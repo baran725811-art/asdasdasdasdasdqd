@@ -1,0 +1,30 @@
+{% load static %}
+{% load i18n %}
+
+<section class="products-hero">
+    <div class="hero-content">
+        <div class="container">
+            <div class="hero-text" data-aos="fade-up">
+                <h1 class="hero-title">{% trans "Ürünlerimiz" %}</h1>
+                <p class="hero-description">
+                    {% if selected_category %}
+                        {{ selected_category.name }} {% trans "kategorisindeki ürünlerimizi keşfedin" %}
+                    {% else %}
+                        {% trans "Kaliteli ürün yelpazemizi keşfedin" %}
+                    {% endif %}
+                </p>
+                <div class="hero-stats" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-item">
+                        <span class="stat-number">{{ products.paginator.count }}</span>
+                        <span class="stat-label">{% trans "Ürün" %}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">{{ categories.count }}</span>
+                        <span class="stat-label">{% trans "Kategori" %}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero-pattern"></div>
+</section>

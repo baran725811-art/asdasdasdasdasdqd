@@ -1,0 +1,196 @@
+<!-- templates/contact/sections/contact_form.html -->
+{% load static %}
+{% load i18n %}
+
+<section class="contact-form-section">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">
+                <i class="fas fa-envelope"></i>
+                <span>{% trans "İletişim" %}</span>
+            </div>
+            <h2 class="section-title">{% trans "Bize Ulaşın" %}</h2>
+            <p class="section-description">
+                {% trans "Sorularınız, önerileriniz veya hizmet talebiniz için aşağıdaki formu doldurarak bizimle iletişime geçebilirsiniz." %}
+            </p>
+        </div>
+
+        <div class="form-container">
+            <div class="form-card">
+                <div class="form-header">
+                    <div class="form-icon">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                    <h3>{% trans "Mesaj Gönder" %}</h3>
+                    <p>{% trans "Formu doldurun, size en kısa sürede dönüş yapalım" %}</p>
+                </div>
+
+                <form method="post" id="contactForm" class="contact-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_type" value="contact">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="{{ contact_form.name.id_for_label }}" class="form-label">
+                                <i class="fas fa-user"></i>
+                                {% trans "Ad Soyad" %}
+                                <span class="required">*</span>
+                            </label>
+                            <div class="input-container">
+                                <input type="text" 
+                                       name="{{ contact_form.name.name }}" 
+                                       id="{{ contact_form.name.id_for_label }}" 
+                                       class="form-input {% if contact_form.name.errors %}error{% endif %}"
+                                       value="{{ contact_form.name.value|default:'' }}" 
+                                       placeholder="{% trans 'Adınız ve soyadınız' %}"
+                                       required>
+                                <div class="input-indicator"></div>
+                            </div>
+                            {% if contact_form.name.errors %}
+                            <div class="error-message">
+                                <i class="fas fa-exclamation-circle"></i>
+                                {{ contact_form.name.errors.0 }}
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="{{ contact_form.phone.id_for_label }}" class="form-label">
+                                <i class="fas fa-phone"></i>
+                                {% trans "Telefon" %}
+                            </label>
+                            <div class="input-container">
+                                <input type="tel" 
+                                       name="{{ contact_form.phone.name }}" 
+                                       id="{{ contact_form.phone.id_for_label }}" 
+                                       class="form-input {% if contact_form.phone.errors %}error{% endif %}"
+                                       value="{{ contact_form.phone.value|default:'' }}" 
+                                       placeholder="{% trans '+90 5xx xxx xx xx' %}">
+                                <div class="input-indicator"></div>
+                            </div>
+                            {% if contact_form.phone.errors %}
+                            <div class="error-message">
+                                <i class="fas fa-exclamation-circle"></i>
+                                {{ contact_form.phone.errors.0 }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ contact_form.email.id_for_label }}" class="form-label">
+                            <i class="fas fa-envelope"></i>
+                            {% trans "E-posta" %}
+                        </label>
+                        <div class="input-container">
+                            <input type="email" 
+                                   name="{{ contact_form.email.name }}" 
+                                   id="{{ contact_form.email.id_for_label }}" 
+                                   class="form-input {% if contact_form.email.errors %}error{% endif %}"
+                                   value="{{ contact_form.email.value|default:'' }}" 
+                                   placeholder="{% trans 'ornek@email.com' %}">
+                            <div class="input-indicator"></div>
+                        </div>
+                        {% if contact_form.email.errors %}
+                        <div class="error-message">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ contact_form.email.errors.0 }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ contact_form.subject.id_for_label }}" class="form-label">
+                            <i class="fas fa-tag"></i>
+                            {% trans "Konu" %}
+                            <span class="required">*</span>
+                        </label>
+                        <div class="input-container">
+                            <input type="text" 
+                                   name="{{ contact_form.subject.name }}" 
+                                   id="{{ contact_form.subject.id_for_label }}" 
+                                   class="form-input {% if contact_form.subject.errors %}error{% endif %}"
+                                   value="{{ contact_form.subject.value|default:'' }}" 
+                                   placeholder="{% trans 'Mesajınızın konusu' %}"
+                                   required>
+                            <div class="input-indicator"></div>
+                        </div>
+                        {% if contact_form.subject.errors %}
+                        <div class="error-message">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ contact_form.subject.errors.0 }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ contact_form.message.id_for_label }}" class="form-label">
+                            <i class="fas fa-comment"></i>
+                            {% trans "Mesajınız" %}
+                            <span class="required">*</span>
+                        </label>
+                        <div class="input-container">
+                            <textarea name="{{ contact_form.message.name }}" 
+                                      id="{{ contact_form.message.id_for_label }}" 
+                                      class="form-textarea {% if contact_form.message.errors %}error{% endif %}"
+                                      rows="6" 
+                                      placeholder="{% trans 'Detaylı mesajınızı yazın...' %}"
+                                      required>{{ contact_form.message.value|default:'' }}</textarea>
+                            <div class="input-indicator"></div>
+                            <div class="character-counter">
+                                <span class="current">0</span> / <span class="max">1000</span>
+                            </div>
+                        </div>
+                        {% if contact_form.message.errors %}
+                        <div class="error-message">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ contact_form.message.errors.0 }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group captcha-group">
+                        <label for="{{ contact_form.captcha.id_for_label }}" class="form-label">
+                            <i class="fas fa-shield-alt"></i>
+                            {% trans "Güvenlik Kodu" %}
+                            <span class="required">*</span>
+                        </label>
+                        <div class="captcha-container">
+                            {{ contact_form.captcha }}
+                            <button type="button" 
+                                    onclick="refreshContactCaptcha()" 
+                                    class="captcha-refresh" 
+                                    title="{% trans 'Yeni kod üret' %}">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                        <small class="form-help">{% trans "Spam önleme için yukarıdaki kodu girin" %}</small>
+                        {% if contact_form.captcha.errors %}
+                        <div class="error-message">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ contact_form.captcha.errors.0 }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn">
+                            <span class="btn-icon">
+                                <i class="fas fa-paper-plane"></i>
+                            </span>
+                            <span class="btn-text">{% trans "Mesajı Gönder" %}</span>
+                            <div class="btn-loading">
+                                <div class="spinner"></div>
+                            </div>
+                        </button>
+                        
+                        <div class="form-info">
+                            <i class="fas fa-info-circle"></i>
+                            {% trans "Mesajınıza 24 saat içinde yanıt vereceğiz" %}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

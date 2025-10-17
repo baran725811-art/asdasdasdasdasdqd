@@ -1,0 +1,129 @@
+{% load i18n %}
+
+<!-- Breadcrumb Navigation - SEO Optimized -->
+{% if breadcrumbs and breadcrumbs|length > 1 %}
+<nav aria-label="{% trans 'Sayfa navigasyonu' %}" class="breadcrumb-container">
+    <div class="container">
+        <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+            {% for breadcrumb in breadcrumbs %}
+            <li class="breadcrumb-item{% if breadcrumb.is_current %} active{% endif %}" 
+                itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                
+                {% if not breadcrumb.is_current %}
+                <a href="{{ breadcrumb.url }}" 
+                   itemprop="item"
+                   class="breadcrumb-link"
+                   {% if forloop.first %}rel="home"{% endif %}>
+                    <span itemprop="name">
+                        {% if forloop.first %}
+                            <i class="fas fa-home me-1" aria-hidden="true"></i>
+                        {% endif %}
+                        {{ breadcrumb.name }}
+                    </span>
+                </a>
+                {% else %}
+                <span itemprop="name" aria-current="page">{{ breadcrumb.name }}</span>
+                {% endif %}
+                
+                <meta itemprop="position" content="{{ forloop.counter }}">
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+</nav>
+
+<!-- Breadcrumb Styling -->
+<style>
+.breadcrumb-container {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-bottom: 1px solid #dee2e6;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+}
+
+.breadcrumb {
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.breadcrumb-item {
+    color: #6c757d;
+}
+
+.breadcrumb-item.active {
+    color: #495057;
+    font-weight: 600;
+}
+
+.breadcrumb-link {
+    color: var(--primary-color, #007bff);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+
+.breadcrumb-link:hover {
+    background-color: rgba(0,123,255,0.1);
+    color: var(--primary-color, #007bff);
+    text-decoration: none;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "\f105";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #adb5bd;
+    margin: 0 0.5rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .breadcrumb-container {
+        padding: 0.75rem 0;
+        margin-bottom: 1.5rem;
+    }
+    
+    .breadcrumb {
+        font-size: 0.8rem;
+        flex-wrap: wrap;
+    }
+    
+    .breadcrumb-item {
+        max-width: none;
+    }
+    
+    /* Çok uzun breadcrumb'larda scroll */
+    .breadcrumb {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 0.5rem;
+    }
+    
+    .breadcrumb-item {
+        white-space: nowrap;
+    }
+}
+
+/* Accessibility improvements */
+.breadcrumb-link:focus {
+    outline: 2px solid var(--primary-color, #007bff);
+    outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+    .breadcrumb-container {
+        background: none;
+        border: none;
+        padding: 0.5rem 0;
+    }
+    
+    .breadcrumb-link {
+        color: #000;
+    }
+}
+</style>
+{% endif %}

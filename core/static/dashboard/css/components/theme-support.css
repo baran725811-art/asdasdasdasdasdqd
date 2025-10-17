@@ -1,0 +1,112 @@
+/* ==========================================================================
+   TEMA DESTEĞİ - Tüm Bileşenler core\static\dashboard\css\components\theme-support.css
+   ========================================================================== */
+
+/* TABLO BAŞLIKLARI */
+.table-header,
+.modern-table-header,
+th {
+    background-color: var(--table-header-bg) !important;
+    color: var(--text-color) !important;
+    border-color: var(--table-border-color) !important;
+}
+
+/* TABLO SATIRLARI */
+.table tbody tr,
+.modern-table tbody tr {
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
+    border-color: var(--table-border-color) !important;
+}
+
+.table tbody tr:hover,
+.modern-table tbody tr:hover {
+    background-color: var(--table-hover-bg) !important;
+}
+
+/* KARTLAR - Ekip, Katalog, vb. */
+.team-card,
+.catalog-card,
+.settings-card,
+.translation-card {
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* FORM ELEMANLARI */
+.form-control,
+.form-select,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* MODAL BAŞLIKLARI */
+.modal-header {
+    background: var(--primary-gradient) !important;
+    color: white !important;
+}
+
+.modal-body {
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
+}
+
+/* BUTONLAR */
+.btn-outline-primary {
+    color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+/* BADGE'LER */
+.badge {
+    background: var(--primary-gradient) !important;
+}
+
+/* LISTE GRUBU */
+.list-group-item {
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* NAV TABS */
+.nav-tabs .nav-link {
+    color: var(--text-muted) !important;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* PAGINATION */
+.pagination .page-link {
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+.pagination .page-item.active .page-link {
+    background: var(--primary-gradient) !important;
+    border-color: var(--primary-color) !important;
+}
+
+/* ALERTler */
+.alert {
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}

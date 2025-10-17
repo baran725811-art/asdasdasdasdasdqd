@@ -1,0 +1,349 @@
+{% load i18n %}
+
+<!-- Çerez Banner -->
+<div id="cookie-banner" class="cookie-banner" style="display: none;">
+    <div class="cookie-banner-content">
+        <div class="cookie-banner-text">
+            <h4 class="cookie-title">🍪 {% trans "Çerez Kullanımı" %}</h4>
+            <p class="cookie-description">
+                {% trans "Web sitemizde deneyiminizi geliştirmek için çerezler kullanıyoruz. Dil tercihlerinizi hatırlamak, site performansını analiz etmek ve size özel içerik sunmak için çerezleri kullanırız." %}
+            </p>
+        </div>
+        
+        <div class="cookie-banner-actions">
+            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="cookieManager.rejectAll()">
+                {% trans "Tümünü Reddet" %}
+            </button>
+            <button type="button" class="btn btn-primary btn-sm" onclick="cookieManager.showSettings()">
+                {% trans "Ayarla" %}
+            </button>
+            <button type="button" class="btn btn-success btn-sm" onclick="cookieManager.acceptAll()">
+                {% trans "Tümünü Kabul Et" %}
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Çerez Ayarları Modal -->
+<div class="modal fade" id="cookieSettingsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">🍪 {% trans "Çerez Ayarları" %}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <div class="modal-body">
+                <p class="text-muted mb-4">
+                    {% trans "Hangi çerez türlerinin kullanılmasına izin vermek istediğinizi seçebilirsiniz. Bu ayarları istediğiniz zaman değiştirebilirsiniz." %}
+                </p>
+                
+                <div class="cookie-categories">
+                    <!-- Zorunlu Çerezler -->
+                    <div class="cookie-category">
+                        <div class="category-header">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="necessary-cookies" checked disabled>
+                                <label class="form-check-label fw-bold" for="necessary-cookies">
+                                    {% trans "Zorunlu Çerezler" %}
+                                    <span class="badge bg-success ms-2">{% trans "Her Zaman Aktif" %}</span>
+                                </label>
+                            </div>
+                        </div>
+                        <p class="category-description text-muted small">
+                            {% trans "Bu çerezler web sitesinin düzgün çalışması için gereklidir. Dil seçiminiz, oturum bilgileriniz ve güvenlik için gerekli çerezlerdir. Devre dışı bırakılamazlar." %}
+                        </p>
+                        <div class="category-cookies">
+                            <small class="text-muted">
+                                <strong>{% trans "Kullanılan çerezler:" %}</strong>
+                                sessionid, csrftoken, main_language, dashboard_language
+                            </small>
+                        </div>
+                    </div>
+                    
+                    <!-- Fonksiyonel Çerezler -->
+                    <div class="cookie-category">
+                        <div class="category-header">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="functional-cookies">
+                                <label class="form-check-label fw-bold" for="functional-cookies">
+                                    {% trans "Fonksiyonel Çerezler" %}
+                                </label>
+                            </div>
+                        </div>
+                        <p class="category-description text-muted small">
+                            {% trans "Bu çerezler gelişmiş özellikler sağlar. Tema tercihlerinizi, form verilerinizi hatırlar ve kullanıcı deneyiminizi kişiselleştirir." %}
+                        </p>
+                        <div class="category-cookies">
+                            <small class="text-muted">
+                                <strong>{% trans "Kullanılan çerezler:" %}</strong>
+                                theme_preference, form_data, ui_settings
+                            </small>
+                        </div>
+                    </div>
+                    
+                    <!-- Analitik Çerezler -->
+                    <div class="cookie-category">
+                        <div class="category-header">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="analytics-cookies">
+                                <label class="form-check-label fw-bold" for="analytics-cookies">
+                                    {% trans "Analitik Çerezler" %}
+                                </label>
+                            </div>
+                        </div>
+                        <p class="category-description text-muted small">
+                            {% trans "Bu çerezler web sitemizin performansını anlamamıza yardımcı olur. Hangi sayfaların ziyaret edildiğini, ne kadar zaman geçirildiğini ve hata durumlarını analiz eder." %}
+                        </p>
+                        <div class="category-cookies">
+                            <small class="text-muted">
+                                <strong>{% trans "Kullanılan çerezler:" %}</strong>
+                                _ga, _ga_*, page_views, session_time
+                            </small>
+                        </div>
+                    </div>
+                    
+                    <!-- Pazarlama Çerezleri -->
+                    <div class="cookie-category">
+                        <div class="category-header">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="marketing-cookies">
+                                <label class="form-check-label fw-bold" for="marketing-cookies">
+                                    {% trans "Pazarlama Çerezleri" %}
+                                </label>
+                            </div>
+                        </div>
+                        <p class="category-description text-muted small">
+                            {% trans "Bu çerezler size daha alakalı reklamlar göstermek için kullanılır. İlgi alanlarınızı takip eder ve kişiselleştirilmiş içerik sunar." %}
+                        </p>
+                        <div class="category-cookies">
+                            <small class="text-muted">
+                                <strong>{% trans "Kullanılan çerezler:" %}</strong>
+                                marketing_prefs, ad_personalization, social_tracking
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Çerez Politikası Linki -->
+                {% if legal_pages.cookies %}
+                <div class="mt-4 pt-3 border-top">
+                    <p class="mb-0">
+                        <a href="{{ legal_pages.cookies.url }}" target="_blank" class="text-decoration-none">
+                            <i class="fas fa-external-link-alt me-1"></i>
+                            {% trans "Detaylı çerez politikamızı okuyun" %}
+                        </a>
+                    </p>
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" onclick="cookieManager.rejectAll()" data-bs-dismiss="modal">
+                    {% trans "Tümünü Reddet" %}
+                </button>
+                <button type="button" class="btn btn-primary" onclick="cookieManager.saveSettings()" data-bs-dismiss="modal">
+                    {% trans "Ayarları Kaydet" %}
+                </button>
+                <button type="button" class="btn btn-success" onclick="cookieManager.acceptAll()" data-bs-dismiss="modal">
+                    {% trans "Tümünü Kabul Et" %}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Çerez Yönetimi JavaScript -->
+<script>
+class CookieManager {
+    constructor() {
+        this.cookieCategories = {
+            necessary: true,      // Her zaman true
+            functional: false,
+            analytics: false,
+            marketing: false
+        };
+        
+        this.init();
+    }
+    
+    init() {
+        // Mevcut çerez onayını kontrol et
+        const consent = this.getCookie('cookie_consent');
+        
+        if (!consent) {
+            // İlk ziyaret - banner göster
+            setTimeout(() => {
+                document.getElementById('cookie-banner').style.display = 'block';
+            }, 1000);
+        } else {
+            // Mevcut tercihleri yükle
+            this.loadSavedPreferences(consent);
+        }
+        
+        // Modal açılırken mevcut ayarları yükle
+        const modal = document.getElementById('cookieSettingsModal');
+        if (modal) {
+            modal.addEventListener('show.bs.modal', () => {
+                this.loadModalSettings();
+            });
+        }
+    }
+    
+    getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        return null;
+    }
+    
+    setCookie(name, value, days = 365) {
+        const expires = new Date();
+        expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+        document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/;SameSite=Strict`;
+    }
+    
+    loadSavedPreferences(consentString) {
+        try {
+            const consent = JSON.parse(decodeURIComponent(consentString));
+            this.cookieCategories = { ...this.cookieCategories, ...consent };
+            this.applyCookieSettings();
+        } catch (e) {
+            console.error('Cookie consent parsing error:', e);
+        }
+    }
+    
+    loadModalSettings() {
+        document.getElementById('functional-cookies').checked = this.cookieCategories.functional;
+        document.getElementById('analytics-cookies').checked = this.cookieCategories.analytics;
+        document.getElementById('marketing-cookies').checked = this.cookieCategories.marketing;
+    }
+    
+    acceptAll() {
+        this.cookieCategories = {
+            necessary: true,
+            functional: true,
+            analytics: true,
+            marketing: true
+        };
+        this.saveConsent();
+        this.hideBanner();
+        this.showNotification('Tüm çerezler kabul edildi.', 'success');
+    }
+    
+    rejectAll() {
+        this.cookieCategories = {
+            necessary: true,
+            functional: false,
+            analytics: false,
+            marketing: false
+        };
+        this.saveConsent();
+        this.hideBanner();
+        this.showNotification('Sadece zorunlu çerezler kabul edildi.', 'info');
+    }
+    
+    saveSettings() {
+        this.cookieCategories = {
+            necessary: true,
+            functional: document.getElementById('functional-cookies').checked,
+            analytics: document.getElementById('analytics-cookies').checked,
+            marketing: document.getElementById('marketing-cookies').checked
+        };
+        this.saveConsent();
+        this.hideBanner();
+        this.showNotification('Çerez ayarlarınız kaydedildi.', 'success');
+    }
+    
+    saveConsent() {
+        const consentString = encodeURIComponent(JSON.stringify(this.cookieCategories));
+        this.setCookie('cookie_consent', consentString);
+        
+        // Son güncelleme tarihini kaydet
+        this.setCookie('cookie_consent_date', new Date().toISOString());
+        
+        // Ayarları uygula
+        this.applyCookieSettings();
+    }
+    
+    applyCookieSettings() {
+        // Dil çerezini her zaman koru (zorunlu)
+        // Diğer çerezleri ayarlara göre yönet
+        
+        if (!this.cookieCategories.functional) {
+            // Fonksiyonel çerezleri temizle
+            this.deleteCookie('theme_preference');
+            this.deleteCookie('ui_settings');
+        }
+        
+        if (!this.cookieCategories.analytics) {
+            // Analytics çerezlerini temizle
+            this.deleteCookie('_ga');
+            this.deleteCookie('_ga_*');
+        }
+        
+        if (!this.cookieCategories.marketing) {
+            // Pazarlama çerezlerini temizle
+            this.deleteCookie('marketing_prefs');
+        }
+        
+        // Google Analytics'i dinamik olarak kontrol et
+        if (this.cookieCategories.analytics && typeof gtag !== 'undefined') {
+            gtag('consent', 'update', {
+                'analytics_storage': 'granted'
+            });
+        }
+    }
+    
+    deleteCookie(name) {
+        document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/`;
+    }
+    
+    showSettings() {
+        const modal = new bootstrap.Modal(document.getElementById('cookieSettingsModal'));
+        modal.show();
+    }
+    
+    hideBanner() {
+        document.getElementById('cookie-banner').style.display = 'none';
+    }
+    
+    showNotification(message, type = 'info') {
+        // Bootstrap toast veya basit notification göster
+        if (typeof bootstrap !== 'undefined') {
+            const toastHtml = `
+                <div class="toast align-items-center text-white bg-${type === 'success' ? 'success' : 'primary'} border-0" role="alert">
+                    <div class="d-flex">
+                        <div class="toast-body">${message}</div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                    </div>
+                </div>
+            `;
+            
+            let toastContainer = document.querySelector('.toast-container');
+            if (!toastContainer) {
+                toastContainer = document.createElement('div');
+                toastContainer.className = 'toast-container position-fixed bottom-0 end-0 p-3';
+                document.body.appendChild(toastContainer);
+            }
+            
+            toastContainer.insertAdjacentHTML('beforeend', toastHtml);
+            const toastElement = toastContainer.lastElementChild;
+            const toast = new bootstrap.Toast(toastElement);
+            toast.show();
+            
+            toastElement.addEventListener('hidden.bs.toast', () => {
+                toastElement.remove();
+            });
+        }
+    }
+}
+
+// Global çerez yöneticisini başlat
+const cookieManager = new CookieManager();
+
+// Global fonksiyonlar (banner'dan çağrılabilmesi için)
+function showCookieSettings() {
+    cookieManager.showSettings();
+}
+</script>

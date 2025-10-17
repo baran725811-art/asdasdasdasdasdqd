@@ -1,0 +1,238 @@
+<!--core\templates\home\sections\ervices_grid.html-->
+{% load static %}
+{% load i18n %}
+
+<section class="services-grid-section section-padding" id="servicesGrid">
+    <div class="container">
+        <!-- Section Header -->
+        <div class="row justify-content-center text-center mb-5">
+            <div class="col-lg-8">
+                <div class="section-header" data-aos="fade-up">
+                    <div class="section-badge">
+                        <i class="fas fa-tools me-2" aria-hidden="true"></i>
+                        {% trans "Hizmetlerimiz" %}
+                    </div>
+                    <h2 class="section-title">
+                        {% trans "Profesyonel" %} <span class="text-gradient">{% trans "Çözümlerimiz" %}</span>
+                    </h2>
+                    <p class="section-description">
+                        {% trans "Uzman ekibimiz ile 7/24 hizmet veren geniş hizmet yelpazemizi keşfedin." %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Services Grid -->
+        <div class="services-grid">
+            {% for service in services %}
+            <div class="service-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:'00' }}">
+                <div class="service-icon">
+                    {% if service.icon %}
+                        <i class="{{ service.icon }}" aria-hidden="true"></i>
+                    {% else %}
+                        <i class="fas fa-cog" aria-hidden="true"></i>
+                    {% endif %}
+                </div>
+                
+                <div class="service-content">
+                    <h3 class="service-title">{{ service.title }}</h3>
+                    <p class="service-description">{{ service.short_description|truncatewords:15 }}</p>
+                    
+                    {% if service.features %}
+                    <ul class="service-features">
+                        {% for feature in service.features|slice:":3" %}
+                        <li>
+                            <i class="fas fa-check" aria-hidden="true"></i>
+                            {{ feature }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                
+                <div class="service-footer">
+                    {% if service.starting_price %}
+                    <div class="service-price">
+                        <span class="price-from">{% trans "başlayan fiyatlarla" %}</span>
+                        <span class="price-amount">{{ service.starting_price }}₺</span>
+                    </div>
+                    {% endif %}
+                    
+                    <a href="{% if service.slug %}{% url 'about:service_detail' service.slug %}{% else %}{% url 'contact:contact' %}{% endif %}" 
+                       class="service-link">
+                        {% trans "Detaylar" %}
+                        <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
+                    </a>
+                </div>
+                
+                <div class="service-overlay"></div>
+            </div>
+            {% empty %}
+            <!-- Default Services if no services in database -->
+            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-icon">
+                    <i class="fas fa-key" aria-hidden="true"></i>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">{% trans "Anahtar Kopyalama" %}</h3>
+                    <p class="service-description">{% trans "Tüm anahtar türleri için hızlı ve güvenilir kopyalama hizmeti." %}</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check" aria-hidden="true"></i>{% trans "Hızlı Hizmet" %}</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i>{% trans "Kaliteli Malzeme" %}</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i>{% trans "Uygun Fiyat" %}</li>
+                    </ul>
+                </div>
+                <div class="service-footer">
+                    <div class="service-price">
+                        <span class="price-from">{% trans "başlayan fiyatlarla" %}</span>
+                        <span class="price-amount">25₺</span>
+                    </div>
+                    <a href="{% url 'contact:contact' %}" class="service-link">
+                        {% trans "Detaylar" %}
+                        <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="service-overlay"></div>
+            </div>
+            
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-icon">
+                    <i class="fas fa-car" aria-hidden="true"></i>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">{% trans "Araç Anahtarı" %}</h3>
+                    <p class="service-description">{% trans "Araç anahtarı kayıp ve kopyalama işlemleri için uzman hizmet." %}</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check" aria-hidden="true"></i>{% trans "Tüm Marka/Model" %}</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i>{% trans "Çipli Anahtar" %}</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i>{% trans "Orijinal Kalite" %}</li>
+                    </ul>
+                </div>
+                <div class="service-footer">
+                    <div class="service-price">
+                        <span class="price-from">{% trans "başlayan fiyatlarla" %}</span>
+                        <span class="price-amount">150₺</span>
+                    </div>
+                    <a href="{% url 'contact:contact' %}" class="service-link">
+                        {% trans "Detaylar" %}
+                        <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="service-overlay"></div>
+            </div>
+            
+            <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="service-icon">
+                    <i class="fas fa-lock" aria-hidden="true"></i>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">{% trans "Kasa Açma" %}</h3>
+                    <p class="service-description">{% trans "Kasa, çelik kapi ve güvenlik sistemleri açma hizmeti." %}</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check" aria-hidden="true"></i>{% trans "Hasar Vermeden" %}</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i>{% trans "7/24 Hizmet" %}</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i>{% trans "Garantili İş" %}</li>
+                    </ul>
+                </div>
+                <div class="service-footer">
+                    <div class="service-price">
+                        <span class="price-from">{% trans "başlayan fiyatlarla" %}</span>
+                        <span class="price-amount">200₺</span>
+                    </div>
+                    <a href="{% url 'contact:contact' %}" class="service-link">
+                        {% trans "Detaylar" %}
+                        <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="service-overlay"></div>
+            </div>
+            
+            <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="service-icon">
+                    <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">{% trans "Güvenlik Sistemleri" %}</h3>
+                    <p class="service-description">{% trans "Modern güvenlik sistemleri kurulum ve bakım hizmetleri." %}</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check" aria-hidden="true"></i>{% trans "Akıllı Kilit" %}</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i>{% trans "Kamera Sistemi" %}</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i>{% trans "Uzaktan Kontrol" %}</li>
+                    </ul>
+                </div>
+                <div class="service-footer">
+                    <div class="service-price">
+                        <span class="price-from">{% trans "başlayan fiyatlarla" %}</span>
+                        <span class="price-amount">500₺</span>
+                    </div>
+                    <a href="{% url 'contact:contact' %}" class="service-link">
+                        {% trans "Detaylar" %}
+                        <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="service-overlay"></div>
+            </div>
+            
+            <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+                <div class="service-icon">
+                    <i class="fas fa-tools" aria-hidden="true"></i>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">{% trans "Acil Çilingir" %}</h3>
+                    <p class="service-description">{% trans "7/24 acil durum çilingir hizmeti. Kapınızın önünde dakikalar içinde." %}</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check" aria-hidden="true"></i>{% trans "24 Saat Hizmet" %}</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i>{% trans "Hızlı Müdahale" %}</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i>{% trans "Güvenilir Ekip" %}</li>
+                    </ul>
+                </div>
+                <div class="service-footer">
+                    <div class="service-price">
+                        <span class="price-from">{% trans "başlayan fiyatlarla" %}</span>
+                        <span class="price-amount">100₺</span>
+                    </div>
+                    <a href="tel:{{ contact_phone }}" class="service-link emergency-link">
+                        {% trans "Hemen Ara" %}
+                        <i class="fas fa-phone ms-1" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="service-overlay"></div>
+            </div>
+            
+            <div class="service-card" data-aos="fade-up" data-aos-delay="600">
+                <div class="service-icon">
+                    <i class="fas fa-home" aria-hidden="true"></i>
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">{% trans "Ev Güvenliği" %}</h3>
+                    <p class="service-description">{% trans "Evinizdeki tüm kilit ve güvenlik ihtiyaçları için kapsamlı çözümler." %}</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check" aria-hidden="true"></i>{% trans "Kapı Kilidi" %}</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i>{% trans "Pencere Kilidi" %}</li>
+                        <li><i class="fas fa-check" aria-hidden="true"></i>{% trans "Güvenlik Analizi" %}</li>
+                    </ul>
+                </div>
+                <div class="service-footer">
+                    <div class="service-price">
+                        <span class="price-from">{% trans "başlayan fiyatlarla" %}</span>
+                        <span class="price-amount">75₺</span>
+                    </div>
+                    <a href="{% url 'contact:contact' %}" class="service-link">
+                        {% trans "Detaylar" %}
+                        <i class="fas fa-arrow-right ms-1" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="service-overlay"></div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- View All Services Button -->
+        <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="700">
+            <a href="{% url 'about:about' %}#services" class="btn btn-primary-modern btn-lg">
+                {% trans "Tüm Hizmetlerimizi Görün" %}
+                <i class="fas fa-arrow-right ms-2" aria-hidden="true"></i>
+            </a>
+        </div>
+    </div>
+</section>

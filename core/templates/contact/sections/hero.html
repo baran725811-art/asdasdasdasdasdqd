@@ -1,0 +1,82 @@
+<!-- templates/contact/sections/hero.html -->
+{% load static %}
+{% load i18n %}
+
+<section class="contact-hero">
+    <div class="hero-background">
+        <div class="hero-overlay"></div>
+        <img src="{% static '' %}" alt="{% trans 'İletişim' %}" class="hero-bg-image">
+    </div>
+    
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    {% trans "İletişim" %}
+                    <span class="title-accent">{% trans "& Değerlendirme" %}</span>
+                </h1>
+                <p class="hero-description">
+                    {% trans "Profesyonel anahtarcılık hizmetlerimiz hakkında sorularınız mı var? Bizimle iletişime geçin veya deneyiminizi paylaşın." %}
+                </p>
+                
+                <div class="hero-features">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>{% trans "7/24 Hizmet" %}</h3>
+                            <p>{% trans "Acil durumlarda her zaman ulaşabilirsiniz" %}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-reply"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>{% trans "Hızlı Yanıt" %}</h3>
+                            <p>{% trans "Mesajlarınıza 24 saat içinde geri dönüş" %}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>{% trans "Güvenilir" %}</h3>
+                            <p>{% trans "Bilgileriniz güvenli ve gizli tutulur" %}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-hero-stats">
+                <div class="contact-stat-item">
+                    <div class="contact-stats-counter" data-contact-count="7">0</div>
+                    <div class="contact-stat-label">{% trans "GÜN" %}</div>
+                </div>
+                
+                <div class="contact-stat-item">                    
+                    <h3>/</h3>
+                </div>
+                
+                <div class="contact-stat-item">
+                    <div class="contact-stats-counter" data-contact-count="24">0</div>
+                    <div class="contact-stat-label">{% trans "SAAT" %}</div>
+                </div>
+                
+                <div class="contact-stat-item stat-text">
+                    <h4>{% trans "ÇİLİNGİR HİZMETİ" %}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="scroll-indicator">
+        <div class="scroll-arrow">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </div>
+</section>

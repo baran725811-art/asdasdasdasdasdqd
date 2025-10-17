@@ -1,0 +1,52 @@
+{% load static %}
+{% load i18n %}
+
+<section class="related-products">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">{% trans "İlgili Ürünler" %}</h2>
+            <p class="section-subtitle">{{ product.category.name }} {% trans "kategorisindeki diğer ürünler" %}</p>
+        </div>
+        
+        <div class="related-grid">
+            {% for related_product in related_products %}
+            <div class="related-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
+                <div class="related-image">
+                    {% if related_product.image %}
+                    <img src="{{ related_product.image.url }}" alt="{{ related_product.alt_text|default:related_product.name }}" loading="lazy">
+                    {% else %}
+                    <div class="image-placeholder">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    {% endif %}
+                    <div class="related-overlay">
+                        <a href="{{ related_product.get_absolute_url }}" class="overlay-btn">
+                            {% trans "İncele" %}
+                        </a>
+                    </div>
+                </div>
+                <div class="related-content">
+                    <h4 class="related-title">{{ related_product.name }}</h4>
+                    {% if related_product.price %}
+                    <div class="related-price">
+                        {% if related_product.has_discount %}
+                        <span class="original-price">{{ related_product.price }} ₺</span>
+                        <span class="current-price">{{ related_product.discount_price }} ₺</span>
+                        {% else %}
+                        <span class="current-price">{{ related_product.price }} ₺</span>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="related-cta" data-aos="fade-up">
+            <a href="{% url 'products:product_list' %}?category={{ product.category.slug }}" class="btn btn-secondary">
+                {{ product.category.name }} {% trans "Kategorisindeki Tüm Ürünler" %}
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,832 @@
+<!-- core\dashboard\templates\dashboard\carousel\list.html -->
+{% extends 'dashboard/base/list_base.html' %}
+{% load widget_tweaks %}
+{% load i18n %}
+{% load custom_filters %}
+
+{% block title %}{% trans "Carousel Yönetimi"%}{% endblock %}
+{% block page_title %}{% trans "Carousel Yönetimi"%}{% endblock %}
+
+<!-- Page Header Configuration -->
+{% block page_header %}
+    {% trans "Ana sayfa slaytlarınızı düzenleyin ve yönetin" as carousel_subtitle %}
+    {% include 'dashboard/includes/navigation/page_header.html' with page_title="{% trans "Carousel Yönetimi"%}" page_subtitle=carousel_subtitle page_icon="fas fa-images" page_actions=page_actions %}
+{% endblock %}
+
+<!-- Page Content -->
+{% block page_content %}
+    
+    <!-- Carousel Preview Section -->
+    {% if slides %}
+    <div class="row mb-4">
+        <div class="col-12">
+           
+            <div class="card-modern">
+                <div class="card-header-modern">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <i class="fas fa-play me-2"></i>{% trans "Carousel Önizleme"%}
+                        </h5>
+                        <button class="btn btn-outline-primary btn-sm" id="previewToggle">
+                            <i class="fas fa-eye me-1"></i>{% trans "Önizlemeyi Göster/Gizle"%}
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body-modern">
+                    <div id="carouselPreviewContainer" class="carousel-preview-container">
+                        <div id="carouselPreview" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                {% for slide in slides %}
+                                    <button type="button" data-bs-target="#carouselPreview" data-bs-slide-to="{{ forloop.counter0 }}" 
+                                            {% if forloop.first %}class="active"{% endif %}></button>
+                                {% endfor %}
+                            </div>
+                            <div class="carousel-inner">
+                                {% for slide in slides %}
+                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                    <div class="carousel-slide-preview">
+                                        <img src="{{ slide.image.url }}" 
+                                             alt="{{ slide.alt_text|default:slide.title }}" 
+                                             class="d-block w-100"
+                                             title="{{ slide.alt_text|default:slide.title }}">
+                                        <div class="carousel-caption d-md-block">
+                                            <h5>{{ slide.title }}</h5>
+                                            <p>{{ slide.description }}</p>
+                                            {% if slide.button_text %}
+                                            <button class="btn-modern primary">{{ slide.button_text }}</button>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselPreview" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselPreview" data-bs-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Slides Table -->
+    <div class="row">
+        <div class="col-12">
+            {% if slides %}
+
+
+
+                
+                <div class="table-card">
+                    <div class="card-header-modern">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">
+                                <i class="fas fa-list me-2"></i>{% trans "Slayt Listesi" %}
+                            </h5>
+                            <div class="d-flex gap-2">
+                                {% include 'dashboard/includes/tables/table_search.html' with search_placeholder="{% trans "Slayt ara..."%}" search_id="slideSearch" %}
+                                <button type="button" class="btn-modern primary btn-sm" data-bs-toggle="modal" data-bs-target="#addSlideModal">
+                                    <i class="fas fa-plus me-1"></i>{% trans "Yeni Slayt Ekle" %}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        {% if slides %}
+                        <div class="table-responsive">
+                            <table class="table table-modern table-hover" id="slidesTable">
+                                <thead>
+                                    <tr>
+                                        <th width="120px">{% trans "Görsel" %}</th>
+                                        <th>{% trans "Başlık" %}</th>
+                                        <th>{% trans "Açıklama" %}</th>
+                                        <th width="80px">{% trans "Sıra" %}</th>
+                                        <th width="100px">{% trans "Durum" %}</th>
+                                        <th width="150px">{% trans "İşlemler" %}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for slide in slides %}
+                                    <tr data-slide-id="{{ slide.id }}">
+                                        <td>
+                                            {% if slide.image %}
+                                                <img src="{{ slide.image.url }}" alt="{{ slide.title }}" class="image-modern" style="width: 100px; height: 60px; object-fit: cover;">
+                                            {% else %}
+                                                <div class="image-placeholder" style="width: 100px; height: 60px;">
+                                                    <i class="fas fa-image"></i>
+                                                </div>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <div class="fw-semibold">{{ slide.title }}</div>
+                                            {% if slide.button_url %}
+                                                <small class="text-muted">
+                                                    <i class="fas fa-external-link-alt me-1"></i>
+                                                    {{ slide.button_url|truncatechars:30 }}
+                                                </small>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <div class="text-muted">{{ slide.description|truncatewords:8|striptags }}</div>
+                                        </td>
+                                        <td>
+                                            <div class="fw-semibold">{{ slide.order }}</div>
+                                        </td>
+                                        <td>
+                                            {% include 'dashboard/includes/ui/status_badge.html' with badge_text=slide.is_active|yesno:"Aktif,Pasif" badge_color=slide.is_active|yesno:"success,danger" %}
+                                        </td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="btn-action edit" 
+                                                        data-bs-toggle="modal" 
+                                                        data-bs-target="#editSlideModal{{ slide.id }}" 
+                                                        title="{% trans 'Düzenle' %}">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn-action view" 
+                                                        data-bs-toggle="modal" 
+                                                        data-bs-target="#viewSlideModal{{ slide.id }}" 
+                                                        title="{% trans 'Görüntüle' %}">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="btn-action delete" 
+                                                        data-bs-toggle="modal" 
+                                                        data-bs-target="#deleteSlideModal{{ slide.id }}" 
+                                                        title="{% trans 'Sil' %}">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+
+            {% else %}
+                {% trans "Henüz slayt bulunmuyor" as empty_title %}
+                {% trans "İlk slaytınızı eklemek için yukarıdaki \"Yeni Slayt Ekle\" butonunu kullanın." as empty_message %}
+                {% trans "İlk Slaytı Ekle" as add_first_slide %}
+                {% include 'dashboard/includes/ui/empty_state.html' with empty_title=empty_title empty_message=empty_message empty_icon="fas fa-images" action_button_attrs='data-bs-toggle="modal" data-bs-target="#addSlideModal"' action_button_text=add_first_slide action_button_icon="fas fa-plus" %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block list_modals %}
+<!-- Add Slide Modal -->
+<div class="modal fade modal-modern" id="addSlideModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-plus me-2"></i>{% trans "Yeni Slayt Ekle" %}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            
+            <form method="post" enctype="multipart/form-data" id="addSlideForm" action="{% url 'dashboard:carousel_add' %}">
+                {% csrf_token %}
+                
+                <div class="modal-body">
+                    <!-- Translation Tabs -->
+                    {% if translation_enabled and enabled_languages|length > 1 %}
+                        {% include 'dashboard/includes/forms/translation_tabs.html' with show_primary_label=True %}
+                    {% endif %}
+                    
+                    <!-- Turkish Content -->
+                    <div class="translation-content active" data-lang="tr">
+                        <div class="row">
+                            <div class="col-md-8">
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="title" field_label="Başlık" field_icon="fas fa-heading" field_type="text" is_required=True help_text="Slayt başlığı" language_code="tr" %}
+                            </div>
+                            <div class="col-md-4">
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="order" field_label="Sıralama" field_icon="fas fa-sort-numeric-up" field_type="number" field_value="0" field_min="0" %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description" label="Açıklama" rows="3" help_text="Slayt açıklaması" %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text" field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" help_text="SEO için görsel açıklaması" language_code="tr" %}
+                            </div>
+                            <div class="col-md-6">
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="button_text" field_label="Buton Metni" field_icon="fas fa-mouse-pointer" field_type="text" language_code="tr" %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Translation Languages Content -->
+                    {% if translation_enabled and enabled_languages|length > 1 %}
+                        {% for lang in enabled_languages %}
+                            {% if lang != 'tr' %}
+                            <div class="translation-content" data-lang="{{ lang }}">
+                                <div class="row">
+                                    <div class="col-12">
+                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="title_"|add:lang field_label="Başlık" field_icon="fas fa-heading" field_type="text" is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description_"|add:lang label="Açıklama" rows="3" help_text="Bu alan zorunludur" %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text_"|add:lang field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" help_text="SEO için görsel açıklaması" language_code=lang %}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="button_text_"|add:lang field_label="Buton Metni" field_icon="fas fa-mouse-pointer" field_type="text" language_code=lang %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+
+                    <!-- Media & Settings -->
+                    <!-- Media & Settings -->
+                    <div class="card-modern mt-4">
+                        <div class="card-header-modern">
+                            <h6 class="mb-0">
+                                <i class="fas fa-cogs me-2"></i>{% trans "Medya & Ayarlar" %}
+                            </h6>
+                        </div>
+                        
+
+                        <div class="card-body-modern">
+                            <div class="row">
+                                <div class="col-12">
+                                    {% include 'dashboard/includes/forms/image_upload_field.html' with field_name="image" label="Slayt Görseli" help_text="Önerilen boyut: 1920x600 piksel" is_required=True %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text" field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" help_text="Slayt görseli için SEO alt metni (max 125 karakter)" %}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="order" field_label="Sıralama" field_icon="fas fa-sort-numeric-up" field_type="number" field_min="0" help_text="Küçük sayılar önce görünür" %}
+                                </div>
+                                <div class="col-md-6">
+                                    {% include 'dashboard/includes/forms/checkbox_field.html' with field_name="is_active" label="Aktif Durumda" field_type="switch" icon="fas fa-toggle-on" checked=True %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>{% trans "İptal" %}
+                    </button>
+                    <button type="submit" class="btn-modern success">
+                        <i class="fas fa-save me-2"></i>{% trans "Slaytı Kaydet" %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit & Delete Modals for each slide -->
+{% for slide_data in slides_with_translations %}
+{% with slide=slide_data.object %}
+<div class="modal fade modal-modern" id="editSlideModal{{ slide.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-edit me-2"></i>{% trans "Slayt Düzenle" %}: {{ slide.title }}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            
+            <form method="post" enctype="multipart/form-data" id="editSlideForm{{ slide.id }}" action="{% url 'dashboard:carousel_edit' slide.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="slide_id" value="{{ slide.id }}">
+                
+                <div class="modal-body">
+                    <!-- Translation Tabs -->
+                    {% if translation_enabled and enabled_languages|length > 1 %}
+                        {% include 'dashboard/includes/forms/translation_tabs.html' with show_primary_label=True %}
+                    {% endif %}
+                    
+                    <!-- Turkish Content -->
+                    <div class="translation-content active" data-lang="tr">
+                        <div class="row">
+                            <div class="col-md-8">
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="title" field_label="Başlık" field_icon="fas fa-heading" field_type="text" field_value=slide.title is_required=True language_code="tr" %}
+                            </div>
+                            <div class="col-md-4">
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="order" field_label="Sıralama" field_icon="fas fa-sort-numeric-up" field_type="number" field_value=slide.order field_min="0" %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description" label="Açıklama" value=slide.description rows="3" %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text" field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" field_value=slide.alt_text help_text="SEO için görsel açıklaması" language_code="tr" %}
+                            </div>
+                            <div class="col-md-6">
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="button_text" field_label="Buton Metni" field_icon="fas fa-mouse-pointer" field_type="text" field_value=slide.button_text language_code="tr" %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Translation Languages Content -->
+                    <!-- Translation Languages Content -->
+                    {% if translation_enabled and enabled_languages|length > 1 %}
+                        {% for lang in enabled_languages %}
+                            {% if lang != 'tr' %}
+                            <div class="translation-content" data-lang="{{ lang }}">
+                                <div class="row">
+                                    <div class="col-12">
+                                        {% if lang == 'en' %}
+                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="title_en" field_label="{% trans "Başlık"%}" field_icon="fas fa-heading" field_type="text" field_value=slide.title_en_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                        {% elif lang == 'de' %}
+                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="title_de" field_label="Başlık" field_icon="fas fa-heading" field_type="text" field_value=slide.title_de_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                        {% elif lang == 'fr' %}
+                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="title_fr" field_label="Başlık" field_icon="fas fa-heading" field_type="text" field_value=slide.title_fr_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                        {% elif lang == 'es' %}
+                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="title_es" field_label="Başlık" field_icon="fas fa-heading" field_type="text" field_value=slide.title_es_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                        {% elif lang == 'ru' %}
+                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="title_ru" field_label="Başlık" field_icon="fas fa-heading" field_type="text" field_value=slide.title_ru_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                        {% elif lang == 'ar' %}
+                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="title_ar" field_label="Başlık" field_icon="fas fa-heading" field_type="text" field_value=slide.title_ar_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        {% if lang == 'en' %}
+                                            {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description_en" label="Açıklama" value=slide.description_en_value rows="3" help_text="Bu alan zorunludur" %}
+                                        {% elif lang == 'de' %}
+                                            {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description_de" label="Açıklama" value=slide.description_de_value rows="3" help_text="Bu alan zorunludur" %}
+                                        {% elif lang == 'fr' %}
+                                            {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description_fr" label="Açıklama" value=slide.description_fr_value rows="3" help_text="Bu alan zorunludur" %}
+                                        {% elif lang == 'es' %}
+                                            {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description_es" label="Açıklama" value=slide.description_es_value rows="3" help_text="Bu alan zorunludur" %}
+                                        {% elif lang == 'ru' %}
+                                            {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description_ru" label="Açıklama" value=slide.description_ru_value rows="3" help_text="Bu alan zorunludur" %}
+                                        {% elif lang == 'ar' %}
+                                            {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description_ar" label="Açıklama" value=slide.description_ar_value rows="3" help_text="Bu alan zorunludur" %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        {% if lang == 'en' %}
+                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text_en" field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" field_value=slide.alt_text_en_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                        {% elif lang == 'de' %}
+                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text_de" field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" field_value=slide.alt_text_de_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                        {% elif lang == 'fr' %}
+                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text_fr" field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" field_value=slide.alt_text_fr_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                        {% elif lang == 'es' %}
+                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text_es" field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" field_value=slide.alt_text_es_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                        {% elif lang == 'ru' %}
+                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text_ru" field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" field_value=slide.alt_text_ru_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                        {% elif lang == 'ar' %}
+                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text_ar" field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" field_value=slide.alt_text_ar_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {% if lang == 'en' %}
+                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="button_text_en" field_label="Buton Metni" field_icon="fas fa-mouse-pointer" field_type="text" field_value=slide.button_text_en_value language_code=lang %}
+                                        {% elif lang == 'de' %}
+                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="button_text_de" field_label="Buton Metni" field_icon="fas fa-mouse-pointer" field_type="text" field_value=slide.button_text_de_value language_code=lang %}
+                                        {% elif lang == 'fr' %}
+                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="button_text_fr" field_label="Buton Metni" field_icon="fas fa-mouse-pointer" field_type="text" field_value=slide.button_text_fr_value language_code=lang %}
+                                        {% elif lang == 'es' %}
+                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="button_text_es" field_label="Buton Metni" field_icon="fas fa-mouse-pointer" field_type="text" field_value=slide.button_text_es_value language_code=lang %}
+                                        {% elif lang == 'ru' %}
+                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="button_text_ru" field_label="Buton Metni" field_icon="fas fa-mouse-pointer" field_type="text" field_value=slide.button_text_ru_value language_code=lang %}
+                                        {% elif lang == 'ar' %}
+                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="button_text_ar" field_label="Buton Metni" field_icon="fas fa-mouse-pointer" field_type="text" field_value=slide.button_text_ar_value language_code=lang %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+
+                    <!-- Media & Settings -->
+                    <div class="card-modern mt-4">
+                        <div class="card-header-modern">
+                            <h6 class="mb-0">
+                                <i class="fas fa-cogs me-2"></i>{% trans "Medya & Ayarlar" %}
+                            </h6>
+                        </div>
+                        <div class="card-body-modern">
+                            <div class="row">
+                                <div class="col-12">
+                                    {% include 'dashboard/includes/forms/image_upload_field.html' with field_name="image" label="Slayt Görseli" current_image=slide.image help_text="Yeni görsel seçmezseniz mevcut korunur" %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="button_url" field_label="Buton URL" field_icon="fas fa-link" field_type="url" field_value=slide.button_url help_text="İsteğe bağlı" %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    {% include 'dashboard/includes/forms/checkbox_field.html' with field_name="is_active" label="Aktif Durumda" field_type="switch" icon="fas fa-toggle-on" checked=slide.is_active %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>{% trans "İptal" %}
+                    </button>
+                    <button type="submit" class="btn-modern success">
+                        <i class="fas fa-save me-2"></i>{% trans "Değişiklikleri Kaydet" %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- View Slide Modal -->
+<div class="modal fade modal-modern" id="viewSlideModal{{ slide.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-eye me-2"></i>{% trans "Slayt Detayları"%}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        {% if slide.image %}
+                            <img src="{{ slide.image.url }}" alt="{{ slide.title }}" class="img-fluid rounded shadow">
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <h4>{{ slide.title }}</h4>
+                        <p class="text-muted">{{ slide.description|default:"{% trans "Açıklama bulunmuyor."%}"|striptags }}</p>
+                        
+                        <div class="slide-meta mt-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>{% trans "Sıra"%}:</strong> {{ slide.order }}
+                                </div>
+                                <div class="col-6">
+                                    <strong>{% trans "Durum"%}:</strong> 
+                                    {% include 'dashboard/includes/ui/status_badge.html' with badge_text=slide.is_active|yesno:"Aktif,Pasif" badge_color=slide.is_active|yesno:"success,danger" %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times"></i>{% trans "Kapat" %}
+                </button>
+                <button type="button" class="btn-modern primary" data-bs-toggle="modal" data-bs-target="#editSlideModal{{ slide.id }}">
+                    <i class="fas fa-edit"></i>{% trans "Düzenle" %}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Slide Modal -->
+<div class="modal fade" id="deleteSlideModal{{ slide.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">
+                    <i class="fas fa-exclamation-triangle me-2"></i>{% trans "Slayt Sil" %}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fas fa-trash-alt text-danger fa-3x mb-3"></i>
+                    <h5>{% trans "Bu slaytı silmek istediğinizden emin misiniz?" %}</h5>
+                    <p class="text-muted">
+                        <strong>"{{ slide.title }}"</strong> kalıcı olarak silinecek.
+                    </p>
+                    <div class="alert alert-warning mt-3">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Bu işlem geri alınamaz!
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>{% trans "İptal" %}
+                </button>
+                
+                <form method="post" style="display: inline;" class="delete-form" 
+                      data-item-type="slayt"
+                      data-item-name="{{ slide.title }}"
+                      action="{% url 'dashboard:carousel_delete' slide.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger delete-confirm-btn">
+                        <i class="fas fa-trash me-2"></i>{% trans "Sil" %}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endwith %}
+{% endfor %}
+{% endblock %}
+
+<!-- Page Variables and Configuration -->
+{% block page_vars %}
+<script>
+// Page actions for header
+const pageActions = [
+    {
+        type: 'button',
+        class: 'primary',
+        size: 'lg',
+        icon: 'fas fa-plus',
+        text: '{% trans "Yeni Slayt Ekle" %}',
+        modal_target: '#addSlideModal'
+    }
+];
+
+// Carousel statistics
+const carouselStats = [
+    {
+        value: '{{ slides|length }}',
+        label: '{% trans "Toplam Slayt" %}',
+        icon: 'fas fa-images',
+        color: 'primary'
+    },
+    {
+        value: '{{ active_slides_count }}',
+        label: '{% trans "Aktif Slaytlar" %}',
+        icon: 'fas fa-check-circle',
+        color: 'success'
+    },
+    {
+        value: '{{ slides.0.order|default:"0" }}',
+        label: '{% trans "İlk Sıra" %}',
+        icon: 'fas fa-sort-numeric-up',
+        color: 'info'
+    },
+    {
+        value: '∞',
+        label: '{% trans "Görüntülenme" %}',
+        icon: 'fas fa-eye',
+        color: 'warning'
+    }
+];
+
+// Table headers configuration
+const tableHeaders = [
+    {
+        title: '{% trans "Görsel" %}',
+        icon: 'fas fa-image',
+        width: '120px'
+    },
+    {
+        title: '{% trans "Başlık" %}',
+        icon: 'fas fa-heading'
+    },
+    {
+        title: '{% trans "Açıklama" %}',
+        icon: 'fas fa-align-left'
+    },
+    {
+        title: '{% trans "Alt Metin" %}',
+        icon: 'fas fa-tag'
+    },
+    {
+        title: '{% trans "Buton" %}',
+        icon: 'fas fa-mouse-pointer',
+        width: '120px'
+    },
+    {
+        title: '{% trans "Sıra" %}',
+        icon: 'fas fa-sort',
+        width: '80px'
+    },
+    {
+        title: '{% trans "Durum" %}',
+        icon: 'fas fa-toggle-on',
+        width: '100px'
+    },
+    {
+        title: '{% trans "İşlemler" %}',
+        icon: 'fas fa-cogs',
+        width: '150px'
+    }
+];
+
+// Table rows data
+const tableRows = [
+    {% for slide in slides %}
+    {
+        data_attributes: {
+            'slide-id': '{{ slide.id }}'
+        },
+        cells: [
+            {
+                content: `
+                    <div class="position-relative">
+                        <img src="{{ slide.image.url }}" 
+                             alt="{{ slide.alt_text|default:slide.title }}" 
+                             class="image-modern" 
+                             style="width: 100px; height: 60px; object-fit: cover;"
+                             title="{{ slide.alt_text|default:slide.title }}">
+                        <div class="position-absolute top-0 end-0 bg-dark text-white px-2 py-1 rounded-start-bottom" 
+                             style="font-size: 0.7rem;">
+                            {{ slide.order }}
+                        </div>
+                    </div>
+                `
+            },
+            {
+                content: `
+                    <div class="fw-semibold">{{ slide.title }}</div>
+                    {% if slide.button_url %}
+                        <small class="text-muted">
+                            <i class="fas fa-external-link-alt me-1"></i>
+                            {{ slide.button_url|truncatechars:30 }}
+                        </small>
+                    {% endif %}
+                `
+            },
+            {
+                content: `<div class="text-muted">{{ slide.description|truncatewords:8 }}</div>`
+            },
+            {
+                content: `
+                    {% if slide.alt_text %}
+                        <span class="badge bg-light text-dark border" title="{{ slide.alt_text }}">
+                            <i class="fas fa-tag me-1"></i>{{ slide.alt_text|truncatechars:25 }}
+                        </span>
+                    {% else %}
+                        <span class="text-muted">-</span>
+                    {% endif %}
+                `
+            },
+            {
+                content: `
+                    {% if slide.button_text %}
+                        <span class="badge bg-light text-dark border">
+                            <i class="fas fa-mouse-pointer me-1"></i>{{ slide.button_text }}
+                        </span>
+                    {% else %}
+                        <span class="text-muted">-</span>
+                    {% endif %}
+                `
+            },
+            {
+                content: `
+                    <div class="d-flex align-items-center">
+                        <span class="badge-modern info">
+                            <i class="fas fa-sort me-1"></i>{{ slide.order }}
+                        </span>
+                    </div>
+                `
+            },
+            {
+                content: `
+                    <span class="badge-modern {% if slide.is_active %}success{% else %}danger{% endif %}">
+                        <i class="fas {% if slide.is_active %}fa-check-circle{% else %}fa-times-circle{% endif %} me-1"></i>
+                        {% if slide.is_active %}
+                            {% trans "Aktif" %}
+                        {% else %}
+                            {% trans "Pasif" %}
+                        {% endif %}
+                    </span>
+                `
+            },
+            {
+                content: `
+                    <div class="action-buttons">
+                        <button class="btn-action edit" data-bs-toggle="modal" 
+                                data-bs-target="#editSlideModal{{ slide.id }}" 
+                                title="{% trans 'Düzenle' %}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn-action delete" data-bs-toggle="modal" 
+                                data-bs-target="#deleteSlideModal{{ slide.id }}" 
+                                title="{% trans 'Sil' %}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `
+            }
+        ]
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+];
+
+// Form action URLs
+const addFormAction = '{% url "dashboard:dashboard_carousel_add" %}';
+
+// Modal content for add slide (this could be moved to a separate include)
+const addModalContent = `
+    <div class="row">
+        <div class="col-md-8 mb-3">
+            <label class="form-label">Başlık (Türkçe) *</label>
+            <input type="text" name="title" class="form-control" placeholder="Slayt başlığını girin..." required>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="form-label">Sıralama</label>
+            <input type="number" name="order" class="form-control" value="0" min="0">
+        </div>
+    </div>
+    
+    <div class="mb-3">
+        <label class="form-label">Açıklama (Türkçe)</label>
+        <textarea name="description" class="form-control" rows="3" placeholder="Slayt açıklaması..."></textarea>
+    </div>
+    
+    <div class="mb-3">
+        <label class="form-label">Alt Metin (SEO) (Türkçe)</label>
+        <input type="text" name="alt_text" class="form-control" maxlength="125" placeholder="Görsel için SEO açıklaması (Max 125 karakter)">
+        <small class="form-text text-muted">Görselin ne olduğunu açıklayan metin. SEO için çok önemli!</small>
+    </div>
+    
+    <div class="mb-3">
+        <label class="form-label">Buton Metni (Türkçe)</label>
+        <input type="text" name="button_text" class="form-control" placeholder="Daha Fazla Bilgi">
+    </div>
+    
+    <div class="mb-3">
+        <label class="form-label">Görsel *</label>
+        <input type="file" name="image" class="form-control" accept="image/*" required>
+        <small class="form-text text-muted">Önerilen boyut: 1920x600 piksel</small>
+    </div>
+    
+    <div class="mb-3">
+        <label class="form-label">Buton URL</label>
+        <input type="url" name="button_url" class="form-control" placeholder="https://example.com">
+    </div>
+    
+    <div class="mb-3">
+        <div class="form-check form-switch">
+            <input type="checkbox" name="is_active" class="form-check-input" checked>
+            <label class="form-check-label">Aktif</label>
+        </div>
+    </div>
+`;
+
+// Preview toggle functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const previewToggle = document.getElementById('previewToggle');
+    const previewContainer = document.getElementById('carouselPreviewContainer');
+    
+    if (previewToggle && previewContainer) {
+        previewToggle.addEventListener('click', function() {
+            previewContainer.style.display = previewContainer.style.display === 'none' ? 'block' : 'none';
+        });
+    }
+
+    // Count active slides
+    const activeSlides = document.querySelectorAll('[data-slide-id]').length;
+    const activeSlidesCountEl = document.getElementById('activeSlidesCount');
+    if (activeSlidesCountEl) {
+        activeSlidesCountEl.textContent = activeSlides;
+    }
+});
+</script>
+{% endblock %}
+
+<!-- Page specific CSS -->
+{% block extra_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'dashboard/css/pages/carousel.css' %}">
+{% endblock %}
+
+<!-- Page specific JS -->
+{% block extra_js %}
+{% load static %}
+<script src="{% static 'dashboard/js/pages/carousel.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Bildirimler{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-bell me-2"></i>Tüm Bildirimler</h5>
+                </div>
+                <div class="card-body">
+                    <!-- Filtreler -->
+                    <form method="get" class="mb-3">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <select name="type" class="form-select" onchange="this.form.submit()">
+                                    <option value="">Tüm Tipler</option>
+                                    {% for value, label in notification_types %}
+                                        <option value="{{ value }}" {% if current_type == value %}selected{% endif %}>{{ label }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <select name="status" class="form-select" onchange="this.form.submit()">
+                                    <option value="">Tüm Durumlar</option>
+                                    <option value="unread" {% if current_status == 'unread' %}selected{% endif %}>Okunmamış</option>
+                                    <option value="read" {% if current_status == 'read' %}selected{% endif %}>Okunmuş</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-primary" onclick="markAllAsRead()">
+                                    <i class="fas fa-check-double me-1"></i>Tümünü Okundu İşaretle
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Bildirimler -->
+                    {% for notification in notifications %}
+                    <div class="card mb-2 {% if not notification.is_read %}border-primary{% endif %}">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h6>{{ notification.title }}</h6>
+                                    <p>{{ notification.message }}</p>
+                                    <small class="text-muted">{{ notification.created_at|date:"d.m.Y H:i" }} - {{ notification.get_notification_type_display }}</small>
+                                </div>
+                                <div>
+                                    {% if not notification.is_read %}
+                                    <button class="btn btn-sm btn-success" onclick="markAsRead({{ notification.id }})">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <p class="text-center">Bildirim bulunamadı.</p>
+                    {% endfor %}
+
+                    <!-- Pagination -->
+                    {% if notifications.has_other_pages %}
+                    <nav>
+                        <ul class="pagination">
+                            {% if notifications.has_previous %}
+                                <li class="page-item"><a class="page-link" href="?page={{ notifications.previous_page_number }}">Önceki</a></li>
+                            {% endif %}
+                            <li class="page-item active"><span class="page-link">{{ notifications.number }} / {{ notifications.paginator.num_pages }}</span></li>
+                            {% if notifications.has_next %}
+                                <li class="page-item"><a class="page-link" href="?page={{ notifications.next_page_number }}">Sonraki</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function markAsRead(id) {
+    fetch(`/dashboard/notifications/mark-read/${id}/`, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value || '{{ csrf_token }}',
+        }
+    }).then(() => location.reload());
+}
+
+function markAllAsRead() {
+    fetch('/dashboard/notifications/mark-all-read/', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value || '{{ csrf_token }}',
+        }
+    }).then(() => location.reload());
+}
+</script>
+{% endblock %}

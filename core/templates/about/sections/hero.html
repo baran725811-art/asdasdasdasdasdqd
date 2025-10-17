@@ -1,0 +1,31 @@
+{% load static %}
+{% load i18n %}
+
+<section class="about-hero">
+    <div class="hero-content">
+        <div class="container">
+            <div class="hero-text">
+                <h1 class="hero-title" data-aos="fade-up">{{ about.title }}</h1>
+                <p class="hero-description" data-aos="fade-up" data-aos-delay="200">
+                    {{ about.short_description }}
+                </p>
+                <div class="hero-stats" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stat-item">
+                        <span class="stat-number">{{ about.years_experience }}+</span>
+                        <span class="stat-label">{% trans "Yıl Deneyim" %}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">{{ about.happy_customers }}+</span>
+                        <span class="stat-label">{% trans "Mutlu Müşteri" %}</span>
+                    </div>
+                </div>
+            </div>
+            {% if about.image %}
+            <div class="hero-image" data-aos="fade-left" data-aos-delay="300">
+                <img src="{{ about.image.url }}" alt="{{ about.alt_text|default:about.title }}" loading="lazy">
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="hero-pattern"></div>
+</section>

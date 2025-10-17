@@ -1,0 +1,611 @@
+<!-- core\dashboard\templates\dashboard\gallery\list.html - DÜZELTILMIŞ VERSIYON -->
+{% extends 'dashboard/base/list_base.html' %}
+{% load dashboard_filters %}
+{% load static %}
+{% load widget_tweaks %}
+{% load i18n %}
+{% load custom_filters %}
+
+{% block title %}{% trans "Galeri Yönetimi" %}{% endblock %}
+{% block page_title %}{% trans "Galeri Yönetimi" %}{% endblock %}
+
+{% block page_content %}
+<!-- Page Header -->
+{% include 'dashboard/includes/navigation/page_header.html' with page_title="Galeri Yönetimi" page_subtitle="Galeri öğelerinizi düzenleyin ve yönetin" page_icon="fas fa-images" page_actions=page_actions %}
+
+<!-- Statistics -->
+<div class="row g-4 mb-4">
+    <div class="col-xl-3 col-lg-6 col-md-6">
+        {% include 'dashboard/includes/cards/stats_card.html' with card_value=total_count card_label="Toplam Öğe" card_icon="fas fa-images" card_style="modern" card_color="primary" %}
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6">
+        {% include 'dashboard/includes/cards/stats_card.html' with card_value=active_count card_label="Aktif Öğeler" card_icon="fas fa-check-circle" card_style="modern" card_color="success" %}
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6">
+        {% include 'dashboard/includes/cards/stats_card.html' with card_value=featured_count card_label="Öne Çıkan" card_icon="fas fa-star" card_style="modern" card_color="warning" %}
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6">
+        {% include 'dashboard/includes/cards/stats_card.html' with card_value=recent_count card_label="Son 7 Gün" card_icon="fas fa-clock" card_style="modern" card_color="info" %}
+    </div>
+</div>
+
+<!-- Gallery Table -->
+<div class="table-card">
+    <div class="card-header-modern">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">
+                <i class="fas fa-list me-2"></i>{% trans "Galeri Listesi" %}
+            </h5>
+            <div class="d-flex gap-2">
+                {% include 'dashboard/includes/tables/table_search.html' with search_placeholder="Galeri ara..." search_id="gallerySearch" %}
+                <button type="button" class="btn-modern primary btn-sm" data-bs-toggle="modal" data-bs-target="#addGalleryModal">
+                    <i class="fas fa-plus me-1"></i>{% trans "Yeni Öğe Ekle" %}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        {% if galleries %}
+        <div class="table-responsive">
+            <table class="table table-modern table-hover" id="galleriesTable">
+                {% include 'dashboard/includes/tables/table_header.html' with table_type='galleries' %}
+                
+                <tbody>
+                    {% for gallery in galleries %}
+                    
+                    <tr data-gallery-id="{{ gallery.id }}">
+                        <td>
+                            <div class="fw-semibold">#{{ gallery.id }}</div>
+                        </td>
+                        <td>
+                            {% if gallery.image %}
+                                <img src="{{ gallery.image.url }}" alt="{{ gallery.get_alt_text }}" class="image-modern" style="width: 60px; height: 60px; object-fit: cover;" loading="lazy">
+                            {% else %}
+                                <div class="image-placeholder" style="width: 60px; height: 60px;">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="fw-semibold">{{ gallery.title }}</div>
+                            {% if gallery.description %}
+                                <small class="text-muted">{{ gallery.description|truncatewords:8|striptags }}</small>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span class="badge bg-secondary">
+                                <i class="fas fa-{% if gallery.media_type == 'video' %}video{% else %}image{% endif %} me-1"></i>
+                                {{ gallery.get_media_type_display }}
+                            </span>
+                        </td>
+                        <td>
+                            {% include 'dashboard/includes/ui/status_badge.html' with badge_text=gallery.is_active|yesno:"Aktif,Pasif" badge_color=gallery.is_active|yesno:"success,danger" %}
+                            {% if gallery.is_featured %}
+                                <span class="badge bg-warning text-dark ms-1">
+                                    <i class="fas fa-star me-1"></i>Öne Çıkan
+                                </span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="fw-semibold">{{ gallery.order }}</div>
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-action edit" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#editGalleryModal{{ gallery.id }}" 
+                                        title="{% trans 'Düzenle' %}">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn-action view" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#viewGalleryModal{{ gallery.id }}" 
+                                        title="{% trans 'Görüntüle' %}">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-action delete" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#deleteGalleryModal{{ gallery.id }}" 
+                                        title="{% trans 'Sil' %}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        {% if galleries.has_other_pages %}
+            {% include 'dashboard/includes/tables/table_pagination.html' with page_obj=galleries %}
+        {% endif %}
+
+        {% else %}
+        
+            {% include 'dashboard/includes/ui/empty_state.html' with empty_icon="fas fa-images" empty_title="Henüz galeri öğesi eklenmemiş" empty_message="İlk galeri öğenizi ekleyerek başlayın" action_button_text="İlk Öğeyi Ekle" action_button_icon="fas fa-plus" action_button_attrs='data-bs-toggle="modal" data-bs-target="#addGalleryModal"' %}
+        
+        {% endif %}
+    </div>
+</div>
+
+<!-- Add Gallery Modal -->
+<div class="modal fade modal-modern" id="addGalleryModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-plus me-2"></i>{% trans "Yeni Galeri Öğesi Ekle" %}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            
+            <form method="post" enctype="multipart/form-data" id="addGalleryForm" action="{% url 'dashboard:gallery_add' %}">
+                {% csrf_token %}
+                
+                <div class="modal-body">
+                    <!-- Translation Tabs -->
+                    {% if translation_enabled and enabled_languages|length > 1 %}
+                        {% include 'dashboard/includes/forms/translation_tabs.html' with show_primary_label=True %}
+                    {% endif %}
+                    
+                    <!-- Turkish Content -->
+                    <div class="translation-content active" data-lang="tr">
+                        <div class="row">
+                            <div class="col-12">
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="title" field_label="Başlık" field_icon="fas fa-heading" field_type="text" is_required=True help_text="Galeri öğesinin başlığı" language_code="tr" %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description" label="Açıklama" rows="5" help_text="Galeri öğesinin açıklaması" %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text" field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" help_text="SEO için görsel açıklaması" language_code="tr" %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Translation Languages Content -->
+                    {% if translation_enabled and enabled_languages|length > 1 %}
+                        {% for lang in enabled_languages %}
+                            {% if lang != 'tr' %}
+                            <div class="translation-content" data-lang="{{ lang }}">
+                                <div class="row">
+                                    <div class="col-12">
+                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="title_"|add:lang field_label="Başlık" field_icon="fas fa-heading" field_type="text" is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description_"|add:lang label="Açıklama" rows="5" help_text="Bu alan zorunludur" %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text_"|add:lang field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+
+                    <!-- Media Settings -->
+                    <div class="card-modern mt-4">
+                        <div class="card-header-modern">
+                            <h6 class="mb-0">
+                                <i class="fas fa-cogs me-2"></i>{% trans "Medya Ayarları" %}
+                            </h6>
+                        </div>
+                        <div class="card-body-modern">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {% include 'dashboard/includes/forms/select_field.html' with field_name="media_type" label="Medya Türü" icon="fas fa-photo-video" options=media_type_options required=True %}
+                                </div>
+                                <div class="col-md-6">
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="order" field_label="Sıralama" field_icon="fas fa-sort-numeric-up" field_type="number" field_min="0" help_text="Küçük sayılar önce görünür" %}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-12">
+                                    {% include 'dashboard/includes/forms/image_upload_field.html' with field_name="image" label="Görsel" help_text="JPG, PNG formatında görsel yükleyebilirsiniz" %}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-12">
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="video_url" field_label="Video URL" field_icon="fas fa-video" field_type="url" help_text="YouTube, Vimeo vb. video platformları için" %}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {% include 'dashboard/includes/forms/checkbox_field.html' with field_name="is_active" label="Aktif Durumda" field_type="switch" icon="fas fa-toggle-on" checked=True %}
+                                </div>
+                                <div class="col-md-6">
+                                    {% include 'dashboard/includes/forms/checkbox_field.html' with field_name="is_featured" label="Öne Çıkan" field_type="switch" icon="fas fa-star" %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>{% trans "İptal" %}
+                    </button>
+                    <button type="submit" class="btn-modern success">
+                        <i class="fas fa-save me-2"></i>{% trans "Galeri Öğesini Kaydet" %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Gallery Modals -->
+{% for gallery_data in galleries_with_translations %}
+{% with gallery=gallery_data.object %}
+<div class="modal fade modal-modern" id="editGalleryModal{{ gallery.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-edit me-2"></i>{% trans "Galeri Öğesi Düzenle" %}: {{ gallery.title }}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            
+            <form method="post" enctype="multipart/form-data" id="editGalleryForm{{ gallery.id }}" action="{% url 'dashboard:gallery_edit' gallery.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="gallery_id" value="{{ gallery.id }}">
+                
+                <div class="modal-body">
+                    <!-- Translation Tabs -->
+                    {% if translation_enabled and enabled_languages|length > 1 %}
+                        {% include 'dashboard/includes/forms/translation_tabs.html' with show_primary_label=True %}
+                    {% endif %}
+                    
+                    <!-- Turkish Content -->
+                    <div class="translation-content active" data-lang="tr">
+                        <div class="row">
+                            <div class="col-12">
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="title" field_label="Başlık" field_icon="fas fa-heading" field_type="text" field_value=gallery.title is_required=True help_text="Galeri öğesinin başlığı" language_code="tr" %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description" label="Açıklama" value=gallery.description rows="5" help_text="Galeri öğesinin açıklaması" %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text" field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" field_value=gallery.alt_text help_text="SEO için görsel açıklaması" language_code="tr" %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Translation Languages Content -->
+                    {% if translation_enabled and enabled_languages|length > 1 %}
+                        {% for lang in enabled_languages %}
+                            {% if lang != 'tr' %}
+                            <div class="translation-content" data-lang="{{ lang }}">
+                                <div class="row">
+                                    <div class="col-12">
+                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="title_"|add:lang field_label="Başlık" field_icon="fas fa-heading" field_type="text" field_value=gallery_data.translations|lookup:lang|lookup:"title" is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description_"|add:lang label="Açıklama" value=gallery_data.translations|lookup:lang|lookup:"description" rows="5" help_text="Bu alan zorunludur" %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text_"|add:lang field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" field_value=gallery_data.translations|lookup:lang|lookup:"alt_text" is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+
+                    <!-- Media Settings -->
+                    <div class="card-modern mt-4">
+                        <div class="card-header-modern">
+                            <h6 class="mb-0">
+                                <i class="fas fa-cogs me-2"></i>{% trans "Medya Ayarları" %}
+                            </h6>
+                        </div>
+                        <div class="card-body-modern">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {% include 'dashboard/includes/forms/select_field.html' with field_name="media_type" label="Medya Türü" icon="fas fa-photo-video" options=media_type_options selected_value=gallery.media_type required=True %}
+                                </div>
+                                <div class="col-md-6">
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="order" field_label="Sıralama" field_icon="fas fa-sort-numeric-up" field_type="number" field_value=gallery.order field_min="0" help_text="Küçük sayılar önce görünür" %}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-12">
+                                    {% include 'dashboard/includes/forms/image_upload_field.html' with field_name="image" label="Görsel" current_image=gallery.image help_text="Yeni bir görsel seçmezseniz mevcut görsel korunur" %}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-12">
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="video_url" field_label="Video URL" field_icon="fas fa-video" field_type="url" field_value=gallery.video_url help_text="YouTube, Vimeo vb. video platformları için" %}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {% include 'dashboard/includes/forms/checkbox_field.html' with field_name="is_active" label="Aktif Durumda" field_type="switch" icon="fas fa-toggle-on" checked=gallery.is_active %}
+                                </div>
+                                <div class="col-md-6">
+                                    {% include 'dashboard/includes/forms/checkbox_field.html' with field_name="is_featured" label="Öne Çıkan" field_type="switch" icon="fas fa-star" checked=gallery.is_featured %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>{% trans "İptal" %}
+                    </button>
+                    <button type="submit" class="btn-modern success">
+                        <i class="fas fa-save me-2"></i>{% trans "Değişiklikleri Kaydet" %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- View Gallery Modal -->
+<div class="modal fade modal-modern" id="viewGalleryModal{{ gallery.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-eye me-2"></i>{% trans "Galeri Detayları" %}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        {% if gallery.image %}
+                            <img src="{{ gallery.image.url }}" alt="{{ gallery.get_alt_text }}" 
+                                 class="img-fluid rounded shadow" loading="lazy">
+                        {% else %}
+                            <div class="text-center p-4 bg-light rounded">
+                                <i class="fas fa-image fa-3x text-muted"></i>
+                                <p class="text-muted mt-2">{% trans "Görsel yok" %}</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-8">
+                        <h4>{{ gallery.title }}</h4>
+                        <p class="text-muted">{{ gallery.description|default:"Açıklama bulunmuyor."|striptags }}</p>
+                        
+                        <div class="gallery-meta mt-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>{% trans "ID" %}:</strong> #{{ gallery.id }}
+                                </div>
+                                <div class="col-6">
+                                    <strong>{% trans "Medya Türü" %}:</strong> {{ gallery.get_media_type_display }}
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-6">
+                                    <strong>{% trans "Sıralama" %}:</strong> {{ gallery.order }}
+                                </div>
+                                <div class="col-6">
+                                    <strong>{% trans "Durum" %}:</strong> 
+                                    {% include 'dashboard/includes/ui/status_badge.html' with badge_text=gallery.is_active|yesno:"Aktif,Pasif" badge_color=gallery.is_active|yesno:"success,danger" %}
+                                </div>
+                            </div>
+                            {% if gallery.is_featured %}
+                            <div class="row mt-2">
+                                <div class="col-12">
+                                    {% include 'dashboard/includes/ui/status_badge.html' with badge_text="Öne Çıkan" badge_color="warning" badge_icon="fas fa-star" %}
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if gallery.video_url %}
+                            <div class="row mt-2">
+                                <div class="col-12">
+                                    <strong>{% trans "Video URL" %}:</strong> <a href="{{ gallery.video_url }}" target="_blank">{{ gallery.video_url }}</a>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <div class="row mt-2">
+                                <div class="col-12">
+                                    <strong>{% trans "Oluşturma" %}:</strong> 
+                                    {% include 'dashboard/includes/partials/datetime_display.html' with datetime_value=gallery.created_at format="short" %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times"></i>{% trans "Kapat" %}
+                </button>
+                <button type="button" class="btn-modern primary" data-bs-toggle="modal" data-bs-target="#editGalleryModal{{ gallery.id }}">
+                    <i class="fas fa-edit"></i>{% trans "Düzenle" %}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Gallery Modal -->
+<!-- Delete Gallery Modal -->
+<div class="modal fade" id="deleteGalleryModal{{ gallery.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">
+                    <i class="fas fa-exclamation-triangle me-2"></i>{% trans "Galeri Öğesi Sil" %}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fas fa-trash-alt text-danger fa-3x mb-3"></i>
+                    <h5>{% trans "Bu galeri öğesini silmek istediğinizden emin misiniz?" %}</h5>
+                    <p class="text-muted">
+                        <strong>"{{ gallery.title }}"</strong> kalıcı olarak silinecek.
+                    </p>
+                    <div class="alert alert-warning mt-3">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Bu işlem geri alınamaz!
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>{% trans "İptal" %}
+                </button>
+                
+                <form method="post" style="display: inline;" class="delete-form" 
+                      data-item-type="galeri öğesi"
+                      data-item-name="{{ gallery.title }}"
+                      action="{% url 'dashboard:gallery_delete' gallery.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger delete-confirm-btn">
+                        <i class="fas fa-trash me-2"></i>{% trans "Sil" %}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endwith %}
+{% endfor %}
+{% endblock %}
+
+{% block list_modals %}
+<!-- Bulk Actions Modal -->
+{% include 'dashboard/includes/modals/bulk_actions_modal.html' %}
+{% endblock %}
+
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'dashboard/css/pages/gallery.css' %}">
+
+
+{% endblock %}
+
+
+{% block extra_js %}
+<script src="{% static 'dashboard/js/pages/gallery.js' %}"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Add Gallery Form Handler
+    const addGalleryForm = document.getElementById('addGalleryForm');
+    if (addGalleryForm) {
+        addGalleryForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Kaydediliyor...';
+            
+            try {
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: new FormData(this),
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                    }
+                });
+                
+                if (response.ok) {
+                    // Success
+                    window.notificationSystem.success('Galeri öğesi başarıyla kaydedildi!');
+                    
+                    // Modal kapat
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('addGalleryModal'));
+                    modal.hide();
+                    
+                    // Sayfa yenile
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    throw new Error('Kaydetme hatası');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                window.notificationSystem.error('Bir hata oluştu: ' + error.message);
+            } finally {
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        });
+    }
+    
+    // Edit Gallery Form Handlers
+    document.querySelectorAll('form[id^="editGalleryForm"]').forEach(form => {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Güncelleniyor...';
+            
+            try {
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: new FormData(this),
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                    }
+                });
+                
+                if (response.ok) {
+                    window.notificationSystem.success('Galeri öğesi başarıyla güncellendi!');
+                    
+                    // Modal kapat
+                    const modalId = this.closest('.modal').id;
+                    const modal = bootstrap.Modal.getInstance(document.getElementById(modalId));
+                    modal.hide();
+                    
+                    // Sayfa yenile
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    throw new Error('Güncelleme hatası');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                window.notificationSystem.error('Bir hata oluştu: ' + error.message);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

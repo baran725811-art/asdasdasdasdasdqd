@@ -1,0 +1,139 @@
+User-agent: *
+Allow: /
+
+# Static files
+Allow: /static/
+Allow: /media/
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /api/
+Disallow: /ckeditor5/
+
+# Language switching
+Disallow: /i18n/
+Disallow: /set_language/
+
+# Catalog (if needed to be private)
+Disallow: /katalog/
+
+# Sitemap
+Sitemap: {{ request.scheme }}://{{ request.get_host }}/sitemap.xml
+
+# Crawl delay (optional - prevents aggressive crawling)
+Crawl-delay: 1
+
+
+
+User-agent: *
+# Ana sayfalar - izin ver
+Allow: /
+Allow: /urunler/
+Allow: /galeri/
+Allow: /hakkimizda/
+Allow: /iletisim/
+Allow: /reviews/
+
+# Static dosyalar - izin ver
+Allow: /static/
+Allow: /media/
+
+# Katalog - izin ver
+Allow: /katalog/
+
+# Admin ve dashboard - engelle
+Disallow: /admin/
+Disallow: /dashboard/
+
+# API endpoints - engelle
+Disallow: /api/
+
+# Temporary/test pages - engelle
+Disallow: /test/
+Disallow: /temp/
+
+# Search parameters - engelle
+Disallow: /*?q=
+Disallow: /*?search=
+Disallow: /*?page=
+Disallow: /*?sort=
+
+# Language parameters - izin ver ama indexleme
+Allow: /tr/
+Allow: /en/
+Allow: /de/
+Allow: /fr/
+Allow: /ar/
+Allow: /ru/
+
+# Error pages - engelle
+Disallow: /404/
+Disallow: /500/
+
+# Private files - engelle
+Disallow: /*.pdf$
+Disallow: /*.doc$
+Disallow: /*.docx$
+Disallow: /*.xls$
+Disallow: /*.xlsx$
+
+# Development files - engelle
+Disallow: /*.log$
+Disallow: /*.sql$
+Disallow: /*.env$
+
+# Sitemap location
+Sitemap: {{ request.build_absolute_uri }}sitemap.xml
+
+# Crawl delay - search engine load'u azaltmak için
+Crawl-delay: 1
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot  
+Allow: /
+Crawl-delay: 2
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 3
+
+# Block problematic bots
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MauiBot
+Disallow: /
+
+# Archive bots - allow but limit
+User-agent: ia_archiver
+Allow: /
+Crawl-delay: 5
+
+# News and content aggregators
+User-agent: GoogleNews
+Allow: /
+
+User-agent: NewsBot
+Allow: /
+
+# Last updated: {% now "Y-m-d H:i:s" %}
+# Contact: {{ contact_email|default:"info@yourdomain.com" }}

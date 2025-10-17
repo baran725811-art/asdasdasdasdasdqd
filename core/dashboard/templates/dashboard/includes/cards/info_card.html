@@ -1,0 +1,198 @@
+<!-- core\dashboard\templates\dashboard\includes\cards\info_card.html - Bilgi kartı -->
+{% load i18n %}
+
+<div class="card-modern info-card {{ card_class|default:'' }}">
+    {% if header_title or header_icon %}
+        <div class="card-header-modern">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    {% if header_icon %}<i class="{{ header_icon }} me-2"></i>{% endif %}
+                    {{ header_title }}
+                </h5>
+                {% if header_actions %}
+                    <div class="header-actions">
+                        {{ header_actions }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+    
+    <div class="card-body-modern {{ body_class|default:'' }}">
+        {% if card_type == "metric" %}
+            <!-- Metric Card -->
+            <div class="metric-content">
+                <div class="metric-icon">
+                    <i class="{{ icon|default:'fas fa-chart-line' }}"></i>
+                </div>
+                <div class="metric-data">
+                    <h3 class="metric-value">{{ value }}</h3>
+                    <p class="metric-label">{{ label }}</p>
+                    {% if trend %}
+                        <div class="metric-trend {{ trend.type|default:'neutral' }}">
+                            <i class="fas fa-arrow-{{ trend.direction|default:'right' }}"></i>
+                            {{ trend.value }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+        {% elif card_type == "progress" %}
+            <!-- Progress Card -->
+            <div class="progress-content">
+                {% if icon or title %}
+                    <div class="progress-header">
+                        {% if icon %}<i class="{{ icon }} me-2"></i>{% endif %}
+                        <h6>{{ title }}</h6>
+                    </div>
+                {% endif %}
+                <div class="progress-bar-container">
+                    <div class="progress progress-modern">
+                        <div class="progress-bar bg-{{ color|default:'primary' }}" 
+                             style="width: {{ percentage|default:0 }}%"
+                             role="progressbar" 
+                             aria-valuenow="{{ percentage|default:0 }}" 
+                             aria-valuemin="0" 
+                             aria-valuemax="100">
+                        </div>
+                    </div>
+                    <div class="progress-text">
+                        <span class="progress-value">{{ current_value|default:percentage }}{{ unit|default:'%' }}</span>
+                        {% if max_value %}
+                            <span class="progress-max">/ {{ max_value }}{{ unit|default:'' }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+                {% if description %}
+                    <small class="text-muted">{{ description }}</small>
+                {% endif %}
+            </div>
+
+        {% elif card_type == "list" %}
+            <!-- List Card -->
+            <div class="info-list">
+                {% for item in items %}
+                    <div class="info-list-item">
+                        {% if item.icon %}
+                            <div class="item-icon">
+                                <i class="{{ item.icon }}"></i>
+                            </div>
+                        {% endif %}
+                        <div class="item-content">
+                            <div class="item-title">{{ item.title }}</div>
+                            {% if item.description %}
+                                <div class="item-description">{{ item.description }}</div>
+                            {% endif %}
+                        </div>
+                        {% if item.value %}
+                            <div class="item-value">{{ item.value }}</div>
+                        {% endif %}
+                        {% if item.actions %}
+                            <div class="item-actions">{{ item.actions }}</div>
+                        {% endif %}
+                    </div>
+                {% empty %}
+                    <div class="empty-list">
+                        <i class="fas fa-inbox text-muted"></i>
+                        <p class="text-muted mb-0">{{ empty_message|default:"Henüz öğe bulunmuyor" }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+
+        {% elif card_type == "status" %}
+            <!-- Status Card -->
+            <div class="status-content">
+                <div class="status-icon bg-{{ status_color|default:'primary' }}">
+                    <i class="{{ icon|default:'fas fa-info-circle' }}"></i>
+                </div>
+                <div class="status-details">
+                    <h6 class="status-title">{{ title }}</h6>
+                    <p class="status-message">{{ message }}</p>
+                    {% if last_updated %}
+                        <small class="text-muted">
+                            <i class="fas fa-clock me-1"></i>
+                            {{ last_updated|timesince }} {% trans "önce güncellendi" %}
+                        </small>
+                    {% endif %}
+                </div>
+                {% if action_button %}
+                    <div class="status-action">
+                        {{ action_button }}
+                    </div>
+                {% endif %}
+            </div>
+
+        {% elif card_type == "quick_stats" %}
+            <!-- Quick Stats Grid -->
+            <div class="quick-stats-grid">
+                {% for stat in stats %}
+                    <div class="quick-stat-item">
+                        <div class="stat-number">{{ stat.value }}</div>
+                        <div class="stat-label">{{ stat.label }}</div>
+                        {% if stat.icon %}
+                            <div class="stat-icon">
+                                <i class="{{ stat.icon }}"></i>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+
+        {% elif card_type == "form" %}
+            <!-- Form Card Content -->
+            <div class="form-content">
+                {% if form_fields %}
+                    {% for field in form_fields %}
+                        <div class="form-group mb-3">
+                            {% if field.type == "text" %}
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name=field.name field_label=field.label field_type="text" field_icon=field.icon help_text=field.help_text %}
+                            {% elif field.type == "textarea" %}
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name=field.name field_label=field.label field_type="textarea" field_icon=field.icon field_rows=field.rows help_text=field.help_text %}
+                            {% elif field.type == "number" %}
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name=field.name field_label=field.label field_type="number" field_icon=field.icon field_min=field.min field_max=field.max help_text=field.help_text %}
+                            {% elif field.type == "editor" %}
+                                {% include 'dashboard/includes/forms/text_editor_field.html' with field_name=field.name label=field.label editor_type="rich" help_text=field.help_text %}
+                            {% elif field.type == "image" %}
+                                {% include 'dashboard/includes/forms/image_upload_field.html' with field_name=field.name label=field.label help_text=field.help_text current_image=field.current_image %}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-muted">{{ content|default:"Form alanları yüklenecek..." }}</p>
+                {% endif %}
+            </div>
+
+        {% else %}
+            <!-- Default Content -->
+            {% if icon or title %}
+                <div class="info-header">
+                    {% if icon %}<i class="{{ icon }} me-2"></i>{% endif %}
+                    {% if title %}<h6>{{ title }}</h6>{% endif %}
+                </div>
+            {% endif %}
+            
+            {% if content %}
+                <div class="info-content">
+                    {{ content|safe }}
+                </div>
+            {% endif %}
+            
+            {% if description %}
+                <p class="text-muted">{{ description }}</p>
+            {% endif %}
+        {% endif %}
+    </div>
+    
+    {% if footer_content or footer_actions %}
+        <div class="card-footer bg-light">
+            <div class="d-flex justify-content-between align-items-center">
+                {% if footer_content %}
+                    <div class="footer-content">{{ footer_content }}</div>
+                {% endif %}
+                {% if footer_actions %}
+                    <div class="footer-actions">{{ footer_actions }}</div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+</div>

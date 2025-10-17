@@ -1,0 +1,292 @@
+{% extends 'dashboard/base/list_base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Müşteri Yorumları"%}{% endblock %}
+{% block page_title %}{% trans "Yorum Yönetimi"%}{% endblock %}
+
+{% block page_content %}
+<!-- Page Header -->
+{% include 'dashboard/includes/navigation/page_header.html' with page_icon="fas fa-comments" page_title="Yorum Yönetimi" page_subtitle="Müşteri yorumlarını yönetin ve onaylayın" page_actions=page_actions %}
+
+<!-- Quick Stats -->
+<div class="row g-4 mb-4">
+    <div class="col-xl-3 col-lg-6 col-md-6">
+        {% include 'dashboard/includes/cards/stats_card.html' with card_value=reviews|length card_label="Toplam Yorum" card_icon="fas fa-comments" card_style="modern" card_color="primary" %}
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6">
+        {% include 'dashboard/includes/cards/stats_card.html' with card_value=approved_count card_label="Onaylı Yorumlar" card_icon="fas fa-check-circle" card_style="modern" card_color="success" %}
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6">
+        {% include 'dashboard/includes/cards/stats_card.html' with card_value=pending_count card_label="Onay Bekleyen" card_icon="fas fa-clock" card_style="modern" card_color="warning" %}
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6">
+        {% include 'dashboard/includes/cards/stats_card.html' with card_value=average_rating card_label="Ortalama Puan" card_icon="fas fa-star" card_style="modern" card_color="info" %}
+    </div>
+</div>
+
+<!-- Reviews Table -->
+<div class="table-card">
+    <div class="card-header-modern">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">
+                <i class="fas fa-list me-2"></i>{% trans "Yorum Listesi"%}
+            </h5>
+            <div class="d-flex gap-2">
+                {% include 'dashboard/includes/tables/table_search.html' with search_placeholder="Yorum ara..." search_id="reviewSearch" %}
+                <select class="form-select form-select-sm" id="statusFilter" style="width: auto;">
+                    <option value="">{% trans "Tüm Durumlar"%}</option>
+                    <option value="approved">{% trans "Onaylı"%}</option>
+                    <option value="pending">{% trans "Onay Bekleyen"%}</option>
+                </select>
+                <button class="btn-modern success btn-sm" data-bs-toggle="modal" data-bs-target="#bulkApproveModal">
+                    <i class="fas fa-check-circle"></i>{% trans "Tümünü Onayla"%}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        {% if reviews %}
+        <div class="table-responsive">
+            <table class="table table-modern table-hover" id="reviewsTable">
+                {% include 'dashboard/includes/tables/table_header.html' with table_type='reviews' %}
+                
+                <tbody>
+                    {% for review in reviews %}
+                    <tr data-status="{% if review.is_approved %}approved{% else %}pending{% endif %}">
+                        <td>
+                            <div class="date-info">
+                                <div class="fw-semibold">{% include 'dashboard/includes/partials/datetime_display.html' with datetime_value=review.created_at format="short" %}</div>
+                                <small class="text-muted">{% include 'dashboard/includes/partials/datetime_display.html' with datetime_value=review.created_at format="time" %}</small>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                {% include 'dashboard/includes/partials/user_avatar.html' with user_name=review.name %}
+                                <div>
+                                    <div class="fw-semibold">{{ review.name }}</div>
+                                    <small class="text-muted">{% trans "Müşteri"%}</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="rating-display">
+                                {% for i in "12345" %}
+                                    {% if forloop.counter <= review.rating %}
+                                        <i class="fas fa-star text-warning"></i>
+                                    {% else %}
+                                        <i class="far fa-star text-muted"></i>
+                                    {% endif %}
+                                {% endfor %}
+                                <div class="rating-number">({{ review.rating }}/5)</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="comment-preview">
+                                {{ review.comment|truncatewords:8 }}
+                                {% if review.comment|wordcount > 8 %}
+                                    <button class="btn btn-link btn-sm p-0 ms-1" data-bs-toggle="modal" 
+                                            data-bs-target="#reviewModal{{ review.id }}">
+                                        <i class="fas fa-expand-alt"></i>
+                                    </button>
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td>
+                            {% if review.image %}
+                            <div class="review-image">
+                                <img src="{{ review.image.url }}" alt="Review image" class="image-modern" style="width: 50px; height: 50px; object-fit: cover;">
+                            </div>
+                            {% else %}
+                            <div class="image-placeholder-sm">
+                                <i class="fas fa-image"></i>
+                            </div>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% include 'dashboard/includes/ui/status_badge.html' with badge_text=review.is_approved|yesno:"Onaylı,Bekliyor" badge_color=review.is_approved|yesno:"success,warning" badge_icon=review.is_approved|yesno:"fas fa-check-circle,fas fa-clock" %}
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <form method="post" action="{% url 'dashboard:review_toggle' review.id %}" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn-action {% if review.is_approved %}warning{% else %}success{% endif %}" 
+                                            title="{% if review.is_approved %}Onayı Kaldır{% else %}Onayla{% endif %}">
+                                        <i class="fas {% if review.is_approved %}fa-times-circle{% else %}fa-check-circle{% endif %}"></i>
+                                    </button>
+                                </form>
+                                <button class="btn-action view" data-bs-toggle="modal" 
+                                        data-bs-target="#reviewModal{{ review.id }}" title="{% trans 'Detay' %}">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-action delete" data-bs-toggle="modal" 
+                                        data-bs-target="#deleteReviewModal{{ review.id }}" title="{% trans 'Sil' %}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        {% if reviews.has_other_pages %}
+            {% include 'dashboard/includes/tables/table_pagination.html' with page_obj=reviews %}
+        {% endif %}
+
+        {% else %}
+            {% include 'dashboard/includes/ui/empty_state.html' with empty_icon="fas fa-comments" empty_title="Henüz yorum bulunmuyor" empty_message="Müşterilerinizden gelen yorumlar burada görünecektir." %}
+        {% endif %}
+    </div>
+</div>
+
+<!-- Review Detail Modals -->
+{% for review in reviews %}
+<div class="modal fade modal-modern" id="reviewModal{{ review.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-comment-dots me-2"></i>{% trans "Yorum Detayı"%}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="info-group mb-3">
+                            <label class="fw-semibold"><i class="fas fa-user me-2"></i>{% trans "Ad Soyad"%}:</label>
+                            <span>{{ review.name }}</span>
+                        </div>
+                        <div class="info-group mb-3">
+                            <label class="fw-semibold"><i class="fas fa-calendar me-2"></i>{% trans "Tarih"%}:</label>
+                            <span>{% include 'dashboard/includes/partials/datetime_display.html' with datetime_value=review.created_at %}</span>
+                        </div>
+                        <div class="info-group mb-3">
+                            <label class="fw-semibold"><i class="fas fa-star me-2"></i>{% trans "Puan"%}:</label>
+                            <div class="rating-display">
+                                {% for i in "12345" %}
+                                    {% if forloop.counter <= review.rating %}
+                                        <i class="fas fa-star text-warning"></i>
+                                    {% else %}
+                                        <i class="far fa-star text-muted"></i>
+                                    {% endif %}
+                                {% endfor %}
+                                <span class="ms-2">({{ review.rating }}/5)</span>
+                            </div>
+                        </div>
+                        <div class="info-group mb-3">
+                            <label class="fw-semibold"><i class="fas fa-toggle-on me-2"></i>{% trans "Durum"%}:</label>
+                            {% include 'dashboard/includes/ui/status_badge.html' with badge_text=review.is_approved|yesno:"Onaylı,Bekliyor" badge_color=review.is_approved|yesno:"success,warning" %}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        {% if review.image %}
+                        <div class="text-center">
+                            <img src="{{ review.image.url }}" alt="Review image" 
+                                 class="img-fluid rounded shadow-modern" style="max-height: 200px;">
+                        </div>
+                        {% else %}
+                        <div class="text-center p-4 bg-light rounded">
+                            <i class="fas fa-image fa-3x text-muted"></i>
+                            <p class="text-muted mt-2">{% trans "Görsel yok" %}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="info-group mt-3">
+                    <label class="fw-semibold"><i class="fas fa-comment me-2"></i>{% trans "Yorum"%}:</label>
+                    <div class="comment-full p-3 bg-light rounded mt-2">
+                        {{ review.comment }}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times"></i>{% trans "Kapat"%}
+                </button>
+                <form method="post" action="{% url 'dashboard:review_toggle' review.id %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-modern {% if review.is_approved %}warning{% else %}success{% endif %}">
+                        <i class="fas {% if review.is_approved %}fa-times-circle{% else %}fa-check-circle{% endif %}"></i>
+                        {% if review.is_approved %}{% trans "Onayı Kaldır"%}{% else %}{% trans "Onayla"%}{% endif %}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal -->
+{% include 'dashboard/includes/modals/delete_confirmation.html' with modal_id="deleteReviewModal"|add:review.id item_name=review.name delete_url="dashboard:review_delete" delete_id=review.id warning_message="Bu işlem geri alınamaz!" %}
+
+
+{% endfor %}
+
+<!-- Bulk Approve Modal -->
+<div class="modal fade modal-modern" id="bulkApproveModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h5 class="modal-title text-white">
+                    <i class="fas fa-check-double me-2"></i>{% trans "Toplu Onaylama"%}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center py-4">
+                <div class="confirm-icon mb-3">
+                    <i class="fas fa-check-double fa-4x text-success"></i>
+                </div>
+                <h5>{% trans "Tüm bekleyen yorumları onaylamak istediğinizden emin misiniz?" %}</h5>
+                <p class="text-muted">{{ pending_count }} {% trans "adet onay bekleyen yorum bulunuyor." %}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times"></i>{% trans "İptal"%}
+                </button>
+                <form method="post" action="#" onsubmit="handlebulkapprove(); return false;" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-modern success">
+                        <i class="fas fa-check-double"></i>{% trans "Tümünü Onayla"%}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block list_modals %}
+<!-- Bulk Actions Modal -->
+{% include 'dashboard/includes/modals/bulk_actions_modal.html' %}
+
+{% endblock %}
+<script>
+function handleBulkApprove() {
+    // Her pending review için ayrı ayrı approve işlemi yap
+    const pendingForms = document.querySelectorAll('tr[data-status="pending"] form[action*="review_toggle"]');
+    
+    pendingForms.forEach(form => {
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'X-CSRFToken': form.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        });
+    });
+    
+    setTimeout(() => {
+        location.reload();
+    }, 1000);
+}
+</script>
+
+<!-- Page specific JS -->
+{% block extra_js %}
+{% load static %}
+<script src="{% static 'dashboard/js/pages/reviews.js' %}"></script>
+{% endblock %}

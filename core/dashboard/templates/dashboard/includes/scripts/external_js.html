@@ -1,0 +1,16 @@
+<!--core\dashboard\templates\dashboard\includes\scripts\external_js.html-->
+{% load static %}
+<!-- jQuery - Local -->
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap JS - Local -->
+
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script>
+window.addEventListener('load', function() {
+    if (typeof bootstrap === 'undefined') {
+        console.error('❌ Bootstrap yüklenemedi!');
+    } else {
+        console.log('✅ Bootstrap başarıyla yüklendi');
+    }
+});
+</script>

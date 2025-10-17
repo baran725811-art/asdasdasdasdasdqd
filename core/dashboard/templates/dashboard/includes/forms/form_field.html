@@ -1,0 +1,108 @@
+<!-- core\dashboard\templates\dashboard\includes\forms\form_field.html - Modern form field -->
+{% load i18n %}
+{% load widget_tweaks %}
+
+<div class="{% if wrapper_class %}{{ wrapper_class }}{% else %}mb-3{% endif %}">
+    {% if field_label %}
+    <label class="form-label-modern" {% if field_id %}for="{{ field_id }}"{% endif %}>
+        {% if field_icon %}<i class="{{ field_icon }}"></i>{% endif %}
+        {{ field_label }}
+        {% if language_code %}
+            ({% include 'dashboard/includes/partials/language_name.html' with language_code=language_code %})
+        {% endif %}
+        {% if is_required %}<span class="text-danger">*</span>{% endif %}
+    </label>
+    {% endif %}
+    
+    {% if field_type == 'textarea' %}
+        <textarea name="{{ field_name }}" 
+                  class="form-control form-control-modern{% if is_required and language_code != 'tr' %} required-translation{% endif %}" 
+                  {% if field_id %}id="{{ field_id }}"{% endif %}
+                  {% if field_rows %}rows="{{ field_rows }}"{% endif %}
+                  {% if field_placeholder %}placeholder="{{ field_placeholder }}"{% endif %}
+                  {% if is_required %}required{% endif %}>{{ field_value|default:"" }}</textarea>
+    
+    {% elif field_type == 'select' %}
+        <select name="{{ field_name }}" 
+                class="form-control form-control-modern{% if is_required and language_code != 'tr' %} required-translation{% endif %}"
+                {% if field_id %}id="{{ field_id }}"{% endif %}
+                {% if is_required %}required{% endif %}>
+            {% if select_options %}
+                {% for option in select_options %}
+                    <option value="{{ option.value }}" {% if option.value == field_value %}selected{% endif %}>
+                        {{ option.label }}
+                    </option>
+                {% endfor %}
+            {% endif %}
+        </select>
+    
+    {% elif field_type == 'checkbox' %}
+        <div class="form-check form-switch">
+            <input type="checkbox" name="{{ field_name }}" 
+                   class="form-check-input" 
+                   {% if field_id %}id="{{ field_id }}"{% endif %}
+                   {% if field_value %}checked{% endif %}>
+            <label class="form-check-label fw-semibold" {% if field_id %}for="{{ field_id }}"{% endif %}>
+                {% if field_icon %}<i class="{{ field_icon }} me-1"></i>{% endif %}
+                {{ field_label }}
+            </label>
+        </div>
+    
+    {% elif field_type == 'file' %}
+        <input type="file" name="{{ field_name }}" 
+               class="form-control form-control-modern" 
+               {% if field_id %}id="{{ field_id }}"{% endif %}
+               {% if file_accept %}accept="{{ file_accept }}"{% endif %}
+               {% if is_required %}required{% endif %}>
+    
+    {% elif field_type == 'number' %}
+        <input type="number" name="{{ field_name }}" 
+               class="form-control form-control-modern{% if is_required and language_code != 'tr' %} required-translation{% endif %}" 
+               {% if field_id %}id="{{ field_id }}"{% endif %}
+               {% if field_value %}value="{{ field_value }}"{% endif %}
+               {% if field_min %}min="{{ field_min }}"{% endif %}
+               {% if field_max %}max="{{ field_max }}"{% endif %}
+               {% if field_step %}step="{{ field_step }}"{% endif %}
+               {% if field_placeholder %}placeholder="{{ field_placeholder }}"{% endif %}
+               {% if is_required %}required{% endif %}>
+    
+    {% elif field_type == 'url' %}
+        <input type="url" name="{{ field_name }}" 
+               class="form-control form-control-modern" 
+               {% if field_id %}id="{{ field_id }}"{% endif %}
+               {% if field_value %}value="{{ field_value }}"{% endif %}
+               {% if field_placeholder %}placeholder="{{ field_placeholder }}"{% endif %}
+               {% if is_required %}required{% endif %}>
+    
+    {% elif field_type == 'date' %}
+        <input type="date" name="{{ field_name }}" 
+               class="form-control form-control-modern" 
+               {% if field_id %}id="{{ field_id }}"{% endif %}
+               {% if field_value %}value="{{ field_value }}"{% endif %}
+               {% if is_required %}required{% endif %}>
+    
+    {% else %}
+        <!-- Default: text input -->
+        <input type="text" name="{{ field_name }}" 
+               class="form-control form-control-modern{% if is_required and language_code != 'tr' %} required-translation{% endif %}" 
+               {% if field_id %}id="{{ field_id }}"{% endif %}
+               {% if field_value %}value="{{ field_value }}"{% endif %}
+               {% if field_placeholder %}placeholder="{{ field_placeholder }}"{% endif %}
+               {% if field_maxlength %}maxlength="{{ field_maxlength }}"{% endif %}
+               {% if is_required %}required{% endif %}>
+    {% endif %}
+    
+    {% if help_text %}
+        <small class="text-muted{% if is_required and language_code != 'tr' %} text-danger{% endif %}">
+            {{ help_text }}
+        </small>
+    {% endif %}
+    
+    {% if field_errors %}
+        <div class="invalid-feedback d-block">
+            {% for error in field_errors %}
+                <i class="fas fa-exclamation-circle me-1"></i>{{ error }}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>

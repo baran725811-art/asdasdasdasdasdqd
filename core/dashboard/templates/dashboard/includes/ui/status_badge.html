@@ -1,0 +1,7 @@
+<!-- core\dashboard\templates\dashboard\includes\ui\status_badge.html - Durum rozeti -->
+ {% load i18n %}
+
+<span class="badge-modern {{ badge_color|default:'secondary' }}">
+    {% if badge_icon %}<i class="{{ badge_icon }} me-1"></i>{% endif %}
+    {{ badge_text }}
+</span>

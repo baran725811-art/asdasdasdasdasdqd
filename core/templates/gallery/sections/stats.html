@@ -1,0 +1,40 @@
+{% load video_tags %}
+
+{% load static %}
+{% load i18n %}
+
+<section class="gallery-stats">
+    <div class="container">
+        <div class="stats-wrapper" data-aos="fade-up">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-th-large"></i>
+                </div>
+                <div class="stat-content">
+                    <span class="stat-number" data-counter="{{ gallery_items.paginator.count }}">0</span>
+                    <span class="stat-label">{% trans "Toplam Öğe" %}</span>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-image"></i>
+                </div>
+                <div class="stat-content">
+                    <span class="stat-number" data-counter="{{ total_images }}">0</span>
+                    <span class="stat-label">{% trans "Resim" %}</span>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+                <div class="stat-content">
+                    <span class="stat-number" data-counter="{{ total_videos }}">0</span>
+                    <span class="stat-label">{% trans "Video" %}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

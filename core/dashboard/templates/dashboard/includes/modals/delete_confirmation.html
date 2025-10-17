@@ -1,0 +1,47 @@
+<!-- dashboard/templates/dashboard/includes/modals/delete_confirmation.html -->
+{% load i18n %}
+
+<div class="modal fade" id="{{ modal_id }}" tabindex="-1" aria-labelledby="{{ modal_id }}Label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="{{ modal_id }}Label">
+                    <i class="fas fa-exclamation-triangle me-2"></i>{% trans "Silme Onayı" %}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fas fa-trash-alt text-danger fa-3x mb-3"></i>
+                    <h5>{% trans "Bu işlemi onaylıyor musunuz?" %}</h5>
+                    <p class="text-muted">
+                        <strong>"{{ item_name }}"</strong> {% trans "silinecek." %}
+                        {% if warning_message %}
+                            <br><span class="text-warning">{{ warning_message }}</span>
+                        {% endif %}
+                    </p>
+                    <div class="alert alert-warning mt-3">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        {% trans "Bu işlem geri alınamaz!" %}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>{% trans "İptal" %}
+                </button>
+                
+                <!-- Form ile silme işlemini gerçekleştir -->
+                <form method="post" style="display: inline;" class="delete-form" 
+                      data-item-type="{{ item_type|default:'item' }}"
+                      data-item-name="{{ item_name }}"
+                        action="{% url delete_url delete_id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger delete-confirm-btn">
+                        <i class="fas fa-trash me-2"></i>{% trans "Sil" %}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>  

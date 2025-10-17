@@ -1,0 +1,208 @@
+
+<!--core\templates\gallery\sections\gallery_grid.html-->
+{% load video_tags %}
+{% load image_tags %}
+{% load static %}
+{% load i18n %}
+
+<section class="gallery-main">
+<!-- Her item için gizli div ile network request at -->
+
+
+    <div class="container">
+        <!-- Filter Tabs -->
+        <div class="gallery-filters" data-aos="fade-up">
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">
+                    <i class="fas fa-th-large"></i>
+                    {% trans "Tümü" %}
+                </button>
+                <button class="filter-tab" data-filter="image">
+                    <i class="fas fa-image"></i>
+                    {% trans "Resimler" %} ({{ total_images }})
+                </button>
+                <button class="filter-tab" data-filter="video">
+                    <i class="fas fa-play-circle"></i>
+                    {% trans "Videolar" %} ({{ total_videos }})
+                </button>
+            </div>
+        </div>
+
+        <!-- Gallery Grid -->
+        {% if gallery_items %}
+        <div class="gallery-masonry" id="galleryMasonry">
+            {% for item in gallery_items %}
+            <div class="gallery-item {{ item.media_type }} visible" data-type="{{ item.media_type }}" data-id="{{ item.id }}">
+                <div class="gallery-card">
+                    <!-- Unified modal system for both image and video -->
+                    <div class="card-media" onclick="openGalleryModal('{{ item.id }}', '{{ item.media_type }}')">
+                        {% if item.media_type == 'image' %}
+                            <!-- DÜZELTİLDİ: Tek, focal noktalı preview URL -->
+                            {% gallery_card_image item 'gallery-image' %}
+                            
+                            <div class="media-overlay">
+                                <div class="overlay-content">
+                                    <div class="overlay-icon">
+                                        <i class="fas fa-search-plus"></i>
+                                    </div>
+                                    <span class="overlay-text">{% trans "Büyüt" %}</span>
+                                </div>
+                            </div>
+                            <div class="media-type-badge">
+                                <i class="fas fa-image"></i>
+                            </div>
+                        
+                        {% elif item.media_type == 'video' %}
+                            {% if item.video %}
+                                <div class="video-preview-container">
+                                    <video muted preload="metadata" poster="/static/images/video-placeholder.jpg">
+                                        <source src="{{ item.video.url }}" type="video/mp4">
+                                        Tarayıcınız video etiketini desteklemiyor.
+                                    </video>
+                                    <div class="video-play-overlay">
+                                        <i class="fas fa-play-circle"></i>
+                                    </div>
+                                </div>
+                            {% elif item.video_url %}
+                                <div class="video-thumbnail" 
+                                     style="background-image: url('{% if "youtube" in item.video_url %}https://img.youtube.com/vi/{{ item.get_youtube_embed_url|cut:"https://www.youtube.com/embed/" }}/maxresdefault.jpg{% else %}/static/images/video-placeholder.jpg{% endif %}'); background-size: cover; background-position: center;"></div>
+                            {% endif %}
+                            <div class="media-overlay video-overlay">
+                                <div class="overlay-content">
+                                    <div class="play-button">
+                                        <i class="fas fa-play"></i>
+                                    </div>
+                                    <span class="overlay-text">{% trans "Oynat" %}</span>
+                                </div>
+                            </div>
+                            <div class="media-type-badge">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="card-content">
+                        <h3 class="card-title">{{ item.title }}</h3>
+                        {% if item.description %}
+                        <p class="card-description">{{ item.description|truncatewords:20 }}</p>
+                        {% endif %}
+                        <div class="card-meta">
+                            <span class="upload-date">
+                                <i class="fas fa-calendar"></i>
+                                {{ item.created_at|date:"d.m.Y" }}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- DÜZELTİLDİ: JavaScript için doğru URL'ler -->
+                    <script type="application/json" id="gallery-data-{{ item.id }}">
+                    {
+                        "id": "{{ item.id }}",
+                        "type": "{{ item.media_type }}",
+                        "title": "{{ item.title|escapejs }}",
+                        "description": "{{ item.description|escapejs }}",
+                        "date": "{{ item.created_at|date:'d.m.Y' }}",
+                        {% if item.media_type == 'image' %}
+                        "imageUrl": "{% cropped_image_url item.cropped_image 'gallery' %}",
+                        "originalImageUrl": "{% original_image_url item.image %}",
+                        "modalImageUrl": "{% original_image_url item.image %}",
+                        "altText": "{{ item.alt_text|default:item.title|escapejs }}"
+                        {% elif item.media_type == 'video' %}
+                        {% if item.video %}
+                        "videoUrl": "{{ item.video.url }}",
+                        "videoType": "file"
+                        {% elif item.video_url %}
+                        "videoUrl": "{{ item.video_url }}",
+                        {% if item.is_youtube_video %}
+                        "videoType": "youtube",
+                        "embedUrl": "{{ item.get_youtube_embed_url }}"
+                        {% elif item.is_vimeo_video %}
+                        "videoType": "vimeo",
+                        "embedUrl": "{{ item.get_vimeo_embed_url }}"
+                        {% else %}
+                        "videoType": "external"
+                        {% endif %}
+                        {% endif %}
+                        {% endif %}
+                    }
+                    </script>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% if page_obj.has_other_pages %}
+        <div class="gallery-pagination" data-aos="fade-up">
+            <nav class="pagination-nav">
+                {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="pagination-btn">
+                    <i class="fas fa-chevron-left"></i>
+                    {% trans "Önceki" %}
+                </a>
+                {% endif %}
+                
+                <div class="page-numbers">
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                        <span class="page-number active">{{ num }}</span>
+                        {% else %}
+                        <a href="?page={{ num }}" class="page-number">{{ num }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="pagination-btn">
+                    {% trans "Sonraki" %}
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+                {% endif %}
+            </nav>
+        </div>
+        {% endif %}
+        
+        {% else %}
+        <!-- Empty Gallery -->
+        <div class="empty-gallery" data-aos="fade-up">
+            <div class="empty-icon">
+                <i class="fas fa-images"></i>
+            </div>
+            <h3>{% trans "Henüz galeri öğesi bulunmuyor" %}</h3>
+            <p>{% trans "Çalışmalarımızdan kareler yakında burada olacak." %}</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Unified Gallery Modal (Both Image and Video) -->
+<div id="galleryModal" class="image-modal">
+    <div class="image-modal-backdrop" onclick="closeGalleryModal()"></div>
+    <div class="image-modal-container" id="galleryModalContainer">
+        <div class="image-modal-header">
+            <h3 class="image-modal-title" id="galleryModalTitle"></h3>
+            <button class="image-modal-close" onclick="closeGalleryModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="image-modal-body" id="galleryModalContent"></div>
+        <div class="image-modal-info" id="galleryModalInfo">
+            <p class="image-modal-description" id="galleryModalDescription"></p>
+            <div class="image-modal-meta">
+                <span class="modal-date" id="galleryModalDate"></span>
+                <span class="modal-category" id="galleryModalType"></span>
+            </div>
+        </div>
+        <div class="image-modal-footer">
+            <button class="image-modal-nav" id="galleryPrevBtn" onclick="navigateGallery('prev')">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="image-modal-counter">
+                <span id="imageModalCurrentIndex">1</span> / <span id="imageModalTotal">1</span>
+            </div>
+            <button class="image-modal-nav" id="galleryNextBtn" onclick="navigateGallery('next')">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+</div>

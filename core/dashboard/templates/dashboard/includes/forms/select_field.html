@@ -1,0 +1,117 @@
+<!-- core\dashboard\templates\dashboard\includes\forms\select_field.html - Select dropdown -->
+{% load i18n %}
+
+<div class="mb-3">
+    <label class="form-label-modern">
+        <i class="fas {{ icon|default:'fa-list' }}"></i>{{ label }}
+        {% if required %}<span class="text-danger">*</span>{% endif %}
+    </label>
+    
+    {% if multiple %}
+        <!-- Multiple Select -->
+        <select name="{{ field_name }}" 
+                class="form-control form-control-modern select-multiple"
+                multiple
+                {% if required %}required{% endif %}
+                {% if size %}size="{{ size }}"{% endif %}
+                {% if attrs %}{% for attr, val in attrs.items %}{{ attr }}="{{ val }}" {% endfor %}{% endif %}>
+            {% for option in options %}
+                {% if option.group %}
+                    <optgroup label="{{ option.group }}">
+                        {% for sub_option in option.options %}
+                            <option value="{{ sub_option.value }}" 
+                                    {% if sub_option.value in selected_values %}selected{% endif %}
+                                    {% if sub_option.disabled %}disabled{% endif %}>
+                                {{ sub_option.label }}
+                            </option>
+                        {% endfor %}
+                    </optgroup>
+                {% else %}
+                    <option value="{{ option.value }}" 
+                            {% if option.value in selected_values %}selected{% endif %}
+                            {% if option.disabled %}disabled{% endif %}>
+                        {{ option.label }}
+                    </option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    {% else %}
+        <!-- Single Select -->
+        <select name="{{ field_name }}" 
+                class="form-control form-control-modern"
+                {% if required %}required{% endif %}
+                {% if attrs %}{% for attr, val in attrs.items %}{{ attr }}="{{ val }}" {% endfor %}{% endif %}>
+            {% if not required or placeholder %}
+                <option value="">{{ placeholder|default:"Seçin..." }}</option>
+            {% endif %}
+            {% for option in options %}
+                {% if option.group %}
+                    <optgroup label="{{ option.group }}">
+                        {% for sub_option in option.options %}
+                            <option value="{{ sub_option.value }}" 
+                                    {% if sub_option.value == selected_value %}selected{% endif %}
+                                    {% if sub_option.disabled %}disabled{% endif %}>
+                                {{ sub_option.label }}
+                            </option>
+                        {% endfor %}
+                    </optgroup>
+                {% else %}
+                    <option value="{{ option.value }}" 
+                            {% if option.value == selected_value %}selected{% endif %}
+                            {% if option.disabled %}disabled{% endif %}>
+                        {{ option.label }}
+                    </option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    {% endif %}
+    
+    {% if searchable %}
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const select = document.querySelector('select[name="{{ field_name }}"]');
+            if (select && !select.hasAttribute('data-search-initialized')) {
+                // Simple search functionality
+                const wrapper = document.createElement('div');
+                wrapper.className = 'select-search-wrapper';
+                select.parentNode.insertBefore(wrapper, select);
+                wrapper.appendChild(select);
+                
+                const searchInput = document.createElement('input');
+                searchInput.type = 'text';
+                searchInput.className = 'form-control form-control-modern mb-2';
+                searchInput.placeholder = '{% trans "Ara..." %}';
+                wrapper.insertBefore(searchInput, select);
+                
+                const originalOptions = Array.from(select.options);
+                
+                searchInput.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase();
+                    select.innerHTML = '';
+                    
+                    originalOptions.forEach(option => {
+                        if (option.textContent.toLowerCase().includes(searchTerm) || option.value === '') {
+                            select.appendChild(option.cloneNode(true));
+                        }
+                    });
+                });
+                
+                select.setAttribute('data-search-initialized', 'true');
+            }
+        });
+        </script>
+    {% endif %}
+    
+    {% if help_text %}
+        <small class="text-muted">{{ help_text }}</small>
+    {% endif %}
+    
+    {% if errors %}
+        <div class="form-error">
+            {% for error in errors %}
+                <i class="fas fa-exclamation-circle me-1"></i>{{ error }}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+

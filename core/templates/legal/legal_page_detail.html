@@ -1,0 +1,108 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{{ page.meta_title|default:page.title }}{% endblock %}
+{% block meta_description %}{{ page.meta_description }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/legal/legal-pages.css' %}">
+<link rel="stylesheet" href="{% static 'css/components/cookie-banner.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="legal-page">
+    <!-- Breadcrumb -->
+    <section class="breadcrumb-section">
+        <div class="container">
+            {% include 'includes/breadcrumb.html' %}
+        </div>
+    </section>
+    
+    <!-- Legal Content -->
+    <section class="legal-content">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <article class="legal-article">
+                        <header class="article-header">
+                            <h1 class="article-title">{{ page.title }}</h1>
+                            
+                            <div class="article-meta">
+                                <div class="meta-item">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>{% trans "Son Güncelleme" %}: {{ page.last_updated|date:"d F Y" }}</span>
+                                </div>
+                                
+                                <div class="meta-item">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span>{% trans "Bu sayfa yasal bilgilendirme amaçlıdır" %}</span>
+                                </div>
+                            </div>
+                        </header>
+                        
+                        <div class="article-content">
+                            {{ page.content|safe }}
+                        </div>
+                        
+                        <!-- Çerez Politikası için özel bölüm -->
+                        {% if page.page_type == 'cookies' %}
+                        <div class="cookie-management-section">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h3 class="card-title">
+                                        <i class="fas fa-cog me-2"></i>
+                                        {% trans "Çerez Tercihlerinizi Yönetin" %}
+                                    </h3>
+                                    <p class="card-text">
+                                        {% trans "Mevcut çerez tercihlerinizi görüntüleyebilir ve değiştirebilirsiniz." %}
+                                    </p>
+                                    <button type="button" class="btn btn-primary" onclick="showCookieSettings()">
+                                        <i class="fas fa-cookie-bite me-1"></i>
+                                        {% trans "Çerez Ayarları" %}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        <!-- İletişim Bilgisi -->
+                        <div class="contact-section">
+                            <div class="card border-primary">
+                                <div class="card-body">
+                                    <h4 class="card-title text-primary">
+                                        <i class="fas fa-envelope me-2"></i>
+                                        {% trans "Sorularınız mı var?" %}
+                                    </h4>
+                                    <p class="card-text">
+                                        {% trans "Bu sayfayla ilgili sorularınız varsa bizimle iletişime geçebilirsiniz." %}
+                                    </p>
+                                    <a href="{% url 'contact:contact' %}" class="btn btn-outline-primary">
+                                        {% trans "İletişime Geçin" %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Sayfa yüklendiğinde çerez ayarları linklerini güncelle
+document.addEventListener('DOMContentLoaded', function() {
+    // İçerik linklerinde çerez ayarları linkini dinamik hale getir
+    const cookieSettingsLinks = document.querySelectorAll('a[href="#cookie-settings"]');
+    cookieSettingsLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            showCookieSettings();
+        });
+    });
+});
+</script>
+{% endblock %}

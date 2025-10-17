@@ -1,0 +1,16 @@
+# .gitignore
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+*.sqlite3
+media/
+staticfiles/
+*.log
+local_settings.py
+db.sqlite3
+deployment/ssl/

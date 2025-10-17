@@ -1,0 +1,115 @@
+<!--core\templates\products\sections\products_grid.html-->
+{% load static %}
+{% load i18n %}
+
+<section class="products-grid-section">
+    <div class="container">
+        {% if products %}
+        <div class="products-grid">
+            {% for product in products %}
+            <div class="product-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:50 }}">
+                {% if product.has_discount %}
+                <div class="discount-badge">-%{{ product.get_discount_percentage }}</div>
+                {% endif %}
+                
+                <div class="product-image">
+                    {% if product.image %}
+                    {% load image_tags %}
+                    {% product_card_image product 'product-image' %}
+                    {% else %}
+                    <div class="image-placeholder">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    {% endif %}
+                    <div class="product-overlay">
+                        <a href="{{ product.get_absolute_url }}" class="overlay-btn">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="product-content">
+                    <div class="product-category">{{ product.category.name }}</div>
+                    <h3 class="product-title">{{ product.name }}</h3>
+                    {% if product.short_description %}
+                    <p class="product-description">{{ product.short_description }}</p>
+                    {% endif %}
+                    
+                    {% if product.price %}
+                    <div class="product-price">
+                        {% if product.has_discount %}
+                        <span class="original-price">{{ product.price }} ₺</span>
+                        <span class="current-price">{{ product.discount_price }} ₺</span>
+                        {% else %}
+                        <span class="current-price">{{ product.price }} ₺</span>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    
+                    {% if product.stock is not None %}
+                    <div class="stock-status {% if product.stock > 0 %}in-stock{% else %}out-of-stock{% endif %}">
+                        {% if product.stock > 0 %}
+                        <i class="fas fa-check-circle"></i> {% trans "Stokta" %}
+                        {% else %}
+                        <i class="fas fa-times-circle"></i> {% trans "Stokta Yok" %}
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    
+                    <a href="{{ product.get_absolute_url }}" class="product-btn">
+                        {% trans "Detayları Gör" %}
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Pagination -->
+        {% if page_obj.has_other_pages %}
+        <div class="pagination-wrapper" data-aos="fade-up">
+            <nav class="pagination-nav">
+                {% if page_obj.has_previous %}
+                <a href="?{% if selected_category %}category={{ selected_category.slug }}&{% endif %}{% if search_query %}q={{ search_query }}&{% endif %}page={{ page_obj.previous_page_number }}" 
+                   class="pagination-btn prev-btn">
+                    <i class="fas fa-chevron-left"></i>
+                    {% trans "Önceki" %}
+                </a>
+                {% endif %}
+                
+                <div class="page-numbers">
+                    {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                    <span class="page-number active">{{ num }}</span>
+                    {% else %}
+                    <a href="?{% if selected_category %}category={{ selected_category.slug }}&{% endif %}{% if search_query %}q={{ search_query }}&{% endif %}page={{ num }}" 
+                       class="page-number">{{ num }}</a>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                
+                {% if page_obj.has_next %}
+                <a href="?{% if selected_category %}category={{ selected_category.slug }}&{% endif %}{% if search_query %}q={{ search_query }}&{% endif %}page={{ page_obj.next_page_number }}" 
+                   class="pagination-btn next-btn">
+                    {% trans "Sonraki" %}
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+                {% endif %}
+            </nav>
+        </div>
+        {% endif %}
+        
+        {% else %}
+        <div class="empty-state" data-aos="fade-up">
+            <div class="empty-icon">
+                <i class="fas fa-search"></i>
+            </div>
+            <h3>{% trans "Ürün Bulunamadı" %}</h3>
+            <p>{% trans "Aradığınız kriterlere uygun ürün bulunamadı." %}</p>
+            <a href="{% url 'products:product_list' %}" class="btn btn-primary">
+                {% trans "Tüm Ürünleri Gör" %}
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</section>

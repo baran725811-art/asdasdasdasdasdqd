@@ -1,0 +1,211 @@
+<!--core\templates\base\main.html-->
+{% load compress %}
+{% load static %}
+{% load i18n %}
+{% load translation_tags %}
+{% load breadcrumb_tags %}
+<!DOCTYPE html>
+<html lang="{{ current_language|default:'tr' }}" prefix="og: https://ogp.me/ns#" data-theme="auto">
+<head>
+    <!-- Meta etiketlerini ayrı dosyadan dahil et -->
+    {% include 'base/sections/meta.html' %}
+    
+    <!-- Tema sistemini dahil et -->
+    {% include 'base/sections/theme.html' %}
+    
+    <!-- Critical CSS -->
+    <style>
+        /* Critical CSS for Above-the-fold Content */
+        :root {
+            --primary-color: {{ primary_color|default:'#007bff' }};
+            --secondary-color: {{ secondary_color|default:'#6c757d' }};
+            --navbar-color: {{ navbar_color|default:'#343a40' }};
+            --white: #ffffff;
+            --dark: #212529;
+            --light-gray: #f8f9fa;
+            --transition-fast: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+            --border-radius: 12px;
+            --border-radius-sm: 8px;
+            --border-radius-lg: 20px;
+        }
+        
+        
+        
+        
+        /* Skip Link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: var(--primary-color);
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            border-radius: var(--border-radius-sm);
+            transition: var(--transition-fast);
+            z-index: 10000;
+        }
+        
+        .skip-link:focus {
+            top: 6px;
+        }
+        
+       
+        
+        /* Loading States */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
+        
+        
+       
+       
+        
+        .btn-primary-modern:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            color: white;
+        }
+        
+        .btn-primary-modern::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: var(--transition-smooth);
+        }
+        
+        .btn-primary-modern:hover::before {
+            left: 100%;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+       
+        
+       
+    </style>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Main CSS Files -->
+    {% compress css %}
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/fontawesome/css/all.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/base/main.css' %}" rel="stylesheet">
+    <link href="{% static 'css/base/navbar.css' %}" rel="stylesheet">
+    <link href="{% static 'css/base/footer.css' %}" rel="stylesheet">
+    <link href="{% static 'css/base/newsletter.css' %}" rel="stylesheet">
+    <link href="{% static 'css/base/responsive.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components/cookie-banner.css' %}">
+    {% endcompress %}
+    
+    {% block extra_css %}{% endblock %}
+
+</head>
+
+<body>
+    <!-- Skip to Main Content -->
+    <a href="#main-content" class="skip-link">{% trans "Ana içeriğe geç" %}</a>
+    
+    <!-- Navbar -->
+    {% include 'base/sections/navbar.html' %}
+    
+    <div class="main-wrapper">
+        <!-- Main Content -->
+        <main id="main-content" role="main">
+            <!-- Messages -->
+            {% include 'base/includes/messages.html' %}
+            
+            <!-- Breadcrumb Navigation - Ana sayfada gösterme -->
+            {% if request.resolver_match.url_name != 'home' %}
+                {% include 'base/includes/breadcrumb.html' %}
+            {% endif %}
+            
+            <!-- Page Content -->
+            {% block content %}{% endblock %}
+        </main>
+        
+        <!-- Newsletter Section -->
+        {% if request.resolver_match.url_name != 'contact' %}
+            {% include 'base/sections/newsletter.html' %}
+        {% endif %}
+        
+        <!-- Footer -->
+        {% include 'base/sections/footer.html' %}
+    </div>
+    
+    <!-- Back to Top Button -->
+    {% include 'base/includes/back_to_top.html' %}
+    
+    <!-- Ortak Modal Sistemi -->
+    {% include 'components/modal.html' %}
+    
+    <!-- Çerez Banner'ı (BODY sonunda, JavaScript'lerden önce) -->
+    {% include 'components/cookie-banner.html' %}
+
+    <!-- JavaScript -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script> 
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}" defer></script>
+    
+    {% compress js %}
+    <script src="{% static 'js/base/utils.js' %}" defer></script>
+    <script src="{% static 'js/base/main.js' %}" defer></script>
+    <script src="{% static 'js/base/navbar.js' %}" defer></script>
+    <script src="{% static 'js/base/newsletter.js' %}" defer></script>
+    <script src="{% static 'js/modal.js' %}"></script>
+    {% endcompress %}
+    
+    {% block extra_js %}{% endblock %}
+    
+    <!-- Performance Analytics -->
+    <script>
+        // Performance monitoring
+        window.addEventListener('load', function() {
+            if ('performance' in window) {
+                const perfData = performance.getEntriesByType('navigation')[0];
+                if (perfData.loadEventEnd - perfData.loadEventStart > 3000) {
+                    console.warn('Page load time exceeded 3 seconds');
+                }
+            }
+        });
+        
+        // Critical error handling
+        window.addEventListener('error', function(e) {
+            console.error('Critical error:', e.error);
+        });
+    </script>
+</body>
+</html>

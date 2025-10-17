@@ -1,0 +1,369 @@
+{% extends 'dashboard/base/dashboard_base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "PDF Katalog Yönetimi" %}{% endblock %}
+
+{% block page_css %}
+<style>
+    .catalog-preview {
+        border: 2px dashed #dee2e6;
+        border-radius: 10px;
+        padding: 40px;
+        text-align: center;
+        background: #f8f9fa;
+        transition: all 0.3s ease;
+    }
+    
+    .catalog-preview:hover {
+        border-color: #007bff;
+        background: #e7f3ff;
+    }
+    
+    .catalog-preview.has-file {
+        border-color: #28a745;
+        background: #d4edda;
+    }
+    
+    .file-upload-area {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+        cursor: pointer;
+    }
+    
+    .file-upload-area input[type=file] {
+        position: absolute;
+        left: -9999px;
+    }
+    
+    .status-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        z-index: 10;
+    }
+    
+    .file-info {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .action-buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+    }
+    
+    @media (max-width: 768px) {
+        .action-buttons {
+            flex-direction: column;
+        }
+        
+        .action-buttons .btn {
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">
+            <i class="fas fa-file-pdf text-danger me-2"></i>
+            {% trans "PDF Katalog Yönetimi" %}
+        </h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+                {% if stats.has_file %}
+                <a href="{{ site_settings.pdf_catalog_file.url }}" target="_blank" class="btn btn-sm btn-outline-primary">
+                    <i class="fas fa-external-link-alt"></i> {% trans "Önizle" %}
+                </a>
+                <a href="{% url 'catalog_view' %}" target="_blank" class="btn btn-sm btn-outline-info">
+                    <i class="fas fa-eye"></i> {% trans "Web'de Görüntüle" %}
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Alert -->
+    <div class="row mb-4">
+        <div class="col-12">
+            {% if stats.is_enabled and stats.has_file %}
+                <div class="alert alert-success d-flex align-items-center" role="alert">
+                    <i class="fas fa-check-circle me-2"></i>
+                    <strong>{% trans "Katalog Aktif" %}:</strong> {% trans "Müşteriler web sitesinde kataloğu görüntüleyebilir" %}.
+                </div>
+            {% elif stats.has_file and not stats.is_enabled %}
+                <div class="alert alert-warning d-flex align-items-center" role="alert">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <strong>{% trans "Katalog Pasif" %}:</strong> {% trans "Dosya yüklü ancak müşteriler göremez" %}. {% trans "Aktif etmeyi unutmayın" %}!
+                </div>
+            {% else %}
+                <div class="alert alert-info d-flex align-items-center" role="alert">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>{% trans "Katalog Yok"%}:</strong> {% trans "Henüz PDF katalog dosyası yüklenmemiş"%}.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Sol Kolon - Katalog Durumu -->
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        <i class="fas fa-upload me-2"></i>
+                        {% trans "Katalog Dosyası" %}
+                    </h5>
+                    <span class="status-badge">
+                        {% if stats.is_enabled %}
+                            <span class="badge bg-success">{% trans "Aktif" %}</span>
+                        {% else %}
+                            <span class="badge bg-secondary">{% trans "Pasif" %}</span>
+                        {% endif %}
+                    </span>
+                </div>
+                <div class="card-body">
+                    <div class="catalog-preview {% if stats.has_file %}has-file{% endif %}">
+                        {% if stats.has_file %}
+                            <div class="text-center">
+                                <i class="fas fa-file-pdf text-danger" style="font-size: 4rem;"></i>
+                                <h4 class="mt-3">{{ site_settings.pdf_catalog_title }}</h4>
+                                <p class="text-muted">{% trans "PDF Kataloğu Mevcu" %}t</p>
+                                
+                                {% if stats.file_size_display %}
+                                <p class="mb-0">
+                                    <small class="text-muted">
+                                        {% trans "Dosya Boyutu"%}: {{ stats.file_size_display }}
+                                    </small>
+                                </p>
+                                {% endif %}
+                                
+                                {% if stats.upload_date %}
+                                <p class="mb-0">
+                                    <small class="text-muted">
+                                       {% trans " Son Güncelleme"%}: {{ stats.upload_date|date:"d.m.Y H:i" }}
+                                    </small>
+                                </p>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <div class="text-center">
+                                <i class="fas fa-cloud-upload-alt text-muted" style="font-size: 4rem;"></i>
+                                <h4 class="mt-3">{% trans "PDF Katalog Yükle" %}</h4>
+                                <p class="text-muted">{% trans "Henüz katalog dosyası yüklenmemiş" %}</p>
+                                <p class="small text-muted">
+                                    {% trans "Desteklenen format" %}: PDF<br>
+                                    {% trans "Maksimum dosya boyutu" %}: 50MB
+                                </p>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Dosya İşlemleri -->
+                    <div class="action-buttons justify-content-center">
+                        <!-- PDF Yükleme -->
+                        <form method="post" enctype="multipart/form-data" class="d-inline">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="upload_catalog">
+                            <div class="file-upload-area">
+                                <input type="file" name="catalog_file" id="catalogFile" accept=".pdf" 
+                                       onchange="this.form.submit()" required>
+                                <label for="catalogFile" class="btn btn-primary">
+                                    <i class="fas fa-upload me-2"></i>
+                                    {% if stats.has_file %}{% trans "Dosyayı Değiştir"%}{% else %}{% trans "PDF Yükle"%}{% endif %}
+                                </label>
+                            </div>
+                        </form>
+
+                        <!-- Durum Değiştir -->
+                        <form method="post" class="d-inline">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="toggle_status">
+                            <button type="submit" class="btn {% if stats.is_enabled %}btn-warning{% else %}btn-success{% endif %}">
+                                {% if stats.is_enabled %}
+                                    <i class="fas fa-pause me-2"></i>{% trans "Pasif Et"%}
+                                {% else %}
+                                    <i class="fas fa-play me-2"></i>{% trans "Aktif Et"%}
+                                {% endif %}
+                            </button>
+                        </form>
+
+                        <!-- Dosya Sil -->
+                        {% if stats.has_file %}
+                        <form method="post" class="d-inline" onsubmit="return confirm('Katalog dosyasını silmek istediğinizden emin misiniz?')">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="delete_catalog">
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-trash me-2"></i>{% trans "Dosyayı Sil"%}
+                            </button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sağ Kolon - Ayarlar -->
+        <div class="col-lg-4">
+            <!-- Katalog Başlığı -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-edit me-2"></i>
+                        {% trans "Katalog Ayarları"%}
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="update_title">
+                        <div class="mb-3">
+                            <label for="catalogTitle" class="form-label">{% trans "Katalog Başlığı"%}</label>
+                            <input type="text" class="form-control" id="catalogTitle" name="catalog_title" 
+                                   value="{{ site_settings.pdf_catalog_title }}" 
+                                   placeholder="Ürün Kataloğu" required>
+                            <div class="form-text">
+                                {% trans "Bu başlık navbar'da görünecek."%}
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            <i class="fas fa-save me-2"></i>{% trans "Başlığı Güncelle"%}
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Katalog İstatistikleri -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-chart-pie me-2"></i>
+                        {% trans "İstatistikler"%}
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <div class="p-3">
+                                <div class="h4 mb-0 {% if stats.is_enabled %}text-success{% else %}text-secondary{% endif %}">
+                                    {% if stats.is_enabled %}
+                                        <i class="fas fa-check-circle"></i>
+                                    {% else %}
+                                        <i class="fas fa-times-circle"></i>
+                                    {% endif %}
+                                </div>
+                                <div class="small text-muted">{% trans "Durum"%}</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-3">
+                                <div class="h4 mb-0 {% if stats.has_file %}text-primary{% else %}text-secondary{% endif %}">
+                                    {% if stats.has_file %}
+                                        <i class="fas fa-file-pdf"></i>
+                                    {% else %}
+                                        <i class="fas fa-file-times"></i>
+                                    {% endif %}
+                                </div>
+                                <div class="small text-muted">{% trans "Dosya"%}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if stats.has_file %}
+                    <hr>
+                    <div class="small">
+                        <p class="mb-1"><strong>{% trans "Dosya Adı"%}:</strong></p>
+                        <p class="text-muted small">{{ site_settings.pdf_catalog_file.name|slice:":30" }}...</p>
+                        
+                        <p class="mb-1 mt-3"><strong>{% trans "Web Adresi"%}:</strong></p>
+                        <div class="input-group">
+                            <input type="text" class="form-control form-control-sm" 
+                                   value="{{ request.build_absolute_uri }}/katalog/" 
+                                   readonly>
+                            <button class="btn btn-outline-secondary btn-sm" type="button" 
+                                    onclick="copyToClipboard(this.previousElementSibling.value)">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Kullanım Kılavuzu -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-question-circle me-2"></i>
+                        {% trans "Nasıl Kullanılır?"%}
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <ol class="small">
+                        <li>{% trans "PDF katalog dosyanızı \'PDF Yükle\' butonuyla yükleyin"%}</li>
+                        <li>{% trans "Katalog başlığını isteğinize göre düzenleyin"%}</li>
+                        <li>{% trans "\'Aktif Et\' butonuyla kataloğu web sitesinde yayınlayın"%}</li>
+                        <li>{% trans "Müşteriler navbar'dan kataloğa erişebilir"%}</li>
+                    </ol>
+                    
+                    <div class="alert alert-info mt-3">
+                        <small>
+                            <i class="fas fa-lightbulb me-1"></i>
+                            <strong>{% trans "İpucu"%}:</strong> {% trans "PDF dosyası web içinde görüntülenir, indirme yapılmaz."%}
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function() {
+        // Toast bildirim göster
+        const toast = document.createElement('div');
+        const copySuccessMessage = "{% trans 'Adres panoya kopyalandı!' %}";
+        const loadingMessage = "{% trans 'Yükleniyor... %}";
+        toast.className = 'toast align-items-center text-white bg-success border-0 position-fixed';
+        toast.style.cssText = 'top: 20px; right: 20px; z-index: 9999;';
+        toast.innerHTML = `
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="fas fa-check me-2"></i>${copySuccessMessage}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        `;
+        document.body.appendChild(toast);
+        
+        const bsToast = new bootstrap.Toast(toast);
+        bsToast.show();
+        
+        // Toast'ı 3 saniye sonra kaldır
+        setTimeout(() => {
+            toast.remove();
+        }, 3000);
+    });
+}
+
+// Dosya yükleme progress göstergesi
+document.getElementById('catalogFile').addEventListener('change', function() {
+    if (this.files.length > 0) {
+        const label = this.nextElementSibling;
+        const originalText = label.innerHTML;
+        label.innerHTML = `<i class="fas fa-spinner fa-spin me-2"></i>${loadingMessage}`;        label.classList.add('disabled');
+    }
+});
+</script>
+{% endblock %}

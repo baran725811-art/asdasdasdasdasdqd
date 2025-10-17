@@ -1,0 +1,396 @@
+<!-- core\dashboard\templates\dashboard\categories\list.html -->
+{% extends 'dashboard/base/list_base.html' %}
+{% load dashboard_filters %}
+{% load widget_tweaks %}
+{% load i18n %}
+{% load custom_filters %}
+{% block title %}{% trans "Kategoriler"%}{% endblock %}
+{% block page_title %}{% trans "Kategori Yönetimi"%}{% endblock %}
+
+<!-- Page Header Configuration -->
+{% block page_header %}
+    {% include 'dashboard/includes/navigation/page_header.html' with page_title="Kategori Yönetimi" page_subtitle="Kategorilerinizi düzenleyin ve yönetin" page_icon="fas fa-tags" page_actions=page_actions %}
+{% endblock %}
+
+<!-- Page Content -->
+{% block page_content %}
+    <!-- Statistics Grid -->
+    <div class="row g-4 mb-4">
+        <div class="col-xl-3 col-lg-6 col-md-6">
+            {% include 'dashboard/includes/cards/stats_card.html' with card_value=categories|length card_label="Toplam Kategori" card_icon="fas fa-tags" card_color="primary" card_style="modern" %}
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6">
+            {% include 'dashboard/includes/cards/stats_card.html' with card_value=categories|length card_label="Aktif Kategoriler" card_icon="fas fa-check-circle" card_color="success" card_style="modern" %}
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6">
+            {% include 'dashboard/includes/cards/stats_card.html' with card_value="0" card_label="Toplam Ürün" card_icon="fas fa-box" card_color="info" card_style="modern" %}
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6">
+            {% include 'dashboard/includes/cards/stats_card.html' with card_value="0" card_label="Boş Kategoriler" card_icon="fas fa-eye" card_color="warning" card_style="modern" %}
+        </div>
+    </div>
+
+    <!-- Categories Table -->
+    <div class="row">
+        <div class="col-12">
+            {% if categories %}
+                <div class="table-card">
+                    <div class="card-header-modern">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">
+                                <i class="fas fa-list me-2"></i>{% trans "Kategori Listesi"%}
+                            </h5>
+                            <div class="d-flex gap-2">
+                                {% include 'dashboard/includes/tables/table_search.html' with search_placeholder="Kategori ara..." search_id="categorySearch" %}
+                                <button type="button" class="btn-modern primary btn-sm" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+                                    <i class="fas fa-plus me-1"></i>{% trans "Yeni Kategori Ekle" %}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-modern table-hover" id="categoriesTable">
+                                {% include 'dashboard/includes/tables/table_header.html' with table_type="categories" %}
+                                <tbody>
+                                    {% for category in categories %}
+                                    <tr>
+                                        <td><span class="badge bg-light text-dark">#{{ category.id }}</span></td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="category-avatar">
+                                                    <i class="fas fa-tag"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="fw-semibold">{{ category.name }}</div>
+                                                    {% if category.description %}
+                                                        <small class="text-muted">{{ category.description|truncatewords:10 }}</small>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><code class="bg-light px-2 py-1 rounded">{{ category.slug }}</code></td>
+                                        <td>
+                                            {% include 'dashboard/includes/ui/status_badge.html' with badge_text=category.is_active|yesno:"Aktif,Pasif" badge_color=category.is_active|yesno:"success,danger" badge_icon=category.is_active|yesno:"fas fa-check-circle,fas fa-times-circle" %}
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="btn-action edit" 
+                                                        data-bs-toggle="modal" 
+                                                        data-bs-target="#editCategoryModal{{ category.id }}" 
+                                                        title="{% trans 'Düzenle' %}">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn-action view" 
+                                                        data-bs-toggle="modal" 
+                                                        data-bs-target="#viewCategoryModal{{ category.id }}" 
+                                                        title="{% trans 'Görüntüle' %}">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="btn-action delete" 
+                                                        data-bs-toggle="modal" 
+                                                        data-bs-target="#deleteCategoryModal{{ category.id }}" 
+                                                        title="{% trans 'Sil' %}">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                {% include 'dashboard/includes/ui/empty_state.html' with empty_title="Henüz kategori bulunmuyor" empty_message="İlk kategorinizi eklemek için aşağıdaki butona tıklayın." empty_icon="fas fa-tags" action_button_text="İlk Kategoriyi Ekle" action_button_icon="fas fa-plus" action_button_attrs='data-bs-toggle="modal" data-bs-target="#addCategoryModal"' %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+<!-- List Modals -->
+{% block list_modals %}
+<!-- Add Category Modal -->
+<div class="modal fade modal-modern" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCategoryModalLabel">
+                    <i class="fas fa-plus-circle me-2"></i>{% trans "Yeni Kategori"%}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="{% url 'dashboard:category_add' %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <!-- Translation Tabs -->
+                    {% include 'dashboard/includes/forms/translation_tabs.html' %}
+
+                    <!-- Turkish Content -->
+                    <div class="translation-content active" data-lang="tr">
+                        {% include 'dashboard/includes/forms/form_field.html' with field_name="name" field_label="Kategori Adı (Türkçe)" field_type="text" field_icon="fas fa-tag" is_required=True field_placeholder="Kategori adını girin..." %}
+                        {% include 'dashboard/includes/forms/url_field.html' with field_name="slug" field_type="slug" label="URL Slug" icon="fas fa-link" placeholder="Otomatik oluşturulacak..." source_field="name" help_text="URL'de görünecek kısım (otomatik oluşturulur)" %}
+                        {% include 'dashboard/includes/forms/form_field.html' with field_name="description" field_label="Açıklama (Türkçe)" field_type="textarea" field_icon="fas fa-align-left" field_rows="4" field_placeholder="Kategori açıklaması..." %}
+                    </div>
+
+                    <!-- Translation Languages Content -->
+                    {% if translation_enabled and enabled_languages|length > 1 %}
+                        {% for lang in enabled_languages %}
+                            {% if lang != 'tr' %}
+                            <div class="translation-content" data-lang="{{ lang }}">
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="name_"|add:lang field_label="Kategori Adı ("|add:lang|upper|add:")" field_type="text" field_icon="fas fa-tag" is_required=True language_code=lang help_text="Bu alan zorunludur" %}
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="description_"|add:lang field_label="Açıklama ("|add:lang|upper|add:")" field_type="textarea" field_icon="fas fa-align-left" field_rows="4" is_required=True language_code=lang help_text="Bu alan zorunludur" %}
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+
+                    <!-- SEO Fields (Common) -->
+                    {% include 'dashboard/includes/forms/form_field.html' with field_name="meta_title" field_label="Meta Başlık (SEO)" field_type="text" field_icon="fas fa-search" field_maxlength="200" field_placeholder="Arama motorları için başlık" help_text="Google'da görünecek başlık (Max 200 karakter)" %}
+                    {% include 'dashboard/includes/forms/form_field.html' with field_name="meta_description" field_label="Meta Açıklama (SEO)" field_type="textarea" field_icon="fas fa-file-alt" field_rows="2" field_placeholder="Arama motorları için açıklama" help_text="Google'da görünecek açıklama" %}
+                    {% include 'dashboard/includes/forms/checkbox_field.html' with field_name="is_active" label="Aktif Durumda" field_type="switch" checked=True %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i>{% trans "İptal"%}
+                    </button>
+                    <button type="submit" class="btn-modern primary">
+                        <i class="fas fa-save"></i>{% trans "Kategori Ekle"%}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit & Delete Modals for each category -->
+<!-- Edit & Delete Modals for each category - GALLERY GİBİ DEĞİŞTİRİLDİ -->
+{% for category_data in categories_with_translations %}
+{% with category=category_data.object %}
+<!-- Edit Category Modal -->
+<div class="modal fade modal-modern" id="editCategoryModal{{ category.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-edit me-2"></i>{% trans "Kategori Düzenle" %}: {{ category.name }}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            
+            <form method="post" enctype="multipart/form-data" id="editCategoryForm{{ category.id }}" action="{% url 'dashboard:category_edit' category.id %}" novalidate>
+                {% csrf_token %}
+                <input type="hidden" name="category_id" value="{{ category.id }}">
+                
+                <div class="modal-body">
+                    <!-- Translation Tabs -->
+                    {% if translation_enabled and enabled_languages|length > 1 %}
+                        {% include 'dashboard/includes/forms/translation_tabs.html' with show_primary_label=True %}
+                    {% endif %}
+                    
+                    <!-- Turkish Content -->
+                    <div class="translation-content active" data-lang="tr">
+                        {% include 'dashboard/includes/forms/form_field.html' with field_name="name" field_label="Kategori Adı" field_icon="fas fa-tag" field_type="text" field_value=category.name is_required=True language_code="tr" %}
+                        {% include 'dashboard/includes/forms/url_field.html' with field_name="slug" label="URL Slug" icon="fas fa-link" value=category.slug required=False novalidate=True %}
+                        {% include 'dashboard/includes/forms/form_field.html' with field_name="description" field_label="Açıklama" field_icon="fas fa-align-left" field_type="textarea" field_rows="4" field_value=category.description %}
+                    </div>
+
+                    <!-- Translation Languages Content -->
+                    {% if translation_enabled and enabled_languages|length > 1 %}
+                        {% for lang in enabled_languages %}
+                            {% if lang != 'tr' %}
+                            <div class="translation-content" data-lang="{{ lang }}">
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="name_"|add:lang field_label="Kategori Adı" field_icon="fas fa-tag" field_type="text" field_value=category_data.translations|lookup:lang|lookup:"name" is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="description_"|add:lang field_label="Açıklama" field_icon="fas fa-align-left" field_type="textarea" field_rows="4" field_value=category_data.translations|lookup:lang|lookup:"description" is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+
+                    <!-- SEO Fields -->
+                    {% include 'dashboard/includes/forms/form_field.html' with field_name="meta_title" field_label="Meta Başlık (SEO)" field_type="text" field_icon="fas fa-search" field_value=category.meta_title %}
+                    {% include 'dashboard/includes/forms/form_field.html' with field_name="meta_description" field_label="Meta Açıklama (SEO)" field_type="textarea" field_icon="fas fa-file-alt" field_rows="2" field_value=category.meta_description %}
+                    {% include 'dashboard/includes/forms/checkbox_field.html' with field_name="is_active" label="Aktif Durumda" field_type="switch" checked=category.is_active %}
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>{% trans "İptal" %}
+                    </button>
+                    <button type="submit" class="btn-modern success">
+                        <i class="fas fa-save me-2"></i>{% trans "Değişiklikleri Kaydet" %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- View Category Modal -->
+<div class="modal fade modal-modern" id="viewCategoryModal{{ category.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-eye me-2"></i>{% trans "Kategori Detayları" %}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <h4>{{ category.name }}</h4>
+                        <p class="text-muted">{{ category.description|default:"Açıklama bulunmuyor." }}</p>
+                        
+                        <div class="category-meta mt-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>{% trans "ID" %}:</strong> #{{ category.id }}
+                                </div>
+                                <div class="col-6">
+                                    <strong>{% trans "Slug" %}:</strong> {{ category.slug }}
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-6">
+                                    <strong>{% trans "Durum" %}:</strong> 
+                                    {% include 'dashboard/includes/ui/status_badge.html' with badge_text=category.is_active|yesno:"Aktif,Pasif" badge_color=category.is_active|yesno:"success,danger" %}
+                                </div>
+                                <div class="col-6">
+                                    <strong>{% trans "Oluşturma" %}:</strong> {{ category.created_at|date:"d.m.Y" }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times"></i>{% trans "Kapat" %}
+                </button>
+                <button type="button" class="btn-modern primary" data-bs-toggle="modal" data-bs-target="#editCategoryModal{{ category.id }}">
+                    <i class="fas fa-edit"></i>{% trans "Düzenle" %}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Category Modal -->
+<div class="modal fade" id="deleteCategoryModal{{ category.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">
+                    <i class="fas fa-exclamation-triangle me-2"></i>{% trans "Kategori Sil" %}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fas fa-trash-alt text-danger fa-3x mb-3"></i>
+                    <h5>{% trans "Bu kategoriyi silmek istediğinizden emin misiniz?" %}</h5>
+                    <p class="text-muted">
+                        <strong>"{{ category.name }}"</strong> kalıcı olarak silinecek.
+                    </p>
+                    <div class="alert alert-warning mt-3">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Bu kategoriye ait ürünler de etkilenebilir!
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>{% trans "İptal" %}
+                </button>
+                
+                <form method="post" style="display: inline;" class="delete-form" 
+                      data-item-type="kategori"
+                      data-item-name="{{ category.name }}"
+                      action="{% url 'dashboard:category_delete' category.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger delete-confirm-btn">
+                        <i class="fas fa-trash me-2"></i>{% trans "Sil" %}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endwith %}
+{% endfor %}
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Notification system kontrolü
+    if (typeof window.notificationSystem === 'undefined') {
+        window.notificationSystem = {
+            success: function(message) { 
+                console.log('SUCCESS:', message);
+                // Bootstrap toast veya basit alert kullan
+                alert(message); 
+            },
+            error: function(message) { 
+                console.log('ERROR:', message);
+                alert('HATA: ' + message); 
+            }
+        };
+    }
+
+    // Edit Category Form Handlers - DÜZELTILMIŞ VERSİYON
+    document.querySelectorAll('form[id^="editCategoryForm"]').forEach(form => {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Güncelleniyor...';
+            
+            try {
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: new FormData(this),
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    // Success notification
+                    window.notificationSystem.success('Kategori başarıyla güncellendi!');
+                    
+                    // Modal kapat
+                    const modalId = this.closest('.modal').id;
+                    const modal = bootstrap.Modal.getInstance(document.getElementById(modalId));
+                    if (modal) modal.hide();
+                    
+                    // Sayfa yenile - GARANTİ İÇİN
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    throw new Error(data.message || 'Güncelleme hatası');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                window.notificationSystem.error('Bir hata oluştu: ' + error.message);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        });
+    });
+
+    // Diğer form handler'ları da aynı şekilde düzelt...
+});
+</script>
+{% endblock %}
+{% endblock %}
+
+
+

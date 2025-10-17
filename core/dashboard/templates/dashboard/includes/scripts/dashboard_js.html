@@ -1,0 +1,13 @@
+<!--core\dashboard\templates\dashboard\includes\scripts\dashboard_js.html-->
+{% load static %}
+
+<script src="{% static 'dashboard/js/common.js' %}"></script>
+<script src="{% static 'dashboard/js/components/sidebar.js' %}"></script>
+<script src="{% static 'dashboard/js/components/theme-manager.js' %}"></script>
+<script src="{% static 'dashboard/js/components/notification-system.js' %}"></script>
+<script src="{% static 'dashboard/js/components/modal-manager.js' %}"></script>
+<script src="{% static 'dashboard/js/components/storage-monitor.js' %}"></script>
+
+{% if translation_enabled %}
+<script src="{% static 'dashboard/js/components/translation-system.js' %}"></script>
+{% endif %}

@@ -1,0 +1,294 @@
+<!-- templates/contact/sections/review_form.html -->
+{% load static %}
+{% load i18n %}
+
+<section class="review-form-section">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-badge">
+                <i class="fas fa-star"></i>
+                <span>{% trans "Değerlendirme" %}</span>
+            </div>
+            <h2 class="section-title">{% trans "Deneyiminizi Paylaşın" %}</h2>
+            <p class="section-description">
+                {% trans "Hizmetimizden memnun kaldıysanız, deneyiminizi diğer müşterilerimizle paylaşın. Görüşleriniz bizim için çok değerli." %}
+            </p>
+        </div>
+
+        <div class="review-container">
+            <div class="review-form-card">
+                <div class="form-header">
+                    <div class="form-icon">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <h3>{% trans "Değerlendirme Yap" %}</h3>
+                    <p>{% trans "Hizmetimizi nasıl buldunuz? Puanınızı ve yorumunuzu bizimle paylaşın." %}</p>
+                </div>
+
+                {% if user.is_authenticated %}
+                <form method="post" id="reviewForm" class="review-form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="form_type" value="review">
+                    
+                    <div class="form-group">
+                        <label for="{{ review_form.name.id_for_label }}" class="form-label">
+                            <i class="fas fa-user"></i>
+                            {% trans "Adınız Soyadınız" %}
+                            <span class="required">*</span>
+                        </label>
+                        <div class="input-container">
+                            <input type="text" 
+                                   name="{{ review_form.name.name }}" 
+                                   id="{{ review_form.name.id_for_label }}" 
+                                   class="form-input {% if review_form.name.errors %}error{% endif %}"
+                                   value="{{ review_form.name.value|default:user.get_full_name|default:user.username }}" 
+                                   placeholder="{% trans 'Adınız ve soyadınız' %}"
+                                   required>
+                            <div class="input-indicator"></div>
+                        </div>
+                        {% if review_form.name.errors %}
+                        <div class="error-message">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ review_form.name.errors.0 }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group rating-group">
+                        <label class="form-label">
+                            <i class="fas fa-star"></i>
+                            {% trans "Puanınız" %}
+                            <span class="required">*</span>
+                        </label>
+                        <div class="rating-container">
+                            <div class="star-rating">
+                                <input type="radio" id="star5" name="rating" value="5" {% if review_form.rating.value == 5 %}checked{% endif %}>
+                                <label for="star5" title="{% trans '5 yıldız - Mükemmel' %}">
+                                    <i class="fas fa-star"></i>
+                                </label>
+                                
+                                <input type="radio" id="star4" name="rating" value="4" {% if review_form.rating.value == 4 %}checked{% endif %}>
+                                <label for="star4" title="{% trans '4 yıldız - Çok İyi' %}">
+                                    <i class="fas fa-star"></i>
+                                </label>
+                                
+                                <input type="radio" id="star3" name="rating" value="3" {% if review_form.rating.value == 3 %}checked{% endif %}>
+                                <label for="star3" title="{% trans '3 yıldız - İyi' %}">
+                                    <i class="fas fa-star"></i>
+                                </label>
+                                
+                                <input type="radio" id="star2" name="rating" value="2" {% if review_form.rating.value == 2 %}checked{% endif %}>
+                                <label for="star2" title="{% trans '2 yıldız - Orta' %}">
+                                    <i class="fas fa-star"></i>
+                                </label>
+                                
+                                <input type="radio" id="star1" name="rating" value="1" {% if review_form.rating.value == 1 %}checked{% endif %}>
+                                <label for="star1" title="{% trans '1 yıldız - Kötü' %}">
+                                    <i class="fas fa-star"></i>
+                                </label>
+                            </div>
+                            <div class="rating-text">
+                                <span class="rating-label">{% trans "Puan seçin" %}</span>
+                            </div>
+                        </div>
+                        {% if review_form.rating.errors %}
+                        <div class="error-message">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ review_form.rating.errors.0 }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ review_form.comment.id_for_label }}" class="form-label">
+                            <i class="fas fa-comment"></i>
+                            {% trans "Yorumunuz" %}
+                            <span class="required">*</span>
+                        </label>
+                        <div class="input-container">
+                            <textarea name="{{ review_form.comment.name }}" 
+                                      id="{{ review_form.comment.id_for_label }}" 
+                                      class="form-textarea {% if review_form.comment.errors %}error{% endif %}"
+                                      rows="5" 
+                                      placeholder="{% trans 'Deneyiminizi detaylı olarak paylaşın...' %}"
+                                      required>{{ review_form.comment.value|default:'' }}</textarea>
+                            <div class="input-indicator"></div>
+                            <div class="character-counter">
+                                <span class="current">0</span> / <span class="max">500</span>
+                            </div>
+                        </div>
+                        {% if review_form.comment.errors %}
+                        <div class="error-message">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ review_form.comment.errors.0 }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ review_form.image.id_for_label }}" class="form-label">
+                            <i class="fas fa-camera"></i>
+                            {% trans "Fotoğraf" %}
+                            <span class="optional">{% trans "(İsteğe bağlı)" %}</span>
+                        </label>
+                        <div class="file-upload-container">
+                            <div class="file-upload-area" id="imageUploadArea">
+                                <input type="file" 
+                                       name="{{ review_form.image.name }}" 
+                                       id="{{ review_form.image.id_for_label }}" 
+                                       class="file-input" 
+                                       accept="image/*">
+                                <div class="upload-content">
+                                    <div class="upload-icon">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                    </div>
+                                    <div class="upload-text">
+                                        <span class="upload-title">{% trans "Fotoğraf Yükle" %}</span>
+                                        <span class="upload-subtitle">{% trans "Sürükle bırak veya seç" %}</span>
+                                    </div>
+                                </div>
+                                <div class="file-preview" id="imagePreview" style="display: none;">
+                                    <img src="" alt="{% trans 'Önizleme' %}" class="preview-image">
+                                    <button type="button" class="remove-file" onclick="removeImage()">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <small class="form-help">{% trans "JPG, PNG veya GIF formatında, maksimum 5MB" %}</small>
+                        </div>
+                        {% if review_form.image.errors %}
+                        <div class="error-message">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ review_form.image.errors.0 }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group captcha-group">
+                        <label for="{{ review_form.captcha.id_for_label }}" class="form-label">
+                            <i class="fas fa-shield-alt"></i>
+                            {% trans "Güvenlik Kodu" %}
+                            <span class="required">*</span>
+                        </label>
+                        <div class="captcha-container">
+                            {{ review_form.captcha }}
+                            <button type="button" 
+                                    onclick="refreshReviewCaptcha()" 
+                                    class="captcha-refresh" 
+                                    title="{% trans 'Yeni kod üret' %}">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                        <small class="form-help">{% trans "Spam önleme için yukarıdaki kodu girin" %}</small>
+                        {% if review_form.captcha.errors %}
+                        <div class="error-message">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ review_form.captcha.errors.0 }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn">
+                            <span class="btn-icon">
+                                <i class="fas fa-star"></i>
+                            </span>
+                            <span class="btn-text">{% trans "Değerlendirme Gönder" %}</span>
+                            <div class="btn-loading">
+                                <div class="spinner"></div>
+                            </div>
+                        </button>
+                        
+                        <div class="form-info">
+                            <i class="fas fa-info-circle"></i>
+                            {% trans "Değerlendirmeniz onaylandıktan sonra yayınlanacak" %}
+                        </div>
+                    </div>
+                </form>
+                {% else %}
+                <!-- Giriş yapmamış kullanıcı için mesaj -->
+                <div class="login-required">
+                    <div class="login-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h4>{% trans "Giriş Gerekli" %}</h4>
+                    <p>{% trans "Değerlendirme yapabilmek için giriş yapmanız gerekiyor." %}</p>
+                    <div class="login-actions">
+                        <a href="{% url 'admin:login' %}" class="login-btn">
+                            <i class="fas fa-sign-in-alt"></i>
+                            {% trans "Giriş Yap" %}
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Son Değerlendirmeler -->
+            <div class="recent-reviews">
+                <div class="reviews-header">
+                    <h3>{% trans "Son Değerlendirmeler" %}</h3>
+                    <p>{% trans "Müşterilerimizin görüşleri" %}</p>
+                </div>
+
+                <div class="reviews-grid">
+                    {% for review in reviews %}
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-info">
+                                <div class="reviewer-avatar">
+                                    {% if review.user.profile.avatar %}
+                                    <img src="{{ review.user.profile.avatar.url }}" alt="{{ review.name }}">
+                                    {% else %}
+                                    <i class="fas fa-user"></i>
+                                    {% endif %}
+                                </div>
+                                <div class="reviewer-details">
+                                    <h4>{{ review.name }}</h4>
+                                    <span class="review-date">{{ review.created_at|date:"d M Y" }}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="review-rating">
+                                {% for i in "12345"|make_list %}
+                                    {% if forloop.counter <= review.rating %}
+                                    <i class="fas fa-star active"></i>
+                                    {% else %}
+                                    <i class="fas fa-star"></i>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="review-content">
+                            <p>{{ review.comment|truncatewords:30 }}</p>
+                            {% if review.image %}
+                            <div class="review-image">
+                                <img src="{{ review.image.url }}" alt="{% trans 'Değerlendirme resmi' %}">
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="no-reviews">
+                        <div class="no-reviews-icon">
+                            <i class="fas fa-comment-slash"></i>
+                        </div>
+                        <h4>{% trans "Henüz değerlendirme yok" %}</h4>
+                        <p>{% trans "İlk değerlendirmeyi yapan siz olun!" %}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                {% if reviews|length > 3 %}
+                <div class="reviews-footer">
+                    <a href="{% url 'reviews:review_list' %}" class="view-all-btn">
+                        {% trans "Tüm Değerlendirmeleri Gör" %}
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+                    

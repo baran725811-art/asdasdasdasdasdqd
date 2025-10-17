@@ -1,0 +1,218 @@
+<!--core\templates\base\sections\navbar.html # Navigasyon menüsü-->
+{% load static %}
+{% load i18n %}
+{% load translation_tags %}
+
+<nav class="navbar navbar-expand-lg fixed-top" id="mainNavbar" role="navigation" aria-label="{% trans 'Ana navigasyon' %}">
+    <div class="container-fluid px-lg-5">
+        <!-- Logo & Brand -->
+        <!-- Logo & Brand -->
+            <a class="navbar-brand" href="{% url 'home:home' %}" aria-label="{{ site_name|default:'Ana Sayfa' }}">
+                <div class="brand-container">
+                    {% if site_logo %}
+                        <img src="{{ site_logo.url }}" alt="{{ site_name }}" class="brand-logo" width="45" height="45">
+                    {% else %}
+                        <div class="brand-icon">
+                            <i class="fas fa-key" aria-hidden="true"></i>
+                        </div>
+                    {% endif %}
+                    <div class="brand-text">
+                        <span class="brand-name">{{ site_name|default:'Site' }}</span>
+                        {% if site_tagline %}
+                        <span class="brand-tagline">{{ site_tagline }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </a>
+        
+        <!-- Mobile Menu Toggle -->
+        <button class="navbar-toggler" 
+                type="button" 
+                data-bs-toggle="collapse" 
+                data-bs-target="#navbarNav" 
+                aria-controls="navbarNav" 
+                aria-expanded="false" 
+                aria-label="{% trans 'Menüyü aç/kapat' %}">
+            <span class="navbar-toggler-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+        </button>
+        
+        <!-- Navigation Menu -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center" role="menubar">
+                <!-- Ana Sayfa -->
+                <li class="nav-item" role="none">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}" 
+                       href="{% url 'home:home' %}" 
+                       role="menuitem"
+                       {% if request.resolver_match.url_name == 'home' %}aria-current="page"{% endif %}>
+                        <i class="fas fa-home nav-icon" aria-hidden="true"></i>
+                        <span class="nav-text">{% trans "Ana Sayfa" %}</span>
+                        <div class="nav-indicator"></div>
+                    </a>
+                </li>
+                
+                <!-- Ürünler -->
+                <li class="nav-item" role="none">
+                    <a class="nav-link {% if 'products' in request.path or 'urunler' in request.path %}active{% endif %}" 
+                       href="{% url 'products:product_list' %}" 
+                       role="menuitem"
+                       {% if 'products' in request.path or 'urunler' in request.path %}aria-current="page"{% endif %}>
+                        <i class="fas fa-cube nav-icon" aria-hidden="true"></i>
+                        <span class="nav-text">{% trans "Ürünler" %}</span>
+                        <div class="nav-indicator"></div>
+                    </a>
+                </li>
+                
+                <!-- Galeri -->
+                <li class="nav-item" role="none">
+                    <a class="nav-link {% if 'gallery' in request.path or 'galeri' in request.path %}active{% endif %}" 
+                       href="{% url 'gallery:gallery_list' %}" 
+                       role="menuitem"
+                       {% if 'gallery' in request.path or 'galeri' in request.path %}aria-current="page"{% endif %}>
+                        <i class="fas fa-images nav-icon" aria-hidden="true"></i>
+                        <span class="nav-text">{% trans "Galeri" %}</span>
+                        <div class="nav-indicator"></div>
+                    </a>
+                </li>
+                
+                <!-- PDF Katalog -->
+                {% if pdf_catalog_enabled and pdf_catalog_file %}
+                <li class="nav-item" role="none">
+                    <a class="nav-link {% if 'katalog' in request.path %}active{% endif %}" 
+                       href="{% url 'catalog_view' %}" 
+                       role="menuitem"
+                       {% if 'katalog' in request.path %}aria-current="page"{% endif %}>
+                        <i class="fas fa-file-pdf nav-icon" aria-hidden="true"></i>
+                        <span class="nav-text">{{ pdf_catalog_title|default:"Katalog" }}</span>
+                        <div class="nav-indicator"></div>
+                    </a>
+                </li>
+                {% endif %}
+                
+                <!-- Hakkımızda -->
+                <li class="nav-item" role="none">
+                    <a class="nav-link {% if 'about' in request.path or 'hakkimizda' in request.path %}active{% endif %}" 
+                       href="{% url 'about:about' %}" 
+                       role="menuitem"
+                       {% if 'about' in request.path or 'hakkimizda' in request.path %}aria-current="page"{% endif %}>
+                        <i class="fas fa-info-circle nav-icon" aria-hidden="true"></i>
+                        <span class="nav-text">{% trans "Hakkımızda" %}</span>
+                        <div class="nav-indicator"></div>
+                    </a>
+                </li>
+                
+                <!-- İletişim -->
+                <li class="nav-item" role="none">
+                    <a class="nav-link {% if 'contact' in request.path or 'iletisim' in request.path %}active{% endif %}" 
+                       href="{% url 'contact:contact' %}" 
+                       role="menuitem"
+                       {% if 'contact' in request.path or 'iletisim' in request.path %}aria-current="page"{% endif %}>
+                        <i class="fas fa-envelope nav-icon" aria-hidden="true"></i>
+                        <span class="nav-text">{% trans "İletişim" %}</span>
+                        <div class="nav-indicator"></div>
+                    </a>
+                </li>
+                
+                <!-- Dil Seçici -->
+                {% if translation_enabled %}
+                    {% get_available_site_languages as site_languages %}
+                    {% if site_languages|length > 1 %}
+                    <li class="nav-item dropdown language-selector" role="none">
+                        <a class="nav-link dropdown-toggle" 
+                           href="#" 
+                           id="languageDropdown" 
+                           role="button" 
+                           data-bs-toggle="dropdown" 
+                           aria-expanded="false" 
+                           aria-label="{% trans 'Dil Seçimi' %}">
+                            <i class="fas fa-globe nav-icon" aria-hidden="true"></i>
+                            <span class="nav-text">
+                                {% get_current_language as current_lang %}
+                                {% if current_lang == 'tr' %}
+                                    <span class="flag-icon flag-tr"></span> ᴛʀ
+                                {% elif current_lang == 'en' %}
+                                    <span class="flag-icon flag-us"></span> ᴇɴ
+                                {% elif current_lang == 'de' %}
+                                    <span class="flag-icon flag-de"></span> ᴅᴇ
+                                {% elif current_lang == 'fr' %}
+                                    <span class="flag-icon flag-fr"></span> ꜰʀ
+                                {% elif current_lang == 'es' %}
+                                    <span class="flag-icon flag-es"></span> ᴇꜱ
+                                {% elif current_lang == 'ru' %}
+                                    <span class="flag-icon flag-ru"></span> ʀᴜ
+                                {% elif current_lang == 'ar' %}
+                                    <span class="flag-icon flag-sa"></span> ᴀʀ
+                                {% else %}
+                                    <span class="flag-icon flag-tr"></span> ᴛʀ
+                                {% endif %}
+                            </span>
+                            <i class="fas fa-chevron-down dropdown-arrow" aria-hidden="true"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="languageDropdown">
+                            {% for lang_code, lang_name in site_languages %}
+                            <li>
+                                <form action="{% url 'set_language' %}" method="post" class="language-form">
+                                    {% csrf_token %}
+                                    <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                                    <input name="language" type="hidden" value="{{ lang_code }}">
+                                    <button type="submit" 
+                                            class="dropdown-item {% if current_lang == lang_code %}active{% endif %}"
+                                            {% if current_lang == lang_code %}aria-current="true"{% endif %}>
+                                        {% if lang_code == 'tr' %}
+                                            <span class="flag-icon flag-tr"></span> ᴛüʀᴋçᴇ
+                                        {% elif lang_code == 'en' %}
+                                            <span class="flag-icon flag-us"></span> ᴇɴɢʟiꜱʜ
+                                        {% elif lang_code == 'de' %}
+                                            <span class="flag-icon flag-de"></span> ᴅᴇᴜᴛꜱᴄʜ
+                                        {% elif lang_code == 'fr' %}
+                                            <span class="flag-icon flag-fr"></span> ꜰʀᴀɴçᴀiꜱ
+                                        {% elif lang_code == 'es' %}
+                                            <span class="flag-icon flag-es"></span> ᴇꜱᴘᴀñᴏʟ
+                                        {% elif lang_code == 'ru' %}
+                                            <span class="flag-icon flag-ru"></span> ᴘʏᴄᴄᴋий
+                                        {% elif lang_code == 'ar' %}
+                                            <span class="flag-icon flag-sa"></span> العربية 
+                                        {% endif %}
+                                        {% if current_lang == lang_code %}
+                                            <i class="fas fa-check ms-auto" aria-hidden="true"></i>
+                                        {% endif %}
+                                    </button>
+                                </form>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% endif %}
+                {% endif %}
+                
+                <!-- WhatsApp Hızlı İletişim -->
+                {% if whatsapp_link %}
+                <li class="nav-item whatsapp-item" role="none">
+                    <a class="nav-link whatsapp-link" 
+                       href="{{ whatsapp_link }}" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       role="menuitem"
+                       aria-label="{% trans 'WhatsApp ile iletişime geç' %}">
+                        <i class="fab fa-whatsapp nav-icon" aria-hidden="true"></i>
+                        <span class="nav-text d-lg-none">WhatsApp</span>
+                        <div class="whatsapp-pulse"></div>
+                    </a>
+                </li>
+                {% endif %}
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Navbar Background Overlay -->
+    <div class="navbar-overlay"></div>
+</nav>
+
+<!-- Mobile Navigation Overlay -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay"></div>

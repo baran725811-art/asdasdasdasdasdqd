@@ -1,0 +1,179 @@
+<!-- core\dashboard\templates\dashboard\includes\modals\translation_form_modal.html - Çeviri form modal-->
+{% load i18n %}
+
+<div class="modal fade modal-modern translation-form-modal" id="{{ modal_id|default:'translationFormModal' }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-language me-2"></i>{{ title|default:"Çeviri Yönetimi" }}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            
+            <div class="modal-body">
+                <form method="post" id="{{ form_id|default:'translationForm' }}">
+                    {% csrf_token %}
+                    
+                    <!-- Dil Sekmeleri -->
+                    <div class="translation-tabs-container mb-4">
+                        <div class="translation-tabs d-flex mb-3">
+                            <div class="translation-tab active" data-lang="{{ primary_language|default:'tr' }}">
+                                <span class="language-flag">
+                                    {% include 'dashboard/includes/partials/language_flag.html' with language=primary_language|default:'tr' %}
+                                </span>
+                                {% include 'dashboard/includes/partials/language_name.html' with language=primary_language|default:'tr' %} ({% trans "Ana Dil" %})
+                                <span class="translation-indicator optional"></span>
+                            </div>
+                            {% for lang in enabled_languages %}
+                                {% if lang != primary_language %}
+                                <div class="translation-tab" data-lang="{{ lang }}">
+                                    <span class="language-flag">
+                                        {% include 'dashboard/includes/partials/language_flag.html' with language=lang %}
+                                    </span>
+                                    {% include 'dashboard/includes/partials/language_name.html' with language=lang %}
+                                    <span class="translation-indicator required"></span>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <!-- Ana Dil İçeriği -->
+                    <div class="translation-content active" data-lang="{{ primary_language|default:'tr' }}">
+                        <div class="row">
+                            {% for field in primary_fields %}
+                                <div class="col-{{ field.width|default:'12' }}">
+                                    {% if field.type == 'text' %}
+                                        {% include 'dashboard/includes/forms/form_field.html' with field_name=field.name label=field.label field_type='text' value=field.value placeholder=field.placeholder required=field.required %}
+                                    {% elif field.type == 'textarea' %}
+                                        {% include 'dashboard/includes/forms/text_editor_field.html' with field_name=field.name label=field.label value=field.value rows=field.rows|default:'4' required=field.required %}
+                                    {% elif field.type == 'url' %}
+                                        {% include 'dashboard/includes/forms/url_field.html' with field_name=field.name label=field.label value=field.value required=field.required %}
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <!-- Çeviri Dilleri İçerikleri -->
+                    {% for lang in enabled_languages %}
+                        {% if lang != primary_language %}
+                        <div class="translation-content" data-lang="{{ lang }}">
+                            <div class="translation-header mb-3">
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    {% trans "Bu dil için çeviri zorunludur. Tüm alanları doldurun." %}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                {% for field in translation_fields %}
+                                    <div class="col-{{ field.width|default:'12' }}">
+                                        {% if field.type == 'text' %}
+                                            {% include 'dashboard/includes/forms/form_field.html' with field_name=field.name|add:'_'|add:lang label=field.label field_type='text' placeholder=field.placeholder required=True help_text="Bu alan zorunludur" %}
+                                        {% elif field.type == 'textarea' %}
+                                            {% include 'dashboard/includes/forms/text_editor_field.html' with field_name=field.name|add:'_'|add:lang label=field.label rows=field.rows|default:'4' required=True help_text="Bu alan zorunludur" %}
+                                        {% elif field.type == 'url' %}
+                                            {% include 'dashboard/includes/forms/url_field.html' with field_name=field.name|add:'_'|add:lang label=field.label required=True help_text="Bu alan zorunludur" %}
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    <!-- Ortak Alanlar -->
+                    {% if common_fields %}
+                        <div class="common-fields mt-4">
+                            <h6 class="mb-3">
+                                <i class="fas fa-cog me-2"></i>{% trans "Genel Ayarlar" %}
+                            </h6>
+                            <div class="row">
+                                {% for field in common_fields %}
+                                    <div class="col-{{ field.width|default:'12' }}">
+                                        {% if field.type == 'checkbox' %}
+                                            {% include 'dashboard/includes/forms/checkbox_field.html' with field_name=field.name label=field.label checked=field.checked help_text=field.help_text %}
+                                        {% elif field.type == 'select' %}
+                                            {% include 'dashboard/includes/forms/select_field.html' with field_name=field.name label=field.label options=field.options selected_value=field.value %}
+                                        {% elif field.type == 'number' %}
+                                            {% include 'dashboard/includes/forms/form_field.html' with field_name=field.name label=field.label field_type='number' value=field.value min=field.min max=field.max %}
+                                        {% elif field.type == 'date' %}
+                                            {% include 'dashboard/includes/forms/date_field.html' with field_name=field.name label=field.label value=field.value %}
+                                        {% elif field.type == 'image' %}
+                                            {% include 'dashboard/includes/forms/image_upload_field.html' with field_name=field.name label=field.label current_image=field.current_image help_text=field.help_text %}
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </form>
+                
+                <!-- Çeviri Durumu Paneli -->
+                {% if show_translation_status %}
+                    <div class="translation-status-panel mt-4">
+                        <h6 class="mb-3">
+                            <i class="fas fa-check-circle me-2"></i>{% trans "Çeviri Durumu" %}
+                        </h6>
+                        <div class="translation-status-grid">
+                            {% for lang in enabled_languages %}
+                                {% if lang != primary_language %}
+                                <div class="status-item" data-lang="{{ lang }}">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="language-name">
+                                            {% include 'dashboard/includes/partials/language_flag.html' with language=lang %}
+                                            {% include 'dashboard/includes/partials/language_name.html' with language=lang %}
+                                        </span>
+                                        <span class="translation-status-badge" id="status-{{ lang }}">
+                                            <i class="fas fa-clock text-warning"></i>
+                                            {% trans "Kontrol Ediliyor" %}
+                                        </span>
+                                    </div>
+                                    <div class="progress mt-2">
+                                        <div class="progress-bar" id="progress-{{ lang }}" style="width: 0%"></div>
+                                    </div>
+                                    <small class="status-detail" id="detail-{{ lang }}">{% trans "Zorunlu alanlar kontrol ediliyor..." %}</small>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="overall-progress mt-3">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <small>{% trans "Genel Tamamlanma" %}</small>
+                                <small><span id="overall-percentage">0</span>%</small>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-success" id="overall-progress" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-1"></i>{% trans "İptal" %}
+                </button>
+                
+                {% if show_preview %}
+                    <button type="button" class="btn btn-info" id="previewButton">
+                        <i class="fas fa-eye me-1"></i>{% trans "Önizleme" %}
+                    </button>
+                {% endif %}
+                
+                {% if show_save_draft %}
+                    <button type="button" class="btn btn-warning" id="saveDraftButton">
+                        <i class="fas fa-save me-1"></i>{% trans "Taslak Kaydet" %}
+                    </button>
+                {% endif %}
+                
+                <button type="submit" form="{{ form_id|default:'translationForm' }}" class="btn btn-success">
+                    <i class="fas fa-check me-1"></i>{{ submit_text|default:"Kaydet" }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

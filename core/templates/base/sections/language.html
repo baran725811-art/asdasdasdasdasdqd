@@ -1,0 +1,35 @@
+<!--core\templates\base\sections\language.html # Dil seçici-->
+{% load static %}
+{% load i18n %}
+{% load translation_tags %}
+
+{% if translation_enabled %}
+    {% get_available_site_languages as site_languages %}
+    {% if site_languages|length > 1 %}
+    <div class="language-selector">
+        <div class="dropdown">
+            <button class="btn btn-outline-secondary dropdown-toggle" 
+                    type="button" 
+                    id="languageDropdown" 
+                    data-bs-toggle="dropdown">
+                {% get_current_language as current_lang %}
+                {% if current_lang == 'tr' %}🇹🇷 TR{% elif current_lang == 'en' %}🇺🇸 EN{% else %}🇹🇷 TR{% endif %}
+            </button>
+            <ul class="dropdown-menu">
+                {% for lang_code, lang_name in site_languages %}
+                <li>
+                    <form action="{% url 'set_language' %}" method="post">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ request.get_full_path }}">
+                        <input name="language" type="hidden" value="{{ lang_code }}">
+                        <button type="submit" class="dropdown-item">
+                            {% if lang_code == 'tr' %}🇹🇷 Türkçe{% elif lang_code == 'en' %}🇺🇸 English{% endif %}
+                        </button>
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+{% endif %}

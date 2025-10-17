@@ -1,0 +1,273 @@
+<!--core\dashboard\templates\dashboard\includes\tables\modern_table.html-->
+{% load i18n %}
+
+<div class="table-card">
+    {% if table_title or search_enabled or filters_enabled %}
+    <div class="card-header-modern">
+        <div class="d-flex justify-content-between align-items-center">
+            {% if table_title %}
+            <h5 class="mb-0">
+                {% if table_icon %}<i class="{{ table_icon }} me-2"></i>{% endif %}
+                {{ table_title }}
+                {% if table_count %}<span class="badge-modern info ms-2">{{ table_count }} {% trans "öğe" %}</span>{% endif %}
+            </h5>
+            {% endif %}
+            
+            <div class="d-flex gap-2">
+                {% if search_enabled %}
+                    {% include 'dashboard/includes/tables/table_search.html' %}
+                {% endif %}
+                
+                {% if filters_enabled %}
+                    {% include 'dashboard/includes/tables/table_filters.html' %}
+                {% endif %}
+                
+                {% if add_button_url %}
+                <a href="{{ add_button_url }}" class="btn-modern primary btn-sm">
+                    <i class="fas fa-plus me-1"></i>{{ add_button_text|default:"Yeni Ekle" }}
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-modern table-hover" {% if table_id %}id="{{ table_id }}"{% endif %}>
+                {% if table_headers %}
+                <thead>
+                    <tr>
+                        {% for header in table_headers %}
+                        <th {% if header.width %}width="{{ header.width }}"{% endif %} 
+                            {% if header.class %}class="{{ header.class }}"{% endif %}>
+                            {% if header.icon %}<i class="{{ header.icon }} me-2"></i>{% endif %}
+                            {{ header.title }}
+                        </th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                {% else %}
+                    {% include 'dashboard/includes/tables/table_header.html' with table_type=table_type %}
+                {% endif %}
+                
+                <tbody>
+                    {% if table_rows %}
+                        {% for row in table_rows %}
+                        <tr {% if row.data_attributes %}
+                            {% for attr_name, attr_value in row.data_attributes.items %}
+                                data-{{ attr_name }}="{{ attr_value }}"
+                            {% endfor %}
+                            {% endif %}
+                            {% if row.css_class %}class="{{ row.css_class }}"{% endif %}>
+                            
+                            {% for cell in row.cells %}
+                            <td {% if cell.class %}class="{{ cell.class }}"{% endif %}>
+                                {{ cell.content|safe }}
+                            </td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    {% elif table_type == 'gallery' and galleries %}
+                        {% for item in galleries %}
+                        <tr data-gallery-id="{{ item.id }}">
+                            <td>
+                                {% if item.media_type == 'image' and item.image %}
+                                    <img src="{{ item.image.url }}" alt="{{ item.title }}" class="image-modern" style="width: 60px; height: 60px; object-fit: cover;">
+                                {% elif item.media_type == 'video' %}
+                                    <div class="image-placeholder" style="width: 60px; height: 60px; position: relative;">
+                                        <i class="fas fa-video"></i>
+                                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                            <i class="fas fa-play-circle text-primary"></i>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="image-placeholder" style="width: 60px; height: 60px;">
+                                        <i class="fas fa-image"></i>
+                                    </div>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="fw-semibold">{{ item.title }}</div>
+                                {% if item.description %}
+                                    <small class="text-muted">{{ item.description|truncatewords:8|striptags }}</small>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if item.description %}
+                                    <span class="text-muted">{{ item.description|truncatewords:5|striptags }}</span>
+                                {% else %}
+                                    <span class="text-muted fst-italic">Açıklama yok</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="fw-semibold">{{ item.order }}</div>
+                            </td>
+                            <td>
+                                {% include 'dashboard/includes/ui/status_badge.html' with badge_text=item.is_active|yesno:"Aktif,Pasif" badge_color=item.is_active|yesno:"success,danger" %}
+                                {% if item.is_featured %}
+                                    {% include 'dashboard/includes/ui/status_badge.html' with badge_text="Öne Çıkan" badge_color="warning" badge_icon="fas fa-star" %}
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-action view" 
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#viewGalleryModal{{ item.id }}" 
+                                            title="{% trans 'Görüntüle' %}">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-action edit" 
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#editGalleryModal{{ item.id }}" 
+                                            title="{% trans 'Düzenle' %}">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-action delete" 
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#deleteGalleryModal{{ item.id }}" 
+                                            title="{% trans 'Sil' %}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% elif table_type == 'services' and services %}
+                        {% for service in services %}
+                        <tr data-service-id="{{ service.id }}">
+                            <td>
+                                <div class="fw-semibold">#{{ service.id }}</div>
+                            </td>
+                            <td>
+                                <div class="fw-semibold">{{ service.order }}</div>
+                            </td>
+                            <td>
+                                {% if service.image %}
+                                    <img src="{{ service.image.url }}" alt="{{ service.title }}" class="image-modern" style="width: 60px; height: 60px; object-fit: cover;">
+                                {% else %}
+                                    <div class="image-placeholder" style="width: 60px; height: 60px;">
+                                        <i class="fas fa-image"></i>
+                                    </div>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="fw-semibold">{{ service.title }}</div>
+                                {% if service.description %}
+                                    <small class="text-muted">{{ service.description|truncatewords:8|striptags }}</small>
+                                {% endif %}
+                            </td>
+                            <!-- Mevcut service loop'unda footer sütunu ekleyin   buraya bakılcak. hata var gibi -->
+                            <td>
+                                <div class="form-check form-switch d-flex justify-content-center">
+                                    <input class="form-check-input footer-toggle" 
+                                           type="checkbox" 
+                                           {% if service.is_footer %}checked{% endif %}
+                                           data-service-id="{{ service.id }}"
+                                           data-service-title="{{ service.title }}"
+                                           title="Footer'da göster/gizle">
+                                </div>
+                            </td>
+                            <td>
+                                {% include 'dashboard/includes/ui/status_badge.html' with badge_text=service.is_active|yesno:"Aktif,Pasif" badge_color=service.is_active|yesno:"success,danger" %}
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-action edit" 
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#editServiceModal{{ service.id }}" 
+                                            title="{% trans 'Düzenle' %}">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-action view" 
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#viewServiceModal{{ service.id }}" 
+                                            title="{% trans 'Görüntüle' %}">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-action delete" 
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#deleteServiceModal{{ service.id }}" 
+                                            title="{% trans 'Sil' %}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% elif table_type == 'products' and products %}
+                        {% for product in products %}
+                        <tr data-product-id="{{ product.id }}">
+                            <td>
+                                {% if product.image %}
+                                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="image-modern" style="width: 60px; height: 60px; object-fit: cover;">
+                                {% else %}
+                                    <div class="image-placeholder" style="width: 60px; height: 60px;">
+                                        <i class="fas fa-image"></i>
+                                    </div>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="fw-semibold">{{ product.name }}</div>
+                                {% if product.description %}
+                                    <small class="text-muted">{{ product.description|truncatewords:8|striptags }}</small>
+                                {% endif %}
+                            </td>
+                            <td>{{ product.category.name }}</td>
+                            <td>
+                                {% if product.price %}
+                                    <span class="fw-bold text-success">{{ product.price|floatformat:2 }} ₺</span>
+                                {% else %}
+                                    <span class="text-muted fst-italic">{% trans "Fiyat belirtilmemiş"%}</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if product.stock is not None %}
+                                    {% include 'dashboard/includes/ui/status_badge.html' with badge_text=product.stock|add:" adet" badge_color="success" %}
+                                {% else %}
+                                    <span class="text-muted fst-italic">{% trans "Stok belirtilmemiş"%}</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% include 'dashboard/includes/ui/status_badge.html' with badge_text=product.is_active|yesno:"Satışta,Pasif" badge_color=product.is_active|yesno:"success,danger" %}
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-action edit" 
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#editProductModal{{ product.id }}" 
+                                            title="{% trans 'Düzenle' %}">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-action view" 
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#viewProductModal{{ product.id }}" 
+                                            title="{% trans 'Görüntüle' %}">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-action delete" 
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#deleteProductModal{{ product.id }}" 
+                                            title="{% trans 'Sil' %}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="{{ table_headers|length|default:'6' }}">
+                                {% include 'dashboard/includes/ui/empty_state.html' with empty_title=empty_title empty_message=empty_message empty_icon=empty_icon %}
+                            </td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    {% if pagination_enabled and page_obj %}
+        {% include 'dashboard/includes/tables/table_pagination.html' %}
+    {% endif %}
+</div>

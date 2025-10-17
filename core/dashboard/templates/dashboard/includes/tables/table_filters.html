@@ -1,0 +1,16 @@
+<!-- C:\Users\BARAN\Desktop\proje\basit1-main\core\dashboard\templates\dashboard\includes\tables\table_filters.html - Tablo filtreleri -->
+ {% load i18n %}
+
+{% if filter_options %}
+<div class="d-flex gap-2">
+    {% for filter in filter_options %}
+    <select class="form-select form-select-sm" name="{{ filter.name }}" onchange="this.form.submit()">
+        {% for option in filter.options %}
+        <option value="{{ option.value }}" {% if option.value == filter.selected %}selected{% endif %}>
+            {{ option.label }}
+        </option>
+        {% endfor %}
+    </select>
+    {% endfor %}
+</div>
+{% endif %}

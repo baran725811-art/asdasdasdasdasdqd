@@ -1,0 +1,125 @@
+{% extends 'dashboard/base.html' %}
+{% load i18n %}
+
+{% block title %}Profil{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0">Kullanıcı Profili</h1>
+            <p class="text-muted">Hesap bilgilerinizi görüntüleyin ve düzenleyin</p>
+        </div>
+        <div>
+            <a href="{% url 'dashboard:profile_edit' %}" class="btn btn-primary">
+                <i class="fas fa-edit me-2"></i>Profili Düzenle
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Profil Bilgileri -->
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-user me-2"></i>Profil Bilgileri
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6 mb-3">
+                            <label class="text-muted">Kullanıcı Adı</label>
+                            <p class="mb-0 fw-bold">{{ user.username }}</p>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <label class="text-muted">E-posta</label>
+                            <p class="mb-0">{{ user.email|default:"Belirtilmemiş" }}</p>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <label class="text-muted">Ad</label>
+                            <p class="mb-0">{{ user.first_name|default:"Belirtilmemiş" }}</p>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <label class="text-muted">Soyad</label>
+                            <p class="mb-0">{{ user.last_name|default:"Belirtilmemiş" }}</p>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <label class="text-muted">Hesap Türü</label>
+                            <p class="mb-0">
+                                {% if user.is_superuser %}
+                                    <span class="badge bg-danger">Süper Kullanıcı</span>
+                                {% elif user.is_staff %}
+                                    <span class="badge bg-warning">Personel</span>
+                                {% else %}
+                                    <span class="badge bg-secondary">Kullanıcı</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <label class="text-muted">Hesap Durumu</label>
+                            <p class="mb-0">
+                                {% if user.is_active %}
+                                    <span class="badge bg-success">Aktif</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Pasif</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <label class="text-muted">Kayıt Tarihi</label>
+                            <p class="mb-0">{{ user.date_joined|date:"d.m.Y H:i" }}</p>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <label class="text-muted">Son Giriş</label>
+                            <p class="mb-0">{{ user.last_login|date:"d.m.Y H:i"|default:"Hiç giriş yapmamış" }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hızlı İşlemler -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-tools me-2"></i>Hızlı İşlemler
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'dashboard:profile_edit' %}" class="btn btn-outline-primary">
+                            <i class="fas fa-edit me-2"></i>Profili Düzenle
+                        </a>
+                        <a href="{% url 'dashboard:profile_password_change' %}" class="btn btn-outline-warning">
+                            <i class="fas fa-key me-2"></i>Şifre Değiştir
+                        </a>
+                        <a href="{% url 'dashboard:settings' %}" class="btn btn-outline-info">
+                            <i class="fas fa-cog me-2"></i>Sistem Ayarları
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Güvenlik Bilgisi -->
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="fas fa-shield-alt me-2"></i>Güvenlik
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info mb-0">
+                        <small>
+                            <i class="fas fa-info-circle me-1"></i>
+                            Hesabınızın güvenliği için şifrenizi düzenli olarak değiştirmenizi öneririz.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

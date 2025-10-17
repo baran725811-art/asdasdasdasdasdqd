@@ -1,0 +1,490 @@
+<!-- core\dashboard\templates\dashboard\includes\ui\progress_bar.html - İlerleme çubuğu -->
+ <!-- Progress Bar Component -->
+<div class="progress-container {{ container_class|default:'' }}" id="{{ progress_id|default:'' }}">
+    {% if label %}
+    <div class="progress-label">
+        <span class="progress-title">{{ label }}</span>
+        {% if show_percentage %}
+        <span class="progress-percentage">{{ value|default:0 }}%</span>
+        {% endif %}
+    </div>
+    {% endif %}
+    
+    <div class="progress progress-modern {{ progress_class|default:'' }}" 
+         style="height: {{ height|default:'8px' }};">
+        <div class="progress-bar progress-bar-{{ type|default:'primary' }} 
+                    {% if animated %}progress-bar-animated{% endif %} 
+                    {% if striped %}progress-bar-striped{% endif %}" 
+             role="progressbar" 
+             style="width: {{ value|default:0 }}%;" 
+             aria-valuenow="{{ value|default:0 }}" 
+             aria-valuemin="0" 
+             aria-valuemax="100">
+            {% if show_text %}
+                <span class="progress-text">{{ text|default:value|default:0 }}%</span>
+            {% endif %}
+        </div>
+    </div>
+    
+    {% if description %}
+    <div class="progress-description">
+        <small class="text-muted">{{ description }}</small>
+    </div>
+    {% endif %}
+    
+    {% if steps %}
+    <div class="progress-steps">
+        {% for step in steps %}
+        <div class="progress-step {% if step.completed %}completed{% endif %} {% if step.active %}active{% endif %}">
+            <div class="step-indicator">
+                {% if step.completed %}
+                    <i class="fas fa-check"></i>
+                {% else %}
+                    {{ forloop.counter }}
+                {% endif %}
+            </div>
+            <div class="step-label">{{ step.label }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+<style>
+.progress-container {
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.progress-title {
+    font-weight: 500;
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.progress-percentage {
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 0.85rem;
+}
+
+.progress-modern {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-modern .progress-bar {
+    border-radius: 50px;
+    transition: width 0.6s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar-primary {
+    background: var(--primary-gradient);
+}
+
+.progress-bar-success {
+    background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+}
+
+.progress-bar-danger {
+    background: linear-gradient(90deg, #dc3545 0%, #fd7e14 100%);
+}
+
+.progress-bar-warning {
+    background: linear-gradient(90deg, #ffc107 0%, #fd7e14 100%);
+}
+
+.progress-bar-info {
+    background: linear-gradient(90deg, #17a2b8 0%, #6f42c1 100%);
+}
+
+.progress-text {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+}
+
+.progress-description {
+    margin-top: 0.25rem;
+}
+
+.progress-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    position: relative;
+}
+
+.progress-steps::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #e9ecef;
+    z-index: 1;
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    text-align: center;
+}
+
+.step-indicator {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #e9ecef;
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.progress-step.completed .step-indicator {
+    background: var(--primary-color);
+    color: white;
+}
+
+.progress-step.active .step-indicator {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 0 0 4px rgba(var(--primary-color), 0.2);
+}
+
+.step-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    max-width: 100px;
+    word-wrap: break-word;
+}
+
+.progress-step.completed .step-label,
+.progress-step.active .step-label {
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+/* Animated progress bars */
+.progress-bar-animated {
+    background-size: 1rem 1rem;
+    animation: progress-bar-stripes 1s linear infinite;
+}
+
+@keyframes progress-bar-stripes {
+    0% {
+        background-position: 1rem 0;
+    }
+    100% {
+        background-position: 0 0;
+    }
+}
+
+/* Gradient animation */
+.progress-bar-gradient-animated {
+    background: linear-gradient(45deg, 
+        var(--primary-color) 25%, 
+        transparent 25%, 
+        transparent 50%, 
+        var(--primary-color) 50%, 
+        var(--primary-color) 75%, 
+        transparent 75%, 
+        transparent);
+    background-size: 1rem 1rem;
+    animation: gradient-move 1s linear infinite;
+}
+
+@keyframes gradient-move {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 1rem 0;
+    }
+}
+
+/* Pulse effect */
+.progress-bar-pulse {
+    animation: pulse-effect 2s ease-in-out infinite;
+}
+
+@keyframes pulse-effect {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Size variants */
+.progress-xs {
+    height: 4px !important;
+}
+
+.progress-sm {
+    height: 6px !important;
+}
+
+.progress-lg {
+    height: 12px !important;
+}
+
+.progress-xl {
+    height: 16px !important;
+}
+
+/* Responsive */
+@media (max-width: 767.98px) {
+    .progress-steps {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .progress-steps::before {
+        display: none;
+    }
+    
+    .progress-step {
+        flex-direction: row;
+        text-align: left;
+        gap: 1rem;
+    }
+    
+    .step-indicator {
+        margin-bottom: 0;
+        flex-shrink: 0;
+    }
+    
+    .step-label {
+        max-width: none;
+    }
+}
+</style>
+
+<script>
+// Progress Bar Utility Class
+class ProgressBar {
+    constructor(containerId) {
+        this.container = document.getElementById(containerId);
+        this.progressBar = this.container?.querySelector('.progress-bar');
+        this.percentageEl = this.container?.querySelector('.progress-percentage');
+        this.textEl = this.container?.querySelector('.progress-text');
+    }
+    
+    setValue(value, animated = true) {
+        if (!this.progressBar) return;
+        
+        value = Math.max(0, Math.min(100, value));
+        
+        if (animated) {
+            this.animateToValue(value);
+        } else {
+            this.setValueImmediate(value);
+        }
+    }
+    
+    setValueImmediate(value) {
+        this.progressBar.style.width = value + '%';
+        this.progressBar.setAttribute('aria-valuenow', value);
+        
+        if (this.percentageEl) {
+            this.percentageEl.textContent = Math.round(value) + '%';
+        }
+        
+        if (this.textEl) {
+            this.textEl.textContent = Math.round(value) + '%';
+        }
+    }
+    
+    animateToValue(targetValue) {
+        const currentValue = parseFloat(this.progressBar.style.width) || 0;
+        const difference = targetValue - currentValue;
+        const steps = 30;
+        const stepValue = difference / steps;
+        const stepDuration = 20;
+        
+        let currentStep = 0;
+        
+        const interval = setInterval(() => {
+            currentStep++;
+            const newValue = currentValue + (stepValue * currentStep);
+            
+            if (currentStep >= steps) {
+                this.setValueImmediate(targetValue);
+                clearInterval(interval);
+            } else {
+                this.setValueImmediate(newValue);
+            }
+        }, stepDuration);
+    }
+    
+    setType(type) {
+        if (!this.progressBar) return;
+        
+        // Remove existing type classes
+        this.progressBar.className = this.progressBar.className
+            .replace(/progress-bar-\w+/g, '');
+        
+        // Add new type class
+        this.progressBar.classList.add(`progress-bar-${type}`);
+    }
+    
+    setText(text) {
+        if (this.textEl) {
+            this.textEl.textContent = text;
+        }
+    }
+    
+    setLabel(label) {
+        const titleEl = this.container?.querySelector('.progress-title');
+        if (titleEl) {
+            titleEl.textContent = label;
+        }
+    }
+    
+    setDescription(description) {
+        const descEl = this.container?.querySelector('.progress-description small');
+        if (descEl) {
+            descEl.textContent = description;
+        }
+    }
+    
+    addStep(label, completed = false, active = false) {
+        const stepsContainer = this.container?.querySelector('.progress-steps');
+        if (!stepsContainer) return;
+        
+        const stepNumber = stepsContainer.children.length + 1;
+        const stepEl = document.createElement('div');
+        stepEl.className = `progress-step ${completed ? 'completed' : ''} ${active ? 'active' : ''}`;
+        stepEl.innerHTML = `
+            <div class="step-indicator">
+                ${completed ? '<i class="fas fa-check"></i>' : stepNumber}
+            </div>
+            <div class="step-label">${label}</div>
+        `;
+        
+        stepsContainer.appendChild(stepEl);
+    }
+    
+    updateStep(stepIndex, completed = false, active = false) {
+        const stepsContainer = this.container?.querySelector('.progress-steps');
+        if (!stepsContainer) return;
+        
+        const stepEl = stepsContainer.children[stepIndex];
+        if (!stepEl) return;
+        
+        stepEl.className = `progress-step ${completed ? 'completed' : ''} ${active ? 'active' : ''}`;
+        
+        const indicator = stepEl.querySelector('.step-indicator');
+        if (completed) {
+            indicator.innerHTML = '<i class="fas fa-check"></i>';
+        } else {
+            indicator.textContent = stepIndex + 1;
+        }
+    }
+    
+    // Static method to create a new progress bar
+    static create(containerId, options = {}) {
+        const {
+            value = 0,
+            type = 'primary',
+            label = null,
+            description = null,
+            showPercentage = true,
+            animated = false,
+            height = '8px'
+        } = options;
+        
+        const container = document.getElementById(containerId);
+        if (!container) return null;
+        
+        const progressHTML = `
+            <div class="progress-container">
+                ${label ? `
+                    <div class="progress-label">
+                        <span class="progress-title">${label}</span>
+                        ${showPercentage ? `<span class="progress-percentage">${value}%</span>` : ''}
+                    </div>
+                ` : ''}
+                <div class="progress progress-modern" style="height: ${height};">
+                    <div class="progress-bar progress-bar-${type} ${animated ? 'progress-bar-animated' : ''}" 
+                         role="progressbar" 
+                         style="width: ${value}%;" 
+                         aria-valuenow="${value}" 
+                         aria-valuemin="0" 
+                         aria-valuemax="100">
+                    </div>
+                </div>
+                ${description ? `
+                    <div class="progress-description">
+                        <small class="text-muted">${description}</small>
+                    </div>
+                ` : ''}
+            </div>
+        `;
+        
+        container.innerHTML = progressHTML;
+        return new ProgressBar(containerId);
+    }
+}
+
+// Global utility functions
+function updateProgress(containerId, value, animated = true) {
+    const progressBar = new ProgressBar(containerId);
+    progressBar.setValue(value, animated);
+}
+
+function createProgress(containerId, options = {}) {
+    return ProgressBar.create(containerId, options);
+}
+
+// Auto-initialize progress bars with data attributes
+document.addEventListener('DOMContentLoaded', function() {
+    const progressBars = document.querySelectorAll('[data-progress-auto]');
+    
+    progressBars.forEach(container => {
+        const value = parseInt(container.dataset.progressValue) || 0;
+        const animated = container.dataset.progressAnimated === 'true';
+        
+        if (animated) {
+            const progressBar = new ProgressBar(container.id);
+            setTimeout(() => {
+                progressBar.setValue(value, true);
+            }, 100);
+        }
+    });
+});
+</script>

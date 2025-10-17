@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{{ error_title }} - {{ block.super }}{% endblock %}
+{% block meta_description %}{{ meta_description }}{% endblock %}
+
+{% block extra_meta %}
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="{{ canonical_url }}">
+
+<script type="application/ld+json">
+{{ structured_data|safe }}
+</script>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.error-page {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    padding: 60px 0;
+}
+
+.error-content {
+    text-align: center;
+}
+
+.error-icon {
+    font-size: 80px;
+    color: #dc3545;
+    margin-bottom: 20px;
+}
+
+.error-code {
+    font-size: 100px;
+    font-weight: bold;
+    color: #dc3545;
+    line-height: 1;
+    margin-bottom: 20px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="error-page">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="error-content">
+                    <div class="error-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    
+                    <div class="error-code">{{ error_code }}</div>
+                    <h1 class="error-title">{{ error_title }}</h1>
+                    <p class="error-message">{{ error_message }}</p>
+                    
+                    <div class="mt-4">
+                        <a href="{% url 'home:home' %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-home"></i> {% trans "Ana Sayfaya Dön" %}
+                        </a>
+                        <button onclick="location.reload()" class="btn btn-outline-secondary btn-lg ml-3">
+                            <i class="fas fa-redo"></i> {% trans "Sayfayı Yenile" %}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

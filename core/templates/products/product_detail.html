@@ -1,0 +1,34 @@
+<!--core\templates\products\product_detail.html-->
+{% extends 'base/main.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{{ meta_title }}{% endblock %}
+{% block meta_description %}{{ meta_description }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/base/breadcrumb.css' %}">
+<link rel="stylesheet" href="{% static 'css/products/detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Breadcrumb -->
+{% include 'products/sections/breadcrumb.html' %}
+
+<!-- Product Detail -->
+{% include 'products/sections/product_detail.html' %}
+
+<!-- Related Products -->
+{% if related_products %}
+{% include 'products/sections/related_products.html' %}
+{% endif %}
+
+<!-- Suggested Products -->
+{% if suggested_products %}
+{% include 'products/sections/suggested_products.html' %}
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/products/detail.js' %}"></script>
+{% endblock %}

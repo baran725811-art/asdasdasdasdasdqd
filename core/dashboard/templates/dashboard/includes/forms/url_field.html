@@ -1,0 +1,254 @@
+<!-- core\dashboard\templates\dashboard\includes\forms\url_field.html - URL field -->
+{% load i18n %}
+
+<div class="mb-3">
+    <label class="form-label-modern">
+        <i class="fas {{ icon|default:'fa-link' }}"></i>{{ label }}
+        {% if required %}<span class="text-danger">*</span>{% endif %}
+    </label>
+    
+    {% if field_type == "slug" %}
+        <!-- Slug Field (Auto-generated from title) -->
+        <div class="slug-input-group">
+            <div class="input-group">
+                {% if base_url %}
+                    <span class="input-group-text base-url">{{ base_url }}</span>
+                {% endif %}
+                <input type="text" 
+                       name="{{ field_name }}" 
+                       class="form-control form-control-modern slug-input"
+                       value="{{ value }}"
+                       placeholder="{{ placeholder|default:'url-ornegi' }}"
+                       pattern="[a-z0-9\-]+"
+                       {% if required %}required{% endif %}
+                       {% if readonly %}readonly{% endif %}
+                       {% if attrs %}{% for attr, val in attrs.items %}{{ attr }}="{{ val }}" {% endfor %}{% endif %}>
+                <button type="button" class="btn btn-outline-secondary auto-generate-btn" 
+                        {% if source_field %}data-source="{{ source_field }}"{% endif %} 
+                        title="{% trans 'Otomatik oluştur' %}">
+                    <i class="fas fa-magic"></i>
+                </button>
+            </div>
+            <div class="slug-preview mt-1">
+                <small class="text-muted">
+                    <i class="fas fa-external-link-alt me-1"></i>
+                    <span class="preview-text">{{ preview_url|default:"/" }}{{ value|default:'...' }}</span>
+                </small>
+            </div>
+        </div>
+        
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slugInput = document.querySelector('.slug-input[name="{{ field_name }}"]');
+            const generateBtn = document.querySelector('.auto-generate-btn[data-source="{{ source_field }}"]');
+            const previewText = document.querySelector('.preview-text');
+            const sourceField = generateBtn ? document.querySelector(`[name="${generateBtn.dataset.source}"]`) : null;
+            
+            function updatePreview() {
+                if (previewText) {
+                    const baseUrl = '{{ preview_url|default:"/" }}';
+                    const slugValue = slugInput.value || '...';
+                    previewText.textContent = baseUrl + slugValue;
+                }
+            }
+            
+            function generateSlug(text) {
+                return text
+                    .toLowerCase()
+                    .replace(/[^a-z0-9\s\-]/g, '')
+                    .replace(/\s+/g, '-')
+                    .replace(/-+/g, '-')
+                    .replace(/^-|-$/g, '');
+            }
+            
+            if (generateBtn && sourceField) {
+                generateBtn.addEventListener('click', function() {
+                    const sourceValue = sourceField.value;
+                    if (sourceValue) {
+                        slugInput.value = generateSlug(sourceValue);
+                        updatePreview();
+                    }
+                });
+                
+                // Auto-generate on source field change
+                sourceField.addEventListener('input', function() {
+                    if (!slugInput.value || slugInput.value === '...') {
+                        slugInput.value = generateSlug(this.value);
+                        updatePreview();
+                    }
+                });
+            }
+            
+            slugInput.addEventListener('input', function() {
+                this.value = generateSlug(this.value);
+                updatePreview();
+            });
+            
+            updatePreview();
+        });
+        </script>
+
+    {% elif field_type == "social" %}
+        <!-- Social Media URL -->
+        <div class="social-url-group">
+            <div class="social-platforms mb-2">
+                <small class="text-muted">{% trans "Platform seçin:" %}</small>
+                <div class="btn-group-sm mt-1" role="group">
+                    <button type="button" class="btn btn-outline-primary btn-sm platform-btn" 
+                            data-platform="website" data-base="">
+                        <i class="fas fa-globe"></i> {% trans "Website" %}
+                    </button>
+                    <button type="button" class="btn btn-outline-primary btn-sm platform-btn" 
+                            data-platform="facebook" data-base="https://facebook.com/">
+                        <i class="fab fa-facebook"></i> Facebook
+                    </button>
+                    <button type="button" class="btn btn-outline-primary btn-sm platform-btn" 
+                            data-platform="twitter" data-base="https://twitter.com/">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </button>
+                    <button type="button" class="btn btn-outline-primary btn-sm platform-btn" 
+                            data-platform="instagram" data-base="https://instagram.com/">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </button>
+                    <button type="button" class="btn btn-outline-primary btn-sm platform-btn" 
+                            data-platform="linkedin" data-base="https://linkedin.com/in/">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </button>
+                    <button type="button" class="btn btn-outline-primary btn-sm platform-btn" 
+                            data-platform="youtube" data-base="https://youtube.com/c/">
+                        <i class="fab fa-youtube"></i> YouTube
+                    </button>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <span class="input-group-text platform-indicator">
+                    <i class="fas fa-link"></i>
+                </span>
+                <input type="url" 
+                       name="{{ field_name }}" 
+                       class="form-control form-control-modern social-url-input"
+                       value="{{ value }}"
+                       placeholder="https://example.com"
+                       {% if required %}required{% endif %}
+                       {% if attrs %}{% for attr, val in attrs.items %}{{ attr }}="{{ val }}" {% endfor %}{% endif %}>
+            </div>
+        </div>
+        
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlInput = document.querySelector('.social-url-input[name="{{ field_name }}"]');
+            const platformBtns = document.querySelectorAll('.platform-btn');
+            const indicator = document.querySelector('.platform-indicator');
+            
+            platformBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const base = this.dataset.base;
+                    const platform = this.dataset.platform;
+                    
+                    // Update button states
+                    platformBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Update input
+                    if (base) {
+                        urlInput.value = base;
+                        urlInput.placeholder = base + 'kullanici-adi';
+                    } else {
+                        urlInput.placeholder = 'https://example.com';
+                    }
+                    
+                    // Update indicator icon
+                    const icon = this.querySelector('i').className;
+                    indicator.innerHTML = `<i class="${icon}"></i>`;
+                    
+                    urlInput.focus();
+                });
+            });
+        });
+        </script>
+
+    {% else %}
+        <!-- Regular URL -->
+        <div class="input-group">
+            <span class="input-group-text">
+                <i class="fas fa-globe"></i>
+            </span>
+            <input type="url" 
+                   name="{{ field_name }}" 
+                   class="form-control form-control-modern url-input"
+                   value="{{ value }}"
+                   placeholder="{{ placeholder|default:'https://example.com' }}"
+                   {% if required %}required{% endif %}
+                   {% if attrs %}{% for attr, val in attrs.items %}{{ attr }}="{{ val }}" {% endfor %}{% endif %}>
+            {% if validate_url %}
+                <button type="button" class="btn btn-outline-secondary validate-btn" 
+                        title="{% trans 'URL\'yi kontrol et' %}">
+                    <i class="fas fa-check"></i>
+                </button>
+            {% endif %}
+        </div>
+        
+        {% if validate_url %}
+            <div class="url-validation mt-2" style="display: none;">
+                <div class="validation-result"></div>
+            </div>
+            
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const urlInput = document.querySelector('.url-input[name="{{ field_name }}"]');
+                const validateBtn = document.querySelector('.validate-btn');
+                const validationResult = document.querySelector('.validation-result');
+                const validationContainer = document.querySelector('.url-validation');
+                
+                if (validateBtn) {
+                    validateBtn.addEventListener('click', function() {
+                        const url = urlInput.value.trim();
+                        if (!url) return;
+                        
+                        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                        this.disabled = true;
+                        
+                        // Simple URL validation (you can replace with actual validation)
+                        setTimeout(() => {
+                            try {
+                                new URL(url);
+                                validationResult.innerHTML = `
+                                    <div class="alert alert-success alert-sm">
+                                        <i class="fas fa-check-circle me-1"></i>
+                                        {% trans "URL geçerli görünüyor" %}
+                                    </div>
+                                `;
+                            } catch (e) {
+                                validationResult.innerHTML = `
+                                    <div class="alert alert-danger alert-sm">
+                                        <i class="fas fa-exclamation-circle me-1"></i>
+                                        {% trans "URL geçersiz" %}
+                                    </div>
+                                `;
+                            }
+                            
+                            validationContainer.style.display = 'block';
+                            this.innerHTML = '<i class="fas fa-check"></i>';
+                            this.disabled = false;
+                        }, 1000);
+                    });
+                }
+            });
+            </script>
+        {% endif %}
+    {% endif %}
+    
+    {% if help_text %}
+        <small class="text-muted">{{ help_text }}</small>
+    {% endif %}
+    
+    {% if errors %}
+        <div class="form-error">
+            {% for error in errors %}
+                <i class="fas fa-exclamation-circle me-1"></i>{{ error }}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+

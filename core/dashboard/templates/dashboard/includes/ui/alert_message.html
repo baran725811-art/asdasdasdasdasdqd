@@ -1,0 +1,449 @@
+<!-- core\dashboard\templates\dashboard\includes\ui\alert_message.html - Uyarı mesajı -->
+ <!-- Alert Message Component -->
+ {% load i18n %}
+
+<div class="alert alert-{{ type|default:'info' }} alert-dismissible fade show alert-modern {{ extra_classes }}" 
+     role="alert" id="{{ alert_id|default:'' }}" {% if auto_hide %}data-auto-hide="{{ auto_hide }}"{% endif %}>
+    
+    <!-- Alert Icon -->
+    <div class="alert-icon">
+        {% if type == 'success' %}
+            <i class="fas fa-check-circle"></i>
+        {% elif type == 'error' or type == 'danger' %}
+            <i class="fas fa-exclamation-triangle"></i>
+        {% elif type == 'warning' %}
+            <i class="fas fa-exclamation-circle"></i>
+        {% elif type == 'info' %}
+            <i class="fas fa-info-circle"></i>
+        {% else %}
+            <i class="fas fa-bell"></i>
+        {% endif %}
+    </div>
+    
+    <!-- Alert Content -->
+    <div class="alert-content">
+        {% if title %}
+            <div class="alert-title">{{ title }}</div>
+        {% endif %}
+        
+        <div class="alert-message">
+            {{ message|default:'' }}
+            {% if messages %}
+                {% for msg in messages %}
+                    <div class="alert-item">{{ msg }}</div>
+                {% endfor %}
+            {% endif %}
+            {% if block.super %}{{ block.super }}{% endif %}
+        </div>
+        
+        {% if details %}
+            <div class="alert-details">
+                <a href="#" class="alert-details-toggle" onclick="toggleAlertDetails(this)">
+                    <i class="fas fa-chevron-down me-1"></i>{% trans "Detayları Göster" %}
+                </a>
+                <div class="alert-details-content" style="display: none;">
+                    {{ details }}
+                </div>
+            </div>
+        {% endif %}
+        
+        {% if actions %}
+            <div class="alert-actions">
+                {% for action in actions %}
+                    <a href="{{ action.url|default:'#' }}" 
+                       class="btn btn-{{ action.type|default:'outline-primary' }} btn-sm"
+                       {% if action.onclick %}onclick="{{ action.onclick }}"{% endif %}
+                       {% if action.target %}target="{{ action.target }}"{% endif %}>
+                        {% if action.icon %}<i class="{{ action.icon }} me-1"></i>{% endif %}
+                        {{ action.text }}
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    
+    <!-- Close Button -->
+    {% if not no_close %}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{% trans 'Kapat' %}"></button>
+    {% endif %}
+</div>
+
+<style>
+.alert-modern {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.alert-modern::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: currentColor;
+    opacity: 0.8;
+}
+
+.alert-modern.alert-success {
+    background: linear-gradient(135deg, #d1edff 0%, #e8f5e8 100%);
+    color: #155724;
+    border-left-color: #28a745;
+}
+
+.alert-modern.alert-danger,
+.alert-modern.alert-error {
+    background: linear-gradient(135deg, #ffeaea 0%, #ffe6e6 100%);
+    color: #721c24;
+    border-left-color: #dc3545;
+}
+
+.alert-modern.alert-warning {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+    color: #856404;
+    border-left-color: #ffc107;
+}
+
+.alert-modern.alert-info {
+    background: linear-gradient(135deg, #d9ecff 0%, #e6f3ff 100%);
+    color: #0c5460;
+    border-left-color: #17a2b8;
+}
+
+.alert-icon {
+    font-size: 1.25rem;
+    margin-top: 0.125rem;
+    flex-shrink: 0;
+}
+
+.alert-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.alert-title {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.alert-message {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.alert-item {
+    margin: 0.25rem 0;
+}
+
+.alert-details {
+    margin-top: 0.75rem;
+}
+
+.alert-details-toggle {
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.alert-details-toggle:hover {
+    color: inherit;
+    text-decoration: underline;
+}
+
+.alert-details-toggle.expanded i {
+    transform: rotate(180deg);
+}
+
+.alert-details-content {
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.alert-actions {
+    margin-top: 0.75rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.alert-modern .btn-close {
+    position: static;
+    margin: 0;
+    padding: 0.5rem;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+
+.alert-modern .btn-close:hover {
+    opacity: 1;
+}
+
+/* Animation Classes */
+.alert-slide-in {
+    animation: slideInDown 0.3s ease-out;
+}
+
+.alert-fade-in {
+    animation: fadeIn 0.3s ease-out;
+}
+
+.alert-bounce-in {
+    animation: bounceIn 0.5s ease-out;
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 767.98px) {
+    .alert-modern {
+        padding: 0.75rem 1rem;
+        gap: 0.5rem;
+    }
+    
+    .alert-icon {
+        font-size: 1.1rem;
+    }
+    
+    .alert-title {
+        font-size: 0.9rem;
+    }
+    
+    .alert-message {
+        font-size: 0.85rem;
+    }
+    
+    .alert-actions {
+        margin-top: 0.5rem;
+    }
+    
+    .alert-actions .btn {
+        font-size: 0.8rem;
+        padding: 0.25rem 0.5rem;
+    }
+}
+</style>
+
+<script>
+// Alert Component Functions
+function toggleAlertDetails(toggle) {
+    const content = toggle.nextElementSibling;
+    const icon = toggle.querySelector('i');
+    
+    if (content.style.display === 'none') {
+        content.style.display = 'block';
+        toggle.classList.add('expanded');
+        toggle.innerHTML = toggle.innerHTML.replace('Göster', 'Gizle');
+    } else {
+        content.style.display = 'none';
+        toggle.classList.remove('expanded');
+        toggle.innerHTML = toggle.innerHTML.replace('Gizle', 'Göster');
+    }
+}
+
+// Auto-hide functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const autoHideAlerts = document.querySelectorAll('[data-auto-hide]');
+    
+    autoHideAlerts.forEach(alert => {
+        const hideTime = parseInt(alert.dataset.autoHide) || 5000;
+        
+        setTimeout(() => {
+            const bsAlert = new bootstrap.Alert(alert);
+            bsAlert.close();
+        }, hideTime);
+    });
+});
+
+// JavaScript Alert Creation
+class AlertManager {
+    static show(message, type = 'info', options = {}) {
+        const {
+            title = null,
+            details = null,
+            actions = null,
+            autoHide = null,
+            container = null,
+            className = ''
+        } = options;
+        
+        const alertId = 'alert-' + Date.now();
+        const containerEl = container ? document.getElementById(container) : document.body;
+        
+        const alertHTML = `
+            <div class="alert alert-${type} alert-dismissible fade show alert-modern alert-slide-in ${className}" 
+                 role="alert" id="${alertId}" ${autoHide ? `data-auto-hide="${autoHide}"` : ''}>
+                <div class="alert-icon">
+                    ${this.getIcon(type)}
+                </div>
+                <div class="alert-content">
+                    ${title ? `<div class="alert-title">${title}</div>` : ''}
+                    <div class="alert-message">${message}</div>
+                    ${details ? `
+                        <div class="alert-details">
+                            <a href="#" class="alert-details-toggle" onclick="toggleAlertDetails(this)">
+                                <i class="fas fa-chevron-down me-1"></i>Detayları Göster
+                            </a>
+                            <div class="alert-details-content" style="display: none;">
+                                ${details}
+                            </div>
+                        </div>
+                    ` : ''}
+                    ${actions ? `
+                        <div class="alert-actions">
+                            ${actions.map(action => `
+                                <a href="${action.url || '#'}" 
+                                   class="btn btn-${action.type || 'outline-primary'} btn-sm"
+                                   ${action.onclick ? `onclick="${action.onclick}"` : ''}
+                                   ${action.target ? `target="${action.target}"` : ''}>
+                                    ${action.icon ? `<i class="${action.icon} me-1"></i>` : ''}
+                                    ${action.text}
+                                </a>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        `;
+        
+        if (container) {
+            containerEl.insertAdjacentHTML('afterbegin', alertHTML);
+        } else {
+            // Create floating alert container if it doesn't exist
+            let floatingContainer = document.getElementById('floating-alerts');
+            if (!floatingContainer) {
+                floatingContainer = document.createElement('div');
+                floatingContainer.id = 'floating-alerts';
+                floatingContainer.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    z-index: 9999;
+                    max-width: 400px;
+                    pointer-events: none;
+                `;
+                document.body.appendChild(floatingContainer);
+            }
+            
+            const alertEl = document.createElement('div');
+            alertEl.innerHTML = alertHTML;
+            alertEl.style.pointerEvents = 'auto';
+            alertEl.style.marginBottom = '10px';
+            floatingContainer.appendChild(alertEl);
+        }
+        
+        // Auto-hide if specified
+        if (autoHide) {
+            setTimeout(() => {
+                const alertEl = document.getElementById(alertId);
+                if (alertEl) {
+                    const bsAlert = new bootstrap.Alert(alertEl);
+                    bsAlert.close();
+                }
+            }, autoHide);
+        }
+        
+        return alertId;
+    }
+    
+    static getIcon(type) {
+        const icons = {
+            success: '<i class="fas fa-check-circle"></i>',
+            danger: '<i class="fas fa-exclamation-triangle"></i>',
+            error: '<i class="fas fa-exclamation-triangle"></i>',
+            warning: '<i class="fas fa-exclamation-circle"></i>',
+            info: '<i class="fas fa-info-circle"></i>'
+        };
+        return icons[type] || icons.info;
+    }
+    
+    static success(message, options = {}) {
+        return this.show(message, 'success', options);
+    }
+    
+    static error(message, options = {}) {
+        return this.show(message, 'danger', options);
+    }
+    
+    static warning(message, options = {}) {
+        return this.show(message, 'warning', options);
+    }
+    
+    static info(message, options = {}) {
+        return this.show(message, 'info', options);
+    }
+}
+
+// Global shorthand functions
+function showAlert(message, type = 'info', options = {}) {
+    return AlertManager.show(message, type, options);
+}
+
+function showSuccessAlert(message, options = {}) {
+    return AlertManager.success(message, options);
+}
+
+function showErrorAlert(message, options = {}) {
+    return AlertManager.error(message, options);
+}
+
+function showWarningAlert(message, options = {}) {
+    return AlertManager.warning(message, options);
+}
+
+function showInfoAlert(message, options = {}) {
+    return AlertManager.info(message, options);
+}
+</script>
+

@@ -1,0 +1,17 @@
+<!--core\dashboard\templates\dashboard\includes\styles\dashboard_css.html-->
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'dashboard/css/common.css' %}">
+<link rel="stylesheet" href="{% static 'dashboard/css/components/sidebar.css' %}">
+<link rel="stylesheet" href="{% static 'dashboard/css/components/navbar.css' %}">
+<link rel="stylesheet" href="{% static 'dashboard/css/components/notifications.css' %}">
+<link rel="stylesheet" href="{% static 'dashboard/css/components/cards.css' %}">
+<link rel="stylesheet" href="{% static 'dashboard/css/components/tables.css' %}">
+<link rel="stylesheet" href="{% static 'dashboard/css/components/modals.css' %}">
+<link rel="stylesheet" href="{% static 'dashboard/css/components/forms.css' %}">
+<!-- Tema Desteği CSS -->
+<link rel="stylesheet" href="{% static 'dashboard/css/components/theme-support.css' %}">
+
+{% if translation_enabled %}
+<link rel="stylesheet" href="{% static 'dashboard/css/components/translation-system.css' %}">
+{% endif %}

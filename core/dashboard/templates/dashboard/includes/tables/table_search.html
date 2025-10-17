@@ -1,0 +1,9 @@
+<!-- core\dashboard\templates\dashboard\includes\tables\table_search.html - Tablo arama -->
+ {% load i18n %}
+
+<div class="search-box">
+    <i class="fas fa-search"></i>
+    <input type="text" placeholder="{{ search_placeholder|default:'Arama...' }}" 
+           id="{{ search_id|default:'tableSearch' }}"
+           value="{{ search_value|default:'' }}">
+</div>

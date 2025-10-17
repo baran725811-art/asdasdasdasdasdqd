@@ -1,0 +1,137 @@
+<!--core\templates\gallery\sections\featured.html-->
+{% load video_tags %}
+{% load static %}
+{% load i18n %}
+
+<section class="featured-gallery">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">{% trans "Öne Çıkan Çalışmalar" %}</h2>
+            <p class="section-subtitle">{% trans "En beğenilen projelerimizden seçmeler" %}</p>
+        </div>
+        
+        <div class="featured-grid">
+            {% for item in featured_items %}
+            <div class="featured-item" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
+                <div class="featured-badge">
+                    <i class="fas fa-star"></i>
+                    {% trans "Öne Çıkan" %}
+                </div>
+                
+                
+                
+
+
+                <!-- Unified modal system for both image and video -->
+                <div class="featured-media" onclick="openHomeGalleryModal('{{ item.id }}', '{{ item.media_type }}')">
+                    {% if item.media_type == 'image' %}
+                        {% load image_tags %}
+                        {% gallery_card_image item 'featured-image' %}
+                        <div class="media-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                    
+                    {% elif item.media_type == 'video' %}
+                        {% if item.video %}
+                            <div class="video-preview-container">
+                                <video muted preload="metadata" poster="/static/images/video-placeholder.jpg">
+                                    <source src="{{ item.video.url }}" type="video/mp4">
+                                </video>
+                                <div class="video-play-overlay">
+                                    <i class="fas fa-play-circle"></i>
+                                </div>
+                            </div>
+                        {% elif item.video_url %}
+                            <div class="video-thumbnail" 
+                                 style="background-image: url('{% if "youtube" in item.video_url %}https://img.youtube.com/vi/{{ item.get_youtube_embed_url|cut:"https://www.youtube.com/embed/" }}/maxresdefault.jpg{% else %}/static/images/video-placeholder.jpg{% endif %}'); background-size: cover; background-position: center;"></div>
+                        {% endif %}
+                        <div class="media-overlay video-overlay">
+                            <div class="overlay-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Hidden data for JavaScript -->
+                <!-- Hidden data for JavaScript -->
+                {% load image_tags %}
+                <script type="application/json" id="featured-gallery-data-{{ item.id }}">
+                {
+                    "id": "{{ item.id }}",
+                    "type": "{{ item.media_type }}",
+                    "title": "{{ item.title|escapejs }}",
+                    "description": "{{ item.description|escapejs }}",
+                    "date": "{{ item.created_at|date:'d.m.Y' }}",
+                    {% if item.media_type == 'image' %}
+                    "imageUrl": "{{ item.image.url }}",
+                    "originalImageUrl": "{% original_image_url item.image %}",
+                    "modalImageUrl": "{% original_image_url item.image %}",
+                    "altText": "{{ item.alt_text|default:item.title|escapejs }}"
+                    {% elif item.media_type == 'video' %}
+                    {% if item.video %}
+                    "videoUrl": "{{ item.video.url }}",
+                    "videoType": "file"
+                    {% elif item.video_url %}
+                    "videoUrl": "{{ item.video_url }}",
+                    {% if item.is_youtube_video %}
+                    "videoType": "youtube",
+                    "embedUrl": "{{ item.get_youtube_embed_url }}"
+                    {% elif item.is_vimeo_video %}
+                    "videoType": "vimeo",
+                    "embedUrl": "{{ item.get_vimeo_embed_url }}"
+                    {% else %}
+                    "videoType": "external"
+                    {% endif %}
+                    {% endif %}
+                    {% endif %}
+                }
+                </script>
+
+
+
+
+                
+                <div class="featured-content">
+                    <h3 class="featured-title">{{ item.title }}</h3>
+                    <p class="featured-description">{{ item.description|truncatewords:15 }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Home Gallery Modal (Featured Items) -->
+<div id="homeGalleryModal" class="image-modal">
+    <div class="image-modal-backdrop" onclick="closeHomeGalleryModal()"></div>
+    <div class="image-modal-container" id="homeModalContainer">
+        <div class="image-modal-header">
+            <h3 class="image-modal-title" id="homeModalTitle"></h3>
+            <button class="image-modal-close" onclick="closeHomeGalleryModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="image-modal-body" id="homeModalContent"></div>
+        <div class="image-modal-info" id="homeModalInfo">
+            <p class="image-modal-description" id="homeModalDescription"></p>
+            <div class="image-modal-meta">
+                <span class="modal-date" id="homeModalDate"></span>
+                <span class="modal-category" id="homeModalType"></span>
+            </div>
+        </div>
+        <div class="image-modal-footer">
+            <button class="image-modal-nav" id="homePrevBtn" onclick="navigateHomeGallery('prev')">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="image-modal-counter">
+                <span id="homeModalCurrentIndex">1</span> / <span id="homeModalTotal">1</span>
+            </div>
+            <button class="image-modal-nav" id="homeNextBtn" onclick="navigateHomeGallery('next')">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+{% load static %}
+{% load i18n %}
+
+<section class="about-statistics">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="stat-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <div class="stat-number" data-counter="{{ about.years_experience }}">0</div>
+                <div class="stat-label">{% trans "Yıl Deneyim" %}</div>
+            </div>
+            
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <div class="stat-number" data-counter="{{ about.completed_jobs }}">0</div>
+                <div class="stat-label">{% trans "Tamamlanan İş" %}</div>
+            </div>
+            
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-number" data-counter="{{ about.happy_customers }}">0</div>
+                <div class="stat-label">{% trans "Mutlu Müşteri" %}</div>
+            </div>
+            
+            <div class="stat-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="stat-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="stat-number" data-counter="{{ about.customer_satisfaction }}">0</div>
+                <div class="stat-label">{% trans "Memnuniyet" %}</div>
+            </div>
+        </div>
+    </div>
+</section>

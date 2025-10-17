@@ -1,0 +1,27 @@
+<!-- core\dashboard\templates\dashboard\includes\navigation\breadcrumb.html - Breadcrumb -->
+ <!-- Modern Breadcrumb Component -->
+<nav aria-label="breadcrumb" class="breadcrumb-modern">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{% url 'dashboard:home' %}">
+                <i class="fas fa-home me-1"></i>{% trans "Ana Sayfa" %}
+            </a>
+        </li>
+        
+        {% for crumb in breadcrumbs %}
+        <li class="breadcrumb-item {% if forloop.last %}active{% endif %}" 
+            {% if forloop.last %}aria-current="page"{% endif %}>
+            {% if not forloop.last and crumb.url %}
+                <a href="{{ crumb.url }}">
+                    {% if crumb.icon %}<i class="{{ crumb.icon }} me-1"></i>{% endif %}
+                    {{ crumb.title }}
+                </a>
+            {% else %}
+                {% if crumb.icon %}<i class="{{ crumb.icon }} me-1"></i>{% endif %}
+                {{ crumb.title }}
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ol>
+</nav>
+

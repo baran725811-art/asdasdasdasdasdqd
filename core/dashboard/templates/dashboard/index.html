@@ -1,0 +1,275 @@
+<!--core\dashboard\templates\dashboard\index.html-->
+{% extends 'dashboard/base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "Ana Sayfa" %}{% endblock %}
+
+{% block page_title %}{{ site_settings.site_name }}{% endblock %}
+
+
+
+
+{% block content %}
+<div class="container-fluid">
+    
+    
+    <!-- Statistics Cards - 4'lü Grid -->
+    <div class="row g-4 mb-4">
+        <div class="col-xl-6 col-lg-6 col-md-6">
+            {% include 'dashboard/includes/cards/stats_card.html' with card_style="modern" card_color="primary" card_icon="fas fa-box-open" card_value=total_products|default:0 card_label="Toplam Ürün" card_subtitle="+2.5%" %}
+        </div>
+        
+        <div class="col-xl-6 col-lg-6 col-md-6">
+            {% include 'dashboard/includes/cards/stats_card.html' with card_style="modern" card_color="success" card_icon="fas fa-tags" card_value=total_categories|default:0 card_label="Kategoriler" card_subtitle="+1.2%" %}
+        </div>
+        
+        <div class="col-xl-6 col-lg-6 col-md-6">
+            {% include 'dashboard/includes/cards/stats_card.html' with card_style="modern" card_color="info" card_icon="fas fa-comments" card_value=total_reviews|default:0 card_label="Müşteri Yorumları" card_subtitle="+5.8%" %}
+        </div>
+        
+        <div class="col-xl-6 col-lg-6 col-md-6">
+            {% include 'dashboard/includes/cards/stats_card.html' with card_style="modern" card_color="warning" card_icon="fas fa-newspaper" card_value=total_media_mentions|default:0 card_label="Basın Haberleri" card_subtitle="+3.1%" %}
+        </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="row g-4 mb-4">
+        <div class="col-lg-8">
+            {% include 'dashboard/includes/cards/chart_card.html' with show_header=True header_icon="fas fa-chart-line" header_title="Aylık İstatistikler" show_period_selector=True chart_id="monthlyChart" chart_height="300" %}
+        </div>
+        
+        <div class="col-lg-4">
+            <div class="card-modern">
+                <div class="card-header-modern">
+                    <h5 class="mb-0">
+                        <i class="fas fa-chart-pie me-2"></i>{% trans "Kategori Dağılımı"%}
+                    </h5>
+                </div>
+                <div class="card-body-modern">
+                    <div class="chart-container">
+                        <canvas id="categoryChart" style="height: 300px;"></canvas>
+                    </div>
+
+                    <!-- Kategori Detayları Butonu -->
+                    <div class="text-center mt-4">
+                        <button class="btn-modern primary-outline" data-bs-toggle="modal" data-bs-target="#categoryDetailModal">
+                            <i class="fas fa-chart-pie me-2"></i>
+                            <span>{% trans "Detayları Görüntüle" %}</span>
+                            <i class="fas fa-arrow-right ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Kategori Detayları -->
+    <div class="modal fade" id="categoryDetailModal" tabindex="-1" aria-labelledby="categoryDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
+            <div class="modal-content modern-modal">
+                <div class="modal-header modern-modal-header">
+                    <div class="modal-title-wrapper">
+                        <div class="modal-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div>
+                            <h5 class="modal-title" id="categoryDetailModalLabel">{% trans "Kategori Analizi" %}</h5>
+                            <p class="modal-subtitle">{% trans "Tüm kategorilerin detaylı ürün dağılımı" %}</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close-modern" data-bs-dismiss="modal" aria-label="{% trans 'Kapat' %}">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="modal-body modern-modal-body">
+                    <div class="category-stats-header">
+                        <div class="stats-summary">
+                            <div class="summary-item">
+                                <span class="summary-number">{{ categories_with_counts|length }}</span>
+                                <span class="summary-label">{% trans "Toplam Kategori" %}</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-number">{{ total_products|default:0 }}</span>
+                                <span class="summary-label">{% trans "Toplam Ürün" %}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="category-list-modern">
+                        {% for category in categories_with_counts %}
+                        <div class="category-item-modern">
+                            <div class="category-info">
+                                <div class="category-color-indicator" 
+                                     style="background: {% cycle 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)' 'linear-gradient(135deg, #fc466b 0%, #3f5efb 100%)' 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)' 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)' %};">
+                                </div>
+                                <div class="category-details">
+                                    <h6 class="category-name">{{ category.name }}</h6>
+                                    <div class="category-progress">
+                                        <div class="progress-bar-modern">
+                                            <div class="progress-fill" style="width: {% widthratio category.product_count total_products 100 %}%;
+                                                 background: {% cycle 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)' 'linear-gradient(135deg, #fc466b 0%, #3f5efb 100%)' 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)' 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)' %};"></div>
+                                        </div>
+                                        <span class="progress-text">{% widthratio category.product_count total_products 100 %}%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="category-count">
+                                <span class="count-badge">{{ category.product_count }}</span>
+                                <small class="count-label">{% trans "ürün" %}</small>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="empty-state">
+                            <div class="empty-icon">
+                                <i class="fas fa-folder-open"></i>
+                            </div>
+                            <h6>{% trans "Henüz kategori bulunmuyor" %}</h6>
+                            <p class="text-muted">{% trans "İlk kategorinizi oluşturmak için ürün ekleme sayfasına gidin." %}</p>
+                            <a href="{% url 'dashboard:dashboard_products' %}" class="btn-modern primary btn-sm">
+                                <i class="fas fa-plus me-1"></i>{% trans "Ürün Ekle" %}
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="modal-footer modern-modal-footer">
+                    <button type="button" class="btn-modern secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-arrow-left me-1"></i>{% trans "Geri Dön" %}
+                    </button>
+                    <a href="{% url 'dashboard:dashboard_products' %}" class="btn-modern primary">
+                        <i class="fas fa-cog me-1"></i>{% trans "Kategori Yönet" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity & Quick Stats -->
+    <div class="row g-4">
+        <div class="col-lg-8">
+            {% include 'dashboard/includes/cards/activity_card.html' with show_header=True header_title="Son Aktiviteler" activities=recent_activities show_view_all=True view_all_url=activities_url %}
+        </div>
+        
+        <div class="col-lg-4">
+            {% include 'dashboard/includes/navigation/quick_actions.html' with section_title="Hızlı Erişim" actions=quick_actions %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'dashboard/css/pages/dashboard.css' %}">
+<link rel="stylesheet" href="{% static 'dashboard/css/pages/charts.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+<!-- Local Chart.js dosyası -->
+<script src="{% static 'dashboard/js/vendor/chart.min.js' %}"></script>
+
+<!-- Grafik verilerini JavaScript'e aktar -->
+
+<script>
+window.monthlyStatsData = {
+    labels: [{% for stat in monthly_stats %}'{{ stat.month_short }}'{% if not forloop.last %},{% endif %}{% endfor %}],
+    datasets: [
+        {
+            label: 'Ürünler',
+            data: [{% for stat in monthly_stats %}{{ stat.products }}{% if not forloop.last %},{% endif %}{% endfor %}],
+            borderColor: 'rgba(102, 126, 234, 1)',
+            backgroundColor: 'rgba(102, 126, 234, 0.1)',
+            tension: 0.4,
+            fill: true,
+            pointBackgroundColor: 'rgba(102, 126, 234, 1)',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            pointRadius: 6
+        },
+        {
+            label: 'Yorumlar',
+            data: [{% for stat in monthly_stats %}{{ stat.reviews }}{% if not forloop.last %},{% endif %}{% endfor %}],
+            borderColor: 'rgba(17, 153, 142, 1)',
+            backgroundColor: 'rgba(17, 153, 142, 0.1)',
+            tension: 0.4,
+            fill: true,
+            pointBackgroundColor: 'rgba(17, 153, 142, 1)',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            pointRadius: 6
+        },
+        {
+            label: 'Mesajlar',
+            data: [{% for stat in monthly_stats %}{{ stat.messages }}{% if not forloop.last %},{% endif %}{% endfor %}],
+            borderColor: 'rgba(255, 193, 7, 1)',
+            backgroundColor: 'rgba(255, 193, 7, 0.1)',
+            tension: 0.4,
+            fill: true,
+            pointBackgroundColor: 'rgba(255, 193, 7, 1)',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            pointRadius: 6
+        }
+    ]
+};
+
+// DEBUG: Veri kontrol
+console.log('=== MONTHLY DATA DEBUG ===');
+console.log('Labels:', window.monthlyStatsData.labels);
+console.log('Ürünler:', window.monthlyStatsData.datasets[0].data);
+console.log('Yorumlar:', window.monthlyStatsData.datasets[1].data);
+console.log('Mesajlar:', window.monthlyStatsData.datasets[2].data);
+
+
+window.categoryStatsData = {
+    labels: [{% for category in categories_with_counts %}'{{ category.name }}'{% if not forloop.last %},{% endif %}{% endfor %}],
+    datasets: [{
+        data: [{% for category in categories_with_counts %}{{ category.product_count }}{% if not forloop.last %},{% endif %}{% endfor %}],
+        backgroundColor: [
+            'rgba(102, 126, 234, 0.8)',
+            'rgba(17, 153, 142, 0.8)',
+            'rgba(32, 156, 255, 0.8)',
+            'rgba(247, 151, 30, 0.8)',
+            'rgba(252, 70, 107, 0.8)',
+            'rgba(153, 102, 255, 0.8)',
+            'rgba(75, 192, 192, 0.8)',
+            'rgba(255, 159, 64, 0.8)'
+        ].slice(0, {{ categories_with_counts|length }}),
+        borderColor: [
+            'rgba(102, 126, 234, 1)',
+            'rgba(17, 153, 142, 1)',
+            'rgba(32, 156, 255, 1)',
+            'rgba(247, 151, 30, 1)',
+            'rgba(252, 70, 107, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(255, 159, 64, 1)'
+        ].slice(0, {{ categories_with_counts|length }}),
+        borderWidth: 2
+    }]
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Tema değişikliğini dinle
+    document.addEventListener('themeChanged', function(e) {
+        console.log('🎨 Theme changed event received:', e.detail);
+        
+        // Sayfa yenile trigger et (gerekirse)
+        setTimeout(() => {
+            // Force style recalculation
+            document.body.style.display = 'none';
+            document.body.offsetHeight; // Force reflow
+            document.body.style.display = '';
+        }, 100);
+    });
+});
+</script>
+
+<script src="{% static 'dashboard/js/pages/dashboard.js' %}"></script>
+<script src="{% static 'dashboard/js/pages/charts.js' %}"></script>
+{% endblock %}

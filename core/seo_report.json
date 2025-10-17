@@ -1,0 +1,90 @@
+{
+  "timestamp": "2025-09-09T22:04:43.270508",
+  "site_health": {
+    "database_connected": true,
+    "cache_working": false,
+    "admin_accessible": true,
+    "errors": []
+  },
+  "seo_scores": {
+    "overall_score": 44,
+    "technical_score": 75,
+    "content_score": 0,
+    "performance_score": 45,
+    "breakdown": {
+      "products": 0,
+      "categories": 0,
+      "gallery_items": 0,
+      "https_enabled": false,
+      "cache_enabled": false,
+      "compression_enabled": false
+    }
+  },
+  "technical_seo": {
+    "sitemap_status": "valid",
+    "robots_txt_status": "complete",
+    "https_enabled": false,
+    "issues": []
+  },
+  "content_analysis": {
+    "total_pages": 0,
+    "pages_with_meta_desc": 0,
+    "pages_with_meta_title": 0,
+    "missing_alt_texts": 0,
+    "recommendations": []
+  },
+  "performance": {
+    "cache_enabled": false,
+    "compression_enabled": false,
+    "static_optimization": true,
+    "avg_response_time": 5.98,
+    "recommendations": [
+      "Cache sistemi aktifleştirin",
+      "CSS/JS compression aktifleştirin"
+    ]
+  },
+  "issues": [
+    "WARNING: Cache çalışmıyor",
+    "CRITICAL: SEO skoru çok düşük",
+    "CRITICAL: HTTPS aktif değil"
+  ],
+  "recommendations": [
+    "Temel SEO optimizasyonları yapın",
+    "HTTPS kurun",
+    "Cache sistemi aktifleştirin",
+    "CSS/JS compression aktifleştirin"
+  ],
+  "url_check": {
+    "total_urls": 6,
+    "working_urls": 0,
+    "broken_urls": 6,
+    "slow_urls": 0,
+    "broken_list": [
+      {
+        "url": "/",
+        "status_code": 302
+      },
+      {
+        "url": "/admin/",
+        "status_code": 302
+      },
+      {
+        "url": "/urunler/",
+        "status_code": 302
+      },
+      {
+        "url": "/galeri/",
+        "status_code": 302
+      },
+      {
+        "url": "/hakkimizda/",
+        "status_code": 302
+      },
+      {
+        "url": "/iletisim/",
+        "status_code": 302
+      }
+    ],
+    "slow_list": []
+  }
+}

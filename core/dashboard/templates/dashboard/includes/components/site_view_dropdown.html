@@ -1,0 +1,53 @@
+<!-- dashboard/templates/dashboard/includes/components/site_view_dropdown.html -->
+{% load i18n %}
+
+<div class="dropdown">
+    <button class="btn btn-success dropdown-toggle btn-sm" type="button" id="siteViewDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fas fa-external-link-alt me-1"></i>{% trans "Siteyi Görüntüle"%}
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="siteViewDropdown">
+        <li>
+            <a class="dropdown-item" href="/{{ user_primary_language|default:'tr' }}/" target="_blank">
+                <i class="fas fa-star me-2"></i>{% trans "Ana Dilde Görüntüle" %} ({{ user_primary_language|default:'TR'|upper }})
+            </a>
+        </li>
+        {% if site_enabled_languages|length > 1 %}
+            <li><hr class="dropdown-divider"></li>
+            <li class="dropdown-header">{% trans "Diğer Dillerde:" %}</li>
+            {% for lang in site_enabled_languages %}
+                {% if lang != user_primary_language %}
+                <li>
+                    <a class="dropdown-item" href="/{{ lang }}/" target="_blank">
+                        {% if lang == 'en' %}🇺🇸 English
+                        {% elif lang == 'de' %}🇩🇪 Deutsch
+                        {% elif lang == 'fr' %}🇫🇷 Français
+                        {% elif lang == 'es' %}🇪🇸 Español
+                        {% elif lang == 'ru' %}🇷🇺 Русский
+                        {% elif lang == 'ar' %}🇸🇦 العربية
+                        {% elif lang == 'tr' %}🇹🇷 Türkçe
+                        {% else %}{{ lang|upper }}
+                        {% endif %}
+                    </a>
+                </li>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item" href="/en/" target="_blank">
+                    🇺🇸 English
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="/de/" target="_blank">
+                    🇩🇪 Deutsch
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="/fr/" target="_blank">
+                    🇫🇷 Français
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</div>

@@ -1,0 +1,46 @@
+<!-- templates/admin/widgets/image_crop_widget.html -->
+<div class="image-crop-container" data-field-name="{{ widget.name }}" data-crop-type="{{ widget.crop_type }}">
+    {% include "django/forms/widgets/clearable_file_input.html" %}
+    
+    <!-- Crop Modal -->
+    <div class="crop-modal" id="cropModal_{{ widget.name }}" style="display: none;">
+        <div class="crop-modal-content">
+            <div class="crop-header">
+                <h3>Resmi Kırp - {{ widget.crop_type|title }}</h3>
+                <button type="button" class="crop-close" onclick="closeCropModal('{{ widget.name }}')">&times;</button>
+            </div>
+            
+            <div class="crop-body">
+                <div class="crop-info">
+                    <p>Resmi istediğiniz boyutta kırpın</p>
+                </div>
+                
+                <div class="crop-preview-container">
+                    <div class="crop-original">
+                        <h4>Orijinal</h4>
+                        <img id="cropImage_{{ widget.name }}" style="max-width: 100%; max-height: 400px;">
+                    </div>
+                    
+                    <div class="crop-result">
+                        <h4>Kırpılacak Alan</h4>
+                        <div class="crop-preview" id="cropPreview_{{ widget.name }}">Kırpma alanını seçin</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="crop-footer">
+                <button type="button" class="btn-crop-cancel" onclick="closeCropModal('{{ widget.name }}')">İptal</button>
+                <button type="button" class="btn-crop-apply" onclick="applyCrop('{{ widget.name }}')">Kırpmayı Uygula</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Crop data storage -->
+    <input type="hidden" id="cropData_{{ widget.name }}" name="{{ widget.name }}_crop_data" value="">
+</div>
+
+<script>
+// Crop oranı konfigürasyonu
+window.cropConfigs = window.cropConfigs || {};
+window.cropConfigs['{{ widget.name }}'] = {{ widget.ratio_config|safe }};
+</script>

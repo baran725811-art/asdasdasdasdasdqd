@@ -1,0 +1,39 @@
+{% load static %}
+{% load i18n %}
+
+<section class="categories-preview">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">{% trans "Kategoriler" %}</h2>
+            <p class="section-subtitle">{% trans "Ürün kategorilerimizi keşfedin" %}</p>
+        </div>
+        
+        <div class="categories-grid">
+            {% for category in categories %}
+            <a href="{% url 'products:product_list' %}?category={{ category.slug }}" 
+               class="category-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
+                <div class="category-image">
+                    {% if category.image %}
+                    <img src="{{ category.image.url }}" alt="{{ category.alt_text|default:category.name }}" loading="lazy">
+                    {% else %}
+                    <div class="category-placeholder">
+                        <i class="fas fa-folder"></i>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="category-content">
+                    <h3 class="category-name">{{ category.name }}</h3>
+                    <span class="category-count">{{ category.product_count }} {% trans "ürün" %}</span>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        
+        <div class="categories-cta" data-aos="fade-up">
+            <a href="{% url 'products:category_list' %}" class="btn btn-secondary">
+                {% trans "Tüm Kategorileri Gör" %}
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>

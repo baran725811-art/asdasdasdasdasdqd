@@ -1,0 +1,108 @@
+{% load i18n %}
+
+<!-- Mobile Breadcrumb - Compact Version -->
+<nav aria-label="{% trans 'Mobil sayfa navigasyonu' %}" class="mobile-breadcrumb d-md-none">
+    <div class="container">
+        <div class="mobile-breadcrumb-content">
+            {% if show_ellipsis %}
+                <span class="breadcrumb-ellipsis">
+                    <i class="fas fa-ellipsis-h me-2"></i>
+                    <small class="text-muted">({{ total_count }} seviye)</small>
+                </span>
+            {% endif %}
+            
+            <ol class="breadcrumb-mobile">
+                {% for breadcrumb in breadcrumbs %}
+                <li class="breadcrumb-mobile-item{% if breadcrumb.is_current %} current{% endif %}">
+                    {% if not breadcrumb.is_current %}
+                    <a href="{{ breadcrumb.url }}" class="breadcrumb-mobile-link">
+                        {% if forloop.first %}
+                            <i class="fas fa-home me-1"></i>
+                        {% endif %}
+                        {{ breadcrumb.name|truncate:20 }}
+                    </a>
+                    {% else %}
+                    <span class="current-page">{{ breadcrumb.name|truncate:25 }}</span>
+                    {% endif %}
+                    
+                    {% if not forloop.last %}
+                    <i class="fas fa-chevron-right mx-2 text-muted"></i>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+</nav>
+
+<style>
+.mobile-breadcrumb {
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    padding: 0.75rem 0;
+    font-size: 0.8rem;
+}
+
+.mobile-breadcrumb-content {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 0.25rem;
+}
+
+.breadcrumb-mobile {
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    white-space: nowrap;
+}
+
+.breadcrumb-mobile-item {
+    display: inline-flex;
+    align-items: center;
+}
+
+.breadcrumb-mobile-link {
+    color: var(--primary-color, #007bff);
+    text-decoration: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.breadcrumb-mobile-link:hover {
+    background-color: rgba(0,123,255,0.1);
+    text-decoration: none;
+}
+
+.current-page {
+    font-weight: 600;
+    color: #495057;
+    padding: 0.25rem 0.5rem;
+}
+
+.breadcrumb-ellipsis {
+    color: #6c757d;
+    margin-right: 1rem;
+    font-size: 0.75rem;
+}
+
+/* Horizontal scroll styling */
+.mobile-breadcrumb-content::-webkit-scrollbar {
+    height: 3px;
+}
+
+.mobile-breadcrumb-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.mobile-breadcrumb-content::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 2px;
+}
+
+.mobile-breadcrumb-content::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
+}
+</style>

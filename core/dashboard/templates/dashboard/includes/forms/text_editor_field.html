@@ -1,0 +1,87 @@
+<!--core\dashboard\templates\dashboard\includes\forms\text_editor_field.html - Rich text editor -->
+{% load i18n %}
+
+<div class="mb-3">
+    <label class="form-label-modern">
+        <i class="fas fa-edit"></i>{{ label|default:"Metin" }}
+        {% if required %}<span class="text-danger">*</span>{% endif %}
+    </label>
+    
+    {% if editor_type == "rich" %}
+        <!-- Rich Text Editor -->
+        <div class="editor-container">
+            <div class="editor-toolbar">
+                <div class="toolbar-group">
+                    <button type="button" class="toolbar-btn" data-action="bold" title="{% trans 'Kalın' %}">
+                        <i class="fas fa-bold"></i>
+                    </button>
+                    <button type="button" class="toolbar-btn" data-action="italic" title="{% trans 'İtalik' %}">
+                        <i class="fas fa-italic"></i>
+                    </button>
+                    <button type="button" class="toolbar-btn" data-action="underline" title="{% trans 'Altı Çizgili' %}">
+                        <i class="fas fa-underline"></i>
+                    </button>
+                </div>
+                <div class="toolbar-group">
+                    <button type="button" class="toolbar-btn" data-action="justifyLeft" title="{% trans 'Sola Hizala' %}">
+                        <i class="fas fa-align-left"></i>
+                    </button>
+                    <button type="button" class="toolbar-btn" data-action="justifyCenter" title="{% trans 'Ortala' %}">
+                        <i class="fas fa-align-center"></i>
+                    </button>
+                    <button type="button" class="toolbar-btn" data-action="justifyRight" title="{% trans 'Sağa Hizala' %}">
+                        <i class="fas fa-align-right"></i>
+                    </button>
+                </div>
+                <div class="toolbar-group">
+                    <button type="button" class="toolbar-btn" data-action="insertUnorderedList" title="{% trans 'Madde İşareti' %}">
+                        <i class="fas fa-list-ul"></i>
+                    </button>
+                    <button type="button" class="toolbar-btn" data-action="insertOrderedList" title="{% trans 'Numaralı Liste' %}">
+                        <i class="fas fa-list-ol"></i>
+                    </button>
+                </div>
+            </div>
+            <div contenteditable="true" 
+                 class="form-control form-control-modern content-editor" 
+                 id="{{ field_id|default:field_name }}"
+                 data-field-name="{{ field_name }}"
+                 style="min-height: {{ min_height|default:'120px' }};">
+                {{ value|default:"" }}
+            </div>
+            <textarea name="{{ field_name }}" 
+                      class="d-none" 
+                      {% if required %}required{% endif %}
+                      {% if attrs %}{% for attr, val in attrs.items %}{{ attr }}="{{ val }}" {% endfor %}{% endif %}>{{ value|default:"" }}</textarea>
+        </div>
+    {% else %}
+        <!-- Simple Textarea -->
+        <textarea name="{{ field_name }}" 
+                  class="form-control form-control-modern" 
+                  rows="{{ rows|default:'4' }}"
+                  placeholder="{{ placeholder|default:'' }}"
+                  {% if required %}required{% endif %}
+                  {% if maxlength %}maxlength="{{ maxlength }}"{% endif %}
+                  {% if attrs %}{% for attr, val in attrs.items %}{{ attr }}="{{ val }}" {% endfor %}{% endif %}>{{ value|default:"" }}</textarea>
+    {% endif %}
+    
+    {% if help_text %}
+        <small class="text-muted">{{ help_text }}</small>
+    {% endif %}
+    
+    {% if maxlength %}
+        <div class="text-end">
+            <small class="text-muted">
+                <span class="char-counter">{{ value|length|default:0 }}</span>/{{ maxlength }}
+            </small>
+        </div>
+    {% endif %}
+    
+    {% if errors %}
+        <div class="form-error">
+            {% for error in errors %}
+                <i class="fas fa-exclamation-circle me-1"></i>{{ error }}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>

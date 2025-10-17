@@ -1,0 +1,56 @@
+<!-- dashboard/templates/dashboard/base/list_base.html -->
+{% extends 'dashboard/base/dashboard_base.html' %}
+{% load i18n %}
+
+{% block page_content %}
+    <!-- Filters -->
+    {% if show_filters %}
+        {% include 'dashboard/includes/navigation/filter_section.html' %}
+    {% endif %}
+
+    <!-- Loading Spinner -->
+    {% if show_loading %}
+        {% include 'dashboard/includes/ui/loading_spinner.html' with spinner_id='listLoadingSpinner' container_class='overlay' %}
+    {% endif %}
+
+    <!-- Main Table/List -->
+    {% if table_data %}
+        {% include 'dashboard/includes/tables/modern_table.html' %}
+    {% elif show_grid %}
+        <div class="row g-4">
+            {% block grid_content %}
+            <!-- Grid items will be rendered here -->
+            {% endblock %}
+        </div>
+    {% endif %}
+
+    <!-- Empty State -->
+    {% if show_empty_state %}
+        {% include 'dashboard/includes/ui/empty_state.html' %}
+    {% endif %}
+
+    <!-- Modals -->
+    {% block list_modals %}
+    <!-- Add Modal -->
+    {% if add_modal_enabled %}
+        {% include 'dashboard/includes/modals/crud_modal_base.html' with modal_id='addModal' modal_title=add_modal_title form_action=add_form_action %}
+    {% endif %}
+
+    <!-- Edit Modals -->
+    {% for item in items %}
+        {% if edit_modal_enabled %}
+            {% include 'dashboard/includes/modals/crud_modal_base.html' with modal_id='editModal'|add:item.id modal_title=edit_modal_title form_action=edit_form_action %}
+        {% endif %}
+
+        <!-- Delete Modals -->
+        {% if delete_modal_enabled %}
+            {% include 'dashboard/includes/modals/delete_confirmation.html' with modal_id='deleteModal'|add:item.id item_name=item.name delete_action=delete_form_action %}
+        {% endif %}
+    {% endfor %}
+
+    <!-- Bulk Actions Modal -->
+    {% if bulk_actions_enabled %}
+        {% include 'dashboard/includes/modals/bulk_actions_modal.html' %}
+    {% endif %}
+    {% endblock %}
+{% endblock %}

@@ -1,0 +1,23 @@
+<!-- core\dashboard\templates\dashboard\includes\cards\stats_card.html - İstatistik kartı -->
+{% load i18n %}
+
+<div class="stat-card {{ card_style|default:'modern' }} {{ card_color|default:'primary' }}">
+    <div class="stat-icon">
+        <i class="{{ card_icon }}"></i>
+    </div>
+    <div class="stat-content">
+        <h3 class="stat-number" {% if count_animation %}data-count="{{ card_value }}"{% endif %}>
+            {{ card_value }}
+        </h3>
+        <p class="stat-label">{{ card_label }}</p>
+        {% if card_subtitle %}
+            <small class="text-muted">{{ card_subtitle }}</small>
+        {% endif %}
+    </div>
+    {% if card_status %}
+        <div class="status-indicator mt-2">
+            <div class="status-dot {{ card_status.color }}"></div>
+            <small class="text-muted">{{ card_status.text }}</small>
+        </div>
+    {% endif %}
+</div>

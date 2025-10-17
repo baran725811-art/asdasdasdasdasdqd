@@ -1,0 +1,181 @@
+<!--core\templates\products\sections\product_detail.html-->
+{% load static %}
+{% load i18n %}
+<section class="product-detail-section">
+    <div class="container">
+        <div class="product-detail-wrapper">
+            <!-- Product Image -->
+            <div class="product-image-section" data-aos="fade-right">
+                <div class="main-image">
+                    {% if product.image %}
+                    {% load image_tags %}
+                    <!-- Küçük görsel (focal point'li) -->
+                    <div onclick="openProductModal()">
+                        {% product_card_image product 'main-product-image' %}
+                    </div>
+                                        
+                    <!-- Modal için hidden tam boyut resim -->
+                    <script type="application/json" id="product-modal-data">
+                    {
+                        "originalImageUrl": "{% original_image_url product.image %}",
+                        "title": "{{ product.name|escapejs }}",
+                        "description": "{{ product.short_description|default:''|escapejs }}"
+                    }
+                    </script>
+                    {% else %}
+                    <div class="image-placeholder">
+                        <i class="fas fa-image"></i>
+                        <p>{% trans "Görsel Yok" %}</p>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                {% if product.has_discount %}
+                <div class="discount-badge">
+                    -%{{ product.get_discount_percentage }}
+                </div>
+                {% endif %}
+                
+                {% if product.is_featured %}
+                <div class="featured-badge">
+                    <i class="fas fa-star"></i>
+                    {% trans "Öne Çıkan" %}
+                </div>
+                {% endif %}
+            </div>
+            <!-- Product Info -->
+            <div class="product-info-section" data-aos="fade-left">
+                <div class="product-header">
+                    <div class="category-tag">{{ product.category.name }}</div>
+                    <h1 class="product-title">{{ product.name }}</h1>
+                    {% if product.brand %}
+                    <div class="product-brand">{% trans "Marka" %}: {{ product.brand }}</div>
+                    {% endif %}
+                </div>
+                {% if product.price %}
+                <div class="price-section">
+                    {% if product.has_discount %}
+                    <div class="price-with-discount">
+                        <span class="original-price">{{ product.price }} ₺</span>
+                        <span class="current-price">{{ product.discount_price }} ₺</span>
+                        <span class="savings">{{ product.price|floatformat:0|add:"-"|add:product.discount_price|floatformat:0 }} ₺ {% trans "tasarruf" %}</span>
+                    </div>
+                    {% else %}
+                    <div class="current-price">{{ product.price }} ₺</div>
+                    {% endif %}
+                </div>
+                {% endif %}
+                {% if product.short_description %}
+                <div class="short-description">
+                    {{ product.short_description }}
+                </div>
+                {% endif %}
+                <div class="product-features">
+                    {% if product.sku %}
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-barcode"></i>
+                        </div>
+                        <div class="feature-content">
+                            <span class="feature-label">{% trans "Ürün Kodu" %}</span>
+                            <span class="feature-value">{{ product.sku }}</span>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if product.stock is not None %}
+                    <div class="feature-item stock-info">
+                        <div class="feature-icon {% if product.stock > 0 %}in-stock{% else %}out-of-stock{% endif %}">
+                            <i class="fas {% if product.stock > 0 %}fa-check-circle{% else %}fa-times-circle{% endif %}"></i>
+                        </div>
+                        <div class="feature-content">
+                            <span class="feature-label">{% trans "Stok Durumu" %}</span>
+                            <span class="feature-value">
+                                {% if product.stock > 0 %}
+                                    {% trans "Stokta Var" %} ({{ product.stock }} {% trans "adet" %})
+                                {% else %}
+                                    {% trans "Stokta Yok" %}
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if product.brand %}
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-tag"></i>
+                        </div>
+                        <div class="feature-content">
+                            <span class="feature-label">{% trans "Marka" %}</span>
+                            <span class="feature-value">{{ product.brand }}</span>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if product.weight %}
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-weight-hanging"></i>
+                        </div>
+                        <div class="feature-content">
+                            <span class="feature-label">{% trans "Ağırlık" %}</span>
+                            <span class="feature-value">{{ product.weight }} kg</span>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if product.category %}
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-folder"></i>
+                        </div>
+                        <div class="feature-content">
+                            <span class="feature-label">{% trans "Kategori" %}</span>
+                            <span class="feature-value">{{ product.category.name }}</span>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="action-buttons">
+                    <a href="{% url 'contact:contact' %}?urun={{ product.slug }}" class="btn btn-primary btn-large">
+                        <i class="fas fa-phone"></i>
+                        {% trans "Sipariş Ver" %}
+                    </a>
+                    <button class="btn btn-secondary" onclick="shareProduct()">
+                        <i class="fas fa-share-alt"></i>
+                        {% trans "Paylaş" %}
+                    </button>
+                </div>
+                <div class="contact-info">
+                    <h4>{% trans "Sipariş ve Bilgi İçin" %}</h4>
+                    <div class="contact-methods">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+90 xxx xxx xx xx</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@barananahtarci.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-whatsapp"></i>
+                            <span>{% trans "WhatsApp ile İletişim" %}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Product Description -->
+        {% if product.description %}
+        <div class="product-description-section" data-aos="fade-up">
+            <div class="description-header">
+                <h3>{% trans "Ürün Açıklaması" %}</h3>
+            </div>
+            <div class="description-content">
+                {{ product.description|safe }}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>

@@ -1,0 +1,130 @@
+/* static/admin/css/custom_sitesettings.css */
+
+/* PDF Katalog Yönetimi için özel stiller */
+.field-pdf_catalog_enabled,
+.field-pdf_catalog_title,
+.field-pdf_catalog_file {
+    background: #f8f9fa;
+    padding: 15px;
+    margin: 10px 0;
+    border-left: 4px solid #007bff;
+    border-radius: 5px;
+}
+
+.field-pdf_catalog_enabled label,
+.field-pdf_catalog_title label,
+.field-pdf_catalog_file label {
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* PDF Katalog durumu için özel stiller */
+.pdf-status-active {
+    color: #28a745 !important;
+    font-weight: bold;
+}
+
+.pdf-status-inactive {
+    color: #ffc107 !important;
+    font-weight: bold;
+}
+
+.pdf-status-none {
+    color: #dc3545 !important;
+    font-weight: bold;
+}
+
+/* Admin panel genel iyileştirmeler */
+.form-row .field-box {
+    margin-bottom: 20px;
+}
+
+/* PDF Katalog fieldset için özel stil */
+fieldset.module h2:contains("PDF Katalog") {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+/* Dashboard linki için özel buton stili */
+a[href*="/dashboard/catalog/"] {
+    background: #007bff;
+    color: white !important;
+    padding: 5px 10px;
+    border-radius: 3px;
+    text-decoration: none !important;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+a[href*="/dashboard/catalog/"]:hover {
+    background: #0056b3;
+    color: white !important;
+}
+
+/* Site ayarları sayfası için genel iyileştirmeler */
+.module.aligned .form-row {
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+}
+
+.module.aligned .form-row:last-child {
+    border-bottom: none;
+}
+
+/* Fieldset'ler için daha iyi görünüm */
+fieldset.module {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 0;
+    overflow: hidden;
+}
+
+fieldset.module h2 {
+    margin: 0;
+    padding: 12px 20px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+fieldset.module .module {
+    border: none;
+    margin: 15px 20px 20px;
+}
+
+/* PDF dosya input için özel stil */
+input[type="file"][name="pdf_catalog_file"] {
+    border: 2px dashed #007bff;
+    padding: 10px;
+    border-radius: 5px;
+    background: #f8f9fa;
+    width: 100%;
+}
+
+input[type="file"][name="pdf_catalog_file"]:hover {
+    border-color: #0056b3;
+    background: #e7f3ff;
+}
+
+/* Başarı/Hata mesajları için iyileştirmeler */
+.messagelist .success {
+    background: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.messagelist .warning {
+    background: #fff3cd;
+    border-color: #ffeaa7;
+    color: #856404;
+}
+
+.messagelist .error {
+    background: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}

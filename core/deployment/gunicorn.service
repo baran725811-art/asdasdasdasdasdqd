@@ -1,0 +1,14 @@
+[Unit]
+Description=Baran Anahtarci Gunicorn Daemon
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/baran_anahtarci
+ExecStart=/var/www/baran_anahtarci/venv/bin/gunicorn \
+    --config /var/www/baran_anahtarci/deployment/gunicorn.conf.py \
+    core.wsgi:application
+
+[Install]
+WantedBy=multi-user.target

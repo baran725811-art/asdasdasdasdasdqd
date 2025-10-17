@@ -1,0 +1,223 @@
+<!--core\templates\admin\login.html-->
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block title %}{% trans 'Log in' %} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block bodyclass %}{{ block.super }} login{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+<style>
+.login #content {
+    padding: 20px;
+    max-width: 400px;
+    margin: 40px auto;
+}
+
+.login .form-row {
+    margin-bottom: 20px;
+}
+
+.login .form-row label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #333;
+}
+
+.login .form-row input[type="text"],
+.login .form-row input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.login .form-row input[type="text"]:focus,
+.login .form-row input[type="password"]:focus {
+    outline: none;
+    border-color: #417690;
+    box-shadow: 0 0 0 3px rgba(65, 118, 144, 0.1);
+}
+
+.captcha-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.captcha-image {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.captcha-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.captcha-refresh {
+    background: #417690;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    min-width: 44px;
+    height: 44px;
+}
+
+.captcha-refresh:hover {
+    background: #356680;
+}
+
+.submit-row {
+    margin-top: 30px;
+}
+
+.submit-row input[type="submit"] {
+    width: 100%;
+    background: #417690;
+    color: white;
+    border: none;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-row input[type="submit"]:hover {
+    background: #356680;
+}
+
+.password-reset-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.password-reset-link a {
+    color: #666;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.password-reset-link a:hover {
+    color: #417690;
+    text-decoration: underline;
+}
+
+.errornote {
+    background: #ffeaea;
+    color: #d63384;
+    border: 1px solid #f5c2c7;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.errorlist {
+    color: #d63384;
+    margin: 5px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.errorlist li {
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+</style>
+{% endblock %}
+
+{% block usertools %}{% endblock %}
+{% block nav-global %}{% endblock %}
+{% block nav-sidebar %}{% endblock %}
+{% block content_title %}{% endblock %}
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+{% if form.errors and not form.non_field_errors %}
+<p class="errornote">
+{% if form.errors.items|length == 1 %}{% trans "Lütfen aşağıdaki hatayı düzeltin." %}{% else %}{% trans "Lütfen aşağıdaki hataları düzeltin." %}{% endif %}
+</p>
+{% endif %}
+
+{% if form.non_field_errors %}
+{% for error in form.non_field_errors %}
+<p class="errornote">{{ error }}</p>
+{% endfor %}
+{% endif %}
+
+<div id="content-main">
+  <form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
+    
+    <div class="form-row">
+      {{ form.username.errors }}
+      {{ form.username.label_tag }} 
+      {{ form.username }}
+    </div>
+    
+    <div class="form-row">
+      {{ form.password.errors }}
+      {{ form.password.label_tag }} 
+      {{ form.password }}
+    </div>
+    
+    <!-- CAPTCHA Alan -->
+    {% if form.captcha %}
+    <div class="form-row">
+      <label for="id_captcha_1">{% trans "Güvenlik Kodu" %}</label>
+      {{ form.captcha.errors }}
+      <div class="captcha-container">
+        {{ form.captcha.image_tag }}
+        {{ form.captcha }}
+        <button type="button" onclick="refreshCaptcha()" class="captcha-refresh" title="{% trans 'Yeni kod üret' %}">
+          ↻
+        </button>
+      </div>
+      <small style="color: #666; margin-top: 4px; display: block;">{% trans "Yukarıdaki kodu girin" %}</small>
+    </div>
+    {% endif %}
+
+    <div class="submit-row">
+      <input type="submit" value="{% trans 'Oturum aç' %}" />
+    </div>
+
+    {% url 'admin_password_reset' as password_reset_url %}
+    {% if password_reset_url %}
+    <div class="password-reset-link">
+      <a href="{{ password_reset_url %}">{% trans 'Şifrenizi mi unuttunuz?' %}</a>
+    </div>
+    {% endif %}
+    
+  </form>
+
+  <script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('id_username').focus();
+  });
+  
+  function refreshCaptcha() {
+    var captchaImg = document.querySelector('.captcha');
+    if (captchaImg) {
+      captchaImg.src = captchaImg.src.split('?')[0] + '?' + Math.random();
+    }
+  }
+  </script>
+</div>
+{% endblock %}

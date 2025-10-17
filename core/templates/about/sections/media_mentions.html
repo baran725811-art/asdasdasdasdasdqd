@@ -1,0 +1,48 @@
+{% load static %}
+{% load i18n %}
+
+<section class="about-media">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">{% trans "Basında Biz" %}</h2>
+            <p class="section-subtitle">{% trans "Medyada yer alan haberlerimiz" %}</p>
+        </div>
+        
+        <div class="media-grid">
+            {% for mention in media_mentions %}
+            <article class="media-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
+                {% if mention.image %}
+                <div class="media-image">
+                    <img src="{{ mention.image.url }}" alt="{{ mention.alt_text|default:mention.title }}" loading="lazy">
+                </div>
+                {% endif %}
+                <div class="media-content">
+                    <h3 class="media-title">{{ mention.title }}</h3>
+                    <p class="media-description">{{ mention.summary|truncatewords:25 }}</p>
+                    <div class="media-meta">
+                        <span class="media-date">{{ mention.publish_date|date:"d F Y" }}</span>
+                        <a href="{{ mention.external_url }}" target="_blank" rel="noopener noreferrer" class="media-link">
+                            {% trans "Haberi Oku" %}
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+            {% empty %}
+            <div class="empty-state">
+                <p>{% trans "Henüz medya haberi eklenmemiş." %}</p>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Tümünü Gör Butonu - YENİ EKLENEN -->
+        {% if media_mentions %}
+        <div class="text-center mt-4">
+            <a href="{% url 'about:media_mentions' %}" class="btn btn-primary-modern">
+                {% trans "Tüm Haberleri Gör" %}
+                <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</section>

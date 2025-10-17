@@ -1,0 +1,149 @@
+<!--core\templates\admin\base_site.html-->
+{% extends "admin/base.html" %}
+{% load i18n static %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+<style>
+    /* Ana dil seçici stili */
+    .language-selector {
+        position: relative;
+        display: inline-block;
+        margin: 0 10px;
+    }
+    
+    .language-selector select {
+        background: #417690;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        font-size: 12px;
+    }
+    
+    .language-selector label {
+        color: #ffc;
+        font-size: 11px;
+        margin-right: 5px;
+    }
+    
+    .admin-language-info {
+        background: #79aec8;
+        color: white;
+        padding: 3px 8px;
+        border-radius: 3px;
+        font-size: 11px;
+        margin-left: 10px;
+    }
+    
+    /* Dashboard link stili */
+    .dashboard-link {
+        background: #28a745;
+        color: white !important;
+        padding: 6px 12px;
+        text-decoration: none;
+        border-radius: 3px;
+        font-size: 12px;
+        margin-left: 15px;
+        transition: background-color 0.3s;
+    }
+    
+    .dashboard-link:hover {
+        background: #218838;
+        color: white !important;
+    }
+    
+    .admin-nav-global {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+    }
+</style>
+{% endblock %}
+
+{% block branding %}
+<div style="display: flex; align-items: center; width: 100%;">
+    <h1 id="site-name">
+        <a href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a>
+    </h1>
+    
+    <!-- Navigasyon - sağ tarafa yaslı -->
+    <nav class="admin-nav-global">
+        <!-- Ana Dil Seçici -->
+        <div class="language-selector">
+            <label for="mainLanguageSelect">{% trans "Ana Dil:" %}</label>
+            <select id="mainLanguageSelect" onchange="changeMainLanguage(this.value)">
+                {% get_current_language as current_lang %}
+                <option value="tr" {% if current_lang == 'tr' %}selected{% endif %}>🇹🇷 Türkçe</option>
+                <option value="en" {% if current_lang == 'en' %}selected{% endif %}>🇺🇸 English</option>
+                <option value="de" {% if current_lang == 'de' %}selected{% endif %}>🇩🇪 Deutsch</option>
+                <option value="fr" {% if current_lang == 'fr' %}selected{% endif %}>🇫🇷 Français</option>
+                <option value="es" {% if current_lang == 'es' %}selected{% endif %}>🇪🇸 Español</option>
+                <option value="ru" {% if current_lang == 'ru' %}selected{% endif %}>🇷🇺 Русский</option>
+                <option value="ar" {% if current_lang == 'ar' %}selected{% endif %}>🇸🇦 العربية</option>
+            </select>
+        </div>
+        
+        <!-- Dil Bilgisi -->
+        <div class="admin-language-info" id="languageInfo">
+            {% trans "Mevcut:" %} {{ current_lang|upper }}
+        </div>
+        
+        <!-- Dashboard Link -->
+        <a href="{% url 'dashboard:home' %}" class="dashboard-link">
+            <i class="fas fa-columns"></i> {% trans "Dashboard'a Geç" %}
+        </a>
+    </nav>
+</div>
+{% endblock %}
+
+{% block footer %}
+{{ block.super }}
+<script>
+    // Ana dil değiştirme fonksiyonu
+    async function changeMainLanguage(languageCode) {
+        try {
+            const response = await fetch('/api/set-main-language/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    language: languageCode
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                // Sayfayı yenile
+                window.location.reload();
+            } else {
+                alert('Ana dil değiştirilemedi: ' + data.error);
+            }
+        } catch (error) {
+            console.error('Dil değiştirme hatası:', error);
+            alert('Ana dil değiştirilirken hata oluştu');
+        }
+    }
+    
+    // Sayfa yüklendiğinde dil bilgisini güncelle
+    document.addEventListener('DOMContentLoaded', function() {
+        updateLanguageInfo();
+    });
+    
+    function updateLanguageInfo() {
+        fetch('/api/language-info/')
+            .then(response => response.json())
+            .then(data => {
+                const infoDiv = document.getElementById('languageInfo');
+                if (infoDiv) {
+                    infoDiv.textContent = 'Mevcut: ' + data.current_language.toUpperCase();
+                }
+            })
+            .catch(error => console.error('Dil bilgisi alınamadı:', error));
+    }
+</script>
+{% endblock %}

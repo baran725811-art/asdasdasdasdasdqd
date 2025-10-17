@@ -1,0 +1,74 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{{ meta_title }}{% endblock %}
+{% block meta_description %}{{ meta_description }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/about/main.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <!-- Service Header -->
+            <div class="service-header text-center mb-5">
+                <h1 class="service-title">{{ service.title }}</h1>
+                {% if service.image %}
+                <div class="service-image mt-4">
+                    <img src="{{ service.image.url }}" 
+                         alt="{{ service.alt_text|default:service.title }}" 
+                         class="img-fluid rounded">
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Service Content -->
+            <div class="service-content">
+                <div class="content-body">
+                    {{ service.description|linebreaks }}
+                </div>
+            </div>
+
+            <!-- Back Button -->
+            <div class="text-center mt-5">
+                <a href="{% url 'about:about' %}" class="btn btn-primary">
+                    <i class="fas fa-arrow-left"></i>
+                    {% trans "Hakkımızda Sayfasına Dön" %}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Related Services -->
+    {% if related_services %}
+    <div class="row mt-5">
+        <div class="col-12">
+            <h3 class="text-center mb-4">{% trans "Diğer Hizmetlerimiz" %}</h3>
+            <div class="row">
+                {% for related_service in related_services %}
+                <div class="col-md-4 mb-4">
+                    <div class="service-card">
+                        {% if related_service.image %}
+                        <img src="{{ related_service.image.url }}" 
+                             alt="{{ related_service.alt_text|default:related_service.title }}" 
+                             class="card-img-top">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ related_service.title }}</h5>
+                            <p class="card-text">{{ related_service.description|truncatewords:20 }}</p>
+                            <a href="{{ related_service.get_absolute_url }}" class="btn btn-outline-primary">
+                                {% trans "Detay" %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

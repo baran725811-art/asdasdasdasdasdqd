@@ -1,0 +1,92 @@
+<!-- dashboard/templates/dashboard/includes/navigation/top_navbar.html -->
+{% load i18n %}
+
+<div class="dashboard-navbar">
+    <div class="navbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="d-flex align-items-center gap-2">
+            {% if site_settings.site_logo %}
+            <img src="{{ site_settings.site_logo.url }}" alt="{{ site_settings.site_name }}" class="navbar-logo" style="height: 40px; width: auto; object-fit: contain;">
+            {% endif %}
+            <h4 class="navbar-brand mb-0">{{ site_settings.site_name|default:"Dashboard" }}</h4>
+        </div>
+    </div>
+    <div class="navbar-right">
+
+        <!-- Storage Progress Bar -->
+        {% if cloudinary_storage %}
+        <div class="storage-info-container">
+            <div class="storage-progress-wrapper">
+                <div class="storage-info-text">
+                    <small class="text-muted">
+                        {{ cloudinary_storage.used_gb }} GB / {{ cloudinary_storage.limit_gb }} GB
+                    </small>
+                    <small class="{% if cloudinary_storage.is_critical %}text-danger{% elif cloudinary_storage.is_warning %}text-warning{% else %}text-success{% endif %}">
+                        ({{ cloudinary_storage.remaining_gb }} GB kaldı)
+                    </small>
+                </div>
+                <div class="progress storage-progress" style="height: 8px; width: 200px;">
+                    <div class="progress-bar 
+                                {% if cloudinary_storage.warning_level == 'danger' %}bg-danger
+                                {% elif cloudinary_storage.warning_level == 'warning' %}bg-warning
+                                {% elif cloudinary_storage.warning_level == 'info' %}bg-info
+                                {% else %}bg-success{% endif %}" 
+                         role="progressbar" 
+                         style="width: {{ cloudinary_storage.usage_percentage }}%"
+                         aria-valuenow="{{ cloudinary_storage.usage_percentage }}" 
+                         aria-valuemin="0" 
+                         aria-valuemax="100">
+                    </div>
+                </div>
+                <div class="storage-percentage">
+                    <small class="{% if cloudinary_storage.is_critical %}text-danger{% elif cloudinary_storage.is_warning %}text-warning{% else %}text-muted{% endif %}">
+                        {{ cloudinary_storage.usage_percentage }}%
+                    </small>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Site View Dropdown -->
+        {% include 'dashboard/includes/components/site_view_dropdown.html' %}
+        
+        <!-- Theme Selector -->
+        {% include 'dashboard/includes/components/theme_selector.html' %}
+        
+        <!-- Notification Dropdown -->
+        {% include 'dashboard/includes/components/notification_dropdown.html' %}
+        
+        <!-- User Profile Dropdown (Optional) -->
+        <div class="dropdown">
+             <button class="btn btn-outline-secondary dropdown-toggle btn-sm" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user me-1"></i>{{ user.first_name }} {{ user.last_name }}{% if not user.first_name and not user.last_name %}{{ user.username }}{% endif %}
+        </button>
+            
+
+
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                <li>
+                    <a class="dropdown-item" href="{% url 'dashboard:profile' %}">
+                        <i class="fas fa-user-circle me-2"></i>{% trans "Profil" %}
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{% url 'dashboard:settings' %}">
+                        <i class="fas fa-cog me-2"></i>{% trans "Ayarlar" %}
+                    </a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <a class="dropdown-item" href="{% url 'dashboard:logout' %}">
+                        <i class="fas fa-sign-out-alt me-2"></i>{% trans "Çıkış Yap" %}
+                    </a>
+                </li>
+            </ul>
+
+
+
+        </div>
+    </div>
+</div>

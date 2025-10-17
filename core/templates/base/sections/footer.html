@@ -1,0 +1,319 @@
+{% load static %}
+{% load i18n %}
+{% load translation_tags %}
+
+<footer class="modern-footer" role="contentinfo">
+    <!-- Main Footer Content -->
+    <div class="footer-main">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Company Info -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-section company-info">
+                        <!-- Logo & Brand -->
+                        <div class="footer-brand mb-4">
+                            {% if site_logo %}
+                                <img src="{{ site_logo.url }}" alt="{{ site_name }}" class="footer-logo mb-3">
+                            {% else %}
+                                <div class="footer-icon mb-3">
+                                    <i class="fas fa-key" aria-hidden="true"></i>
+                                </div>
+                            {% endif %}
+                            <h3 class="footer-brand-name">{{ site_name|default:'Site' }}</h3>
+                            {% if site_tagline %}
+                            <p class="footer-tagline">{{ site_tagline }}</p>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- About Description -->
+                        {% if global_about.short_description %}
+                        <p class="footer-description">
+                            {{ global_about.short_description|truncatewords:25 }}
+                        </p>
+                        {% endif %}
+                        
+                        <!-- Stats -->
+                        {% if global_about.years_experience %}
+                        <div class="footer-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">{{ global_about.years_experience|default:20 }}+</span>
+                                <span class="stat-label">{% trans "Yıl Deneyim" %}</span>
+                            </div>
+                            {% if global_about.happy_customers %}
+                            <div class="stat-item">
+                                <span class="stat-number">{{ global_about.happy_customers|default:1000 }}+</span>
+                                <span class="stat-label">{% trans "Mutlu Müşteri" %}</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-section">
+                        <h4 class="footer-title">{% trans "Hızlı Menü" %}</h4>
+                        <nav class="footer-nav" aria-label="{% trans 'Footer navigasyon' %}">
+                            <ul class="footer-menu">
+                                <li>
+                                    <a href="{% url 'home:home' %}" class="footer-link">
+                                        <i class="fas fa-home me-2" aria-hidden="true"></i>
+                                        {% trans "Ana Sayfa" %}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'about:about' %}" class="footer-link">
+                                        <i class="fas fa-info-circle me-2" aria-hidden="true"></i>
+                                        {% trans "Hakkımızda" %}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'products:product_list' %}" class="footer-link">
+                                        <i class="fas fa-cube me-2" aria-hidden="true"></i>
+                                        {% trans "Ürünler" %}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'gallery:gallery_list' %}" class="footer-link">
+                                        <i class="fas fa-images me-2" aria-hidden="true"></i>
+                                        {% trans "Galeri" %}
+                                    </a>
+                                </li>
+                                {% if pdf_catalog_enabled and pdf_catalog_file %}
+                                <li>
+                                    <a href="{% url 'catalog_view' %}" class="footer-link">
+                                        <i class="fas fa-file-pdf me-2" aria-hidden="true"></i>
+                                        {{ pdf_catalog_title|default:"Katalog" }}
+                                    </a>
+                                </li>
+                                {% endif %}
+                                <li>
+                                    <a href="{% url 'contact:contact' %}" class="footer-link">
+                                        <i class="fas fa-envelope me-2" aria-hidden="true"></i>
+                                        {% trans "İletişim" %}
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                
+                <!-- Dynamic Services from Dashboard -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-section">
+                        <h4 class="footer-title">{% trans "Hizmetlerimiz" %}</h4>
+                        <nav class="footer-nav" aria-label="{% trans 'Hizmetler navigasyon' %}">
+                            <ul class="footer-menu">
+                                {% for service in footer_services %}
+                                <li>
+                                    <a href="{{ service.get_absolute_url }}" class="footer-link">
+                                        <i class="fas fa-key me-2" aria-hidden="true"></i>
+                                        {{ service.title }}
+                                    </a>
+                                </li>
+                                {% empty %}
+                                <!-- Varsayılan hizmetler -->
+                                <li>
+                                    <a href="#" class="footer-link">
+                                        <i class="fas fa-key me-2" aria-hidden="true"></i>
+                                        {% trans "Anahtar Kopyalama" %}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="footer-link">
+                                        <i class="fas fa-car me-2" aria-hidden="true"></i>
+                                        {% trans "Araç Anahtarı" %}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="footer-link">
+                                        <i class="fas fa-lock me-2" aria-hidden="true"></i>
+                                        {% trans "Kasa Açma" %}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="footer-link">
+                                        <i class="fas fa-shield-alt me-2" aria-hidden="true"></i>
+                                        {% trans "Güvenlik Sistemleri" %}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="footer-link">
+                                        <i class="fas fa-tools me-2" aria-hidden="true"></i>
+                                        {% trans "Acil Çilingir" %}
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-section">
+                        <h4 class="footer-title">{% trans "İletişim Bilgileri" %}</h4>
+                        
+                        <div class="contact-info">
+                            {% if contact_phone %}
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone" aria-hidden="true"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <span class="contact-label">{% trans "Telefon" %}</span>
+                                    <a href="tel:{{ contact_phone }}" class="contact-value">{{ contact_phone }}</a>
+                                </div>
+                            </div>
+                            {% endif %}
+                            
+                            {% if contact_email %}
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <span class="contact-label">{% trans "E-posta" %}</span>
+                                    <a href="mailto:{{ contact_email }}" class="contact-value">{{ contact_email }}</a>
+                                </div>
+                            </div>
+                            {% endif %}
+                            
+                            {% if contact_address %}
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <span class="contact-label">{% trans "Adres" %}</span>
+                                    <span class="contact-value">{{ contact_address|striptags|truncatewords:10 }}</span>
+                                </div>
+                            </div>
+                            {% endif %}
+                            
+                            <!-- Working Hours -->
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-clock" aria-hidden="true"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <span class="contact-label">{% trans "Çalışma Saatleri" %}</span>
+                                    <span class="contact-value">
+                                        {% trans "Pazartesi - Cumartesi" %}<br>
+                                        <small>08:00 - 18:00</small>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Social Media -->
+                        {% if has_social_media %}
+                        <div class="social-section mt-4">
+                            <h5 class="social-title">{% trans "Bizi Takip Edin" %}</h5>
+                            <div class="social-links">
+                                {% if facebook_url %}
+                                <a href="{{ facebook_url }}" class="social-link facebook" target="_blank" rel="noopener noreferrer" aria-label="{% trans 'Facebook sayfamız' %}">
+                                    <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                                </a>
+                                {% endif %}
+                                {% if instagram_url %}
+                                <a href="{{ instagram_url }}" class="social-link instagram" target="_blank" rel="noopener noreferrer" aria-label="{% trans 'Instagram sayfamız' %}">
+                                    <i class="fab fa-instagram" aria-hidden="true"></i>
+                                </a>
+                                {% endif %}
+                                {% if twitter_url %}
+                                <a href="{{ twitter_url }}" class="social-link twitter" target="_blank" rel="noopener noreferrer" aria-label="{% trans 'Twitter sayfamız' %}">
+                                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                                </a>
+                                {% endif %}
+                                {% if youtube_url %}
+                                <a href="{{ youtube_url }}" class="social-link youtube" target="_blank" rel="noopener noreferrer" aria-label="{% trans 'YouTube kanalımız' %}">
+                                    <i class="fab fa-youtube" aria-hidden="true"></i>
+                                </a>
+                                {% endif %}
+                                {% if whatsapp_link %}
+                                <a href="{{ whatsapp_link }}" class="social-link whatsapp" target="_blank" rel="noopener noreferrer" aria-label="{% trans 'WhatsApp ile iletişim' %}">
+                                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="copyright">
+                        <p class="mb-0">
+                            &copy; {% now "Y" %} {{ site_name|default:'Site' }}. 
+                            {% trans "Tüm hakları saklıdır." %}
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="footer-bottom-links">
+                        <nav aria-label="{% trans 'Alt menü' %}">
+                            <ul class="bottom-menu">
+                                {% if legal_pages.privacy %}
+                                <li>
+                                    <a href="{{ legal_pages.privacy.url }}" class="bottom-link">
+                                        {{ legal_pages.privacy.title }}
+                                    </a>
+                                </li>
+                                {% else %}
+                                <li>
+                                    <a href="#" class="bottom-link">{% trans "Gizlilik Politikası" %}</a>
+                                </li>
+                                {% endif %}
+                                
+                                {% if legal_pages.terms %}
+                                <li>
+                                    <a href="{{ legal_pages.terms.url }}" class="bottom-link">
+                                        {{ legal_pages.terms.title }}
+                                    </a>
+                                </li>
+                                {% else %}
+                                <li>
+                                    <a href="#" class="bottom-link">{% trans "Kullanım Şartları" %}</a>
+                                </li>
+                                {% endif %}
+                                
+                                {% if legal_pages.cookies %}
+                                <li>
+                                    <a href="{{ legal_pages.cookies.url }}" class="bottom-link">
+                                        {{ legal_pages.cookies.title }}
+                                    </a>
+                                </li>
+                                {% else %}
+                                <li>
+                                    <a href="#" class="bottom-link" onclick="showCookieSettings()">
+                                        {% trans "Çerez Politikası" %}
+                                    </a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer Decoration -->
+    <div class="footer-decoration">
+        <div class="decoration-line"></div>
+        <div class="decoration-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</footer>

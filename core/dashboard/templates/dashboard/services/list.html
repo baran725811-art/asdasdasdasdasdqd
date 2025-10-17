@@ -1,0 +1,683 @@
+<!-- dashboard/templates/dashboard/services/list.html -->
+{% extends 'dashboard/base/list_base.html' %}
+{% load dashboard_filters %}
+
+{% load static %}
+{% load widget_tweaks %}
+{% load i18n %}
+{% load custom_filters %}
+
+{% block title %}{% trans "Hizmetlerimiz" %}{% endblock %}
+{% block page_title %}{% trans "Hizmet Yönetimi" %}{% endblock %}
+
+{% block page_content %}
+<!-- Page Header -->
+{% include 'dashboard/includes/navigation/page_header.html' with page_title="Hizmet Yönetimi" page_subtitle="Hizmetlerinizi düzenleyin ve yönetin" page_icon="fas fa-cogs" page_actions=page_actions %}
+
+<!-- Statistics -->
+<div class="row g-4 mb-4">
+    <div class="col-xl-3 col-lg-6 col-md-6">
+        {% include 'dashboard/includes/cards/stats_card.html' with card_value=total_services card_label="Toplam Hizmet" card_icon="fas fa-cogs" card_style="modern" card_color="primary" %}
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6">
+        {% include 'dashboard/includes/cards/stats_card.html' with card_value=active_services card_label="Aktif Hizmetler" card_icon="fas fa-check-circle" card_style="modern" card_color="success" %}
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6">
+        {% include 'dashboard/includes/cards/stats_card.html' with card_value=inactive_services card_label="Pasif Hizmetler" card_icon="fas fa-eye-slash" card_style="modern" card_color="warning" %}
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6">
+        {% include 'dashboard/includes/cards/stats_card.html' with card_value=total_services card_label="Toplam Sıralama" card_icon="fas fa-sort-numeric-up" card_style="modern" card_color="info" %}
+    </div>
+</div>
+
+<!-- Services Table -->
+<div class="table-card">
+    <div class="card-header-modern">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">
+                <i class="fas fa-list me-2"></i>{% trans "Hizmet Listesi" %}
+            </h5>
+            <div class="d-flex gap-2">
+                {% include 'dashboard/includes/tables/table_search.html' with search_placeholder="Hizmet ara..." search_id="serviceSearch" %}
+                <button type="button" class="btn-modern primary btn-sm" data-bs-toggle="modal" data-bs-target="#addServiceModal">
+                    <i class="fas fa-plus me-1"></i>{% trans "Yeni Hizmet Ekle" %}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        {% if services or services_with_translations %}
+
+        <div class="table-responsive">
+            <table class="table table-modern table-hover" id="servicesTable">
+                {% include 'dashboard/includes/tables/table_header.html' with table_type='services' %}
+                
+                <tbody>
+                    {% for service_data in services_with_translations %}
+                    {% with service=service_data.object %}
+                    <tr data-service-id="{{ service.id }}">
+                        <td>
+                            <div class="fw-semibold">#{{ service.id }}</div>
+                        </td>
+                        <td>
+                            <div class="fw-semibold">{{ service.order }}</div>
+                        </td>
+                        <td>
+                            {% if service.image %}
+                                <img src="{{ service.image.url }}" alt="{{ service.get_alt_text }}" class="image-modern" style="width: 60px; height: 60px; object-fit: cover;" loading="lazy">
+                            {% else %}
+                                <div class="image-placeholder" style="width: 60px; height: 60px;">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="fw-semibold">{{ service.title }}</div>
+                            {% if service.description %}
+                                <small class="text-muted">{{ service.description|truncatewords:8|striptags }}</small>
+                            {% endif %}
+                        </td>
+                        
+                        <td class="text-center">
+                            <div class="form-check form-switch d-flex justify-content-center">
+                                <input class="form-check-input footer-toggle" 
+                                       type="checkbox" 
+                                       {% if service.is_footer %}checked{% endif %}
+                                       data-service-id="{{ service.id }}"
+                                       data-service-title="{{ service.title }}"
+                                       title="Footer'da göster/gizle"
+                                       style="cursor: pointer;">
+                            </div>
+                        </td>
+
+                       
+                        
+                        
+
+                        <td>
+                            {% include 'dashboard/includes/ui/status_badge.html' with badge_text=service.is_active|yesno:"Aktif,Pasif" badge_color=service.is_active|yesno:"success,danger" %}
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-action edit" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#editServiceModal{{ service.id }}" 
+                                        title="{% trans 'Düzenle' %}">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn-action view" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#viewServiceModal{{ service.id }}" 
+                                        title="{% trans 'Görüntüle' %}">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-action delete" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#deleteServiceModal{{ service.id }}" 
+                                        title="{% trans 'Sil' %}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endwith %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        {% if services.has_other_pages %}
+            {% include 'dashboard/includes/tables/table_pagination.html' with page_obj=services %}
+        {% endif %}
+
+        {% else %}
+        
+            {% include 'dashboard/includes/ui/empty_state.html' with empty_icon="fas fa-cogs" empty_title="Henüz hizmet eklenmemiş" empty_message="İlk hizmetinizi ekleyerek başlayın" action_button_text="İlk Hizmeti Ekle" action_button_icon="fas fa-plus" action_button_attrs='data-bs-toggle="modal" data-bs-target="#addServiceModal"' %}
+        
+        {% endif %}
+    </div>
+</div>
+
+<!-- Add Service Modal -->
+<div class="modal fade modal-modern" id="addServiceModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-plus me-2"></i>{% trans "Yeni Hizmet Ekle" %}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            
+            <form method="post" enctype="multipart/form-data" id="addServiceForm" action="{% url 'dashboard:service_create' %}">
+                {% csrf_token %}
+                
+                <div class="modal-body">
+                    <!-- Translation Tabs -->
+                    {% if translation_enabled and enabled_languages|length > 1 %}
+                        {% include 'dashboard/includes/forms/translation_tabs.html' with show_primary_label=True %}
+                    {% endif %}
+                    
+                    <!-- Turkish Content -->
+                    <div class="translation-content active" data-lang="tr">
+                        <div class="row">
+                            <div class="col-12">
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="title" field_label="Hizmet Başlığı" field_icon="fas fa-heading" field_type="text" is_required=True help_text="Hizmet adını girin" language_code="tr" %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description" label="Hizmet Açıklaması" rows="5" help_text="Hizmet detaylarını açıklayın" %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Translation Languages Content -->
+                    {% if translation_enabled and enabled_languages|length > 1 %}
+                        {% for lang in enabled_languages %}
+                            {% if lang != 'tr' %}
+                            <div class="translation-content" data-lang="{{ lang }}">
+                                <div class="row">
+                                    <div class="col-12">
+                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="title_"|add:lang field_label="Hizmet Başlığı" field_icon="fas fa-heading" field_type="text" is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description_"|add:lang label="Hizmet Açıklaması" rows="5" help_text="Bu alan zorunludur" %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+
+                    <!-- Image Upload and Settings -->
+                    <div class="card-modern mt-4">
+                        <div class="card-header-modern">
+                            <h6 class="mb-0">
+                                <i class="fas fa-cogs me-2"></i>{% trans "Hizmet Ayarları" %}
+                            </h6>
+                        </div>
+                        <div class="card-body-modern">
+                            <div class="row">
+                                <div class="col-12">
+                                    {% include 'dashboard/includes/forms/image_upload_field.html' with field_name="image" label="Hizmet Görseli" help_text="JPG, PNG formatında görsel yükleyebilirsiniz" %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text" field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" help_text="Hizmet görseli için SEO alt metni (max 125 karakter)" %}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="order" field_label="Sıralama" field_icon="fas fa-sort-numeric-up" field_type="number" field_min="0" help_text="Küçük sayılar önce görünür" %}
+                                </div>
+                                <div class="col-md-6">
+                                    {% include 'dashboard/includes/forms/checkbox_field.html' with field_name="is_active" label="Aktif Durumda" field_type="switch" icon="fas fa-toggle-on" checked=True %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>{% trans "İptal" %}
+                    </button>
+                    <button type="submit" class="btn-modern success">
+                        <i class="fas fa-save me-2"></i>{% trans "Hizmeti Kaydet" %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Service Modals -->
+{% for service_data in services_with_translations %}
+{% with service=service_data.object %}
+<div class="modal fade modal-modern" id="editServiceModal{{ service.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-edit me-2"></i>{% trans "Hizmet Düzenle" %}: {{ service.title }}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            
+            <form method="post" enctype="multipart/form-data" id="editServiceForm{{ service.id }}" action="{% url 'dashboard:service_edit' service.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="service_id" value="{{ service.id }}">
+                
+                <div class="modal-body">
+                    <!-- Translation Tabs -->
+                    {% if translation_enabled and enabled_languages|length > 1 %}
+                        {% include 'dashboard/includes/forms/translation_tabs.html' with show_primary_label=True %}
+                    {% endif %}
+                    
+                    <!-- Turkish Content -->
+                    <div class="translation-content active" data-lang="tr">
+                        <div class="row">
+                            <div class="col-12">
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="title" field_label="Hizmet Başlığı" field_icon="fas fa-heading" field_type="text" field_value=service.title is_required=True help_text="Hizmet adını girin" language_code="tr" %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description" label="Hizmet Açıklaması" value=service.description rows="5" help_text="Hizmet detaylarını açıklayın" %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Translation Languages Content -->
+                    {% if translation_enabled and enabled_languages|length > 1 %}
+                        {% for lang in enabled_languages %}
+                            {% if lang != 'tr' %}
+                            <div class="translation-content" data-lang="{{ lang }}">
+                                <div class="row">
+                                    <div class="col-12">
+                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="title_"|add:lang field_label="Hizmet Başlığı" field_icon="fas fa-heading" field_type="text" field_value=service_data.translations|lookup:lang|lookup:"title" is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description_"|add:lang label="Hizmet Açıklaması" value=service_data.translations|lookup:lang|lookup:"description" rows="5" help_text="Bu alan zorunludur" %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+
+                    <!-- Image Upload and Settings -->
+                    <div class="card-modern mt-4">
+                        <div class="card-header-modern">
+                            <h6 class="mb-0">
+                                <i class="fas fa-cogs me-2"></i>{% trans "Hizmet Ayarları" %}
+                            </h6>
+                        </div>
+                        <div class="card-body-modern">
+                            <div class="row">
+                                <div class="col-12">
+                                    {% include 'dashboard/includes/forms/image_upload_field.html' with field_name="image" label="Hizmet Görseli" current_image=service.image help_text="Yeni bir görsel seçmezseniz mevcut görsel korunur" %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text" field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" field_value=service.alt_text help_text="Hizmet görseli için SEO alt metni (max 125 karakter)" %}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="order" field_label="Sıralama" field_icon="fas fa-sort-numeric-up" field_type="number" field_value=service.order field_min="0" help_text="Küçük sayılar önce görünür" %}
+                                </div>
+                                <div class="col-md-6">
+                                    {% include 'dashboard/includes/forms/checkbox_field.html' with field_name="is_active" label="Aktif Durumda" field_type="switch" icon="fas fa-toggle-on" checked=service.is_active %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>{% trans "İptal" %}
+                    </button>
+                    <button type="submit" class="btn-modern success">
+                        <i class="fas fa-save me-2"></i>{% trans "Değişiklikleri Kaydet" %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- View Service Modal -->
+<div class="modal fade modal-modern" id="viewServiceModal{{ service.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-eye me-2"></i>{% trans "Hizmet Detayları" %}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        {% if service.image %}
+                            <img src="{{ service.image.url }}" alt="{{ service.get_alt_text }}" 
+                                 class="img-fluid rounded shadow" loading="lazy">
+                        {% else %}
+                            <div class="text-center p-4 bg-light rounded">
+                                <i class="fas fa-image fa-3x text-muted"></i>
+                                <p class="text-muted mt-2">{% trans "Görsel yok" %}</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-8">
+                        <h4>{{ service.title }}</h4>
+                        <p class="text-muted">{{ service.description|default:"Açıklama bulunmuyor."|striptags }}</p>
+                        
+                        <div class="service-meta mt-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>{% trans "ID" %}:</strong> #{{ service.id }}
+                                </div>
+                                <div class="col-6">
+                                    <strong>{% trans "Sıralama" %}:</strong> {{ service.order }}
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-6">
+                                    <strong>{% trans "Durum" %}:</strong> 
+                                    {% include 'dashboard/includes/ui/status_badge.html' with badge_text=service.is_active|yesno:"Aktif,Pasif" badge_color=service.is_active|yesno:"success,danger" %}
+                                </div>
+                                <div class="col-6">
+                                    <strong>{% trans "Oluşturma" %}:</strong> 
+                                    {% include 'dashboard/includes/partials/datetime_display.html' with datetime_value=service.created_at format="short" %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times"></i>{% trans "Kapat" %}
+                </button>
+                <button type="button" class="btn-modern primary" data-bs-toggle="modal" data-bs-target="#editServiceModal{{ service.id }}">
+                    <i class="fas fa-edit"></i>{% trans "Düzenle" %}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Service Modal -->
+<div class="modal fade" id="deleteServiceModal{{ service.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">
+                    <i class="fas fa-exclamation-triangle me-2"></i>{% trans "Hizmet Sil" %}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fas fa-trash-alt text-danger fa-3x mb-3"></i>
+                    <h5>{% trans "Bu hizmeti silmek istediğinizden emin misiniz?" %}</h5>
+                    <p class="text-muted">
+                        <strong>"{{ service.title }}"</strong> kalıcı olarak silinecek.
+                    </p>
+                    <div class="alert alert-warning mt-3">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Bu işlem geri alınamaz!
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>{% trans "İptal" %}
+                </button>
+                
+                <form method="post" style="display: inline;" class="delete-form" 
+                      data-item-type="hizmet"
+                      data-item-name="{{ service.title }}"
+                      action="{% url 'dashboard:service_delete' service.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger delete-confirm-btn">
+                        <i class="fas fa-trash me-2"></i>{% trans "Sil" %}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endwith %}
+
+{% endfor %}
+
+{% endblock %}
+
+{% block list_modals %}
+<!-- Bulk Actions Modal -->
+{% include 'dashboard/includes/modals/bulk_actions_modal.html' %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Add Service Form Handler
+    const addServiceForm = document.getElementById('addServiceForm');
+    if (addServiceForm) {
+        addServiceForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Kaydediliyor...';
+            
+            try {
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: new FormData(this),
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                    }
+                });
+                
+                if (response.ok) {
+                    // Success
+                    if (window.notificationSystem) {
+                        window.notificationSystem.success('Hizmet başarıyla kaydedildi!');
+                    }
+                    
+                    // Modal kapat
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('addServiceModal'));
+                    modal.hide();
+                    
+                    // Sayfa yenile (hizmet listesini güncelle)
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    throw new Error('Kaydetme hatası');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                if (window.notificationSystem) {
+                    window.notificationSystem.error('Bir hata oluştu: ' + error.message);
+                } else {
+                    alert('Bir hata oluştu: ' + error.message);
+                }
+            } finally {
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        });
+    }
+    
+    // Edit Service Form Handlers
+    document.querySelectorAll('form[id^="editServiceForm"]').forEach(form => {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Güncelleniyor...';
+            
+            try {
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: new FormData(this),
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                    }
+                });
+                
+                if (response.ok) {
+                    if (window.notificationSystem) {
+                        window.notificationSystem.success('Hizmet başarıyla güncellendi!');
+                    }
+                    
+                    // Modal kapat
+                    const modalId = this.closest('.modal').id;
+                    const modal = bootstrap.Modal.getInstance(document.getElementById(modalId));
+                    modal.hide();
+                    
+                    // Sayfa yenile
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    throw new Error('Güncelleme hatası');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                if (window.notificationSystem) {
+                    window.notificationSystem.error('Bir hata oluştu: ' + error.message);
+                } else {
+                    alert('Bir hata oluştu: ' + error.message);
+                }
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        });
+    });
+    
+    // Delete form submission handler
+    document.querySelectorAll('.delete-form').forEach(form => {
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('.delete-confirm-btn');
+            const originalText = submitBtn.innerHTML;
+            const itemType = this.dataset.itemType || 'öğe';
+            const itemName = this.dataset.itemName || 'Bu öğe';
+            
+            // Loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Siliniyor...';
+            
+            try {
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: new FormData(this),
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                    }
+                });
+                
+                if (response.ok) {
+                    // Success
+                    if (window.notificationSystem) {
+                        window.notificationSystem.success(`${itemName} başarıyla silindi!`);
+                    }
+                    
+                    // Modal kapat
+                    const modal = bootstrap.Modal.getInstance(this.closest('.modal'));
+                    if (modal) {
+                        modal.hide();
+                    }
+                    
+                    // Sayfa yenile
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    throw new Error('Silme işlemi başarısız');
+                }
+            } catch (error) {
+                console.error('Delete error:', error);
+                if (window.notificationSystem) {
+                    window.notificationSystem.error('Silme işlemi sırasında hata oluştu: ' + error.message);
+                } else {
+                    alert('Silme işlemi sırasında hata oluştu: ' + error.message);
+                }
+            } finally {
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        });
+    });
+});
+
+// Footer toggle functionality
+document.querySelectorAll('.footer-toggle').forEach(toggle => {
+    toggle.addEventListener('change', async function(e) {
+        const serviceId = this.dataset.serviceId;
+        const serviceTitle = this.dataset.serviceTitle;
+        const isChecked = this.checked;
+        
+        // Loading state
+        this.disabled = true;
+        
+        try {
+            const response = await fetch(`/dashboard/services/footer-toggle/${serviceId}/`, {
+                method: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                    'Content-Type': 'application/json',
+                }
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                // Success notification
+                if (window.notificationSystem) {
+                    const message = data.is_footer 
+                        ? `"${serviceTitle}" footer'a eklendi (${data.footer_count}/6)`
+                        : `"${serviceTitle}" footer'dan çıkarıldı (${data.footer_count}/6)`;
+                    window.notificationSystem.success(message);
+                }
+                
+                // Checkbox durumunu güncelle
+                this.checked = data.is_footer;
+            } else {
+                // Error - revert checkbox
+                this.checked = !isChecked;
+                
+                if (window.notificationSystem) {
+                    window.notificationSystem.error(data.error);
+                } else {
+                    alert(data.error);
+                }
+            }
+        } catch (error) {
+            console.error('Footer toggle error:', error);
+            
+            // Revert checkbox on error
+            this.checked = !isChecked;
+            
+            if (window.notificationSystem) {
+                window.notificationSystem.error('Bağlantı hatası oluştu');
+            } else {
+                alert('Bağlantı hatası oluştu');
+            }
+        } finally {
+            // Re-enable checkbox
+            this.disabled = false;
+        }
+    });
+});
+</script>
+{% endblock %}

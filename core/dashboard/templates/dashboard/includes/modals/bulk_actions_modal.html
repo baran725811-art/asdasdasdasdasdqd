@@ -1,0 +1,66 @@
+<!-- core\dashboard\templates\dashboard\includes\modals\bulk_actions_modal.html - Toplu işlemler modal-->
+ <!-- Bulk Actions Modal -->
+{% load i18n %}
+<div class="modal fade modal-modern" id="bulkActionsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-tasks me-2"></i>{% trans "Toplu İşlemler" %}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <span id="selectedItemsCount">0</span> {% trans "öğe seçildi" %}
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label-modern">{% trans "İşlem Seçin" %}</label>
+                    <select id="bulkActionType" class="form-control form-control-modern">
+                        <option value="">{% trans "İşlem seçin..." %}</option>
+                        <option value="activate">{% trans "Seçilenleri Aktif Yap" %}</option>
+                        <option value="deactivate">{% trans "Seçilenleri Pasif Yap" %}</option>
+                        <option value="delete">{% trans "Seçilenleri Sil" %}</option>
+                        <option value="export">{% trans "Seçilenleri Dışa Aktar" %}</option>
+                    </select>
+                </div>
+
+                <!-- Action Specific Options -->
+                <div id="deleteOptions" class="action-options" style="display: none;">
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        {% trans "Bu işlem geri alınamaz! Seçili öğeler kalıcı olarak silinecek." %}
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="confirmDelete" class="form-check-input">
+                        <label class="form-check-label" for="confirmDelete">
+                            {% trans "Silme işlemini onaylıyorum" %}
+                        </label>
+                    </div>
+                </div>
+
+                <div id="exportOptions" class="action-options" style="display: none;">
+                    <label class="form-label-modern">{% trans "Dışa Aktarma Formatı" %}</label>
+                    <select id="exportFormat" class="form-control form-control-modern">
+                        <option value="csv">CSV</option>
+                        <option value="excel">Excel (.xlsx)</option>
+                        <option value="json">JSON</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times"></i>{% trans "İptal" %}
+                </button>
+                <button type="button" class="btn-modern danger" id="executeBulkAction" disabled>
+                    <i class="fas fa-play"></i>{% trans "İşlemi Uygula" %}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

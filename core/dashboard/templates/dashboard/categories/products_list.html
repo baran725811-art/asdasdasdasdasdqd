@@ -1,0 +1,135 @@
+<!-- ============================================= -->
+<!-- core\dashboard\templates\dashboard\categories\products_list.html -->
+{% extends 'dashboard/base/list_base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Ürün Yönetimi"%}{% endblock %}
+{% block page_title %}{% trans "Ürün Yönetimi"%}{% endblock %}
+
+<!-- Page Header Configuration -->
+{% block page_header %}
+    {% include 'dashboard/includes/navigation/page_header.html' with page_title="Ürün Yönetimi" page_subtitle=category.name|add:" kategorisindeki ürünler" page_icon="fas fa-box" page_actions=page_actions %}
+{% endblock %}
+
+<!-- Page Content -->
+{% block page_content %}
+    <!-- Filters Section -->
+    {% include 'dashboard/includes/navigation/filter_section.html' with filters=product_filters %}
+
+    <!-- Products Table -->
+    <div class="row">
+        <div class="col-12">
+            {% if products %}
+                <div class="card-modern">
+                    <div class="card-body-modern">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                {% include 'dashboard/includes/tables/table_header.html' with table_type="products" %}
+                                <tbody>
+                                    {% for product in products %}
+                                    <tr>
+                                        <td>
+                                            {% if product.image %}
+                                                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-thumbnail" style="max-height: 50px;">
+                                            {% else %}
+                                                {% include 'dashboard/includes/ui/empty_state.html' with empty_icon="fas fa-image" empty_title="" empty_message="" %}
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {{ product.name }}
+                                            {% if product.is_featured %}
+                                                {% include 'dashboard/includes/ui/status_badge.html' with badge_text="Öne Çıkan" badge_color="primary" %}
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ product.category.name }}</td>
+                                        <td>{{ product.price|floatformat:2 }} ₺</td>
+                                        <td>
+                                            {% if product.stock > 10 %}
+                                                {% include 'dashboard/includes/ui/status_badge.html' with badge_text=product.stock badge_color="success" %}
+                                            {% elif product.stock > 0 %}
+                                                {% include 'dashboard/includes/ui/status_badge.html' with badge_text=product.stock badge_color="warning" %}
+                                            {% else %}
+                                                {% include 'dashboard/includes/ui/status_badge.html' with badge_text=product.stock badge_color="danger" %}
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% include 'dashboard/includes/ui/status_badge.html' with badge_text=product.is_active|yesno:"Satışta,Pasif" badge_color=product.is_active|yesno:"success,danger" %}
+                                        </td>
+                                        <td>
+                                            {% include 'dashboard/includes/ui/action_buttons.html' with actions=product.actions %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination -->
+                        {% if products.has_other_pages %}
+                            {% include 'dashboard/includes/tables/table_pagination.html' with page_obj=products url_params=pagination_params %}
+                        {% endif %}
+                    </div>
+                </div>
+            {% else %}
+                {% include 'dashboard/includes/ui/empty_state.html' with empty_title="Henüz ürün eklenmemiş." empty_message="İlk ürününüzü eklemek için yukarıdaki butona tıklayın." empty_icon="fas fa-box" action_button_text="Yeni Ürün Ekle" action_button_icon="fas fa-plus" %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+<!-- List Modals -->
+{% block list_modals %}
+<!-- Add Product Modal -->
+<div class="modal fade modal-lg" id="addProductModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{% trans "Yeni Ürün Ekle"%}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" enctype="multipart/form-data" action="{% url 'dashboard:dashboard_product_add' %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {% include 'dashboard/includes/forms/form_field.html' with field_name="name" field_label="Ürün Adı" field_type="text" is_required=True %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {% include 'dashboard/includes/forms/select_field.html' with field_name="category" label="Kategori" options=category_options is_required=True %}
+                        </div>
+                    </div>
+                    {% include 'dashboard/includes/forms/url_field.html' with field_name="slug" field_type="slug" label="URL" source_field="name" is_required=True %}
+                    {% include 'dashboard/includes/forms/form_field.html' with field_name="description" field_label="Açıklama" field_type="textarea" field_rows="4" %}
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {% include 'dashboard/includes/forms/form_field.html' with field_name="price" field_label="Fiyat" field_type="number" field_step="0.01" is_required=True %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {% include 'dashboard/includes/forms/form_field.html' with field_name="stock" field_label="Stok" field_type="number" is_required=True %}
+                        </div>
+                    </div>
+                    {% include 'dashboard/includes/forms/image_upload_field.html' with field_name="image" label="Görsel" %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {% include 'dashboard/includes/forms/checkbox_field.html' with field_name="is_active" label="Satışta" field_type="switch" %}
+                        </div>
+                        <div class="col-md-6">
+                            {% include 'dashboard/includes/forms/checkbox_field.html' with field_name="is_featured" label="Öne Çıkan" field_type="switch" %}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "İptal"%}</button>
+                    <button type="submit" class="btn btn-primary">{% trans "Ekle"%}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit & Delete Modals for each product -->
+{% for product in products %}
+{% include 'dashboard/includes/modals/crud_modal_base.html' with modal_id="editProductModal"|add:product.id modal_title="Ürün Düzenle" title_icon="fas fa-edit" form_action=product.edit_url form_id="editProductForm"|add:product.id modal_size="lg" %}
+{% include 'dashboard/includes/modals/delete_confirmation.html' with modal_id="deleteProductModal"|add:product.id item_name=product.name delete_action=product.delete_url %}
+{% endfor %}
+{% endblock %}

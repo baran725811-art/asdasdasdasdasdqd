@@ -1,0 +1,754 @@
+{% load static %}
+{% load i18n %}
+
+<section class="reviews-section section-padding" id="reviewsSection">
+    <div class="container">
+        <!-- Section Header -->
+        <div class="section-header text-center mb-5">
+            <div class="section-badge">
+                <i class="fas fa-comments"></i>
+                {% trans "Müşteri Deneyimleri" %}
+            </div>
+            <h2 class="section-title">
+                {% trans "Müşteri" %} <span class="text-gradient">{% trans "Yorumları" %}</span>
+            </h2>
+            <p class="section-description">
+                {% trans "Hizmetlerimizden memnun kalan müşterilerimizin görüşlerini okuyun." %}
+            </p>
+        </div>
+
+        {% if approved_reviews %}
+        <!-- Modern Reviews Carousel -->
+        <div class="reviews-carousel-wrapper">
+            <div class="reviews-carousel" id="reviewsCarousel">
+                <div class="carousel-track" id="reviewsTrack">
+                    {% for review in approved_reviews %}
+                    <div class="review-slide">
+                        <div class="review-card-modern">
+                            <!-- Quote Icon -->
+                            <div class="quote-decoration">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            
+                            <!-- Review Content -->
+                            <div class="review-content">
+                                <blockquote class="review-text">
+                                    {{ review.comment }}
+                                </blockquote>
+                                
+                                <!-- Rating Stars -->
+                                <div class="rating-display">
+                                    {% for i in "12345" %}
+                                        {% if forloop.counter <= review.rating %}
+                                        <i class="fas fa-star active"></i>
+                                        {% else %}
+                                        <i class="far fa-star"></i>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <span class="rating-number">{{ review.rating }}.0</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Reviewer Info -->
+                            <div class="reviewer-info">
+                                <div class="reviewer-avatar">
+                                    {% if review.image %}
+                                    <img src="{{ review.image.url }}" alt="{{ review.name }}">
+                                    {% else %}
+                                    <div class="avatar-placeholder">
+                                        {{ review.name|first|upper }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <div class="reviewer-details">
+                                    <h4 class="reviewer-name">{{ review.name }}</h4>
+                                    <time class="review-date">{{ review.created_at|date:"F Y" }}</time>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <div class="carousel-navigation">
+                <button class="carousel-btn prev-btn" id="reviewsPrev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn next-btn" id="reviewsNext">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <!-- Indicators -->
+            <div class="carousel-indicators" id="reviewsIndicators">
+                {% for review in approved_reviews %}
+                <button class="indicator {% if forloop.first %}active{% endif %}" data-slide="{{ forloop.counter0 }}"></button>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Reviews Summary Stats -->
+        <div class="reviews-summary">
+            <div class="row g-3">
+                <div class="col-md-3 col-6">
+                    <div class="summary-stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" data-target="4.9">0</div>
+                            <div class="stat-label">{% trans "Ortalama Puan" %}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="summary-stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" data-target="{{ approved_reviews|length }}">0</div>
+                            <div class="stat-label">{% trans "Değerlendirme" %}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="summary-stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-thumbs-up"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" data-target="98">0</div>
+                            <div class="stat-label">{% trans "Memnuniyet %" %}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="summary-stat">
+                        <div class="stat-icon">
+                            <i class="fas fa-redo"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" data-target="95">0</div>
+                            <div class="stat-label">{% trans "Tekrar Tercih %" %}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="reviews-cta text-center">
+            <a href="{% url 'contact:contact' %}#reviewForm" class="btn btn-primary-modern btn-lg">
+                {% trans "Değerlendirme Yap" %}
+                <i class="fas fa-star ms-2"></i>
+            </a>
+            <a href="{% url 'reviews:review_list' %}" class="btn btn-outline-primary ms-3">
+                {% trans "Tüm Yorumlar" %}
+                <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+        
+        {% else %}
+        <!-- No Reviews State -->
+        <div class="no-reviews-state text-center">
+            <div class="empty-icon">
+                <i class="fas fa-comment-dots"></i>
+            </div>
+            <h3>{% trans "İlk Yorumu Siz Yapın" %}</h3>
+            <p class="text-muted mb-4">{% trans "Hizmetlerimiz hakkındaki deneyiminizi paylaşın." %}</p>
+            <a href="{% url 'contact:contact' %}#reviewForm" class="btn btn-primary-modern">
+                {% trans "Yorum Yap" %}
+                <i class="fas fa-pen ms-2"></i>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<style>
+/* Modern Reviews Section */
+.reviews-section {
+    background: #fafafa;
+    position: relative;
+    overflow: hidden;
+    padding: 60px 0;
+}
+
+.reviews-carousel-wrapper {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto 4rem;
+    perspective: 1200px;
+    height: 400px;
+}
+
+.reviews-carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.carousel-track {
+   position: relative;
+   width: 100%;
+   height: 100%;
+   transform-style: preserve-3d;
+   transition: transform 0.8s, cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.review-slide {
+    position: absolute;
+    width: 300px;
+    height: 350px;
+    left: 50%;
+    top: 50%;
+    margin-left: -150px;
+    margin-top: -175px;
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-style: preserve-3d;
+    /* Başlangıç pozisyonu - JavaScript tarafından kontrol edilecek */
+    transform: translateZ(-200px) scale(0.6);
+    opacity: 0;
+    z-index: 1;
+}
+
+
+@media (min-width: 768px) {
+    .review-slide {
+        width: 280px;
+        height: 330px;
+        margin-left: -140px;
+        margin-top: -165px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .review-slide {
+        min-width: 33.333%;
+    }
+}
+
+.review-card-modern {
+    background: white;
+    border-radius: 20px;
+    padding: 1.8rem;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.5s ease;
+    transform-style: preserve-3d;
+}
+
+.review-slide:nth-child(1) .review-card-modern {
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+}
+
+.review-slide:nth-child(1) .review-card-modern:hover {
+    transform: translateY(-10px) rotateX(5deg);
+}
+
+.review-card-modern:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+}
+
+.quote-decoration {
+    position: absolute;
+    top: -15px;
+    left: 2rem;
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.1rem;
+    z-index: 2;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+.review-content {
+    flex: 1;
+}
+
+.review-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--gray-700);
+    margin: 1rem 0;
+    font-style: italic;
+    position: relative;
+    max-height: 5.4em;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.rating-display {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-bottom: 1rem;
+}
+
+.rating-display .fas.fa-star.active {
+    color: #ffc107;
+}
+
+.rating-display .far.fa-star {
+    color: #e9ecef;
+}
+
+.rating-number {
+    font-weight: 600;
+    color: var(--gray-700);
+    margin-left: 0.5rem;
+}
+
+.reviewer-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--gray-200);
+}
+
+.reviewer-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.reviewer-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+
+.reviewer-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--dark-color);
+    margin: 0;
+}
+
+.review-date {
+    font-size: 0.8rem;
+    color: var(--gray-500);
+    display: block;
+}
+
+/* Navigation Buttons */
+.carousel-navigation {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.carousel-btn {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: all;
+    transition: all 0.3s ease;
+    color: var(--gray-700);
+    backdrop-filter: blur(10px);
+}
+
+.carousel-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.15);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+}
+
+.prev-btn {
+    margin-left: -30px;
+}
+
+.next-btn {
+    margin-right: -30px;
+}
+
+/* Indicators */
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-top: 3rem;
+}
+
+.indicator {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: none;
+    background: var(--gray-300);
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.indicator.active {
+    background: var(--primary-color);
+    transform: scale(1.3);
+    box-shadow: 0 0 15px rgba(var(--primary-color-rgb), 0.5);
+}
+
+.indicator:hover {
+    background: var(--primary-color);
+    transform: scale(1.2);
+}
+
+
+/* Summary Stats */
+.reviews-summary {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 3rem 0;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.summary-stat {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-align: left;
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--dark-color);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: var(--gray-600);
+    margin-top: 0.25rem;
+}
+
+/* CTA Section */
+.reviews-cta {
+    margin-top: 3rem;
+}
+
+/* Empty State */
+.no-reviews-state .empty-icon {
+    width: 100px;
+    height: 100px;
+    background: var(--gray-100);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    font-size: 2.5rem;
+    color: var(--gray-400);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .reviews-carousel-wrapper {
+        max-width: 350px;
+        height: 380px;
+    }
+    
+    .review-card-modern {
+        padding: 1.5rem;
+        height: 280px;
+    }
+    
+    
+    
+    .review-slide:nth-child(2) { 
+        transform: translateZ(-80px) translateX(200px) rotateY(-20deg) scale(0.75);
+    }
+    .review-slide:nth-child(3) { 
+        transform: translateZ(-80px) translateX(-200px) rotateY(20deg) scale(0.75);
+    }
+    
+   
+    
+    .carousel-btn {
+        width: 45px;
+        height: 45px;
+    }
+
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .prev-btn {
+        margin-left: -20px;
+    }
+    
+    .next-btn {
+        margin-right: -20px;
+    }
+    
+    .reviews-cta .btn {
+        display: block;
+        margin: 0.5rem 0;
+    }
+    
+    .summary-stat {
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Animation for stat numbers */
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stat-number {
+    animation: countUp 0.6s ease-out;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.getElementById('reviewsCarousel');
+    const track = document.getElementById('reviewsTrack');
+    const prevBtn = document.getElementById('reviewsPrev');
+    const nextBtn = document.getElementById('reviewsNext');
+    const indicators = document.querySelectorAll('#reviewsIndicators .indicator');
+    
+    if (!track || !prevBtn || !nextBtn) return;
+    
+    const slides = track.querySelectorAll('.review-slide');
+    const totalSlides = slides.length;
+    let currentSlide = 0;
+    let slidesToShow = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
+    let autoplayInterval;
+    
+    // Update slides to show based on screen size
+    function updateSlidesToShow() {
+        const newSlidesToShow = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
+        if (newSlidesToShow !== slidesToShow) {
+            slidesToShow = newSlidesToShow;
+            currentSlide = Math.min(currentSlide, totalSlides - slidesToShow);
+            updateCarousel();
+        }
+    }
+    
+    // 3D Carousel için JavaScript güncellemesi
+    function updateCarousel() {
+        const slides = track.querySelectorAll('.review-slide');
+
+        slides.forEach((slide, index) => {
+            slide.style.transform = '';
+            slide.style.filter = '';
+            slide.style.opacity = '';
+            slide.style.zIndex = '';
+
+            const position = (index - currentSlide + totalSlides) % totalSlides;
+
+            switch(position) {
+                case 0: // Center
+                    slide.style.transform = 'translateZ(0px) rotateY(0deg) scale(1)';
+                    slide.style.zIndex = '3';
+                    slide.style.opacity = '1';
+                    slide.style.filter = 'blur(0px)';
+                    break;
+                case 1: // Right
+                    slide.style.transform = 'translateZ(-100px) translateX(280px) rotateY(-25deg) scale(0.8)';
+                    slide.style.zIndex = '2';
+                    slide.style.opacity = '0.7';
+                    slide.style.filter = 'blur(1px)';
+                    break;
+                case totalSlides - 1: // Left
+                    slide.style.transform = 'translateZ(-100px) translateX(-280px) rotateY(25deg) scale(0.8)';
+                    slide.style.zIndex = '2';
+                    slide.style.opacity = '0.7';
+                    slide.style.filter = 'blur(1px)';
+                    break;
+                default: // Hidden
+                    slide.style.transform = 'translateZ(-200px) scale(0.6)';
+                    slide.style.zIndex = '1';
+                    slide.style.opacity = '0';
+                    slide.style.filter = 'blur(2px)';
+            }
+        });
+
+        // Update indicators
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === currentSlide);
+        });
+    }
+    
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateCarousel();
+    }
+    
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateCarousel();
+    }
+    
+    // Event listeners
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+    
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            currentSlide = index;
+            updateCarousel();
+        });
+    });
+    
+    // Auto-play
+    function startAutoplay() {
+        autoplayInterval = setInterval(nextSlide, 5000);
+    }
+    
+    function stopAutoplay() {
+        if (autoplayInterval) {
+            clearInterval(autoplayInterval);
+        }
+    }
+    
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
+    
+    // Touch/swipe support
+    let startX = 0;
+    let isDragging = false;
+    
+    track.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+        stopAutoplay();
+    });
+    
+    track.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+    });
+    
+    track.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+        
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        }
+        
+        startAutoplay();
+    });
+    
+    // Resize handler
+    window.addEventListener('resize', updateSlidesToShow);
+    
+    // Initialize
+    updateCarousel();
+    startAutoplay();
+    
+    // Animate stats numbers
+    function animateStats() {
+        const stats = document.querySelectorAll('.stat-number[data-target]');
+        stats.forEach(stat => {
+            const target = parseInt(stat.dataset.target);
+            let current = 0;
+            const increment = target / 50;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    stat.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    stat.textContent = Math.floor(current);
+                }
+            }, 30);
+        });
+    }
+    
+    // Trigger stats animation when section is visible
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateStats();
+                observer.unobserve(entry.target);
+            }
+        });
+    });
+    
+    const statsSection = document.querySelector('.reviews-summary');
+    if (statsSection) {
+        observer.observe(statsSection);
+    }
+});
+</script>

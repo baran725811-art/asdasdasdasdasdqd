@@ -1,0 +1,105 @@
+<!--core\dashboard\templates\dashboard\includes\tables\table_header.html-->
+{% load i18n %}
+
+<thead>
+    <tr>
+        <!-- Basit kullanım: Hard-coded headers -->
+        {% if table_type == 'products' %}
+            <th style="width: 100px;"><i class="fas fa-image me-2"></i>{% trans "Görsel"%}</th>
+            <th><i class="fas fa-box me-2"></i>{% trans "Ürün Adı"%}</th>
+            <th><i class="fas fa-barcode me-2"></i>{% trans "Ürün Kodu"%}</th>
+            <th><i class="fas fa-tags me-2"></i>{% trans "Kategori"%}</th>
+            <th><i class="fas fa-tag me-2"></i>{% trans "Marka"%}</th>
+            <th><i class="fas fa-lira-sign me-2"></i>{% trans "Fiyat"%}</th>
+            <th><i class="fas fa-warehouse me-2"></i>{% trans "Stok"%}</th>
+            <th><i class="fas fa-toggle-on me-2"></i>{% trans "Durum"%}</th>
+            <th><i class="fas fa-calendar me-2"></i>{% trans "Tarih"%}</th>
+            <th style="width: 120px;"><i class="fas fa-cogs me-2"></i>{% trans "İşlemler"%}</th>
+        
+        {% elif table_type == 'categories' %}
+            <th width="80">ID</th>
+            <th><i class="fas fa-tag me-2"></i>{% trans "Kategori Adı"%}</th>
+            <th><i class="fas fa-link me-2"></i>{% trans "Slug"%}</th>
+            <th width="120"><i class="fas fa-toggle-on me-2"></i>{% trans "Durum"%}</th>
+            <th width="200"><i class="fas fa-cogs me-2"></i>{% trans "İşlemler"%}</th>
+        
+        {% elif table_type == 'services' %}
+            <th width="80">{% trans "ID"%}</th>
+            <th width="80"><i class="fas fa-sort-numeric-up me-2"></i>{% trans "Sıra"%}</th>
+            <th width="100"><i class="fas fa-image me-2"></i>{% trans "Resim"%}</th>
+            <th><i class="fas fa-heading me-2"></i>{% trans "Başlık"%}</th>
+            <th width="80"><i class="fas fa-home me-2"></i>{% trans "Footer"%}</th>  <!-- YENİ SÜTUN -->
+            <th width="120"><i class="fas fa-toggle-on me-2"></i>{% trans "Durum"%}</th>
+            <th width="200"><i class="fas fa-cogs me-2"></i>{% trans "İşlemler"%}</th>
+        
+        {% elif table_type == 'gallery' or table_type == 'galleries' %}
+            <th width="60">{% trans "ID"%}</th>
+            <th width="100"><i class="fas fa-image me-2"></i>{% trans "Görsel"%}</th>
+            <th><i class="fas fa-heading me-2"></i>{% trans "Başlık"%}</th>
+            <th width="100"><i class="fas fa-photo-video me-2"></i>{% trans "Tür"%}</th>
+            <th width="120"><i class="fas fa-toggle-on me-2"></i>{% trans "Durum"%}</th>
+            <th width="80"><i class="fas fa-sort-numeric-up me-2"></i>{% trans "Sıra"%}</th>
+            <th width="150"><i class="fas fa-cogs me-2"></i>{% trans "İşlemler"%}</th>
+        
+        {% elif table_type == 'team' %}
+            <th width="80"><i class="fas fa-sort-numeric-up me-2"></i>{% trans "Sıra"%}</th>
+            <th width="100"><i class="fas fa-image me-2"></i>{% trans "Fotoğraf"%}</th>
+            <th><i class="fas fa-user me-2"></i>{% trans "Ad Soyad"%}</th>
+            <th><i class="fas fa-briefcase me-2"></i>{% trans "Pozisyon"%}</th>
+            <th width="120"><i class="fas fa-toggle-on me-2"></i>{% trans "Durum"%}</th>
+            <th width="200"><i class="fas fa-cogs me-2"></i>{% trans "İşlemler"%}</th>
+        
+        {% elif table_type == 'messages' %}
+            <th><i class="fas fa-user me-2"></i>{% trans "İsim"%}</th>
+            <th><i class="fas fa-envelope me-2"></i>{% trans "E-posta"%}</th>
+            <th><i class="fas fa-tag me-2"></i>{% trans "Konu"%}</th>
+            <th><i class="fas fa-comment me-2"></i>{% trans "Mesaj"%}</th>
+            <th width="150"><i class="fas fa-calendar me-2"></i>{% trans "Tarih"%}</th>
+            <th width="120"><i class="fas fa-cogs me-2"></i>{% trans "İşlemler"%}</th>
+        
+        {% elif table_type == 'reviews' %}
+            <th width="120"><i class="fas fa-calendar me-2"></i>{% trans "Tarih"%}</th>
+            <th><i class="fas fa-user me-2"></i>{% trans "Ad Soyad"%}</th>
+            <th width="120"><i class="fas fa-star me-2"></i>{% trans "Puan"%}</th>
+            <th><i class="fas fa-comment me-2"></i>{% trans "Yorum"%}</th>
+            <th width="80"><i class="fas fa-image me-2"></i>{% trans "Resim"%}</th>
+            <th width="120"><i class="fas fa-toggle-on me-2"></i>{% trans "Durum"%}</th>
+            <th width="250"><i class="fas fa-cogs me-2"></i>{% trans "İşlemler"%}</th>
+        
+        {% elif table_type == 'carousel' %}
+            <th style="width: 120px;"><i class="fas fa-image me-2"></i>{% trans "Görsel"%}</th>
+            <th><i class="fas fa-heading me-2"></i>{% trans "Başlık"%}</th>
+            <th><i class="fas fa-align-left me-2"></i>{% trans "Açıklama"%}</th>
+            <th><i class="fas fa-tag me-2"></i>{% trans "Alt Metin"%}</th>
+            <th style="width: 120px;"><i class="fas fa-mouse-pointer me-2"></i>{% trans "Buton"%}</th>
+            <th style="width: 80px;"><i class="fas fa-sort me-2"></i>{% trans "Sıra"%}</th>
+            <th style="width: 100px;"><i class="fas fa-toggle-on me-2"></i>{% trans "Durum"%}</th>
+            <th style="width: 150px;"><i class="fas fa-cogs me-2"></i>{% trans "İşlemler"%}</th>
+        
+        {% else %}
+            <!-- Custom headers with table_headers variable -->
+            {% if table_headers %}
+                {% for header in table_headers %}
+                    <th {% if header.width %}style="width: {{ header.width }};"{% endif %} 
+                        {% if header.class %}class="{{ header.class }}"{% endif %}>
+                        {% if header.icon %}
+                            <i class="{{ header.icon }} me-2"></i>
+                        {% endif %}
+                        {{ header.label }}
+                        {% if header.sortable %}
+                            <i class="fas fa-sort ms-1 text-muted"></i>
+                        {% endif %}
+                    </th>
+                {% endfor %}
+            {% else %}
+                <!-- Fallback: Default headers for unknown table types -->
+                <th><i class="fas fa-image me-2"></i>{% trans "Görsel"%}</th>
+                <th><i class="fas fa-heading me-2"></i>{% trans "Başlık"%}</th>
+                <th><i class="fas fa-align-left me-2"></i>{% trans "Açıklama"%}</th>
+                <th><i class="fas fa-sort-numeric-up me-2"></i>{% trans "Sıra"%}</th>
+                <th><i class="fas fa-toggle-on me-2"></i>{% trans "Durum"%}</th>
+                <th><i class="fas fa-cogs me-2"></i>{% trans "İşlemler"%}</th>
+            {% endif %}
+        {% endif %}
+    </tr>
+</thead>

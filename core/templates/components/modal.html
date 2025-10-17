@@ -1,0 +1,47 @@
+<!--core\templates\components\modal.html-->
+{% load i18n %}
+
+<!-- Universal Image Modal - Ortak Modal Sistemi -->
+<div class="image-modal" id="imageModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="image-modal-backdrop" id="imageModalBackdrop"></div>
+    <div class="image-modal-container">
+        <div class="image-modal-header">
+            <span id="imageModalDescription"></span>
+            <span>/</span>
+            <h3 class="image-modal-title" id="imageModalTitle"></h3>
+
+            <div class="image-modal-meta" id="imageModalMeta">
+                
+                <span class="modal-date" id="imageModalDate"></span>
+                <span class="modal-category" id="imageModalCategory"></span>
+            </div>
+
+
+            <button class="image-modal-close" id="imageModalClose" aria-label="{% trans 'Görseli kapat' %}">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+        </div>
+        
+        <div class="image-modal-body">
+            <img id="imageModalImage" src="" alt="" class="image-modal-image">
+            <div class="image-modal-loading" id="imageModalLoading">
+                <i class="fas fa-spinner fa-spin"></i>
+            </div>
+        </div>
+        
+      
+        
+        <div class="image-modal-footer">
+            <button class="image-modal-nav image-modal-prev" id="imageModalPrev" aria-label="{% trans 'Önceki görsel' %}">
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <div class="image-modal-counter" id="imageModalCounter">
+                <span id="imageModalCurrentIndex">1</span> / <span id="imageModalTotal">1</span>
+            </div>
+            <button class="image-modal-nav image-modal-next" id="imageModalNext" aria-label="{% trans 'Sonraki görsel' %}">
+                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+            </button>
+            
+        </div>
+    </div>
+</div>

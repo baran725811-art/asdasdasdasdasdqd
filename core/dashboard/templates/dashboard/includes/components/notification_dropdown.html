@@ -1,0 +1,727 @@
+<!-- dashboard/templates/dashboard/includes/components/notification_dropdown.html -->
+{% load i18n %}
+
+<!-- Notification Dropdown -->
+<div class="dropdown me-2">
+    <button class="btn btn-outline-secondary dropdown-toggle position-relative" type="button" 
+            id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fas fa-bell"></i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger notification-badge" 
+              id="notificationCount" style="display: none;">0</span>
+    </button>
+    
+    <div class="dropdown-menu dropdown-menu-end notification-dropdown" aria-labelledby="notificationDropdown" style="width: 350px;">
+        <!-- Header -->
+        <div class="dropdown-header d-flex justify-content-between align-items-center">
+            <span class="fw-bold">Bildirimler</span>
+            <button class="btn btn-sm btn-outline-primary" id="markAllReadBtn" style="display: none;">
+                <i class="fas fa-check-double me-1"></i>Tümünü Okundu İşaretle
+            </button>
+        </div>
+        
+        <!-- Notifications Content -->
+        <div id="notificationsContent">
+            <div class="dropdown-item-text text-center py-4">
+                <i class="fas fa-bell-slash fa-2x text-muted mb-2"></i>
+                <p class="mb-0 text-muted">Yeni bildirim yok</p>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-item-text text-center">
+            <button class="btn btn-sm btn-primary" id="showAllNotificationsBtn">
+                <i class="fas fa-list me-1"></i>Tüm Bildirimleri Görüntüle
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Bildirimler Modal -->
+<div class="modal fade" id="notificationsModal" tabindex="-1" role="dialog" aria-labelledby="notificationsModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="notificationsModalLabel">
+                    <i class="fas fa-bell me-2"></i>Tüm Bildirimler
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+                <!-- Filtreler -->
+                <div class="p-3 border-bottom bg-light">
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <label for="notificationTypeFilter" class="form-label small">Bildirim Tipi</label>
+                            <select class="form-select form-select-sm" id="notificationTypeFilter">
+                                <option value="all">Tüm Tipler</option>
+                                <option value="message">Mesajlar</option>
+                                <option value="review">Yorumlar</option>
+                                <option value="product">Ürünler</option>
+                                <option value="system">Sistem</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <label for="notificationStatusFilter" class="form-label small">Durum</label>
+                            <select class="form-select form-select-sm" id="notificationStatusFilter">
+                                <option value="all">Tüm Durumlar</option>
+                                <option value="unread">Okunmamış</option>
+                                <option value="read">Okunmuş</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bildirimler Listesi -->
+                <div id="allNotificationsContent" style="min-height: 300px; max-height: 500px; overflow-y: auto;">
+                    <div class="text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Yükleniyor...</span>
+                        </div>
+                        <p class="mt-2 text-muted">Bildirimler yükleniyor...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-1"></i>Kapat
+                </button>
+                <button type="button" class="btn btn-primary" id="markAllReadModalBtn">
+                    <i class="fas fa-check-double me-1"></i>Tümünü Okundu İşaretle
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Global notification system
+window.NotificationDropdownSystem = (function() {
+    
+    // CSRF Token fonksiyonu - global scope'da
+    function getCSRFToken() {
+        // Önce meta tag'den dene
+        const metaTag = document.querySelector('meta[name="csrf-token"]');
+        if (metaTag) {
+            return metaTag.getAttribute('content');
+        }
+        
+        // Cookie'den dene
+        const cookies = document.cookie.split(';');
+        for (let cookie of cookies) {
+            const [name, value] = cookie.trim().split('=');
+            if (name === 'csrftoken') {
+                return value;
+            }
+        }
+        
+        // Form'dan dene
+        const csrfInput = document.querySelector('[name="csrfmiddlewaretoken"]');
+        if (csrfInput) {
+            return csrfInput.value;
+        }
+        
+        console.error('CSRF token bulunamadı!');
+        return '';
+    }
+    
+    let notificationModal = null;
+    
+    
+
+
+
+
+
+
+    // Modal init kısmını değiştirin:
+
+    function init() {
+        console.log('🔔 Notification Dropdown System başlatılıyor...');
+        
+        // Bootstrap kontrolü
+        if (typeof bootstrap === 'undefined') {
+            console.error('Bootstrap bulunamadı! CDN yüklenmedi mi?');
+            // Bootstrap olmadan da temel işlevsellik çalışsın
+            setupEventListeners();
+            loadNotifications();
+            setInterval(loadNotifications, 30000);
+            return;
+        }
+        
+        // Modal element kontrolü
+        const modalElement = document.getElementById('notificationsModal');
+        if (!modalElement) {
+            console.error('Modal element bulunamadı!');
+            return;
+        }
+        
+        // Modal instance oluştur - daha güvenli yöntem
+        try {
+            notificationModal = new bootstrap.Modal(modalElement, {
+                backdrop: 'static',
+                keyboard: true,
+                focus: true
+            });
+            console.log('Modal başarıyla oluşturuldu');
+        } catch (error) {
+            console.error('Modal oluşturma hatası:', error);
+            // Fallback: doğrudan modal API kullan
+            notificationModal = modalElement;
+        }
+        
+        loadNotifications();
+        setupEventListeners();
+        setInterval(loadNotifications, 30000);
+    }
+    
+    // Event listeners'ı da güncelleyin:
+    function setupEventListeners() {
+        // Tümünü okundu işaretle - dropdown
+        const markAllBtn = document.getElementById('markAllReadBtn');
+        if (markAllBtn) {
+            markAllBtn.addEventListener('click', markAllNotificationsRead);
+        }
+        
+        // Tümünü okundu işaretle - modal
+        const markAllModalBtn = document.getElementById('markAllReadModalBtn');
+        if (markAllModalBtn) {
+            markAllModalBtn.addEventListener('click', markAllNotificationsRead);
+        }
+        
+        // Tüm bildirimleri göster butonu
+        const showAllBtn = document.getElementById('showAllNotificationsBtn');
+        if (showAllBtn) {
+            showAllBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = '{% url "dashboard:notifications_list" %}';
+            });
+        }
+        
+        // Modal event listeners
+        const modalElement = document.getElementById('notificationsModal');
+        if (modalElement) {
+            modalElement.addEventListener('shown.bs.modal', function() {
+                console.log('Modal açıldı');
+                loadAllNotifications();
+            });
+            
+            modalElement.addEventListener('hidden.bs.modal', function() {
+                console.log('Modal kapandı');
+            });
+        }
+        
+        // Filtre değişiklikleri
+        const typeFilter = document.getElementById('notificationTypeFilter');
+        const statusFilter = document.getElementById('notificationStatusFilter');
+        
+        if (typeFilter) {
+            typeFilter.addEventListener('change', loadAllNotifications);
+        }
+        if (statusFilter) {
+            statusFilter.addEventListener('change', loadAllNotifications);
+        }
+    }
+    
+    // Modal açma fonksiyonu
+    function showModal() {
+        const modalElement = document.getElementById('notificationsModal');
+        
+        if (!modalElement) {
+            console.error('Modal element bulunamadı!');
+            return;
+        }
+        
+        console.log('Modal açılmaya çalışılıyor...');
+        
+        if (notificationModal && typeof notificationModal.show === 'function') {
+            // Bootstrap modal instance var
+            notificationModal.show();
+        } else if (typeof bootstrap !== 'undefined' && bootstrap.Modal) {
+            // Bootstrap var ama instance yok, oluştur ve aç
+            try {
+                const modal = new bootstrap.Modal(modalElement, {
+                    backdrop: 'static',
+                    keyboard: true
+                });
+                modal.show();
+                notificationModal = modal;
+            } catch (error) {
+                console.error('Modal oluşturma/açma hatası:', error);
+                // Fallback: manuel göster
+                showModalFallback();
+            }
+        } else {
+            // Bootstrap yok, manuel göster
+            showModalFallback();
+        }
+        
+        // Bildirimleri yükle
+        setTimeout(() => {
+            loadAllNotifications();
+        }, 300);
+    }
+    
+    // Fallback modal gösterme
+    function showModalFallback() {
+        const modalElement = document.getElementById('notificationsModal');
+        const backdrop = document.createElement('div');
+        backdrop.className = 'modal-backdrop fade show';
+        backdrop.style.zIndex = '1055';
+        
+        document.body.appendChild(backdrop);
+        modalElement.style.display = 'block';
+        modalElement.classList.add('show');
+        modalElement.style.zIndex = '1060';
+        document.body.classList.add('modal-open');
+        
+        // Kapatma butonları için event listener
+        const closeButtons = modalElement.querySelectorAll('[data-bs-dismiss="modal"]');
+        closeButtons.forEach(btn => {
+            btn.addEventListener('click', hideModalFallback);
+        });
+        
+        // Backdrop tıklama
+        backdrop.addEventListener('click', hideModalFallback);
+    }
+    
+    // Fallback modal kapatma
+    function hideModalFallback() {
+        const modalElement = document.getElementById('notificationsModal');
+        const backdrop = document.querySelector('.modal-backdrop');
+        
+        if (backdrop) {
+            backdrop.remove();
+        }
+        
+        modalElement.style.display = 'none';
+        modalElement.classList.remove('show');
+        document.body.classList.remove('modal-open');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    function loadNotifications() {
+        fetch('{% url "dashboard:get_notifications" %}')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                updateNotificationUI(data);
+            })
+            .catch(error => {
+                console.error('Bildirim yükleme hatası:', error);
+            });
+    }
+    
+    function loadAllNotifications() {
+        const typeFilter = document.getElementById('notificationTypeFilter');
+        const statusFilter = document.getElementById('notificationStatusFilter');
+        
+        const params = new URLSearchParams();
+        if (typeFilter && typeFilter.value !== 'all') {
+            params.append('type', typeFilter.value);
+        }
+        if (statusFilter && statusFilter.value !== 'all') {
+            params.append('status', statusFilter.value);
+        }
+        params.append('all', 'true');
+        
+        fetch(`{% url "dashboard:get_notifications" %}?${params.toString()}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                updateAllNotificationsUI(data);
+            })
+            .catch(error => {
+                console.error('Tüm bildirimler yükleme hatası:', error);
+                document.getElementById('allNotificationsContent').innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Bildirimler yüklenirken hata oluştu.
+                    </div>
+                `;
+            });
+    }
+    
+    function updateNotificationUI(data) {
+        const badge = document.getElementById('notificationCount');
+        const content = document.getElementById('notificationsContent');
+        const markAllBtn = document.getElementById('markAllReadBtn');
+        
+        if (!badge || !content || !markAllBtn) return;
+        
+        // Badge güncelle
+        if (data.unread_count > 0) {
+            badge.textContent = data.unread_count;
+            badge.style.display = 'block';
+            markAllBtn.style.display = 'block';
+        } else {
+            badge.style.display = 'none';
+            markAllBtn.style.display = 'none';
+        }
+        
+        // İçerik güncelle
+        if (data.notifications && data.notifications.length > 0) {
+            let html = '';
+            data.notifications.forEach(notification => {
+                html += createNotificationItem(notification);
+            });
+            content.innerHTML = html;
+        } else {
+            content.innerHTML = `
+                <div class="dropdown-item-text text-center py-4">
+                    <i class="fas fa-bell-slash fa-2x text-muted mb-2"></i>
+                    <p class="mb-0 text-muted">Yeni bildirim yok</p>
+                </div>
+            `;
+        }
+    }
+    
+    function updateAllNotificationsUI(data) {
+        const content = document.getElementById('allNotificationsContent');
+        if (!content) return;
+        
+        if (data.notifications && data.notifications.length > 0) {
+            let html = '<div class="list-group list-group-flush">';
+            data.notifications.forEach(notification => {
+                html += createNotificationListItem(notification);
+            });
+            html += '</div>';
+            content.innerHTML = html;
+        } else {
+            content.innerHTML = `
+                <div class="text-center py-4">
+                    <i class="fas fa-bell-slash fa-2x text-muted mb-2"></i>
+                    <p class="mb-0 text-muted">Bildirim bulunamadı</p>
+                </div>
+            `;
+        }
+    }
+    
+    function createNotificationItem(notification) {
+        const typeIcons = {
+            'message': 'fas fa-envelope text-info',
+            'review': 'fas fa-star text-success',
+            'product': 'fas fa-box text-primary',
+            'system': 'fas fa-cog text-secondary',
+            'order': 'fas fa-shopping-cart text-warning',
+            'user': 'fas fa-user text-info'
+        };
+        
+        const icon = typeIcons[notification.type] || 'fas fa-bell text-secondary';
+        
+        return `
+            <div class="dropdown-item notification-item p-3 cursor-pointer" 
+                 onclick="handleNotificationClick(${notification.id}, '${notification.redirect_url || ''}', '${notification.type}')">
+                <div class="d-flex">
+                    <div class="flex-shrink-0 me-3">
+                        <i class="${icon}"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                        <div class="fw-bold small">${escapeHtml(notification.title)}</div>
+                        <div class="text-muted small">${escapeHtml(notification.message)}</div>
+                        <div class="text-muted small">${notification.created_at}</div>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <button class="btn btn-sm btn-outline-success mark-read-btn" 
+                                onclick="event.stopPropagation(); markNotificationRead(${notification.id})">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    function createNotificationListItem(notification) {
+        const typeIcons = {
+            'message': 'fas fa-envelope text-info',
+            'review': 'fas fa-star text-success',
+            'product': 'fas fa-box text-primary',
+            'system': 'fas fa-cog text-secondary',
+            'order': 'fas fa-shopping-cart text-warning',
+            'user': 'fas fa-user text-info'
+        };
+        
+        const icon = typeIcons[notification.type] || 'fas fa-bell text-secondary';
+        const readClass = notification.is_read ? 'list-group-item-light' : 'list-group-item-primary';
+        
+        return `
+            <div class="list-group-item ${readClass} cursor-pointer" 
+                 onclick="handleNotificationClick(${notification.id}, '${notification.redirect_url || ''}', '${notification.type}')">
+                <div class="d-flex">
+                    <div class="flex-shrink-0 me-3">
+                        <i class="${icon}"></i>
+                    </div>
+                    <div class="flex-grow-1">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">${escapeHtml(notification.title)}</h6>
+                            <small>${notification.created_at}</small>
+                        </div>
+                        <p class="mb-1">${escapeHtml(notification.message)}</p>
+                        <small>Tip: ${notification.type}</small>
+                    </div>
+                    ${!notification.is_read ? `
+                    <div class="flex-shrink-0">
+                        <button class="btn btn-sm btn-outline-success" 
+                                onclick="event.stopPropagation(); markNotificationRead(${notification.id})">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </div>
+                    ` : ''}
+                </div>
+            </div>
+        `;
+    }
+    
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    // Global fonksiyonlar
+    window.handleNotificationClick = function(notificationId, redirectUrl, type) {
+        // Önce bildirimi okundu olarak işaretle
+        markNotificationRead(notificationId, () => {
+            // Modal'ı kapat
+            if (notificationModal) {
+                notificationModal.hide();
+            }
+            
+            // Sonra yönlendirme yap
+            if (redirectUrl && redirectUrl !== '' && redirectUrl !== 'null') {
+                window.location.href = redirectUrl;
+            } else {
+                // Varsayılan yönlendirmeler
+                switch(type) {
+                    case 'message':
+                        window.location.href = '{% url "dashboard:dashboard_messages" %}';
+                        break;
+                    case 'review':
+                        window.location.href = '{% url "dashboard:dashboard_messages" %}';
+                        break;
+                    case 'product':
+                        window.location.href = '{% url "dashboard:dashboard_products" %}';
+                        break;
+                    default:
+                        window.location.href = '{% url "dashboard:home" %}';
+                }
+            }
+        });
+    };
+    
+    function markNotificationRead(notificationId, callback = null) {
+        const csrfToken = getCSRFToken();
+        
+        fetch(`{% url 'dashboard:mark_notification_read' 0 %}`.replace('0', notificationId), {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrfToken,
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                loadNotifications(); // Dropdown'u yenile
+                loadAllNotifications(); // Modal'ı yenile
+                if (callback) callback();
+            }
+        })
+        .catch(error => {
+            console.error('Bildirim işaretleme hatası:', error);
+        });
+    }
+    
+    function markAllNotificationsRead() {
+        const csrfToken = getCSRFToken();
+        
+        fetch('{% url "dashboard:mark_all_notifications_read" %}', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrfToken,
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                loadNotifications(); // Dropdown'u yenile
+                loadAllNotifications(); // Modal'ı yenile
+            }
+        })
+        .catch(error => {
+            console.error('Toplu işaretleme hatası:', error);
+        });
+    }
+    
+    // Public API
+    return {
+        init: init,
+        loadNotifications: loadNotifications,
+        loadAllNotifications: loadAllNotifications
+    };
+})();
+
+// DOM ready olduğunda başlat
+document.addEventListener('DOMContentLoaded', function() {
+    // Bootstrap'in yüklendiğinden emin ol
+    if (typeof bootstrap !== 'undefined') {
+        window.NotificationDropdownSystem.init();
+    } else {
+        console.error('Bootstrap bulunamadı! Modal çalışmayacak.');
+        // Bootstrap olmadan da dropdown çalışsın
+        setTimeout(() => {
+            window.NotificationDropdownSystem.init();
+        }, 1000);
+    }
+});
+</script>
+
+<style>
+
+/* MODAL Z-INDEX FIX - EN ÜST SEVIYE */
+#notificationsModal {
+    z-index: 99999 !important;
+}
+
+#notificationsModal .modal-dialog {
+    z-index: 99999 !important;
+}   
+
+.modal-backdrop {
+    z-index: 99998 !important;
+}
+
+.modal:not(#notificationsModal) {
+    z-index: 1055 !important;
+}
+
+.modal:not(#notificationsModal) .modal-dialog {
+    z-index: 1060 !important;
+}
+
+/* Force modal to be visible */
+.modal.show #notificationsModal {
+    display: block !important;
+    opacity: 1 !important;
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.notification-dropdown {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.notification-item {
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+}
+
+.notification-item:hover {
+    background-color: #f8f9fa !important;
+}
+
+.notification-badge {
+    font-size: 0.7rem;
+}
+
+.list-group-item {
+    border-left: 4px solid transparent;
+}
+
+.list-group-item-primary {
+    border-left-color: #0d6efd;
+    background-color: rgba(13, 110, 253, 0.05);
+}
+
+/* MODAL FIX */
+#notificationsModal {
+    z-index: 1060 !important;
+}
+
+#notificationsModal .modal-backdrop {
+    z-index: 1055 !important;
+}
+
+#notificationsModal .modal-dialog {
+    z-index: 1065 !important;
+    position: relative;
+}
+
+.modal-dialog-scrollable .modal-body {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+/* Bootstrap modal override */
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out;
+    transform: translate(0, -50px);
+}
+
+.modal.show .modal-dialog {
+    transform: none;
+}
+
+/* Mobil uyumluluk */
+@media (max-width: 768px) {
+    .notification-dropdown {
+        width: 300px !important;
+    }
+    
+    .modal-dialog {
+        margin: 0.5rem;
+        max-width: calc(100% - 1rem);
+    }
+    
+    #notificationsModal .modal-dialog {
+        margin: 10px;
+        max-width: calc(100% - 20px);
+    }
+}
+
+/* Debug için geçici - modal görünür olsun */
+.modal.show {
+    display: block !important;
+}
+
+.modal-backdrop.show {
+    opacity: 0.5 !important;
+}
+</style>

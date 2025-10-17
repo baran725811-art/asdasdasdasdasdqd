@@ -1,0 +1,32 @@
+{% load video_tags %}
+
+{% load static %}
+{% load i18n %}
+
+<section class="gallery-hero">
+    <div class="hero-content">
+        <div class="container">
+            <div class="hero-text" data-aos="fade-up">
+                <h1 class="hero-title">{% trans "Galeri" %}</h1>
+                <p class="hero-description">
+                    {% trans "Profesyonel çalışmalarımızdan örnekler, projelerimiz ve hizmet videolarımız" %}
+                </p>
+                <div class="hero-features" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-item">
+                        <i class="fas fa-images"></i>
+                        <span>{% trans "Yüksek Kalite" %}</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-play-circle"></i>
+                        <span>{% trans "Video İçerik" %}</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-eye"></i>
+                        <span>{% trans "Detaylı Görünüm" %}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hero-pattern"></div>
+</section>

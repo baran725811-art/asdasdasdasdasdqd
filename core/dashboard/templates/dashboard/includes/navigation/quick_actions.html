@@ -1,0 +1,192 @@
+<!-- Quick Actions Component -->
+<div class="card h-100">
+    <div class="card-header bg-gradient-primary text-white">
+        <h5 class="card-title mb-0 d-flex align-items-center">
+            <i class="fas fa-bolt me-2"></i>{{ section_title|default:"Hızlı Erişim" }}
+        </h5>
+    </div>
+    <div class="card-body p-0">
+        <div class="quick-actions-grid">
+            {% for action in actions %}
+            <a href="{{ action.url }}" class="quick-action-item">
+                <div class="action-icon bg-{{ action.color }}">
+                    <i class="{{ action.icon }}"></i>
+                </div>
+                <div class="action-content">
+                    <h6 class="action-title">{{ action.title }}</h6>
+                    <p class="action-description">{{ action.description }}</p>
+                </div>
+                <div class="action-arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </a>
+            {% empty %}
+            <div class="text-center py-4">
+                <i class="fas fa-rocket fa-2x text-muted mb-2"></i>
+                <p class="text-muted mb-0">Hızlı erişim bulunamadı</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<style>
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.quick-actions-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.quick-action-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 1px solid #f1f3f4;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.quick-action-item:hover {
+    background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
+    color: inherit;
+    text-decoration: none;
+    transform: translateX(4px);
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+}
+
+.quick-action-item:last-child {
+    border-bottom: none;
+}
+
+.action-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.25rem;
+    margin-right: 1rem;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.quick-action-item:hover .action-icon {
+    transform: scale(1.05);
+}
+
+.bg-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+.bg-success {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%) !important;
+}
+
+.bg-info {
+    background: linear-gradient(135deg, #209cff 0%, #68e0cf 100%) !important;
+}
+
+.bg-warning {
+    background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%) !important;
+}
+
+.bg-danger {
+    background: linear-gradient(135deg, #fc466b 0%, #3f5efb 100%) !important;
+}
+
+.action-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.action-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: #2d3748;
+}
+
+.action-description {
+    font-size: 0.8rem;
+    color: #718096;
+    margin-bottom: 0;
+    line-height: 1.3;
+}
+
+.action-arrow {
+    color: #a0aec0;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+}
+
+.quick-action-item:hover .action-arrow {
+    opacity: 1;
+    transform: translateX(0);
+    color: #667eea;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .quick-action-item {
+        padding: 0.875rem 1rem;
+    }
+    
+    .action-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+        margin-right: 0.75rem;
+    }
+    
+    .action-title {
+        font-size: 0.9rem;
+    }
+    
+    .action-description {
+        font-size: 0.75rem;
+    }
+}
+
+/* Hover animasyonları */
+.quick-action-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.quick-action-item:hover::before {
+    left: 100%;
+}
+
+/* Loading state için */
+.quick-actions-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.quick-actions-loading .spinner-border {
+    width: 2rem;
+    height: 2rem;
+    border-width: 0.2rem;
+}
+</style>

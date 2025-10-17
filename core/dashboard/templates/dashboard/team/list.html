@@ -1,0 +1,503 @@
+{% extends 'dashboard/base/list_base.html' %}
+{% load dashboard_filters %}
+{% load static %}
+{% load widget_tweaks %}
+{% load i18n %}
+{% load custom_filters %} 
+{% block title %}{% trans "Ekibimiz" %}{% endblock %}
+{% block page_title %}{% trans "Ekip Yönetimi" %}{% endblock %}
+
+{% block page_content %}
+<!-- Page Header -->
+{% include 'dashboard/includes/navigation/page_header.html' with page_title="Ekip Yönetimi" page_subtitle="Ekip üyelerinizi düzenleyin ve yönetin" page_icon="fas fa-users" page_actions=page_actions %}
+
+<!-- Statistics -->
+<div class="row g-4 mb-4">
+    <div class="col-xl-3 col-lg-6 col-md-6">
+        {% include 'dashboard/includes/cards/stats_card.html' with card_value=total_members card_label="Toplam Üye" card_icon="fas fa-users" card_style="modern" card_color="primary" %}
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6">
+        {% include 'dashboard/includes/cards/stats_card.html' with card_value=active_members card_label="Aktif Üyeler" card_icon="fas fa-user-check" card_style="modern" card_color="success" %}
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6">
+        {% include 'dashboard/includes/cards/stats_card.html' with card_value=positions_count card_label="Pozisyon Sayısı" card_icon="fas fa-briefcase" card_style="modern" card_color="info" %}
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-6">
+        {% include 'dashboard/includes/cards/stats_card.html' with card_value=avg_order card_label="Ortalama Sıralama" card_icon="fas fa-sort-numeric-up" card_style="modern" card_color="warning" %}
+    </div>
+</div>
+
+<!-- View Toggle & Search -->
+<div class="mb-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="view-toggle">
+            <button class="btn-toggle active" data-view="grid" title="{% trans 'Kart Görünümü' %}">
+                <i class="fas fa-th-large"></i>
+            </button>
+            <button class="btn-toggle" data-view="table" title="{% trans 'Liste Görünümü' %}">
+                <i class="fas fa-list"></i>
+            </button>
+        </div>
+        <div class="d-flex gap-2">
+            {% include 'dashboard/includes/tables/table_search.html' with search_id="memberSearch" search_placeholder="Ekip üyesi ara..." %}
+            <button type="button" class="btn-modern primary btn-sm" data-bs-toggle="modal" data-bs-target="#addMemberModal">
+                <i class="fas fa-plus me-1"></i>{% trans "Yeni Ekip Üyesi" %}
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Grid View -->
+<div id="gridView" class="team-grid">
+    {% if team_members %}
+    <div class="row g-4">
+        {% for member in team_members %}
+        <div class="col-xl-3 col-lg-4 col-md-6 team-card-wrapper" data-name="{{ member.name|lower }}" data-position="{{ member.position|lower }}" data-member-id="{{ member.id }}">
+            <div class="team-card">
+                <div class="team-card-image">
+                    {% if member.image %}
+                    <img src="{{ member.image.url }}" alt="{{ member.get_alt_text }}" class="card-img" loading="lazy">
+                    {% else %}
+                    <div class="team-card-placeholder">
+                        <i class="fas fa-user fa-2x"></i>
+                    </div>
+                    {% endif %}
+                    <div class="team-card-overlay">
+                        <div class="team-card-actions">
+                            <button class="btn-card-action" data-bs-toggle="modal" data-bs-target="#memberModal{{ member.id }}" title="Detayları Görüntüle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn-card-action" data-bs-toggle="modal" data-bs-target="#editMemberModal{{ member.id }}" title="Düzenle">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn-card-action delete" data-bs-toggle="modal" data-bs-target="#deleteMemberModal{{ member.id }}" title="Sil">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="team-order-badge">#{{ member.order }}</div>
+                    {% include 'dashboard/includes/ui/status_badge.html' with badge_text=member.is_active|yesno:"Aktif,Pasif" badge_color=member.is_active|yesno:"success,danger" badge_classes="team-status-badge" %}
+                </div>
+                <div class="team-card-content">
+                    <h5 class="team-card-title">{{ member.name }}</h5>
+                    <p class="team-card-position">{{ member.position }}</p>
+                    {% if member.bio %}
+                    <p class="team-card-description">{{ member.bio|truncatewords:12|striptags }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="row">
+        <div class="col-12">
+            {% include 'dashboard/includes/ui/empty_state.html' with empty_title="Henüz ekip üyesi bulunmuyor" empty_message="İlk ekip üyenizi eklemek için yukarıdaki 'Yeni Ekip Üyesi' butonunu kullanın." empty_icon="fas fa-users" action_button_text="İlk Üyeyi Ekle" action_button_icon="fas fa-plus" action_button_attrs='data-bs-toggle="modal" data-bs-target="#addMemberModal"' %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Table View -->
+<!-- Table View -->
+<div id="tableView" style="display: none;">
+    <div class="table-card">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-modern table-hover" id="teamTable">
+                    {% include 'dashboard/includes/tables/table_header.html' with table_type='team' %}
+                    
+                    <tbody>
+                        {% for member in team_members %}  <!-- ✅ DOĞRU -->
+                        <tr data-member-id="{{ member.id }}">
+                            <td>
+                                <div class="fw-semibold">{{ member.order }}</div>
+                            </td>
+                            <td>
+                                {% if member.image %}
+                                    <img src="{{ member.image.url }}" alt="{{ member.get_alt_text }}" class="image-modern" style="width: 50px; height: 50px; object-fit: cover;" loading="lazy">
+                                {% else %}
+                                    <div class="image-placeholder" style="width: 50px; height: 50px;">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="fw-semibold">{{ member.name }}</div>
+                                {% if member.bio %}
+                                    <small class="text-muted">{{ member.bio|truncatewords:8|striptags }}</small>
+                                {% endif %}
+                            </td>
+                            <td>{{ member.position }}</td>
+                            <td>
+                                {% include 'dashboard/includes/ui/status_badge.html' with badge_text=member.is_active|yesno:"Aktif,Pasif" badge_color=member.is_active|yesno:"success,danger" %}
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-action edit" 
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#editMemberModal{{ member.id }}" 
+                                            title="{% trans 'Düzenle' %}">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-action view" 
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#memberModal{{ member.id }}" 
+                                            title="{% trans 'Görüntüle' %}">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-action delete" 
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#deleteMemberModal{{ member.id }}" 
+                                            title="{% trans 'Sil' %}">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}  <!-- ✅ DOĞRU KAPANIŞ -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Add Member Modal -->
+<div class="modal fade modal-modern" id="addMemberModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-plus me-2"></i>{% trans "Yeni Ekip Üyesi Ekle" %}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            
+            <form method="post" enctype="multipart/form-data" id="addMemberForm" action="{% url 'dashboard:team_member_create' %}">
+                {% csrf_token %}
+                
+                <div class="modal-body">
+                    <!-- Çeviri Dil Sekmeleri -->
+                    {% if translation_enabled and enabled_languages|length > 1 %}
+                        {% include 'dashboard/includes/forms/translation_tabs.html' %}
+                    {% endif %}
+
+                    <!-- Türkçe İçerik -->
+                    <div class="translation-content active" data-lang="tr">
+                        <div class="row">
+                            <div class="col-md-6">
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="name" field_label="Ad Soyad" field_icon="fas fa-user" field_type="text" is_required=True help_text="Ekip üyesinin adını girin" language_code="tr" %}
+                            </div>
+                            <div class="col-md-6">
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="order" field_label="Sıralama" field_icon="fas fa-sort-numeric-up" field_type="number" field_min="0" field_value="0" help_text="Küçük sayılar önce görünür" %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="position" field_label="Pozisyon" field_icon="fas fa-briefcase" field_type="text" is_required=True help_text="Ör: Genel Müdür, Yazılım Geliştirici..." language_code="tr" %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="bio" label="Biyografi" rows="4" help_text="Ekip üyesinin deneyimi, uzmanlık alanları vb." %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Çeviri Dilleri İçerikleri -->
+                    {% if translation_enabled and enabled_languages|length > 1 %}
+                        {% for lang in enabled_languages %}
+                            {% if lang != 'tr' %}
+                            <div class="translation-content" data-lang="{{ lang }}">
+                                
+                                <div class="row">
+                                    <div class="col-12">
+                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="position_"|add:lang field_label="Pozisyon" field_icon="fas fa-briefcase" field_type="text" is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="bio_"|add:lang label="Biyografi" rows="4" help_text="Bu alan zorunludur" %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+
+                    <!-- Ortak Alanlar -->
+                    <div class="card-modern mt-4">
+                        <div class="card-header-modern">
+                            <h6 class="mb-0">
+                                <i class="fas fa-cogs me-2"></i>{% trans "Genel Ayarlar" %}
+                            </h6>
+                        </div>
+                        <div class="card-body-modern">
+                            <div class="row">
+                                <div class="col-12">
+                                    {% include 'dashboard/includes/forms/image_upload_field.html' with field_name="image" label="Fotoğraf" help_text="Önerilen boyut: 400x400 piksel, JPG/PNG formatında" required=True %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text" field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" help_text="Fotoğraf için SEO alt metni (max 125 karakter)" %}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-12">
+                                    {% include 'dashboard/includes/forms/checkbox_field.html' with field_name="is_active" label="Aktif Durumda" field_type="switch" icon="fas fa-toggle-on" checked=True help_text="Pasif üyeler web sitesinde görüntülenmez" %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>{% trans "İptal" %}
+                    </button>
+                    <button type="submit" class="btn-modern primary">
+                        <i class="fas fa-save me-2"></i>{% trans "Üyeyi Kaydet" %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Member Modals -->
+{% for member_data in team_members_with_translations %}
+{% with member=member_data.object %}
+<div class="modal fade modal-modern" id="editMemberModal{{ member.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-edit me-2"></i>{% trans "Ekip Üyesi Düzenle" %}: {{ member.name }}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            
+            <form method="post" enctype="multipart/form-data" id="editMemberForm{{ member.id }}" action="{% url 'dashboard:team_member_edit' member.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="member_id" value="{{ member.id }}">
+                
+                <div class="modal-body">
+                    <!-- Çeviri Dil Sekmeleri -->
+                    {% if translation_enabled and enabled_languages|length > 1 %}
+                        {% include 'dashboard/includes/forms/translation_tabs.html' %}
+                    {% endif %}
+
+                    <!-- Türkçe İçerik -->
+                    <div class="translation-content active" data-lang="tr">
+                        <div class="row">
+                            <div class="col-md-6">
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="name" field_label="Ad Soyad" field_icon="fas fa-user" field_type="text" field_value=member.name is_required=True language_code="tr" %}
+                            </div>
+                            <div class="col-md-6">
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="order" field_label="Sıralama" field_icon="fas fa-sort-numeric-up" field_type="number" field_value=member.order field_min="0" %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="position" field_label="Pozisyon" field_icon="fas fa-briefcase" field_type="text" field_value=member.position is_required=True language_code="tr" %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="bio" label="Biyografi" value=member.bio rows="4" %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Çeviri Dilleri İçerikleri -->
+                    <!-- Çeviri Dilleri İçerikleri -->
+                    {% if translation_enabled and enabled_languages|length > 1 %}
+                        {% for lang in enabled_languages %}
+                            {% if lang != 'tr' %}
+                            <div class="translation-content" data-lang="{{ lang }}">
+                                <!-- Ad Soyad alanını KALDIR - çevrilmeyecek -->
+                                
+                                <div class="row">
+                                    <div class="col-12">
+                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="position_"|add:lang field_label="Pozisyon" field_icon="fas fa-briefcase" field_type="text" field_value=member_data.translations|lookup:lang|lookup:"position" is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="bio_"|add:lang label="Biyografi" value=member_data.translations|lookup:lang|lookup:"bio" rows="4" help_text="Bu alan zorunludur" %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+
+                    <!-- Ortak Alanlar -->
+                    <div class="card-modern mt-4">
+                        <div class="card-header-modern">
+                            <h6 class="mb-0">
+                                <i class="fas fa-cogs me-2"></i>{% trans "Genel Ayarlar" %}
+                            </h6>
+                        </div>
+                        <div class="card-body-modern">
+                            <div class="row">
+                                <div class="col-12">
+                                    {% include 'dashboard/includes/forms/image_upload_field.html' with field_name="image" label="Fotoğraf" current_image=member.image help_text="Yeni fotoğraf seçmezseniz mevcut fotoğraf korunur" %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text" field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" field_value=member.alt_text help_text="Fotoğraf için SEO alt metni (max 125 karakter)" %}
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-12">
+                                    {% include 'dashboard/includes/forms/checkbox_field.html' with field_name="is_active" label="Aktif Durumda" field_type="switch" icon="fas fa-toggle-on" checked=member.is_active help_text="Pasif üyeler web sitesinde görüntülenmez" %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-2"></i>{% trans "İptal" %}
+                    </button>
+                    <button type="submit" class="btn-modern primary">
+                        <i class="fas fa-save me-2"></i>{% trans "Değişiklikleri Kaydet" %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Member Detail Modal -->
+<div class="modal fade modal-modern" id="memberModal{{ member.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-user me-2"></i>{% trans "Ekip Üyesi Detayı" %}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        {% if member.image %}
+                    <img src="{{ member.image.url }}" alt="{{ member.get_alt_text }}" 
+                         class="img-fluid rounded-circle shadow-modern mb-3" 
+                         style="width: 200px; height: 200px; object-fit: cover;" loading="lazy">
+                    {% else %}
+                    <div class="member-image-placeholder-large mb-3">
+                        <i class="fas fa-user fa-5x"></i>
+                    </div>
+                    {% endif %}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="info-group mb-3">
+                            <label class="fw-semibold"><i class="fas fa-user me-2"></i>{% trans "Ad Soyad" %}:</label>
+                            <span>{{ member.name }}</span>
+                        </div>
+                        <div class="info-group mb-3">
+                            <label class="fw-semibold"><i class="fas fa-briefcase me-2"></i>{% trans "Pozisyon" %}:</label>
+                            <span>{{ member.position }}</span>
+                        </div>
+                        <div class="info-group mb-3">
+                            <label class="fw-semibold"><i class="fas fa-sort-numeric-up me-2"></i>{% trans "Sıra" %}:</label>
+                            <span>{{ member.order }}</span>
+                        </div>
+                        <div class="info-group mb-3">
+                            <label class="fw-semibold"><i class="fas fa-toggle-on me-2"></i>{% trans "Durum" %}:</label>
+                            {% include 'dashboard/includes/ui/status_badge.html' with badge_text=member.is_active|yesno:"Aktif,Pasif" badge_color=member.is_active|yesno:"success,danger" %}
+                        </div>
+                        {% if member.bio %}
+                        <div class="info-group mb-3">
+                            <label class="fw-semibold"><i class="fas fa-info-circle me-2"></i>{% trans "Biyografi" %}:</label>
+                            <div class="member-description-full p-3 bg-light rounded">
+                                {{ member.bio }}
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="info-group mb-3">
+                            <label class="fw-semibold"><i class="fas fa-calendar me-2"></i>{% trans "Oluşturma Tarihi" %}:</label>
+                            <span>{% include 'dashboard/includes/partials/datetime_display.html' with datetime_value=member.created_at %}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times"></i>{% trans "Kapat" %}
+                </button>
+                <button type="button" class="btn-modern primary" data-bs-toggle="modal" data-bs-target="#editMemberModal{{ member.id }}">
+                    <i class="fas fa-edit"></i>{% trans "Düzenle" %}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteMemberModal{{ member.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">
+                    <i class="fas fa-exclamation-triangle me-2"></i>{% trans "Ekip Üyesi Sil" %}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <i class="fas fa-trash-alt text-danger fa-3x mb-3"></i>
+                    <h5>{% trans "Bu ekip üyesini silmek istediğinizden emin misiniz?" %}</h5>
+                    <p class="text-muted">
+                        <strong>"{{ member.name }}"</strong> kalıcı olarak silinecek.
+                    </p>
+                    <div class="alert alert-warning mt-3">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Bu işlem geri alınamaz!
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>{% trans "İptal" %}
+                </button>
+                
+                <form method="post" style="display: inline;" class="delete-form" 
+                      data-item-type="ekip üyesi"
+                      data-item-name="{{ member.name }}"
+                      action="{% url 'dashboard:team_member_delete' member.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger delete-confirm-btn">
+                        <i class="fas fa-trash me-2"></i>{% trans "Sil" %}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endwith %}
+{% endfor %}
+
+{% endblock %}
+
+{% block list_modals %}
+<!-- Bulk Actions Modal -->
+{% include 'dashboard/includes/modals/bulk_actions_modal.html' %}
+{% endblock %}
+{% block extra_js %}
+<!-- Team Page Styles -->
+<link rel="stylesheet" href="{% static 'dashboard/css/pages/team.css' %}">
+
+<!-- Team Page JavaScript -->
+<script src="{% static 'dashboard/js/pages/team.js' %}"></script>
+
+<!-- Remove the existing JavaScript code and replace with just this -->
+{% endblock %}

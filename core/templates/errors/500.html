@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{{ error_title }} - {{ block.super }}{% endblock %}
+
+{% block meta_description %}{{ meta_description }}{% endblock %}
+
+{% block extra_meta %}
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="{{ canonical_url }}">
+
+<!-- Structured Data for 500 Error -->
+<script type="application/ld+json">
+{{ structured_data|safe }}
+</script>
+
+<!-- Open Graph -->
+<meta property="og:title" content="{{ error_title }}">
+<meta property="og:description" content="{{ meta_description }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ canonical_url }}">
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.error-page {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    padding: 80px 0;
+}
+
+.error-content {
+    text-align: center;
+}
+
+.error-icon {
+    font-size: 80px;
+    color: #dc3545;
+    margin-bottom: 20px;
+}
+
+.error-code {
+    font-size: 100px;
+    font-weight: bold;
+    color: #dc3545;
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+.error-title {
+    font-size: 2.5rem;
+    color: #343a40;
+    margin-bottom: 20px;
+}
+
+.error-message {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.safe-links {
+    margin-top: 40px;
+}
+
+.safe-link {
+    display: inline-block;
+    margin: 5px 10px;
+    padding: 10px 20px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #495057;
+    transition: all 0.3s ease;
+}
+
+.safe-link:hover {
+    background-color: #f8f9fa;
+    border-color: #adb5bd;
+    text-decoration: none;
+    color: #495057;
+}
+
+.contact-info {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 30px;
+    margin-top: 40px;
+}
+
+.status-indicator {
+    margin-top: 30px;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.status-investigating {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+@media (max-width: 768px) {
+    .error-code {
+        font-size: 70px;
+    }
+    
+    .error-title {
+        font-size: 2rem;
+    }
+    
+    .error-message {
+        font-size: 1rem;
+    }
+    
+    .safe-link {
+        display: block;
+        margin: 10px 0;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="error-page">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="error-content">
+                    <!-- Error Icon -->
+                    <div class="error-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    
+                    <!-- Error Code -->
+                    <div class="error-code">{{ error_code }}</div>
+                    
+                    <!-- Error Title -->
+                    <h1 class="error-title">{{ error_title }}</h1>
+                    
+                    <!-- Error Message -->
+                    <p class="error-message">{{ error_message }}</p>
+                    
+                    <!-- Status Indicator -->
+                    <div class="status-indicator">
+                        <span class="status-badge status-investigating">
+                            <i class="fas fa-tools"></i> {% trans "Sorun araştırılıyor" %}
+                        </span>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="mt-4">
+                        <a href="{% url 'home:home' %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-home"></i> {% trans "Ana Sayfaya Dön" %}
+                        </a>
+                        <button onclick="location.reload()" class="btn btn-outline-secondary btn-lg ml-3">
+                            <i class="fas fa-redo"></i> {% trans "Sayfayı Yenile" %}
+                        </button>
+                    </div>
+
+                    {% if safe_links %}
+                    <!-- Safe Navigation Links -->
+                    <div class="safe-links">
+                        <h5>{% trans "Güvenli Sayfalar" %}</h5>
+                        {% for link in safe_links %}
+                        <a href="{{ link.url }}" class="safe-link">{{ link.title }}</a>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    {% if show_contact %}
+                    <!-- Contact Support -->
+                    <div class="contact-info">
+                        <h5><i class="fas fa-headset"></i> {% trans "Teknik Destek" %}</h5>
+                        <p>{% trans "Sorun devam ederse, lütfen teknik destek ekibimizle iletişime geçin." %}</p>
+                        
+                        {% if support_email %}
+                        <p>
+                            <strong>{% trans "E-posta" %}:</strong> 
+                            <a href="mailto:{{ support_email }}">{{ support_email }}</a>
+                        </p>
+                        {% endif %}
+                        
+                        <p class="text-muted small">
+                            {% trans "Hata kodu" %}: {{ error_code }} | 
+                            {% trans "Zaman" %}: {% now "Y-m-d H:i:s" %}
+                        </p>
+                    </div>
+                    {% endif %}
+
+                    <!-- Auto Refresh Notice -->
+                    <div class="mt-4">
+                        <p class="text-muted small">
+                            <i class="fas fa-info-circle"></i>
+                            {% trans "Bu sayfa 30 saniye sonra otomatik olarak yenilenecektir." %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Auto refresh after 30 seconds
+setTimeout(function() {
+    location.reload();
+}, 30000);
+</script>
+{% endblock %}

@@ -1,0 +1,80 @@
+<!-- dashboard/templates/dashboard/includes/navigation/sidebar.html -->
+{% load i18n %}
+
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <button class="sidebar-close" id="sidebarClose">
+            <i class="fas fa-times"></i>
+        </button>
+        <h4>{{ site_settings.site_name|default:"Dashboard" }}</h4>
+        <div class="subtitle">{% trans "Yönetim Paneli"%}</div>
+    </div>
+    
+    <nav class="sidebar-nav">
+        <a href="{% url 'dashboard:home' %}" class="sidebar-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+            <i class="fas fa-home"></i> {% trans "Ana Sayfa"%}
+        </a>
+
+        <hr class="sidebar-divider">
+
+        <a href="{% url 'dashboard:dashboard_about_edit' %}" class="sidebar-link {% if 'about' in request.path %}active{% endif %}">
+            <i class="fas fa-info-circle"></i> {% trans "Hakkımızda"%}
+        </a>
+
+        <a href="{% url 'dashboard:service_list' %}" class="sidebar-link {% if 'services' in request.path %}active{% endif %}">
+            <i class="fas fa-cogs"></i> {% trans "Hizmetlerimiz"%}
+        </a>
+
+        <a href="{% url 'dashboard:dashboard_messages' %}" class="sidebar-link {% if 'messages' in request.path %}active{% endif %}">
+            <i class="fas fa-envelope"></i> {% trans "Mesajlar"%}
+        </a>
+        
+        <a href="{% url 'dashboard:reviews' %}" class="sidebar-link {% if 'reviews' in request.path %}active{% endif %}">
+            <i class="fas fa-comments"></i> {% trans "Müşteri Yorumları"%}
+        </a>
+
+        <a href="{% url 'dashboard:dashboard_gallery' %}" class="sidebar-link {% if 'gallery' in request.path %}active{% endif %}">
+            <i class="fas fa-images"></i> {% trans "Galeri"%}
+        </a>
+
+        <a href="{% url 'dashboard:dashboard_carousel' %}" class="sidebar-link {% if 'carousel' in request.path %}active{% endif %}">
+            <i class="fas fa-sliders-h"></i> {% trans "Carousel"%}
+        </a>
+
+        <a href="{% url 'dashboard:dashboard_categories' %}" class="sidebar-link {% if 'categories' in request.path %}active{% endif %}">
+            <i class="fas fa-tags"></i> {% trans "Kategoriler"%}
+        </a>
+
+        <a href="{% url 'dashboard:dashboard_products' %}" class="sidebar-link {% if 'products' in request.path %}active{% endif %}">
+            <i class="fas fa-box"></i> {% trans "Ürünler"%}
+        </a>
+        
+        <a href="{% url 'dashboard:pdf_catalog_management' %}" class="sidebar-link {% if 'catalog' in request.path %}active{% endif %}">
+            <i class="fas fa-file-pdf"></i> {% trans "PDF Katalog"%}
+        </a>
+        
+        <a href="{% url 'dashboard:team_member_list' %}" class="sidebar-link {% if 'team' in request.path %}active{% endif %}">
+            <i class="fas fa-users"></i> {% trans "Ekibimiz"%}
+        </a>
+
+        <a href="{% url 'dashboard:dashboard_media_mentions' %}" class="sidebar-link {% if 'media-mentions' in request.path %}active{% endif %}">
+            <i class="fas fa-newspaper"></i> {% trans "Basın'da Biz"%}
+        </a>
+
+        {% if translation_enabled %}
+        <hr class="sidebar-divider">
+        <div class="px-3 py-2">
+            <small class="text-white-50">{% trans "ÇEVİRİ YÖNETİMİ" %}</small>
+        </div>
+        <a href="{% url 'dashboard:translation_settings' %}" class="sidebar-link {% if 'translation' in request.path %}active{% endif %}">
+            <i class="fas fa-language"></i> {% trans "Dil Ayarları" %}
+        </a>
+        {% endif %}
+
+        <hr class="sidebar-divider">
+
+        <a href="{% url 'dashboard:logout' %}" class="sidebar-link">
+            <i class="fas fa-sign-out-alt"></i> {% trans "Çıkış"%}
+        </a>
+    </nav>
+</div>

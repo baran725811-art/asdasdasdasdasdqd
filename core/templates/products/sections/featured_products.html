@@ -1,0 +1,58 @@
+{% load static %}
+{% load i18n %}
+
+<section class="featured-products">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">{% trans "Öne Çıkan Ürünler" %}</h2>
+            <p class="section-subtitle">{% trans "En çok tercih edilen ürünlerimiz" %}</p>
+        </div>
+        
+        <div class="featured-grid">
+            {% for product in featured_products %}
+            <div class="featured-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
+                <div class="featured-badge">
+                    <i class="fas fa-star"></i>
+                    {% trans "Öne Çıkan" %}
+                </div>
+                <div class="product-image">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.alt_text|default:product.name }}" loading="lazy">
+                    {% else %}
+                    <div class="image-placeholder">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    {% endif %}
+                    <div class="product-overlay">
+                        <a href="{{ product.get_absolute_url }}" class="overlay-btn">
+                            {% trans "Detayları Gör" %}
+                        </a>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">{{ product.name }}</h3>
+                    <p class="product-category">{{ product.category.name }}</p>
+                    {% if product.price %}
+                    <div class="product-price">
+                        {% if product.has_discount %}
+                        <span class="original-price">{{ product.price }} ₺</span>
+                        <span class="current-price">{{ product.discount_price }} ₺</span>
+                        <span class="discount-badge">-%{{ product.get_discount_percentage }}</span>
+                        {% else %}
+                        <span class="current-price">{{ product.price }} ₺</span>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="featured-cta" data-aos="fade-up">
+            <a href="{% url 'products:featured_products' %}" class="btn btn-primary">
+                {% trans "Tüm Öne Çıkanları Gör" %}
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>

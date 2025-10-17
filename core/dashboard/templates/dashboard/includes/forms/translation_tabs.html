@@ -1,0 +1,43 @@
+<!-- core\dashboard\templates\dashboard\includes\forms\translation_tabs.html -  Çeviri dil sekmeleri -->
+{% load i18n %}
+
+{% if translation_enabled and enabled_languages|length > 1 %}
+    {% if show_card|default:True %}
+        <div class="card-modern mb-4">
+            <div class="card-header-modern">
+                <h5 class="mb-0">
+                    <i class="fas fa-language me-2"></i>{% trans "Dil Seçimi"%}
+                </h5>
+            </div>
+            <div class="card-body-modern p-0">
+    {% endif %}
+    
+    <div class="translation-tabs-container">
+        <div class="translation-tabs d-flex {% if show_card|default:True %}p-3 border-bottom{% else %}mb-3{% endif %}">
+            <!-- Ana Dil (Türkçe) -->
+            <div class="translation-tab active" data-lang="{{ primary_lang|default:'tr' }}">
+                <span class="language-flag">🇹🇷</span>
+                {{ primary_lang_name|default:'Türkçe' }} {% if show_primary_label %}(Ana Dil){% endif %}
+                <span class="translation-indicator {{ primary_indicator|default:'optional' }}"></span>
+            </div>
+            
+            <!-- Diğer Diller -->
+            {% for lang in enabled_languages %}
+                {% if lang != primary_lang|default:'tr' %}
+                <div class="translation-tab" data-lang="{{ lang }}">
+                    <span class="language-flag">
+                        {% if lang == 'en' %}🇬🇧{% elif lang == 'de' %}🇩🇪{% elif lang == 'fr' %}🇫🇷{% elif lang == 'es' %}🇪🇸{% elif lang == 'ru' %}🇷🇺{% elif lang == 'ar' %}🇸🇦{% endif %}
+                    </span>
+                    {% if lang == 'en' %}İngilizce{% elif lang == 'de' %}Almanca{% elif lang == 'fr' %}Fransızca{% elif lang == 'es' %}İspanyolca{% elif lang == 'ru' %}Rusça{% elif lang == 'ar' %}Arapça{% endif %}
+                    <span class="translation-indicator {{ other_indicator|default:'required' }}"></span>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    
+    {% if show_card|default:True %}
+            </div>
+        </div>
+    {% endif %}
+{% endif %}

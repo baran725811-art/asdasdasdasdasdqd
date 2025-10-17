@@ -1,0 +1,48 @@
+<!-- dashboard/templates/dashboard/base/dashboard_base.html -->
+{% extends 'dashboard/base.html' %}
+{% load i18n %}
+{% load static %} <!-- ← BU SATIRI EKLE -->
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Breadcrumb Navigation -->
+    {% if show_breadcrumb %}
+        {% include 'dashboard/includes/navigation/breadcrumb.html' %}
+    {% endif %}
+
+    <!-- Page Header -->
+    {% include 'dashboard/includes/navigation/page_header.html' %}
+
+    <!-- Statistics -->
+    {% if show_stats %}
+    <div class="{% if stats_layout == 'grid' %}stats-grid{% else %}row g-4{% endif %} mb-4">
+        {% for stat in statistics %}
+            {% if stats_layout == 'grid' %}
+                {% include 'dashboard/includes/cards/stats_card.html' with stat_number=stat.number stat_label=stat.label stat_icon=stat.icon card_color=stat.color stat_trend=stat.trend %}
+            {% else %}
+                <div class="col-xl-3 col-lg-6 col-md-6">
+                    {% include 'dashboard/includes/cards/stats_card.html' with stat_number=stat.number stat_label=stat.label stat_icon=stat.icon card_color=stat.color stat_trend=stat.trend %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Quick Actions -->
+    {% if show_quick_actions %}
+        {% include 'dashboard/includes/navigation/quick_actions.html' %}
+    {% endif %}
+
+    {% block page_content %}
+    <!-- Page specific content -->
+    {% endblock %}
+</div>
+
+<!-- Translation Tab Fix Script -->
+<script src="{% static 'dashboard/js/components/translation-tab-fix.js' %}"></script>
+
+<!-- Modals Section -->
+{% block list_modals %}
+<!-- Page specific modals will be rendered here -->
+{% endblock %}
+{% endblock %}

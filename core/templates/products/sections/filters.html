@@ -1,0 +1,67 @@
+{% load static %}
+{% load i18n %}
+
+<section class="products-filters">
+    <div class="container">
+        <div class="filters-wrapper" data-aos="fade-up">
+            <!-- Search Bar -->
+            <div class="search-container">
+                <form method="GET" class="search-form">
+                    <div class="search-input-group">
+                        <input type="text" name="q" value="{{ search_query }}" 
+                               placeholder="{% trans 'Ürün ara...' %}" class="search-input">
+                        <button type="submit" class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    {% if selected_category %}
+                    <input type="hidden" name="category" value="{{ selected_category.slug }}">
+                    {% endif %}
+                </form>
+            </div>
+
+            <!-- Category Filter -->
+            <div class="category-filter">
+                <div class="filter-label">{% trans "Kategoriler" %}:</div>
+                <div class="category-buttons">
+                    <a href="{% url 'products:product_list' %}" 
+                       class="category-btn {% if not selected_category %}active{% endif %}">
+                        <i class="fas fa-th"></i>
+                        {% trans "Tümü" %}
+                    </a>
+                    {% for category in categories %}
+                    <a href="{% url 'products:product_list' %}?category={{ category.slug }}" 
+                       class="category-btn {% if selected_category == category %}active{% endif %}">
+                        {% if category.image %}
+                        <img src="{{ category.image.url }}" alt="{{ category.alt_text|default:category.name }}">
+                        {% else %}
+                        <i class="fas fa-folder"></i>
+                        {% endif %}
+                        {{ category.name }}
+                        <span class="product-count">{{ category.product_count }}</span>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Sort Options -->
+            <div class="sort-options">
+                <div class="sort-label">{% trans "Sırala" %}:</div>
+                <select class="sort-select" onchange="handleSortChange(this.value)">
+                    <option value="newest" {% if sort_by == 'newest' %}selected{% endif %}>
+                        {% trans "En Yeni" %}
+                    </option>
+                    <option value="name" {% if sort_by == 'name' %}selected{% endif %}>
+                        {% trans "İsme Göre" %}
+                    </option>
+                    <option value="price_low" {% if sort_by == 'price_low' %}selected{% endif %}>
+                        {% trans "Ucuzdan Pahalıya" %}
+                    </option>
+                    <option value="price_high" {% if sort_by == 'price_high' %}selected{% endif %}>
+                        {% trans "Pahalıdan Ucuza" %}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+</section>

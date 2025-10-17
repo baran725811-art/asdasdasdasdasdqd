@@ -1,0 +1,36 @@
+<!-- dashboard/templates/dashboard/base/content_base.html -->
+{% extends 'dashboard/base/dashboard_base.html' %}
+{% load i18n %}
+
+{% block page_content %}
+<div class="row g-4">
+    <!-- Main Content -->
+    <div class="col-lg-8">
+        {% block main_content %}
+        <!-- Main content area -->
+        {% endblock %}
+    </div>
+
+    <!-- Sidebar -->
+    <div class="col-lg-4">
+        {% block sidebar_content %}
+        <!-- Quick Actions -->
+        {% if show_quick_actions %}
+            {% include 'dashboard/includes/navigation/quick_actions.html' %}
+        {% endif %}
+
+        <!-- Activity Feed -->
+        {% if show_activity %}
+            {% include 'dashboard/includes/cards/activity_card.html' %}
+        {% endif %}
+
+        <!-- Information Cards -->
+        {% if show_info_cards %}
+            {% for card in info_cards %}
+                {% include 'dashboard/includes/cards/info_card.html' with card_data=card %}
+            {% endfor %}
+        {% endif %}
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}

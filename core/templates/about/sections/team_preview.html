@@ -1,0 +1,47 @@
+{% load static %}
+{% load i18n %}
+
+<section class="about-team">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">{% trans "Ekibimiz" %}</h2>
+            <p class="section-subtitle">{% trans "Uzman kadromuzla size en iyi hizmeti sunuyoruz" %}</p>
+        </div>
+        
+        <div class="team-grid">
+            {% for member in team_members %}
+            {% if member.is_active %}
+            <div class="team-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
+                <div class="member-image">
+                    {% if member.image %}
+                    <img src="{{ member.image.url }}" alt="{{ member.alt_text|default:member.name }}" loading="lazy">
+                    {% else %}
+                    <div class="member-placeholder">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="member-content">
+                    <h3 class="member-name">{{ member.name }}</h3>
+                    <p class="member-position">{{ member.position }}</p>
+                    {% if member.bio %}
+                    <p class="member-bio">{{ member.bio|truncatewords:15 }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+            {% empty %}
+            <div class="empty-state">
+                <p>{% trans "Henüz ekip üyesi eklenmemiş." %}</p>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="team-cta" data-aos="fade-up">
+            <a href="{% url 'about:team' %}" class="btn btn-secondary">
+                {% trans "Tüm Ekibi Görün" %}
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>

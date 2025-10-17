@@ -1,0 +1,158 @@
+{% load static %}
+{% load i18n %}
+
+{% if carousel_slides %}
+<!--core\templates\home\sections\carousel.html-->
+<section class="hero-carousel" id="heroCarousel" role="region" aria-label="{% trans 'Ana carousel' %}">
+    <div class="carousel slide" id="mainCarousel" data-bs-ride="carousel" data-bs-interval="6000">
+        <!-- Carousel Indicators -->
+        <div class="carousel-indicators modern-indicators">
+            {% for slide in carousel_slides %}
+            <button type="button" 
+                    data-bs-target="#mainCarousel" 
+                    data-bs-slide-to="{{ forloop.counter0 }}" 
+                    {% if forloop.first %}class="active" aria-current="true"{% endif %}
+                    aria-label="{% trans 'Slayt' %} {{ forloop.counter }}: {{ slide.title }}">
+                <span class="indicator-progress"></span>
+            </button>
+            {% endfor %}
+        </div>
+        
+        <!-- Carousel Inner -->
+        <div class="carousel-inner">
+            {% for slide in carousel_slides %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <!-- Background Image -->
+                <div class="carousel-bg">
+                    {% load image_tags %}
+                    {% if slide.cropped_image %}
+                        {% carousel_image slide alt_text=slide.alt_text|default:slide.title is_first=forloop.first %}
+                    {% endif %}
+                    <div class="carousel-overlay"></div>
+                </div>
+                
+                <!-- Content -->
+                <div class="carousel-content">
+                    <div class="container">
+                        <div class="row align-items-center min-vh-100">
+                            <div class="col-lg-8 col-xl-7">
+                                <div class="hero-content">
+                                    <!-- Slide Number -->
+                                    <div class="slide-meta">
+                                        <span class="slide-number">{{ forloop.counter|stringformat:"02d" }}</span>
+                                        <span class="slide-total">/ {{ carousel_slides|length|stringformat:"02d" }}</span>
+                                    </div>
+                                    
+                                    <!-- Title -->
+                                    <h1 class="hero-title">{{ slide.title }}</h1>
+                                    
+                                    <!-- Description -->
+                                    <p class="hero-description">{{ slide.description }}</p>
+                                    
+                                    <!-- Buttons -->
+                                    <div class="hero-actions">
+                                        {% if slide.button_text and slide.button_url %}
+                                        <a href="{{ slide.button_url }}" 
+                                           class="btn btn-primary-modern btn-lg hero-cta">
+                                            <span>{{ slide.button_text }}</span>
+                                            <i class="fas fa-arrow-right ms-2" aria-hidden="true"></i>
+                                        </a>
+                                        {% endif %}
+
+                                        
+                                        
+                                    </div>
+                                    
+                                    <!-- Features -->
+                                    <div class="hero-features">
+                                        <div class="feature-item">
+                                            <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                                            <span>{% trans "Güvenilir Hizmet" %}</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <i class="fas fa-clock" aria-hidden="true"></i>
+                                            <span>{% trans "7/24 Destek" %}</span>
+                                        </div>
+                                        <div class="feature-item">
+                                            <i class="fas fa-award" aria-hidden="true"></i>
+                                            <span>{{ company_info.years_experience }}+ {% trans "Yıl Deneyim" %}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Scroll Indicator -->
+                {% if forloop.first %}
+                <div class="scroll-indicator">
+                    <div class="scroll-text">{% trans "Keşfetmek için kaydır" %}</div>
+                    <div class="scroll-arrow">
+                        <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Modern Navigation Controls -->
+        <div class="carousel-navigation">
+            <button class="carousel-nav carousel-prev" 
+                    type="button" 
+                    data-bs-target="#mainCarousel" 
+                    data-bs-slide="prev"
+                    aria-label="{% trans 'Önceki slayt' %}">
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            
+            <button class="carousel-nav carousel-next" 
+                    type="button" 
+                    data-bs-target="#mainCarousel" 
+                    data-bs-slide="next"
+                    aria-label="{% trans 'Sonraki slayt' %}">
+                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+            </button>
+        </div>
+        
+        <!-- Play/Pause Button -->
+        <button class="carousel-play-pause" 
+                id="carouselPlayPause"
+                aria-label="{% trans 'Carousel oynat/duraklat' %}"
+                title="{% trans 'Duraklat' %}">
+            <i class="fas fa-pause" aria-hidden="true"></i>
+        </button>
+    </div>
+    
+    <!-- Floating Elements -->
+    <div class="floating-elements" aria-hidden="true">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+    </div>
+</section>
+{% else %}
+<!-- Fallback Hero Section -->
+<section class="hero-fallback" role="banner">
+    <div class="container">
+        <div class="row align-items-center min-vh-100">
+            <div class="col-lg-8 col-xl-7">
+                <div class="hero-content">
+                    <h1 class="hero-title">{{ site_name }}</h1>
+                    <p class="hero-description">{{ site_tagline|default:"Profesyonel hizmet anlayışımızla sizlerleyiz." }}</p>
+                    <div class="hero-actions">
+                        <a href="{% url 'contact:contact' %}" class="btn btn-primary-modern btn-lg">
+                            {% trans "İletişime Geç" %}
+                            <i class="fas fa-arrow-right ms-2" aria-hidden="true"></i>
+                        </a>
+                        <a href="{% url 'about:about' %}" class="btn btn-outline-modern btn-lg">
+                            {% trans "Hakkımızda" %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}

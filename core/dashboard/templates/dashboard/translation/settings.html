@@ -1,0 +1,329 @@
+<!--core\dashboard\templates\dashboard\translation\settings.html-->
+{% extends 'dashboard/base/dashboard_base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Çeviri Ayarları" %}{% endblock %}
+{% block page_title %}{% trans "Çeviri Ayarları" %}{% endblock %}
+{% block page_content %}
+<!-- Page Header -->
+{% trans "Çeviri Ayarları" as translation_settings_title %}
+{% trans "Sistem dil ayarlarını yönetin" as translation_settings_subtitle %}
+{% include 'dashboard/includes/navigation/page_header.html' with page_title=translation_settings_title page_subtitle=translation_settings_subtitle page_icon="fas fa-language" %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <div class="card-modern">
+            <div class="card-header-modern">
+                <h5 class="mb-0">
+                    <i class="fas fa-language me-2"></i>{% trans "Çeviri Sistemi Ayarları" %}
+                </h5>
+            </div>
+            <div class="card-body-modern">
+                {% trans "Çeviri ayarları formu" as form_aria_label %}
+                <form method="post" id="translationForm" role="form" aria-label="{{ form_aria_label }}">
+                    {% csrf_token %}
+                    
+                    <!-- Mevcut Durum Bilgisi -->
+                    {% trans "Mevcut Durum" as current_status_title %}
+                    {% trans "Dashboard ayarlarınızın şu anki durumu" as current_status_message %}
+                    {% include 'dashboard/includes/ui/alert_message.html' with type="info" title=current_status_title message=current_status_message %}
+                    
+                    <div class="alert alert-info mb-4">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <strong>{% trans "Dashboard Dili" %}:</strong><br>
+                                <code id="currentDashboardLang">{{ user_settings.dashboard_language|upper }}</code>
+                            </div>
+                            <div class="col-md-4">
+                                <strong>{% trans "Ana Dil" %}:</strong><br>
+                                <code id="currentPrimaryLang">{{ user_settings.primary_language|upper }}</code>
+                            </div>
+                            <div class="col-md-4">
+                                <strong>{% trans "Aktif Diller" %}:</strong><br>
+                                <code id="currentEnabledLangs">{{ user_settings.enabled_languages|join:", "|upper }}</code>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Dashboard Dili Seçimi -->
+                    <div class="card-modern mb-4">
+                        <div class="card-header-modern">
+                            <h6 class="mb-0 text-primary">
+                                <i class="fas fa-desktop me-2"></i>{% trans "Dashboard Arayüz Dili" %}
+                            </h6>
+                        </div>
+                        <div class="card-body-modern">
+                            <p class="text-muted">{% trans "Sadece dashboard arayüzünün dilini değiştirir. Site dili etkilenmez." %}</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="{{ form.dashboard_language.id_for_label }}" class="form-label">
+                                        <i class="fas fa-desktop me-2"></i>{% trans "Dashboard Arayüz Dili" %}
+                                    </label>
+                                    {{ form.dashboard_language }}
+                                    {% if form.dashboard_language.help_text %}
+                                        <div class="form-text">{{ form.dashboard_language.help_text }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Site İçerik Dilleri -->
+                    <div class="card-modern mb-4">
+                        <div class="card-header-modern">
+                            <h6 class="mb-0 text-primary">
+                                <i class="fas fa-globe me-2"></i>{% trans "Site İçerik Dilleri" %}
+                            </h6>
+                        </div>
+                        <div class="card-body-modern">
+                            <p class="text-muted">{% trans "Site ziyaretçileri için hangi dillerde içerik sunacağınızı belirleyin." %}</p>
+                            
+                            {% trans "Aktif Diller" as active_languages_title %}
+                            {% include 'dashboard/includes/ui/alert_message.html' with type="success" title=active_languages_title message=user_settings.enabled_languages|join:", "|upper no_close=True %}
+                            <!-- Ana Dil Seçimi -->
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    {% trans "Ana dil değişince site varsayılan dili de değişir" as primary_lang_help2 %}
+                                    {% trans "Seçili" as selected_text2 %}
+                                    {% with help_full2=primary_lang_help2|add:" - "|add:selected_text2|add:": "|add:user_settings.primary_language|upper %}
+                                        {% include 'dashboard/includes/forms/select_field.html' with field_name="primary_language" label="🌟 Site Ana Dili" icon="fas fa-star" options=primary_language_options selected_value=user_settings.primary_language help_text=help_full2 %}
+                                    {% endwith %}                                    </div>
+                            </div>
+                            
+                            <!-- Ek Diller -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <label class="form-label-modern">
+                                        <i class="fas fa-language me-2"></i>{% trans "Ek Çeviri Dilleri" %}
+                                    </label>
+                                    <p class="text-muted small">{% trans "Ana dilinize ek olarak hangi dillerde içerik sunmak istiyorsanız seçin." %}</p>
+                                </div>
+                                
+                                {% for lang in available_languages %}
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-check">
+                                        <input type="checkbox" 
+                                            name="enabled_languages" 
+                                            value="{{ lang.code }}"
+                                            class="form-check-input"
+                                            id="lang_{{ lang.code }}"
+                                            {% if lang.code in user_settings.enabled_languages %}checked{% endif %}>
+                                        <label class="form-check-label" for="lang_{{ lang.code }}">
+                                            {{ lang.flag_name }}
+                                            {% trans "URL'si" as url_suffix %}
+                                            <small class="text-muted d-block">/{{ lang.code }}/ {{ url_suffix }}</small>
+                                        </label>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- İstatistikler -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-3">
+                            {% trans "Aktif Dil Sayısı" as active_lang_count_label %}
+                            {% include 'dashboard/includes/cards/info_card.html' with card_type="metric" icon="fas fa-language" value=user_settings.enabled_languages|length label=active_lang_count_label %}
+                        </div>
+                        <div class="col-md-3">
+                            {% trans "Dashboard Dili" as dashboard_lang_label %}
+                            {% include 'dashboard/includes/cards/info_card.html' with card_type="metric" icon="fas fa-desktop" value=user_settings.dashboard_language|upper label=dashboard_lang_label %}
+                        </div>
+                        <div class="col-md-3">
+                            {% trans "Ana Dil" as primary_lang_label %}
+                            {% include 'dashboard/includes/cards/info_card.html' with card_type="metric" icon="fas fa-star" value=user_settings.primary_language|upper label=primary_lang_label %}
+                        </div>
+                        <div class="col-md-3">
+                            {% trans "Mevcut Dil Sayısı" as available_lang_count_label %}
+                            {% include 'dashboard/includes/cards/info_card.html' with card_type="metric" icon="fas fa-globe" value=available_languages|length label=available_lang_count_label %}
+                        </div>
+                    </div>
+                    <!-- Çeviri İpuçları -->
+                    <div class="card-modern mb-4">
+                        <div class="card-header-modern">
+                            <h6 class="mb-0">
+                                <i class="fas fa-lightbulb me-2"></i>{% trans "Çeviri İpuçları" %}
+                            </h6>
+                        </div>
+                        <div class="card-body-modern">
+                            {% include 'dashboard/includes/cards/info_card.html' with card_type="list" items=translation_tips %}
+                        </div>
+                    </div>
+                    <!-- Form Actions -->
+                    <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+                        {% trans "Sayfayı Yenile" as refresh_page_text %}
+                        {% trans "Değişiklikleri Önizle" as preview_changes_text %}
+                        {% trans "Ayarları Kaydet" as save_settings_text %}
+                        <button type="button" class="btn btn-outline-secondary" onclick="location.reload()">
+                            <i class="fas fa-sync-alt me-2"></i>{{ refresh_page_text }}
+                        </button>
+                        
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-outline-info" onclick="previewChanges()">
+                                <i class="fas fa-eye me-2"></i>{{ preview_changes_text }}
+                            </button>
+                            <button type="submit" class="btn-modern primary">
+                                <i class="fas fa-save me-2"></i>{{ save_settings_text }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Quick Actions -->
+<div class="row mt-4">
+    <div class="col-lg-6">
+        {% trans "Hızlı İşlemler" as quick_actions_title %}
+        {% include 'dashboard/includes/navigation/quick_actions.html' with section_title=quick_actions_title actions=translation_quick_actions %}
+    </div>
+    <div class="col-lg-6">
+        {% trans "Çeviri Durumu" as translation_status_title %}
+        {% trans "Sistem dil ayarları aktif ve çalışıyor" as translation_status_message %}
+        {% include 'dashboard/includes/cards/info_card.html' with card_type="status" title=translation_status_title message=translation_status_message icon="fas fa-check-circle" status_color="success" %}
+    </div>
+</div>
+<!-- Önizleme Modal -->
+<div class="modal fade modal-modern" id="previewModal" tabindex="-1" aria-hidden="true"
+    aria-labelledby="previewModalTitle" aria-describedby="previewModalDescription">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                {% trans "Ayar Değişiklikleri Önizlemesi" as preview_modal_title %}
+                <h5 class="modal-title" id="previewmodaltitle">
+                    <i class="fas fa-eye me-2"></i>{{ preview_modal_title }}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            {% trans "Bu modal mevcut ve yeni çeviri ayarlarınızı karşılaştırır" as modal_description %}
+            <div id="previewModalDescription" class="sr-only">{{ modal_description }}</div>
+            <div class="modal-body">
+                <div class="preview-content">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {% trans "Mevcut Ayarlar" as current_settings_title %}
+                            <h6>{{ current_settings_title }}</h6>
+                            <div class="current-settings">
+                                <div class="setting-item">
+                                    <strong>{% trans "Dashboard Dili" %}:</strong> {{ user_settings.dashboard_language|upper }}
+                                </div>
+                                <div class="setting-item">
+                                    <strong>{% trans "Ana Dil" %}:</strong> {{ user_settings.primary_language|upper }}
+                                </div>
+                                <div class="setting-item">
+                                    <strong>{% trans "Aktif Diller" %}:</strong> {{ user_settings.enabled_languages|join:", "|upper }}
+                                </div>
+                            </div>
+                        </div>
+                        {% trans "Yeni Ayarlar" as new_settings_title %}
+                        <div class="col-md-6">
+                            <h6>{{ new_settings_title }}</h6>
+                            <div class="new-settings">
+                                <div class="setting-item">
+                                    <strong>{% trans "Dashboard Dili" %}:</strong> <span id="newDashboardLang">-</span>
+                                </div>
+                                <div class="setting-item">
+                                    <strong>{% trans "Ana Dil" %}:</strong> <span id="newPrimaryLang">-</span>
+                                </div>
+                                <div class="setting-item">
+                                    <strong>{% trans "Aktif Diller" %}:</strong> <span id="newEnabledLangs">-</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                {% trans "Kapat" as close_text %}
+                {% trans "Değişiklikleri Uygula" as apply_changes_text %}
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times"></i>{{ close_text }}
+                </button>
+                <button type="button" class="btn-modern primary" onclick="submitForm()">
+                    <i class="fas fa-save"></i>{{ apply_changes_text }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Başarı Modal -->
+<div class="modal fade modal-modern" id="successModal" tabindex="-1" aria-hidden="true"
+    aria-labelledby="successModalTitle" aria-describedby="successModalDescription">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                {% trans "Ayarlar Kaydedildi" as settings_saved_title %}
+                <h5 class="modal-title text-white" id="successModalTitle">
+                    <i class="fas fa-check-circle me-2"></i>{{ settings_saved_title }}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body text-center py-4">
+                <div class="success-icon mb-3">
+                    <i class="fas fa-check-circle fa-4x text-success"></i>
+                </div>
+                {% trans "Çeviri ayarları başarıyla güncellendi!" as success_message %}
+                <h5>{{ success_message }}</h5>
+                {% trans "Değişiklikler hemen etkili olacaktır." as effect_message %}
+                <p class="text-muted">{{ effect_message }}</p>
+                {% trans "Çeviri ayarları başarıyla kaydedildi" as success_modal_description %}
+                <div id="successModalDescription" class="sr-only">{{ success_modal_description }}</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                    {% trans "Kapat" as close_text2 %}
+                    <i class="fas fa-times"></i>{{ close_text2 }}
+                </button>
+                {% trans "Sayfayı Yenile" as reload_text %}
+                <button type="button" class="btn-modern primary" onclick="location.reload()">
+                    <i class="fas fa-sync-alt"></i>{{ reload_text }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Dashboard dili değişikliğinde otomatik kaydet
+    const dashboardLangSelect = document.getElementById('id_dashboard_language');
+    
+    if (dashboardLangSelect) {
+        dashboardLangSelect.addEventListener('change', function() {
+            const formData = new FormData();
+            formData.append('csrfmiddlewaretoken', document.querySelector('[name=csrfmiddlewaretoken]').value);
+            formData.append('dashboard_language', this.value);
+            formData.append('primary_language', document.getElementById('id_primary_language').value);
+            formData.append('auto_save', 'dashboard_language_only');
+            
+            // Enabled languages'i de ekle
+            const enabledLangs = Array.from(document.querySelectorAll('input[name="enabled_languages"]:checked'))
+                .map(cb => cb.value);
+            enabledLangs.forEach(lang => formData.append('enabled_languages', lang));
+            
+            fetch('{% url "dashboard:translation_settings" %}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Başarı mesajı göster
+                    const alert = document.createElement('div');
+                    alert.className = 'alert alert-success alert-dismissible fade show';
+                    alert.innerHTML = `
+                        <i class="fas fa-check me-2"></i>${data.message}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    `;
+                    document.querySelector('.container-fluid').prepend(alert);
+                    
+                    // Mevcut durum bilgisini güncelle
+                    document.getElementById('currentDashboardLang').textContent = data.dashboard_language.toUpperCase();
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    }
+});
+</script>
+{% endblock %}

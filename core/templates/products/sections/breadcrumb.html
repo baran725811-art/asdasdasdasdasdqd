@@ -1,0 +1,31 @@
+<!--core\templates\products\sections\breadcrumb.html-->
+{% load static %}
+{% load i18n %}
+
+<section class="product-breadcrumb">
+    <div class="container">
+        <nav aria-label="breadcrumb" data-aos="fade-up">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'home:home' %}">
+                        <i class="fas fa-home"></i>
+                        {% trans "Ana Sayfa" %}
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'products:product_list' %}">
+                        {% trans "Ürünler" %}
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'products:product_list' %}?category={{ product.category.slug }}">
+                        {{ product.category.name }}
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    {{ product.name }}
+                </li>
+            </ol>
+        </nav>
+    </div>
+</section>

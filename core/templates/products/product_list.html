@@ -1,0 +1,34 @@
+<!--core\templates\products\product_list.html-->
+{% extends 'base/main.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{{ meta_title }}{% endblock %}
+{% block meta_description %}{{ meta_description }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/products/main.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+{% include 'products/sections/hero.html' %}
+
+<!-- Filters & Search -->
+{% include 'products/sections/filters.html' %}
+
+<!-- Featured Products -->
+{% if featured_products %}
+{% include 'products/sections/featured_products.html' %}
+{% endif %}
+
+<!-- Products Grid -->
+{% include 'products/sections/products_grid.html' %}
+
+<!-- Categories Preview -->
+{% include 'products/sections/categories_preview.html' %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/products/main.js' %}"></script>
+{% endblock %}

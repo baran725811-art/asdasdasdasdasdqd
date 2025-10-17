@@ -1,0 +1,42 @@
+<!-- core\dashboard\templates\dashboard\includes\navigation\page_header.html - Sayfa başlığı -->
+{% load i18n %}
+
+<div class="page-header">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1>
+                    {% if page_icon %}<i class="{{ page_icon }} me-3"></i>{% endif %}
+                    {{ page_title }}
+                </h1>
+                {% if page_subtitle %}
+                <p class="subtitle mb-0">{{ page_subtitle }}</p>
+                {% endif %}
+                {% if page_info %}
+                <small class="text-info">
+                    <i class="fas fa-info-circle"></i> {{ page_info }}
+                </small>
+                {% endif %}
+            </div>
+            
+            {% if page_actions %}
+            <div class="d-flex gap-2">
+                {% for action in page_actions %}
+                {% if action.type == 'link' %}
+                <a href="{{ action.url }}" class="btn-modern {{ action.class|default:'primary' }} {{ action.size|default:'' }}"
+                   {% if action.target %}target="{{ action.target }}"{% endif %}>
+                    {% if action.icon %}<i class="{{ action.icon }}"></i>{% endif %}{{ action.text }}
+                </a>
+                {% elif action.type == 'button' %}
+                <button class="btn-modern {{ action.class|default:'primary' }} {{ action.size|default:'' }}"
+                        {% if action.onclick %}onclick="{{ action.onclick }}"{% endif %}
+                        {% if action.modal_target %}data-bs-toggle="modal" data-bs-target="{{ action.modal_target }}"{% endif %}>
+                    {% if action.icon %}<i class="{{ action.icon }}"></i>{% endif %}{{ action.text }}
+                </button>
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

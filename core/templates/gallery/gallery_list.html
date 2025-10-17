@@ -1,0 +1,32 @@
+<!--core\templates\gallery\gallery_list.html-->
+{% extends 'base/main.html' %}
+{% load static %}
+{% load i18n %}
+{% load video_tags %}
+
+{% block title %}{{ meta_title }}{% endblock %}
+{% block meta_description %}{{ meta_description }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/gallery/main.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+{% include 'gallery/sections/hero.html' %}
+
+<!-- Gallery Stats -->
+{% include 'gallery/sections/stats.html' %}
+
+<!-- Featured Gallery -->
+{% if featured_items %}
+{% include 'gallery/sections/featured.html' %}
+{% endif %}
+
+<!-- Gallery Grid -->
+{% include 'gallery/sections/gallery_grid.html' %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/gallery/main.js' %}"></script>
+{% endblock %}

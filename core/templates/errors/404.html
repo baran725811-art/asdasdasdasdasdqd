@@ -1,0 +1,296 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{{ error_title }} - {{ block.super }}{% endblock %}
+
+{% block meta_description %}{{ meta_description }}{% endblock %}
+
+{% block extra_meta %}
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="{{ canonical_url }}">
+
+<!-- Structured Data for 404 Error -->
+<script type="application/ld+json">
+{{ structured_data|safe }}
+</script>
+
+<!-- Open Graph -->
+<meta property="og:title" content="{{ error_title }}">
+<meta property="og:description" content="{{ meta_description }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ canonical_url }}">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ error_title }}">
+<meta name="twitter:description" content="{{ meta_description }}">
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.error-page {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    padding: 60px 0;
+}
+
+.error-content {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.error-code {
+    font-size: 120px;
+    font-weight: bold;
+    color: #6c757d;
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+.error-title {
+    font-size: 2.5rem;
+    color: #343a40;
+    margin-bottom: 20px;
+}
+
+.error-message {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin-bottom: 30px;
+}
+
+.suggestions-section {
+    margin-top: 50px;
+}
+
+.suggestion-card {
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.suggestion-card:hover {
+    border-color: #007bff;
+    box-shadow: 0 2px 10px rgba(0,123,255,0.1);
+    text-decoration: none;
+    color: inherit;
+}
+
+.suggestion-type {
+    font-size: 0.8rem;
+    color: #6c757d;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.suggestion-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #007bff;
+    margin-bottom: 8px;
+}
+
+.suggestion-description {
+    font-size: 0.9rem;
+    color: #6c757d;
+    line-height: 1.4;
+}
+
+.popular-section {
+    margin-top: 40px;
+}
+
+.product-card {
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.product-card:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.search-box {
+    margin: 30px 0;
+}
+
+.breadcrumb-error {
+    background: transparent;
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+    .error-code {
+        font-size: 80px;
+    }
+    
+    .error-title {
+        font-size: 2rem;
+    }
+    
+    .error-message {
+        font-size: 1rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-error">
+            <li class="breadcrumb-item"><a href="{% url 'home:home' %}">{% trans "Ana Sayfa" %}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ error_code }} {% trans "Hata" %}</li>
+        </ol>
+    </nav>
+
+    <div class="error-page">
+        <div class="row w-100">
+            <div class="col-12">
+                <!-- Error Content -->
+                <div class="error-content">
+                    <div class="error-code">{{ error_code }}</div>
+                    <h1 class="error-title">{{ error_title }}</h1>
+                    <p class="error-message">{{ error_message }}</p>
+                    
+                    {% if requested_path %}
+                    <p class="text-muted">
+                        <small>{% trans "İstenen sayfa" %}: <code>{{ requested_path }}</code></small>
+                    </p>
+                    {% endif %}
+                    
+                    <!-- Ana Sayfa Butonu -->
+                    <div class="mt-4">
+                        <a href="{% url 'home:home' %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-home"></i> {% trans "Ana Sayfaya Dön" %}
+                        </a>
+                        <a href="javascript:history.back()" class="btn btn-outline-secondary btn-lg ml-3">
+                            <i class="fas fa-arrow-left"></i> {% trans "Geri Dön" %}
+                        </a>
+                    </div>
+                </div>
+
+                {% if show_search %}
+                <!-- Arama Kutusu -->
+                <div class="search-box text-center">
+                    <h4>{% trans "Aradığınızı bulamadınız mı?" %}</h4>
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <form method="get" action="{% url 'products:product_list' %}">
+                                <div class="input-group input-group-lg">
+                                    <input type="text" class="form-control" name="q" 
+                                           placeholder="{% trans 'Ürün ara...' %}" 
+                                           value="{{ request.GET.q }}">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if search_suggestions %}
+                <!-- Arama Önerileri -->
+                <div class="suggestions-section">
+                    <h4 class="text-center mb-4">{% trans "Bunları arıyor olabilirsiniz" %}</h4>
+                    <div class="row">
+                        {% for suggestion in search_suggestions %}
+                        <div class="col-md-6 col-lg-4 mb-3">
+                            <a href="{{ suggestion.url }}" class="suggestion-card">
+                                <div class="suggestion-type">{{ suggestion.type|title }}</div>
+                                <div class="suggestion-title">{{ suggestion.title }}</div>
+                                {% if suggestion.description %}
+                                <div class="suggestion-description">{{ suggestion.description|truncatewords:15 }}</div>
+                                {% endif %}
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if popular_products %}
+                <!-- Popüler Ürünler -->
+                <div class="popular-section">
+                    <h4 class="text-center mb-4">{% trans "Popüler Ürünlerimiz" %}</h4>
+                    <div class="row">
+                        {% for product in popular_products %}
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="product-card">
+                                {% if product.image %}
+                                <img src="{{ product.image.url }}" class="card-img-top" 
+                                     alt="{{ product.name }}" style="height: 200px; object-fit: cover;">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h6 class="card-title">{{ product.name }}</h6>
+                                    {% if product.description %}
+                                    <p class="card-text text-muted small">{{ product.description|truncatewords:10 }}</p>
+                                    {% endif %}
+                                    <a href="{{ product.get_absolute_url }}" class="btn btn-sm btn-outline-primary">
+                                        {% trans "İncele" %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if recent_gallery %}
+                <!-- Son Galeri -->
+                <div class="popular-section">
+                    <h4 class="text-center mb-4">{% trans "Galeri" %}</h4>
+                    <div class="row">
+                        {% for item in recent_gallery %}
+                        <div class="col-md-6 col-lg-3 mb-3">
+                            <a href="{% url 'gallery:gallery_list' %}" class="d-block">
+                                {% if item.image %}
+                                <img src="{{ item.image.url }}" class="img-fluid rounded" 
+                                     alt="{{ item.title }}" style="height: 150px; width: 100%; object-fit: cover;">
+                                {% endif %}
+                                <p class="text-center mt-2 small">{{ item.title|truncatewords:3 }}</p>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Site Haritası Linkleri -->
+                <div class="mt-5 text-center">
+                    <h5>{% trans "Site Haritası" %}</h5>
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <nav class="nav nav-pills nav-fill">
+                                <a class="nav-link" href="{% url 'home:home' %}">{% trans "Ana Sayfa" %}</a>
+                                <a class="nav-link" href="{% url 'products:product_list' %}">{% trans "Ürünler" %}</a>
+                                <a class="nav-link" href="{% url 'gallery:gallery_list' %}">{% trans "Galeri" %}</a>
+                                <a class="nav-link" href="{% url 'about:about' %}">{% trans "Hakkımızda" %}</a>
+                                <a class="nav-link" href="{% url 'contact:contact' %}">{% trans "İletişim" %}</a>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

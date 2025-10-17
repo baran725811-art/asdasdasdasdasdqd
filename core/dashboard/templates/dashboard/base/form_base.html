@@ -1,0 +1,45 @@
+<!-- dashboard/templates/dashboard/base/form_base.html -->
+{% extends 'dashboard/base/dashboard_base.html' %}
+{% load i18n %}
+
+{% block page_content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card-modern">
+            {% if form_title %}
+            <div class="card-header-modern">
+                <h5 class="mb-0">
+                    {% if form_icon %}<i class="{{ form_icon }} me-2"></i>{% endif %}
+                    {{ form_title }}
+                </h5>
+            </div>
+            {% endif %}
+            
+            <div class="card-body-modern">
+                <form method="post" enctype="multipart/form-data" {% if form_id %}id="{{ form_id }}"{% endif %}>
+                    {% csrf_token %}
+                    
+                    <!-- Translation Tabs -->
+                    {% if translation_enabled %}
+                        {% include 'dashboard/includes/forms/translation_tabs.html' %}
+                    {% endif %}
+                    
+                    {% block form_content %}
+                    <!-- Form fields will be rendered here -->
+                    {% endblock %}
+                    
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn-modern primary lg">
+                            <i class="fas fa-save"></i>{% trans "Kaydet" %}
+                        </button>
+                        <a href="{{ cancel_url }}" class="btn-modern secondary lg">
+                            <i class="fas fa-times"></i>{% trans "İptal" %}
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

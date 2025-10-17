@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<section class="review-form-section py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="card-title mb-4">Değerlendirme Yap</h2>
+                        
+                        <!-- Google ile Giriş Butonu (Eğer kullanıcı giriş yapmamışsa) -->
+                        {% if not user.is_authenticated %}
+                        <div class="text-center mb-4">
+                            <p class="mb-3">Yorum yapabilmek için lütfen Google hesabınızla giriş yapın.</p>
+                            <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-light border">
+                                <img src="{% static 'images/google-icon.png' %}" alt="Google" class="me-2" style="width: 20px;">
+                                Google ile Giriş Yap
+                            </a>
+                        </div>
+                        {% else %}
+                        <!-- Yorum Formu -->
+                        <form method="post" id="reviewForm">
+                            {% csrf_token %}
+                            
+                            <!-- Rating Input -->
+                            <div class="mb-3">
+                                <label class="form-label">{{ form.rating.label }}</label>
+                                <div class="rating-input">
+                                    {% for i in "12345" %}
+                                    <input type="radio" name="rating" value="{{ i }}" id="star{{ i }}" 
+                                           {% if form.rating.value == i %}checked{% endif %}>
+                                    <label for="star{{ i }}" class="star-label">
+                                        <i class="fas fa-star"></i>
+                                    </label>
+                                    {% endfor %}
+                                </div>
+                                {% if form.rating.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.rating.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+
+                            <!-- Comment Input -->
+                            <div class="mb-3">
+                                <label class="form-label">{{ form.comment.label }}</label>
+                                {{ form.comment|add_class:"form-control" }}
+                                {% if form.comment.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.comment.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Gönder</button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Custom CSS for star rating -->
+{% block extra_css %}
+<style>
+    .rating-input {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+    }
+    
+    .rating-input input {
+        display: none;
+    }
+    
+    .rating-input label {
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: #ddd;
+        margin: 0 2px;
+    }
+    
+    .rating-input label:hover,
+    .rating-input label:hover ~ label,
+    .rating-input input:checked ~ label {
+        color: #ffd700;
+    }
+    
+    .rating-input label:hover,
+    .rating-input label:hover ~ label {
+        transform: scale(1.1);
+    }
+</style>
+{% endblock %}
+{% endblock %}

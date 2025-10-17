@@ -1,0 +1,47 @@
+<!-- core\dashboard\templates\dashboard\includes\forms\image_upload_field.html -  Görsel yükleme field -->
+{% load i18n %}
+
+<div class="mb-3">
+    <label class="form-label-modern">
+        <i class="fas fa-image"></i>{{ label|default:"Görsel" }}
+        {% if required %}<span class="text-danger">*</span>{% endif %}
+    </label>
+    
+    <input type="file" 
+           name="{{ field_name }}" 
+           class="form-control form-control-modern" 
+           accept="image/*" 
+           {% if required %}required{% endif %}
+           {% if attrs %}{% for attr, value in attrs.items %}{{ attr }}="{{ value }}" {% endfor %}{% endif %}>
+    
+    {% if current_image %}
+        <div class="current-image mt-3">
+            <div class="d-flex align-items-center gap-3">
+                <img src="{{ current_image.url }}" 
+                     alt="{% trans 'Mevcut görsel'%}" 
+                     class="image-modern" 
+                     style="width: {{ preview_width|default:'100px' }}; height: {{ preview_height|default:'100px' }}; object-fit: cover;">
+                <div>
+                    <div class="fw-semibold">{{ current_image.name|default:"Görsel" }}</div>
+                    <small class="text-muted">
+                        {% if keep_message %}{{ keep_message }}{% else %}{% trans "Yeni görsel seçmezseniz mevcut görsel korunur" %}{% endif %}
+                    </small>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    
+    {% if help_text %}
+        <small class="text-muted">{{ help_text }}</small>
+    {% elif not help_text and not current_image %}
+        <small class="text-muted">{% trans "JPG, PNG formatlarında görsel yükleyebilirsiniz" %}</small>
+    {% endif %}
+    
+    {% if errors %}
+        <div class="form-error">
+            {% for error in errors %}
+                <i class="fas fa-exclamation-circle me-1"></i>{{ error }}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>

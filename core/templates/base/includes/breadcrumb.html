@@ -1,0 +1,191 @@
+<!-- core\templates\base\includes\breadcrumb.html # Breadcrumb navigasyon-->
+ {% load static %}
+{% load i18n %}
+
+{% if breadcrumbs and breadcrumbs|length > 1 %}
+<nav class="breadcrumb-container" aria-label="{% trans 'Sayfa konumu' %}" role="navigation">
+    <div class="container">
+        <div class="breadcrumb-wrapper">
+            <!-- Mobile Back Button -->
+            <button class="breadcrumb-back d-md-none" 
+                    onclick="history.back()" 
+                    aria-label="{% trans 'Önceki sayfaya dön' %}"
+                    title="{% trans 'Geri' %}">
+                <i class="fas fa-arrow-left" aria-hidden="true"></i>
+            </button>
+            
+            <!-- Breadcrumb Trail -->
+            <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+                {% for breadcrumb in breadcrumbs %}
+                <li class="breadcrumb-item{% if breadcrumb.is_current %} active{% endif %}" 
+                    itemprop="itemListElement" 
+                    itemscope 
+                    itemtype="https://schema.org/ListItem">
+                    
+                    {% if not breadcrumb.is_current %}
+                        <a href="{{ breadcrumb.url }}" 
+                           class="breadcrumb-link"
+                           itemprop="item"
+                           aria-label="{% trans 'Git' %} {{ breadcrumb.name }}">
+                            
+                            {% if forloop.first %}
+                                <i class="fas fa-home breadcrumb-icon" aria-hidden="true"></i>
+                            {% endif %}
+                            
+                            <span itemprop="name">{{ breadcrumb.name }}</span>
+                        </a>
+                        <meta itemprop="position" content="{{ forloop.counter }}">
+                    {% else %}
+                        <span class="breadcrumb-current" 
+                              itemprop="name" 
+                              aria-current="page">
+                            {{ breadcrumb.name }}
+                        </span>
+                        <meta itemprop="position" content="{{ forloop.counter }}">
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ol>
+            
+            <!-- Page Actions (if needed) -->
+            <div class="breadcrumb-actions d-none d-lg-flex">
+                <!-- Share Button -->
+                <button class="breadcrumb-action share-btn" 
+                        onclick="shareCurrentPage()" 
+                        aria-label="{% trans 'Sayfayı paylaş' %}"
+                        title="{% trans 'Paylaş' %}">
+                    <i class="fas fa-share-alt" aria-hidden="true"></i>
+                </button>
+                
+                <!-- Print Button -->
+                <button class="breadcrumb-action print-btn" 
+                        onclick="window.print()" 
+                        aria-label="{% trans 'Sayfayı yazdır' %}"
+                        title="{% trans 'Yazdır' %}">
+                    <i class="fas fa-print" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Breadcrumb (Compact) -->
+<nav class="mobile-breadcrumb d-md-none" aria-label="{% trans 'Mobil navigasyon' %}">
+    <div class="container">
+        <div class="mobile-breadcrumb-content">
+            {% if breadcrumbs|length >= 2 %}
+                {% with breadcrumbs|slice:"-2:-1"|first as parent %}
+                <a href="{{ parent.url }}" class="parent-link">
+                    <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                    <span>{{ parent.name|truncatechars:20 }}</span>
+                </a>
+                {% endwith %}
+            {% endif %}
+            
+            <span class="current-page">
+                {% for breadcrumb in breadcrumbs %}
+                    {% if breadcrumb.is_current %}
+                        {{ breadcrumb.name|truncatechars:30 }}
+                    {% endif %}
+                {% endfor %}
+            </span>
+        </div>
+    </div>
+</nav>
+{% endif %}
+
+<script>
+/**
+ * Share current page functionality
+ */
+function shareCurrentPage() {
+    if (navigator.share) {
+        // Use Web Share API if available
+        navigator.share({
+            title: document.title,
+            text: document.querySelector('meta[name="description"]')?.content || '',
+            url: window.location.href
+        }).catch(err => {
+            console.log('Error sharing:', err);
+            fallbackShare();
+        });
+    } else {
+        fallbackShare();
+    }
+}
+
+/**
+ * Fallback share functionality
+ */
+function fallbackShare() {
+    // Copy URL to clipboard
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+            // Show toast notification
+            showNotification('{% trans "Link panoya kopyalandı!" %}', 'success');
+        }).catch(() => {
+            // Fallback to selection method
+            selectAndCopy();
+        });
+    } else {
+        selectAndCopy();
+    }
+}
+
+/**
+ * Select and copy URL (older browsers)
+ */
+function selectAndCopy() {
+    const textArea = document.createElement('textarea');
+    textArea.value = window.location.href;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+    showNotification('{% trans "Link kopyalandı!" %}', 'success');
+}
+
+/**
+ * Show notification
+ */
+function showNotification(message, type = 'info') {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `breadcrumb-notification ${type}`;
+    notification.textContent = message;
+    
+    // Style the notification
+    Object.assign(notification.style, {
+        position: 'fixed',
+        top: '20px',
+        right: '20px',
+        background: type === 'success' ? '#28a745' : '#007bff',
+        color: 'white',
+        padding: '12px 20px',
+        borderRadius: '8px',
+        fontSize: '14px',
+        fontWeight: '500',
+        zIndex: '10000',
+        boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+        transform: 'translateX(100%)',
+        transition: 'transform 0.3s ease'
+    });
+    
+    document.body.appendChild(notification);
+    
+    // Animate in
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }, 3000);
+}
+</script>

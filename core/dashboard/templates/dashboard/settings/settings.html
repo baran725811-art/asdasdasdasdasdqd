@@ -1,0 +1,190 @@
+{% extends 'dashboard/base.html' %}
+{% load i18n %}
+
+{% block title %}Sistem Ayarları{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0">Site Ayarları</h1>
+            <p class="text-muted">Site geneli ayarları yönetin</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Ayar Kategorileri -->
+        <div class="col-md-3">
+            <div class="list-group">
+                <a href="#general" class="list-group-item list-group-item-action active" data-bs-toggle="tab">
+                    <i class="fas fa-cog me-2"></i>Genel Bilgiler
+                </a>
+                <a href="#contact" class="list-group-item list-group-item-action" data-bs-toggle="tab">
+                    <i class="fas fa-phone me-2"></i>İletişim
+                </a>
+                <a href="#social" class="list-group-item list-group-item-action" data-bs-toggle="tab">
+                    <i class="fas fa-share-alt me-2"></i>Sosyal Medya
+                </a>
+                <a href="#seo" class="list-group-item list-group-item-action" data-bs-toggle="tab">
+                    <i class="fas fa-search me-2"></i>SEO
+                </a>
+                
+            </div>
+        </div>
+
+        <!-- Ayar İçeriği -->
+        <div class="col-md-9">
+            <div class="tab-content">
+                <!-- Genel Bilgiler -->
+                <div class="tab-pane fade show active" id="general" role="tabpanel">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-cog me-2"></i>Genel Bilgiler
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="text-muted">Site Adı</label>
+                                        <p class="mb-0 fw-bold">{{ site_settings.site_name|default:"Belirtilmemiş" }}</p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="text-muted">Site Sloganı</label>
+                                        <p class="mb-0">{{ site_settings.site_tagline|default:"Belirtilmemiş" }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="text-muted">Logo</label>
+                                        {% if site_settings.site_logo %}
+                                            <div>
+                                                <img src="{{ site_settings.site_logo.url }}" alt="Logo" class="img-thumbnail" style="max-height: 80px;">
+                                            </div>
+                                        {% else %}
+                                            <p class="mb-0 text-muted">Yüklenmemiş</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="{% url 'dashboard:business_settings' %}" class="btn btn-primary">
+                                <i class="fas fa-edit me-2"></i>Düzenle
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- İletişim -->
+                <div class="tab-pane fade" id="contact" role="tabpanel">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-phone me-2"></i>İletişim Bilgileri
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="text-muted">Telefon</label>
+                                <p class="mb-0">{{ site_settings.contact_phone|default:"Belirtilmemiş" }}</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="text-muted">E-posta</label>
+                                <p class="mb-0">{{ site_settings.contact_email|default:"Belirtilmemiş" }}</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="text-muted">Adres</label>
+                                <p class="mb-0">{{ site_settings.contact_address|default:"Belirtilmemiş" }}</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="text-muted">Google Maps URL</label>
+                                <p class="mb-0">{{ site_settings.google_maps_embed_url|default:"Belirtilmemiş" }}</p>
+                            </div>
+                            <a href="{% url 'dashboard:business_settings' %}" class="btn btn-primary">
+                                <i class="fas fa-edit me-2"></i>Düzenle
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sosyal Medya -->
+                <div class="tab-pane fade" id="social" role="tabpanel">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-share-alt me-2"></i>Sosyal Medya
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="text-muted">
+                                            <i class="fab fa-facebook me-1"></i>Facebook
+                                        </label>
+                                        <p class="mb-0">{{ site_settings.facebook_url|default:"Belirtilmemiş" }}</p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="text-muted">
+                                            <i class="fab fa-instagram me-1"></i>Instagram
+                                        </label>
+                                        <p class="mb-0">{{ site_settings.instagram_url|default:"Belirtilmemiş" }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="text-muted">
+                                            <i class="fab fa-twitter me-1"></i>Twitter
+                                        </label>
+                                        <p class="mb-0">{{ site_settings.twitter_url|default:"Belirtilmemiş" }}</p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="text-muted">
+                                            <i class="fab fa-whatsapp me-1"></i>WhatsApp
+                                        </label>
+                                        <p class="mb-0">{{ site_settings.whatsapp_number|default:"Belirtilmemiş" }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="{% url 'dashboard:business_settings' %}" class="btn btn-primary">
+                                <i class="fas fa-edit me-2"></i>Düzenle
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SEO -->
+                <div class="tab-pane fade" id="seo" role="tabpanel">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-search me-2"></i>SEO Ayarları
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="text-muted">SEO Başlık</label>
+                                <p class="mb-0">{{ site_settings.seo_title|default:"Belirtilmemiş" }}</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="text-muted">SEO Açıklama</label>
+                                <p class="mb-0">{{ site_settings.seo_description|default:"Belirtilmemiş" }}</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="text-muted">Anahtar Kelimeler</label>
+                                <p class="mb-0">{{ site_settings.seo_keywords|default:"Belirtilmemiş" }}</p>
+                            </div>
+                            <a href="{% url 'dashboard:business_settings' %}" class="btn btn-primary">
+                                <i class="fas fa-edit me-2"></i>Düzenle
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

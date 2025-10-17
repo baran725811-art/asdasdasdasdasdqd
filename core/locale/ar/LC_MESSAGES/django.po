@@ -1,0 +1,2408 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-06 13:10+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: .\core\settings\base.py:132
+msgid "Türkçe"
+msgstr "اللغة التركية"
+
+#: .\core\settings\base.py:133
+msgid "English"
+msgstr "اللغة الإنجليزية"
+
+#: .\core\settings\base.py:134
+msgid "Deutsch"
+msgstr "الألمانية"
+
+#: .\core\settings\base.py:135
+msgid "Français"
+msgstr "الفرنسية"
+
+#: .\core\settings\base.py:136
+msgid "Español"
+msgstr "اللغة الإنجليزية"
+
+#: .\core\settings\base.py:137
+msgid "Русский"
+msgstr "الروسية"
+
+#: .\core\settings\base.py:138
+msgid "العربية"
+msgstr "العربية"
+
+#: .\dashboard\models.py:26
+#: .\dashboard\templates\dashboard\carousel\list.html:110
+#: .\dashboard\templates\dashboard\carousel\list.html:217
+#: .\dashboard\templates\dashboard\carousel\list.html:299
+#: .\dashboard\templates\dashboard\gallery\list.html:259
+#: .\dashboard\templates\dashboard\gallery\list.html:355
+#: .\dashboard\templates\dashboard\services\list.html:99
+msgid "Başlık"
+msgstr "العنوان"
+
+#: .\dashboard\models.py:27
+#: .\dashboard\templates\dashboard\carousel\list.html:111
+#: .\dashboard\templates\dashboard\carousel\list.html:231
+#: .\dashboard\templates\dashboard\carousel\list.html:314
+#: .\dashboard\templates\dashboard\categories\list.html:196
+#: .\dashboard\templates\dashboard\categories\list.html:249
+#: .\dashboard\templates\dashboard\categories\products_list.html:146
+#: .\dashboard\templates\dashboard\gallery\list.html:277
+#: .\dashboard\templates\dashboard\media_mentions\list.html:237
+#: .\dashboard\templates\dashboard\media_mentions\list.html:592
+#: .\dashboard\templates\dashboard\products\edit_modal.html:64
+#: .\dashboard\templates\dashboard\products\list.html:275
+#: .\dashboard\templates\dashboard\team\list.html:304
+msgid "Açıklama"
+msgstr "الوصف"
+
+#: .\dashboard\models.py:28
+#: .\dashboard\templates\dashboard\gallery\list.html:284
+#: .\dashboard\templates\dashboard\gallery\list.html:380
+msgid "Medya Tipi"
+msgstr "نوع الوسائط"
+
+#: .\dashboard\models.py:29
+#: .\dashboard\templates\dashboard\gallery\list.html:114
+#: .\dashboard\templates\dashboard\gallery\list.html:287
+#: .\dashboard\templates\dashboard\gallery\list.html:294
+#: .\dashboard\templates\dashboard\gallery\list.html:383
+#: .\dashboard\templates\dashboard\gallery\list.html:390
+#: .\dashboard\templates\dashboard\reviews\list.html:109
+#: .\dashboard\templates\dashboard\services\list.html:98
+#: .\templates\gallery\gallery_list.html:647
+msgid "Resim"
+msgstr "ريسيم"
+
+#: .\dashboard\models.py:30
+#: .\dashboard\templates\dashboard\gallery\list.html:301
+#: .\dashboard\templates\dashboard\gallery\list.html:402
+msgid "Video URL"
+msgstr "رابط الفيديو"
+
+#: .\dashboard\models.py:31
+msgid "Video Önizleme"
+msgstr "معاينة الفيديو"
+
+#: .\dashboard\models.py:32
+#: .\dashboard\templates\dashboard\carousel\list.html:263
+#: .\dashboard\templates\dashboard\carousel\list.html:351
+#: .\dashboard\templates\dashboard\categories\list.html:123
+#: .\dashboard\templates\dashboard\categories\products_list.html:40
+#: .\dashboard\templates\dashboard\gallery\gallery_items.html:74
+#: .\dashboard\templates\dashboard\gallery\list.html:124
+#: .\dashboard\templates\dashboard\gallery\list.html:311
+#: .\dashboard\templates\dashboard\gallery\list.html:412
+#: .\dashboard\templates\dashboard\media_mentions\list.html:240
+#: .\dashboard\templates\dashboard\media_mentions\list.html:594
+#: .\dashboard\templates\dashboard\products\list.html:81
+#: .\dashboard\templates\dashboard\services\list.html:141
+#: .\dashboard\templates\dashboard\services\list.html:220
+#: .\dashboard\templates\dashboard\team\list.html:209
+#: .\dashboard\templates\dashboard\team\list.html:283
+msgid "Aktif"
+msgstr "نشط"
+
+#: .\dashboard\models.py:33
+#: .\dashboard\templates\dashboard\categories\products_list.html:86
+#: .\dashboard\templates\dashboard\categories\products_list.html:179
+#: .\dashboard\templates\dashboard\gallery\gallery_items.html:81
+#: .\dashboard\templates\dashboard\gallery\list.html:126
+#: .\dashboard\templates\dashboard\gallery\list.html:320
+#: .\dashboard\templates\dashboard\gallery\list.html:421
+msgid "Öne Çıkan"
+msgstr "مميز"
+
+#: .\dashboard\models.py:34
+#: .\dashboard\templates\dashboard\carousel\list.html:224
+#: .\dashboard\templates\dashboard\carousel\list.html:306
+#: .\dashboard\templates\dashboard\gallery\list.html:132
+#: .\dashboard\templates\dashboard\gallery\list.html:268
+#: .\dashboard\templates\dashboard\gallery\list.html:364
+#: .\dashboard\templates\dashboard\services\list.html:59
+#: .\dashboard\templates\dashboard\services\list.html:213
+#: .\dashboard\templates\dashboard\team\list.html:68
+msgid "Sıralama"
+msgstr "الترتيب"
+
+#: .\dashboard\models.py:35 .\dashboard\models.py:61
+msgid "Oluşturulma Tarihi"
+msgstr "تاريخ الإنشاء"
+
+#: .\dashboard\models.py:36 .\dashboard\models.py:62 .\dashboard\models.py:86
+msgid "Güncellenme Tarihi"
+msgstr "تاريخ التحديث"
+
+#: .\dashboard\models.py:39
+msgid "Galeri Öğesi"
+msgstr "عنصر المعرض"
+
+#: .\dashboard\models.py:40
+#: .\dashboard\templates\dashboard\gallery\list.html:161
+msgid "Galeri Öğeleri"
+msgstr "عناصر المعرض"
+
+#: .\dashboard\models.py:47
+msgid "Site Başlığı"
+msgstr "عنوان الموقع"
+
+#: .\dashboard\models.py:48
+msgid "Favicon"
+msgstr "فافيكون"
+
+#: .\dashboard\models.py:49
+msgid "Logo"
+msgstr "الشعار"
+
+#: .\dashboard\models.py:50 .\dashboard\models.py:80
+#: .\dashboard\templates\dashboard\messages\list.html:122
+#: .\dashboard\templates\dashboard\messages\list.html:232
+#: .\dashboard\templates\dashboard\team\list.html:292
+#: .\templates\contact\contact.html:42 .\templates\contact\contact.html:92
+msgid "E-posta"
+msgstr "البريد الإلكتروني"
+
+#: .\dashboard\models.py:51 .\dashboard\templates\dashboard\team\list.html:298
+#: .\templates\contact\contact.html:32 .\templates\contact\contact.html:87
+msgid "Telefon"
+msgstr "رقم الهاتف"
+
+#: .\dashboard\models.py:52 .\templates\contact\contact.html:82
+msgid "Adres"
+msgstr "العنوان"
+
+#: .\dashboard\models.py:53
+msgid "Facebook"
+msgstr "فيسبوك"
+
+#: .\dashboard\models.py:54
+msgid "Twitter"
+msgstr "تويتر"
+
+#: .\dashboard\models.py:55
+msgid "Instagram"
+msgstr "انستقرام"
+
+#: .\dashboard\models.py:56
+msgid "LinkedIn"
+msgstr "لينكد إن"
+
+#: .\dashboard\models.py:57
+msgid "YouTube"
+msgstr "يوتيوب"
+
+#: .\dashboard\models.py:58
+msgid "Analytics Kodu"
+msgstr "تحليلات كودو"
+
+#: .\dashboard\models.py:59
+#: .\dashboard\templates\dashboard\products\edit_modal.html:87
+msgid "Meta Başlık"
+msgstr "العنوان التعريفي"
+
+#: .\dashboard\models.py:60
+#: .\dashboard\templates\dashboard\products\edit_modal.html:95
+msgid "Meta Açıklama"
+msgstr "الوصف التعريفي"
+
+#: .\dashboard\models.py:65
+msgid "Site Ayarı"
+msgstr "إعداد الموقع"
+
+#: .\dashboard\models.py:66
+msgid "Site Ayarları"
+msgstr "إعدادات الموقع"
+
+#: .\dashboard\models.py:73
+msgid "Yeni"
+msgstr "جديد"
+
+#: .\dashboard\models.py:74
+msgid "Okundu"
+msgstr "اقرأ"
+
+#: .\dashboard\models.py:75
+msgid "Yanıtlandı"
+msgstr "تمت الإجابة"
+
+#: .\dashboard\models.py:76
+msgid "Spam"
+msgstr "الرسائل غير المرغوب فيها"
+
+#: .\dashboard\models.py:79
+#: .\dashboard\templates\dashboard\messages\list.html:121
+#: .\dashboard\templates\dashboard\messages\list.html:226
+#: .\dashboard\templates\dashboard\messages\list.html:328
+msgid "İsim"
+msgstr "الاسم"
+
+#: .\dashboard\models.py:81
+#: .\dashboard\templates\dashboard\messages\list.html:123
+#: .\dashboard\templates\dashboard\messages\list.html:238
+#: .\templates\contact\contact.html:51
+msgid "Konu"
+msgstr "الزوجة"
+
+#: .\dashboard\models.py:82 .\dashboard\models.py:89
+#: .\dashboard\templates\dashboard\messages\list.html:124
+#: .\dashboard\templates\dashboard\messages\list.html:244
+msgid "Mesaj"
+msgstr "الرسالة"
+
+#: .\dashboard\models.py:83
+#: .\dashboard\templates\dashboard\carousel\list.html:114
+#: .\dashboard\templates\dashboard\categories\list.html:97
+#: .\dashboard\templates\dashboard\categories\products_list.html:37
+#: .\dashboard\templates\dashboard\categories\products_list.html:67
+#: .\dashboard\templates\dashboard\gallery\list.html:121
+#: .\dashboard\templates\dashboard\media_mentions\list.html:177
+#: .\dashboard\templates\dashboard\messages\list.html:355
+#: .\dashboard\templates\dashboard\notifications\list.html:97
+#: .\dashboard\templates\dashboard\products\list.html:77
+#: .\dashboard\templates\dashboard\products\list.html:127
+#: .\dashboard\templates\dashboard\reviews\list.html:110
+#: .\dashboard\templates\dashboard\services\form.html:123
+#: .\dashboard\templates\dashboard\services\list.html:100
+#: .\dashboard\templates\dashboard\team\list.html:167
+#: .\dashboard\templates\dashboard\team\list.html:279
+msgid "Durum"
+msgstr "الحالة"
+
+#: .\dashboard\models.py:84
+msgid "Not"
+msgstr "لا يوجد"
+
+#: .\dashboard\models.py:85
+msgid "Gönderim Tarihi"
+msgstr "تاريخ التقديم"
+
+#: .\dashboard\models.py:90 .\dashboard\templates\dashboard\base.html:834
+#: .\dashboard\templates\dashboard\index.html:319
+#: .\dashboard\templates\dashboard\index.html:1037
+#: .\dashboard\templates\dashboard\messages\list.html:6
+msgid "Mesajlar"
+msgstr "الرسائل"
+
+#: .\dashboard\models.py:173
+msgid "Müşteri Adı"
+msgstr "اسم العميل"
+
+#: .\dashboard\models.py:174
+#: .\dashboard\templates\dashboard\messages\list.html:363
+#: .\dashboard\templates\dashboard\reviews\list.html:108
+#: .\dashboard\templates\dashboard\reviews\list.html:287
+#: .\templates\home\index.html:826
+msgid "Yorum"
+msgstr "تعليق"
+
+#: .\dashboard\models.py:175
+#: .\dashboard\templates\dashboard\reviews\list.html:107
+#: .\dashboard\templates\dashboard\reviews\list.html:264
+msgid "Puan"
+msgstr "بوان"
+
+#: .\dashboard\models.py:176
+msgid "Yorum Tarihi"
+msgstr "تاريخ التعليق"
+
+#: .\dashboard\models.py:177
+#: .\dashboard\templates\dashboard\reviews\list.html:93
+#: .\dashboard\templates\dashboard\reviews\list.html:171
+msgid "Onaylı"
+msgstr "معتمد"
+
+#: .\dashboard\models.py:180
+msgid "Müşteri Yorumu"
+msgstr "تقييم العميل"
+
+#: .\dashboard\models.py:181 .\dashboard\templates\dashboard\base.html:838
+#: .\dashboard\templates\dashboard\index.html:72
+#: .\dashboard\templates\dashboard\messages\list.html:59
+#: .\dashboard\templates\dashboard\reviews\list.html:6
+#: .\templates\home\index.html:814
+msgid "Müşteri Yorumları"
+msgstr "آراء العملاء"
+
+#: .\dashboard\templates\dashboard\about\edit.html:7
+#: .\dashboard\templates\dashboard\about\edit.html:8
+msgid "Hakkımızda Düzenle"
+msgstr "تحرير نبذة عنا"
+
+#: .\dashboard\templates\dashboard\about\edit.html:22
+msgid "Hakkımızda Sayfası"
+msgstr "صفحة معلومات عنا"
+
+#: .\dashboard\templates\dashboard\about\edit.html:23
+msgid "Şirket bilgilerinizi düzenleyin ve güncelleyin"
+msgstr "تنظيم معلومات شركتك وتحديثها"
+
+#: .\dashboard\templates\dashboard\about\edit.html:27
+#: .\dashboard\templates\dashboard\media_mentions\list.html:226
+msgid "Önizleme"
+msgstr "معاينة"
+
+#: .\dashboard\templates\dashboard\about\edit.html:30
+#: .\dashboard\templates\dashboard\carousel\list.html:361
+#: .\dashboard\templates\dashboard\categories\list.html:265
+#: .\dashboard\templates\dashboard\products\edit_modal.html:129
+msgid "Değişiklikleri Kaydet"
+msgstr "حفظ التغييرات"
+
+#: .\dashboard\templates\dashboard\about\edit.html:47
+#: .\dashboard\templates\dashboard\media_mentions\list.html:50
+msgid "Temel Bilgiler"
+msgstr "معلومات أساسية"
+
+#: .\dashboard\templates\dashboard\about\edit.html:54
+#: .\dashboard\templates\dashboard\about\edit.html:224
+msgid "Sayfa Başlığı"
+msgstr "عنوان الصفحة"
+
+#: .\dashboard\templates\dashboard\about\edit.html:57
+msgid "Ana başlık olarak görünecek metin"
+msgstr "النص الذي سيظهر كعنوان رئيسي"
+
+#: .\dashboard\templates\dashboard\about\edit.html:62
+msgid "Kısa Açıklama"
+msgstr "وصف موجز"
+
+#: .\dashboard\templates\dashboard\about\edit.html:65
+msgid "Sayfa başlığının altında görünecek özet metin"
+msgstr "نص ملخص يظهر أسفل عنوان الصفحة"
+
+#: .\dashboard\templates\dashboard\about\edit.html:75
+#: .\dashboard\templates\dashboard\about\edit.html:240
+msgid "Ana Görsel"
+msgstr "الصورة الرئيسية"
+
+#: .\dashboard\templates\dashboard\about\edit.html:83
+msgid "Görsel Seçin"
+msgstr "حدد الصورة"
+
+#: .\dashboard\templates\dashboard\about\edit.html:86
+msgid "Önerilen boyut: 1200x600 piksel"
+msgstr "الحجم الموصى به: 1200 × 600 بكسل"
+
+#: .\dashboard\templates\dashboard\about\edit.html:91
+#: .\dashboard\templates\dashboard\carousel\list.html:326
+#: .\dashboard\templates\dashboard\products\edit_modal.html:77
+msgid "Mevcut görsel"
+msgstr "المرئي المتاح"
+
+#: .\dashboard\templates\dashboard\about\edit.html:93
+msgid "Mevcut Görsel"
+msgstr "الصورة المتاحة"
+
+#: .\dashboard\templates\dashboard\about\edit.html:99
+msgid "Görsel Yok"
+msgstr "لا يوجد مرئي"
+
+#: .\dashboard\templates\dashboard\about\edit.html:112
+#: .\dashboard\templates\dashboard\about\edit.html:232
+msgid "İçerik Bölümleri"
+msgstr "أقسام المحتوى"
+
+#: .\dashboard\templates\dashboard\about\edit.html:119
+#: .\templates\about\about.html:40 .\templates\home\index.html:596
+msgid "Misyonumuz"
+msgstr "مهمتنا"
+
+#: .\dashboard\templates\dashboard\about\edit.html:123
+msgid "Şirketinizin misyonunu açıklayın"
+msgstr "صف مهمة شركتك"
+
+#: .\dashboard\templates\dashboard\about\edit.html:129
+#: .\templates\about\about.html:51
+msgid "Vizyonumuz"
+msgstr "رؤيتنا"
+
+#: .\dashboard\templates\dashboard\about\edit.html:133
+msgid "Gelecek hedeflerinizi paylaşın"
+msgstr "شارك أهدافك المستقبلية"
+
+#: .\dashboard\templates\dashboard\about\edit.html:139
+#: .\templates\about\about.html:29
+msgid "Hikayemiz"
+msgstr "قصتنا"
+
+#: .\dashboard\templates\dashboard\about\edit.html:143
+msgid "Şirketinizin kuruluş hikayesini anlatın"
+msgstr "سرد قصة تأسيس شركتك"
+
+#: .\dashboard\templates\dashboard\about\edit.html:165
+msgid "Şirket İstatistikleri"
+msgstr "إحصائيات الشركة"
+
+#: .\dashboard\templates\dashboard\about\edit.html:172
+msgid "Tecrübe Yılı"
+msgstr "سنوات الخبرة"
+
+#: .\dashboard\templates\dashboard\about\edit.html:179
+msgid "Tamamlanan İşler"
+msgstr "الأعمال المنجزة"
+
+#: .\dashboard\templates\dashboard\about\edit.html:186
+#: .\templates\about\about.html:96 .\templates\home\index.html:902
+msgid "Mutlu Müşteri"
+msgstr "عميل سعيد"
+
+#: .\dashboard\templates\dashboard\about\edit.html:193
+#: .\dashboard\templates\dashboard\services\list.html:37
+msgid "Toplam Hizmet"
+msgstr "إجمالي الخدمة"
+
+#: .\dashboard\templates\dashboard\about\edit.html:200
+#, python-format
+msgid "Müşteri Memnuniyeti (%%)"
+msgstr "رضا العملاء (%%)"
+
+#: .\dashboard\templates\dashboard\about\edit.html:217
+msgid "İçerik Durumu"
+msgstr "حالة المحتوى"
+
+#: .\dashboard\templates\dashboard\about\edit.html:225
+#: .\dashboard\templates\dashboard\about\edit.html:233
+#: .\dashboard\templates\dashboard\about\edit.html:241
+msgid "Kontrol Ediliyor"
+msgstr "التحكم"
+
+#: .\dashboard\templates\dashboard\about\edit.html:249
+msgid "Tamamlanma Oranı"
+msgstr "معدل الإنجاز"
+
+#: .\dashboard\templates\dashboard\about\edit.html:264
+msgid "Hızlı İşlemler"
+msgstr "المعاملات السريعة"
+
+#: .\dashboard\templates\dashboard\about\edit.html:271
+msgid "Sayfayı Görüntüle"
+msgstr "عرض الصفحة"
+
+#: .\dashboard\templates\dashboard\about\edit.html:277
+msgid "Değişiklikleri Geri Al"
+msgstr "التراجع عن التغييرات"
+
+#: .\dashboard\templates\dashboard\about\edit.html:282
+msgid "Dashboard'a Dön"
+msgstr "العودة إلى لوحة التحكم"
+
+#: .\dashboard\templates\dashboard\activities\list.html:4
+msgid "Tüm Aktiviteler"
+msgstr "جميع الأنشطة"
+
+#: .\dashboard\templates\dashboard\activities\list.html:5
+#: .\dashboard\templates\dashboard\activities\list.html:51
+msgid "Aktivite Geçmişi"
+msgstr "تاريخ النشاط"
+
+#: .\dashboard\templates\dashboard\activities\list.html:16
+msgid "Zaman Aralığı"
+msgstr "الفاصل الزمني"
+
+#: .\dashboard\templates\dashboard\activities\list.html:18
+#: .\dashboard\templates\dashboard\gallery\list.html:77
+msgid "Son 7 Gün"
+msgstr "آخر 7 أيام"
+
+#: .\dashboard\templates\dashboard\activities\list.html:19
+msgid "Son 30 Gün"
+msgstr "آخر 30 يوماً"
+
+#: .\dashboard\templates\dashboard\activities\list.html:20
+#: .\dashboard\templates\dashboard\index.html:110
+msgid "Son 3 Ay"
+msgstr "الصوت 3 أي"
+
+#: .\dashboard\templates\dashboard\activities\list.html:21
+msgid "Son 1 Yıl"
+msgstr "آخر 1 سنة"
+
+#: .\dashboard\templates\dashboard\activities\list.html:25
+msgid "Aktivite Türü"
+msgstr "نوع النشاط"
+
+#: .\dashboard\templates\dashboard\activities\list.html:33
+msgid "İstatistikler"
+msgstr "الإحصائيات"
+
+#: .\dashboard\templates\dashboard\activities\list.html:35
+msgid "Toplam"
+msgstr "الإجمالي"
+
+#: .\dashboard\templates\dashboard\activities\list.html:36
+msgid "gün"
+msgstr "اليوم"
+
+#: .\dashboard\templates\dashboard\activities\list.html:78
+msgid "Sayfa navigasyonu"
+msgstr "تصفح الصفحة"
+
+#: .\dashboard\templates\dashboard\activities\list.html:82
+#: .\dashboard\templates\dashboard\notifications\list.html:183
+#: .\templates\gallery\gallery_list.html:705 .\templates\home\index.html:580
+#: .\templates\home\index.html:761 .\templates\home\index.html:871
+#: .\templates\products\product_list.html:78
+msgid "Önceki"
+msgstr "السابق"
+
+#: .\dashboard\templates\dashboard\activities\list.html:96
+#: .\dashboard\templates\dashboard\notifications\list.html:201
+#: .\templates\gallery\gallery_list.html:706 .\templates\home\index.html:584
+#: .\templates\home\index.html:768 .\templates\home\index.html:876
+#: .\templates\products\product_list.html:90
+msgid "Sonraki"
+msgstr "التالي"
+
+#: .\dashboard\templates\dashboard\activities\list.html:105
+msgid "Aktivite Bulunamadı"
+msgstr "لم يتم العثور على أي نشاط"
+
+#: .\dashboard\templates\dashboard\activities\list.html:106
+msgid "Bu zaman aralığında herhangi bir aktivite kaydı bulunamadı."
+msgstr "لم يتم العثور على أي سجل للنشاط خلال هذه الفترة الزمنية."
+
+#: .\dashboard\templates\dashboard\base.html:814
+msgid "Admin Dashboard"
+msgstr "لوحة تحكم المسؤول"
+
+#: .\dashboard\templates\dashboard\base.html:815
+msgid "Yönetim Paneli"
+msgstr "فريق الإدارة"
+
+#: .\dashboard\templates\dashboard\base.html:820
+#: .\dashboard\templates\dashboard\index.html:5 .\templates\base.html:224
+#: .\templates\base.html:434 .\templates\products\product_detail.html:13
+msgid "Ana Sayfa"
+msgstr "الصفحة الرئيسية"
+
+#: .\dashboard\templates\dashboard\base.html:826 .\templates\about\about.html:6
+#: .\templates\base.html:255 .\templates\base.html:440
+#: .\templates\home\index.html:594 .\templates\home\index.html:622
+#: .\templates\home\index.html:628
+msgid "Hakkımızda"
+msgstr "نبذة عنا"
+
+#: .\dashboard\templates\dashboard\base.html:830
+#: .\dashboard\templates\dashboard\services\list.html:6
+#: .\templates\about\about.html:119
+msgid "Hizmetlerimiz"
+msgstr "خدماتنا"
+
+#: .\dashboard\templates\dashboard\base.html:842
+#: .\dashboard\templates\dashboard\index.html:330 .\templates\base.html:240
+#: .\templates\base.html:436
+msgid "Galeri"
+msgstr "معرض الصور"
+
+#: .\dashboard\templates\dashboard\base.html:846
+msgid "Carousel"
+msgstr "كاروسيل"
+
+#: .\dashboard\templates\dashboard\base.html:850
+#: .\dashboard\templates\dashboard\categories\list.html:6
+#: .\dashboard\templates\dashboard\index.html:57
+msgid "Kategoriler"
+msgstr "الفئات"
+
+#: .\dashboard\templates\dashboard\base.html:854
+#: .\dashboard\templates\dashboard\index.html:1007 .\templates\base.html:232
+#: .\templates\base.html:435 .\templates\products\product_detail.html:14
+msgid "Ürünler"
+msgstr "المنتجات"
+
+#: .\dashboard\templates\dashboard\base.html:857
+#: .\dashboard\templates\dashboard\team\list.html:6
+#: .\templates\about\about.html:180
+msgid "Ekibimiz"
+msgstr "فريقنا"
+
+#: .\dashboard\templates\dashboard\base.html:861
+msgid "Basın'da Biz"
+msgstr "نحن في الصحافة"
+
+#: .\dashboard\templates\dashboard\base.html:867
+msgid "Çıkış"
+msgstr "الخروج"
+
+#: .\dashboard\templates\dashboard\base.html:881
+msgid "Dashboard"
+msgstr "لوحة التحكم"
+
+#: .\dashboard\templates\dashboard\base.html:897
+#: .\templates\gallery\gallery_list.html:703
+msgid "Yükleniyor..."
+msgstr "جاري التحميل..."
+
+#: .\dashboard\templates\dashboard\base.html:908
+msgid "Tema"
+msgstr "لها"
+
+#: .\dashboard\templates\dashboard\base.html:917
+msgid "Varsayılan"
+msgstr "افتراضي"
+
+#: .\dashboard\templates\dashboard\base.html:927
+msgid "Karanlık Mod"
+msgstr "الوضع الداكن"
+
+#: .\dashboard\templates\dashboard\base.html:937
+msgid "Okuma Modu"
+msgstr "أوكوما مودو"
+
+#: .\dashboard\templates\dashboard\base.html:948
+msgid "Mavi"
+msgstr "مافي"
+
+#: .\dashboard\templates\dashboard\base.html:958
+msgid "Yeşil"
+msgstr "أخضر"
+
+#: .\dashboard\templates\dashboard\base.html:968
+msgid "Mor"
+msgstr "مور"
+
+#: .\dashboard\templates\dashboard\base.html:978
+msgid "Turuncu"
+msgstr "برتقالي"
+
+#: .\dashboard\templates\dashboard\base.html:987
+#: .\dashboard\templates\dashboard\index.html:20
+msgid "Siteyi Görüntüle"
+msgstr "عرض الموقع"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:6
+#: .\dashboard\templates\dashboard\carousel\list.html:7
+#: .\dashboard\templates\dashboard\carousel\list.html:16
+msgid "Carousel Yönetimi"
+msgstr "الإدارة الدوارة"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:17
+msgid "Ana sayfa slaytlarınızı düzenleyin ve yönetin"
+msgstr "تنظيم شرائح صفحتك الرئيسية وإدارتها"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:21
+#: .\dashboard\templates\dashboard\carousel\list.html:207
+msgid "Yeni Slayt Ekle"
+msgstr "إضافة شريحة جديدة"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:32
+msgid "Toplam Slayt"
+msgstr "إجمالي الشريحة"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:38
+msgid "Aktif Slaytlar"
+msgstr "الشرائح النشطة"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:43
+msgid "İlk Sıra"
+msgstr "الصف الأول"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:48
+msgid "Görüntülenme"
+msgstr "التصوير"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:58
+msgid "Carousel Önizleme"
+msgstr "معاينة العرض الدائري"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:62
+msgid "Önizlemeyi Göster/Gizle"
+msgstr "إظهار/إخفاء المعاينة"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:109
+#: .\dashboard\templates\dashboard\carousel\list.html:238
+#: .\dashboard\templates\dashboard\carousel\list.html:320
+#: .\dashboard\templates\dashboard\categories\products_list.html:62
+#: .\dashboard\templates\dashboard\categories\products_list.html:163
+#: .\dashboard\templates\dashboard\products\edit_modal.html:71
+#: .\dashboard\templates\dashboard\products\list.html:112
+#: .\dashboard\templates\dashboard\products\list.html:281
+msgid "Görsel"
+msgstr "جورس"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:112
+msgid "Buton"
+msgstr "بوتون"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:113
+#: .\dashboard\templates\dashboard\services\list.html:97
+#: .\dashboard\templates\dashboard\team\list.html:163
+#: .\dashboard\templates\dashboard\team\list.html:275
+msgid "Sıra"
+msgstr "التسلسل"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:115
+#: .\dashboard\templates\dashboard\categories\list.html:98
+#: .\dashboard\templates\dashboard\categories\products_list.html:68
+#: .\dashboard\templates\dashboard\messages\list.html:126
+#: .\dashboard\templates\dashboard\products\list.html:130
+#: .\dashboard\templates\dashboard\reviews\list.html:111
+#: .\dashboard\templates\dashboard\services\list.html:101
+#: .\dashboard\templates\dashboard\team\list.html:168
+msgid "İşlemler"
+msgstr "المعاملات"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:185
+msgid "Henüz slayt bulunmuyor"
+msgstr "لا توجد شرائح بعد"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:186
+msgid ""
+"İlk slaytınızı eklemek için yukarıdaki \"Yeni Slayt Ekle\" butonunu kullanın."
+msgstr "لإضافة الشريحة الأولى، استخدم زر \"إضافة شريحة جديدة\" أعلاه."
+
+#: .\dashboard\templates\dashboard\carousel\list.html:188
+msgid "İlk Slaytı Ekle"
+msgstr "إدراج الشريحة الأولى"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:220
+msgid "Slayt başlığını girin..."
+msgstr "أدخل عنوان الشريحة..."
+
+#: .\dashboard\templates\dashboard\carousel\list.html:234
+msgid "Slayt açıklaması..."
+msgstr "وصف الشريحة..."
+
+#: .\dashboard\templates\dashboard\carousel\list.html:241
+msgid "Önerilen boyut: 1920x600 piksel"
+msgstr "الحجم الموصى به: 1920 × 600 بكسل"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:246
+#: .\dashboard\templates\dashboard\carousel\list.html:333
+msgid "Buton Metni"
+msgstr "بوتون متني"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:249
+msgid "Daha Fazla Bilgi"
+msgstr "المزيد من المعلومات"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:253
+#: .\dashboard\templates\dashboard\carousel\list.html:340
+msgid "Buton URL"
+msgstr "عنوان URL لـ بوتون"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:256
+msgid "https://example.com"
+msgstr "https://example.com"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:270
+#: .\dashboard\templates\dashboard\carousel\list.html:358
+#: .\dashboard\templates\dashboard\carousel\list.html:390
+#: .\dashboard\templates\dashboard\categories\list.html:209
+#: .\dashboard\templates\dashboard\categories\list.html:262
+#: .\dashboard\templates\dashboard\categories\list.html:296
+#: .\dashboard\templates\dashboard\categories\products_list.html:185
+#: .\dashboard\templates\dashboard\categories\products_list.html:205
+#: .\dashboard\templates\dashboard\categories\products_list.html:273
+#: .\dashboard\templates\dashboard\gallery\list.html:327
+#: .\dashboard\templates\dashboard\gallery\list.html:428
+#: .\dashboard\templates\dashboard\gallery\list.html:458
+#: .\dashboard\templates\dashboard\media_mentions\add.html:93
+#: .\dashboard\templates\dashboard\media_mentions\list.html:210
+#: .\dashboard\templates\dashboard\messages\list.html:299
+#: .\dashboard\templates\dashboard\products\edit_modal.html:126
+#: .\dashboard\templates\dashboard\products\list.html:296
+#: .\dashboard\templates\dashboard\products\list.html:338
+#: .\dashboard\templates\dashboard\reviews\list.html:332
+#: .\dashboard\templates\dashboard\services\form.html:145
+#: .\dashboard\templates\dashboard\services\list.html:271
+#: .\dashboard\templates\dashboard\team\form.html:20
+#: .\dashboard\templates\dashboard\team\list.html:348
+msgid "İptal"
+msgstr "إلغاء"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:273
+msgid "Slaytı Ekle"
+msgstr "إدراج الشريحة"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:289
+msgid "Slayt Düzenle"
+msgstr "تحرير الشريحة"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:375
+#: .\dashboard\templates\dashboard\categories\list.html:279
+#: .\dashboard\templates\dashboard\categories\products_list.html:198
+#: .\dashboard\templates\dashboard\gallery\list.html:444
+#: .\dashboard\templates\dashboard\messages\list.html:282
+#: .\dashboard\templates\dashboard\products\list.html:323
+#: .\dashboard\templates\dashboard\reviews\list.html:315
+#: .\dashboard\templates\dashboard\services\list.html:254
+#: .\dashboard\templates\dashboard\team\list.html:331
+msgid "Silme Onayı"
+msgstr "تأكيد الحذف"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:381
+#: .\dashboard\templates\dashboard\categories\list.html:287
+#: .\dashboard\templates\dashboard\products\list.html:329
+#: .\dashboard\templates\dashboard\reviews\list.html:323
+#: .\dashboard\templates\dashboard\team\list.html:339
+msgid "Emin misiniz?"
+msgstr "هل أنت متأكد؟"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:382
+msgid "slaytını kalıcı olarak silmek istediğinizden emin misiniz?"
+msgstr "هل أنت متأكد من رغبتك في حذف الشريحة نهائياً؟"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:385
+#: .\dashboard\templates\dashboard\messages\list.html:294
+#: .\dashboard\templates\dashboard\products\list.html:333
+#: .\dashboard\templates\dashboard\reviews\list.html:327
+#: .\dashboard\templates\dashboard\services\list.html:266
+#: .\dashboard\templates\dashboard\team\list.html:343
+msgid "Bu işlem geri alınamaz!"
+msgstr "هذه العملية لا رجعة فيها!"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:395
+#: .\dashboard\templates\dashboard\categories\list.html:301
+#: .\dashboard\templates\dashboard\messages\list.html:304
+#: .\dashboard\templates\dashboard\products\list.html:343
+#: .\dashboard\templates\dashboard\reviews\list.html:337
+#: .\dashboard\templates\dashboard\services\list.html:276
+#: .\dashboard\templates\dashboard\team\list.html:351
+msgid "Kalıcı Olarak Sil"
+msgstr "الحذف نهائيًا"
+
+#: .\dashboard\templates\dashboard\categories\list.html:7
+#: .\dashboard\templates\dashboard\categories\list.html:16
+msgid "Kategori Yönetimi"
+msgstr "إدارة الفئات"
+
+#: .\dashboard\templates\dashboard\categories\list.html:17
+msgid "Kategorilerinizi düzenleyin ve yönetin"
+msgstr "تنظيم فئاتك وإدارتها"
+
+#: .\dashboard\templates\dashboard\categories\list.html:20
+#: .\dashboard\templates\dashboard\categories\list.html:174
+msgid "Yeni Kategori"
+msgstr "فئة جديدة"
+
+#: .\dashboard\templates\dashboard\categories\list.html:35
+#: .\dashboard\templates\dashboard\index.html:182
+msgid "Toplam Kategori"
+msgstr "إجمالي الفئة"
+
+#: .\dashboard\templates\dashboard\categories\list.html:46
+msgid "Aktif Kategoriler"
+msgstr "الفئات النشطة"
+
+#: .\dashboard\templates\dashboard\categories\list.html:57
+#: .\dashboard\templates\dashboard\index.html:42
+#: .\dashboard\templates\dashboard\index.html:186
+#: .\dashboard\templates\dashboard\products\list.html:31
+msgid "Toplam Ürün"
+msgstr "إجمالي المنتج"
+
+#: .\dashboard\templates\dashboard\categories\list.html:68
+msgid "Boş Kategoriler"
+msgstr "الفئات الفارغة"
+
+#: .\dashboard\templates\dashboard\categories\list.html:79
+msgid "Kategori Listesi"
+msgstr "الفئة الثانية"
+
+#: .\dashboard\templates\dashboard\categories\list.html:84
+msgid "Kategori ara..."
+msgstr "فئة التين..."
+
+#: .\dashboard\templates\dashboard\categories\list.html:95
+#: .\dashboard\templates\dashboard\categories\list.html:183
+#: .\dashboard\templates\dashboard\categories\list.html:237
+msgid "Kategori Adı"
+msgstr "اسم الفئة"
+
+#: .\dashboard\templates\dashboard\categories\list.html:96
+msgid "Slug"
+msgstr "سبيكة"
+
+#: .\dashboard\templates\dashboard\categories\list.html:125
+#: .\dashboard\templates\dashboard\categories\products_list.html:41
+#: .\dashboard\templates\dashboard\gallery\gallery_items.html:76
+#: .\dashboard\templates\dashboard\gallery\list.html:125
+#: .\dashboard\templates\dashboard\media_mentions\list.html:594
+#: .\dashboard\templates\dashboard\products\list.html:82
+#: .\dashboard\templates\dashboard\services\list.html:143
+#: .\dashboard\templates\dashboard\services\list.html:222
+#: .\dashboard\templates\dashboard\team\list.html:211
+#: .\dashboard\templates\dashboard\team\list.html:285
+msgid "Pasif"
+msgstr "مبني للمجهول"
+
+#: .\dashboard\templates\dashboard\categories\list.html:133
+#: .\dashboard\templates\dashboard\gallery\gallery_items.html:47
+#: .\dashboard\templates\dashboard\products\list.html:187
+#: .\dashboard\templates\dashboard\services\list.html:150
+#: .\dashboard\templates\dashboard\services\list.html:239
+#: .\dashboard\templates\dashboard\team\list.html:120
+#: .\dashboard\templates\dashboard\team\list.html:219
+#: .\dashboard\templates\dashboard\team\list.html:318
+msgid "Düzenle"
+msgstr "تحرير"
+
+#: .\dashboard\templates\dashboard\categories\list.html:137
+msgid "Ürünleri Görüntüle"
+msgstr "عرض المنتجات"
+
+#: .\dashboard\templates\dashboard\categories\list.html:141
+#: .\dashboard\templates\dashboard\categories\products_list.html:208
+#: .\dashboard\templates\dashboard\gallery\gallery_items.html:53
+#: .\dashboard\templates\dashboard\gallery\list.html:462
+#: .\dashboard\templates\dashboard\messages\list.html:180
+#: .\dashboard\templates\dashboard\products\list.html:192
+#: .\dashboard\templates\dashboard\services\list.html:158
+#: .\dashboard\templates\dashboard\team\list.html:127
+#: .\dashboard\templates\dashboard\team\list.html:226
+msgid "Sil"
+msgstr "سيل"
+
+#: .\dashboard\templates\dashboard\categories\list.html:152
+#: .\dashboard\templates\dashboard\index.html:219
+msgid "Henüz kategori bulunmuyor"
+msgstr "لا توجد فئات بعد"
+
+#: .\dashboard\templates\dashboard\categories\list.html:153
+msgid ""
+"İlk kategorinizi eklemek için yukarıdaki \"Yeni Kategori\" butonunu kullanın."
+msgstr "لإضافة الفئة الأولى، استخدم زر \"فئة جديدة\" أعلاه."
+
+#: .\dashboard\templates\dashboard\categories\list.html:155
+msgid "İlk Kategoriyi Ekle"
+msgstr "إضافة الفئة الأولى"
+
+#: .\dashboard\templates\dashboard\categories\list.html:189
+#: .\dashboard\templates\dashboard\categories\list.html:243
+msgid "URL Slug"
+msgstr "عنوان URL سبيكة"
+
+#: .\dashboard\templates\dashboard\categories\list.html:192
+msgid "URL'de görünecek kısım (otomatik oluşturulur)"
+msgstr "الجزء المراد ظهوره في عنوان URL (يتم إنشاؤه تلقائياً)"
+
+#: .\dashboard\templates\dashboard\categories\list.html:203
+#: .\dashboard\templates\dashboard\categories\list.html:256
+msgid "Aktif Durumda"
+msgstr "الحالة النشطة"
+
+#: .\dashboard\templates\dashboard\categories\list.html:212
+msgid "Kategori Ekle"
+msgstr "إضافة فئة"
+
+#: .\dashboard\templates\dashboard\categories\list.html:228
+msgid "Kategori Düzenle"
+msgstr "تحرير الفئة"
+
+#: .\dashboard\templates\dashboard\categories\list.html:288
+msgid "kategorisini silmek istediğinizden emin misiniz?"
+msgstr "هل أنت متأكد من رغبتك في حذف الفئة؟"
+
+#: .\dashboard\templates\dashboard\categories\list.html:291
+msgid "Bu kategoriye ait tüm ürünler de silinecektir!"
+msgstr "سيتم أيضًا حذف جميع المنتجات التي تنتمي إلى هذه الفئة!"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:5
+#: .\dashboard\templates\dashboard\categories\products_list.html:11
+#: .\dashboard\templates\dashboard\products\list.html:5
+#: .\dashboard\templates\dashboard\products\list.html:6
+#: .\dashboard\templates\dashboard\products\list.html:15
+msgid "Ürün Yönetimi"
+msgstr "إدارة المنتجات"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:13
+msgid "kategorisindeki ürünler"
+msgstr "المنتجات في الفئة"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:17
+msgid "Yeni Ürün"
+msgstr "منتج جديد"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:26
+#: .\dashboard\templates\dashboard\categories\products_list.html:64
+#: .\dashboard\templates\dashboard\categories\products_list.html:131
+#: .\dashboard\templates\dashboard\products\edit_modal.html:23
+#: .\dashboard\templates\dashboard\products\list.html:64
+#: .\dashboard\templates\dashboard\products\list.html:118
+#: .\dashboard\templates\dashboard\products\list.html:241
+#: .\templates\products\product_detail.html:31
+msgid "Kategori"
+msgstr "الفئات"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:28
+#: .\dashboard\templates\dashboard\categories\products_list.html:39
+#: .\dashboard\templates\dashboard\gallery\list.html:113
+#: .\dashboard\templates\dashboard\gallery\list.html:123
+#: .\dashboard\templates\dashboard\notifications\list.html:89
+#: .\dashboard\templates\dashboard\notifications\list.html:99
+#: .\dashboard\templates\dashboard\products\list.html:67
+#: .\dashboard\templates\dashboard\products\list.html:80
+#: .\templates\gallery\gallery_list.html:571
+#: .\templates\products\product_list.html:19
+msgid "Tümü"
+msgstr "الكل"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:45
+#: .\dashboard\templates\dashboard\products\list.html:87
+msgid "Arama"
+msgstr "أراما"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:46
+#: .\dashboard\templates\dashboard\products\list.html:91
+msgid "Ürün adı ile ara..."
+msgstr "البحث حسب اسم المنتج..."
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:49
+#: .\dashboard\templates\dashboard\notifications\list.html:108
+#: .\dashboard\templates\dashboard\products\list.html:97
+msgid "Filtrele"
+msgstr "فيلتريل"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:63
+#: .\dashboard\templates\dashboard\categories\products_list.html:127
+#: .\dashboard\templates\dashboard\products\edit_modal.html:16
+#: .\dashboard\templates\dashboard\products\list.html:115
+#: .\dashboard\templates\dashboard\products\list.html:235
+msgid "Ürün Adı"
+msgstr "اسم المنتج"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:65
+#: .\dashboard\templates\dashboard\categories\products_list.html:151
+#: .\dashboard\templates\dashboard\products\edit_modal.html:45
+#: .\dashboard\templates\dashboard\products\list.html:121
+#: .\dashboard\templates\dashboard\products\list.html:260
+msgid "Fiyat"
+msgstr "السعر"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:66
+#: .\dashboard\templates\dashboard\categories\products_list.html:158
+#: .\dashboard\templates\dashboard\products\edit_modal.html:54
+#: .\dashboard\templates\dashboard\products\list.html:124
+#: .\dashboard\templates\dashboard\products\list.html:267
+msgid "Stok"
+msgstr "قصب"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:118
+#: .\dashboard\templates\dashboard\products\edit_modal.html:6
+msgid "Ürün Düzenle"
+msgstr "تحرير المنتج"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:142
+#: .\dashboard\templates\dashboard\products\edit_modal.html:37
+#: .\dashboard\templates\dashboard\products\list.html:253
+msgid "URL"
+msgstr "عنوان URL"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:173
+#: .\dashboard\templates\dashboard\products\edit_modal.html:118
+#: .\dashboard\templates\dashboard\products\list.html:289
+msgid "Satışta"
+msgstr "معروض للبيع"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:186
+#: .\dashboard\templates\dashboard\gallery\list.html:430
+#: .\dashboard\templates\dashboard\media_mentions\list.html:213
+#: .\dashboard\templates\dashboard\products\add.html:12
+#: .\dashboard\templates\dashboard\services\form.html:149
+#: .\dashboard\templates\dashboard\team\form.html:19
+msgid "Kaydet"
+msgstr "الحفظ"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:202
+msgid "ürününü silmek istediğinizden emin misiniz?"
+msgstr "هل أنت متأكد من رغبتك في حذف المنتج؟"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:216
+msgid "Henüz ürün eklenmemiş."
+msgstr "لم تتم إضافة أي منتجات بعد."
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:262
+#: .\dashboard\templates\dashboard\products\list.html:20
+#: .\dashboard\templates\dashboard\products\list.html:225
+msgid "Yeni Ürün Ekle"
+msgstr "إضافة منتج جديد"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:274
+#: .\dashboard\templates\dashboard\gallery\list.html:329
+msgid "Ekle"
+msgstr "إضافة"
+
+#: .\dashboard\templates\dashboard\gallery\gallery_items.html:41
+msgid "Görüntüle"
+msgstr "عرض"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:6
+#: .\dashboard\templates\dashboard\gallery\list.html:7
+#: .\dashboard\templates\dashboard\gallery\list.html:16
+msgid "Galeri Yönetimi"
+msgstr "إدارة المعرض"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:17
+msgid "Resim ve videoları yönetin, düzenleyin"
+msgstr "إدارة الصور ومقاطع الفيديو وتنظيمها"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:21
+msgid "Yeni galeri öğesi ekle"
+msgstr "إضافة عنصر جديد إلى المعرض"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:22
+msgid "Yeni Ekle"
+msgstr "إضافة جديد"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:40
+msgid "Toplam Medya"
+msgstr "مجموع وسائل الإعلام"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:43
+msgid "Aktif sistem"
+msgstr "النظام النشط"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:52
+msgid "Aktif Öğeler"
+msgstr "العناصر النشطة"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:55
+msgid "Yayında"
+msgstr "على الهواء"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:64
+msgid "Öne Çıkanlar"
+msgstr "أبرز الملامح"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:67
+msgid "Özel içerik"
+msgstr "المحتوى المتخصص"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:80
+msgid "Yeni içerik"
+msgstr "محتوى جديد"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:93
+msgid "Ara"
+msgstr "آرا"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:100
+msgid "Başlık, açıklama ara..."
+msgstr "ابحث عن العنوان والوصف..."
+
+#: .\dashboard\templates\dashboard\gallery\list.html:111
+msgid "Tip"
+msgstr "نصيحة"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:115
+#: .\dashboard\templates\dashboard\gallery\list.html:288
+#: .\dashboard\templates\dashboard\gallery\list.html:384
+#: .\templates\gallery\gallery_list.html:649
+msgid "Video"
+msgstr "فيديو"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:134
+msgid "Sıraya Göre"
+msgstr "بالترتيب"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:135
+msgid "Yeniye Göre"
+msgstr "وفقًا لنيو"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:136
+msgid "Eskiye Göre"
+msgstr "وفقًا لـ"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:137
+msgid "Başlığa Göre"
+msgstr "حسب العنوان"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:138
+msgid "Başlığa Göre (Z-A)"
+msgstr "حسب العنوان (ز-أ)"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:145
+msgid "Filtreleri Temizle"
+msgstr "مسح الفلاتر"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:146
+#: .\dashboard\templates\dashboard\notifications\list.html:111
+msgid "Temizle"
+msgstr "واضح"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:162
+msgid "öğe"
+msgstr "البند"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:168
+msgid "Grid Görünümü"
+msgstr "عرض الشبكة"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:172
+#: .\dashboard\templates\dashboard\team\list.html:81
+msgid "Liste Görünümü"
+msgstr "عرض القائمة"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:229
+msgid "Henüz galeri öğesi yok"
+msgstr "لا توجد عناصر للمعرض حتى الآن"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:230
+msgid "İlk resim veya videonuzu eklemek için aşağıdaki butona tıklayın"
+msgstr "انقر فوق الزر أدناه لإضافة أول صورة أو فيديو لك"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:232
+msgid "İlk Öğeyi Ekle"
+msgstr "إضافة العنصر الأول"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:247
+msgid "Yeni Galeri Öğesi Ekle"
+msgstr "إضافة عنصر جديد للمعرض"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:249
+#: .\dashboard\templates\dashboard\gallery\list.html:345
+#: .\dashboard\templates\dashboard\gallery\list.html:446
+#: .\dashboard\templates\dashboard\index.html:172
+#: .\dashboard\templates\dashboard\messages\list.html:258
+#: .\dashboard\templates\dashboard\messages\list.html:377
+#: .\dashboard\templates\dashboard\reviews\list.html:295
+#: .\dashboard\templates\dashboard\services\list.html:237
+#: .\dashboard\templates\dashboard\team\list.html:315
+#: .\templates\gallery\gallery_list.html:707
+msgid "Kapat"
+msgstr "كابات"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:343
+msgid "Galeri Öğesi Düzenle"
+msgstr "تحرير عنصر المعرض"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:404
+msgid "YouTube veya Vimeo URL"
+msgstr "عنوان URL يوتيوب أو فيميو"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:453
+msgid "başlıklı öğeyi silmek istediğinizden emin misiniz?"
+msgstr "هل أنت متأكد من رغبتك في حذف العنصر المعنون؟"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:454
+msgid "Bu işlem geri alınamaz."
+msgstr "هذا الإجراء لا رجعة فيه."
+
+#: .\dashboard\templates\dashboard\gallery\list.html:476
+msgid "Medya Görüntüleyici"
+msgstr "عارض الوسائط"
+
+#: .\dashboard\templates\dashboard\index.html:6
+msgid "Dashboard Ana Sayfa"
+msgstr "الصفحة الرئيسية للوحة التحكم"
+
+#: .\dashboard\templates\dashboard\index.html:15
+msgid "Dashboard Genel Bakış"
+msgstr "نظرة عامة على لوحة التحكم"
+
+#: .\dashboard\templates\dashboard\index.html:16
+msgid "Sitenizin genel durumunu ve istatistiklerini görüntüleyin"
+msgstr "عرض الحالة العامة والإحصائيات الخاصة بموقعك"
+
+#: .\dashboard\templates\dashboard\index.html:23
+#: .\dashboard\templates\dashboard\messages\list.html:22
+#: .\dashboard\templates\dashboard\notifications\list.html:23
+msgid "Yenile"
+msgstr "التجديد"
+
+#: .\dashboard\templates\dashboard\index.html:87
+msgid "Basın Haberleri"
+msgstr "أخبار صحفية"
+
+#: .\dashboard\templates\dashboard\index.html:103
+msgid "Aylık İstatistikler"
+msgstr "الإحصاءات الشهرية"
+
+#: .\dashboard\templates\dashboard\index.html:107
+#: .\dashboard\templates\dashboard\index.html:111
+msgid "Son 6 Ay"
+msgstr "الصوت 6 أي"
+
+#: .\dashboard\templates\dashboard\index.html:112
+msgid "Son 12 Ay"
+msgstr "آخر 12 شهراً"
+
+#: .\dashboard\templates\dashboard\index.html:130
+msgid "Kategori Dağılımı"
+msgstr "تقسيم الفئات"
+
+#: .\dashboard\templates\dashboard\index.html:142
+#: .\dashboard\templates\dashboard\messages\list.html:176
+#: .\dashboard\templates\dashboard\team\list.html:123
+#: .\dashboard\templates\dashboard\team\list.html:222
+msgid "Detayları Görüntüle"
+msgstr "عرض التفاصيل"
+
+#: .\dashboard\templates\dashboard\index.html:168
+msgid "Kategori Analizi"
+msgstr "فئات التحليلات"
+
+#: .\dashboard\templates\dashboard\index.html:169
+msgid "Tüm kategorilerin detaylı ürün dağılımı"
+msgstr "التوزيع التفصيلي للمنتجات لجميع الفئات"
+
+#: .\dashboard\templates\dashboard\index.html:211
+msgid "ürün"
+msgstr "المنتج"
+
+#: .\dashboard\templates\dashboard\index.html:220
+msgid "İlk kategorinizi oluşturmak için ürün ekleme sayfasına gidin."
+msgstr "لإنشاء فئتك الأولى، انتقل إلى صفحة إضافة منتج."
+
+#: .\dashboard\templates\dashboard\index.html:222
+#: .\dashboard\templates\dashboard\index.html:308
+#: .\dashboard\templates\dashboard\products\add.html:8
+msgid "Ürün Ekle"
+msgstr "إضافة منتج"
+
+#: .\dashboard\templates\dashboard\index.html:231
+#: .\dashboard\templates\dashboard\media_mentions\list.html:22
+#: .\dashboard\templates\dashboard\services\form.html:21
+msgid "Geri Dön"
+msgstr "العودة إلى الوراء"
+
+#: .\dashboard\templates\dashboard\index.html:234
+msgid "Kategori Yönet"
+msgstr "إدارة الفئة"
+
+#: .\dashboard\templates\dashboard\index.html:251
+msgid "Son Aktiviteler"
+msgstr "سون أكتيفيتيلر"
+
+#: .\dashboard\templates\dashboard\index.html:264
+#: .\dashboard\templates\dashboard\notifications\list.html:151
+#: .\dashboard\templates\dashboard\notifications\popup_content.html:32
+msgid "önce"
+msgstr "قبل"
+
+#: .\dashboard\templates\dashboard\index.html:276
+msgid "Henüz aktivite yok"
+msgstr "لا يوجد نشاط بعد"
+
+#: .\dashboard\templates\dashboard\index.html:277
+msgid "Şimdi"
+msgstr "الآن"
+
+#: .\dashboard\templates\dashboard\index.html:279
+msgid "Sistem kullanıldıkça aktiviteler burada görünecek"
+msgstr "ستظهر الأنشطة هنا عند استخدام النظام"
+
+#: .\dashboard\templates\dashboard\index.html:287
+msgid "Tüm Aktiviteleri Gör"
+msgstr "شاهد جميع الأنشطة"
+
+#: .\dashboard\templates\dashboard\index.html:298
+msgid "Hızlı Erişim"
+msgstr "الوصول السريع"
+
+#: .\dashboard\templates\dashboard\index.html:309
+msgid "Yeni ürün ekleyin"
+msgstr "إضافة منتج جديد"
+
+#: .\dashboard\templates\dashboard\index.html:320
+msgid "Gelen mesajları görün"
+msgstr "عرض الرسائل الواردة"
+
+#: .\dashboard\templates\dashboard\index.html:331
+msgid "Fotoğraf yönetimi"
+msgstr "إدارة الصور"
+
+#: .\dashboard\templates\dashboard\index.html:341
+#: .\dashboard\templates\dashboard\index.html:1022
+msgid "Yorumlar"
+msgstr "التعليقات"
+
+#: .\dashboard\templates\dashboard\index.html:342
+msgid "Müşteri geri bildirimleri"
+msgstr "ملاحظات العملاء"
+
+#: .\dashboard\templates\dashboard\index.html:1114
+msgid "Kategori Yok"
+msgstr "فئة يوك"
+
+#: .\dashboard\templates\dashboard\index.html:1126
+msgid "Veri Yok"
+msgstr "لا توجد بيانات"
+
+#: .\dashboard\templates\dashboard\login.html:352
+msgid "Hoş Geldiniz"
+msgstr "أهلاً وسهلاً بك"
+
+#: .\dashboard\templates\dashboard\login.html:353
+msgid "Yönetim panelinize giriş yapın"
+msgstr "تسجيل الدخول إلى لوحة الإدارة"
+
+#: .\dashboard\templates\dashboard\login.html:360
+msgid "Giriş Hatası"
+msgstr "خطأ في الإدخال"
+
+#: .\dashboard\templates\dashboard\login.html:361
+msgid "Kullanıcı adı veya parola hatalı. Lütfen tekrar deneyin."
+msgstr "اسم المستخدم أو كلمة المرور غير صحيحة. يرجى المحاولة مرة أخرى."
+
+#: .\dashboard\templates\dashboard\login.html:371
+msgid "Kullanıcı Adı"
+msgstr "اسم المستخدم"
+
+#: .\dashboard\templates\dashboard\login.html:382
+msgid "Parola"
+msgstr "كلمة"
+
+#: .\dashboard\templates\dashboard\login.html:396
+msgid "Giriş Yap"
+msgstr "تسجيل الدخول"
+
+#: .\dashboard\templates\dashboard\login.html:410
+msgid "Güvenli bağlantı ile korunan giriş"
+msgstr "تسجيل دخول محمي مع اتصال آمن"
+
+#: .\dashboard\templates\dashboard\login.html:589
+msgid "Parola sıfırlama özelliği yakında eklenecek."
+msgstr "ستتم إضافة ميزة إعادة تعيين كلمة المرور قريباً."
+
+#: .\dashboard\templates\dashboard\login.html:589
+msgid "Lütfen sistem yöneticinizle iletişime geçin."
+msgstr "يُرجى الاتصال بمسؤول النظام لديك."
+
+#: .\dashboard\templates\dashboard\media_mentions\add.html:7
+#: .\dashboard\templates\dashboard\media_mentions\add.html:13
+#: .\dashboard\templates\dashboard\media_mentions\list.html:7
+#: .\dashboard\templates\dashboard\media_mentions\list.html:17
+msgid "Yeni Basın Haberi Ekle"
+msgstr "إضافة أخبار صحفية جديدة"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:8
+msgid "Basın Haberi Yönetimi"
+msgstr "إدارة الأخبار الصحفية"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:18
+msgid "Basın haberlerinizi düzenleyin ve yönetin"
+msgstr "تنظيم وإدارة بياناتك الصحفية"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:34
+msgid "Basın Haberi Bilgileri"
+msgstr "معلومات البيان الصحفي"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:37
+msgid "Bilgileri doldurun"
+msgstr "املأ المعلومات"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:86
+msgid "Haberin tam linkini girin (https:// ile başlamalı)"
+msgstr "أدخل الرابط الكامل للخبر (يجب أن يبدأ بـ https://)"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:115
+msgid "Detaylar ve Ayarlar"
+msgstr "التفاصيل والإعدادات"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:125
+msgid "Haberin kısa özeti (İsteğe bağlı)"
+msgstr "ملخص قصير للأخبار (اختياري)"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:143
+msgid "Resim seçin veya sürükleyip bırakın"
+msgstr "حدد صورة أو قم بالسحب والإفلات"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:144
+msgid "JPG, PNG, GIF - Maksimum 5MB"
+msgstr "JPG، PNG، GIF - بحد أقصى 5 ميغابايت"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:164
+msgid "Düşük sayı önce görünür"
+msgstr "يظهر الرقم المنخفض أولاً"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:206
+msgid "Tüm alanları doldurduktan sonra kaydet butonuna tıklayın"
+msgstr "بعد ملء جميع الحقول، انقر فوق الزر حفظ"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:235
+#: .\dashboard\templates\dashboard\media_mentions\list.html:590
+msgid "Haber Başlığı"
+msgstr "عناوين الأخبار"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:236
+#: .\dashboard\templates\dashboard\media_mentions\list.html:591
+msgid "Kaynak"
+msgstr "المصدر"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:239
+#: .\dashboard\templates\dashboard\media_mentions\list.html:593
+#: .\dashboard\templates\dashboard\messages\list.html:125
+#: .\dashboard\templates\dashboard\messages\list.html:250
+#: .\dashboard\templates\dashboard\messages\list.html:369
+#: .\dashboard\templates\dashboard\reviews\list.html:105
+#: .\dashboard\templates\dashboard\reviews\list.html:260
+msgid "Tarih"
+msgstr "التاريخ"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:628
+msgid "Başlık alanı zorunludur"
+msgstr "حقل الرأس إلزامي"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:633
+msgid "Kaynak alanı zorunludur"
+msgstr "حقل المصدر إلزامي"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:638
+msgid "Geçerli bir URL girin"
+msgstr "أدخل عنوان URL صالحاً"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:644
+msgid "Lütfen aşağıdaki hataları düzeltin"
+msgstr "يرجى تصحيح الأخطاء التالية"
+
+#: .\dashboard\templates\dashboard\messages\list.html:7
+#: .\dashboard\templates\dashboard\messages\list.html:16
+msgid "Mesaj Yönetimi"
+msgstr "إدارة الرسائل"
+
+#: .\dashboard\templates\dashboard\messages\list.html:17
+msgid "İletişim mesajları ve müşteri yorumlarını yönetin"
+msgstr "إدارة رسائل الاتصال وتعليقات العملاء"
+
+#: .\dashboard\templates\dashboard\messages\list.html:29
+msgid "Tümünü Okundu Yap"
+msgstr "جعل الكل يقرأ"
+
+#: .\dashboard\templates\dashboard\messages\list.html:48
+#: .\dashboard\templates\dashboard\messages\list.html:106
+msgid "İletişim Mesajları"
+msgstr "رسائل الاتصال"
+
+#: .\dashboard\templates\dashboard\messages\list.html:70
+msgid "Bekleyen Onaylar"
+msgstr "الموافقات المعلقة"
+
+#: .\dashboard\templates\dashboard\messages\list.html:81
+#: .\dashboard\templates\dashboard\reviews\list.html:73
+msgid "Ortalama Puan"
+msgstr "متوسط النقاط"
+
+#: .\dashboard\templates\dashboard\messages\list.html:111
+msgid "Mesaj ara..."
+msgstr "ميساي آرا..."
+
+#: .\dashboard\templates\dashboard\messages\list.html:168
+msgid "Okundu Olarak İşaretle"
+msgstr "وضع علامة كمقروء"
+
+#: .\dashboard\templates\dashboard\messages\list.html:192
+msgid "Henüz mesaj bulunmuyor"
+msgstr "لا توجد رسائل بعد"
+
+#: .\dashboard\templates\dashboard\messages\list.html:193
+msgid "İletişim formundan gelen mesajlar burada görünecektir."
+msgstr "ستظهر الرسائل من نموذج الاتصال هنا."
+
+#: .\dashboard\templates\dashboard\messages\list.html:218
+msgid "Mesaj Detayı"
+msgstr "تفاصيل الرسالة"
+
+#: .\dashboard\templates\dashboard\messages\list.html:264
+msgid "Okundu İşaretle"
+msgstr "مارك ريد"
+
+#: .\dashboard\templates\dashboard\messages\list.html:269
+msgid "Yanıtla"
+msgstr "الرد على"
+
+#: .\dashboard\templates\dashboard\messages\list.html:291
+msgid "tarafından gönderilen mesajı silmek istediğinizden emin misiniz?"
+msgstr "هل أنت متأكد أنك تريد حذف الرسالة المرسلة من قبل؟"
+
+#: .\dashboard\templates\dashboard\messages\list.html:320
+#: .\dashboard\templates\dashboard\reviews\list.html:248
+msgid "Yorum Detayı"
+msgstr "تفاصيل التعليق"
+
+#: .\dashboard\templates\dashboard\messages\list.html:334
+msgid "Ürün"
+msgstr "المنتج"
+
+#: .\dashboard\templates\dashboard\messages\list.html:340
+msgid "Değerlendirme"
+msgstr "التقييم"
+
+#: .\dashboard\templates\dashboard\messages\list.html:381
+#: .\dashboard\templates\dashboard\reviews\list.html:301
+msgid "Onayla"
+msgstr "تأكيد"
+
+#: .\dashboard\templates\dashboard\notifications\list.html:5
+#: .\dashboard\templates\dashboard\notifications\list.html:6
+#: .\dashboard\templates\dashboard\notifications\list.html:15
+#: .\dashboard\templates\dashboard\notifications\popup_content.html:6
+msgid "Bildirimler"
+msgstr "الإشعارات"
+
+#: .\dashboard\templates\dashboard\notifications\list.html:16
+msgid "Sistem bildirimlerinizi görüntüleyin ve yönetin"
+msgstr "عرض إشعارات النظام وإدارتها"
+
+#: .\dashboard\templates\dashboard\notifications\list.html:20
+#: .\dashboard\templates\dashboard\notifications\popup_content.html:10
+msgid "Tümünü Okundu İşaretle"
+msgstr "وضع علامة الكل يقرأ"
+
+#: .\dashboard\templates\dashboard\notifications\list.html:39
+msgid "Toplam Bildirim"
+msgstr "إجمالي الإشعارات"
+
+#: .\dashboard\templates\dashboard\notifications\list.html:51
+#: .\dashboard\templates\dashboard\notifications\list.html:100
+msgid "Okunmamış"
+msgstr "غير مقروء"
+
+#: .\dashboard\templates\dashboard\notifications\list.html:63
+#: .\dashboard\templates\dashboard\notifications\list.html:101
+msgid "Okunmuş"
+msgstr "اقرأ"
+
+#: .\dashboard\templates\dashboard\notifications\list.html:75
+msgid "Mesaj Bildirimleri"
+msgstr "إشعارات الرسائل"
+
+#: .\dashboard\templates\dashboard\notifications\list.html:87
+msgid "Bildirim Türü"
+msgstr "نوع الإخطار"
+
+#: .\dashboard\templates\dashboard\notifications\list.html:126
+msgid "Bildirim Listesi"
+msgstr "قائمة الإشعارات"
+
+#: .\dashboard\templates\dashboard\notifications\list.html:157
+msgid "Okunmadı"
+msgstr "غير مقروء"
+
+#: .\dashboard\templates\dashboard\notifications\list.html:211
+msgid "Bildirim bulunmamaktadır"
+msgstr "لا يوجد إشعار"
+
+#: .\dashboard\templates\dashboard\notifications\list.html:212
+msgid "Henüz hiç bildiriminiz yok."
+msgstr "ليس لديك أي إشعارات حتى الآن."
+
+#: .\dashboard\templates\dashboard\notifications\popup_content.html:41
+msgid "Yeni bildirim bulunmamaktadır"
+msgstr "لا توجد إشعارات جديدة"
+
+#: .\dashboard\templates\dashboard\notifications\popup_content.html:49
+msgid "Tüm Bildirimleri Görüntüle"
+msgstr "عرض جميع الإشعارات"
+
+#: .\dashboard\templates\dashboard\products\edit_modal.html:26
+#: .\dashboard\templates\dashboard\products\list.html:244
+msgid "Kategori seçin..."
+msgstr "اختر الفئة..."
+
+#: .\dashboard\templates\dashboard\products\edit_modal.html:46
+#: .\dashboard\templates\dashboard\products\edit_modal.html:50
+#: .\dashboard\templates\dashboard\products\edit_modal.html:55
+#: .\dashboard\templates\dashboard\products\edit_modal.html:59
+#: .\dashboard\templates\dashboard\products\list.html:261
+#: .\dashboard\templates\dashboard\products\list.html:263
+#: .\dashboard\templates\dashboard\products\list.html:268
+#: .\dashboard\templates\dashboard\products\list.html:270
+msgid "İsteğe bağlı"
+msgstr "اختياري"
+
+#: .\dashboard\templates\dashboard\products\edit_modal.html:67
+#: .\dashboard\templates\dashboard\products\list.html:277
+msgid "Ürün açıklaması..."
+msgstr "وصف المنتج..."
+
+#: .\dashboard\templates\dashboard\products\edit_modal.html:81
+msgid "Yeni bir görsel seçmezseniz mevcut görsel korunur."
+msgstr "إذا لم تقم بتحديد صورة جديدة، فسيتم الاحتفاظ بالصورة الموجودة."
+
+#: .\dashboard\templates\dashboard\products\edit_modal.html:88
+#: .\dashboard\templates\dashboard\products\edit_modal.html:96
+msgid "SEO için"
+msgstr "لتحسين محركات البحث"
+
+#: .\dashboard\templates\dashboard\products\edit_modal.html:91
+msgid "SEO başlığı"
+msgstr "عنوان تحسين محركات البحث"
+
+#: .\dashboard\templates\dashboard\products\edit_modal.html:99
+msgid "SEO açıklaması"
+msgstr "وصف تحسين محركات البحث"
+
+#: .\dashboard\templates\dashboard\products\edit_modal.html:109
+msgid "Öne Çıkan Ürün"
+msgstr "المنتج المميز"
+
+#: .\dashboard\templates\dashboard\products\list.html:16
+msgid "Ürünlerinizi kolayca yönetin ve takip edin"
+msgstr "إدارة منتجاتك وتتبعها بسهولة"
+
+#: .\dashboard\templates\dashboard\products\list.html:36
+msgid "Aktif Ürünler"
+msgstr "المنتجات النشطة"
+
+#: .\dashboard\templates\dashboard\products\list.html:41
+msgid "Düşük Stok"
+msgstr "انخفاض المخزون"
+
+#: .\dashboard\templates\dashboard\products\list.html:46
+msgid "Toplam Değer"
+msgstr "القيمة الإجمالية"
+
+#: .\dashboard\templates\dashboard\products\list.html:55
+msgid "Gelişmiş Filtreler"
+msgstr "الفلاتر المتقدمة"
+
+#: .\dashboard\templates\dashboard\products\list.html:58
+msgid "Sıfırla"
+msgstr "إعادة تعيين"
+
+#: .\dashboard\templates\dashboard\products\list.html:161
+msgid "Fiyat belirtilmemiş"
+msgstr "السعر غير محدد"
+
+#: .\dashboard\templates\dashboard\products\list.html:169
+#: .\templates\products\product_detail.html:48
+msgid "adet"
+msgstr "أديت"
+
+#: .\dashboard\templates\dashboard\products\list.html:173
+msgid "Stok belirtilmemiş"
+msgstr "المخزون غير محدد"
+
+#: .\dashboard\templates\dashboard\products\list.html:203
+msgid "Henüz ürün bulunmuyor"
+msgstr "لا توجد منتجات متاحة حتى الآن"
+
+#: .\dashboard\templates\dashboard\products\list.html:204
+msgid ""
+"İlk ürününüzü eklemek için yukarıdaki \"Yeni Ürün Ekle\" butonunu kullanın."
+msgstr "لإضافة المنتج الأول، استخدم زر \"إضافة منتج جديد\" أعلاه."
+
+#: .\dashboard\templates\dashboard\products\list.html:206
+msgid "İlk Ürünü Ekle"
+msgstr "إضافة المنتج الأول"
+
+#: .\dashboard\templates\dashboard\products\list.html:299
+msgid "Ürünü Ekle"
+msgstr "إضافة منتج"
+
+#: .\dashboard\templates\dashboard\products\list.html:330
+msgid "ürününü kalıcı olarak silmek istediğinizden emin misiniz?"
+msgstr "هل أنت متأكد من رغبتك في حذف المنتج نهائيًا؟"
+
+#: .\dashboard\templates\dashboard\products\list.html:458
+#: .\dashboard\templates\dashboard\products\list.html:494
+msgid "Bir hata oluştu!"
+msgstr "حدث خطأ!"
+
+#: .\dashboard\templates\dashboard\products\list.html:488
+msgid "Form hatası! Lütfen alanları kontrol edin."
+msgstr "خطأ في النموذج! يرجى التحقق من الحقول."
+
+#: .\dashboard\templates\dashboard\reviews\list.html:7
+#: .\dashboard\templates\dashboard\reviews\list.html:16
+msgid "Yorum Yönetimi"
+msgstr "إدارة التعليقات"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:17
+msgid "Müşteri yorumlarını yönetin ve onaylayın"
+msgstr "إدارة مراجعات العملاء والموافقة عليها"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:21
+msgid "Tümünü Onayla"
+msgstr "تأكيد الكل"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:24
+msgid "Bekleyenler"
+msgstr "الانتظار"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:40
+msgid "Toplam Yorum"
+msgstr "إجمالي التعليقات"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:51
+msgid "Onaylı Yorumlar"
+msgstr "المراجعات المعتمدة"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:62
+#: .\dashboard\templates\dashboard\reviews\list.html:94
+msgid "Onay Bekleyen"
+msgstr "في انتظار الموافقة"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:84
+msgid "Yorum Listesi"
+msgstr "قائمة التعليقات"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:89
+msgid "Yorum ara..."
+msgstr "يوروم آرا..."
+
+#: .\dashboard\templates\dashboard\reviews\list.html:92
+msgid "Tüm Durumlar"
+msgstr "جميع الحالات"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:106
+#: .\dashboard\templates\dashboard\reviews\list.html:256
+#: .\dashboard\templates\dashboard\team\list.html:165
+#: .\dashboard\templates\dashboard\team\list.html:267
+#: .\templates\contact\contact.html:23
+msgid "Ad Soyad"
+msgstr "الاسم اللقب"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:130
+msgid "Müşteri"
+msgstr "العميل"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:171
+msgid "Bekliyor"
+msgstr "الانتظار"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:233
+msgid "Henüz yorum bulunmuyor"
+msgstr "لا توجد تعليقات حتى الآن"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:234
+msgid "Müşterilerinizden gelen yorumlar burada görünecektir."
+msgstr "ستظهر التعليقات من عملائك هنا."
+
+#: .\dashboard\templates\dashboard\reviews\list.html:301
+msgid "Onayı Kaldır"
+msgstr "إزالة الموافقة"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:324
+msgid "kullanıcısının yorumunu silmek istediğinizden emin misiniz?"
+msgstr "هل أنت متأكد من أنك تريد حذف تعليق المستخدم؟"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:600
+msgid "Tüm bekleyen yorumları onaylamak istediğinize emin misiniz?"
+msgstr "هل تريد بالتأكيد الموافقة على جميع التعليقات المعلقة؟"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:632
+msgid ""
+"kullanıcısının yorumunu kalıcı olarak silmek istediğinizden emin misiniz?"
+msgstr "هل أنت متأكد من أنك تريد حذف تعليق المستخدم بشكل دائم؟"
+
+#: .\dashboard\templates\dashboard\services\form.html:18
+msgid "Hizmet bilgilerini düzenleyin"
+msgstr "تحرير معلومات الخدمة"
+
+#: .\dashboard\templates\dashboard\services\form.html:32
+msgid "Hizmet Bilgileri"
+msgstr "معلومات الخدمة"
+
+#: .\dashboard\templates\dashboard\services\form.html:86
+msgid "Mevcut Resim"
+msgstr "الصورة المتاحة"
+
+#: .\dashboard\templates\dashboard\services\form.html:88
+msgid "Mevcut resim"
+msgstr "الصورة المتوفرة"
+
+#: .\dashboard\templates\dashboard\services\form.html:92
+msgid "Yeni bir resim seçerseniz bu resim değiştirilecek."
+msgstr "إذا قمت بتحديد صورة جديدة، فسيتم استبدال هذه الصورة."
+
+#: .\dashboard\templates\dashboard\services\form.html:115
+msgid "Küçük sayılar önce görünür"
+msgstr "تظهر الأعداد الصغيرة أولاً"
+
+#: .\dashboard\templates\dashboard\services\list.html:7
+#: .\dashboard\templates\dashboard\services\list.html:16
+msgid "Hizmet Yönetimi"
+msgstr "إدارة الخدمات"
+
+#: .\dashboard\templates\dashboard\services\list.html:17
+msgid "Hizmetlerinizi düzenleyin ve yönetin"
+msgstr "تنظيم خدماتك وإدارتها"
+
+#: .\dashboard\templates\dashboard\services\list.html:20
+msgid "Yeni Hizmet"
+msgstr "الخدمة الجديدة"
+
+#: .\dashboard\templates\dashboard\services\list.html:48
+msgid "Aktif Hizmetler"
+msgstr "الخدمات النشطة"
+
+#: .\dashboard\templates\dashboard\services\list.html:70
+msgid "Pasif Hizmetler"
+msgstr "الخدمات السلبية"
+
+#: .\dashboard\templates\dashboard\services\list.html:81
+msgid "Hizmet Listesi"
+msgstr "قائمة الخدمات"
+
+#: .\dashboard\templates\dashboard\services\list.html:86
+msgid "Hizmet ara..."
+msgstr "ابحث عن الخدمة..."
+
+#: .\dashboard\templates\dashboard\services\list.html:96
+#: .\dashboard\templates\dashboard\services\list.html:230
+msgid "ID"
+msgstr "بطاقة الهوية"
+
+#: .\dashboard\templates\dashboard\services\list.html:169
+msgid "Henüz hizmet bulunmuyor"
+msgstr "لا توجد خدمة متاحة حتى الآن"
+
+#: .\dashboard\templates\dashboard\services\list.html:170
+msgid ""
+"İlk hizmetinizi eklemek için yukarıdaki \"Yeni Hizmet\" butonunu kullanın."
+msgstr "لإضافة الخدمة الأولى، استخدم زر \"خدمة جديدة\" أعلاه."
+
+#: .\dashboard\templates\dashboard\services\list.html:172
+msgid "İlk Hizmeti Ekle"
+msgstr "إضافة الخدمة الأولى"
+
+#: .\dashboard\templates\dashboard\services\list.html:191
+msgid "Hizmet Detayları"
+msgstr "تفاصيل الخدمة"
+
+#: .\dashboard\templates\dashboard\services\list.html:263
+msgid "hizmetini silmek istediğinizden emin misiniz?"
+msgstr "الخدمة، هل أنت متأكد من رغبتك في حذفها؟"
+
+#: .\dashboard\templates\dashboard\services\list.html:447
+msgid "hizmetini kalıcı olarak silmek istediğinizden emin misiniz?"
+msgstr "الخدمة بشكل دائم؟"
+
+#: .\dashboard\templates\dashboard\team\form.html:6
+msgid "- Dashboard"
+msgstr "- لوحة التحكم"
+
+#: .\dashboard\templates\dashboard\team\list.html:7
+#: .\dashboard\templates\dashboard\team\list.html:16
+msgid "Ekip Yönetimi"
+msgstr "إدارة الفريق"
+
+#: .\dashboard\templates\dashboard\team\list.html:17
+msgid "Ekip üyelerinizi düzenleyin ve yönetin"
+msgstr "تنظيم أعضاء فريقك وإدارتهم"
+
+#: .\dashboard\templates\dashboard\team\list.html:20
+msgid "Yeni Ekip Üyesi"
+msgstr "عضو جديد في الفريق"
+
+#: .\dashboard\templates\dashboard\team\list.html:35
+msgid "Toplam Üye"
+msgstr "مجموع الأعضاء"
+
+#: .\dashboard\templates\dashboard\team\list.html:46
+msgid "Aktif Üyeler"
+msgstr "الأعضاء النشطون"
+
+#: .\dashboard\templates\dashboard\team\list.html:57
+msgid "Pozisyon Sayısı"
+msgstr "عدد المناصب"
+
+#: .\dashboard\templates\dashboard\team\list.html:78
+msgid "Kart Görünümü"
+msgstr "عرض البطاقة"
+
+#: .\dashboard\templates\dashboard\team\list.html:87
+msgid "Ekip üyesi ara..."
+msgstr "البحث عن أعضاء الفريق..."
+
+#: .\dashboard\templates\dashboard\team\list.html:138
+msgid "Henüz ekip üyesi bulunmuyor"
+msgstr "لا يوجد أعضاء في الفريق حتى الآن"
+
+#: .\dashboard\templates\dashboard\team\list.html:139
+msgid ""
+"İlk ekip üyenizi eklemek için yukarıdaki \"Yeni Ekip Üyesi\" butonunu "
+"kullanın."
+msgstr "لإضافة أول عضو في الفريق، استخدم زر \"عضو فريق جديد\" أعلاه."
+
+#: .\dashboard\templates\dashboard\team\list.html:141
+msgid "İlk Üyeyi Ekle"
+msgstr "إضافة العضو الأول"
+
+#: .\dashboard\templates\dashboard\team\list.html:154
+msgid "Ekip Üyeleri Listesi"
+msgstr "قائمة أعضاء الفريق"
+
+#: .\dashboard\templates\dashboard\team\list.html:164
+msgid "Fotoğraf"
+msgstr "صورة فوتوغرافية."
+
+#: .\dashboard\templates\dashboard\team\list.html:166
+#: .\dashboard\templates\dashboard\team\list.html:271
+msgid "Pozisyon"
+msgstr "المنصب"
+
+#: .\dashboard\templates\dashboard\team\list.html:248
+msgid "Ekip Üyesi Detayı"
+msgstr "تفاصيل عضو الفريق"
+
+#: .\dashboard\templates\dashboard\team\list.html:340
+msgid "isimli ekip üyesini silmek istediğinizden emin misiniz?"
+msgstr "هل أنت متأكد من رغبتك في حذف عضو الفريق المسمى؟"
+
+#: .\templates\about\about.html:65
+msgid "Neden Biz?"
+msgstr "نيدن بيز"
+
+#: .\templates\about\about.html:69 .\templates\about\about.html:106
+msgid "Yıllık Deneyim"
+msgstr "سنوات الخبرة"
+
+#: .\templates\about\about.html:73 .\templates\contact\contact.html:98
+#: .\templates\home\index.html:610
+msgid "7/24 Hizmet"
+msgstr "خدمة 7/24"
+
+#: .\templates\about\about.html:77
+msgid "Profesyonel Ekipman"
+msgstr "معدات احترافية"
+
+#: .\templates\about\about.html:81
+msgctxt "Hizmet niteliği"
+msgid "Güvenilir"
+msgstr "موثوقة"
+
+#: .\templates\about\about.html:91
+msgid "Rakamlarla Biz"
+msgstr "نحن بالأرقام"
+
+#: .\templates\about\about.html:101 .\templates\home\index.html:908
+msgid "Tamamlanan İş"
+msgstr "الأعمال المنجزة"
+
+#: .\templates\about\about.html:143
+msgid "Henüz hizmet eklenmemiş."
+msgstr "لم تتم إضافة أي خدمة بعد."
+
+#: .\templates\about\about.html:154 .\templates\home\index.html:778
+msgid "Basında Biz"
+msgstr "نحن في الصحافة"
+
+#: .\templates\about\about.html:166 .\templates\home\index.html:802
+msgid "Haberi Oku"
+msgstr "اقرأ الأخبار"
+
+#: .\templates\about\about.html:202
+msgid "Henüz ekip üyesi eklenmemiş."
+msgstr "لم تتم إضافة أعضاء الفريق بعد."
+
+#: .\templates\admin\base_site.html:6
+msgid "Django site admin"
+msgstr "مشرف موقع جانغو"
+
+#: .\templates\base.html:199
+msgid "Ana içeriğe geç"
+msgstr "تخطي إلى المحتوى الرئيسي"
+
+#: .\templates\base.html:214
+msgid "Navigasyon menüsünü aç/kapat"
+msgstr "تشغيل/إيقاف تشغيل قائمة التنقل"
+
+#: .\templates\base.html:263 .\templates\base.html:420
+#: .\templates\base.html:441
+msgid "İletişim"
+msgstr "اتصل بنا"
+
+#: .\templates\base.html:271
+msgid "Dil Seçimi"
+msgstr "اختيار اللغة"
+
+#: .\templates\base.html:391
+msgid "Haberlerden Haberdar Olun"
+msgstr "ابق على اطلاع دائم بالأخبار"
+
+#: .\templates\base.html:392
+msgid "Yeni hizmetlerimiz ve özel tekliflerimizden ilk siz haberdar olun."
+msgstr "كن أول من يطلع على خدماتنا الجديدة وعروضنا الخاصة."
+
+#: .\templates\base.html:395 .\templates\base.html:396
+msgid "E-posta adresiniz"
+msgstr "عنوان بريدك الإلكتروني"
+
+#: .\templates\base.html:397
+msgid "Newsletter\\"
+msgstr "النشرة الإخبارية \\\\"
+
+#: .\templates\base.html:398 .\templates\base.html:585
+msgid "Abone Ol"
+msgstr "أبون أول"
+
+#: .\templates\base.html:409
+msgid "Yukarı Çık"
+msgstr "ارفع"
+
+#: .\templates\base.html:409
+msgid "Sayfanın başına dön"
+msgstr "العودة إلى أعلى الصفحة"
+
+#: .\templates\base.html:431
+msgid "Hızlı Linkler"
+msgstr "روابط سريعة"
+
+#: .\templates\base.html:447
+msgid "Sosyal Medya"
+msgstr "وسائل التواصل الاجتماعي"
+
+#: .\templates\base.html:450
+msgid "Facebook sayfamız"
+msgstr "صفحتنا على فيسبوك"
+
+#: .\templates\base.html:455
+msgid "Instagram sayfamız"
+msgstr "صفحتنا على إنستغرام"
+
+#: .\templates\base.html:460
+msgid "Twitter sayfamız"
+msgstr "صفحتنا على تويتر"
+
+#: .\templates\base.html:465
+msgid "YouTube kanalımız"
+msgstr "قناتنا على اليوتيوب"
+
+#: .\templates\base.html:475
+msgid "Tüm hakları saklıdır."
+msgstr "جميع الحقوق محفوظة."
+
+#: .\templates\base.html:583
+msgid "Gönderiliyor..."
+msgstr "إرسال..."
+
+#: .\templates\base.html:584
+msgid "Başarılı!"
+msgstr "نجاح!"
+
+#: .\templates\base.html:597
+msgid "Bu web sitesi, deneyiminizi geliştirmek için çerezler kullanır."
+msgstr "يستخدم هذا الموقع الإلكتروني ملفات تعريف الارتباط لتحسين تجربتك."
+
+#: .\templates\base.html:598
+msgid "Gizlilik Politikası"
+msgstr "سياسة الخصوصية"
+
+#: .\templates\base.html:602
+msgid "Kabul Et"
+msgstr "قبول"
+
+#: .\templates\base.html:603
+msgid "Reddet"
+msgstr "تم الحفظ"
+
+#: .\templates\contact\contact.html:6
+msgid "İletişim ve Değerlendirme"
+msgstr "التواصل والتقييم"
+
+#: .\templates\contact\contact.html:17
+msgid "Bize Ulaşın"
+msgstr "اتصل بنا"
+
+#: .\templates\contact\contact.html:60
+msgid "Mesajınız"
+msgstr "رسالتك"
+
+#: .\templates\contact\contact.html:68
+msgid "Gönder"
+msgstr "إرسال"
+
+#: .\templates\contact\contact.html:78
+msgid "İletişim Bilgileri"
+msgstr "تفاصيل الاتصال"
+
+#: .\templates\contact\contact.html:83
+msgid "Adres bilgisi buraya gelecek"
+msgstr "ستأتي معلومات العنوان هنا"
+
+#: .\templates\contact\contact.html:97
+msgid "Çalışma Saatleri"
+msgstr "ساعات العمل"
+
+#: .\templates\contact\contact.html:107
+msgid "Konum"
+msgstr "الموقع"
+
+#: .\templates\contact\contact.html:126
+msgid "Değerlendirme Yap"
+msgstr "تقييم"
+
+#: .\templates\contact\contact.html:132
+msgid "Adınız Soyadınız"
+msgstr "اسمك ولقبك"
+
+#: .\templates\contact\contact.html:142
+msgid "Puanınız"
+msgstr "نتيجتك"
+
+#: .\templates\contact\contact.html:167
+msgid "Yorumunuz"
+msgstr "تعليق"
+
+#: .\templates\contact\contact.html:177
+msgid "İsteğe Bağlı Resim"
+msgstr "صورة اختيارية"
+
+#: .\templates\contact\contact.html:187
+msgid "Değerlendirme Gönder"
+msgstr "إرسال التقييم"
+
+#: .\templates\errors\ratelimit.html:4 .\templates\errors\ratelimit.html:8
+msgid "Çok Fazla İstek"
+msgstr "طلبات كثيرة جداً"
+
+#: .\templates\errors\ratelimit.html:10
+msgid "Ana Sayfaya Dön"
+msgstr "العودة إلى الصفحة الرئيسية"
+
+#: .\templates\gallery\gallery_list.html:559
+msgid ""
+"Profesyonel çalışmalarımızdan örnekler, projelerimiz ve hizmet videolarımız"
+msgstr "أمثلة على أعمالنا المهنية ومشاريعنا ومقاطع فيديو عن خدماتنا"
+
+#: .\templates\gallery\gallery_list.html:574
+msgid "Resimler"
+msgstr "الصور"
+
+#: .\templates\gallery\gallery_list.html:577
+msgid "Videolar"
+msgstr "فيديولار"
+
+#: .\templates\gallery\gallery_list.html:592
+#: .\templates\gallery\gallery_list.html:597 .\templates\home\index.html:939
+msgid "Galeri Görseli"
+msgstr "معرض الصور"
+
+#: .\templates\gallery\gallery_list.html:659
+msgid "Henüz Galeri Öğesi Yok"
+msgstr "لا توجد عناصر في المعرض حتى الآن"
+
+#: .\templates\gallery\gallery_list.html:660
+msgid ""
+"Galeri bölümümüze yakında içerik eklenecektir. Lütfen daha sonra tekrar "
+"ziyaret edin."
+msgstr ""
+"سيتم إضافة محتوى إلى قسم المعرض قريباً. يرجى زيارة الموقع مرة أخرى لاحقاً."
+
+#: .\templates\gallery\gallery_list.html:699
+msgid "Tarayıcınız video elementini desteklemiyor."
+msgstr "متصفحك لا يدعم عنصر الفيديو."
+
+#: .\templates\gallery\gallery_list.html:700
+msgid "Resim yüklenemedi:"
+msgstr "تعذر تحميل الصورة:"
+
+#: .\templates\gallery\gallery_list.html:701
+msgid "Başlıksız"
+msgstr "بدون عنوان"
+
+#: .\templates\gallery\gallery_list.html:702
+msgid "Açıklama yok"
+msgstr "لا يوجد تفسير"
+
+#: .\templates\gallery\gallery_list.html:704
+msgid "Hata"
+msgstr "خطأ"
+
+#: .\templates\home\index.html:602
+msgid "Profesyonel Ekip"
+msgstr "الفريق المحترف"
+
+#: .\templates\home\index.html:606
+msgid "+ Yıllık Tecrübe"
+msgstr "+ سنوات الخبرة"
+
+#: .\templates\home\index.html:613 .\templates\home\index.html:745
+msgid "Detaylı Bilgi"
+msgstr "معلومات مفصلة"
+
+#: .\templates\home\index.html:641
+msgid "Son Yüklenenler"
+msgstr "آخر تحميل"
+
+#: .\templates\home\index.html:646 .\templates\home\index.html:941
+msgid "Önceki görseller"
+msgstr "الصور السابقة"
+
+#: .\templates\home\index.html:650 .\templates\home\index.html:942
+msgid "Sonraki görseller"
+msgstr "الصور التالية"
+
+#: .\templates\home\index.html:693
+msgid "Tüm Galeriyi Görüntüle"
+msgstr "عرض كل الصور"
+
+#: .\templates\home\index.html:702
+msgid "Öne Çıkan Ürünler"
+msgstr "المنتجات المميزة"
+
+#: .\templates\home\index.html:714
+msgid "Ürün grubu"
+msgstr "مجموعة المنتجات"
+
+#: .\templates\home\index.html:839 .\templates\home\index.html:845
+#: .\templates\home\index.html:945
+msgid "Müşteri fotoğrafı"
+msgstr "صورة العميل"
+
+#: .\templates\home\index.html:882
+msgid " Değerlendirme Yap"
+msgstr " تقييم"
+
+#: .\templates\home\index.html:896
+msgid "Yıllık Tecrübe"
+msgstr "سنوات الخبرة"
+
+#: .\templates\home\index.html:914
+msgid "Müşteri Memnuniyeti"
+msgstr "إرضاء العملاء"
+
+#: .\templates\home\index.html:924
+msgid "Modal\\"
+msgstr "مودال\\\\\\"
+
+#: .\templates\home\index.html:940
+msgid "Görsel yüklenemedi"
+msgstr "فشل تحميل الصورة"
+
+#: .\templates\home\index.html:943
+msgid "Görseli büyüt"
+msgstr "تكبير الصورة"
+
+#: .\templates\home\index.html:944
+msgid "Modal\\'ı kapat"
+msgstr "إغلاق مشروط"
+
+#: .\templates\products\product_detail.html:48
+msgid "Stokta Var"
+msgstr "ستوكتا فار"
+
+#: .\templates\products\product_detail.html:52
+#: .\templates\products\product_list.html:54
+msgid "Stokta Yok"
+msgstr "غير متوفر من المخزون"
+
+#: .\templates\products\product_detail.html:58
+msgid "Sipariş ve Bilgi İçin"
+msgstr "للطلب والمعلومات"
+
+#: .\templates\products\product_list.html:11
+msgid "Ürünlerimiz"
+msgstr "منتجاتنا"
+
+#: .\templates\products\product_list.html:52
+msgid "Stokta"
+msgstr "ستوكتا"
+
+#: .\templates\products\product_list.html:61
+msgid "Detayları Gör"
+msgstr "انظر التفاصيل"
+
+#: .\templates\products\product_list.html:67
+msgid "Bu kategoride henüz ürün bulunmamaktadır."
+msgstr "لا توجد منتجات في هذه الفئة حتى الآن."

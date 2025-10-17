@@ -1,0 +1,2426 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-06 13:14+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\core\settings\base.py:132
+msgid "Türkçe"
+msgstr "Турецкая"
+
+#: .\core\settings\base.py:133
+msgid "English"
+msgstr "Английский язык"
+
+#: .\core\settings\base.py:134
+msgid "Deutsch"
+msgstr "Немецкий"
+
+#: .\core\settings\base.py:135
+msgid "Français"
+msgstr "Французский"
+
+#: .\core\settings\base.py:136
+msgid "Español"
+msgstr "Английский язык"
+
+#: .\core\settings\base.py:137
+msgid "Русский"
+msgstr "Русский"
+
+#: .\core\settings\base.py:138
+msgid "العربية"
+msgstr "Арабский язык"
+
+#: .\dashboard\models.py:26
+#: .\dashboard\templates\dashboard\carousel\list.html:110
+#: .\dashboard\templates\dashboard\carousel\list.html:217
+#: .\dashboard\templates\dashboard\carousel\list.html:299
+#: .\dashboard\templates\dashboard\gallery\list.html:259
+#: .\dashboard\templates\dashboard\gallery\list.html:355
+#: .\dashboard\templates\dashboard\services\list.html:99
+msgid "Başlık"
+msgstr "Название"
+
+#: .\dashboard\models.py:27
+#: .\dashboard\templates\dashboard\carousel\list.html:111
+#: .\dashboard\templates\dashboard\carousel\list.html:231
+#: .\dashboard\templates\dashboard\carousel\list.html:314
+#: .\dashboard\templates\dashboard\categories\list.html:196
+#: .\dashboard\templates\dashboard\categories\list.html:249
+#: .\dashboard\templates\dashboard\categories\products_list.html:146
+#: .\dashboard\templates\dashboard\gallery\list.html:277
+#: .\dashboard\templates\dashboard\media_mentions\list.html:237
+#: .\dashboard\templates\dashboard\media_mentions\list.html:592
+#: .\dashboard\templates\dashboard\products\edit_modal.html:64
+#: .\dashboard\templates\dashboard\products\list.html:275
+#: .\dashboard\templates\dashboard\team\list.html:304
+msgid "Açıklama"
+msgstr "Описание"
+
+#: .\dashboard\models.py:28
+#: .\dashboard\templates\dashboard\gallery\list.html:284
+#: .\dashboard\templates\dashboard\gallery\list.html:380
+msgid "Medya Tipi"
+msgstr "Тип носителя"
+
+#: .\dashboard\models.py:29
+#: .\dashboard\templates\dashboard\gallery\list.html:114
+#: .\dashboard\templates\dashboard\gallery\list.html:287
+#: .\dashboard\templates\dashboard\gallery\list.html:294
+#: .\dashboard\templates\dashboard\gallery\list.html:383
+#: .\dashboard\templates\dashboard\gallery\list.html:390
+#: .\dashboard\templates\dashboard\reviews\list.html:109
+#: .\dashboard\templates\dashboard\services\list.html:98
+#: .\templates\gallery\gallery_list.html:647
+msgid "Resim"
+msgstr "Резим"
+
+#: .\dashboard\models.py:30
+#: .\dashboard\templates\dashboard\gallery\list.html:301
+#: .\dashboard\templates\dashboard\gallery\list.html:402
+msgid "Video URL"
+msgstr "URL-адрес видео"
+
+#: .\dashboard\models.py:31
+msgid "Video Önizleme"
+msgstr "Предварительный просмотр видео"
+
+#: .\dashboard\models.py:32
+#: .\dashboard\templates\dashboard\carousel\list.html:263
+#: .\dashboard\templates\dashboard\carousel\list.html:351
+#: .\dashboard\templates\dashboard\categories\list.html:123
+#: .\dashboard\templates\dashboard\categories\products_list.html:40
+#: .\dashboard\templates\dashboard\gallery\gallery_items.html:74
+#: .\dashboard\templates\dashboard\gallery\list.html:124
+#: .\dashboard\templates\dashboard\gallery\list.html:311
+#: .\dashboard\templates\dashboard\gallery\list.html:412
+#: .\dashboard\templates\dashboard\media_mentions\list.html:240
+#: .\dashboard\templates\dashboard\media_mentions\list.html:594
+#: .\dashboard\templates\dashboard\products\list.html:81
+#: .\dashboard\templates\dashboard\services\list.html:141
+#: .\dashboard\templates\dashboard\services\list.html:220
+#: .\dashboard\templates\dashboard\team\list.html:209
+#: .\dashboard\templates\dashboard\team\list.html:283
+msgid "Aktif"
+msgstr "Активный"
+
+#: .\dashboard\models.py:33
+#: .\dashboard\templates\dashboard\categories\products_list.html:86
+#: .\dashboard\templates\dashboard\categories\products_list.html:179
+#: .\dashboard\templates\dashboard\gallery\gallery_items.html:81
+#: .\dashboard\templates\dashboard\gallery\list.html:126
+#: .\dashboard\templates\dashboard\gallery\list.html:320
+#: .\dashboard\templates\dashboard\gallery\list.html:421
+msgid "Öne Çıkan"
+msgstr "Featured"
+
+#: .\dashboard\models.py:34
+#: .\dashboard\templates\dashboard\carousel\list.html:224
+#: .\dashboard\templates\dashboard\carousel\list.html:306
+#: .\dashboard\templates\dashboard\gallery\list.html:132
+#: .\dashboard\templates\dashboard\gallery\list.html:268
+#: .\dashboard\templates\dashboard\gallery\list.html:364
+#: .\dashboard\templates\dashboard\services\list.html:59
+#: .\dashboard\templates\dashboard\services\list.html:213
+#: .\dashboard\templates\dashboard\team\list.html:68
+msgid "Sıralama"
+msgstr "Рейтинг"
+
+#: .\dashboard\models.py:35 .\dashboard\models.py:61
+msgid "Oluşturulma Tarihi"
+msgstr "Дата создания"
+
+#: .\dashboard\models.py:36 .\dashboard\models.py:62 .\dashboard\models.py:86
+msgid "Güncellenme Tarihi"
+msgstr "Дата обновления"
+
+#: .\dashboard\models.py:39
+msgid "Galeri Öğesi"
+msgstr "Предмет галереи"
+
+#: .\dashboard\models.py:40
+#: .\dashboard\templates\dashboard\gallery\list.html:161
+msgid "Galeri Öğeleri"
+msgstr "Предметы галереи"
+
+#: .\dashboard\models.py:47
+msgid "Site Başlığı"
+msgstr "Название сайта"
+
+#: .\dashboard\models.py:48
+msgid "Favicon"
+msgstr "Фавикон"
+
+#: .\dashboard\models.py:49
+msgid "Logo"
+msgstr "Логотип"
+
+#: .\dashboard\models.py:50 .\dashboard\models.py:80
+#: .\dashboard\templates\dashboard\messages\list.html:122
+#: .\dashboard\templates\dashboard\messages\list.html:232
+#: .\dashboard\templates\dashboard\team\list.html:292
+#: .\templates\contact\contact.html:42 .\templates\contact\contact.html:92
+msgid "E-posta"
+msgstr "Электронная почта"
+
+#: .\dashboard\models.py:51 .\dashboard\templates\dashboard\team\list.html:298
+#: .\templates\contact\contact.html:32 .\templates\contact\contact.html:87
+msgid "Telefon"
+msgstr "Номер телефона"
+
+#: .\dashboard\models.py:52 .\templates\contact\contact.html:82
+msgid "Adres"
+msgstr "Адрес"
+
+#: .\dashboard\models.py:53
+msgid "Facebook"
+msgstr "Facebook"
+
+#: .\dashboard\models.py:54
+msgid "Twitter"
+msgstr "Twitter"
+
+#: .\dashboard\models.py:55
+msgid "Instagram"
+msgstr "Instagram"
+
+#: .\dashboard\models.py:56
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+#: .\dashboard\models.py:57
+msgid "YouTube"
+msgstr "YouTube"
+
+#: .\dashboard\models.py:58
+msgid "Analytics Kodu"
+msgstr "Аналитика Коду"
+
+#: .\dashboard\models.py:59
+#: .\dashboard\templates\dashboard\products\edit_modal.html:87
+msgid "Meta Başlık"
+msgstr "Мета-заголовок"
+
+#: .\dashboard\models.py:60
+#: .\dashboard\templates\dashboard\products\edit_modal.html:95
+msgid "Meta Açıklama"
+msgstr "Мета-описание"
+
+#: .\dashboard\models.py:65
+msgid "Site Ayarı"
+msgstr "Настройка сайта"
+
+#: .\dashboard\models.py:66
+msgid "Site Ayarları"
+msgstr "Настройки сайта"
+
+#: .\dashboard\models.py:73
+msgid "Yeni"
+msgstr "Новый"
+
+#: .\dashboard\models.py:74
+msgid "Okundu"
+msgstr "Читать дальше"
+
+#: .\dashboard\models.py:75
+msgid "Yanıtlandı"
+msgstr "Ответил"
+
+#: .\dashboard\models.py:76
+msgid "Spam"
+msgstr "Спам"
+
+#: .\dashboard\models.py:79
+#: .\dashboard\templates\dashboard\messages\list.html:121
+#: .\dashboard\templates\dashboard\messages\list.html:226
+#: .\dashboard\templates\dashboard\messages\list.html:328
+msgid "İsim"
+msgstr "Имя"
+
+#: .\dashboard\models.py:81
+#: .\dashboard\templates\dashboard\messages\list.html:123
+#: .\dashboard\templates\dashboard\messages\list.html:238
+#: .\templates\contact\contact.html:51
+msgid "Konu"
+msgstr "жена"
+
+#: .\dashboard\models.py:82 .\dashboard\models.py:89
+#: .\dashboard\templates\dashboard\messages\list.html:124
+#: .\dashboard\templates\dashboard\messages\list.html:244
+msgid "Mesaj"
+msgstr "Сообщение"
+
+#: .\dashboard\models.py:83
+#: .\dashboard\templates\dashboard\carousel\list.html:114
+#: .\dashboard\templates\dashboard\categories\list.html:97
+#: .\dashboard\templates\dashboard\categories\products_list.html:37
+#: .\dashboard\templates\dashboard\categories\products_list.html:67
+#: .\dashboard\templates\dashboard\gallery\list.html:121
+#: .\dashboard\templates\dashboard\media_mentions\list.html:177
+#: .\dashboard\templates\dashboard\messages\list.html:355
+#: .\dashboard\templates\dashboard\notifications\list.html:97
+#: .\dashboard\templates\dashboard\products\list.html:77
+#: .\dashboard\templates\dashboard\products\list.html:127
+#: .\dashboard\templates\dashboard\reviews\list.html:110
+#: .\dashboard\templates\dashboard\services\form.html:123
+#: .\dashboard\templates\dashboard\services\list.html:100
+#: .\dashboard\templates\dashboard\team\list.html:167
+#: .\dashboard\templates\dashboard\team\list.html:279
+msgid "Durum"
+msgstr "Статус"
+
+#: .\dashboard\models.py:84
+msgid "Not"
+msgstr "Не"
+
+#: .\dashboard\models.py:85
+msgid "Gönderim Tarihi"
+msgstr "Дата представления"
+
+#: .\dashboard\models.py:90 .\dashboard\templates\dashboard\base.html:834
+#: .\dashboard\templates\dashboard\index.html:319
+#: .\dashboard\templates\dashboard\index.html:1037
+#: .\dashboard\templates\dashboard\messages\list.html:6
+msgid "Mesajlar"
+msgstr "Сообщения"
+
+#: .\dashboard\models.py:173
+msgid "Müşteri Adı"
+msgstr "Имя клиента"
+
+#: .\dashboard\models.py:174
+#: .\dashboard\templates\dashboard\messages\list.html:363
+#: .\dashboard\templates\dashboard\reviews\list.html:108
+#: .\dashboard\templates\dashboard\reviews\list.html:287
+#: .\templates\home\index.html:826
+msgid "Yorum"
+msgstr "Комментарий"
+
+#: .\dashboard\models.py:175
+#: .\dashboard\templates\dashboard\reviews\list.html:107
+#: .\dashboard\templates\dashboard\reviews\list.html:264
+msgid "Puan"
+msgstr "Пуань"
+
+#: .\dashboard\models.py:176
+msgid "Yorum Tarihi"
+msgstr "Дата комментария"
+
+#: .\dashboard\models.py:177
+#: .\dashboard\templates\dashboard\reviews\list.html:93
+#: .\dashboard\templates\dashboard\reviews\list.html:171
+msgid "Onaylı"
+msgstr "Одобрено"
+
+#: .\dashboard\models.py:180
+msgid "Müşteri Yorumu"
+msgstr "Отзыв покупателя"
+
+#: .\dashboard\models.py:181 .\dashboard\templates\dashboard\base.html:838
+#: .\dashboard\templates\dashboard\index.html:72
+#: .\dashboard\templates\dashboard\messages\list.html:59
+#: .\dashboard\templates\dashboard\reviews\list.html:6
+#: .\templates\home\index.html:814
+msgid "Müşteri Yorumları"
+msgstr "Отзывы покупателей"
+
+#: .\dashboard\templates\dashboard\about\edit.html:7
+#: .\dashboard\templates\dashboard\about\edit.html:8
+msgid "Hakkımızda Düzenle"
+msgstr "Редактировать О нас"
+
+#: .\dashboard\templates\dashboard\about\edit.html:22
+msgid "Hakkımızda Sayfası"
+msgstr "Страница \"О нас"
+
+#: .\dashboard\templates\dashboard\about\edit.html:23
+msgid "Şirket bilgilerinizi düzenleyin ve güncelleyin"
+msgstr "Организуйте и обновляйте информацию о своей компании"
+
+#: .\dashboard\templates\dashboard\about\edit.html:27
+#: .\dashboard\templates\dashboard\media_mentions\list.html:226
+msgid "Önizleme"
+msgstr "Предварительный просмотр"
+
+#: .\dashboard\templates\dashboard\about\edit.html:30
+#: .\dashboard\templates\dashboard\carousel\list.html:361
+#: .\dashboard\templates\dashboard\categories\list.html:265
+#: .\dashboard\templates\dashboard\products\edit_modal.html:129
+msgid "Değişiklikleri Kaydet"
+msgstr "Сохранить изменения"
+
+#: .\dashboard\templates\dashboard\about\edit.html:47
+#: .\dashboard\templates\dashboard\media_mentions\list.html:50
+msgid "Temel Bilgiler"
+msgstr "Основная информация"
+
+#: .\dashboard\templates\dashboard\about\edit.html:54
+#: .\dashboard\templates\dashboard\about\edit.html:224
+msgid "Sayfa Başlığı"
+msgstr "Название страницы"
+
+#: .\dashboard\templates\dashboard\about\edit.html:57
+msgid "Ana başlık olarak görünecek metin"
+msgstr "Текст, который будет отображаться в качестве основного заголовка"
+
+#: .\dashboard\templates\dashboard\about\edit.html:62
+msgid "Kısa Açıklama"
+msgstr "Краткое описание"
+
+#: .\dashboard\templates\dashboard\about\edit.html:65
+msgid "Sayfa başlığının altında görünecek özet metin"
+msgstr "Краткий текст, который будет отображаться под заголовком страницы"
+
+#: .\dashboard\templates\dashboard\about\edit.html:75
+#: .\dashboard\templates\dashboard\about\edit.html:240
+msgid "Ana Görsel"
+msgstr "Главное изображение"
+
+#: .\dashboard\templates\dashboard\about\edit.html:83
+msgid "Görsel Seçin"
+msgstr "Выберите изображение"
+
+#: .\dashboard\templates\dashboard\about\edit.html:86
+msgid "Önerilen boyut: 1200x600 piksel"
+msgstr "Рекомендуемый размер: 1200x600 пикселей"
+
+#: .\dashboard\templates\dashboard\about\edit.html:91
+#: .\dashboard\templates\dashboard\carousel\list.html:326
+#: .\dashboard\templates\dashboard\products\edit_modal.html:77
+msgid "Mevcut görsel"
+msgstr "Доступный визуальный"
+
+#: .\dashboard\templates\dashboard\about\edit.html:93
+msgid "Mevcut Görsel"
+msgstr "Доступное изображение"
+
+#: .\dashboard\templates\dashboard\about\edit.html:99
+msgid "Görsel Yok"
+msgstr "Нет визуального"
+
+#: .\dashboard\templates\dashboard\about\edit.html:112
+#: .\dashboard\templates\dashboard\about\edit.html:232
+msgid "İçerik Bölümleri"
+msgstr "Разделы содержания"
+
+#: .\dashboard\templates\dashboard\about\edit.html:119
+#: .\templates\about\about.html:40 .\templates\home\index.html:596
+msgid "Misyonumuz"
+msgstr "Наша миссия"
+
+#: .\dashboard\templates\dashboard\about\edit.html:123
+msgid "Şirketinizin misyonunu açıklayın"
+msgstr "Опишите миссию вашей компании"
+
+#: .\dashboard\templates\dashboard\about\edit.html:129
+#: .\templates\about\about.html:51
+msgid "Vizyonumuz"
+msgstr "Наше видение"
+
+#: .\dashboard\templates\dashboard\about\edit.html:133
+msgid "Gelecek hedeflerinizi paylaşın"
+msgstr "Поделитесь своими будущими целями"
+
+#: .\dashboard\templates\dashboard\about\edit.html:139
+#: .\templates\about\about.html:29
+msgid "Hikayemiz"
+msgstr "Наша история"
+
+#: .\dashboard\templates\dashboard\about\edit.html:143
+msgid "Şirketinizin kuruluş hikayesini anlatın"
+msgstr "Расскажите об истории основания вашей компании"
+
+#: .\dashboard\templates\dashboard\about\edit.html:165
+msgid "Şirket İstatistikleri"
+msgstr "Статистика компании"
+
+#: .\dashboard\templates\dashboard\about\edit.html:172
+msgid "Tecrübe Yılı"
+msgstr "Годы опыта"
+
+#: .\dashboard\templates\dashboard\about\edit.html:179
+msgid "Tamamlanan İşler"
+msgstr "Завершённые работы"
+
+#: .\dashboard\templates\dashboard\about\edit.html:186
+#: .\templates\about\about.html:96 .\templates\home\index.html:902
+msgid "Mutlu Müşteri"
+msgstr "Счастливый покупатель"
+
+#: .\dashboard\templates\dashboard\about\edit.html:193
+#: .\dashboard\templates\dashboard\services\list.html:37
+msgid "Toplam Hizmet"
+msgstr "Общее обслуживание"
+
+#: .\dashboard\templates\dashboard\about\edit.html:200
+#, python-format
+msgid "Müşteri Memnuniyeti (%%)"
+msgstr "Удовлетворенность клиентов (%%)"
+
+#: .\dashboard\templates\dashboard\about\edit.html:217
+msgid "İçerik Durumu"
+msgstr "Статус содержимого"
+
+#: .\dashboard\templates\dashboard\about\edit.html:225
+#: .\dashboard\templates\dashboard\about\edit.html:233
+#: .\dashboard\templates\dashboard\about\edit.html:241
+msgid "Kontrol Ediliyor"
+msgstr "Контролируемый"
+
+#: .\dashboard\templates\dashboard\about\edit.html:249
+msgid "Tamamlanma Oranı"
+msgstr "Уровень завершения"
+
+#: .\dashboard\templates\dashboard\about\edit.html:264
+msgid "Hızlı İşlemler"
+msgstr "Быстрые транзакции"
+
+#: .\dashboard\templates\dashboard\about\edit.html:271
+msgid "Sayfayı Görüntüle"
+msgstr "Посмотреть страницу"
+
+#: .\dashboard\templates\dashboard\about\edit.html:277
+msgid "Değişiklikleri Geri Al"
+msgstr "Отменить изменения"
+
+#: .\dashboard\templates\dashboard\about\edit.html:282
+msgid "Dashboard'a Dön"
+msgstr "Назад к приборной панели"
+
+#: .\dashboard\templates\dashboard\activities\list.html:4
+msgid "Tüm Aktiviteler"
+msgstr "Все виды деятельности"
+
+#: .\dashboard\templates\dashboard\activities\list.html:5
+#: .\dashboard\templates\dashboard\activities\list.html:51
+msgid "Aktivite Geçmişi"
+msgstr "История деятельности"
+
+#: .\dashboard\templates\dashboard\activities\list.html:16
+msgid "Zaman Aralığı"
+msgstr "Интервал времени"
+
+#: .\dashboard\templates\dashboard\activities\list.html:18
+#: .\dashboard\templates\dashboard\gallery\list.html:77
+msgid "Son 7 Gün"
+msgstr "Последние 7 дней"
+
+#: .\dashboard\templates\dashboard\activities\list.html:19
+msgid "Son 30 Gün"
+msgstr "Последние 30 дней"
+
+#: .\dashboard\templates\dashboard\activities\list.html:20
+#: .\dashboard\templates\dashboard\index.html:110
+msgid "Son 3 Ay"
+msgstr "Звук 3 Ай"
+
+#: .\dashboard\templates\dashboard\activities\list.html:21
+msgid "Son 1 Yıl"
+msgstr "Последний 1 год"
+
+#: .\dashboard\templates\dashboard\activities\list.html:25
+msgid "Aktivite Türü"
+msgstr "Вид деятельности"
+
+#: .\dashboard\templates\dashboard\activities\list.html:33
+msgid "İstatistikler"
+msgstr "Статистика"
+
+#: .\dashboard\templates\dashboard\activities\list.html:35
+msgid "Toplam"
+msgstr "Всего"
+
+#: .\dashboard\templates\dashboard\activities\list.html:36
+msgid "gün"
+msgstr "день"
+
+#: .\dashboard\templates\dashboard\activities\list.html:78
+msgid "Sayfa navigasyonu"
+msgstr "Навигация по странице"
+
+#: .\dashboard\templates\dashboard\activities\list.html:82
+#: .\dashboard\templates\dashboard\notifications\list.html:183
+#: .\templates\gallery\gallery_list.html:705 .\templates\home\index.html:580
+#: .\templates\home\index.html:761 .\templates\home\index.html:871
+#: .\templates\products\product_list.html:78
+msgid "Önceki"
+msgstr "Предыдущий"
+
+#: .\dashboard\templates\dashboard\activities\list.html:96
+#: .\dashboard\templates\dashboard\notifications\list.html:201
+#: .\templates\gallery\gallery_list.html:706 .\templates\home\index.html:584
+#: .\templates\home\index.html:768 .\templates\home\index.html:876
+#: .\templates\products\product_list.html:90
+msgid "Sonraki"
+msgstr "Следующий"
+
+#: .\dashboard\templates\dashboard\activities\list.html:105
+msgid "Aktivite Bulunamadı"
+msgstr "Активность не обнаружена"
+
+#: .\dashboard\templates\dashboard\activities\list.html:106
+msgid "Bu zaman aralığında herhangi bir aktivite kaydı bulunamadı."
+msgstr "Никаких записей о деятельности в этот период времени не обнаружено."
+
+#: .\dashboard\templates\dashboard\base.html:814
+msgid "Admin Dashboard"
+msgstr "Панель администратора"
+
+#: .\dashboard\templates\dashboard\base.html:815
+msgid "Yönetim Paneli"
+msgstr "Группа управления"
+
+#: .\dashboard\templates\dashboard\base.html:820
+#: .\dashboard\templates\dashboard\index.html:5 .\templates\base.html:224
+#: .\templates\base.html:434 .\templates\products\product_detail.html:13
+msgid "Ana Sayfa"
+msgstr "Главная страница"
+
+#: .\dashboard\templates\dashboard\base.html:826 .\templates\about\about.html:6
+#: .\templates\base.html:255 .\templates\base.html:440
+#: .\templates\home\index.html:594 .\templates\home\index.html:622
+#: .\templates\home\index.html:628
+msgid "Hakkımızda"
+msgstr "О нас"
+
+#: .\dashboard\templates\dashboard\base.html:830
+#: .\dashboard\templates\dashboard\services\list.html:6
+#: .\templates\about\about.html:119
+msgid "Hizmetlerimiz"
+msgstr "Наши услуги"
+
+#: .\dashboard\templates\dashboard\base.html:842
+#: .\dashboard\templates\dashboard\index.html:330 .\templates\base.html:240
+#: .\templates\base.html:436
+msgid "Galeri"
+msgstr "Галерея"
+
+#: .\dashboard\templates\dashboard\base.html:846
+msgid "Carousel"
+msgstr "Карусель"
+
+#: .\dashboard\templates\dashboard\base.html:850
+#: .\dashboard\templates\dashboard\categories\list.html:6
+#: .\dashboard\templates\dashboard\index.html:57
+msgid "Kategoriler"
+msgstr "Категории"
+
+#: .\dashboard\templates\dashboard\base.html:854
+#: .\dashboard\templates\dashboard\index.html:1007 .\templates\base.html:232
+#: .\templates\base.html:435 .\templates\products\product_detail.html:14
+msgid "Ürünler"
+msgstr "Продукция"
+
+#: .\dashboard\templates\dashboard\base.html:857
+#: .\dashboard\templates\dashboard\team\list.html:6
+#: .\templates\about\about.html:180
+msgid "Ekibimiz"
+msgstr "Наша команда"
+
+#: .\dashboard\templates\dashboard\base.html:861
+msgid "Basın'da Biz"
+msgstr "Мы в прессе"
+
+#: .\dashboard\templates\dashboard\base.html:867
+msgid "Çıkış"
+msgstr "Выход"
+
+#: .\dashboard\templates\dashboard\base.html:881
+msgid "Dashboard"
+msgstr "Приборная панель"
+
+#: .\dashboard\templates\dashboard\base.html:897
+#: .\templates\gallery\gallery_list.html:703
+msgid "Yükleniyor..."
+msgstr "Загрузка..."
+
+#: .\dashboard\templates\dashboard\base.html:908
+msgid "Tema"
+msgstr "Ее"
+
+#: .\dashboard\templates\dashboard\base.html:917
+msgid "Varsayılan"
+msgstr "По умолчанию"
+
+#: .\dashboard\templates\dashboard\base.html:927
+msgid "Karanlık Mod"
+msgstr "Темный режим"
+
+#: .\dashboard\templates\dashboard\base.html:937
+msgid "Okuma Modu"
+msgstr "Окума Моду"
+
+#: .\dashboard\templates\dashboard\base.html:948
+msgid "Mavi"
+msgstr "Мави"
+
+#: .\dashboard\templates\dashboard\base.html:958
+msgid "Yeşil"
+msgstr "Зеленый"
+
+#: .\dashboard\templates\dashboard\base.html:968
+msgid "Mor"
+msgstr "Мор"
+
+#: .\dashboard\templates\dashboard\base.html:978
+msgid "Turuncu"
+msgstr "Оранжевый"
+
+#: .\dashboard\templates\dashboard\base.html:987
+#: .\dashboard\templates\dashboard\index.html:20
+msgid "Siteyi Görüntüle"
+msgstr "Посмотреть сайт"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:6
+#: .\dashboard\templates\dashboard\carousel\list.html:7
+#: .\dashboard\templates\dashboard\carousel\list.html:16
+msgid "Carousel Yönetimi"
+msgstr "Управление каруселью"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:17
+msgid "Ana sayfa slaytlarınızı düzenleyin ve yönetin"
+msgstr "Организуйте и управляйте слайдами своей домашней страницы"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:21
+#: .\dashboard\templates\dashboard\carousel\list.html:207
+msgid "Yeni Slayt Ekle"
+msgstr "Добавить новый слайд"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:32
+msgid "Toplam Slayt"
+msgstr "Всего слайдов"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:38
+msgid "Aktif Slaytlar"
+msgstr "Активные слайды"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:43
+msgid "İlk Sıra"
+msgstr "Первый ряд"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:48
+msgid "Görüntülenme"
+msgstr "Изображение"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:58
+msgid "Carousel Önizleme"
+msgstr "Предварительный просмотр \"Карусели"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:62
+msgid "Önizlemeyi Göster/Gizle"
+msgstr "Показать/скрыть предварительный просмотр"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:109
+#: .\dashboard\templates\dashboard\carousel\list.html:238
+#: .\dashboard\templates\dashboard\carousel\list.html:320
+#: .\dashboard\templates\dashboard\categories\products_list.html:62
+#: .\dashboard\templates\dashboard\categories\products_list.html:163
+#: .\dashboard\templates\dashboard\products\edit_modal.html:71
+#: .\dashboard\templates\dashboard\products\list.html:112
+#: .\dashboard\templates\dashboard\products\list.html:281
+msgid "Görsel"
+msgstr "Gorse"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:112
+msgid "Buton"
+msgstr "Бутон"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:113
+#: .\dashboard\templates\dashboard\services\list.html:97
+#: .\dashboard\templates\dashboard\team\list.html:163
+#: .\dashboard\templates\dashboard\team\list.html:275
+msgid "Sıra"
+msgstr "Последовательность"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:115
+#: .\dashboard\templates\dashboard\categories\list.html:98
+#: .\dashboard\templates\dashboard\categories\products_list.html:68
+#: .\dashboard\templates\dashboard\messages\list.html:126
+#: .\dashboard\templates\dashboard\products\list.html:130
+#: .\dashboard\templates\dashboard\reviews\list.html:111
+#: .\dashboard\templates\dashboard\services\list.html:101
+#: .\dashboard\templates\dashboard\team\list.html:168
+msgid "İşlemler"
+msgstr "Транзакции"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:185
+msgid "Henüz slayt bulunmuyor"
+msgstr "Слайдов пока нет"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:186
+msgid ""
+"İlk slaytınızı eklemek için yukarıdaki \"Yeni Slayt Ekle\" butonunu kullanın."
+msgstr ""
+"Чтобы добавить первый слайд, используйте кнопку \"Добавить новый слайд\" "
+"выше."
+
+#: .\dashboard\templates\dashboard\carousel\list.html:188
+msgid "İlk Slaytı Ekle"
+msgstr "Вставка первого слайда"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:220
+msgid "Slayt başlığını girin..."
+msgstr "Введите название слайда..."
+
+#: .\dashboard\templates\dashboard\carousel\list.html:234
+msgid "Slayt açıklaması..."
+msgstr "Описание слайда..."
+
+#: .\dashboard\templates\dashboard\carousel\list.html:241
+msgid "Önerilen boyut: 1920x600 piksel"
+msgstr "Рекомендуемый размер: 1920x600 пикселей"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:246
+#: .\dashboard\templates\dashboard\carousel\list.html:333
+msgid "Buton Metni"
+msgstr "Бутон Метни"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:249
+msgid "Daha Fazla Bilgi"
+msgstr "Дополнительная информация"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:253
+#: .\dashboard\templates\dashboard\carousel\list.html:340
+msgid "Buton URL"
+msgstr "Бутон URL"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:256
+msgid "https://example.com"
+msgstr "https://example.com"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:270
+#: .\dashboard\templates\dashboard\carousel\list.html:358
+#: .\dashboard\templates\dashboard\carousel\list.html:390
+#: .\dashboard\templates\dashboard\categories\list.html:209
+#: .\dashboard\templates\dashboard\categories\list.html:262
+#: .\dashboard\templates\dashboard\categories\list.html:296
+#: .\dashboard\templates\dashboard\categories\products_list.html:185
+#: .\dashboard\templates\dashboard\categories\products_list.html:205
+#: .\dashboard\templates\dashboard\categories\products_list.html:273
+#: .\dashboard\templates\dashboard\gallery\list.html:327
+#: .\dashboard\templates\dashboard\gallery\list.html:428
+#: .\dashboard\templates\dashboard\gallery\list.html:458
+#: .\dashboard\templates\dashboard\media_mentions\add.html:93
+#: .\dashboard\templates\dashboard\media_mentions\list.html:210
+#: .\dashboard\templates\dashboard\messages\list.html:299
+#: .\dashboard\templates\dashboard\products\edit_modal.html:126
+#: .\dashboard\templates\dashboard\products\list.html:296
+#: .\dashboard\templates\dashboard\products\list.html:338
+#: .\dashboard\templates\dashboard\reviews\list.html:332
+#: .\dashboard\templates\dashboard\services\form.html:145
+#: .\dashboard\templates\dashboard\services\list.html:271
+#: .\dashboard\templates\dashboard\team\form.html:20
+#: .\dashboard\templates\dashboard\team\list.html:348
+msgid "İptal"
+msgstr "Отменить"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:273
+msgid "Slaytı Ekle"
+msgstr "Вставить слайд"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:289
+msgid "Slayt Düzenle"
+msgstr "Редактировать слайд"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:375
+#: .\dashboard\templates\dashboard\categories\list.html:279
+#: .\dashboard\templates\dashboard\categories\products_list.html:198
+#: .\dashboard\templates\dashboard\gallery\list.html:444
+#: .\dashboard\templates\dashboard\messages\list.html:282
+#: .\dashboard\templates\dashboard\products\list.html:323
+#: .\dashboard\templates\dashboard\reviews\list.html:315
+#: .\dashboard\templates\dashboard\services\list.html:254
+#: .\dashboard\templates\dashboard\team\list.html:331
+msgid "Silme Onayı"
+msgstr "Подтверждение удаления"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:381
+#: .\dashboard\templates\dashboard\categories\list.html:287
+#: .\dashboard\templates\dashboard\products\list.html:329
+#: .\dashboard\templates\dashboard\reviews\list.html:323
+#: .\dashboard\templates\dashboard\team\list.html:339
+msgid "Emin misiniz?"
+msgstr "Вы уверены?"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:382
+msgid "slaytını kalıcı olarak silmek istediğinizden emin misiniz?"
+msgstr "Вы уверены, что хотите удалить слайд навсегда?"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:385
+#: .\dashboard\templates\dashboard\messages\list.html:294
+#: .\dashboard\templates\dashboard\products\list.html:333
+#: .\dashboard\templates\dashboard\reviews\list.html:327
+#: .\dashboard\templates\dashboard\services\list.html:266
+#: .\dashboard\templates\dashboard\team\list.html:343
+msgid "Bu işlem geri alınamaz!"
+msgstr "Эта операция необратима!"
+
+#: .\dashboard\templates\dashboard\carousel\list.html:395
+#: .\dashboard\templates\dashboard\categories\list.html:301
+#: .\dashboard\templates\dashboard\messages\list.html:304
+#: .\dashboard\templates\dashboard\products\list.html:343
+#: .\dashboard\templates\dashboard\reviews\list.html:337
+#: .\dashboard\templates\dashboard\services\list.html:276
+#: .\dashboard\templates\dashboard\team\list.html:351
+msgid "Kalıcı Olarak Sil"
+msgstr "Удалить навсегда"
+
+#: .\dashboard\templates\dashboard\categories\list.html:7
+#: .\dashboard\templates\dashboard\categories\list.html:16
+msgid "Kategori Yönetimi"
+msgstr "Управление категориями"
+
+#: .\dashboard\templates\dashboard\categories\list.html:17
+msgid "Kategorilerinizi düzenleyin ve yönetin"
+msgstr "Организуйте и управляйте своими категориями"
+
+#: .\dashboard\templates\dashboard\categories\list.html:20
+#: .\dashboard\templates\dashboard\categories\list.html:174
+msgid "Yeni Kategori"
+msgstr "Новая категория"
+
+#: .\dashboard\templates\dashboard\categories\list.html:35
+#: .\dashboard\templates\dashboard\index.html:182
+msgid "Toplam Kategori"
+msgstr "Общая категория"
+
+#: .\dashboard\templates\dashboard\categories\list.html:46
+msgid "Aktif Kategoriler"
+msgstr "Активные категории"
+
+#: .\dashboard\templates\dashboard\categories\list.html:57
+#: .\dashboard\templates\dashboard\index.html:42
+#: .\dashboard\templates\dashboard\index.html:186
+#: .\dashboard\templates\dashboard\products\list.html:31
+msgid "Toplam Ürün"
+msgstr "Общий продукт"
+
+#: .\dashboard\templates\dashboard\categories\list.html:68
+msgid "Boş Kategoriler"
+msgstr "Пустые категории"
+
+#: .\dashboard\templates\dashboard\categories\list.html:79
+msgid "Kategori Listesi"
+msgstr "Список категорий"
+
+#: .\dashboard\templates\dashboard\categories\list.html:84
+msgid "Kategori ara..."
+msgstr "Категория фигур..."
+
+#: .\dashboard\templates\dashboard\categories\list.html:95
+#: .\dashboard\templates\dashboard\categories\list.html:183
+#: .\dashboard\templates\dashboard\categories\list.html:237
+msgid "Kategori Adı"
+msgstr "Название категории"
+
+#: .\dashboard\templates\dashboard\categories\list.html:96
+msgid "Slug"
+msgstr "Слизняк"
+
+#: .\dashboard\templates\dashboard\categories\list.html:125
+#: .\dashboard\templates\dashboard\categories\products_list.html:41
+#: .\dashboard\templates\dashboard\gallery\gallery_items.html:76
+#: .\dashboard\templates\dashboard\gallery\list.html:125
+#: .\dashboard\templates\dashboard\media_mentions\list.html:594
+#: .\dashboard\templates\dashboard\products\list.html:82
+#: .\dashboard\templates\dashboard\services\list.html:143
+#: .\dashboard\templates\dashboard\services\list.html:222
+#: .\dashboard\templates\dashboard\team\list.html:211
+#: .\dashboard\templates\dashboard\team\list.html:285
+msgid "Pasif"
+msgstr "Пассивный"
+
+#: .\dashboard\templates\dashboard\categories\list.html:133
+#: .\dashboard\templates\dashboard\gallery\gallery_items.html:47
+#: .\dashboard\templates\dashboard\products\list.html:187
+#: .\dashboard\templates\dashboard\services\list.html:150
+#: .\dashboard\templates\dashboard\services\list.html:239
+#: .\dashboard\templates\dashboard\team\list.html:120
+#: .\dashboard\templates\dashboard\team\list.html:219
+#: .\dashboard\templates\dashboard\team\list.html:318
+msgid "Düzenle"
+msgstr "Редактировать"
+
+#: .\dashboard\templates\dashboard\categories\list.html:137
+msgid "Ürünleri Görüntüle"
+msgstr "Посмотреть товары"
+
+#: .\dashboard\templates\dashboard\categories\list.html:141
+#: .\dashboard\templates\dashboard\categories\products_list.html:208
+#: .\dashboard\templates\dashboard\gallery\gallery_items.html:53
+#: .\dashboard\templates\dashboard\gallery\list.html:462
+#: .\dashboard\templates\dashboard\messages\list.html:180
+#: .\dashboard\templates\dashboard\products\list.html:192
+#: .\dashboard\templates\dashboard\services\list.html:158
+#: .\dashboard\templates\dashboard\team\list.html:127
+#: .\dashboard\templates\dashboard\team\list.html:226
+msgid "Sil"
+msgstr "Удалить"
+
+#: .\dashboard\templates\dashboard\categories\list.html:152
+#: .\dashboard\templates\dashboard\index.html:219
+msgid "Henüz kategori bulunmuyor"
+msgstr "Пока нет категорий"
+
+#: .\dashboard\templates\dashboard\categories\list.html:153
+msgid ""
+"İlk kategorinizi eklemek için yukarıdaki \"Yeni Kategori\" butonunu kullanın."
+msgstr ""
+"Чтобы добавить первую категорию, воспользуйтесь кнопкой \"Новая категория\" "
+"выше."
+
+#: .\dashboard\templates\dashboard\categories\list.html:155
+msgid "İlk Kategoriyi Ekle"
+msgstr "Добавить первую категорию"
+
+#: .\dashboard\templates\dashboard\categories\list.html:189
+#: .\dashboard\templates\dashboard\categories\list.html:243
+msgid "URL Slug"
+msgstr "URL-шлюз"
+
+#: .\dashboard\templates\dashboard\categories\list.html:192
+msgid "URL'de görünecek kısım (otomatik oluşturulur)"
+msgstr "Часть, которая будет отображаться в URL (генерируется автоматически)"
+
+#: .\dashboard\templates\dashboard\categories\list.html:203
+#: .\dashboard\templates\dashboard\categories\list.html:256
+msgid "Aktif Durumda"
+msgstr "Активный статус"
+
+#: .\dashboard\templates\dashboard\categories\list.html:212
+msgid "Kategori Ekle"
+msgstr "Добавить категорию"
+
+#: .\dashboard\templates\dashboard\categories\list.html:228
+msgid "Kategori Düzenle"
+msgstr "Редактировать категорию"
+
+#: .\dashboard\templates\dashboard\categories\list.html:288
+msgid "kategorisini silmek istediğinizden emin misiniz?"
+msgstr "Вы уверены, что хотите удалить категорию?"
+
+#: .\dashboard\templates\dashboard\categories\list.html:291
+msgid "Bu kategoriye ait tüm ürünler de silinecektir!"
+msgstr "Все товары, относящиеся к этой категории, также будут удалены!"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:5
+#: .\dashboard\templates\dashboard\categories\products_list.html:11
+#: .\dashboard\templates\dashboard\products\list.html:5
+#: .\dashboard\templates\dashboard\products\list.html:6
+#: .\dashboard\templates\dashboard\products\list.html:15
+msgid "Ürün Yönetimi"
+msgstr "Управление продуктами"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:13
+msgid "kategorisindeki ürünler"
+msgstr "продукты в категории"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:17
+msgid "Yeni Ürün"
+msgstr "Новый продукт"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:26
+#: .\dashboard\templates\dashboard\categories\products_list.html:64
+#: .\dashboard\templates\dashboard\categories\products_list.html:131
+#: .\dashboard\templates\dashboard\products\edit_modal.html:23
+#: .\dashboard\templates\dashboard\products\list.html:64
+#: .\dashboard\templates\dashboard\products\list.html:118
+#: .\dashboard\templates\dashboard\products\list.html:241
+#: .\templates\products\product_detail.html:31
+msgid "Kategori"
+msgstr "Категории"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:28
+#: .\dashboard\templates\dashboard\categories\products_list.html:39
+#: .\dashboard\templates\dashboard\gallery\list.html:113
+#: .\dashboard\templates\dashboard\gallery\list.html:123
+#: .\dashboard\templates\dashboard\notifications\list.html:89
+#: .\dashboard\templates\dashboard\notifications\list.html:99
+#: .\dashboard\templates\dashboard\products\list.html:67
+#: .\dashboard\templates\dashboard\products\list.html:80
+#: .\templates\gallery\gallery_list.html:571
+#: .\templates\products\product_list.html:19
+msgid "Tümü"
+msgstr "Все"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:45
+#: .\dashboard\templates\dashboard\products\list.html:87
+msgid "Arama"
+msgstr "Арама"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:46
+#: .\dashboard\templates\dashboard\products\list.html:91
+msgid "Ürün adı ile ara..."
+msgstr "Поиск по названию продукта..."
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:49
+#: .\dashboard\templates\dashboard\notifications\list.html:108
+#: .\dashboard\templates\dashboard\products\list.html:97
+msgid "Filtrele"
+msgstr "Фильтр"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:63
+#: .\dashboard\templates\dashboard\categories\products_list.html:127
+#: .\dashboard\templates\dashboard\products\edit_modal.html:16
+#: .\dashboard\templates\dashboard\products\list.html:115
+#: .\dashboard\templates\dashboard\products\list.html:235
+msgid "Ürün Adı"
+msgstr "Название продукта"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:65
+#: .\dashboard\templates\dashboard\categories\products_list.html:151
+#: .\dashboard\templates\dashboard\products\edit_modal.html:45
+#: .\dashboard\templates\dashboard\products\list.html:121
+#: .\dashboard\templates\dashboard\products\list.html:260
+msgid "Fiyat"
+msgstr "Цена"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:66
+#: .\dashboard\templates\dashboard\categories\products_list.html:158
+#: .\dashboard\templates\dashboard\products\edit_modal.html:54
+#: .\dashboard\templates\dashboard\products\list.html:124
+#: .\dashboard\templates\dashboard\products\list.html:267
+msgid "Stok"
+msgstr "Тростник"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:118
+#: .\dashboard\templates\dashboard\products\edit_modal.html:6
+msgid "Ürün Düzenle"
+msgstr "Редактировать продукт"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:142
+#: .\dashboard\templates\dashboard\products\edit_modal.html:37
+#: .\dashboard\templates\dashboard\products\list.html:253
+msgid "URL"
+msgstr "URL"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:173
+#: .\dashboard\templates\dashboard\products\edit_modal.html:118
+#: .\dashboard\templates\dashboard\products\list.html:289
+msgid "Satışta"
+msgstr "В продаже"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:186
+#: .\dashboard\templates\dashboard\gallery\list.html:430
+#: .\dashboard\templates\dashboard\media_mentions\list.html:213
+#: .\dashboard\templates\dashboard\products\add.html:12
+#: .\dashboard\templates\dashboard\services\form.html:149
+#: .\dashboard\templates\dashboard\team\form.html:19
+msgid "Kaydet"
+msgstr "Сохранить"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:202
+msgid "ürününü silmek istediğinizden emin misiniz?"
+msgstr "Вы уверены, что хотите удалить продукт?"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:216
+msgid "Henüz ürün eklenmemiş."
+msgstr "Продукты еще не добавлены."
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:262
+#: .\dashboard\templates\dashboard\products\list.html:20
+#: .\dashboard\templates\dashboard\products\list.html:225
+msgid "Yeni Ürün Ekle"
+msgstr "Добавить новый продукт"
+
+#: .\dashboard\templates\dashboard\categories\products_list.html:274
+#: .\dashboard\templates\dashboard\gallery\list.html:329
+msgid "Ekle"
+msgstr "Добавить"
+
+#: .\dashboard\templates\dashboard\gallery\gallery_items.html:41
+msgid "Görüntüle"
+msgstr "Посмотреть"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:6
+#: .\dashboard\templates\dashboard\gallery\list.html:7
+#: .\dashboard\templates\dashboard\gallery\list.html:16
+msgid "Galeri Yönetimi"
+msgstr "Управление галереей"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:17
+msgid "Resim ve videoları yönetin, düzenleyin"
+msgstr "Управление и упорядочивание изображений и видео"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:21
+msgid "Yeni galeri öğesi ekle"
+msgstr "Добавить новый элемент галереи"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:22
+msgid "Yeni Ekle"
+msgstr "Добавить новый"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:40
+msgid "Toplam Medya"
+msgstr "Total Media"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:43
+msgid "Aktif sistem"
+msgstr "Активная система"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:52
+msgid "Aktif Öğeler"
+msgstr "Активные предметы"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:55
+msgid "Yayında"
+msgstr "В эфире"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:64
+msgid "Öne Çıkanlar"
+msgstr "Основные моменты"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:67
+msgid "Özel içerik"
+msgstr "Специализированный контент"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:80
+msgid "Yeni içerik"
+msgstr "Новое содержание"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:93
+msgid "Ara"
+msgstr "Ара"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:100
+msgid "Başlık, açıklama ara..."
+msgstr "Поиск по названию, описанию..."
+
+#: .\dashboard\templates\dashboard\gallery\list.html:111
+msgid "Tip"
+msgstr "Наконечник"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:115
+#: .\dashboard\templates\dashboard\gallery\list.html:288
+#: .\dashboard\templates\dashboard\gallery\list.html:384
+#: .\templates\gallery\gallery_list.html:649
+msgid "Video"
+msgstr "Видео"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:134
+msgid "Sıraya Göre"
+msgstr "В порядке"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:135
+msgid "Yeniye Göre"
+msgstr "По данным New"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:136
+msgid "Eskiye Göre"
+msgstr "Согласно старому"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:137
+msgid "Başlığa Göre"
+msgstr "По названию"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:138
+msgid "Başlığa Göre (Z-A)"
+msgstr "В соответствии с названием (З-А)"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:145
+msgid "Filtreleri Temizle"
+msgstr "Очистить фильтры"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:146
+#: .\dashboard\templates\dashboard\notifications\list.html:111
+msgid "Temizle"
+msgstr "Очистить"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:162
+msgid "öğe"
+msgstr "Артикул"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:168
+msgid "Grid Görünümü"
+msgstr "Вид на сетку"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:172
+#: .\dashboard\templates\dashboard\team\list.html:81
+msgid "Liste Görünümü"
+msgstr "Просмотр списка"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:229
+msgid "Henüz galeri öğesi yok"
+msgstr "Пока нет галереи"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:230
+msgid "İlk resim veya videonuzu eklemek için aşağıdaki butona tıklayın"
+msgstr ""
+"Нажмите на кнопку ниже, чтобы добавить свое первое изображение или видео"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:232
+msgid "İlk Öğeyi Ekle"
+msgstr "Добавить первый элемент"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:247
+msgid "Yeni Galeri Öğesi Ekle"
+msgstr "Добавить новый элемент галереи"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:249
+#: .\dashboard\templates\dashboard\gallery\list.html:345
+#: .\dashboard\templates\dashboard\gallery\list.html:446
+#: .\dashboard\templates\dashboard\index.html:172
+#: .\dashboard\templates\dashboard\messages\list.html:258
+#: .\dashboard\templates\dashboard\messages\list.html:377
+#: .\dashboard\templates\dashboard\reviews\list.html:295
+#: .\dashboard\templates\dashboard\services\list.html:237
+#: .\dashboard\templates\dashboard\team\list.html:315
+#: .\templates\gallery\gallery_list.html:707
+msgid "Kapat"
+msgstr "Капат"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:343
+msgid "Galeri Öğesi Düzenle"
+msgstr "Редактировать элемент галереи"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:404
+msgid "YouTube veya Vimeo URL"
+msgstr "URL-адрес YouTube или Vimeo"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:453
+msgid "başlıklı öğeyi silmek istediğinizden emin misiniz?"
+msgstr "Вы уверены, что хотите удалить названный элемент?"
+
+#: .\dashboard\templates\dashboard\gallery\list.html:454
+msgid "Bu işlem geri alınamaz."
+msgstr "Это действие необратимо."
+
+#: .\dashboard\templates\dashboard\gallery\list.html:476
+msgid "Medya Görüntüleyici"
+msgstr "Средство просмотра мультимедиа"
+
+#: .\dashboard\templates\dashboard\index.html:6
+msgid "Dashboard Ana Sayfa"
+msgstr "Главная страница приборной панели"
+
+#: .\dashboard\templates\dashboard\index.html:15
+msgid "Dashboard Genel Bakış"
+msgstr "Обзор приборной панели"
+
+#: .\dashboard\templates\dashboard\index.html:16
+msgid "Sitenizin genel durumunu ve istatistiklerini görüntüleyin"
+msgstr "Просмотр общего состояния и статистики вашего сайта"
+
+#: .\dashboard\templates\dashboard\index.html:23
+#: .\dashboard\templates\dashboard\messages\list.html:22
+#: .\dashboard\templates\dashboard\notifications\list.html:23
+msgid "Yenile"
+msgstr "Обновить"
+
+#: .\dashboard\templates\dashboard\index.html:87
+msgid "Basın Haberleri"
+msgstr "Новости прессы"
+
+#: .\dashboard\templates\dashboard\index.html:103
+msgid "Aylık İstatistikler"
+msgstr "Ежемесячная статистика"
+
+#: .\dashboard\templates\dashboard\index.html:107
+#: .\dashboard\templates\dashboard\index.html:111
+msgid "Son 6 Ay"
+msgstr "Звук 6 Ай"
+
+#: .\dashboard\templates\dashboard\index.html:112
+msgid "Son 12 Ay"
+msgstr "Последние 12 месяцев"
+
+#: .\dashboard\templates\dashboard\index.html:130
+msgid "Kategori Dağılımı"
+msgstr "Разбивка по категориям"
+
+#: .\dashboard\templates\dashboard\index.html:142
+#: .\dashboard\templates\dashboard\messages\list.html:176
+#: .\dashboard\templates\dashboard\team\list.html:123
+#: .\dashboard\templates\dashboard\team\list.html:222
+msgid "Detayları Görüntüle"
+msgstr "Посмотреть детали"
+
+#: .\dashboard\templates\dashboard\index.html:168
+msgid "Kategori Analizi"
+msgstr "Аналитические категории"
+
+#: .\dashboard\templates\dashboard\index.html:169
+msgid "Tüm kategorilerin detaylı ürün dağılımı"
+msgstr "Подробное распределение продуктов по всем категориям"
+
+#: .\dashboard\templates\dashboard\index.html:211
+msgid "ürün"
+msgstr "Продукт"
+
+#: .\dashboard\templates\dashboard\index.html:220
+msgid "İlk kategorinizi oluşturmak için ürün ekleme sayfasına gidin."
+msgstr ""
+"Чтобы создать первую категорию, перейдите на страницу добавления товара."
+
+#: .\dashboard\templates\dashboard\index.html:222
+#: .\dashboard\templates\dashboard\index.html:308
+#: .\dashboard\templates\dashboard\products\add.html:8
+msgid "Ürün Ekle"
+msgstr "Добавить товар"
+
+#: .\dashboard\templates\dashboard\index.html:231
+#: .\dashboard\templates\dashboard\media_mentions\list.html:22
+#: .\dashboard\templates\dashboard\services\form.html:21
+msgid "Geri Dön"
+msgstr "Вернуться"
+
+#: .\dashboard\templates\dashboard\index.html:234
+msgid "Kategori Yönet"
+msgstr "Управление категорией"
+
+#: .\dashboard\templates\dashboard\index.html:251
+msgid "Son Aktiviteler"
+msgstr "Последние действия"
+
+#: .\dashboard\templates\dashboard\index.html:264
+#: .\dashboard\templates\dashboard\notifications\list.html:151
+#: .\dashboard\templates\dashboard\notifications\popup_content.html:32
+msgid "önce"
+msgstr "до"
+
+#: .\dashboard\templates\dashboard\index.html:276
+msgid "Henüz aktivite yok"
+msgstr "Пока нет активности"
+
+#: .\dashboard\templates\dashboard\index.html:277
+msgid "Şimdi"
+msgstr "Сейчас"
+
+#: .\dashboard\templates\dashboard\index.html:279
+msgid "Sistem kullanıldıkça aktiviteler burada görünecek"
+msgstr "Действия будут появляться здесь по мере использования системы"
+
+#: .\dashboard\templates\dashboard\index.html:287
+msgid "Tüm Aktiviteleri Gör"
+msgstr "Смотреть все мероприятия"
+
+#: .\dashboard\templates\dashboard\index.html:298
+msgid "Hızlı Erişim"
+msgstr "Быстрый доступ"
+
+#: .\dashboard\templates\dashboard\index.html:309
+msgid "Yeni ürün ekleyin"
+msgstr "Добавить новый продукт"
+
+#: .\dashboard\templates\dashboard\index.html:320
+msgid "Gelen mesajları görün"
+msgstr "Просмотр входящих сообщений"
+
+#: .\dashboard\templates\dashboard\index.html:331
+msgid "Fotoğraf yönetimi"
+msgstr "Управление фотографиями"
+
+#: .\dashboard\templates\dashboard\index.html:341
+#: .\dashboard\templates\dashboard\index.html:1022
+msgid "Yorumlar"
+msgstr "Комментарии"
+
+#: .\dashboard\templates\dashboard\index.html:342
+msgid "Müşteri geri bildirimleri"
+msgstr "Отзывы клиентов"
+
+#: .\dashboard\templates\dashboard\index.html:1114
+msgid "Kategori Yok"
+msgstr "Категория Yok"
+
+#: .\dashboard\templates\dashboard\index.html:1126
+msgid "Veri Yok"
+msgstr "Нет данных"
+
+#: .\dashboard\templates\dashboard\login.html:352
+msgid "Hoş Geldiniz"
+msgstr "Добро пожаловать"
+
+#: .\dashboard\templates\dashboard\login.html:353
+msgid "Yönetim panelinize giriş yapın"
+msgstr "Войдите в административную панель"
+
+#: .\dashboard\templates\dashboard\login.html:360
+msgid "Giriş Hatası"
+msgstr "Ошибка ввода"
+
+#: .\dashboard\templates\dashboard\login.html:361
+msgid "Kullanıcı adı veya parola hatalı. Lütfen tekrar deneyin."
+msgstr ""
+"Имя пользователя или пароль указаны неверно. Пожалуйста, попробуйте еще раз."
+
+#: .\dashboard\templates\dashboard\login.html:371
+msgid "Kullanıcı Adı"
+msgstr "Имя пользователя"
+
+#: .\dashboard\templates\dashboard\login.html:382
+msgid "Parola"
+msgstr "Слово"
+
+#: .\dashboard\templates\dashboard\login.html:396
+msgid "Giriş Yap"
+msgstr "Войти"
+
+#: .\dashboard\templates\dashboard\login.html:410
+msgid "Güvenli bağlantı ile korunan giriş"
+msgstr "Защищенный вход в систему с безопасным соединением"
+
+#: .\dashboard\templates\dashboard\login.html:589
+msgid "Parola sıfırlama özelliği yakında eklenecek."
+msgstr "Функция сброса пароля будет добавлена в ближайшее время."
+
+#: .\dashboard\templates\dashboard\login.html:589
+msgid "Lütfen sistem yöneticinizle iletişime geçin."
+msgstr "Обратитесь к своему системному администратору."
+
+#: .\dashboard\templates\dashboard\media_mentions\add.html:7
+#: .\dashboard\templates\dashboard\media_mentions\add.html:13
+#: .\dashboard\templates\dashboard\media_mentions\list.html:7
+#: .\dashboard\templates\dashboard\media_mentions\list.html:17
+msgid "Yeni Basın Haberi Ekle"
+msgstr "Добавить новую новость для прессы"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:8
+msgid "Basın Haberi Yönetimi"
+msgstr "Управление новостями прессы"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:18
+msgid "Basın haberlerinizi düzenleyin ve yönetin"
+msgstr "Организация и управление пресс-релизами"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:34
+msgid "Basın Haberi Bilgileri"
+msgstr "Информация для прессы"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:37
+msgid "Bilgileri doldurun"
+msgstr "Заполните информацию"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:86
+msgid "Haberin tam linkini girin (https:// ile başlamalı)"
+msgstr "Введите полную ссылку на новость (должна начинаться с https://)."
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:115
+msgid "Detaylar ve Ayarlar"
+msgstr "Детали и настройки"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:125
+msgid "Haberin kısa özeti (İsteğe bağlı)"
+msgstr "Краткое содержание новости (необязательно)"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:143
+msgid "Resim seçin veya sürükleyip bırakın"
+msgstr "Выберите изображение или перетащите его"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:144
+msgid "JPG, PNG, GIF - Maksimum 5MB"
+msgstr "JPG, PNG, GIF - не более 5 МБ"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:164
+msgid "Düşük sayı önce görünür"
+msgstr "Низкое число появляется первым"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:206
+msgid "Tüm alanları doldurduktan sonra kaydet butonuna tıklayın"
+msgstr "Заполнив все поля, нажмите кнопку сохранения"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:235
+#: .\dashboard\templates\dashboard\media_mentions\list.html:590
+msgid "Haber Başlığı"
+msgstr "Заголовок новости"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:236
+#: .\dashboard\templates\dashboard\media_mentions\list.html:591
+msgid "Kaynak"
+msgstr "Источник"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:239
+#: .\dashboard\templates\dashboard\media_mentions\list.html:593
+#: .\dashboard\templates\dashboard\messages\list.html:125
+#: .\dashboard\templates\dashboard\messages\list.html:250
+#: .\dashboard\templates\dashboard\messages\list.html:369
+#: .\dashboard\templates\dashboard\reviews\list.html:105
+#: .\dashboard\templates\dashboard\reviews\list.html:260
+msgid "Tarih"
+msgstr "История"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:628
+msgid "Başlık alanı zorunludur"
+msgstr "Поле заголовка является обязательным"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:633
+msgid "Kaynak alanı zorunludur"
+msgstr "Поле \"Источник\" является обязательным"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:638
+msgid "Geçerli bir URL girin"
+msgstr "Введите действительный URL-адрес"
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:644
+msgid "Lütfen aşağıdaki hataları düzeltin"
+msgstr "Пожалуйста, исправьте следующие ошибки"
+
+#: .\dashboard\templates\dashboard\messages\list.html:7
+#: .\dashboard\templates\dashboard\messages\list.html:16
+msgid "Mesaj Yönetimi"
+msgstr "Управление сообщениями"
+
+#: .\dashboard\templates\dashboard\messages\list.html:17
+msgid "İletişim mesajları ve müşteri yorumlarını yönetin"
+msgstr "Управление контактными сообщениями и комментариями клиентов"
+
+#: .\dashboard\templates\dashboard\messages\list.html:29
+msgid "Tümünü Okundu Yap"
+msgstr "Заставить всех читать"
+
+#: .\dashboard\templates\dashboard\messages\list.html:48
+#: .\dashboard\templates\dashboard\messages\list.html:106
+msgid "İletişim Mesajları"
+msgstr "Контактные сообщения"
+
+#: .\dashboard\templates\dashboard\messages\list.html:70
+msgid "Bekleyen Onaylar"
+msgstr "Ожидающие утверждения"
+
+#: .\dashboard\templates\dashboard\messages\list.html:81
+#: .\dashboard\templates\dashboard\reviews\list.html:73
+msgid "Ortalama Puan"
+msgstr "Средний балл"
+
+#: .\dashboard\templates\dashboard\messages\list.html:111
+msgid "Mesaj ara..."
+msgstr "Мессай ара..."
+
+#: .\dashboard\templates\dashboard\messages\list.html:168
+msgid "Okundu Olarak İşaretle"
+msgstr "Отметить как прочитанное"
+
+#: .\dashboard\templates\dashboard\messages\list.html:192
+msgid "Henüz mesaj bulunmuyor"
+msgstr "Пока нет сообщений"
+
+#: .\dashboard\templates\dashboard\messages\list.html:193
+msgid "İletişim formundan gelen mesajlar burada görünecektir."
+msgstr "Здесь будут появляться сообщения из контактной формы."
+
+#: .\dashboard\templates\dashboard\messages\list.html:218
+msgid "Mesaj Detayı"
+msgstr "Детализация сообщений"
+
+#: .\dashboard\templates\dashboard\messages\list.html:264
+msgid "Okundu İşaretle"
+msgstr "Марк Рид"
+
+#: .\dashboard\templates\dashboard\messages\list.html:269
+msgid "Yanıtla"
+msgstr "Ответить"
+
+#: .\dashboard\templates\dashboard\messages\list.html:291
+msgid "tarafından gönderilen mesajı silmek istediğinizden emin misiniz?"
+msgstr "Вы уверены, что хотите удалить сообщение, отправленное пользователем?"
+
+#: .\dashboard\templates\dashboard\messages\list.html:320
+#: .\dashboard\templates\dashboard\reviews\list.html:248
+msgid "Yorum Detayı"
+msgstr "Комментарий Подробнее"
+
+#: .\dashboard\templates\dashboard\messages\list.html:334
+msgid "Ürün"
+msgstr "Продукт"
+
+#: .\dashboard\templates\dashboard\messages\list.html:340
+msgid "Değerlendirme"
+msgstr "Оценка"
+
+#: .\dashboard\templates\dashboard\messages\list.html:381
+#: .\dashboard\templates\dashboard\reviews\list.html:301
+msgid "Onayla"
+msgstr "Подтвердите"
+
+#: .\dashboard\templates\dashboard\notifications\list.html:5
+#: .\dashboard\templates\dashboard\notifications\list.html:6
+#: .\dashboard\templates\dashboard\notifications\list.html:15
+#: .\dashboard\templates\dashboard\notifications\popup_content.html:6
+msgid "Bildirimler"
+msgstr "Уведомления"
+
+#: .\dashboard\templates\dashboard\notifications\list.html:16
+msgid "Sistem bildirimlerinizi görüntüleyin ve yönetin"
+msgstr "Просмотр и управление системными уведомлениями"
+
+#: .\dashboard\templates\dashboard\notifications\list.html:20
+#: .\dashboard\templates\dashboard\notifications\popup_content.html:10
+msgid "Tümünü Okundu İşaretle"
+msgstr "Отметить все Читать"
+
+#: .\dashboard\templates\dashboard\notifications\list.html:39
+msgid "Toplam Bildirim"
+msgstr "Всего уведомлений"
+
+#: .\dashboard\templates\dashboard\notifications\list.html:51
+#: .\dashboard\templates\dashboard\notifications\list.html:100
+msgid "Okunmamış"
+msgstr "Непрочитанное"
+
+#: .\dashboard\templates\dashboard\notifications\list.html:63
+#: .\dashboard\templates\dashboard\notifications\list.html:101
+msgid "Okunmuş"
+msgstr "Читать"
+
+#: .\dashboard\templates\dashboard\notifications\list.html:75
+msgid "Mesaj Bildirimleri"
+msgstr "Уведомления о сообщениях"
+
+#: .\dashboard\templates\dashboard\notifications\list.html:87
+msgid "Bildirim Türü"
+msgstr "Тип уведомления"
+
+#: .\dashboard\templates\dashboard\notifications\list.html:126
+msgid "Bildirim Listesi"
+msgstr "Список уведомлений"
+
+#: .\dashboard\templates\dashboard\notifications\list.html:157
+msgid "Okunmadı"
+msgstr "Не прочитано"
+
+#: .\dashboard\templates\dashboard\notifications\list.html:211
+msgid "Bildirim bulunmamaktadır"
+msgstr "Нет уведомления"
+
+#: .\dashboard\templates\dashboard\notifications\list.html:212
+msgid "Henüz hiç bildiriminiz yok."
+msgstr "У вас еще нет уведомлений."
+
+#: .\dashboard\templates\dashboard\notifications\popup_content.html:41
+msgid "Yeni bildirim bulunmamaktadır"
+msgstr "Нет новых уведомлений"
+
+#: .\dashboard\templates\dashboard\notifications\popup_content.html:49
+msgid "Tüm Bildirimleri Görüntüle"
+msgstr "Посмотреть все уведомления"
+
+#: .\dashboard\templates\dashboard\products\edit_modal.html:26
+#: .\dashboard\templates\dashboard\products\list.html:244
+msgid "Kategori seçin..."
+msgstr "Выберите категорию..."
+
+#: .\dashboard\templates\dashboard\products\edit_modal.html:46
+#: .\dashboard\templates\dashboard\products\edit_modal.html:50
+#: .\dashboard\templates\dashboard\products\edit_modal.html:55
+#: .\dashboard\templates\dashboard\products\edit_modal.html:59
+#: .\dashboard\templates\dashboard\products\list.html:261
+#: .\dashboard\templates\dashboard\products\list.html:263
+#: .\dashboard\templates\dashboard\products\list.html:268
+#: .\dashboard\templates\dashboard\products\list.html:270
+msgid "İsteğe bağlı"
+msgstr "Дополнительно"
+
+#: .\dashboard\templates\dashboard\products\edit_modal.html:67
+#: .\dashboard\templates\dashboard\products\list.html:277
+msgid "Ürün açıklaması..."
+msgstr "Описание товара..."
+
+#: .\dashboard\templates\dashboard\products\edit_modal.html:81
+msgid "Yeni bir görsel seçmezseniz mevcut görsel korunur."
+msgstr ""
+"Если вы не выберете новое изображение, существующее изображение будет "
+"сохранено."
+
+#: .\dashboard\templates\dashboard\products\edit_modal.html:88
+#: .\dashboard\templates\dashboard\products\edit_modal.html:96
+msgid "SEO için"
+msgstr "Для SEO"
+
+#: .\dashboard\templates\dashboard\products\edit_modal.html:91
+msgid "SEO başlığı"
+msgstr "SEO-заголовок"
+
+#: .\dashboard\templates\dashboard\products\edit_modal.html:99
+msgid "SEO açıklaması"
+msgstr "SEO-описание"
+
+#: .\dashboard\templates\dashboard\products\edit_modal.html:109
+msgid "Öne Çıkan Ürün"
+msgstr "Продукт"
+
+#: .\dashboard\templates\dashboard\products\list.html:16
+msgid "Ürünlerinizi kolayca yönetin ve takip edin"
+msgstr "Удобное управление и отслеживание продуктов"
+
+#: .\dashboard\templates\dashboard\products\list.html:36
+msgid "Aktif Ürünler"
+msgstr "Активные продукты"
+
+#: .\dashboard\templates\dashboard\products\list.html:41
+msgid "Düşük Stok"
+msgstr "Низкая инвентаризация"
+
+#: .\dashboard\templates\dashboard\products\list.html:46
+msgid "Toplam Değer"
+msgstr "Общая стоимость"
+
+#: .\dashboard\templates\dashboard\products\list.html:55
+msgid "Gelişmiş Filtreler"
+msgstr "Дополнительные фильтры"
+
+#: .\dashboard\templates\dashboard\products\list.html:58
+msgid "Sıfırla"
+msgstr "Сброс"
+
+#: .\dashboard\templates\dashboard\products\list.html:161
+msgid "Fiyat belirtilmemiş"
+msgstr "Цена не указана"
+
+#: .\dashboard\templates\dashboard\products\list.html:169
+#: .\templates\products\product_detail.html:48
+msgid "adet"
+msgstr "адет"
+
+#: .\dashboard\templates\dashboard\products\list.html:173
+msgid "Stok belirtilmemiş"
+msgstr "Запасы не указаны"
+
+#: .\dashboard\templates\dashboard\products\list.html:203
+msgid "Henüz ürün bulunmuyor"
+msgstr "Пока нет продуктов в наличии"
+
+#: .\dashboard\templates\dashboard\products\list.html:204
+msgid ""
+"İlk ürününüzü eklemek için yukarıdaki \"Yeni Ürün Ekle\" butonunu kullanın."
+msgstr ""
+"Чтобы добавить свой первый продукт, воспользуйтесь кнопкой \"Добавить новый "
+"продукт\" выше."
+
+#: .\dashboard\templates\dashboard\products\list.html:206
+msgid "İlk Ürünü Ekle"
+msgstr "Добавить первый продукт"
+
+#: .\dashboard\templates\dashboard\products\list.html:299
+msgid "Ürünü Ekle"
+msgstr "Добавить товар"
+
+#: .\dashboard\templates\dashboard\products\list.html:330
+msgid "ürününü kalıcı olarak silmek istediğinizden emin misiniz?"
+msgstr "Вы уверены, что хотите удалить продукт навсегда?"
+
+#: .\dashboard\templates\dashboard\products\list.html:458
+#: .\dashboard\templates\dashboard\products\list.html:494
+msgid "Bir hata oluştu!"
+msgstr "Произошла ошибка!"
+
+#: .\dashboard\templates\dashboard\products\list.html:488
+msgid "Form hatası! Lütfen alanları kontrol edin."
+msgstr "Ошибка формы! Пожалуйста, проверьте поля."
+
+#: .\dashboard\templates\dashboard\reviews\list.html:7
+#: .\dashboard\templates\dashboard\reviews\list.html:16
+msgid "Yorum Yönetimi"
+msgstr "Управление комментариями"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:17
+msgid "Müşteri yorumlarını yönetin ve onaylayın"
+msgstr "Управление и утверждение отзывов клиентов"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:21
+msgid "Tümünü Onayla"
+msgstr "Подтвердить все"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:24
+msgid "Bekleyenler"
+msgstr "Ожидание"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:40
+msgid "Toplam Yorum"
+msgstr "Всего комментариев"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:51
+msgid "Onaylı Yorumlar"
+msgstr "Одобренные отзывы"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:62
+#: .\dashboard\templates\dashboard\reviews\list.html:94
+msgid "Onay Bekleyen"
+msgstr "Ожидается утверждение"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:84
+msgid "Yorum Listesi"
+msgstr "Список комментариев"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:89
+msgid "Yorum ara..."
+msgstr "Йорум ара..."
+
+#: .\dashboard\templates\dashboard\reviews\list.html:92
+msgid "Tüm Durumlar"
+msgstr "Все случаи"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:106
+#: .\dashboard\templates\dashboard\reviews\list.html:256
+#: .\dashboard\templates\dashboard\team\list.html:165
+#: .\dashboard\templates\dashboard\team\list.html:267
+#: .\templates\contact\contact.html:23
+msgid "Ad Soyad"
+msgstr "Имя Фамилия"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:130
+msgid "Müşteri"
+msgstr "Клиент"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:171
+msgid "Bekliyor"
+msgstr "Ожидание"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:233
+msgid "Henüz yorum bulunmuyor"
+msgstr "Комментариев пока нет"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:234
+msgid "Müşterilerinizden gelen yorumlar burada görünecektir."
+msgstr "Здесь будут появляться комментарии ваших клиентов."
+
+#: .\dashboard\templates\dashboard\reviews\list.html:301
+msgid "Onayı Kaldır"
+msgstr "Удалить разрешение"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:324
+msgid "kullanıcısının yorumunu silmek istediğinizden emin misiniz?"
+msgstr "Вы уверены, что хотите удалить комментарий пользователя?"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:600
+msgid "Tüm bekleyen yorumları onaylamak istediğinize emin misiniz?"
+msgstr "Вы уверены, что хотите одобрить все оставшиеся комментарии?"
+
+#: .\dashboard\templates\dashboard\reviews\list.html:632
+msgid ""
+"kullanıcısının yorumunu kalıcı olarak silmek istediğinizden emin misiniz?"
+msgstr "Вы уверены, что хотите окончательно удалить комментарий пользователя?"
+
+#: .\dashboard\templates\dashboard\services\form.html:18
+msgid "Hizmet bilgilerini düzenleyin"
+msgstr "Редактирование служебной информации"
+
+#: .\dashboard\templates\dashboard\services\form.html:32
+msgid "Hizmet Bilgileri"
+msgstr "Информация о сервисе"
+
+#: .\dashboard\templates\dashboard\services\form.html:86
+msgid "Mevcut Resim"
+msgstr "Доступное изображение"
+
+#: .\dashboard\templates\dashboard\services\form.html:88
+msgid "Mevcut resim"
+msgstr "Доступное изображение"
+
+#: .\dashboard\templates\dashboard\services\form.html:92
+msgid "Yeni bir resim seçerseniz bu resim değiştirilecek."
+msgstr "Если вы выберете новое изображение, оно будет заменено."
+
+#: .\dashboard\templates\dashboard\services\form.html:115
+msgid "Küçük sayılar önce görünür"
+msgstr "Маленькие номера появляются первыми"
+
+#: .\dashboard\templates\dashboard\services\list.html:7
+#: .\dashboard\templates\dashboard\services\list.html:16
+msgid "Hizmet Yönetimi"
+msgstr "Управление услугами"
+
+#: .\dashboard\templates\dashboard\services\list.html:17
+msgid "Hizmetlerinizi düzenleyin ve yönetin"
+msgstr "Организуйте и управляйте своими услугами"
+
+#: .\dashboard\templates\dashboard\services\list.html:20
+msgid "Yeni Hizmet"
+msgstr "Новый сервис"
+
+#: .\dashboard\templates\dashboard\services\list.html:48
+msgid "Aktif Hizmetler"
+msgstr "Активные услуги"
+
+#: .\dashboard\templates\dashboard\services\list.html:70
+msgid "Pasif Hizmetler"
+msgstr "Пассивные услуги"
+
+#: .\dashboard\templates\dashboard\services\list.html:81
+msgid "Hizmet Listesi"
+msgstr "Список услуг"
+
+#: .\dashboard\templates\dashboard\services\list.html:86
+msgid "Hizmet ara..."
+msgstr "Поиск услуг..."
+
+#: .\dashboard\templates\dashboard\services\list.html:96
+#: .\dashboard\templates\dashboard\services\list.html:230
+msgid "ID"
+msgstr "ID"
+
+#: .\dashboard\templates\dashboard\services\list.html:169
+msgid "Henüz hizmet bulunmuyor"
+msgstr "Сервис пока не доступен"
+
+#: .\dashboard\templates\dashboard\services\list.html:170
+msgid ""
+"İlk hizmetinizi eklemek için yukarıdaki \"Yeni Hizmet\" butonunu kullanın."
+msgstr ""
+"Чтобы добавить свою первую услугу, воспользуйтесь кнопкой \"Новая услуга\" "
+"выше."
+
+#: .\dashboard\templates\dashboard\services\list.html:172
+msgid "İlk Hizmeti Ekle"
+msgstr "Добавить первую услугу"
+
+#: .\dashboard\templates\dashboard\services\list.html:191
+msgid "Hizmet Detayları"
+msgstr "Детали обслуживания"
+
+#: .\dashboard\templates\dashboard\services\list.html:263
+msgid "hizmetini silmek istediğinizden emin misiniz?"
+msgstr "Вы уверены, что хотите удалить его?"
+
+#: .\dashboard\templates\dashboard\services\list.html:447
+msgid "hizmetini kalıcı olarak silmek istediğinizden emin misiniz?"
+msgstr "постоянно?"
+
+#: .\dashboard\templates\dashboard\team\form.html:6
+msgid "- Dashboard"
+msgstr "- Приборная панель"
+
+#: .\dashboard\templates\dashboard\team\list.html:7
+#: .\dashboard\templates\dashboard\team\list.html:16
+msgid "Ekip Yönetimi"
+msgstr "Управление командой"
+
+#: .\dashboard\templates\dashboard\team\list.html:17
+msgid "Ekip üyelerinizi düzenleyin ve yönetin"
+msgstr "Организуйте и управляйте членами своей команды"
+
+#: .\dashboard\templates\dashboard\team\list.html:20
+msgid "Yeni Ekip Üyesi"
+msgstr "Новый член команды"
+
+#: .\dashboard\templates\dashboard\team\list.html:35
+msgid "Toplam Üye"
+msgstr "Всего членов"
+
+#: .\dashboard\templates\dashboard\team\list.html:46
+msgid "Aktif Üyeler"
+msgstr "Активные члены"
+
+#: .\dashboard\templates\dashboard\team\list.html:57
+msgid "Pozisyon Sayısı"
+msgstr "Количество должностей"
+
+#: .\dashboard\templates\dashboard\team\list.html:78
+msgid "Kart Görünümü"
+msgstr "Вид карты"
+
+#: .\dashboard\templates\dashboard\team\list.html:87
+msgid "Ekip üyesi ara..."
+msgstr "Поиск членов команды..."
+
+#: .\dashboard\templates\dashboard\team\list.html:138
+msgid "Henüz ekip üyesi bulunmuyor"
+msgstr "Пока нет членов команды"
+
+#: .\dashboard\templates\dashboard\team\list.html:139
+msgid ""
+"İlk ekip üyenizi eklemek için yukarıdaki \"Yeni Ekip Üyesi\" butonunu "
+"kullanın."
+msgstr ""
+"Чтобы добавить первого участника команды, нажмите кнопку «Новый участник "
+"команды» выше."
+
+#: .\dashboard\templates\dashboard\team\list.html:141
+msgid "İlk Üyeyi Ekle"
+msgstr "Добавить первого участника"
+
+#: .\dashboard\templates\dashboard\team\list.html:154
+msgid "Ekip Üyeleri Listesi"
+msgstr "Список членов команды"
+
+#: .\dashboard\templates\dashboard\team\list.html:164
+msgid "Fotoğraf"
+msgstr "Фото."
+
+#: .\dashboard\templates\dashboard\team\list.html:166
+#: .\dashboard\templates\dashboard\team\list.html:271
+msgid "Pozisyon"
+msgstr "Позиция"
+
+#: .\dashboard\templates\dashboard\team\list.html:248
+msgid "Ekip Üyesi Detayı"
+msgstr "Подробная информация о члене команды"
+
+#: .\dashboard\templates\dashboard\team\list.html:340
+msgid "isimli ekip üyesini silmek istediğinizden emin misiniz?"
+msgstr "Вы уверены, что хотите удалить названного члена команды?"
+
+#: .\templates\about\about.html:65
+msgid "Neden Biz?"
+msgstr "Неден Биз?"
+
+#: .\templates\about\about.html:69 .\templates\about\about.html:106
+msgid "Yıllık Deneyim"
+msgstr "Годы опыта"
+
+#: .\templates\about\about.html:73 .\templates\contact\contact.html:98
+#: .\templates\home\index.html:610
+msgid "7/24 Hizmet"
+msgstr "Обслуживание 7/24"
+
+#: .\templates\about\about.html:77
+msgid "Profesyonel Ekipman"
+msgstr "Профессиональное оборудование"
+
+#: .\templates\about\about.html:81
+msgctxt "Hizmet niteliği"
+msgid "Güvenilir"
+msgstr "Надежный"
+
+#: .\templates\about\about.html:91
+msgid "Rakamlarla Biz"
+msgstr "Мы в цифрах"
+
+#: .\templates\about\about.html:101 .\templates\home\index.html:908
+msgid "Tamamlanan İş"
+msgstr "Законченная работа"
+
+#: .\templates\about\about.html:143
+msgid "Henüz hizmet eklenmemiş."
+msgstr "Пока не добавлено ни одной услуги."
+
+#: .\templates\about\about.html:154 .\templates\home\index.html:778
+msgid "Basında Biz"
+msgstr "Мы в прессе"
+
+#: .\templates\about\about.html:166 .\templates\home\index.html:802
+msgid "Haberi Oku"
+msgstr "Читать новости"
+
+#: .\templates\about\about.html:202
+msgid "Henüz ekip üyesi eklenmemiş."
+msgstr "Члены команды еще не добавлены."
+
+#: .\templates\admin\base_site.html:6
+msgid "Django site admin"
+msgstr "Администратор сайта Django"
+
+#: .\templates\base.html:199
+msgid "Ana içeriğe geç"
+msgstr "Перейти к основному содержанию"
+
+#: .\templates\base.html:214
+msgid "Navigasyon menüsünü aç/kapat"
+msgstr "Открыть/закрыть меню навигации"
+
+#: .\templates\base.html:263 .\templates\base.html:420
+#: .\templates\base.html:441
+msgid "İletişim"
+msgstr "Связаться с"
+
+#: .\templates\base.html:271
+msgid "Dil Seçimi"
+msgstr "Выбор языка"
+
+#: .\templates\base.html:391
+msgid "Haberlerden Haberdar Olun"
+msgstr "Будьте в курсе новостей"
+
+#: .\templates\base.html:392
+msgid "Yeni hizmetlerimiz ve özel tekliflerimizden ilk siz haberdar olun."
+msgstr ""
+"Будьте первыми, кто узнает о наших новых услугах и специальных предложениях."
+
+#: .\templates\base.html:395 .\templates\base.html:396
+msgid "E-posta adresiniz"
+msgstr "Ваш адрес электронной почты"
+
+#: .\templates\base.html:397
+msgid "Newsletter\\"
+msgstr "Бюллетень\\\\\\\\"
+
+#: .\templates\base.html:398 .\templates\base.html:585
+msgid "Abone Ol"
+msgstr "Абон Ол"
+
+#: .\templates\base.html:409
+msgid "Yukarı Çık"
+msgstr "Поднимайтесь"
+
+#: .\templates\base.html:409
+msgid "Sayfanın başına dön"
+msgstr "Вернуться к началу страницы"
+
+#: .\templates\base.html:431
+msgid "Hızlı Linkler"
+msgstr "Быстрые ссылки"
+
+#: .\templates\base.html:447
+msgid "Sosyal Medya"
+msgstr "Социальные сети"
+
+#: .\templates\base.html:450
+msgid "Facebook sayfamız"
+msgstr "Наша страница в Facebook"
+
+#: .\templates\base.html:455
+msgid "Instagram sayfamız"
+msgstr "Наша страница в Instagram"
+
+#: .\templates\base.html:460
+msgid "Twitter sayfamız"
+msgstr "Наша страница в Twitter"
+
+#: .\templates\base.html:465
+msgid "YouTube kanalımız"
+msgstr "Наш канал на YouTube"
+
+#: .\templates\base.html:475
+msgid "Tüm hakları saklıdır."
+msgstr "Все права защищены."
+
+#: .\templates\base.html:583
+msgid "Gönderiliyor..."
+msgstr "Посылаю..."
+
+#: .\templates\base.html:584
+msgid "Başarılı!"
+msgstr "Успех!"
+
+#: .\templates\base.html:597
+msgid "Bu web sitesi, deneyiminizi geliştirmek için çerezler kullanır."
+msgstr "Этот сайт использует файлы cookie, чтобы улучшить ваши впечатления."
+
+#: .\templates\base.html:598
+msgid "Gizlilik Politikası"
+msgstr "Политика конфиденциальности"
+
+#: .\templates\base.html:602
+msgid "Kabul Et"
+msgstr "Принять"
+
+#: .\templates\base.html:603
+msgid "Reddet"
+msgstr "Сохранено"
+
+#: .\templates\contact\contact.html:6
+msgid "İletişim ve Değerlendirme"
+msgstr "Коммуникация и оценка"
+
+#: .\templates\contact\contact.html:17
+msgid "Bize Ulaşın"
+msgstr "Свяжитесь с нами"
+
+#: .\templates\contact\contact.html:60
+msgid "Mesajınız"
+msgstr "Ваше сообщение"
+
+#: .\templates\contact\contact.html:68
+msgid "Gönder"
+msgstr "Отправить"
+
+#: .\templates\contact\contact.html:78
+msgid "İletişim Bilgileri"
+msgstr "Контактная информация"
+
+#: .\templates\contact\contact.html:83
+msgid "Adres bilgisi buraya gelecek"
+msgstr "Информация об адресе будет здесь"
+
+#: .\templates\contact\contact.html:97
+msgid "Çalışma Saatleri"
+msgstr "Рабочие часы"
+
+#: .\templates\contact\contact.html:107
+msgid "Konum"
+msgstr "Расположение"
+
+#: .\templates\contact\contact.html:126
+msgid "Değerlendirme Yap"
+msgstr "Оцените"
+
+#: .\templates\contact\contact.html:132
+msgid "Adınız Soyadınız"
+msgstr "Ваше имя и фамилия"
+
+#: .\templates\contact\contact.html:142
+msgid "Puanınız"
+msgstr "Ваша оценка"
+
+#: .\templates\contact\contact.html:167
+msgid "Yorumunuz"
+msgstr "Комментарий"
+
+#: .\templates\contact\contact.html:177
+msgid "İsteğe Bağlı Resim"
+msgstr "Дополнительный рисунок"
+
+#: .\templates\contact\contact.html:187
+msgid "Değerlendirme Gönder"
+msgstr "Отправить оценку"
+
+#: .\templates\errors\ratelimit.html:4 .\templates\errors\ratelimit.html:8
+msgid "Çok Fazla İstek"
+msgstr "Слишком много запросов"
+
+#: .\templates\errors\ratelimit.html:10
+msgid "Ana Sayfaya Dön"
+msgstr "Вернуться на главную страницу"
+
+#: .\templates\gallery\gallery_list.html:559
+msgid ""
+"Profesyonel çalışmalarımızdan örnekler, projelerimiz ve hizmet videolarımız"
+msgstr "Примеры наших профессиональных работ, проекты и видеоролики об услугах"
+
+#: .\templates\gallery\gallery_list.html:574
+msgid "Resimler"
+msgstr "Изображения"
+
+#: .\templates\gallery\gallery_list.html:577
+msgid "Videolar"
+msgstr "Видеоряд"
+
+#: .\templates\gallery\gallery_list.html:592
+#: .\templates\gallery\gallery_list.html:597 .\templates\home\index.html:939
+msgid "Galeri Görseli"
+msgstr "Галерея изображений"
+
+#: .\templates\gallery\gallery_list.html:659
+msgid "Henüz Galeri Öğesi Yok"
+msgstr "Пока нет элементов галереи"
+
+#: .\templates\gallery\gallery_list.html:660
+msgid ""
+"Galeri bölümümüze yakında içerik eklenecektir. Lütfen daha sonra tekrar "
+"ziyaret edin."
+msgstr ""
+"В раздел нашей галереи скоро будет добавлен контент. Пожалуйста, посетите "
+"нас позже."
+
+#: .\templates\gallery\gallery_list.html:699
+msgid "Tarayıcınız video elementini desteklemiyor."
+msgstr "Ваш браузер не поддерживает элемент видео."
+
+#: .\templates\gallery\gallery_list.html:700
+msgid "Resim yüklenemedi:"
+msgstr "Изображение не удалось загрузить:"
+
+#: .\templates\gallery\gallery_list.html:701
+msgid "Başlıksız"
+msgstr "Без названия"
+
+#: .\templates\gallery\gallery_list.html:702
+msgid "Açıklama yok"
+msgstr "Без объяснений"
+
+#: .\templates\gallery\gallery_list.html:704
+msgid "Hata"
+msgstr "Ошибка"
+
+#: .\templates\home\index.html:602
+msgid "Profesyonel Ekip"
+msgstr "Профессиональная команда"
+
+#: .\templates\home\index.html:606
+msgid "+ Yıllık Tecrübe"
+msgstr "+ годы опыта"
+
+#: .\templates\home\index.html:613 .\templates\home\index.html:745
+msgid "Detaylı Bilgi"
+msgstr "Подробная информация"
+
+#: .\templates\home\index.html:641
+msgid "Son Yüklenenler"
+msgstr "Последняя загрузка"
+
+#: .\templates\home\index.html:646 .\templates\home\index.html:941
+msgid "Önceki görseller"
+msgstr "Предыдущие изображения"
+
+#: .\templates\home\index.html:650 .\templates\home\index.html:942
+msgid "Sonraki görseller"
+msgstr "Следующие изображения"
+
+#: .\templates\home\index.html:693
+msgid "Tüm Galeriyi Görüntüle"
+msgstr "Смотреть всю галерею"
+
+#: .\templates\home\index.html:702
+msgid "Öne Çıkan Ürünler"
+msgstr "Популярные товары"
+
+#: .\templates\home\index.html:714
+msgid "Ürün grubu"
+msgstr "Группа продуктов"
+
+#: .\templates\home\index.html:839 .\templates\home\index.html:845
+#: .\templates\home\index.html:945
+msgid "Müşteri fotoğrafı"
+msgstr "Фотография клиента"
+
+#: .\templates\home\index.html:882
+msgid " Değerlendirme Yap"
+msgstr " Оцените"
+
+#: .\templates\home\index.html:896
+msgid "Yıllık Tecrübe"
+msgstr "Годы опыта"
+
+#: .\templates\home\index.html:914
+msgid "Müşteri Memnuniyeti"
+msgstr "Удовлетворенность клиентов"
+
+#: .\templates\home\index.html:924
+msgid "Modal\\"
+msgstr "Modal\\\\\\\\"
+
+#: .\templates\home\index.html:940
+msgid "Görsel yüklenemedi"
+msgstr "Изображение не удалось загрузить"
+
+#: .\templates\home\index.html:943
+msgid "Görseli büyüt"
+msgstr "Увеличить изображение"
+
+#: .\templates\home\index.html:944
+msgid "Modal\\'ı kapat"
+msgstr "Закрыть модальное окно"
+
+#: .\templates\products\product_detail.html:48
+msgid "Stokta Var"
+msgstr "Стокта Вар"
+
+#: .\templates\products\product_detail.html:52
+#: .\templates\products\product_list.html:54
+msgid "Stokta Yok"
+msgstr "Нет в наличии"
+
+#: .\templates\products\product_detail.html:58
+msgid "Sipariş ve Bilgi İçin"
+msgstr "Для заказа и получения информации"
+
+#: .\templates\products\product_list.html:11
+msgid "Ürünlerimiz"
+msgstr "Наши продукты"
+
+#: .\templates\products\product_list.html:52
+msgid "Stokta"
+msgstr "В наличии"
+
+#: .\templates\products\product_list.html:61
+msgid "Detayları Gör"
+msgstr "Посмотреть детали"
+
+#: .\templates\products\product_list.html:67
+msgid "Bu kategoride henüz ürün bulunmamaktadır."
+msgstr "В этой категории пока нет товаров."

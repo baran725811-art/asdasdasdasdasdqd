@@ -1,0 +1,93 @@
+<!--core\templates\home\index.html-->
+{% extends 'base/main.html' %}
+{% load static %}
+{% load custom_filters %}
+{% load i18n %}
+
+{% block title %}{{ about.meta_title|default:site_name }} - {% trans "Ana Sayfa" %}{% endblock %}
+
+{% block meta_description %}
+{% if about.meta_description %}
+    {{ about.meta_description }}
+{% else %}
+    {{ seo_description }}
+{% endif %}
+{% endblock %}
+
+{% block meta_keywords %}
+{% if about.meta_keywords %}
+    {{ about.meta_keywords }}
+{% else %}
+    {{ seo_keywords }}
+{% endif %}
+{% endblock %}
+
+{% block og_title %}{{ site_name }} - {% trans "Ana Sayfa" %}{% endblock %}
+
+{% block og_description %}
+{% if about.meta_description %}
+    {{ about.meta_description }}
+{% else %}
+    {{ seo_description }}
+{% endif %}
+{% endblock %}
+
+{% block og_image %}
+{% if carousel_slides %}
+    {{ request.build_absolute_uri }}{{ carousel_slides.0.image.url }}
+{% else %}
+    {{ block.super }}
+{% endif %}
+{% endblock %}
+
+{% block extra_css %}
+
+<link href="{% static 'css/home/carousel.css' %}" rel="stylesheet">
+<link href="{% static 'css/home/services-grid.css' %}" rel="stylesheet">
+<link href="{% static 'css/home/products-preview.css' %}" rel="stylesheet">
+<link href="{% static 'css/home/gallery-preview.css' %}" rel="stylesheet">
+<link href="{% static 'css/home/main.css' %}" rel="stylesheet">
+<!-- Bootstrap for carousel functionality -->
+{% endblock %}
+
+{% block content %}
+    <!-- Hero Carousel Section -->
+    {% include 'home/sections/carousel.html' %}
+    
+    <!-- About Preview Section -->
+    {% include 'home/sections/about_preview.html' %}
+    
+    <!-- Services Grid Section -->
+    {% include 'home/sections/services_grid.html' %}
+    
+    <!-- Statistics Section -->
+    {% include 'home/sections/statistics.html' %}
+    
+    <!-- Featured Products Section -->
+    {% include 'home/sections/products_preview.html' %}
+    
+    <!-- Gallery Preview Section -->
+    {% include 'home/sections/gallery_preview.html' %}
+    
+    <!-- Reviews Section -->
+    {% include 'home/sections/reviews.html' %}
+    
+    <!-- Media Mentions Section -->
+    {% include 'home/sections/media_mentions.html' %}
+    
+    <!-- CTA Section -->
+    {% include 'home/sections/cta_section.html' %}
+
+    
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/home/carousel.js' %}" defer></script>
+<script src="{% static 'js/home/about-preview.js' %}" defer></script>
+<script src="{% static 'js/home/services-grid.js' %}" defer></script>
+<script src="{% static 'js/home/products-preview.js' %}" defer></script>
+<script src="{% static 'js/home/statistics.js' %}" defer></script>
+<script src="{% static 'js/home/gallery-preview.js' %}" defer></script>
+<script src="{% static 'js/home/reviews.js' %}" defer></script>
+<script src="{% static 'js/home/main.js' %}" defer></script>
+{% endblock %}

@@ -1,0 +1,21 @@
+<!--core\templates\contact\contact.html-->
+{% extends 'base/main.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{{ _("İletişim ve Değerlendirme") }} - Baran Anahtarcı{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css\contact\main.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include 'contact/sections/hero.html' %}
+{% include 'contact/sections/contact_form.html' %}
+{% include 'contact/sections/contact_info.html' %}
+{% include 'contact/sections/review_form.html' %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/contact/main.js' %}"></script>
+{% endblock %}  

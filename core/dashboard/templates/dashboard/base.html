@@ -1,0 +1,67 @@
+<!--core\dashboard\templates\dashboard\base.html-->
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <!-- Meta Tags -->
+    {% include 'dashboard/includes/meta/base_meta.html' %}
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <!-- Title -->
+    <title>{{ site_settings.site_name|default:"Dashboard" }} - {% block title %}{% endblock %}</title>
+    
+    <!-- External CSS Libraries -->
+    {% include 'dashboard/includes/styles/external_css.html' %}
+
+    <!-- Dashboard Core CSS -->
+    {% include 'dashboard/includes/styles/dashboard_css.html' %}
+    
+    <!-- Page Specific CSS -->
+    {% block page_css %}{% endblock %}
+    
+    <!-- Extra CSS -->
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body data-theme="{% block theme %}default{% endblock %}">
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
+    <!-- Sidebar -->
+    {% include 'dashboard/includes/navigation/sidebar.html' %}
+    
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+        <!-- Top Navbar -->
+        {% include 'dashboard/includes/navigation/top_navbar.html' %}
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Alert Messages -->
+            {% include 'dashboard/includes/ui/messages_display.html' %}
+
+            <!-- Page Content -->
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <!-- Modals Section -->
+    {% block list_modals %}
+    <!-- Page specific modals will be rendered here -->
+    {% endblock %}
+
+    <!-- External JavaScript Libraries -->
+    {% include 'dashboard/includes/scripts/external_js.html' %}
+
+    <!-- Dashboard Core JavaScript -->
+    {% include 'dashboard/includes/scripts/dashboard_js.html' %}
+    
+    <!-- Page Specific JavaScript -->
+    {% block page_js %}{% endblock %}
+    
+    <!-- Extra JavaScript -->
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

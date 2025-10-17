@@ -1,0 +1,50 @@
+{% load static %}
+{% load i18n %}
+
+<section class="suggested-products">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">{% trans "Önerilen Ürünler" %}</h2>
+            <p class="section-subtitle">{% trans "Size özel seçtiğimiz diğer ürünler" %}</p>
+        </div>
+        
+        <div class="suggested-grid">
+            {% for suggested_product in suggested_products %}
+            <div class="suggested-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
+                {% if suggested_product.is_featured %}
+                <div class="featured-badge">
+                    <i class="fas fa-star"></i>
+                </div>
+                {% endif %}
+                <div class="suggested-image">
+                    {% if suggested_product.image %}
+                    <img src="{{ suggested_product.image.url }}" alt="{{ suggested_product.alt_text|default:suggested_product.name }}" loading="lazy">
+                    {% else %}
+                    <div class="image-placeholder">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="suggested-content">
+                    <div class="category-tag">{{ suggested_product.category.name }}</div>
+                    <h4 class="suggested-title">{{ suggested_product.name }}</h4>
+                    {% if suggested_product.price %}
+                    <div class="suggested-price">
+                        {% if suggested_product.has_discount %}
+                        <span class="original-price">{{ suggested_product.price }} ₺</span>
+                        <span class="current-price">{{ suggested_product.discount_price }} ₺</span>
+                        {% else %}
+                        <span class="current-price">{{ suggested_product.price }} ₺</span>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    <a href="{{ suggested_product.get_absolute_url }}" class="suggested-btn">
+                        {% trans "İncele" %}
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

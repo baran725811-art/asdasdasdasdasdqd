@@ -1,0 +1,195 @@
+<!-- core\dashboard\templates\dashboard\includes\forms\date_field.html - Tarih field -->
+{% load i18n %}
+
+<div class="mb-3">
+    <label class="form-label-modern">
+        <i class="fas {{ icon|default:'fa-calendar' }}"></i>{{ label }}
+        {% if required %}<span class="text-danger">*</span>{% endif %}
+    </label>
+    
+    {% if field_type == "datetime" %}
+        <!-- Date and Time -->
+        <div class="datetime-input-group">
+            <div class="row g-2">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fas fa-calendar-day"></i>
+                        </span>
+                        <input type="date" 
+                               name="{{ field_name }}_date" 
+                               class="form-control form-control-modern"
+                               value="{{ date_value }}"
+                               {% if min_date %}min="{{ min_date }}"{% endif %}
+                               {% if max_date %}max="{{ max_date }}"{% endif %}
+                               {% if required %}required{% endif %}>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fas fa-clock"></i>
+                        </span>
+                        <input type="time" 
+                               name="{{ field_name }}_time" 
+                               class="form-control form-control-modern"
+                               value="{{ time_value }}"
+                               {% if step %}step="{{ step }}"{% endif %}>
+                    </div>
+                </div>
+            </div>
+            <!-- Hidden combined field -->
+            <input type="hidden" 
+                   name="{{ field_name }}" 
+                   value="{{ value }}"
+                   id="{{ field_id|default:field_name }}">
+        </div>
+        
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateInput = document.querySelector('input[name="{{ field_name }}_date"]');
+            const timeInput = document.querySelector('input[name="{{ field_name }}_time"]');
+            const hiddenInput = document.querySelector('input[name="{{ field_name }}"]');
+            
+            function updateCombinedValue() {
+                const dateValue = dateInput.value;
+                const timeValue = timeInput.value || '00:00';
+                
+                if (dateValue) {
+                    hiddenInput.value = dateValue + ' ' + timeValue;
+                } else {
+                    hiddenInput.value = '';
+                }
+            }
+            
+            dateInput.addEventListener('change', updateCombinedValue);
+            timeInput.addEventListener('change', updateCombinedValue);
+        });
+        </script>
+
+    {% elif field_type == "daterange" %}
+        <!-- Date Range -->
+        <div class="daterange-input-group">
+            <div class="row g-2">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fas fa-calendar-check"></i>
+                        </span>
+                        <input type="date" 
+                               name="{{ field_name }}_start" 
+                               class="form-control form-control-modern"
+                               placeholder="{% trans 'Başlangıç tarihi' %}"
+                               value="{{ start_date }}"
+                               {% if min_date %}min="{{ min_date }}"{% endif %}
+                               {% if max_date %}max="{{ max_date }}"{% endif %}
+                               {% if required %}required{% endif %}>
+                    </div>
+                    <small class="text-muted">{% trans "Başlangıç" %}</small>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fas fa-calendar-times"></i>
+                        </span>
+                        <input type="date" 
+                               name="{{ field_name }}_end" 
+                               class="form-control form-control-modern"
+                               placeholder="{% trans 'Bitiş tarihi' %}"
+                               value="{{ end_date }}"
+                               {% if min_date %}min="{{ min_date }}"{% endif %}
+                               {% if max_date %}max="{{ max_date }}"{% endif %}>
+                    </div>
+                    <small class="text-muted">{% trans "Bitiş" %}</small>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const startInput = document.querySelector('input[name="{{ field_name }}_start"]');
+            const endInput = document.querySelector('input[name="{{ field_name }}_end"]');
+            
+            startInput.addEventListener('change', function() {
+                endInput.min = this.value;
+                if (endInput.value && endInput.value < this.value) {
+                    endInput.value = this.value;
+                }
+            });
+            
+            endInput.addEventListener('change', function() {
+                if (this.value && startInput.value && this.value < startInput.value) {
+                    this.value = startInput.value;
+                }
+            });
+        });
+        </script>
+
+    {% else %}
+        <!-- Simple Date -->
+        <div class="input-group">
+            <span class="input-group-text">
+                <i class="fas fa-calendar-alt"></i>
+            </span>
+            <input type="date" 
+                   name="{{ field_name }}" 
+                   class="form-control form-control-modern"
+                   value="{{ value }}"
+                   {% if min_date %}min="{{ min_date }}"{% endif %}
+                   {% if max_date %}max="{{ max_date }}"{% endif %}
+                   {% if required %}required{% endif %}
+                   {% if attrs %}{% for attr, val in attrs.items %}{{ attr }}="{{ val }}" {% endfor %}{% endif %}>
+        </div>
+    {% endif %}
+    
+    {% if quick_select %}
+        <div class="quick-date-buttons mt-2">
+            <small class="text-muted d-block mb-1">{% trans "Hızlı seçim:" %}</small>
+            <div class="btn-group-sm" role="group">
+                <button type="button" class="btn btn-outline-secondary btn-sm quick-date" data-days="0">
+                    {% trans "Bugün" %}
+                </button>
+                <button type="button" class="btn btn-outline-secondary btn-sm quick-date" data-days="1">
+                    {% trans "Yarın" %}
+                </button>
+                <button type="button" class="btn btn-outline-secondary btn-sm quick-date" data-days="7">
+                    {% trans "+1 Hafta" %}
+                </button>
+                <button type="button" class="btn btn-outline-secondary btn-sm quick-date" data-days="30">
+                    {% trans "+1 Ay" %}
+                </button>
+            </div>
+        </div>
+        
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.quick-date').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const days = parseInt(this.dataset.days);
+                    const date = new Date();
+                    date.setDate(date.getDate() + days);
+                    
+                    const formattedDate = date.toISOString().split('T')[0];
+                    const dateInput = this.closest('.mb-3').querySelector('input[type="date"]');
+                    if (dateInput) {
+                        dateInput.value = formattedDate;
+                        dateInput.dispatchEvent(new Event('change'));
+                    }
+                });
+            });
+        });
+        </script>
+    {% endif %}
+    
+    {% if help_text %}
+        <small class="text-muted">{{ help_text }}</small>
+    {% endif %}
+    
+    {% if errors %}
+        <div class="form-error">
+            {% for error in errors %}
+                <i class="fas fa-exclamation-circle me-1"></i>{{ error }}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>

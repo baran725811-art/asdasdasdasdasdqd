@@ -1,0 +1,35 @@
+<!--core\templates\about\about.html-->
+{% extends 'base/main.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{{ meta_title }}{% endblock %}
+{% block meta_description %}{{ meta_description }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/about/main.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+{% include 'about/sections/hero.html' %}
+
+<!-- About Content -->
+{% include 'about/sections/content.html' %}
+
+<!-- Statistics -->
+{% include 'about/sections/statistics.html' %}
+
+<!-- Services Preview -->
+{% include 'about/sections/services_preview.html' %}
+
+<!-- Team Preview -->
+{% include 'about/sections/team_preview.html' %}
+
+<!-- Media Mentions -->
+{% include 'about/sections/media_mentions.html' %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/about/main.js' %}"></script>
+{% endblock %}

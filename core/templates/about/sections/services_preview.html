@@ -1,0 +1,48 @@
+{% load static %}
+{% load i18n %}
+
+<section class="about-services">
+    <div class="container">
+        <div class="section-header" data-aos="fade-up">
+            <h2 class="section-title">{% trans "Hizmetlerimiz" %}</h2>
+            <p class="section-subtitle">{% trans "Profesyonel çözümlerimizle size hizmet veriyoruz" %}</p>
+        </div>
+        
+        <div class="services-grid">
+            {% for service in services %}
+            {% if service.is_active %}
+            <div class="service-card" data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:100 }}">
+                <div class="service-image">
+                    {% if service.image %}
+                    <img src="{{ service.image.url }}" alt="{{ service.alt_text|default:service.title }}" loading="lazy">
+                    {% else %}
+                    <div class="service-placeholder">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="service-content">
+                    <h3 class="service-title">{{ service.title }}</h3>
+                    <p class="service-description">{{ service.description|truncatewords:20 }}</p>
+                    <a href="{{ service.get_absolute_url }}" class="service-link">
+                        {% trans "Detayları Gör" %}
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+            {% empty %}
+            <div class="empty-state">
+                <p>{% trans "Henüz hizmet eklenmemiş." %}</p>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="services-cta" data-aos="fade-up">
+            <a href="{% url 'about:services' %}" class="btn btn-primary">
+                {% trans "Tüm Hizmetlerimizi Görün" %}
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>

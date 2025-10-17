@@ -1,0 +1,145 @@
+<!--core\templates\admin\dashboard.html-->
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block title %}Dashboard - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <!-- İstatistikler -->
+    <div class="dashboard-card">
+        <h2><i class="fas fa-chart-bar"></i> Genel İstatistikler</h2>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">{{ stats.total_products|default:"0" }}</div>
+                <div class="stat-label">Toplam Ürün</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">{{ stats.unread_messages|default:"0" }}</div>
+                <div class="stat-label">Okunmamış Mesaj</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">{{ stats.total_orders|default:"0" }}</div>
+                <div class="stat-label">Toplam Sipariş</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">{{ stats.active_users|default:"0" }}</div>
+                <div class="stat-label">Aktif Kullanıcı</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Son Eklenen Ürünler -->
+    <div class="dashboard-card">
+        <h2><i class="fas fa-box"></i> Son Eklenen Ürünler</h2>
+        {% if latest_products %}
+            <ul class="item-list">
+                {% for product in latest_products %}
+                <li>
+                    <span class="item-name" title="{{ product.name }}">{{ product.name|truncatechars:30 }}</span>
+                    <span class="item-date">{{ product.created_at|date:"d.m.Y" }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="empty-state">
+                <i class="fas fa-box-open"></i>
+                <p>Henüz ürün eklenmemiş</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Okunmamış Mesajlar -->
+    <div class="dashboard-card">
+        <h2><i class="fas fa-envelope"></i> Okunmamış Mesajlar</h2>
+        {% if latest_contacts %}
+            <ul class="item-list">
+                {% for contact in latest_contacts %}
+                <li>
+                    <span class="item-name" title="{{ contact.subject }}">{{ contact.subject|truncatechars:25 }}</span>
+                    <span class="item-date">{{ contact.created_at|date:"d.m.Y" }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="empty-state">
+                <i class="fas fa-inbox"></i>
+                <p>Yeni mesaj bulunmuyor</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Kategori İstatistikleri -->
+    <div class="dashboard-card">
+        <h2><i class="fas fa-tags"></i> Kategori İstatistikleri</h2>
+        {% if categories_with_counts %}
+            <ul class="item-list">
+                {% for category in categories_with_counts %}
+                <li>
+                    <span class="item-name" title="{{ category.name }}">{{ category.name|truncatechars:20 }}</span>
+                    <span class="count-badge">{{ category.product_count }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="empty-state">
+                <i class="fas fa-folder-open"></i>
+                <p>Kategori bulunmuyor</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Son Siparişler -->
+    <div class="dashboard-card">
+        <h2><i class="fas fa-shopping-cart"></i> Son Siparişler</h2>
+        {% if latest_orders %}
+            <ul class="item-list">
+                {% for order in latest_orders %}
+                <li>
+                    <span class="item-name" title="Sipariş #{{ order.id }}">
+                        Sipariş #{{ order.id }} - {{ order.customer_name|truncatechars:15 }}
+                    </span>
+                    <span class="item-date">{{ order.created_at|date:"d.m.Y" }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="empty-state">
+                <i class="fas fa-shopping-bag"></i>
+                <p>Henüz sipariş bulunmuyor</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Sistem Durumu -->
+    <div class="dashboard-card">
+        <h2><i class="fas fa-server"></i> Sistem Durumu</h2>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">{{ system_stats.disk_usage|default:"--" }}%</div>
+                <div class="stat-label">Disk Kullanımı</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">{{ system_stats.memory_usage|default:"--" }}%</div>
+                <div class="stat-label">Bellek Kullanımı</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Hızlı Eylemler -->
+<div class="stats-container">
+    <div class="stat-card">
+        <i class="fas fa-plus-circle" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;"></i>
+        <div class="stat-label">Hızlı Eylemler</div>
+        <div style="margin-top: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;">
+            <a href="{% url 'admin:myapp_product_add' %}" class="button" style="font-size: 0.75rem; padding: 0.5rem 0.75rem;">
+                <i class="fas fa-plus"></i> Ürün Ekle
+            </a>
+            <a href="{% url 'admin:myapp_category_add' %}" class="button" style="font-size: 0.75rem; padding: 0.5rem 0.75rem;">
+                <i class="fas fa-folder-plus"></i> Kategori
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

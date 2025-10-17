@@ -1,0 +1,27 @@
+<!-- core\dashboard\templates\dashboard\includes\ui\empty_state.html - Boş durum -->
+{% load i18n %}
+
+<div class="empty-state">
+    <i class="{{ empty_icon|default:'fas fa-folder-open' }} icon"></i>
+    <h4>{{ empty_title|default:"Henüz öğe bulunmuyor" }}</h4>
+    <p>{{ empty_message|default:"İçerik eklendiğinde burada görünecektir." }}</p>
+    
+    {% if action_button_text %}
+        {% if action_button_attrs %}
+            <!-- Modal tetikleyici buton -->
+            <button type="button" class="btn-modern primary" {{ action_button_attrs|safe }}>
+                <i class="{{ action_button_icon|default:'fas fa-plus' }}"></i>{{ action_button_text }}
+            </button>
+        {% elif action_button_url %}
+            <!-- Normal link butonu -->
+            <a href="{{ action_button_url }}" class="btn-modern primary">
+                <i class="{{ action_button_icon|default:'fas fa-plus' }}"></i>{{ action_button_text }}
+            </a>
+        {% else %}
+            <!-- Sadece buton metni varsa -->
+            <button type="button" class="btn-modern primary" onclick="console.warn('No action defined for: {{ action_button_text }}')">
+                <i class="{{ action_button_icon|default:'fas fa-plus' }}"></i>{{ action_button_text }}
+            </button>
+        {% endif %}
+    {% endif %}
+</div>

@@ -1,0 +1,9 @@
+{% load i18n %}
+
+{% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+            {% include 'dashboard/includes/ui/alert_message.html' with type=message.tags message=message.message auto_hide=5000 %}
+        {% endfor %}
+    </div>
+{% endif %}

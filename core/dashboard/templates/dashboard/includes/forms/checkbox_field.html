@@ -1,0 +1,161 @@
+<!-- core\dashboard\templates\dashboard\includes\forms\checkbox_field.html - Checkbox field -->
+{% load i18n %}
+
+{% if field_type == "group" %}
+    <!-- Checkbox Group -->
+    <div class="mb-3">
+        <label class="form-label-modern">
+            <i class="fas {{ icon|default:'fa-check-square' }}"></i>{{ label }}
+            {% if required %}<span class="text-danger">*</span>{% endif %}
+        </label>
+        
+        <div class="checkbox-group">
+            {% for option in options %}
+                <div class="form-check">
+                    <input type="checkbox" 
+                           name="{{ field_name }}" 
+                           value="{{ option.value }}" 
+                           class="form-check-input"
+                           id="{{ field_name }}_{{ option.value }}"
+                           {% if option.value in checked_values %}checked{% endif %}
+                           {% if option.disabled %}disabled{% endif %}>
+                    <label class="form-check-label" for="{{ field_name }}_{{ option.value }}">
+                        {% if option.icon %}<i class="{{ option.icon }} me-1"></i>{% endif %}
+                        {{ option.label }}
+                        {% if option.description %}
+                            <small class="text-muted d-block">{{ option.description }}</small>
+                        {% endif %}
+                    </label>
+                </div>
+            {% endfor %}
+        </div>
+        
+        {% if help_text %}
+            <small class="text-muted">{{ help_text }}</small>
+        {% endif %}
+        
+        {% if errors %}
+            <div class="form-error">
+                {% for error in errors %}
+                    <i class="fas fa-exclamation-circle me-1"></i>{{ error }}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+{% elif field_type == "switch" %}
+    <!-- Switch -->
+    <div class="mb-3">
+        <div class="form-check form-switch">
+            <input type="checkbox" 
+                   name="{{ field_name }}" 
+                   value="{{ value|default:'1' }}"
+                   class="form-check-input"
+                   id="{{ field_id|default:field_name }}"
+                   {% if checked %}checked{% endif %}
+                   {% if disabled %}disabled{% endif %}
+                   {% if attrs %}{% for attr, val in attrs.items %}{{ attr }}="{{ val }}" {% endfor %}{% endif %}>
+            <label class="form-check-label fw-semibold" for="{{ field_id|default:field_name }}">
+                {% if icon %}<i class="{{ icon }} me-1"></i>{% endif %}
+                {{ label }}
+                {% if required %}<span class="text-danger">*</span>{% endif %}
+            </label>
+        </div>
+        
+        {% if help_text %}
+            <small class="text-muted d-block mt-1">{{ help_text }}</small>
+        {% endif %}
+        
+        {% if errors %}
+            <div class="form-error">
+                {% for error in errors %}
+                    <i class="fas fa-exclamation-circle me-1"></i>{{ error }}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+{% elif field_type == "card" %}
+    <!-- Card-style Checkbox -->
+    <div class="mb-3">
+        <label class="form-label-modern">
+            <i class="fas {{ icon|default:'fa-check-square' }}"></i>{{ label }}
+            {% if required %}<span class="text-danger">*</span>{% endif %}
+        </label>
+        
+        <div class="checkbox-cards">
+            {% for option in options %}
+                <div class="checkbox-card">
+                    <input type="checkbox" 
+                           name="{{ field_name }}" 
+                           value="{{ option.value }}" 
+                           class="checkbox-card-input"
+                           id="{{ field_name }}_card_{{ option.value }}"
+                           {% if option.value in checked_values %}checked{% endif %}
+                           {% if option.disabled %}disabled{% endif %}>
+                    <label class="checkbox-card-label" for="{{ field_name }}_card_{{ option.value }}">
+                        {% if option.icon %}
+                            <div class="checkbox-card-icon">
+                                <i class="{{ option.icon }}"></i>
+                            </div>
+                        {% endif %}
+                        <div class="checkbox-card-content">
+                            <div class="checkbox-card-title">{{ option.label }}</div>
+                            {% if option.description %}
+                                <div class="checkbox-card-description">{{ option.description }}</div>
+                            {% endif %}
+                        </div>
+                        <div class="checkbox-card-check">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    </label>
+                </div>
+            {% endfor %}
+        </div>
+        
+        {% if help_text %}
+            <small class="text-muted">{{ help_text }}</small>
+        {% endif %}
+        
+        {% if errors %}
+            <div class="form-error">
+                {% for error in errors %}
+                    <i class="fas fa-exclamation-circle me-1"></i>{{ error }}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+{% else %}
+    <!-- Simple Checkbox -->
+    <div class="mb-3">
+        <div class="form-check">
+            <input type="checkbox" 
+                   name="{{ field_name }}" 
+                   value="{{ value|default:'1' }}"
+                   class="form-check-input"
+                   id="{{ field_id|default:field_name }}"
+                   {% if checked %}checked{% endif %}
+                   {% if disabled %}disabled{% endif %}
+                   {% if required %}required{% endif %}
+                   {% if attrs %}{% for attr, val in attrs.items %}{{ attr }}="{{ val }}" {% endfor %}{% endif %}>
+            <label class="form-check-label" for="{{ field_id|default:field_name }}">
+                {% if icon %}<i class="{{ icon }} me-1"></i>{% endif %}
+                {{ label }}
+                {% if required %}<span class="text-danger">*</span>{% endif %}
+            </label>
+        </div>
+        
+        {% if help_text %}
+            <small class="text-muted d-block mt-1">{{ help_text }}</small>
+        {% endif %}
+        
+        {% if errors %}
+            <div class="form-error">
+                {% for error in errors %}
+                    <i class="fas fa-exclamation-circle me-1"></i>{{ error }}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endif %}

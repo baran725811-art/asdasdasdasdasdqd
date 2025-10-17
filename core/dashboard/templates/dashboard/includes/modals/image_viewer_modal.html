@@ -1,0 +1,154 @@
+<!-- core\dashboard\templates\dashboard\includes\modals\image_viewer_modal.html - Görsel görüntüleme modal-->
+{% load i18n %}
+
+<div class="modal fade modal-modern image-viewer-modal" id="{{ modal_id|default:'imageViewerModal' }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-image me-2"></i>{{ title|default:"Görsel Görüntüleyici" }}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            
+            <div class="modal-body p-0">
+                <div class="image-viewer-container">
+                    {% if images and images|length > 1 %}
+                        <!-- Multiple Images Carousel -->
+                        <div id="imageCarousel{{ modal_id|default:'imageViewerModal' }}" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                {% for image in images %}
+                                    <button type="button" 
+                                            data-bs-target="#imageCarousel{{ modal_id|default:'imageViewerModal' }}" 
+                                            data-bs-slide-to="{{ forloop.counter0 }}" 
+                                            {% if forloop.first %}class="active"{% endif %}>
+                                    </button>
+                                {% endfor %}
+                            </div>
+                            
+                            <div class="carousel-inner">
+                                {% for image in images %}
+                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                        <div class="image-container">
+                                            <img src="{{ image.url }}" 
+                                                 alt="{{ image.alt|default:image.title }}" 
+                                                 class="viewer-image"
+                                                 loading="lazy">
+                                            {% if image.title or image.description %}
+                                                <div class="image-caption">
+                                                    {% if image.title %}<h6>{{ image.title }}</h6>{% endif %}
+                                                    {% if image.description %}<p>{{ image.description }}</p>{% endif %}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            
+                            <button class="carousel-control-prev" type="button" 
+                                    data-bs-target="#imageCarousel{{ modal_id|default:'imageViewerModal' }}" 
+                                    data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </button>
+                            <button class="carousel-control-next" type="button" 
+                                    data-bs-target="#imageCarousel{{ modal_id|default:'imageViewerModal' }}" 
+                                    data-bs-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </button>
+                        </div>
+                    {% else %}
+                        <!-- Single Image -->
+                        <div class="single-image-container">
+                            {% if image_url %}
+                                <img src="{{ image_url }}" 
+                                     alt="{{ image_alt|default:'Görsel' }}" 
+                                     class="viewer-image single-image"
+                                     id="viewerImage{{ modal_id|default:'imageViewerModal' }}">
+                            {% elif images and images.0 %}
+                                <img src="{{ images.0.url }}" 
+                                     alt="{{ images.0.alt|default:images.0.title|default:'Görsel' }}" 
+                                     class="viewer-image single-image"
+                                     id="viewerImage{{ modal_id|default:'imageViewerModal' }}">
+                            {% else %}
+                                <!-- Placeholder when no image -->
+                                <div class="no-image-placeholder">
+                                    <i class="fas fa-image fa-5x text-muted"></i>
+                                    <p class="text-muted mt-3">{% trans "Görsel bulunamadı" %}</p>
+                                </div>
+                            {% endif %}
+                            {% if image_title or image_description %}
+                                <div class="image-caption">
+                                    {% if image_title %}<h6>{{ image_title }}</h6>{% endif %}
+                                    {% if image_description %}<p>{{ image_description }}</p>{% endif %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    
+                    <!-- Zoom Controls -->
+                    <div class="zoom-controls">
+                        <button type="button" class="zoom-btn" onclick="zoomImage('in', '{{ modal_id|default:'imageViewerModal' }}')">
+                            <i class="fas fa-search-plus"></i>
+                        </button>
+                        <button type="button" class="zoom-btn" onclick="zoomImage('out', '{{ modal_id|default:'imageViewerModal' }}')">
+                            <i class="fas fa-search-minus"></i>
+                        </button>
+                        <button type="button" class="zoom-btn" onclick="resetZoom('{{ modal_id|default:'imageViewerModal' }}')">
+                            <i class="fas fa-expand-arrows-alt"></i>
+                        </button>
+                        <button type="button" class="zoom-btn" onclick="rotateImage('{{ modal_id|default:'imageViewerModal' }}')">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Image Info Panel -->
+                    {% if show_info %}
+                        <div class="image-info-panel">
+                            <button type="button" class="info-toggle" onclick="toggleImageInfo('{{ modal_id|default:'imageViewerModal' }}')">
+                                <i class="fas fa-info-circle"></i>
+                            </button>
+                            <div class="info-content" id="imageInfo{{ modal_id|default:'imageViewerModal' }}">
+                                <div class="info-item">
+                                    <strong>{% trans "Dosya Adı" %}:</strong>
+                                    <span>{{ image_name|default:"unknown.jpg" }}</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>{% trans "Boyut" %}:</strong>
+                                    <span>{{ image_size|default:"Bilinmiyor" }}</span>
+                                </div>
+                                <div class="info-item">
+                                    <strong>{% trans "Boyutlar" %}:</strong>
+                                    <span>{{ image_dimensions|default:"Bilinmiyor" }}</span>
+                                </div>
+                                {% if image_date %}
+                                    <div class="info-item">
+                                        <strong>{% trans "Yüklenme" %}:</strong>
+                                        <span>{{ image_date }}</span>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            {% if show_footer %}
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i>{% trans "Kapat" %}
+                    </button>
+                    {% if download_url %}
+                        <a href="{{ download_url }}" class="btn btn-primary" download>
+                            <i class="fas fa-download me-1"></i>{% trans "İndir" %}
+                        </a>
+                    {% endif %}
+                    {% if edit_url %}
+                        <a href="{{ edit_url }}" class="btn btn-success">
+                            <i class="fas fa-edit me-1"></i>{% trans "Düzenle" %}
+                        </a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

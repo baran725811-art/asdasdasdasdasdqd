@@ -1,0 +1,19 @@
+<!-- core\dashboard\templates\dashboard\includes\partials\datetime_display.html - Tarih-saat gösterimi -->
+
+{% load i18n %}
+
+{% if datetime_value %}
+    {% if format == 'short' %}
+        {{ datetime_value|date:"d.m.Y" }}
+    {% elif format == 'long' %}
+        {{ datetime_value|date:"d F Y, H:i" }}
+    {% elif format == 'time' %}
+        {{ datetime_value|date:"H:i" }}
+    {% elif format == 'relative' %}
+        {{ datetime_value|timesince }} {% trans "önce" %}
+    {% else %}
+        {{ datetime_value|date:"d.m.Y H:i" }}
+    {% endif %}
+{% else %}
+    <span class="text-muted">-</span>
+{% endif %}
