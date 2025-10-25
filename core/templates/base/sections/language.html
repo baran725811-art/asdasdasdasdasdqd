@@ -11,9 +11,10 @@
             <button class="btn btn-outline-secondary dropdown-toggle" 
                     type="button" 
                     id="languageDropdown" 
-                    data-bs-toggle="dropdown">
+                    data-bs-toggle="dropdown"
+                    aria-label="{% trans 'Dil Seçimi' %}">
                 {% get_current_language as current_lang %}
-                {% if current_lang == 'tr' %}🇹🇷 TR{% elif current_lang == 'en' %}🇺🇸 EN{% else %}🇹🇷 TR{% endif %}
+                {{ current_lang|upper }}
             </button>
             <ul class="dropdown-menu">
                 {% for lang_code, lang_name in site_languages %}
@@ -23,7 +24,7 @@
                         <input name="next" type="hidden" value="{{ request.get_full_path }}">
                         <input name="language" type="hidden" value="{{ lang_code }}">
                         <button type="submit" class="dropdown-item">
-                            {% if lang_code == 'tr' %}🇹🇷 Türkçe{% elif lang_code == 'en' %}🇺🇸 English{% endif %}
+                            {{ lang_name }}
                         </button>
                     </form>
                 </li>

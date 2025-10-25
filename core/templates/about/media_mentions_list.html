@@ -1,3 +1,4 @@
+<!--core\templates\about\media_mentions_list.html-->
 {% extends 'base/main.html' %}
 {% load static %}
 {% load i18n %}
@@ -477,7 +478,13 @@
                 
                 <div class="media-content">
                     <div class="media-meta">
-                        <span class="media-source">{{ mention.source|default:"Haber" }}</span>
+                        <span class="media-source">
+                            {% if mention.source %}
+                                {{ mention.source }}
+                            {% else %}
+                                {% trans "Haber" %}
+                            {% endif %}
+                        </span>
                         <time class="media-date">{{ mention.publish_date|date:"d F Y" }}</time>
                     </div>
                     
@@ -505,12 +512,12 @@
             <ul class="pagination">
                 {% if media_mentions.has_previous %}
                 <li class="page-item">
-                    <a class="page-link" href="?page=1">
+                    <a class="page-link" href="?page=1" aria-label="{% trans 'İlk sayfa' %}">
                         <i class="fas fa-angle-double-left"></i>
                     </a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ media_mentions.previous_page_number }}">
+                    <a class="page-link" href="?page={{ media_mentions.previous_page_number }}" aria-label="{% trans 'Önceki sayfa' %}">
                         <i class="fas fa-angle-left"></i>
                     </a>
                 </li>
@@ -530,12 +537,12 @@
 
                 {% if media_mentions.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ media_mentions.next_page_number }}">
+                    <a class="page-link" href="?page={{ media_mentions.next_page_number }}" aria-label="{% trans 'Sonraki sayfa' %}">
                         <i class="fas fa-angle-right"></i>
                     </a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ media_mentions.paginator.num_pages }}">
+                    <a class="page-link" href="?page={{ media_mentions.paginator.num_pages }}" aria-label="{% trans 'Son sayfa' %}">
                         <i class="fas fa-angle-double-right"></i>
                     </a>
                 </li>

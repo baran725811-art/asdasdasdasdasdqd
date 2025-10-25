@@ -1,13 +1,19 @@
 {% load i18n %}
 
-<!-- Mobile Breadcrumb - Compact Version -->
+<!-- core\templates\includes\mobile_breadcrumb.html Mobile Breadcrumb - Compact Version -->
 <nav aria-label="{% trans 'Mobil sayfa navigasyonu' %}" class="mobile-breadcrumb d-md-none">
     <div class="container">
         <div class="mobile-breadcrumb-content">
             {% if show_ellipsis %}
                 <span class="breadcrumb-ellipsis">
                     <i class="fas fa-ellipsis-h me-2"></i>
-                    <small class="text-muted">({{ total_count }} seviye)</small>
+                    <small class="text-muted">
+                        {% blocktrans count count=total_count %}
+                        ({{ count }} seviye)
+                        {% plural %}
+                        ({{ count }} seviye)
+                        {% endblocktrans %}
+                    </small>
                 </span>
             {% endif %}
             

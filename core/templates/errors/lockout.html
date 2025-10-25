@@ -2,11 +2,11 @@
 {% load i18n %}
 
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="{{ request.LANGUAGE_CODE|default:'tr' }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hesap Kilitlendi</title>
+    <title>{% trans "Hesap Kilitlendi" %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -46,13 +46,15 @@
                         <i class="fas fa-lock"></i>
                     </div>
                     
-                    <h2 class="text-danger mb-3">Hesap Geçici Olarak Kilitlendi</h2>
+                    <h2 class="text-danger mb-3">{% trans "Hesap Geçici Olarak Kilitlendi" %}</h2>
                     
                     <div class="alert alert-danger mb-4">
-                        <h5><i class="fas fa-exclamation-triangle me-2"></i>Güvenlik Uyarısı</h5>
+                        <h5><i class="fas fa-exclamation-triangle me-2"></i>{% trans "Güvenlik Uyarısı" %}</h5>
                         <p class="mb-0">
+                            {% blocktrans %}
                             Çok fazla başarısız giriş denemesi yaptınız. 
                             Hesabınız güvenlik nedeniyle <strong>1 saat</strong> süreyle kilitlenmiştir.
+                            {% endblocktrans %}
                         </p>
                     </div>
                     
@@ -60,44 +62,44 @@
                         <div class="col-md-4 mb-3">
                             <div class="text-warning">
                                 <i class="fas fa-clock fa-2x mb-2"></i>
-                                <p class="mb-0"><small>Bekleme Süresi</small></p>
-                                <div class="countdown">1 Saat</div>
+                                <p class="mb-0"><small>{% trans"Bekleme Süresi" %}</small></p>
+                                <div class="countdown">{% trans "1 Saat" %}</div>
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <div class="text-info">
                                 <i class="fas fa-shield-alt fa-2x mb-2"></i>
-                                <p class="mb-0"><small>Güvenlik Seviyesi</small></p>
-                                <div class="fw-bold">Yüksek</div>
+                                <p class="mb-0"><small>{% trans "Güvenlik Seviyesi" %}</small></p>
+                                <div class="fw-bold">{% trans "Yüksek" %}</div>
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <div class="text-success">
                                 <i class="fas fa-user-check fa-2x mb-2"></i>
-                                <p class="mb-0"><small>Hesap Durumu</small></p>
-                                <div class="fw-bold">Korunuyor</div>
+                                <p class="mb-0"><small>{% trans "Hesap Durumu" %}</small></p>
+                                <div class="fw-bold">{% trans"Korunuyor" %}</div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="mb-4">
-                        <h6 class="text-start">Ne yapabilirsiniz?</h6>
+                        <h6 class="text-start">{% trans "Ne yapabilirsiniz?" %}</h6>
                         <ul class="list-unstyled text-start">
                             <li class="mb-2">
                                 <i class="fas fa-clock text-warning me-2"></i>
-                                Bekleme süresinin dolmasını bekleyin
+                                {% trans "Bekleme süresinin dolmasını bekleyin" %}
                             </li>
                             <li class="mb-2">
                                 <i class="fas fa-envelope text-info me-2"></i>
-                                Şifrenizi unuttuysanız yöneticiye başvurun
+                                {% trans "Şifrenizi unuttuysanız yöneticiye başvurun" %}
                             </li>
                             <li class="mb-2">
                                 <i class="fas fa-shield-alt text-success me-2"></i>
-                                Güçlü bir şifre kullanın (büyük/küçük harf, sayı, özel karakter)
+                                {% trans "Güçlü bir şifre kullanın (büyük/küçük harf, sayı, özel karakter)" %}
                             </li>
                             <li class="mb-2">
                                 <i class="fas fa-eye text-primary me-2"></i>
-                                Şifrenizi girerken dikkatli olun
+                                {% trans "Şifrenizi girerken dikkatli olun" %}
                             </li>
                         </ul>
                     </div>
@@ -105,10 +107,10 @@
                     <div class="d-grid gap-2">
                         <a href="{% url 'dashboard:dashboard_login' %}" class="btn btn-primary">
                             <i class="fas fa-arrow-left me-2"></i>
-                            Giriş Sayfasına Dön
+                            {% trans "Giriş Sayfasına Dön" %}
                         </a>
                         <small class="text-muted mt-2">
-                            Sorun devam ederse sistem yöneticisi ile iletişime geçin
+                            {% trans "Sorun devam ederse sistem yöneticisi ile iletişime geçin" %}
                         </small>
                     </div>
                 </div>

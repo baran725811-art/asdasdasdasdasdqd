@@ -33,16 +33,16 @@
                     <h3 class="product-name">{{ product.name }}</h3>
                     <p class="product-category">{{ product.category.name }}</p>
                     {% if product.price %}
-                    <div class="product-price">
-                        {% if product.has_discount %}
-                        <span class="original-price">{{ product.price }} ₺</span>
-                        <span class="current-price">{{ product.discount_price }} ₺</span>
-                        <span class="discount-badge">-%{{ product.get_discount_percentage }}</span>
-                        {% else %}
-                        <span class="current-price">{{ product.price }} ₺</span>
-                        {% endif %}
-                    </div>
-                    {% endif %}
+                    <div class="product-price">
+                        {% if product.has_discount %}
+                        <span class="original-price">{% blocktrans %}{{ product.price }} ₺{% endblocktrans %}</span>
+                        <span class="current-price">{% blocktrans %}{{ product.discount_price }} ₺{% endblocktrans %}</span>
+                        <span class="discount-badge">-%{{ product.get_discount_percentage }}</span>
+                        {% else %}
+                        <span class="current-price">{% blocktrans %}{{ product.price }} ₺{% endblocktrans %}</span>
+                        {% endif %}
+                    </div>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}

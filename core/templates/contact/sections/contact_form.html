@@ -138,7 +138,7 @@
                                       required>{{ contact_form.message.value|default:'' }}</textarea>
                             <div class="input-indicator"></div>
                             <div class="character-counter">
-                                <span class="current">0</span> / <span class="max">1000</span>
+                                <span class="current">0</span>{% trans " / " %}<span class="max">1000</span>
                             </div>
                         </div>
                         {% if contact_form.message.errors %}

@@ -4,7 +4,7 @@
 {% load i18n %}
 
 {% block title %}{{ title }} - {{ site_name }}{% endblock %}
-{% block meta_description %}Müşterilerimizin deneyimlerini ve değerlendirmelerini okuyun.{% endblock %}
+{% block meta_description %}{% trans "Müşterilerimizin deneyimlerini ve değerlendirmelerini okuyun." %}{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -669,7 +669,7 @@
                             <i class="far fa-star"></i>
                             {% endif %}
                         {% endfor %}
-                        <span class="rating-number">{{ review.rating }}/5</span>
+                        <span class="rating-number">{% blocktrans %}{{ review.rating }}/5{% endblocktrans %}</span>
                     </div>
                 </div>
 
@@ -688,15 +688,15 @@
             <ul class="pagination">
                 {% if reviews.has_previous %}
                 <li class="page-item">
-                    <a class="page-link" href="?page=1">
-                        <i class="fas fa-angle-double-left"></i>
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ reviews.previous_page_number }}">
-                        <i class="fas fa-angle-left"></i>
-                    </a>
-                </li>
+                <a class="page-link" href="?page=1" aria-label="{% trans 'İlk sayfa' %}">
+                    <i class="fas fa-angle-double-left"></i>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ reviews.previous_page_number }}" aria-label="{% trans 'Önceki sayfa' %}">
+                    <i class="fas fa-angle-left"></i>
+                </a>
+            </li>
                 {% endif %}
 
                 {% for num in reviews.paginator.page_range %}
@@ -713,12 +713,12 @@
 
                 {% if reviews.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ reviews.next_page_number }}">
+                    <a class="page-link" href="?page={{ reviews.next_page_number }}" aria-label="{% trans 'Sonraki sayfa' %}">
                         <i class="fas fa-angle-right"></i>
                     </a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ reviews.paginator.num_pages }}">
+                    <a class="page-link" href="?page={{ reviews.paginator.num_pages }}" aria-label="{% trans 'Son sayfa' %}">
                         <i class="fas fa-angle-double-right"></i>
                     </a>
                 </li>

@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<!-- Çerez Banner -->
+<!-- core/templates/components/cookie-banner.html Çerez Banner -->
 <div id="cookie-banner" class="cookie-banner" style="display: none;">
     <div class="cookie-banner-content">
         <div class="cookie-banner-text">
@@ -228,7 +228,7 @@ class CookieManager {
         };
         this.saveConsent();
         this.hideBanner();
-        this.showNotification('Tüm çerezler kabul edildi.', 'success');
+        this.showNotification('{% trans "Tüm çerezler kabul edildi."|escapejs %}', 'success');
     }
     
     rejectAll() {
@@ -240,7 +240,7 @@ class CookieManager {
         };
         this.saveConsent();
         this.hideBanner();
-        this.showNotification('Sadece zorunlu çerezler kabul edildi.', 'info');
+        this.showNotification('{% trans "Sadece zorunlu çerezler kabul edildi."|escapejs %}', 'info');
     }
     
     saveSettings() {
@@ -252,7 +252,7 @@ class CookieManager {
         };
         this.saveConsent();
         this.hideBanner();
-        this.showNotification('Çerez ayarlarınız kaydedildi.', 'success');
+        this.showNotification('{% trans "Çerez ayarlarınız kaydedildi."|escapejs %}', 'success');
     }
     
     saveConsent() {

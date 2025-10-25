@@ -29,15 +29,15 @@
                     <div class="category-tag">{{ suggested_product.category.name }}</div>
                     <h4 class="suggested-title">{{ suggested_product.name }}</h4>
                     {% if suggested_product.price %}
-                    <div class="suggested-price">
-                        {% if suggested_product.has_discount %}
-                        <span class="original-price">{{ suggested_product.price }} ₺</span>
-                        <span class="current-price">{{ suggested_product.discount_price }} ₺</span>
-                        {% else %}
-                        <span class="current-price">{{ suggested_product.price }} ₺</span>
-                        {% endif %}
-                    </div>
-                    {% endif %}
+                    <div class="suggested-price">
+                        {% if suggested_product.has_discount %}
+                        <span class="original-price">{% blocktrans %}{{ suggested_product.price }} ₺{% endblocktrans %}</span>
+                        <span class="current-price">{% blocktrans %}{{ suggested_product.discount_price }} ₺{% endblocktrans %}</span>
+                        {% else %}
+                        <span class="current-price">{% blocktrans %}{{ suggested_product.price }} ₺{% endblocktrans %}</span>
+                        {% endif %}
+                    </div>
+                    {% endif %}
                     <a href="{{ suggested_product.get_absolute_url }}" class="suggested-btn">
                         {% trans "İncele" %}
                         <i class="fas fa-arrow-right"></i>

@@ -1,0 +1,174 @@
+carousel resim tam oturmuyor
+404 hatalarında sayfaya yönlendirmiyor. eror sayfasına yönlendirsin istiyorum
+
+
+
+
+
+anasayfa galeri modal. uygulanacak yerler: ürünler delatis bölümünde modal,  galeri bölümünde modal. 
+
+Hakkımızda , ve istatisliklerde göstermiyor rakamlar. footer bölümünde doğru çekkiyor. 
+
+
+footer : Hizmetlerimiz  dahsbordan çekecek
+
+back-to-top show << gözükmüyor çok köşede sağ tarafta olsun 
+telefon yerine sol bölümde whatshap olacak
+
+Son Çalışmalarımız << sadece öne çıknaları gösterecek. 
+
+http://127.0.0.1:8000/katalog/ <<< boş sayfa gösteriyor html çekmiyor. 
+
+iletişim değerlendirme : istatislikler çekmiyor. 
+
+dahsbord basında biz bölümünde hata var. 
+basında biz bölümü kullanılırsa bir şey eklenirse ana sayfada aktif olsun. 
+**** en son yapılacak : tasarım bölümüne göre görsel ayarlanacak =görsellerde resim boyutu farklıysa yüklenince kırtmasını sitede hangi alanda görülmesi gerektiğini belirlenmesini istiyorum
+
+tüm öne çıkanları gör butonunda hata var.
+
+📱 Resim Gereksinimleri:Base için gerekli görseller:
+
+Logo: 200x60px (navbar), 60x60px (footer)
+Favicon: 16x16px, 32x32px, 180x180px
+OG Image: 1200x630px
+Apple Touch Icons: 57x57px → 180x180px
+
+📱 Resim Gereksinimleri:Home sayfası için gerekli görseller:
+
+Carousel Slides: 1920x1080px (5 adet hero görsel)
+About Image: 800x600px (hakkımızda ana görseli)
+Service Icons: FontAwesome ikonları (kod ile)
+Product Images: 600x400px (ürün görselleri)
+Gallery Items: 800x600px (galeri önizlemeleri)
+Review Avatars: 100x100px (müşteri fotoğrafları)
+Media Images: 400x250px (basın haberi görselleri)
+
+
+📱 RESİM GEREKSİNİMLERİ
+
+Carousel: 1920x1080px (hero slides)
+About: 800x600px (hakkımızda görseli)
+Products: 600x400px (ürün görselleri)
+Gallery: 800x600px (galeri öğeleri - masonry layout)
+Reviews: 100x100px (müşteri avatarları)
+Logos: 200x60px (navbar), 60x60px (footer)
+
+
+
+**** oldu gibi : pdf dosyası eklenince sadece ana sitede görülecek navara gelecek elnemese navarda olmasın
+
+
+tüm sıralamalar kontrolü olsun.
+resimler: "hakkımızda =Ana Görsel", "hizmetlerimiz = Hizmet Ayarları", "carosel = Slayt Görseli",  "ürünler = YÜrün Görseli", "ekibimiz = Genel Ayarlar", "basında biz = Medya ve Ayarlar"
+
+incelenecek :" kategori = Meta Başlık (SEO),  Meta Açıklama (SEO) ", "ürünler =  Meta Başlık ,  Meta Açıklama" 
+
+
+
+
+
+
+"Gösterge Tablosu << yerine işletme adı girilecek bunun için nerede yazdığına bakılacak ve işletme adı yazılacak ve logosu olacak"
+{% block page_title %}{% trans "Dashboard Ana Sayfa" %}{% endblock %} dashboard/templates/dashboard/index.html
+
+"Yönetici Kontrol Paneli << işletme adı yazılacak devamı yönetici kontrol paneli yazılacak gerekirse yazı biraz küçültülecek "
+<h4>{% trans "Admin Dashboard"%}</h4> dashboard/templates/dashboard/includes/navigation/sidebar.html
+
+"Yönetim Paneli << paneli kullanacak kişinin adı yazılacak soy isim isteğe bağlı"
+<div class="subtitle">{% trans "Yönetim Paneli"%}</div>  dashboard/templates/dashboard/includes/navigation/sidebar.html
+
+
+
+
+
+
+
+
+seo ölçme eksikleri görmek için:
+
+python manage.py seo_audit
+python manage.py seo_audit --check-urls
+python manage.py seo_audit --full --export seo_report.json
+python manage.py seo_audit --ping-google
+
+
+
+
+
+
+
+güvenlik:
+
+# Django Güvenlik Yol Haritası - Güncel Durum
+
+## ✅ Tamamlanan Güvenlik Adımları
+
+1. **Password Validator** → Güçlü şifre kuralları tamamlandı
+2. **Axes & Captcha Kurulumu** → Başarılı şekilde kuruldu
+3. **Dashboard Login Güvenliği** → CAPTCHA ile tamamlandı
+4. **Axes Kilitleme Sistemi** → Kilitleme ve loglama tamamlandı
+5. **Admin Login CAPTCHA** → Tamamlandı
+6. **Contact Form CAPTCHA** → Tamamlandı
+7. **Review Form CAPTCHA** → Tamamlandı
+8. **HTTPS Konfigürasyonu** → **YENİ TamamlandI**
+   - TLS 1.3 zorlaması aktif
+   - Content Security Policy (CSP) ayarlandı
+   - HSTS Preload konfigürasyonu
+   - Güçlendirilmiş CSRF koruması
+   - Admin URL gizleme (secure-admin-baran2025/)
+   - Gelişmiş Security Headers
+
+---
+
+## 🎯 Mevcut Durum
+
+- Tüm public formlar **CAPTCHA koruması** altında
+- **HTTPS güvenliği** maksimum seviyede
+- **SSL/TLS** optimizasyonu tamamlandı
+- **Brute force** ve **spam koruması** sağlandı
+
+---
+
+## 📋 Sıradaki Öncelikler
+
+1. **2FA Sistemi (Yüksek Öncelik)**
+   - Yönetici hesapları için iki faktörlü kimlik doğrulama
+   - Paket: `django-otp` kurulumu ve entegrasyonu
+   - TOTP (Time-based One-Time Password) desteği
+
+2. **Güvenlik Loglama ve Uyarı E-postaları**
+   - Şüpheli aktivite tespiti
+   - Yöneticiye otomatik uyarı e-postaları
+   - Detaylı güvenlik log analizi
+
+3. **Backup ve Recovery Sistemi**
+   - Otomatik veritabanı yedekleme
+   - Cloudinary medya yedekleme
+   - Recovery plan oluşturma
+
+---
+
+## 🔍 Test Edilecek Güvenlik Özellikleri
+
+**Production Testleri** (canlı domain gerekli):
+- SSL Labs Test → A+ hedefi
+- Security Headers Test → A hedefi  
+- HSTS Preload Test → Eligible durumu
+
+---
+
+## 📌 Kurallar
+
+- Kod görmeden tahmin yapma
+- Mevcut dosyaları incele, sonra değişiklik öner
+- Önce analiz et, doğrudan kod yazma
+- Gerekirse konfigürasyon dosyalarını iste
+
+---
+
+## ❓ Bir Sonraki Adım
+
+**2FA (İki Faktörlü Kimlik Doğrulama)** sistemini kurmaya hazırsınız.
+
+👉 Devam etmek istiyorsanız, önce `requirements.txt` dosyanızı görmem gerekiyor.

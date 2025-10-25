@@ -16,7 +16,11 @@
                     
                     <!-- Main Title -->
                     <h2 class="section-title">
-                        {{ about.title|default:"Deneyimli ve Güvenilir" }}
+                        {% if about.title %}
+                            {{ about.title }}
+                        {% else %}
+                            {% trans "Deneyimli ve Güvenilir" %}
+                        {% endif %}
                         <span class="text-gradient">{% trans "Ekibimiz" %}</span>
                     </h2>
                     
@@ -27,7 +31,11 @@
                             {% trans "Misyonumuz" %}
                         </h3>
                         <p class="mission-text">
-                            {{ about.mission|default:"Müşterilerimize en kaliteli ve güvenilir hizmeti sunarak, sektörde öncü olmayı hedefliyoruz." }}
+                            {% if about.mission %}
+                                {{ about.mission }}
+                            {% else %}
+                                {% trans "Müşterilerimize en kaliteli ve güvenilir hizmeti sunarak, sektörde öncü olmayı hedefliyoruz." %}
+                            {% endif %}
                         </p>
                     </div>
                     

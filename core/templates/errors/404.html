@@ -195,7 +195,7 @@
                                            placeholder="{% trans 'Ürün ara...' %}" 
                                            value="{{ request.GET.q }}">
                                     <div class="input-group-append">
-                                        <button class="btn btn-primary" type="submit">
+                                        <button class="btn btn-primary" type="submit" aria-label="{% trans 'Ara' %}">
                                             <i class="fas fa-search"></i>
                                         </button>
                                     </div>
@@ -214,7 +214,17 @@
                         {% for suggestion in search_suggestions %}
                         <div class="col-md-6 col-lg-4 mb-3">
                             <a href="{{ suggestion.url }}" class="suggestion-card">
-                                <div class="suggestion-type">{{ suggestion.type|title }}</div>
+                                <div class="suggestion-type">
+                                    {% if suggestion.type == 'product' %}
+                                        {% trans "Ürün" %}
+                                    {% elif suggestion.type == 'category' %}
+                                        {% trans "Kategori" %}
+                                    {% elif suggestion.type == 'gallery' %}
+                                        {% trans "Galeri" %}
+                                    {% else %}
+                                        {{ suggestion.type|title }}
+                                    {% endif %}
+                                </div>
                                 <div class="suggestion-title">{{ suggestion.title }}</div>
                                 {% if suggestion.description %}
                                 <div class="suggestion-description">{{ suggestion.description|truncatewords:15 }}</div>

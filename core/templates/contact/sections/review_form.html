@@ -114,7 +114,7 @@
                                       required>{{ review_form.comment.value|default:'' }}</textarea>
                             <div class="input-indicator"></div>
                             <div class="character-counter">
-                                <span class="current">0</span> / <span class="max">500</span>
+                                <span class="current">0</span>{% trans " / " %}<span class="max">500</span>
                             </div>
                         </div>
                         {% if review_form.comment.errors %}

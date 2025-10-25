@@ -56,12 +56,16 @@
                 <div class="price-section">
                     {% if product.has_discount %}
                     <div class="price-with-discount">
-                        <span class="original-price">{{ product.price }} ₺</span>
-                        <span class="current-price">{{ product.discount_price }} ₺</span>
-                        <span class="savings">{{ product.price|floatformat:0|add:"-"|add:product.discount_price|floatformat:0 }} ₺ {% trans "tasarruf" %}</span>
+                        <span class="original-price">{% blocktrans %}{{ product.price }} ₺{% endblocktrans %}</span>
+                        <span class="current-price">{% blocktrans %}{{ product.discount_price }} ₺{% endblocktrans %}</span>
+                        <span class="savings">
+                            {% blocktrans with savings_amount=product.price|floatformat:0|add:"-"|add:product.discount_price|floatformat:0 %}
+                            {{ savings_amount }} ₺ tasarruf
+                            {% endblocktrans %}
+                        </span>
                     </div>
                     {% else %}
-                    <div class="current-price">{{ product.price }} ₺</div>
+                    <div class="current-price">{% blocktrans %}{{ product.price }} ₺{% endblocktrans %}</div>
                     {% endif %}
                 </div>
                 {% endif %}
@@ -92,7 +96,12 @@
                             <span class="feature-label">{% trans "Stok Durumu" %}</span>
                             <span class="feature-value">
                                 {% if product.stock > 0 %}
-                                    {% trans "Stokta Var" %} ({{ product.stock }} {% trans "adet" %})
+                                    {% trans "Stokta Var" %}
+                                    {% blocktrans count stock_count=product.stock %}
+                                    ({{ stock_count }} adet)
+                                    {% plural %}
+                                    ({{ stock_count }} adet)
+                                    {% endblocktrans %}
                                 {% else %}
                                     {% trans "Stokta Yok" %}
                                 {% endif %}
@@ -120,7 +129,7 @@
                         </div>
                         <div class="feature-content">
                             <span class="feature-label">{% trans "Ağırlık" %}</span>
-                            <span class="feature-value">{{ product.weight }} kg</span>
+                            <span class="feature-value">{% blocktrans %}{{ product.weight }} kg{% endblocktrans %}</span>
                         </div>
                     </div>
                     {% endif %}
@@ -152,11 +161,11 @@
                     <div class="contact-methods">
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
-                            <span>+90 xxx xxx xx xx</span>
+                            <span>{{ contact_phone|default:"+90 XXX XXX XX XX" }}</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
-                            <span>info@barananahtarci.com</span>
+                            <span>{{ contact_email|default:"info@barananahtarci.com" }}</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-whatsapp"></i>

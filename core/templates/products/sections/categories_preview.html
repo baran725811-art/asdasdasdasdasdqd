@@ -23,7 +23,13 @@
                 </div>
                 <div class="category-content">
                     <h3 class="category-name">{{ category.name }}</h3>
-                    <span class="category-count">{{ category.product_count }} {% trans "ürün" %}</span>
+                    <span class="category-count">
+                        {% blocktrans count product_count=category.product_count %}
+                        {{ product_count }} ürün
+                        {% plural %}
+                        {{ product_count }} ürün
+                        {% endblocktrans %}
+                    </span>
                 </div>
             </a>
             {% endfor %}

@@ -1,6 +1,6 @@
 {% load static %}
 {% load i18n %}
-
+<!--core\templates\home\sections\media_mentions.html-->
 <section class="media-mentions-section section-padding-sm" id="mediaMentions">
     <div class="container">
         {% if media_mentions %}
@@ -47,7 +47,13 @@
                             <!-- Media Content -->
                             <div class="media-content">
                                 <div class="media-meta">
-                                    <span class="media-source">{{ mention.source|default:"Haber" }}</span>
+                                    <span class="media-source">
+                                        {% if mention.source %}
+                                            {{ mention.source }}
+                                        {% else %}
+                                            {% trans "Haber" %}
+                                        {% endif %}
+                                    </span>
                                     <time class="media-date">{{ mention.publish_date|date:"d.m.Y" }}</time>
                                 </div>
                                 

@@ -140,7 +140,13 @@
             <div class="col-lg-8 col-xl-7">
                 <div class="hero-content">
                     <h1 class="hero-title">{{ site_name }}</h1>
-                    <p class="hero-description">{{ site_tagline|default:"Profesyonel hizmet anlayışımızla sizlerleyiz." }}</p>
+                    <p class="hero-description">
+                        {% if site_tagline %}
+                            {{ site_tagline }}
+                        {% else %}
+                            {% trans "Profesyonel hizmet anlayışımızla sizlerleyiz." %}
+                        {% endif %}
+                    </p>
                     <div class="hero-actions">
                         <a href="{% url 'contact:contact' %}" class="btn btn-primary-modern btn-lg">
                             {% trans "İletişime Geç" %}

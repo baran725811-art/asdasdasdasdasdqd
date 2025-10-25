@@ -28,15 +28,15 @@
                 <div class="related-content">
                     <h4 class="related-title">{{ related_product.name }}</h4>
                     {% if related_product.price %}
-                    <div class="related-price">
-                        {% if related_product.has_discount %}
-                        <span class="original-price">{{ related_product.price }} ₺</span>
-                        <span class="current-price">{{ related_product.discount_price }} ₺</span>
-                        {% else %}
-                        <span class="current-price">{{ related_product.price }} ₺</span>
-                        {% endif %}
-                    </div>
-                    {% endif %}
+                    <div class="related-price">
+                        {% if related_product.has_discount %}
+                        <span class="original-price">{% blocktrans %}{{ related_product.price }} ₺{% endblocktrans %}</span>
+                        <span class="current-price">{% blocktrans %}{{ related_product.discount_price }} ₺{% endblocktrans %}</span>
+                        {% else %}
+                        <span class="current-price">{% blocktrans %}{{ related_product.price }} ₺{% endblocktrans %}</span>
+                        {% endif %}
+                    </div>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}

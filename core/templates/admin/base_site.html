@@ -72,17 +72,17 @@
     <!-- Navigasyon - sağ tarafa yaslı -->
     <nav class="admin-nav-global">
         <!-- Ana Dil Seçici -->
+        {% get_available_languages as LANGUAGES %}
+        {% get_current_language as current_lang %}
+        
         <div class="language-selector">
             <label for="mainLanguageSelect">{% trans "Ana Dil:" %}</label>
             <select id="mainLanguageSelect" onchange="changeMainLanguage(this.value)">
-                {% get_current_language as current_lang %}
-                <option value="tr" {% if current_lang == 'tr' %}selected{% endif %}>🇹🇷 Türkçe</option>
-                <option value="en" {% if current_lang == 'en' %}selected{% endif %}>🇺🇸 English</option>
-                <option value="de" {% if current_lang == 'de' %}selected{% endif %}>🇩🇪 Deutsch</option>
-                <option value="fr" {% if current_lang == 'fr' %}selected{% endif %}>🇫🇷 Français</option>
-                <option value="es" {% if current_lang == 'es' %}selected{% endif %}>🇪🇸 Español</option>
-                <option value="ru" {% if current_lang == 'ru' %}selected{% endif %}>🇷🇺 Русский</option>
-                <option value="ar" {% if current_lang == 'ar' %}selected{% endif %}>🇸🇦 العربية</option>
+                {% for lang_code, lang_name in LANGUAGES %}
+                <option value="{{ lang_code }}" {% if lang_code == current_lang %}selected{% endif %}>
+                    {{ lang_name }} ({{ lang_code }})
+                </option>
+                {% endfor %}
             </select>
         </div>
         
@@ -118,14 +118,13 @@
             const data = await response.json();
             
             if (data.success) {
-                // Sayfayı yenile
                 window.location.reload();
             } else {
-                alert('Ana dil değiştirilemedi: ' + data.error);
+                alert('{% trans "Ana dil değiştirilemedi:"|escapejs %} ' + data.error);
             }
         } catch (error) {
-            console.error('Dil değiştirme hatası:', error);
-            alert('Ana dil değiştirilirken hata oluştu');
+            console.error('{% trans "Dil değiştirme hatası:"|escapejs %}', error);
+            alert('{% trans "Ana dil değiştirilirken hata oluştu"|escapejs %}');
         }
     }
     
@@ -140,10 +139,11 @@
             .then(data => {
                 const infoDiv = document.getElementById('languageInfo');
                 if (infoDiv) {
-                    infoDiv.textContent = 'Mevcut: ' + data.current_language.toUpperCase();
+                    const label = '{% trans "Mevcut:"|escapejs %}';
+                    infoDiv.textContent = label + ' ' + data.current_language.toUpperCase();
                 }
             })
-            .catch(error => console.error('Dil bilgisi alınamadı:', error));
+            .catch(error => console.error('{% trans "Dil bilgisi alınamadı:"|escapejs %}', error));
     }
 </script>
 {% endblock %}

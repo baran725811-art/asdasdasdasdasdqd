@@ -110,7 +110,7 @@
     <div class="image-modal-container" id="homeModalContainer">
         <div class="image-modal-header">
             <h3 class="image-modal-title" id="homeModalTitle"></h3>
-            <button class="image-modal-close" onclick="closeHomeGalleryModal()">
+            <button type="button" class="image-modal-close" onclick="closeHomeGalleryModal()" aria-label="{% trans 'Kapat' %}">
                 <i class="fas fa-times"></i>
             </button>
         </div>
@@ -123,13 +123,13 @@
             </div>
         </div>
         <div class="image-modal-footer">
-            <button class="image-modal-nav" id="homePrevBtn" onclick="navigateHomeGallery('prev')">
+            <button type="button" class="image-modal-nav" id="homePrevBtn" onclick="navigateHomeGallery('prev')" aria-label="{% trans 'Önceki' %}">
                 <i class="fas fa-chevron-left"></i>
             </button>
             <div class="image-modal-counter">
                 <span id="homeModalCurrentIndex">1</span> / <span id="homeModalTotal">1</span>
             </div>
-            <button class="image-modal-nav" id="homeNextBtn" onclick="navigateHomeGallery('next')">
+            <button type="button" class="image-modal-nav" id="homeNextBtn" onclick="navigateHomeGallery('next')" aria-label="{% trans 'Sonraki' %}">
                 <i class="fas fa-chevron-right"></i>
             </button>
         </div>

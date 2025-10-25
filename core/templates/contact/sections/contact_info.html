@@ -87,30 +87,31 @@
                 <div class="social-section">
                     <h4>{% trans "Sosyal Medya" %}</h4>
                     <div class="social-links">
-                        {% if facebook_url %}
-                        <a href="{{ facebook_url }}" target="_blank" class="social-link facebook" title="Facebook">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        {% endif %}
-                        
-                        {% if instagram_url %}
-                        <a href="{{ instagram_url }}" target="_blank" class="social-link instagram" title="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        {% endif %}
-                        
-                        {% if twitter_url %}
-                        <a href="{{ twitter_url }}" target="_blank" class="social-link twitter" title="Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        {% endif %}
-                        
-                        {% if whatsapp_link %}
-                        <a href="{{ whatsapp_link }}" target="_blank" class="social-link whatsapp" title="WhatsApp">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                        {% endif %}
-                    </div>
+                        {% if facebook_url %}
+                        <a href="{{ facebook_url }}" target="_blank" class="social-link facebook" title="{% trans 'Facebook' %}">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        {% endif %}
+                        
+                        {% if instagram_url %}
+                        <a href="{{ instagram_url }}" target="_blank" class="social-link instagram" title="{% trans 'Instagram' %}">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        {% endif %}
+                        
+                        {% if twitter_url %}
+                        <a href="{{ twitter_url }}" target="_blank" class="social-link twitter" title="{% trans 'Twitter' %}">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        {% endif %}
+                        
+                        {% if whatsapp_link %}
+                        <a href="{{ whatsapp_link }}" target="_blank" class="social-link whatsapp" title="{% trans 'WhatsApp' %}">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        {% endif %}
+                    </div>
+
                 </div>
             </div>
 

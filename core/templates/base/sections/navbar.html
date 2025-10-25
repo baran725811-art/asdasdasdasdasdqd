@@ -7,7 +7,7 @@
     <div class="container-fluid px-lg-5">
         <!-- Logo & Brand -->
         <!-- Logo & Brand -->
-            <a class="navbar-brand" href="{% url 'home:home' %}" aria-label="{{ site_name|default:'Ana Sayfa' }}">
+            <a class="navbar-brand" href="{% url 'home:home' %}" aria-label="{% if site_name %}{{ site_name }}{% else %}{% trans 'Ana Sayfa' %}{% endif %}">
                 <div class="brand-container">
                     {% if site_logo %}
                         <img src="{{ site_logo.url }}" alt="{{ site_name }}" class="brand-logo" width="45" height="45">
@@ -199,7 +199,7 @@
                        role="menuitem"
                        aria-label="{% trans 'WhatsApp ile iletişime geç' %}">
                         <i class="fab fa-whatsapp nav-icon" aria-hidden="true"></i>
-                        <span class="nav-text d-lg-none">WhatsApp</span>
+                        <span class="nav-text d-lg-none">{% trans "WhatsApp" %}</span>
                         <div class="whatsapp-pulse"></div>
                     </a>
                 </li>

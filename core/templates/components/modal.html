@@ -7,7 +7,7 @@
     <div class="image-modal-container">
         <div class="image-modal-header">
             <span id="imageModalDescription"></span>
-            <span>/</span>
+            <span>{% trans "/" %}</span>
             <h3 class="image-modal-title" id="imageModalTitle"></h3>
 
             <div class="image-modal-meta" id="imageModalMeta">
@@ -24,8 +24,9 @@
         
         <div class="image-modal-body">
             <img id="imageModalImage" src="" alt="" class="image-modal-image">
-            <div class="image-modal-loading" id="imageModalLoading">
-                <i class="fas fa-spinner fa-spin"></i>
+            <div class="image-modal-loading" id="imageModalLoading" role="status" aria-live="polite">
+                <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+                <span class="visually-hidden">{% trans "Yükleniyor..." %}</span>
             </div>
         </div>
         
@@ -36,7 +37,7 @@
                 <i class="fas fa-chevron-left" aria-hidden="true"></i>
             </button>
             <div class="image-modal-counter" id="imageModalCounter">
-                <span id="imageModalCurrentIndex">1</span> / <span id="imageModalTotal">1</span>
+                <span id="imageModalCurrentIndex">1</span>{% trans " / " %}<span id="imageModalTotal">1</span>
             </div>
             <button class="image-modal-nav image-modal-next" id="imageModalNext" aria-label="{% trans 'Sonraki görsel' %}">
                 <i class="fas fa-chevron-right" aria-hidden="true"></i>
