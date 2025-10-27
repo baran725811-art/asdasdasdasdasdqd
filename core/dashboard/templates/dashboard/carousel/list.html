@@ -4,13 +4,14 @@
 {% load i18n %}
 {% load custom_filters %}
 
-{% block title %}{% trans "Carousel Yönetimi"%}{% endblock %}
-{% block page_title %}{% trans "Carousel Yönetimi"%}{% endblock %}
+{% block title %}{% trans "Carousel Yönetimi" %}{% endblock %}
+{% block page_title %}{% trans "Carousel Yönetimi" %}{% endblock %}
 
 <!-- Page Header Configuration -->
 {% block page_header %}
     {% trans "Ana sayfa slaytlarınızı düzenleyin ve yönetin" as carousel_subtitle %}
-    {% include 'dashboard/includes/navigation/page_header.html' with page_title="{% trans "Carousel Yönetimi"%}" page_subtitle=carousel_subtitle page_icon="fas fa-images" page_actions=page_actions %}
+    {% trans "Carousel Yönetimi" as page_title_trans %}
+    {% include 'dashboard/includes/navigation/page_header.html' with page_title=page_title_trans page_subtitle=carousel_subtitle page_icon="fas fa-images" page_actions=page_actions %}
 {% endblock %}
 
 <!-- Page Content -->
@@ -25,10 +26,10 @@
                 <div class="card-header-modern">
                     <div class="d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">
-                            <i class="fas fa-play me-2"></i>{% trans "Carousel Önizleme"%}
+                            <i class="fas fa-play me-2"></i>{% trans "Carousel Önizleme" %}
                         </h5>
                         <button class="btn btn-outline-primary btn-sm" id="previewToggle">
-                            <i class="fas fa-eye me-1"></i>{% trans "Önizlemeyi Göster/Gizle"%}
+                            <i class="fas fa-eye me-1"></i>{% trans "Önizlemeyi Göster/Gizle" %}
                         </button>
                     </div>
                 </div>
@@ -89,7 +90,8 @@
                                 <i class="fas fa-list me-2"></i>{% trans "Slayt Listesi" %}
                             </h5>
                             <div class="d-flex gap-2">
-                                {% include 'dashboard/includes/tables/table_search.html' with search_placeholder="{% trans "Slayt ara..."%}" search_id="slideSearch" %}
+                                {% trans "Slayt ara..." as search_placeholder_trans %}
+                                {% include 'dashboard/includes/tables/table_search.html' with search_placeholder=search_placeholder_trans search_id="slideSearch" %}
                                 <button type="button" class="btn-modern primary btn-sm" data-bs-toggle="modal" data-bs-target="#addSlideModal">
                                     <i class="fas fa-plus me-1"></i>{% trans "Yeni Slayt Ekle" %}
                                 </button>
@@ -174,7 +176,7 @@
 
             {% else %}
                 {% trans "Henüz slayt bulunmuyor" as empty_title %}
-                {% trans "İlk slaytınızı eklemek için yukarıdaki \"Yeni Slayt Ekle\" butonunu kullanın." as empty_message %}
+                {% trans "İlk slaytınızı eklemek için yukarıdaki Yeni Slayt Ekle butonunu kullanın." as empty_message %}
                 {% trans "İlk Slaytı Ekle" as add_first_slide %}
                 {% include 'dashboard/includes/ui/empty_state.html' with empty_title=empty_title empty_message=empty_message empty_icon="fas fa-images" action_button_attrs='data-bs-toggle="modal" data-bs-target="#addSlideModal"' action_button_text=add_first_slide action_button_icon="fas fa-plus" %}
             {% endif %}
@@ -360,7 +362,7 @@
                                 <div class="row">
                                     <div class="col-12">
                                         {% if lang == 'en' %}
-                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="title_en" field_label="{% trans "Başlık"%}" field_icon="fas fa-heading" field_type="text" field_value=slide.title_en_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="title_en" field_label="{% trans "Başlık" %}" field_icon="fas fa-heading" field_type="text" field_value=slide.title_en_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
                                         {% elif lang == 'de' %}
                                             {% include 'dashboard/includes/forms/form_field.html' with field_name="title_de" field_label="Başlık" field_icon="fas fa-heading" field_type="text" field_value=slide.title_de_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
                                         {% elif lang == 'fr' %}
@@ -474,7 +476,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
-                    <i class="fas fa-eye me-2"></i>{% trans "Slayt Detayları"%}
+                    <i class="fas fa-eye me-2"></i>{% trans "Slayt Detayları" %}
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
@@ -487,15 +489,16 @@
                     </div>
                     <div class="col-md-6">
                         <h4>{{ slide.title }}</h4>
-                        <p class="text-muted">{{ slide.description|default:"{% trans "Açıklama bulunmuyor."%}"|striptags }}</p>
+                        {% trans "Açıklama bulunmuyor." as no_description %}
+                        <p class="text-muted">{{ slide.description|default:no_description|striptags }}</p>
                         
                         <div class="slide-meta mt-3">
                             <div class="row">
                                 <div class="col-6">
-                                    <strong>{% trans "Sıra"%}:</strong> {{ slide.order }}
+                                    <strong>{% trans "Sıra" %}:</strong> {{ slide.order }}
                                 </div>
                                 <div class="col-6">
-                                    <strong>{% trans "Durum"%}:</strong> 
+                                    <strong>{% trans "Durum" %}:</strong> 
                                     {% include 'dashboard/includes/ui/status_badge.html' with badge_text=slide.is_active|yesno:"Aktif,Pasif" badge_color=slide.is_active|yesno:"success,danger" %}
                                 </div>
                             </div>
@@ -530,11 +533,11 @@
                     <i class="fas fa-trash-alt text-danger fa-3x mb-3"></i>
                     <h5>{% trans "Bu slaytı silmek istediğinizden emin misiniz?" %}</h5>
                     <p class="text-muted">
-                        <strong>"{{ slide.title }}"</strong> kalıcı olarak silinecek.
+                        <strong>"{{ slide.title }}"</strong> {% trans "kalıcı olarak silinecek." %}
                     </p>
                     <div class="alert alert-warning mt-3">
                         <i class="fas fa-exclamation-triangle me-2"></i>
-                        Bu işlem geri alınamaz!
+                        {% trans "Bu işlem geri alınamaz!" %}
                     </div>
                 </div>
             </div>

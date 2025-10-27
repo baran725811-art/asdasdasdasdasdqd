@@ -17,12 +17,14 @@
 <meta name="enabled-languages" content="{{ enabled_languages|safe }}">
 <meta name="primary-language" content="tr">
 
-{% block title %}{% trans "Hakkımızda Düzenle"%}{% endblock %}
-{% block page_title %}{% trans "Hakkımızda Düzenle"%}{% endblock %}
+{% block title %}{% trans "Hakkımızda Düzenle" %}{% endblock %}
+{% block page_title %}{% trans "Hakkımızda Düzenle" %}{% endblock %}
 
 <!-- Page Header Configuration -->
 {% block page_header %}
-    {% include 'dashboard/includes/navigation/page_header.html' with page_title="Hakkımızda Sayfası" page_subtitle="Şirket bilgilerinizi düzenleyin ve güncelleyin" page_icon="fas fa-info-circle" page_info=page_info_text page_actions=page_actions %}
+    {% trans "Hakkımızda Sayfası" as page_title_trans %}
+    {% trans "Şirket bilgilerinizi düzenleyin ve güncelleyin" as page_subtitle_trans %}
+    {% include 'dashboard/includes/navigation/page_header.html' with page_title=page_title_trans page_subtitle=page_subtitle_trans page_icon="fas fa-info-circle" page_info=page_info_text page_actions=page_actions %}
 {% endblock %}
 
 <!-- Main Content Area -->
@@ -39,7 +41,7 @@
     <div class="card-modern mb-4">
         <div class="card-header-modern">
             <h5 class="mb-0">
-                <i class="fas fa-edit me-2"></i>{% trans "Temel Bilgiler"%}
+                <i class="fas fa-edit me-2"></i>{% trans "Temel Bilgiler" %}
             </h5>
         </div>
         <div class="card-body-modern">
@@ -47,14 +49,14 @@
             <div class="translation-content active" data-lang="tr">
                 <div class="row g-3">
                     <div class="col-12 mb-3">
-                        <label for="{{ form.title.id_for_label }}" class="form-label">{% trans "Sayfa Başlığı"%}</label>
+                        <label for="{{ form.title.id_for_label }}" class="form-label">{% trans "Sayfa Başlığı" %}</label>
                         {{ form.title }}
                         {% if form.title.errors %}
                             <div class="text-danger">{{ form.title.errors.0 }}</div>
                         {% endif %}
                     </div>
                     <div class="col-12 mb-3">
-                        <label for="{{ form.short_description.id_for_label }}" class="form-label">{% trans "Kısa Açıklama"%}</label>
+                        <label for="{{ form.short_description.id_for_label }}" class="form-label">{% trans "Kısa Açıklama" %}</label>
                         {{ form.short_description }}
                         {% if form.short_description.errors %}
                             <div class="text-danger">{{ form.short_description.errors.0 }}</div>
@@ -88,21 +90,21 @@
     <div class="card-modern mb-4">
         <div class="card-header-modern">
             <h5 class="mb-0">
-                <i class="fas fa-image me-2"></i>{% trans "Ana Görsel"%}
+                <i class="fas fa-image me-2"></i>{% trans "Ana Görsel" %}
             </h5>
         </div>
         <div class="card-body-modern">
             <div class="row align-items-center">
                 <div class="col-md-8">
-                    <label for="{{ form.image.id_for_label }}" class="form-label">{% trans "Görsel Seçin"%}</label>
+                    <label for="{{ form.image.id_for_label }}" class="form-label">{% trans "Görsel Seçin" %}</label>
                     {{ form.image }}
                     {% if form.image.errors %}
                         <div class="text-danger">{{ form.image.errors.0 }}</div>
                     {% endif %}
                     <div class="mt-3">
-                        <label for="{{ form.alt_text.id_for_label }}" class="form-label">{% trans "Alt Metin (SEO)"%}</label>
+                        <label for="{{ form.alt_text.id_for_label }}" class="form-label">{% trans "Alt Metin (SEO)" %}</label>
                         {{ form.alt_text|add_class:"form-control" }}
-                        <small class="form-text text-muted">{% trans "Görsel için SEO alt metni (max 125 karakter)"%}</small>
+                        <small class="form-text text-muted">{% trans "Görsel için SEO alt metni (max 125 karakter)" %}</small>
                         {% if form.alt_text.errors %}
                             <div class="text-danger">{{ form.alt_text.errors.0 }}</div>
                         {% endif %}
@@ -113,7 +115,7 @@
                         <div class="current-image">
                             <img src="{{ about.image.url }}" alt="{{ about.get_alt_text }}" class="image-modern w-100" loading="lazy">
                             <div class="image-overlay">
-                                <small class="text-white">{% trans "Mevcut Görsel"%}</small>
+                                <small class="text-white">{% trans "Mevcut Görsel" %}</small>
                             </div>
                         </div>
                     {% else %}
@@ -129,7 +131,7 @@
     <div class="card-modern mb-4">
         <div class="card-header-modern">
             <h5 class="mb-0">
-                <i class="fas fa-file-alt me-2"></i>{% trans "İçerik Bölümleri"%}
+                <i class="fas fa-file-alt me-2"></i>{% trans "İçerik Bölümleri" %}
             </h5>
         </div>
         <div class="card-body-modern">
@@ -139,7 +141,7 @@
                     <div class="content-section-card mb-4">
                         <div class="section-header">
                             <i class="fas fa-bullseye text-primary me-2"></i>
-                            <h6 class="mb-0">{% trans "Misyonumuz"%}</h6>
+                            <h6 class="mb-0">{% trans "Misyonumuz" %}</h6>
                         </div>
                         <div class="section-body">
                             {{ form.mission|add_class:"form-control-expanded"|attr:"rows:8"|attr:"style:width:100% !important; min-height: 200px;" }}
@@ -152,7 +154,7 @@
                     <div class="content-section-card mb-4">
                         <div class="section-header">
                             <i class="fas fa-eye text-success me-2"></i>
-                            <h6 class="mb-0">{% trans "Vizyonumuz"%}</h6>
+                            <h6 class="mb-0">{% trans "Vizyonumuz" %}</h6>
                         </div>
                         <div class="section-body">
                             {{ form.vision|add_class:"form-control-expanded"|attr:"rows:8"|attr:"style:width:100% !important; min-height: 200px;" }}
@@ -165,7 +167,7 @@
                     <div class="content-section-card">
                         <div class="section-header">
                             <i class="fas fa-book text-info me-2"></i>
-                            <h6 class="mb-0">{% trans "Hikayemiz"%}</h6>
+                            <h6 class="mb-0">{% trans "Hikayemiz" %}</h6>
                         </div>
                         <div class="section-body">
                             {{ form.story|add_class:"form-control-expanded"|attr:"rows:8"|attr:"style:width:100% !important; min-height: 200px;" }}
@@ -225,42 +227,42 @@
     <div class="card-modern mb-4">
         <div class="card-header-modern">
             <h5 class="mb-0">
-                <i class="fas fa-chart-bar me-2"></i>{% trans "Şirket İstatistikleri"%}
+                <i class="fas fa-chart-bar me-2"></i>{% trans "Şirket İstatistikleri" %}
             </h5>
         </div>
         <div class="card-body-modern">
             <div class="stats-grid-vertical">
                 <div class="row g-3">
                     <div class="col-12 col-sm-6 col-lg-4">
-                        <label for="{{ form.years_experience.id_for_label }}" class="form-label">{% trans "Tecrübe Yılı"%}</label>
+                        <label for="{{ form.years_experience.id_for_label }}" class="form-label">{% trans "Tecrübe Yılı" %}</label>
                         {{ form.years_experience }}
                         {% if form.years_experience.errors %}
                             <div class="text-danger">{{ form.years_experience.errors.0 }}</div>
                         {% endif %}
                     </div>
                     <div class="col-12 col-sm-6 col-lg-4">
-                        <label for="{{ form.completed_jobs.id_for_label }}" class="form-label">{% trans "Tamamlanan İşler"%}</label>
+                        <label for="{{ form.completed_jobs.id_for_label }}" class="form-label">{% trans "Tamamlanan İşler" %}</label>
                         {{ form.completed_jobs }}
                         {% if form.completed_jobs.errors %}
                             <div class="text-danger">{{ form.completed_jobs.errors.0 }}</div>
                         {% endif %}
                     </div>
                     <div class="col-12 col-sm-6 col-lg-4">
-                        <label for="{{ form.happy_customers.id_for_label }}" class="form-label">{% trans "Mutlu Müşteri"%}</label>
+                        <label for="{{ form.happy_customers.id_for_label }}" class="form-label">{% trans "Mutlu Müşteri" %}</label>
                         {{ form.happy_customers }}
                         {% if form.happy_customers.errors %}
                             <div class="text-danger">{{ form.happy_customers.errors.0 }}</div>
                         {% endif %}
                     </div>
                     <div class="col-12 col-sm-6 col-lg-4">
-                        <label for="{{ form.total_services.id_for_label }}" class="form-label">{% trans "Toplam Hizmet"%}</label>
+                        <label for="{{ form.total_services.id_for_label }}" class="form-label">{% trans "Toplam Hizmet" %}</label>
                         {{ form.total_services }}
                         {% if form.total_services.errors %}
                             <div class="text-danger">{{ form.total_services.errors.0 }}</div>
                         {% endif %}
                     </div>
                     <div class="col-12 col-sm-6 col-lg-4">
-                        <label for="{{ form.customer_satisfaction.id_for_label }}" class="form-label">{% trans "Müşteri Memnuniyeti (%)"%}</label>
+                        <label for="{{ form.customer_satisfaction.id_for_label }}" class="form-label">{% trans "Müşteri Memnuniyeti (%)" %}</label>
                         {{ form.customer_satisfaction }}
                         {% if form.customer_satisfaction.errors %}
                             <div class="text-danger">{{ form.customer_satisfaction.errors.0 }}</div>
@@ -307,7 +309,7 @@
     <div class="card-modern mb-4">
         <div class="card-header-modern">
             <h5 class="mb-0">
-                <i class="fas fa-tasks me-2"></i>{% trans "Form Durumu"%}
+                <i class="fas fa-tasks me-2"></i>{% trans "Form Durumu" %}
             </h5>
         </div>
         <div class="card-body-modern">
@@ -317,7 +319,7 @@
                     <div class="alert alert-info" id="validationAlert" style="display: none;">
                         <h6 class="alert-heading mb-2">
                             <i class="fas fa-exclamation-triangle me-1"></i>
-                            {% trans "Dikkat Edilecek Noktalar"%}
+                            {% trans "Dikkat Edilecek Noktalar" %}
                         </h6>
                         <ul class="mb-0" id="validationList"></ul>
                     </div>
@@ -325,9 +327,9 @@
                     <div class="alert alert-success" id="validationSuccess" style="display: none;">
                         <h6 class="alert-heading mb-1">
                             <i class="fas fa-check-circle me-1"></i>
-                            {% trans "Form Hazır"%}
+                            {% trans "Form Hazır" %}
                         </h6>
-                        <small>{% trans "Tüm zorunlu alanlar dolduruldu"%}</small>
+                        <small>{% trans "Tüm zorunlu alanlar dolduruldu" %}</small>
                     </div>
                 </div>
                 
@@ -343,71 +345,71 @@
                 <div class="field-status-list">
                     <div class="status-item mb-2">
                         <div class="d-flex justify-content-between align-items-center">
-                            <span class="field-name">{% trans "Sayfa Başlığı"%}</span>
-                            <span class="badge bg-secondary" id="titleStatus">{% trans "Boş"%}</span>
+                            <span class="field-name">{% trans "Sayfa Başlığı" %}</span>
+                            <span class="badge bg-secondary" id="titleStatus">{% trans "Boş" %}</span>
                         </div>
                         <div class="field-info">
-                            <small class="text-muted" id="titleInfo">{% trans "0 karakter"%}</small>
+                            <small class="text-muted" id="titleInfo">{% trans "0 karakter" %}</small>
                         </div>
                     </div>
                     
                     <div class="status-item mb-2">
                         <div class="d-flex justify-content-between align-items-center">
-                            <span class="field-name">{% trans "Kısa Açıklama"%}</span>
-                            <span class="badge bg-secondary" id="descriptionStatus">{% trans "Boş"%}</span>
+                            <span class="field-name">{% trans "Kısa Açıklama" %}</span>
+                            <span class="badge bg-secondary" id="descriptionStatus">{% trans "Boş" %}</span>
                         </div>
                         <div class="field-info">
-                            <small class="text-muted" id="descriptionInfo">0 karakter</small>
+                            <small class="text-muted" id="descriptionInfo">{% trans "0 karakter" %}</small>
                         </div>
                     </div>
                     
                     <div class="status-item mb-2">
                         <div class="d-flex justify-content-between align-items-center">
-                            <span class="field-name">{% trans "Ana Görsel"%}</span>
-                            <span class="badge bg-secondary" id="imageStatus">{% trans "Yok"%}</span>
+                            <span class="field-name">{% trans "Ana Görsel" %}</span>
+                            <span class="badge bg-secondary" id="imageStatus">{% trans "Yok" %}</span>
                         </div>
                         <div class="field-info">
-                            <small class="text-muted" id="imageInfo">Görsel seçilmedi</small>
+                            <small class="text-muted" id="imageInfo">{% trans "Görsel seçilmedi" %}</small>
                         </div>
                     </div>
                     
                     <div class="status-item mb-2">
                         <div class="d-flex justify-content-between align-items-center">
-                            <span class="field-name">{% trans "Misyon"%}</span>
-                            <span class="badge bg-secondary" id="missionStatus">{% trans "Boş"%}</span>
+                            <span class="field-name">{% trans "Misyon" %}</span>
+                            <span class="badge bg-secondary" id="missionStatus">{% trans "Boş" %}</span>
                         </div>
                         <div class="field-info">
-                            <small class="text-muted" id="missionInfo">0 karakter</small>
+                            <small class="text-muted" id="missionInfo">{% trans "0 karakter" %}</small>
                         </div>
                     </div>
                     
                     <div class="status-item mb-2">
                         <div class="d-flex justify-content-between align-items-center">
-                            <span class="field-name">{% trans "Vizyon"%}</span>
-                            <span class="badge bg-secondary" id="visionStatus">{% trans "Boş"%}</span>
+                            <span class="field-name">{% trans "Vizyon" %}</span>
+                            <span class="badge bg-secondary" id="visionStatus">{% trans "Boş" %}</span>
                         </div>
                         <div class="field-info">
-                            <small class="text-muted" id="visionInfo">0 karakter</small>
+                            <small class="text-muted" id="visionInfo">{% trans "0 karakter" %}</small>
                         </div>
                     </div>
                     
                     <div class="status-item mb-2">
                         <div class="d-flex justify-content-between align-items-center">
-                            <span class="field-name">{% trans "Hikaye"%}</span>
-                            <span class="badge bg-secondary" id="storyStatus">{% trans "Boş"%}</span>
+                            <span class="field-name">{% trans "Hikaye" %}</span>
+                            <span class="badge bg-secondary" id="storyStatus">{% trans "Boş" %}</span>
                         </div>
                         <div class="field-info">
-                            <small class="text-muted" id="storyInfo">0 karakter</small>
+                            <small class="text-muted" id="storyInfo">{% trans "0 karakter" %}</small>
                         </div>
                     </div>
                     
                     <div class="status-item mb-2">
                         <div class="d-flex justify-content-between align-items-center">
-                            <span class="field-name">{% trans "İstatistikler"%}</span>
-                            <span class="badge bg-secondary" id="statsStatus">{% trans "Eksik"%}</span>
+                            <span class="field-name">{% trans "İstatistikler" %}</span>
+                            <span class="badge bg-secondary" id="statsStatus">{% trans "Eksik" %}</span>
                         </div>
                         <div class="field-info">
-                            <small class="text-muted" id="statsInfo">0/5 alan dolduruldu</small>
+                            <small class="text-muted" id="statsInfo">{% trans "0/5 alan dolduruldu" %}</small>
                         </div>
                     </div>
                 </div>
@@ -418,19 +420,19 @@
                         <div class="col-4">
                             <div class="summary-item">
                                 <h6 class="text-success mb-0" id="completedFields">0</h6>
-                                <small class="text-muted">{% trans "Tamamlanan"%}</small>
+                                <small class="text-muted">{% trans "Tamamlanan" %}</small>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="summary-item">
                                 <h6 class="text-warning mb-0" id="pendingFields">0</h6>
-                                <small class="text-muted">{% trans "Eksik"%}</small>
+                                <small class="text-muted">{% trans "Eksik" %}</small>
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="summary-item">
                                 <h6 class="text-info mb-0" id="totalFields">10</h6>
-                                <small class="text-muted">{% trans "Toplam"%}</small>
+                                <small class="text-muted">{% trans "Toplam" %}</small>
                             </div>
                         </div>
                     </div>

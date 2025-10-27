@@ -3,19 +3,20 @@
 {% load i18n %}
 {% load dashboard_filters %}
 {% load custom_filters %}
-{% block title %}{% trans "Ürün Yönetimi"%}{% endblock %}
-{% block page_title %}{% trans "Ürün Yönetimi"%}{% endblock %}
+{% block title %}{% trans "Ürün Yönetimi" %}{% endblock %}
+{% block page_title %}{% trans "Ürün Yönetimi" %}{% endblock %}
 
 {% block page_content %}
 <!-- Page Header -->
-{% include 'dashboard/includes/navigation/page_header.html' with page_icon="fas fa-box-open" page_title="Ürün Yönetimi" page_subtitle="Ürünlerinizi kolayca yönetin ve takip edin" page_actions=page_actions %}
+{% include 'dashboard/includes/navigation/page_header.html' with page_icon="fas fa-box-open" page_title=_("Ürün Yönetimi") page_subtitle=_("Ürünlerinizi kolayca yönetin ve takip edin") page_actions=page_actions %}
+
 
 <!-- Stats Grid -->
 <div class="stats-grid mb-4">
-    {% include 'dashboard/includes/cards/stats_card.html' with card_icon="fas fa-boxes" card_value=products|length card_label="Toplam Ürün" card_color="primary" %}
-    {% include 'dashboard/includes/cards/stats_card.html' with card_icon="fas fa-check-circle" card_value=active_products_count card_label="Aktif Ürünler" card_color="success" %}
-    {% include 'dashboard/includes/cards/stats_card.html' with card_icon="fas fa-exclamation-triangle" card_value=low_stock_count card_label="Düşük Stok" card_color="warning" %}
-    {% include 'dashboard/includes/cards/stats_card.html' with card_icon="fas fa-chart-line" card_value=total_value card_label="Toplam Değer" card_color="info" %}
+    {% include 'dashboard/includes/cards/stats_card.html' with card_icon="fas fa-boxes" card_value=products|length card_label=_("Toplam Ürün") card_color="primary" %}
+    {% include 'dashboard/includes/cards/stats_card.html' with card_icon="fas fa-check-circle" card_value=active_products_count card_label=_("Aktif Ürünler") card_color="success" %}
+    {% include 'dashboard/includes/cards/stats_card.html' with card_icon="fas fa-exclamation-triangle" card_value=low_stock_count card_label=_("Düşük Stok") card_color="warning" %}
+    {% include 'dashboard/includes/cards/stats_card.html' with card_icon="fas fa-chart-line" card_value=total_value card_label=_("Toplam Değer") card_color="info" %}
 </div>
 
 
@@ -29,7 +30,7 @@
             </h5>
             <div class="d-flex gap-2">
                 <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="collapse" data-bs-target="#productFilters">
-                    <i class="fas fa-filter me-1"></i>Filtreler
+                    <i class="fas fa-filter me-1"></i>{% trans "Filtreler" %}
                 </button>
                 <button type="button" class="btn-modern primary btn-sm" data-bs-toggle="modal" data-bs-target="#addProductModal">
                     <i class="fas fa-plus me-1"></i>{% trans "Yeni Ürün Ekle" %}
@@ -49,15 +50,15 @@
                                     <i class="fas fa-search text-muted"></i>
                                 </span>
                                 <input type="text" name="search" class="form-control border-start-0" 
-                                       placeholder="Ürün adı, kodu veya marka ara..."
-                                       value="{{ request.GET.search }}">
+                                    placeholder="{% trans 'Ürün adı, kodu veya marka ara...' %}"
+                                    value="{{ request.GET.search }}">
                             </div>
                         </div>
                         
                         <!-- Kategori -->
                         <div class="col-md-2">
                             <select name="category" class="form-select">
-                                <option value="">Tüm Kategoriler</option>
+                                <option value="">{% trans "Tüm Kategoriler" %}</option>
                                 {% for option in category_options %}
                                     <option value="{{ option.value }}" 
                                             {% if option.value|stringformat:"s" == request.GET.category %}selected{% endif %}>
@@ -70,7 +71,7 @@
                         <!-- Marka -->
                         <div class="col-md-2">
                             <select name="brand" class="form-select">
-                                <option value="">Tüm Markalar</option>
+                                <option value="">{% trans "Tüm Markalar" %}</option>
                                 {% for option in brand_options %}
                                     <option value="{{ option.value }}" 
                                             {% if option.value == request.GET.brand %}selected{% endif %}>
@@ -83,9 +84,9 @@
                         <!-- Durum -->
                         <div class="col-md-2">
                             <select name="status" class="form-select">
-                                <option value="">Tüm Durumlar</option>
-                                <option value="active" {% if request.GET.status == 'active' %}selected{% endif %}>Aktif</option>
-                                <option value="inactive" {% if request.GET.status == 'inactive' %}selected{% endif %}>Pasif</option>
+                                <option value="">{% trans "Tüm Durumlar" %}</option>
+                                <option value="active" {% if request.GET.status == 'active' %}selected{% endif %}>{% trans "Aktif" %}</option>
+                                <option value="inactive" {% if request.GET.status == 'inactive' %}selected{% endif %}>{% trans "Pasif" %}</option>
                             </select>
                         </div>
                         
@@ -131,7 +132,7 @@
                                         <strong>{{ product.name }}</strong>
                                         {% if product.is_featured %}
                                             <span class="badge bg-warning ms-1">
-                                                <i class="fas fa-star"></i> Öne Çıkan
+                                                <i class="fas fa-star"></i> {% trans "Öne Çıkan" %}
                                             </span>
                                         {% endif %}
                                     </div>
@@ -161,11 +162,11 @@
                                 <td>
                                     {% if product.stock is not None %}
                                         {% if product.stock > 10 %}
-                                            <span class="text-success">{{ product.stock }} adet</span>
+                                            <span class="text-success">{% blocktrans with stock=product.stock %}{{ stock }} adet{% endblocktrans %}</span>
                                         {% elif product.stock > 0 %}
-                                            <span class="text-warning">{{ product.stock }} adet</span>
+                                            <span class="text-warning">{% blocktrans with stock=product.stock %}{{ stock }} adet{% endblocktrans %}</span>
                                         {% else %}
-                                            <span class="text-danger">Stokta Yok</span>
+                                            <span class="text-danger">{% trans "Stokta Yok" %}</span>
                                         {% endif %}
                                     {% else %}
                                         <span class="text-muted">—</span>
@@ -177,13 +178,13 @@
                                 <td>{{ product.created_at|date:"d.m.Y" }}</td>
                                 <td>
                                     <div class="action-buttons">
-                                        <button type="button" class="btn btn-sm btn-outline-info" data-bs-toggle="modal" data-bs-target="#viewProductModal{{ product.id }}">
+                                        <button type="button" class="btn btn-sm btn-outline-info" data-bs-toggle="modal" data-bs-target="#viewProductModal{{ product.id }}" title="{% trans 'Görüntüle' %}">
                                             <i class="fas fa-eye"></i>
                                         </button>
-                                        <button type="button" class="btn btn-sm btn-outline-warning" data-bs-toggle="modal" data-bs-target="#editProductModal{{ product.id }}">
+                                        <button type="button" class="btn btn-sm btn-outline-warning" data-bs-toggle="modal" data-bs-target="#editProductModal{{ product.id }}" title="{% trans 'Düzenle' %}">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteProductModal{{ product.id }}">
+                                        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteProductModal{{ product.id }}" title="{% trans 'Sil' %}">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </div>
@@ -197,7 +198,7 @@
                     {% else %}
                         <tr>
                             <td colspan="10">
-                                {% include 'dashboard/includes/ui/empty_state.html' with empty_icon="fas fa-boxes" empty_title="Henüz ürün eklenmemiş" empty_message="İlk ürününüzü ekleyerek başlayın" action_button_text="İlk Ürünü Ekle" action_button_icon="fas fa-plus" action_button_attrs='data-bs-toggle="modal" data-bs-target="#addProductModal"' %}
+                                {% include 'dashboard/includes/ui/empty_state.html' with empty_icon="fas fa-boxes" empty_title=_("Henüz ürün eklenmemiş") empty_message=_("İlk ürününüzü ekleyerek başlayın") action_button_text=_("İlk Ürünü Ekle") action_button_icon="fas fa-plus" action_button_attrs='data-bs-toggle="modal" data-bs-target="#addProductModal"' %}
                             </td>
                         </tr>
                     {% endif %}
@@ -215,7 +216,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
-                    <i class="fas fa-plus me-2"></i>{% trans "Yeni Ürün Ekle"%}
+                    <i class="fas fa-plus me-2"></i>{% trans "Yeni Ürün Ekle" %}
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
@@ -233,20 +234,20 @@
                     <div class="translation-content active" data-lang="tr">
                         <div class="row">
                             <div class="col-md-6">
-                                {% include 'dashboard/includes/forms/form_field.html' with field_name="name" field_label="Ürün Adı" field_icon="fas fa-box" field_type="text" is_required=True help_text="Ürünün Türkçe adı" language_code="tr" %}
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="name" field_label=_("Ürün Adı") field_icon="fas fa-box" field_type="text" is_required=True help_text=_("Ürünün Türkçe adı") language_code="tr" %}
                             </div>
                             <div class="col-md-6">
-                                {% include 'dashboard/includes/forms/select_field.html' with field_name="category" label="Kategori" icon="fas fa-tags" options=category_options required=True %}
+                                {% include 'dashboard/includes/forms/select_field.html' with field_name="category" label=_("Kategori") icon="fas fa-tags" options=category_options required=True %}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                {% include 'dashboard/includes/forms/url_field.html' with field_name="slug" label="URL" icon="fas fa-link" field_type="slug" source_field="name" help_text="Otomatik oluşturulur veya özel girebilirsiniz" %}
+                                {% include 'dashboard/includes/forms/url_field.html' with field_name="slug" label=_("URL") icon="fas fa-link" field_type="slug" source_field="name" help_text=_("Otomatik oluşturulur veya özel girebilirsiniz") %}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description" label="Açıklama" rows="4" help_text="Ürünün Türkçe açıklaması" %}
+                                {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description" label=_("Açıklama") rows="4" help_text=_("Ürünün Türkçe açıklaması") %}
                             </div>
                         </div>
                     </div>
@@ -281,29 +282,29 @@
                         <div class="card-body-modern">
                             <div class="row">
                                 <div class="col-md-6">
-                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="price" field_label="Fiyat" field_icon="fas fa-lira-sign" field_type="number" field_step="0.01" help_text="İsteğe bağlı" %}
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="price" field_label=_("Fiyat") field_icon="fas fa-lira-sign" field_type="number" field_step="0.01" help_text=_("İsteğe bağlı") %}
                                 </div>
                                 <div class="col-md-6">
-                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="stock" field_label="Stok" field_icon="fas fa-warehouse" field_type="number" help_text="İsteğe bağlı" %}
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="stock" field_label=_("Stok") field_icon="fas fa-warehouse" field_type="number" help_text=_("İsteğe bağlı") %}
                                 </div>
                             </div>
 
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="discount_price" field_label="İndirimli Fiyat" field_icon="fas fa-percent" field_type="number" field_step="0.01" help_text="İndirim varsa bu alanı doldurun" %}
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="discount_price" field_label=_("İndirimli Fiyat") field_icon="fas fa-percent" field_type="number" field_step="0.01" help_text=_("İndirim varsa bu alanı doldurun") %}
                                 </div>
                                 <div class="col-md-6">
-                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="sku" field_label="Ürün Kodu" field_icon="fas fa-barcode" field_type="text" help_text="Otomatik oluşturulur" %}
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="sku" field_label=_("Ürün Kodu") field_icon="fas fa-barcode" field_type="text" help_text=_("Otomatik oluşturulur") %}
                                 </div>
                             </div>
                             
                             <div class="row">
                                 <div class="col-md-6">
-                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="brand" field_label="Marka" field_icon="fas fa-tag" field_type="text" help_text="İsteğe bağlı" %}
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="brand" field_label=_("Marka") field_icon="fas fa-tag" field_type="text" help_text=_("İsteğe bağlı") %}
                                 </div>
                                 <div class="col-md-6">
-                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="weight" field_label="Ağırlık (kg)" field_icon="fas fa-weight-hanging" field_type="number" field_step="0.01" help_text="İsteğe bağlı" %}
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="weight" field_label=_("Ağırlık (kg)") field_icon="fas fa-weight-hanging" field_type="number" field_step="0.01" help_text=_("İsteğe bağlı") %}
                                 </div>
                             </div>
 
@@ -311,30 +312,30 @@
                             
                             <div class="row">
                                 <div class="col-12">
-                                    {% include 'dashboard/includes/forms/image_upload_field.html' with field_name="image" label="Ürün Görseli" help_text="JPG, PNG formatlarında görsel yükleyebilirsiniz" %}
+                                    {% include 'dashboard/includes/forms/image_upload_field.html' with field_name="image" label=_("Ürün Görseli") help_text=_("JPG, PNG formatlarında görsel yükleyebilirsiniz") %}
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text" field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" help_text="Ürün görseli için SEO alt metni (max 125 karakter)" %}
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text" field_label=_("Alt Metin (SEO)") field_icon="fas fa-paragraph" field_type="text" help_text=_("Ürün görseli için SEO alt metni (max 125 karakter)") %}
                                 </div>
                             </div>
                             
                             <div class="row">
                                 <div class="col-md-6">
-                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="meta_title" field_label="Meta Başlık" field_icon="fas fa-heading" field_type="text" help_text="SEO için" %}
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="meta_title" field_label=_("Meta Başlık") field_icon="fas fa-heading" field_type="text" help_text=_("SEO için") %}
                                 </div>
                                 <div class="col-md-6">
-                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="meta_description" field_label="Meta Açıklama" field_icon="fas fa-paragraph" field_type="textarea" field_rows="2" help_text="SEO için" %}
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="meta_description" field_label=_("Meta Açıklama") field_icon="fas fa-paragraph" field_type="textarea" field_rows="2" help_text=_("SEO için") %}
                                 </div>
                             </div>
                             
                             <div class="row">
                                 <div class="col-md-6">
-                                    {% include 'dashboard/includes/forms/checkbox_field.html' with field_name="is_featured" label="Öne Çıkan Ürün" field_type="switch" icon="fas fa-star" %}
+                                    {% include 'dashboard/includes/forms/checkbox_field.html' with field_name="is_featured" label=_("Öne Çıkan Ürün") field_type="switch" icon="fas fa-star" %}
                                 </div>
                                 <div class="col-md-6">
-                                    {% include 'dashboard/includes/forms/checkbox_field.html' with field_name="is_active" label="Satışta" field_type="switch" icon="fas fa-toggle-on" checked=True %}
+                                    {% include 'dashboard/includes/forms/checkbox_field.html' with field_name="is_active" label=_("Satışta") field_type="switch" icon="fas fa-toggle-on" checked=True %}
                                 </div>
                             </div>
                         </div>
@@ -346,7 +347,7 @@
                         <i class="fas fa-times me-2"></i>{% trans "İptal" %}
                     </button>
                     <button type="submit" class="btn-modern primary">
-                        <i class="fas fa-save"></i>{% trans "Ürünü Kaydet" %}
+                        <i class="fas fa-save me-2"></i>{% trans "Ürünü Kaydet" %}
                     </button>
                 </div>
             </form>
@@ -362,7 +363,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
-                    <i class="fas fa-edit me-2"></i>{% trans "Ürün Düzenle"%}: {{ product.name }}
+                    <i class="fas fa-edit me-2"></i>{% trans "Ürün Düzenle" %}: {{ product.name }}
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
@@ -442,7 +443,7 @@
                                     {% include 'dashboard/includes/forms/form_field.html' with field_name="discount_price" field_label="İndirimli Fiyat" field_icon="fas fa-percent" field_type="number" field_step="0.01" field_value=product.discount_price help_text="İndirim varsa bu alanı doldurun" %}
                                 </div>
                                 <div class="col-md-6">
-                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="sku" field_label="Ürün Kodu" field_icon="fas fa-barcode" field_type="text" field_value=product.sku help_text="Değiştirebilirsiniz" %}
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="sku" field_label=_("Ürün Kodu") field_icon="fas fa-barcode" field_type="text" field_value=product.sku help_text=_("Değiştirebilirsiniz") %}
                                 </div>
                             </div>
 
@@ -457,7 +458,7 @@
                             
                             <div class="row">
                                 <div class="col-12">
-                                    {% include 'dashboard/includes/forms/image_upload_field.html' with field_name="image" label="Ürün Görseli" current_image=product.image help_text="Yeni bir görsel seçmezseniz mevcut görsel korunur" %}
+                                    {% include 'dashboard/includes/forms/image_upload_field.html' with field_name="image" label=_("Ürün Görseli") current_image=product.image help_text=_("Yeni bir görsel seçmezseniz mevcut görsel korunur") %}
                                 </div>
                             </div>
                             <div class="row">
@@ -506,7 +507,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
-                    <i class="fas fa-eye me-2"></i>{% trans "Ürün Detayları"%}: {{ product.name }}
+                    <i class="fas fa-eye me-2"></i>{% trans "Ürün Detayları" %}: {{ product.name }}
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
@@ -542,7 +543,7 @@
                                 <div class="mb-2">
                                     <strong>{% trans "Stok" %}:</strong> 
                                     {% if product.stock is not None %}
-                                        {{ product.stock }} adet
+                                        {% blocktrans with stock=product.stock %}{{ stock }} adet{% endblocktrans %}
                                     {% else %}
                                         <span class="text-muted">{% trans "Belirtilmemiş" %}</span>
                                     {% endif %}
@@ -552,7 +553,9 @@
                                 <div class="mb-2">
                                     <strong>{% trans "İndirimli Fiyat" %}:</strong> {{ product.discount_price|floatformat:2 }} ₺
                                     {% if product.has_discount %}
-                                        <span class="badge bg-success ms-2">%{{ product.get_discount_percentage }} indirim</span>
+                                        <span class="badge bg-success ms-2">
+                                            {% blocktrans with percentage=product.get_discount_percentage %}%{{ percentage }} indirim{% endblocktrans %}
+                                        </span>
                                     {% endif %}
                                 </div>
                                 {% endif %}
@@ -578,11 +581,11 @@
 
                                 <div class="mb-2">
                                     <strong>{% trans "Durum" %}:</strong>
-                                    {% include 'dashboard/includes/ui/status_badge.html' with badge_text=product.is_active|yesno:"Satışta,Pasif" badge_color=product.is_active|yesno:"success,danger" %}
+                                    {% include 'dashboard/includes/ui/status_badge.html' with badge_text=product.is_active|yesno:_("Satışta")|add:","|add:_("Pasif") badge_color=product.is_active|yesno:"success,danger" %}
                                 </div>
                                 {% if product.is_featured %}
                                 <div class="mb-2">
-                                    {% include 'dashboard/includes/ui/status_badge.html' with badge_text="Öne Çıkan" badge_color="warning" badge_icon="fas fa-star" %}
+                                    {% include 'dashboard/includes/ui/status_badge.html' with badge_text=_("Öne Çıkan") badge_color="warning" badge_icon="fas fa-star" %}
                                 </div>
                                 {% endif %}
                             </div>
@@ -592,10 +595,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                    <i class="fas fa-times"></i>{% trans "Kapat" %}
+                    <i class="fas fa-times me-2"></i>{% trans "Kapat" %}
                 </button>
                 <button type="button" class="btn-modern primary" data-bs-toggle="modal" data-bs-target="#editProductModal{{ product.id }}">
-                    <i class="fas fa-edit"></i>{% trans "Düzenle" %}
+                    <i class="fas fa-edit me-2"></i>{% trans "Düzenle" %}
                 </button>
             </div>
         </div>
@@ -619,11 +622,11 @@
                     <i class="fas fa-trash-alt text-danger fa-3x mb-3"></i>
                     <h5>{% trans "Bu ürünü silmek istediğinizden emin misiniz?" %}</h5>
                     <p class="text-muted">
-                        <strong>"{{ product.name }}"</strong> kalıcı olarak silinecek.
+                        <strong>"{{ product.name }}"</strong> {% trans "kalıcı olarak silinecek." %}
                     </p>
                     <div class="alert alert-warning mt-3">
                         <i class="fas fa-exclamation-triangle me-2"></i>
-                        Bu işlem geri alınamaz!
+                        {% trans "Bu işlem geri alınamaz!" %}
                     </div>
                 </div>
             </div>
@@ -633,7 +636,7 @@
                 </button>
                 
                 <form method="post" style="display: inline;" class="delete-form" 
-                    data-item-type="ürün"
+                    data-item-type="{% trans 'ürün' %}"
                     data-item-name="{{ product.name }}"
                     action="{% url 'dashboard:product_delete' product.id %}">
                     {% csrf_token %}

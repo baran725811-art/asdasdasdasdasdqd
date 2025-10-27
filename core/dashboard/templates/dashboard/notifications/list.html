@@ -1,6 +1,8 @@
+<!--core\dashboard\templates\dashboard\notifications\list.html-->
 {% extends 'dashboard/base.html' %}
+{% load i18n %}
 
-{% block title %}Bildirimler{% endblock %}
+{% block title %}{% trans "Bildirimler" %}{% endblock %}
 
 {% block content %}
 <div class="container-fluid">
@@ -8,7 +10,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h5><i class="fas fa-bell me-2"></i>Tüm Bildirimler</h5>
+                    <h5><i class="fas fa-bell me-2"></i>{% trans "Tüm Bildirimler" %}</h5>
                 </div>
                 <div class="card-body">
                     <!-- Filtreler -->
@@ -16,7 +18,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <select name="type" class="form-select" onchange="this.form.submit()">
-                                    <option value="">Tüm Tipler</option>
+                                    <option value="">{% trans "Tüm Tipler" %}</option>
                                     {% for value, label in notification_types %}
                                         <option value="{{ value }}" {% if current_type == value %}selected{% endif %}>{{ label }}</option>
                                     {% endfor %}
@@ -24,14 +26,14 @@
                             </div>
                             <div class="col-md-4">
                                 <select name="status" class="form-select" onchange="this.form.submit()">
-                                    <option value="">Tüm Durumlar</option>
-                                    <option value="unread" {% if current_status == 'unread' %}selected{% endif %}>Okunmamış</option>
-                                    <option value="read" {% if current_status == 'read' %}selected{% endif %}>Okunmuş</option>
+                                    <option value="">{% trans "Tüm Durumlar" %}</option>
+                                    <option value="unread" {% if current_status == 'unread' %}selected{% endif %}>{% trans "Okunmamış" %}</option>
+                                    <option value="read" {% if current_status == 'read' %}selected{% endif %}>{% trans "Okunmuş" %}</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
                                 <button type="button" class="btn btn-primary" onclick="markAllAsRead()">
-                                    <i class="fas fa-check-double me-1"></i>Tümünü Okundu İşaretle
+                                    <i class="fas fa-check-double me-1"></i>{% trans "Tümünü Okundu İşaretle" %}
                                 </button>
                             </div>
                         </div>
@@ -49,7 +51,7 @@
                                 </div>
                                 <div>
                                     {% if not notification.is_read %}
-                                    <button class="btn btn-sm btn-success" onclick="markAsRead({{ notification.id }})">
+                                    <button class="btn btn-sm btn-success" onclick="markAsRead({{ notification.id }})" title="{% trans 'Okundu İşaretle' %}">
                                         <i class="fas fa-check"></i>
                                     </button>
                                     {% endif %}
@@ -58,7 +60,7 @@
                         </div>
                     </div>
                     {% empty %}
-                    <p class="text-center">Bildirim bulunamadı.</p>
+                    <p class="text-center">{% trans "Bildirim bulunamadı." %}</p>
                     {% endfor %}
 
                     <!-- Pagination -->
@@ -66,11 +68,17 @@
                     <nav>
                         <ul class="pagination">
                             {% if notifications.has_previous %}
-                                <li class="page-item"><a class="page-link" href="?page={{ notifications.previous_page_number }}">Önceki</a></li>
+                                <li class="page-item"><a class="page-link" href="?page={{ notifications.previous_page_number }}">{% trans "Önceki" %}</a></li>
                             {% endif %}
-                            <li class="page-item active"><span class="page-link">{{ notifications.number }} / {{ notifications.paginator.num_pages }}</span></li>
+                            <li class="page-item active">
+                                <span>
+                                    {% blocktrans trimmed with current=page_obj.number total=page_obj.paginator.num_pages %}
+                                    {{ current }} / {{ total }}
+                                    {% endblocktrans %}
+                                </span>
+                            </li>
                             {% if notifications.has_next %}
-                                <li class="page-item"><a class="page-link" href="?page={{ notifications.next_page_number }}">Sonraki</a></li>
+                                <li class="page-item"><a class="page-link" href="?page={{ notifications.next_page_number }}">{% trans "Sonraki" %}</a></li>
                             {% endif %}
                         </ul>
                     </nav>

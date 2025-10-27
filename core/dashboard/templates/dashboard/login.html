@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Giriş</title>
+    <title>{% trans "Dashboard - Giriş" %}</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
     <!-- Font Awesome -->
@@ -22,8 +22,8 @@
                 <div class="login-icon">
                     <i class="fas fa-user-shield"></i>
                 </div>
-                <h2>{% trans "Hoş Geldiniz"%}</h2>
-                <p>{% trans "Yönetim panelinize giriş yapın"%}</p>
+                <h2>{% trans "Hoş Geldiniz" %}</h2>
+                <p>{% trans "Yönetim panelinize giriş yapın" %}</p>
             </div>
             
             {% if messages %}
@@ -39,8 +39,8 @@
             {% if show_captcha %}
                 <div class="alert alert-warning">
                     <i class="fas fa-shield-alt me-2"></i>
-                    <strong>Güvenlik Kontrolü!</strong><br>
-                    {{ attempts }}/{{ max_attempts }} başarısız deneme yapıldı. Güvenlik kodunu girin.
+                    <strong>{% trans "Güvenlik Kontrolü!" %}</strong><br>
+                    {% blocktrans with attempts=attempts max=max_attempts %}{{ attempts }}/{{ max }} başarısız deneme yapıldı. Güvenlik kodunu girin.{% endblocktrans %}
                 </div>
             {% endif %}
 
@@ -85,7 +85,7 @@
                 <div class="form-group">
                     <label for="{{ form.captcha.id_for_label }}" class="form-label">
                         <i class="fas fa-shield-alt"></i>
-                        Güvenlik Kodu <span class="text-danger">*</span>
+                        {% trans "Güvenlik Kodu" %} <span class="text-danger">*</span>
                     </label>
                     <div class="captcha-container">
                         {{ form.captcha }}
@@ -106,14 +106,14 @@
                 <button type="submit" class="btn-login" id="loginBtn">
                     <div class="loading-spinner" id="loadingSpinner"></div>
                     <i class="fas fa-sign-in-alt me-2"></i>
-                    <span id="btnText">{% trans "Giriş Yap"%}</span>
+                    <span id="btnText">{% trans "Giriş Yap" %}</span>
                 </button>
             </form>
         </div>
         
         <div class="footer-text">
             <i class="fas fa-shield-alt me-2"></i>
-            {% trans "Güvenli bağlantı ile korunan giriş"%}
+            {% trans "Güvenli bağlantı ile korunan giriş" %}
         </div>
     </div>
 

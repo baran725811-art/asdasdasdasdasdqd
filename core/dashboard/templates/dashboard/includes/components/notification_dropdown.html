@@ -13,9 +13,9 @@
     <div class="dropdown-menu dropdown-menu-end notification-dropdown" aria-labelledby="notificationDropdown" style="width: 350px;">
         <!-- Header -->
         <div class="dropdown-header d-flex justify-content-between align-items-center">
-            <span class="fw-bold">Bildirimler</span>
+            <span class="fw-bold">{% trans "Bildirimler" %}</span>
             <button class="btn btn-sm btn-outline-primary" id="markAllReadBtn" style="display: none;">
-                <i class="fas fa-check-double me-1"></i>Tümünü Okundu İşaretle
+                <i class="fas fa-check-double me-1"></i>{% trans "Tümünü okundu olarak işaretle" %}
             </button>
         </div>
         
@@ -23,7 +23,7 @@
         <div id="notificationsContent">
             <div class="dropdown-item-text text-center py-4">
                 <i class="fas fa-bell-slash fa-2x text-muted mb-2"></i>
-                <p class="mb-0 text-muted">Yeni bildirim yok</p>
+                <p class="text-muted mb-0">{% trans "Henüz yeni bildirim yok." %}</p>
             </div>
         </div>
         
@@ -31,7 +31,7 @@
         <div class="dropdown-divider"></div>
         <div class="dropdown-item-text text-center">
             <button class="btn btn-sm btn-primary" id="showAllNotificationsBtn">
-                <i class="fas fa-list me-1"></i>Tüm Bildirimleri Görüntüle
+                <i class="fas fa-list me-1"></i>{% trans "Tüm Bildirimleri Gör" %}
             </button>
         </div>
     </div>
@@ -43,7 +43,7 @@
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title" id="notificationsModalLabel">
-                    <i class="fas fa-bell me-2"></i>Tüm Bildirimler
+                    <i class="fas fa-bell me-2"></i>{% trans "Tüm Bildirimler" %}
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -52,21 +52,21 @@
                 <div class="p-3 border-bottom bg-light">
                     <div class="row">
                         <div class="col-md-6 mb-2">
-                            <label for="notificationTypeFilter" class="form-label small">Bildirim Tipi</label>
+                            <label for="notificationTypeFilter" class="form-label small">{% trans "Bildirim türü" %}</label>
                             <select class="form-select form-select-sm" id="notificationTypeFilter">
-                                <option value="all">Tüm Tipler</option>
-                                <option value="message">Mesajlar</option>
-                                <option value="review">Yorumlar</option>
-                                <option value="product">Ürünler</option>
-                                <option value="system">Sistem</option>
+                                <option value="all">{% trans "Tüm türler" %}</option>
+                                <option value="message">{% trans "Mesajlar" %}</option>
+                                <option value="review">{% trans "Yorumlar" %}</option>
+                                <option value="product">{% trans "Ürünler" %}</option>
+                                <option value="system">{% trans "Sistem" %}</option>
                             </select>
                         </div>
                         <div class="col-md-6 mb-2">
-                            <label for="notificationStatusFilter" class="form-label small">Durum</label>
+                            <label for="notificationStatusFilter" class="form-label small">{% trans "Durum" %}</label>
                             <select class="form-select form-select-sm" id="notificationStatusFilter">
-                                <option value="all">Tüm Durumlar</option>
-                                <option value="unread">Okunmamış</option>
-                                <option value="read">Okunmuş</option>
+                                <option value="all">{% trans "Tüm durumlar" %}</option>
+                                <option value="unread">{% trans "Okunmamış" %}</option>
+                                <option value="read">{% trans "Okunmuş" %}</option>
                             </select>
                         </div>
                     </div>
@@ -76,25 +76,26 @@
                 <div id="allNotificationsContent" style="min-height: 300px; max-height: 500px; overflow-y: auto;">
                     <div class="text-center py-5">
                         <div class="spinner-border text-primary" role="status">
-                            <span class="visually-hidden">Yükleniyor...</span>
+                            <span class="visually-hidden">{% trans "Yükleniyor..." %}</span>
                         </div>
-                        <p class="mt-2 text-muted">Bildirimler yükleniyor...</p>
+                        <p class="mt-2 text-muted">{% trans "Bildirimler yükleniyor..." %}</p>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    <i class="fas fa-times me-1"></i>Kapat
+                    <i class="fas fa-times me-1"></i>{% trans "Kapat" %}
                 </button>
                 <button type="button" class="btn btn-primary" id="markAllReadModalBtn">
-                    <i class="fas fa-check-double me-1"></i>Tümünü Okundu İşaretle
+                    <i class="fas fa-check-double me-1"></i>{% trans "Tümünü okundu olarak işaretle" %}
                 </button>
             </div>
         </div>
     </div>
 </div>
-
+<script src="{% url 'javascript-catalog' %}"></script>
 <script>
+const { gettext, ngettext } = window;
 // Global notification system
 window.NotificationDropdownSystem = (function() {
     
@@ -121,7 +122,7 @@ window.NotificationDropdownSystem = (function() {
             return csrfInput.value;
         }
         
-        console.error('CSRF token bulunamadı!');
+        console.error(gettext('CSRF token bulunamadı!'));
         return '';
     }
     
@@ -137,11 +138,11 @@ window.NotificationDropdownSystem = (function() {
     // Modal init kısmını değiştirin:
 
     function init() {
-        console.log('🔔 Notification Dropdown System başlatılıyor...');
+        console.log(gettext('🔔 Bildirim sistemi başlatılıyor...'));
         
         // Bootstrap kontrolü
         if (typeof bootstrap === 'undefined') {
-            console.error('Bootstrap bulunamadı! CDN yüklenmedi mi?');
+            console.error(gettext('Bootstrap bulunamadı! CDN yüklenmedi mi?'));
             // Bootstrap olmadan da temel işlevsellik çalışsın
             setupEventListeners();
             loadNotifications();
@@ -152,7 +153,7 @@ window.NotificationDropdownSystem = (function() {
         // Modal element kontrolü
         const modalElement = document.getElementById('notificationsModal');
         if (!modalElement) {
-            console.error('Modal element bulunamadı!');
+            console.error(gettext('Modal element bulunamadı!'));
             return;
         }
         
@@ -163,9 +164,9 @@ window.NotificationDropdownSystem = (function() {
                 keyboard: true,
                 focus: true
             });
-            console.log('Modal başarıyla oluşturuldu');
+            console.log(gettext('Modal başarıyla oluşturuldu'));
         } catch (error) {
-            console.error('Modal oluşturma hatası:', error);
+            console.error(gettext('Modal oluşturma/açma hatası:'), error);
             // Fallback: doğrudan modal API kullan
             notificationModal = modalElement;
         }
@@ -202,12 +203,12 @@ window.NotificationDropdownSystem = (function() {
         const modalElement = document.getElementById('notificationsModal');
         if (modalElement) {
             modalElement.addEventListener('shown.bs.modal', function() {
-                console.log('Modal açıldı');
+                console.log(gettext('Modal açıldı'));
                 loadAllNotifications();
             });
             
             modalElement.addEventListener('hidden.bs.modal', function() {
-                console.log('Modal kapandı');
+                console.log(gettext('Modal kapandı'));
             });
         }
         
@@ -228,11 +229,11 @@ window.NotificationDropdownSystem = (function() {
         const modalElement = document.getElementById('notificationsModal');
         
         if (!modalElement) {
-            console.error('Modal element bulunamadı!');
+            console.error(gettext('Modal element bulunamadı!'));
             return;
         }
         
-        console.log('Modal açılmaya çalışılıyor...');
+        console.log(gettext('Modal açılmaya çalışılıyor...'));
         
         if (notificationModal && typeof notificationModal.show === 'function') {
             // Bootstrap modal instance var
@@ -247,7 +248,7 @@ window.NotificationDropdownSystem = (function() {
                 modal.show();
                 notificationModal = modal;
             } catch (error) {
-                console.error('Modal oluşturma/açma hatası:', error);
+                console.error(gettext('Modal oluşturma/açma hatası:'), error);
                 // Fallback: manuel göster
                 showModalFallback();
             }
@@ -327,8 +328,18 @@ window.NotificationDropdownSystem = (function() {
                 updateNotificationUI(data);
             })
             .catch(error => {
-                console.error('Bildirim yükleme hatası:', error);
+                console.error(gettext('Bildirim yükleme hatası:'), error);
+                const content = document.getElementById('notificationsContent');
+                if (content) {
+                    content.innerHTML = `
+                        <div class="dropdown-item-text text-center py-4 text-danger">
+                            <i class="fas fa-exclamation-triangle fa-2x mb-2"></i>
+                            <p class="mb-0">${gettext('Bildirimler yüklenirken bir hata oluştu.')} %}</p>
+                        </div>
+                    `;
+                }
             });
+
     }
     
     function loadAllNotifications() {
@@ -355,11 +366,11 @@ window.NotificationDropdownSystem = (function() {
                 updateAllNotificationsUI(data);
             })
             .catch(error => {
-                console.error('Tüm bildirimler yükleme hatası:', error);
+                console.error(gettext('Tüm bildirimler yükleme hatası:'), error);
                 document.getElementById('allNotificationsContent').innerHTML = `
                     <div class="alert alert-danger">
                         <i class="fas fa-exclamation-triangle me-2"></i>
-                        Bildirimler yüklenirken hata oluştu.
+                        ${gettext('Bildirimler yüklenirken bir hata oluştu.')} %}
                     </div>
                 `;
             });
@@ -393,7 +404,7 @@ window.NotificationDropdownSystem = (function() {
             content.innerHTML = `
                 <div class="dropdown-item-text text-center py-4">
                     <i class="fas fa-bell-slash fa-2x text-muted mb-2"></i>
-                    <p class="mb-0 text-muted">Yeni bildirim yok</p>
+                    <p class="mb-0 text-muted">{% trans "Yeni bildirim yok." %}</p>
                 </div>
             `;
         }
@@ -414,7 +425,7 @@ window.NotificationDropdownSystem = (function() {
             content.innerHTML = `
                 <div class="text-center py-4">
                     <i class="fas fa-bell-slash fa-2x text-muted mb-2"></i>
-                    <p class="mb-0 text-muted">Bildirim bulunamadı</p>
+                    <p class="mb-0 text-muted">{% trans "Bildirim bulunamadı." %}</p>
                 </div>
             `;
         }
@@ -481,7 +492,7 @@ window.NotificationDropdownSystem = (function() {
                             <small>${notification.created_at}</small>
                         </div>
                         <p class="mb-1">${escapeHtml(notification.message)}</p>
-                        <small>Tip: ${notification.type}</small>
+                        <small>{% trans "Tür" %}: ${notification.type}</small>
                     </div>
                     ${!notification.is_read ? `
                     <div class="flex-shrink-0">
@@ -557,7 +568,7 @@ window.NotificationDropdownSystem = (function() {
             }
         })
         .catch(error => {
-            console.error('Bildirim işaretleme hatası:', error);
+            console.error(gettext('Bildirim işaretleme hatası:'), error);
         });
     }
     
@@ -584,7 +595,7 @@ window.NotificationDropdownSystem = (function() {
             }
         })
         .catch(error => {
-            console.error('Toplu işaretleme hatası:', error);
+            console.error(gettext('Toplu işaretleme hatası:'), error);
         });
     }
     
@@ -602,7 +613,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof bootstrap !== 'undefined') {
         window.NotificationDropdownSystem.init();
     } else {
-        console.error('Bootstrap bulunamadı! Modal çalışmayacak.');
+        console.error(gettext('Bootstrap bulunamadı! Modal çalışmayacak.'));
         // Bootstrap olmadan da dropdown çalışsın
         setTimeout(() => {
             window.NotificationDropdownSystem.init();

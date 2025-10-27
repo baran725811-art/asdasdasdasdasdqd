@@ -2,8 +2,8 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}{% trans "Müşteri Yorumları"%}{% endblock %}
-{% block page_title %}{% trans "Yorum Yönetimi"%}{% endblock %}
+{% block title %}{% trans "Müşteri Yorumları" %}{% endblock %}
+{% block page_title %}{% trans "Yorum Yönetimi" %}{% endblock %}
 
 {% block page_content %}
 <!-- Page Header -->
@@ -30,17 +30,17 @@
     <div class="card-header-modern">
         <div class="d-flex justify-content-between align-items-center">
             <h5 class="mb-0">
-                <i class="fas fa-list me-2"></i>{% trans "Yorum Listesi"%}
+                <i class="fas fa-list me-2"></i>{% trans "Yorum Listesi" %}
             </h5>
             <div class="d-flex gap-2">
                 {% include 'dashboard/includes/tables/table_search.html' with search_placeholder="Yorum ara..." search_id="reviewSearch" %}
                 <select class="form-select form-select-sm" id="statusFilter" style="width: auto;">
-                    <option value="">{% trans "Tüm Durumlar"%}</option>
-                    <option value="approved">{% trans "Onaylı"%}</option>
-                    <option value="pending">{% trans "Onay Bekleyen"%}</option>
+                    <option value="">{% trans "Tüm Durumlar" %}</option>
+                    <option value="approved">{% trans "Onaylı" %}</option>
+                    <option value="pending">{% trans "Onay Bekleyen" %}</option>
                 </select>
                 <button class="btn-modern success btn-sm" data-bs-toggle="modal" data-bs-target="#bulkApproveModal">
-                    <i class="fas fa-check-circle"></i>{% trans "Tümünü Onayla"%}
+                    <i class="fas fa-check-circle me-2"></i>{% trans "Tümünü Onayla" %}
                 </button>
             </div>
         </div>
@@ -65,7 +65,7 @@
                                 {% include 'dashboard/includes/partials/user_avatar.html' with user_name=review.name %}
                                 <div>
                                     <div class="fw-semibold">{{ review.name }}</div>
-                                    <small class="text-muted">{% trans "Müşteri"%}</small>
+                                    <small class="text-muted">{% trans "Müşteri" %}</small>
                                 </div>
                             </div>
                         </td>
@@ -149,7 +149,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
-                    <i class="fas fa-comment-dots me-2"></i>{% trans "Yorum Detayı"%}
+                    <i class="fas fa-comment-dots me-2"></i>{% trans "Yorum Detayı" %}
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
@@ -157,15 +157,15 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="info-group mb-3">
-                            <label class="fw-semibold"><i class="fas fa-user me-2"></i>{% trans "Ad Soyad"%}:</label>
+                            <label class="fw-semibold"><i class="fas fa-user me-2"></i>{% trans "Ad Soyad" %}:</label>
                             <span>{{ review.name }}</span>
                         </div>
                         <div class="info-group mb-3">
-                            <label class="fw-semibold"><i class="fas fa-calendar me-2"></i>{% trans "Tarih"%}:</label>
+                            <label class="fw-semibold"><i class="fas fa-calendar me-2"></i>{% trans "Tarih" %}:</label>
                             <span>{% include 'dashboard/includes/partials/datetime_display.html' with datetime_value=review.created_at %}</span>
                         </div>
                         <div class="info-group mb-3">
-                            <label class="fw-semibold"><i class="fas fa-star me-2"></i>{% trans "Puan"%}:</label>
+                            <label class="fw-semibold"><i class="fas fa-star me-2"></i>{% trans "Puan" %}:</label>
                             <div class="rating-display">
                                 {% for i in "12345" %}
                                     {% if forloop.counter <= review.rating %}
@@ -178,7 +178,7 @@
                             </div>
                         </div>
                         <div class="info-group mb-3">
-                            <label class="fw-semibold"><i class="fas fa-toggle-on me-2"></i>{% trans "Durum"%}:</label>
+                            <label class="fw-semibold"><i class="fas fa-toggle-on me-2"></i>{% trans "Durum" %}:</label>
                             {% include 'dashboard/includes/ui/status_badge.html' with badge_text=review.is_approved|yesno:"Onaylı,Bekliyor" badge_color=review.is_approved|yesno:"success,warning" %}
                         </div>
                     </div>
@@ -197,7 +197,7 @@
                     </div>
                 </div>
                 <div class="info-group mt-3">
-                    <label class="fw-semibold"><i class="fas fa-comment me-2"></i>{% trans "Yorum"%}:</label>
+                    <label class="fw-semibold"><i class="fas fa-comment me-2"></i>{% trans "Yorum" %}:</label>
                     <div class="comment-full p-3 bg-light rounded mt-2">
                         {{ review.comment }}
                     </div>
@@ -205,13 +205,13 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                    <i class="fas fa-times"></i>{% trans "Kapat"%}
+                    <i class="fas fa-times me-2"></i>{% trans "Kapat" %}
                 </button>
                 <form method="post" action="{% url 'dashboard:review_toggle' review.id %}" class="d-inline">
                     {% csrf_token %}
                     <button type="submit" class="btn-modern {% if review.is_approved %}warning{% else %}success{% endif %}">
                         <i class="fas {% if review.is_approved %}fa-times-circle{% else %}fa-check-circle{% endif %}"></i>
-                        {% if review.is_approved %}{% trans "Onayı Kaldır"%}{% else %}{% trans "Onayla"%}{% endif %}
+                        {% if review.is_approved %}{% trans "Onayı Kaldır" %}{% else %}{% trans "Onayla" %}{% endif %}
                     </button>
                 </form>
             </div>
@@ -231,7 +231,7 @@
         <div class="modal-content">
             <div class="modal-header bg-success">
                 <h5 class="modal-title text-white">
-                    <i class="fas fa-check-double me-2"></i>{% trans "Toplu Onaylama"%}
+                    <i class="fas fa-check-double me-2"></i>{% trans "Toplu Onaylama" %}
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
@@ -239,17 +239,21 @@
                 <div class="confirm-icon mb-3">
                     <i class="fas fa-check-double fa-4x text-success"></i>
                 </div>
-                <h5>{% trans "Tüm bekleyen yorumları onaylamak istediğinizden emin misiniz?" %}</h5>
-                <p class="text-muted">{{ pending_count }} {% trans "adet onay bekleyen yorum bulunuyor." %}</p>
+                <h5>{% blocktrans %}Tüm bekleyen yorumları onaylamak istediğinizden emin misiniz?{% endblocktrans %}</h5>
+                <p>
+                    {% blocktrans trimmed count counter=pending_count %}
+                    {{ counter }} adet onay bekleyen yorum bulunuyor.
+                    {% endblocktrans %}
+                </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                    <i class="fas fa-times"></i>{% trans "İptal"%}
+                    <i class="fas fa-times me-2"></i>{% trans "İptal" %}
                 </button>
-                <form method="post" action="#" onsubmit="handlebulkapprove(); return false;" class="d-inline">
+                <form method="post" action="#" onsubmit="handleBulkApprove(); return false;" class="d-inline">
                     {% csrf_token %}
                     <button type="submit" class="btn-modern success">
-                        <i class="fas fa-check-double"></i>{% trans "Tümünü Onayla"%}
+                        <i class="fas fa-check-double me-2"></i>{% trans "Tümünü Onayla" %}
                     </button>
                 </form>
             </div>

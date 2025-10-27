@@ -1,9 +1,10 @@
 <!-- core\dashboard\templates\dashboard\includes\partials\language_name.html - Dil adı -->
- {% if language_code == 'tr' %}Türkçe
-{% elif language_code == 'en' %}İngilizce
-{% elif language_code == 'de' %}Almanca
-{% elif language_code == 'fr' %}Fransızca
-{% elif language_code == 'es' %}İspanyolca
-{% elif language_code == 'ru' %}Rusça
-{% elif language_code == 'ar' %}Arapça
+{% load i18n %}
+{% if language_code == 'tr' %}{% trans "Türkçe" %}
+{% elif language_code == 'en' %}{% trans "İngilizce" %}
+{% elif language_code == 'de' %}{% trans "Almanca" %}
+{% elif language_code == 'fr' %}{% trans "Fransızca" %}
+{% elif language_code == 'es' %}{% trans "İspanyolca" %}
+{% elif language_code == 'ru' %}{% trans "Rusça" %}
+{% elif language_code == 'ar' %}{% trans "Arapça" %}
 {% endif %}

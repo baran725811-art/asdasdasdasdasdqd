@@ -1,6 +1,7 @@
 <!-- core\dashboard\templates\dashboard\includes\navigation\breadcrumb.html - Breadcrumb -->
  <!-- Modern Breadcrumb Component -->
-<nav aria-label="breadcrumb" class="breadcrumb-modern">
+{% load i18n %}
+ <nav aria-label="breadcrumb" class="breadcrumb-modern">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a href="{% url 'dashboard:home' %}">

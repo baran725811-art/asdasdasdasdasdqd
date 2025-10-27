@@ -7,13 +7,13 @@
             {% if show_ellipsis %}
                 <span class="breadcrumb-ellipsis">
                     <i class="fas fa-ellipsis-h me-2"></i>
-                    <small class="text-muted">
-                        {% blocktrans count count=total_count %}
+                    <span>
+                        {% blocktrans trimmed count count=breadcrumb_level %}
                         ({{ count }} seviye)
                         {% plural %}
                         ({{ count }} seviye)
                         {% endblocktrans %}
-                    </small>
+                    </span>
                 </span>
             {% endif %}
             

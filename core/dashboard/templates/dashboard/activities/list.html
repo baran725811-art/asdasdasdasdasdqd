@@ -1,8 +1,8 @@
 {% extends 'dashboard/base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "Tüm Aktiviteler"%}{% endblock %}
-{% block page_title %}{% trans "Aktivite Geçmişi"%}{% endblock %}
+{% block title %}{% trans "Tüm Aktiviteler" %}{% endblock %}
+{% block page_title %}{% trans "Aktivite Geçmişi" %}{% endblock %}
 
 {% block content %}
 <div class="container-fluid">
@@ -11,11 +11,11 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">
-                        <i class="fas fa-history me-2"></i>{% trans "Son Aktiviteler"%}
+                        <i class="fas fa-history me-2"></i>{% trans "Son Aktiviteler" %}
                     </h5>
                     <div class="d-flex gap-2">
-                        <span class="badge bg-primary">{{ total_activities }} {% trans "toplam aktivite"%}</span>
-                        <span class="badge bg-info">{{ days }} {% trans "günlük dönem"%}</span>
+                        <span class="badge bg-primary">{{ total_activities }} {% trans "toplam aktivite" %}</span>
+                        <span class="badge bg-info">{{ days }} {% trans "günlük dönem" %}</span>
                     </div>
                 </div>
                 
@@ -24,31 +24,31 @@
                     <form method="get" class="mb-4">
                         <div class="row">
                             <div class="col-md-3">
-                                <label class="form-label">{% trans "Son"%}</label>
+                                <label class="form-label">{% trans "Son" %}</label>
                                 <select name="days" class="form-select" onchange="this.form.submit()">
-                                   <option value="7" {% if days == 7 %}selected{% endif %}>{% trans "7 gün"%}</option>
-                                    <option value="30" {% if days == 30 %}selected{% endif %}>{% trans "30 gün"%}</option>
-                                    <option value="90" {% if days == 90 %}selected{% endif %}>{% trans "90 gün"%}</option>
+                                   <option value="7" {% if days == 7 %}selected{% endif %}>7 {% trans "gün" %}</option>
+                                    <option value="30" {% if days == 30 %}selected{% endif %}>30 {% trans "gün" %}</option>
+                                    <option value="90" {% if days == 90 %}selected{% endif %}>90 {% trans "gün" %}</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <label class="form-label">{% trans "Aktivite Tipi"%}</label>
+                                <label class="form-label">{% trans "Aktivite Tipi" %}</label>
                                 <select name="type" class="form-select" onchange="this.form.submit()">
-                                    <option value="all" {% if activity_type == 'all' %}selected{% endif %}>{% trans "Tümü"%}</option>
-                                    <option value="products" {% if activity_type == 'products' %}selected{% endif %}>{% trans "Ürünler"%}</option>
-                                    <option value="reviews" {% if activity_type == 'reviews' %}selected{% endif %}>{% trans "Yorumlar"%}</option>
-                                    <option value="messages" {% if activity_type == 'messages' %}selected{% endif %}>{% trans "Mesajlar"%}</option>
-                                    <option value="categories" {% if activity_type == 'categories' %}selected{% endif %}>{% trans "Kategoriler"%}</option>
+                                    <option value="all" {% if activity_type == 'all' %}selected{% endif %}>{% trans "Tümü" %}</option>
+                                    <option value="products" {% if activity_type == 'products' %}selected{% endif %}>{% trans "Ürünler" %}</option>
+                                    <option value="reviews" {% if activity_type == 'reviews' %}selected{% endif %}>{% trans "Yorumlar" %}</option>
+                                    <option value="messages" {% if activity_type == 'messages' %}selected{% endif %}>{% trans "Mesajlar" %}</option>
+                                    <option value="categories" {% if activity_type == 'categories' %}selected{% endif %}>{% trans "Kategoriler" %}</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">{% trans "Hızlı Eylemler"%}</label>
+                                <label class="form-label">{% trans "Hızlı Eylemler" %}</label>
                                 <div class="d-flex gap-2">
                                     <a href="{% url 'dashboard:home' %}" class="btn btn-outline-primary btn-sm">
-                                        <i class="fas fa-home me-1"></i>{% trans "Ana Sayfa"%}
+                                        <i class="fas fa-home me-1"></i>{% trans "Ana Sayfa" %}
                                     </a>
                                     <a href="{% url 'dashboard:dashboard_products' %}" class="btn btn-outline-success btn-sm">
-                                        <i class="fas fa-plus me-1"></i>{% trans "Ürün Ekle"%}
+                                        <i class="fas fa-plus me-1"></i>{% trans "Ürün Ekle" %}
                                     </a>
                                 </div>
                             </div>
@@ -83,12 +83,12 @@
 
                         <!-- Pagination -->
                         {% if activities.has_other_pages %}
-                        <nav aria-label="{% trans 'Aktivite sayfaları'%}">
+                        <nav aria-label="{% trans 'Aktivite sayfaları' %}">
                             <ul class="pagination justify-content-center">
                                 {% if activities.has_previous %}
                                     <li class="page-item">
                                         <a class="page-link" href="?page={{ activities.previous_page_number }}&days={{ days }}&type={{ activity_type }}">
-                                            {% trans "Önceki"%}
+                                            {% trans "Önceki" %}
                                         </a>
                                     </li>
                                 {% endif %}
@@ -102,7 +102,7 @@
                                 {% if activities.has_next %}
                                     <li class="page-item">
                                         <a class="page-link" href="?page={{ activities.next_page_number }}&days={{ days }}&type={{ activity_type }}">
-                                            {% trans "Sonraki"%}
+                                            {% trans "Sonraki" %}
                                         </a>
                                     </li>
                                 {% endif %}
@@ -112,14 +112,14 @@
                     {% else %}
                         <div class="text-center py-5">
                             <i class="fas fa-history fa-3x text-muted mb-3"></i>
-                            <h5>{% trans "Aktivite bulunamadı"%}</h5>
-                            <p class="text-muted">{% trans "Seçili dönemde herhangi bir aktivite gerçekleşmemiş."%}</p>
+                            <h5>{% trans "Aktivite bulunamadı" %}</h5>
+                            <p class="text-muted">{% trans "Seçili dönemde herhangi bir aktivite gerçekleşmemiş." %}</p>
                             <div class="d-flex gap-2 justify-content-center">
                                 <a href="{% url 'dashboard:home' %}" class="btn btn-primary">
-                                    <i class="fas fa-arrow-left me-1"></i>{% trans "Ana Sayfaya Dön"%}
+                                    <i class="fas fa-arrow-left me-1"></i>{% trans "Ana Sayfaya Dön" %}
                                 </a>
                                 <a href="{% url 'dashboard:dashboard_products' %}" class="btn btn-success">
-                                    <i class="fas fa-plus me-1"></i>{% trans "Ürün Ekle"%}
+                                    <i class="fas fa-plus me-1"></i>{% trans "Ürün Ekle" %}
                                 </a>
                             </div>
                         </div>

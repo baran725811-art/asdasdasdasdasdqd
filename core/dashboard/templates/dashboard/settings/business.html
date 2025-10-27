@@ -2,19 +2,19 @@
 {% load i18n %}
 {% load static %}
 
-{% block title %}İşletme Ayarları{% endblock %}
+{% block title %}{% trans "İşletme Ayarları" %}{% endblock %}
 
 {% block content %}
 <div class="container-fluid">
     <!-- Page Header -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h1 class="h3 mb-0">İşletme Ayarları</h1>
-            <p class="text-muted">İşletme bilgilerinizi ve ayarlarınızı güncelleyin</p>
+            <h1 class="h3 mb-0">{% trans "İşletme Ayarları" %}</h1>
+            <p class="text-muted">{% trans "İşletme bilgilerinizi ve ayarlarınızı güncelleyin" %}</p>
         </div>
         <div>
             <a href="{% url 'dashboard:settings' %}" class="btn btn-outline-secondary">
-                <i class="fas fa-arrow-left me-2"></i>Ayarlara Dön
+                <i class="fas fa-arrow-left me-2"></i>{% trans "Ayarlara Dön" %}
             </a>
         </div>
     </div>
@@ -28,13 +28,13 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <h5 class="card-title mb-0">
-                            <i class="fas fa-building me-2"></i>Temel Bilgiler
+                            <i class="fas fa-building me-2"></i>{% trans "Temel Bilgiler" %}
                         </h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Site Adı <span class="text-danger">*</span></label>
+                                <label class="form-label">{% trans "Site Adı" %} <span class="text-danger">*</span></label>
                                 {{ form.site_name }}
                                 {% if form.site_name.errors %}
                                     <div class="text-danger small">{{ form.site_name.errors.0 }}</div>
@@ -42,30 +42,30 @@
                             </div>
                             
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Site Sloganı</label>
+                                <label class="form-label">{% trans "Site Sloganı" %}</label>
                                 {{ form.site_tagline }}
                             </div>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Telefon</label>
+                            <label class="form-label">{% trans "Telefon" %}</label>
                             {{ form.contact_phone }}
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">E-posta</label>
+                            <label class="form-label">{% trans "E-posta" %}</label>
                             {{ form.contact_email }}
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Adres</label>
+                            <label class="form-label">{% trans "Adres" %}</label>
                             {{ form.contact_address }}
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Google Maps Embed URL</label>
+                            <label class="form-label">{% trans "Google Maps Embed URL" %}</label>
                             {{ form.google_maps_embed_url }}
-                            <div class="form-text">Google Maps'ten alınan iframe URL'si</div>
+                            <div class="form-text">{% trans "Google Maps'ten alınan iframe URL'si" %}</div>
                         </div>
                     </div>
                 </div>
@@ -74,26 +74,26 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <h5 class="card-title mb-0">
-                            <i class="fas fa-search me-2"></i>SEO Ayarları
+                            <i class="fas fa-search me-2"></i>{% trans "SEO Ayarları" %}
                         </h5>
                     </div>
                     <div class="card-body">
                         <div class="mb-3">
-                            <label class="form-label">SEO Başlık</label>
+                            <label class="form-label">{% trans "SEO Başlık" %}</label>
                             {{ form.seo_title }}
-                            <div class="form-text">Sitenizin ana başlığı (max 60 karakter)</div>
+                            <div class="form-text">{% trans "Sitenizin ana başlığı (max 60 karakter)" %}</div>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">SEO Açıklama</label>
+                            <label class="form-label">{% trans "SEO Açıklama" %}</label>
                             {{ form.seo_description }}
-                            <div class="form-text">Site açıklaması (max 160 karakter)</div>
+                            <div class="form-text">{% trans "Site açıklaması (max 160 karakter)" %}</div>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Anahtar Kelimeler</label>
+                            <label class="form-label">{% trans "Anahtar Kelimeler" %}</label>
                             {{ form.seo_keywords }}
-                            <div class="form-text">Virgül ile ayrılmış anahtar kelimeler</div>
+                            <div class="form-text">{% trans "Virgül ile ayrılmış anahtar kelimeler" %}</div>
                         </div>
                     </div>
                 </div>
@@ -102,21 +102,21 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <h5 class="card-title mb-0">
-                            <i class="fas fa-share-alt me-2"></i>Sosyal Medya Hesapları
+                            <i class="fas fa-share-alt me-2"></i>{% trans "Sosyal Medya Hesapları" %}
                         </h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">
-                                    <i class="fab fa-facebook me-1"></i>Facebook URL
+                                    <i class="fab fa-facebook me-1"></i>{% trans "Facebook URL" %}
                                 </label>
                                 {{ form.facebook_url }}
                             </div>
                             
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">
-                                    <i class="fab fa-instagram me-1"></i>Instagram URL
+                                    <i class="fab fa-instagram me-1"></i>{% trans "Instagram URL" %}
                                 </label>
                                 {{ form.instagram_url }}
                             </div>
@@ -125,17 +125,17 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">
-                                    <i class="fab fa-twitter me-1"></i>Twitter URL
+                                    <i class="fab fa-twitter me-1"></i>{% trans "Twitter URL" %}
                                 </label>
                                 {{ form.twitter_url }}
                             </div>
                             
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">
-                                    <i class="fab fa-whatsapp me-1"></i>WhatsApp Numarası
+                                    <i class="fab fa-whatsapp me-1"></i>{% trans "WhatsApp Numarası" %}
                                 </label>
                                 {{ form.whatsapp_number }}
-                                <div class="form-text">Örn: +90xxxxxxxxx</div>
+                                <div class="form-text">{% trans "Örn: +90xxxxxxxxx" %}</div>
                             </div>
                         </div>
                     </div>
@@ -150,21 +150,21 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <h5 class="card-title mb-0">
-                            <i class="fas fa-image me-2"></i>Logo
+                                <i class="fas fa-image me-2"></i>{% trans "Logo" %}
                         </h5>
                     </div>
                     <div class="card-body text-center">
                         {% if settings.site_logo %}
                             <div class="mb-3">
                                 <img src="{{ settings.site_logo.url }}" alt="Mevcut Logo" class="img-fluid rounded" style="max-height: 150px;">
-                                <p class="text-muted small mt-2">Mevcut Logo</p>
+                                <p class="text-muted small mt-2">{% trans "Mevcut Logo" %}</p>
                             </div>
                         {% else %}
                             <div class="mb-3">
                                 <div class="bg-light border rounded d-flex align-items-center justify-content-center" style="height: 150px;">
                                     <i class="fas fa-image fa-3x text-muted"></i>
                                 </div>
-                                <p class="text-muted small mt-2">Logo yüklenmemiş</p>
+                                <p class="text-muted small mt-2">{% trans "Logo yüklenmemiş" %}</p>
                             </div>
                         {% endif %}
                         
@@ -174,7 +174,7 @@
                         
                         <div class="alert alert-info small">
                             <i class="fas fa-info-circle me-1"></i>
-                            Önerilen boyut: 300x100px
+                           {% trans "Önerilen boyut: 300x100px" %}
                         </div>
                     </div>
                 </div>
@@ -183,7 +183,7 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <h5 class="card-title mb-0">
-                            <i class="fas fa-star me-2"></i>Favicon
+                                <i class="fas fa-star me-2"></i>{% trans "Favicon" %}
                         </h5>
                     </div>
                     <div class="card-body">
@@ -192,7 +192,7 @@
                         </div>
                         <div class="alert alert-info small">
                             <i class="fas fa-info-circle me-1"></i>
-                            Önerilen boyut: 32x32px
+                            {% trans "Önerilen boyut: 32x32px" %}
                         </div>
                     </div>
                 </div>
@@ -202,16 +202,16 @@
                     <div class="card-body">
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary btn-lg">
-                                <i class="fas fa-save me-2"></i>Ayarları Kaydet
+                                <i class="fas fa-save me-2"></i>{% trans "Ayarları Kaydet" %}
                             </button>
                             <a href="{% url 'dashboard:settings' %}" class="btn btn-outline-secondary">
-                                <i class="fas fa-times me-2"></i>İptal
+                                <i class="fas fa-times me-2"></i>{% trans "İptal" %}
                             </a>
                         </div>
                         
                         <div class="alert alert-warning mt-3 small">
                             <i class="fas fa-exclamation-triangle me-1"></i>
-                            Değişiklikler site genelinde etkili olacaktır.
+                            {% trans "Değişiklikler site genelinde etkili olacaktır." %}
                         </div>
                     </div>
                 </div>

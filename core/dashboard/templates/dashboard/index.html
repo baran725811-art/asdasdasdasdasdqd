@@ -17,33 +17,38 @@
     <!-- Statistics Cards - 4'lü Grid -->
     <div class="row g-4 mb-4">
         <div class="col-xl-6 col-lg-6 col-md-6">
-            {% include 'dashboard/includes/cards/stats_card.html' with card_style="modern" card_color="primary" card_icon="fas fa-box-open" card_value=total_products|default:0 card_label="Toplam Ürün" card_subtitle="+2.5%" %}
+            {% trans "Toplam Ürün" as total_products_label %}
+            {% include 'dashboard/includes/cards/stats_card.html' with card_style="modern" card_color="primary" card_icon="fas fa-box-open" card_value=total_products|default:0 card_label=total_products_label card_subtitle="+2.5%" %}
         </div>
         
         <div class="col-xl-6 col-lg-6 col-md-6">
-            {% include 'dashboard/includes/cards/stats_card.html' with card_style="modern" card_color="success" card_icon="fas fa-tags" card_value=total_categories|default:0 card_label="Kategoriler" card_subtitle="+1.2%" %}
+            {% trans "Kategoriler" as categories_label %}
+            {% include 'dashboard/includes/cards/stats_card.html' with card_style="modern" card_color="success" card_icon="fas fa-tags" card_value=total_categories|default:0 card_label=categories_label card_subtitle="+1.2%" %}
         </div>
         
         <div class="col-xl-6 col-lg-6 col-md-6">
-            {% include 'dashboard/includes/cards/stats_card.html' with card_style="modern" card_color="info" card_icon="fas fa-comments" card_value=total_reviews|default:0 card_label="Müşteri Yorumları" card_subtitle="+5.8%" %}
+            {% trans "Müşteri Yorumları" as reviews_label %}
+            {% include 'dashboard/includes/cards/stats_card.html' with card_style="modern" card_color="info" card_icon="fas fa-comments" card_value=total_reviews|default:0 card_label=reviews_label card_subtitle="+5.8%" %}
         </div>
         
         <div class="col-xl-6 col-lg-6 col-md-6">
-            {% include 'dashboard/includes/cards/stats_card.html' with card_style="modern" card_color="warning" card_icon="fas fa-newspaper" card_value=total_media_mentions|default:0 card_label="Basın Haberleri" card_subtitle="+3.1%" %}
+            {% trans "Basın Haberleri" as media_label %}
+            {% include 'dashboard/includes/cards/stats_card.html' with card_style="modern" card_color="warning" card_icon="fas fa-newspaper" card_value=total_media_mentions|default:0 card_label=media_label card_subtitle="+3.1%" %}
         </div>
     </div>
 
     <!-- Charts Section -->
     <div class="row g-4 mb-4">
         <div class="col-lg-8">
-            {% include 'dashboard/includes/cards/chart_card.html' with show_header=True header_icon="fas fa-chart-line" header_title="Aylık İstatistikler" show_period_selector=True chart_id="monthlyChart" chart_height="300" %}
+            {% trans "Aylık İstatistikler" as monthly_stats_title %}
+            {% include 'dashboard/includes/cards/chart_card.html' with show_header=True header_icon="fas fa-chart-line" header_title=monthly_stats_title show_period_selector=True chart_id="monthlyChart" chart_height="300" %}
         </div>
         
         <div class="col-lg-4">
             <div class="card-modern">
                 <div class="card-header-modern">
                     <h5 class="mb-0">
-                        <i class="fas fa-chart-pie me-2"></i>{% trans "Kategori Dağılımı"%}
+                        <i class="fas fa-chart-pie me-2"></i>{% trans "Kategori Dağılımı" %}
                     </h5>
                 </div>
                 <div class="card-body-modern">
@@ -150,11 +155,13 @@
     <!-- Recent Activity & Quick Stats -->
     <div class="row g-4">
         <div class="col-lg-8">
-            {% include 'dashboard/includes/cards/activity_card.html' with show_header=True header_title="Son Aktiviteler" activities=recent_activities show_view_all=True view_all_url=activities_url %}
+            {% trans "Son Aktiviteler" as recent_activities_title %}
+            {% include 'dashboard/includes/cards/activity_card.html' with show_header=True header_title=recent_activities_title activities=recent_activities show_view_all=True view_all_url=activities_url %}
         </div>
         
         <div class="col-lg-4">
-            {% include 'dashboard/includes/navigation/quick_actions.html' with section_title="Hızlı Erişim" actions=quick_actions %}
+            {% trans "Hızlı Erişim" as quick_access_title %}
+            {% include 'dashboard/includes/navigation/quick_actions.html' with section_title=quick_access_title actions=quick_actions %}
         </div>
     </div>
 </div>
@@ -180,7 +187,7 @@ window.monthlyStatsData = {
     labels: [{% for stat in monthly_stats %}'{{ stat.month_short }}'{% if not forloop.last %},{% endif %}{% endfor %}],
     datasets: [
         {
-            label: 'Ürünler',
+            label: gettext('Ürünler'),
             data: [{% for stat in monthly_stats %}{{ stat.products }}{% if not forloop.last %},{% endif %}{% endfor %}],
             borderColor: 'rgba(102, 126, 234, 1)',
             backgroundColor: 'rgba(102, 126, 234, 0.1)',
@@ -192,7 +199,7 @@ window.monthlyStatsData = {
             pointRadius: 6
         },
         {
-            label: 'Yorumlar',
+            label: gettext('Yorumlar'),
             data: [{% for stat in monthly_stats %}{{ stat.reviews }}{% if not forloop.last %},{% endif %}{% endfor %}],
             borderColor: 'rgba(17, 153, 142, 1)',
             backgroundColor: 'rgba(17, 153, 142, 0.1)',
@@ -204,7 +211,7 @@ window.monthlyStatsData = {
             pointRadius: 6
         },
         {
-            label: 'Mesajlar',
+            label: gettext('Mesajlar'),
             data: [{% for stat in monthly_stats %}{{ stat.messages }}{% if not forloop.last %},{% endif %}{% endfor %}],
             borderColor: 'rgba(255, 193, 7, 1)',
             backgroundColor: 'rgba(255, 193, 7, 0.1)',
@@ -221,9 +228,9 @@ window.monthlyStatsData = {
 // DEBUG: Veri kontrol
 console.log('=== MONTHLY DATA DEBUG ===');
 console.log('Labels:', window.monthlyStatsData.labels);
-console.log('Ürünler:', window.monthlyStatsData.datasets[0].data);
-console.log('Yorumlar:', window.monthlyStatsData.datasets[1].data);
-console.log('Mesajlar:', window.monthlyStatsData.datasets[2].data);
+console.log(gettext('Ürünler') + ':', window.monthlyStatsData.datasets[0].data);
+console.log(gettext('Yorumlar') + ':', window.monthlyStatsData.datasets[1].data);
+console.log(gettext('Mesajlar') + ':', window.monthlyStatsData.datasets[2].data);
 
 
 window.categoryStatsData = {
@@ -257,8 +264,7 @@ window.categoryStatsData = {
 document.addEventListener('DOMContentLoaded', function() {
     // Tema değişikliğini dinle
     document.addEventListener('themeChanged', function(e) {
-        console.log('🎨 Theme changed event received:', e.detail);
-        
+        console.log(gettext('Tema değişikliği algılandı:'), e.detail);        
         // Sayfa yenile trigger et (gerekirse)
         setTimeout(() => {
             // Force style recalculation

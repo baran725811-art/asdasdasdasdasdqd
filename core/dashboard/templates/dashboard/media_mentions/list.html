@@ -5,8 +5,8 @@
 {% load i18n %}
 {% load custom_filters %}
 
-{% block title %}{% trans "Basın Haberleri"%}{% endblock %}
-{% block page_title %}{% trans "Basın Haberleri Yönetimi"%}{% endblock %}
+{% block title %}{% trans "Basın Haberleri" %}{% endblock %}
+{% block page_title %}{% trans "Basın Haberleri Yönetimi" %}{% endblock %}
 
 {% block page_content %}
 <!-- Page Header -->
@@ -32,17 +32,17 @@
 <div class="mb-4">
     <div class="d-flex justify-content-between align-items-center">
         <div class="view-toggle">
-            <button class="btn-toggle active" data-view="grid" title="Kart Görünümü">
+            <button class="btn-toggle active" data-view="grid" title="{% trans 'Kart Görünümü' %}">
                 <i class="fas fa-th-large"></i>
             </button>
-            <button class="btn-toggle" data-view="list" title="Liste Görünümü">
+            <button class="btn-toggle" data-view="list" title="{% trans 'Liste Görünümü' %}">
                 <i class="fas fa-list"></i>
             </button>
         </div>
         <div class="d-flex gap-2">
-            {% include 'dashboard/includes/tables/table_search.html' with search_id="newsSearch" search_placeholder="Haber ara..." %}
+            {% include 'dashboard/includes/tables/table_search.html' with search_id="newsSearch" search_placeholder=_("Haber ara...") %}
             <button type="button" class="btn-modern primary btn-sm" data-bs-toggle="modal" data-bs-target="#addmediamentionmodal">
-                <i class="fas fa-plus me-1"></i>Yeni Haber Ekle
+                <i class="fas fa-plus me-1"></i>{% trans "Yeni Haber Ekle" %}
             </button>
         </div>
     </div>
@@ -65,18 +65,18 @@
                     {% endif %}
                     <div class="news-card-overlay">
                         <div class="news-card-actions">
-                            <button class="btn-card-action" data-bs-toggle="modal" data-bs-target="#viewMentionModal{{ mention.id }}" title="Detayları Görüntüle">
+                            <button class="btn-card-action" data-bs-toggle="modal" data-bs-target="#viewMentionModal{{ mention.id }}" title="{% trans 'Detayları Görüntüle' %}">
                                     <i class="fas fa-eye"></i>
-                                </button>
-                            <button class="btn-card-action" data-bs-toggle="modal" data-bs-target="#editMentionModal{{ mention.id }}" title="Düzenle">
+                            </button>
+                            <button class="btn-card-action" data-bs-toggle="modal" data-bs-target="#editMentionModal{{ mention.id }}" title="{% trans 'Düzenle' %}">
                                 <i class="fas fa-edit"></i>
                             </button>
                             {% if mention.url %}
-                            <a href="{{ mention.url }}" target="_blank" class="btn-card-action" title="Kaynağa Git">
+                            <a href="{{ mention.url }}" target="_blank" class="btn-card-action" title="{% trans 'Kaynağa Git' %}">
                                 <i class="fas fa-external-link-alt"></i>
                             </a>
                             {% endif %}
-                            <button class="btn-card-action delete" data-bs-toggle="modal" data-bs-target="#deleteMentionModal{{ mention.id }}" title="Sil">
+                            <button class="btn-card-action delete" data-bs-toggle="modal" data-bs-target="#deleteMentionModal{{ mention.id }}" title="{% trans 'Sil' %}">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </div>
@@ -114,7 +114,7 @@
     {% else %}
     <div class="row">
         <div class="col-12">
-            {% include 'dashboard/includes/ui/empty_state.html' with empty_title="Henüz basın haberi eklenmemiş" empty_message="İlk basın haberinizi ekleyerek başlayın" empty_icon="fas fa-newspaper" action_button_text="İlk Haberi Ekle" action_button_icon="fas fa-plus" action_button_attrs='data-bs-toggle="modal" data-bs-target="#addmediamentionmodal"' %}
+            {% include 'dashboard/includes/ui/empty_state.html' with empty_title=_("Henüz basın haberi eklenmemiş") empty_message=_("İlk basın haberinizi ekleyerek başlayın") empty_icon="fas fa-newspaper" action_button_text=_("İlk Haberi Ekle") action_button_icon="fas fa-plus" action_button_attrs='data-bs-toggle="modal" data-bs-target="#addmediamentionmodal"' %}
         </div>
     </div>
     {% endif %}
@@ -156,7 +156,7 @@
                             {% if mention.url %}
                             <span class="mx-2">•</span>
                             <a href="{{ mention.url }}" target="_blank" class="text-primary">
-                                <i class="fas fa-external-link-alt me-1"></i>{% trans "Kaynağa Git"%}
+                                <i class="fas fa-external-link-alt me-1"></i>{% trans "Kaynağa Git" %}
                             </a>
                             {% endif %}
                         </div>
@@ -169,7 +169,7 @@
                         <div class="mt-2">
                             <small class="text-info">
                                 <i class="fas fa-language me-1"></i>
-                                {% trans "Çeviriler"%}: 
+                                {% trans "Çeviriler" %}: 
                                 {% for lang in enabled_languages %}
                                     {% if lang != 'tr' %}
                                         <span class="badge bg-light text-dark me-1">{{ lang|upper }}</span>
@@ -205,7 +205,7 @@
                         
                         <div class="mt-2">
                             <small class="text-muted">
-                                <i class="fas fa-sort-numeric-up me-1"></i>{% trans "Sıra"%}: {{ mention.order }}
+                                <i class="fas fa-sort-numeric-up me-1"></i>{% trans "Sıra" %}: {{ mention.order }}
                             </small>
                         </div>
                     </div>
@@ -217,7 +217,13 @@
         <!-- Sonuç sayısı -->
         <div class="mt-3 text-center">
             <small class="text-muted" id="resultsCount">
-                {% blocktrans count counter=mentions|length %}{{ counter }} haber gösteriliyor{% plural %}{{ counter }} haber gösteriliyor{% endblocktrans %}
+                <p>
+                    {% blocktrans trimmed count counter=mention_count %}
+                    {{ counter }} haber gösteriliyor
+                    {% plural %}
+                    {{ counter }} haber gösteriliyor
+                    {% endblocktrans %}
+                </p>
             </small>
         </div>
     {% else %}
@@ -233,7 +239,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
-                    <i class="fas fa-newspaper me-2"></i>{% trans "Yeni Basın Haberi Ekle"%}
+                    <i class="fas fa-newspaper me-2"></i>{% trans "Yeni Basın Haberi Ekle" %}
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
@@ -250,7 +256,7 @@
                     <div class="card-modern mb-4">
                         <div class="card-header-modern">
                             <h5 class="mb-0">
-                                <i class="fas fa-edit me-2"></i>{% trans "Haber Bilgileri"%}
+                                <i class="fas fa-edit me-2"></i>{% trans "Haber Bilgileri" %}
                             </h5>
                         </div>
                         <div class="card-body-modern">
@@ -258,19 +264,19 @@
                             <div class="translation-content active" data-lang="tr">
                                 <div class="row g-3">
                                     <div class="col-12">
-                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="title" field_label="Haber Başlığı" field_icon="fas fa-heading" field_type="text" is_required=True help_text="Haberin ana başlığı" language_code="tr" %}
+                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="title" field_label=_("Haber Başlığı") field_icon="fas fa-heading" field_type="text" is_required=True help_text=_("Haberin ana başlığı") language_code="tr" %}
                                     </div>
                                     
                                     <div class="col-md-6">
-                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="source" field_label="Kaynak" field_icon="fas fa-building" field_type="text" is_required=True help_text="Haberin yayınlandığı kaynak" language_code="tr" %}
+                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="source" field_label=_("Kaynak") field_icon="fas fa-building" field_type="text" is_required=True help_text=_("Haberin yayınlandığı kaynak") language_code="tr" %}
                                     </div>
                                     
                                     <div class="col-md-6">
-                                        {% include 'dashboard/includes/forms/date_field.html' with field_name="publish_date" label="Yayın Tarihi" icon="fas fa-calendar" required=False %}
+                                        {% include 'dashboard/includes/forms/date_field.html' with field_name="publish_date" label=_("Yayın Tarihi") icon="fas fa-calendar" required=False %}
                                     </div>
                                     
                                     <div class="col-12">
-                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="description" field_label="Kısa Açıklama" field_icon="fas fa-align-left" field_type="textarea" field_rows="3" help_text="Haberin kısa özeti" language_code="tr" %}
+                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="description" field_label=_("Kısa Açıklama") field_icon="fas fa-align-left" field_type="textarea" field_rows="3" help_text=_("Haberin kısa özeti") language_code="tr" %}
                                     </div>
                                 </div>
                             </div>
@@ -304,7 +310,7 @@
                     <div class="card-modern mb-4">
                         <div class="card-header-modern">
                             <h5 class="mb-0">
-                                <i class="fas fa-cogs me-2"></i>{% trans "Medya ve Ayarlar"%}
+                                <i class="fas fa-cogs me-2"></i>{% trans "Medya ve Ayarlar" %}
                             </h5>
                         </div>
                         <div class="card-body-modern">
@@ -312,28 +318,28 @@
                                 <div class="col-md-8">
                                     <div class="row g-3">
                                         <div class="col-12">
-                                            {% include 'dashboard/includes/forms/url_field.html' with field_name="url" label="Haber URL'si" icon="fas fa-link" help_text="Haberin orijinal linkini girin (https:// ile başlamalı)" required=False %}
+                                            {% include 'dashboard/includes/forms/url_field.html' with field_name="url" label=_("Haber URL'si") icon="fas fa-link" help_text=_("Haberin orijinal linkini girin (https:// ile başlamalı)") required=False %}
                                         </div>
                                         
                                         <div class="col-md-6">
-                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="order" field_label="Sıralama" field_icon="fas fa-sort-numeric-up" field_type="number" help_text="Düşük sayı önce görünür" %}
+                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="order" field_label=_("Sıralama") field_icon="fas fa-sort-numeric-up" field_type="number" help_text=_("Düşük sayı önce görünür") %}
                                         </div>
                                         
                                         <div class="col-md-6">
-                                            {% include 'dashboard/includes/forms/checkbox_field.html' with field_name="is_active" label="Aktif" field_type="switch" icon="fas fa-toggle-on" checked=True %}
+                                            {% include 'dashboard/includes/forms/checkbox_field.html' with field_name="is_active" label=_("Aktif") field_type="switch" icon="fas fa-toggle-on" checked=True %}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    {% include 'dashboard/includes/forms/image_upload_field.html' with field_name="image" label="Haber Görseli" help_text="JPG, PNG formatlarında görsel yükleyebilirsiniz" %}
+                                    {% include 'dashboard/includes/forms/image_upload_field.html' with field_name="image" label=_("Haber Görseli") help_text=_("JPG, PNG formatlarında görsel yükleyebilirsiniz") %}
 
                                     <div class="mt-3">
-                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text" field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" help_text="Haber görseli için SEO alt metni (max 125 karakter)" %}
+                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text" field_label=_("Alt Metin (SEO)") field_icon="fas fa-paragraph" field_type="text" help_text=_("Haber görseli için SEO alt metni (max 125 karakter)") %}
                                     </div>
 
                                     <div class="image-placeholder mt-3" id="imagePreview">
                                         <i class="fas fa-image fa-3x"></i>
-                                        <p class="mb-0">{% trans "Görsel Yok"%}</p>
+                                        <p class="mb-0">{% trans "Görsel Yok" %}</p>
                                     </div>
                                 </div>
                             </div>
@@ -346,7 +352,7 @@
                         <i class="fas fa-times me-2"></i>{% trans "İptal" %}
                     </button>
                     <button type="submit" class="btn-modern primary">
-                        <i class="fas fa-save"></i>{% trans "Kaydet" %}
+                        <i class="fas fa-save me-2"></i>{% trans "Kaydet" %}
                     </button>
                 </div>
             </form>
@@ -398,7 +404,7 @@
                                     
                                     <div class="col-md-6">
                                         <label for="id_publish_date_edit_{{ mention.id }}" class="form-label">
-                                            <i class="fas fa-calendar me-1"></i>Yayın Tarihi
+                                            <i class="fas fa-calendar me-1"></i>{% trans "Yayın Tarihi" %}
                                         </label>
                                         <input type="date" 
                                                name="publish_date" 
@@ -449,14 +455,14 @@
                             <div class="row g-3">
                                 <div class="col-12">
                                     <label for="id_url_edit_{{ mention.id }}" class="form-label">
-                                        <i class="fas fa-link me-1"></i>Haber URL
+                                        <i class="fas fa-link me-1"></i>{% trans "Haber URL" %}
                                     </label>
                                     <input type="url" 
                                            name="url" 
                                            id="id_url_edit_{{ mention.id }}"
                                            class="form-control" 
                                            value="{{ mention.url }}"
-                                           placeholder="https://example.com/haber-linki">
+                                           placeholder="{% trans 'https://example.com/haber-linki' %}">
                                 </div>
                                 
                                 <div class="col-md-6">
@@ -563,10 +569,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                    <i class="fas fa-times"></i>{% trans "Kapat" %}
+                    <i class="fas fa-times me-2"></i>{% trans "Kapat" %}
                 </button>
                 <button type="button" class="btn-modern primary" data-bs-toggle="modal" data-bs-target="#editMentionModal{{ mention.id }}">
-                    <i class="fas fa-edit"></i>{% trans "Düzenle" %}
+                    <i class="fas fa-edit me-2"></i>{% trans "Düzenle" %}
                 </button>
             </div>
         </div>
@@ -588,11 +594,11 @@
                     <i class="fas fa-trash-alt text-danger fa-3x mb-3"></i>
                     <h5>{% trans "Bu haberi silmek istediğinizden emin misiniz?" %}</h5>
                     <p class="text-muted">
-                        <strong>"{{ mention.title }}"</strong> kalıcı olarak silinecek.
+                        <strong>"{{ mention.title }}"</strong> {% trans "kalıcı olarak silinecek." %}
                     </p>
                     <div class="alert alert-warning mt-3">
                         <i class="fas fa-exclamation-triangle me-2"></i>
-                        Bu işlem geri alınamaz!
+                        {% trans "Bu işlem geri alınamaz!" %}
                     </div>
                 </div>
             </div>

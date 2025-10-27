@@ -1,13 +1,14 @@
 <!-- core\dashboard\templates\dashboard\includes\partials\file_size_display.html - Dosya boyutu -->
- {% if file_size %}
+{% load i18n %}
+{% if file_size %}
     {% if file_size < 1024 %}
         {{ file_size }} B
     {% elif file_size < 1048576 %}
-        {{ file_size|floatformat:1|mul:0.0009765625 }} KB
+        {{ file_size|floatformat:2 }} KB
     {% elif file_size < 1073741824 %}
-        {{ file_size|floatformat:1|mul:0.00000095367 }} MB
+        {{ file_size|floatformat:2 }} MB
     {% else %}
-        {{ file_size|floatformat:1|mul:0.00000000093132 }} GB
+        {{ file_size|floatformat:2 }} GB
     {% endif %}
 {% else %}
     <span class="text-muted">-</span>

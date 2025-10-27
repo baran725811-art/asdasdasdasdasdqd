@@ -3,12 +3,14 @@
 {% extends 'dashboard/base/list_base.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "Ürün Yönetimi"%}{% endblock %}
-{% block page_title %}{% trans "Ürün Yönetimi"%}{% endblock %}
+{% block page_header %}
+    {% trans "Ürün Yönetimi" as page_title_trans %}
+    {% include 'dashboard/includes/navigation/page_header.html' with page_title=page_title_trans page_subtitle=category.name|add:" kategorisindeki ürünler" page_icon="fas fa-box" page_actions=page_actions %}
+{% endblock %}
 
 <!-- Page Header Configuration -->
 {% block page_header %}
-    {% include 'dashboard/includes/navigation/page_header.html' with page_title="Ürün Yönetimi" page_subtitle=category.name|add:" kategorisindeki ürünler" page_icon="fas fa-box" page_actions=page_actions %}
+    {% include 'dashboard/includes/navigation/page_header.html' with page_title=page_title_trans page_subtitle=category.name|add:" kategorisindeki ürünler" page_icon="fas fa-box" page_actions=page_actions %}
 {% endblock %}
 
 <!-- Page Content -->
@@ -38,7 +40,8 @@
                                         <td>
                                             {{ product.name }}
                                             {% if product.is_featured %}
-                                                {% include 'dashboard/includes/ui/status_badge.html' with badge_text="Öne Çıkan" badge_color="primary" %}
+                                                {% trans "Öne Çıkan" as featured_text %}
+                                                {% include 'dashboard/includes/ui/status_badge.html' with badge_text=featured_text badge_color="primary" %}
                                             {% endif %}
                                         </td>
                                         <td>{{ product.category.name }}</td>
@@ -70,8 +73,11 @@
                         {% endif %}
                     </div>
                 </div>
-            {% else %}
-                {% include 'dashboard/includes/ui/empty_state.html' with empty_title="Henüz ürün eklenmemiş." empty_message="İlk ürününüzü eklemek için yukarıdaki butona tıklayın." empty_icon="fas fa-box" action_button_text="Yeni Ürün Ekle" action_button_icon="fas fa-plus" %}
+            {% else %}            
+                {% trans "Henüz ürün eklenmemiş." as empty_title_trans %}
+                {% trans "İlk ürününüzü eklemek için yukarıdaki butona tıklayın." as empty_message_trans %}
+                {% trans "Yeni Ürün Ekle" as action_button_text_trans %}
+                {% include 'dashboard/includes/ui/empty_state.html' with empty_title=empty_title_trans empty_message=empty_message_trans empty_icon="fas fa-box" action_button_text=action_button_text_trans action_button_icon="fas fa-plus" %}            
             {% endif %}
         </div>
     </div>
@@ -84,7 +90,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{% trans "Yeni Ürün Ekle"%}</h5>
+                <h5 class="modal-title">{% trans "Yeni Ürün Ekle" %}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <form method="post" enctype="multipart/form-data" action="{% url 'dashboard:dashboard_product_add' %}">
@@ -119,8 +125,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "İptal"%}</button>
-                    <button type="submit" class="btn btn-primary">{% trans "Ekle"%}</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "İptal" %}</button>
+                    <button type="submit" class="btn btn-primary">{% trans "Ekle" %}</button>
                 </div>
             </form>
         </div>
@@ -129,7 +135,7 @@
 
 <!-- Edit & Delete Modals for each product -->
 {% for product in products %}
-{% include 'dashboard/includes/modals/crud_modal_base.html' with modal_id="editProductModal"|add:product.id modal_title="Ürün Düzenle" title_icon="fas fa-edit" form_action=product.edit_url form_id="editProductForm"|add:product.id modal_size="lg" %}
+{% trans "Ürün Düzenle" as edit_modal_title %}
+{% include 'dashboard/includes/modals/crud_modal_base.html' with modal_id="editProductModal"|add:product.id modal_title=edit_modal_title title_icon="fas fa-edit" form_action=product.edit_url form_id="editProductForm"|add:product.id modal_size="lg" %}
 {% include 'dashboard/includes/modals/delete_confirmation.html' with modal_id="deleteProductModal"|add:product.id item_name=product.name delete_action=product.delete_url %}
 {% endfor %}
-{% endblock %}

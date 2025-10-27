@@ -1,5 +1,6 @@
 <!-- core\dashboard\templates\dashboard\includes\ui\loading_spinner.html - Yükleme animasyonu -->
  <!-- Loading Spinner Component -->
+{% load i18n %}
 <div class="loading-spinner-container {{ container_class|default:'' }}" id="{{ spinner_id|default:'loadingSpinner' }}">
     <div class="loading-spinner {{ spinner_class|default:'spinner-border' }}" role="status">
         {% if spinner_type == 'dots' %}
@@ -21,13 +22,13 @@
             </div>
         {% else %}
             <!-- Bootstrap default spinner -->
-            <span class="visually-hidden">{{ loading_text|default:"Yükleniyor..." }}</span>
+            <span class="visually-hidden">{{ loading_text|default:"" }}{% if not loading_text %}{% trans "Yükleniyor..." %}{% endif %}</span>
         {% endif %}
     </div>
     
     {% if show_text %}
     <div class="loading-text">
-        <span>{{ loading_text|default:"Yükleniyor..." }}</span>
+        <span>{{ loading_text|default:"" }}{% if not loading_text %}{% trans "Yükleniyor..." %}{% endif %}</span>
         {% if show_dots %}
         <span class="loading-dots">
             <span>.</span><span>.</span><span>.</span>
@@ -215,6 +216,10 @@
 </style>
 
 <script>
+
+const loadingTranslations = {
+    loading: "{% trans 'Yükleniyor...' %}"
+};
 // Loading Spinner Utility Functions
 class LoadingSpinner {
     constructor(containerId = 'loadingSpinner') {

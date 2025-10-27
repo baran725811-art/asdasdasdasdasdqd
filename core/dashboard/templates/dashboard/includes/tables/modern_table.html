@@ -24,7 +24,7 @@
                 
                 {% if add_button_url %}
                 <a href="{{ add_button_url }}" class="btn-modern primary btn-sm">
-                    <i class="fas fa-plus me-1"></i>{{ add_button_text|default:"Yeni Ekle" }}
+                    <i class="fas fa-plus me-1"></i>{% trans "Yeni Ekle" %}
                 </a>
                 {% endif %}
             </div>
@@ -97,7 +97,7 @@
                                 {% if item.description %}
                                     <span class="text-muted">{{ item.description|truncatewords:5|striptags }}</span>
                                 {% else %}
-                                    <span class="text-muted fst-italic">Açıklama yok</span>
+                                    <span class="text-muted fst-italic">{% trans "Açıklama yok" %}</span>
                                 {% endif %}
                             </td>
                             <td>
@@ -157,7 +157,6 @@
                                     <small class="text-muted">{{ service.description|truncatewords:8|striptags }}</small>
                                 {% endif %}
                             </td>
-                            <!-- Mevcut service loop'unda footer sütunu ekleyin   buraya bakılcak. hata var gibi -->
                             <td>
                                 <div class="form-check form-switch d-flex justify-content-center">
                                     <input class="form-check-input footer-toggle" 
@@ -165,7 +164,7 @@
                                            {% if service.is_footer %}checked{% endif %}
                                            data-service-id="{{ service.id }}"
                                            data-service-title="{{ service.title }}"
-                                           title="Footer'da göster/gizle">
+                                           title="{% trans 'Footer\'da göster/gizle' %}">
                                 </div>
                             </td>
                             <td>
@@ -218,14 +217,14 @@
                                 {% if product.price %}
                                     <span class="fw-bold text-success">{{ product.price|floatformat:2 }} ₺</span>
                                 {% else %}
-                                    <span class="text-muted fst-italic">{% trans "Fiyat belirtilmemiş"%}</span>
+                                    <span class="text-muted fst-italic">{% trans "Fiyat belirtilmemiş" %}</span>
                                 {% endif %}
                             </td>
                             <td>
                                 {% if product.stock is not None %}
                                     {% include 'dashboard/includes/ui/status_badge.html' with badge_text=product.stock|add:" adet" badge_color="success" %}
                                 {% else %}
-                                    <span class="text-muted fst-italic">{% trans "Stok belirtilmemiş"%}</span>
+                                    <span class="text-muted fst-italic">{% trans "Stok belirtilmemiş" %}</span>
                                 {% endif %}
                             </td>
                             <td>

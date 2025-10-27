@@ -10,6 +10,7 @@ from django.conf.urls.i18n import i18n_patterns
 from django.views.i18n import set_language
 from . import views
 from dashboard.views import catalog_view
+from django.views.i18n import JavaScriptCatalog
 
 
 # Sitemap'leri güvenli import
@@ -33,6 +34,7 @@ except ImportError:
 # Dil-bağımsız URL'ler (admin, sitemap, dil değiştirme, API'ler)
 urlpatterns = [
     path(getattr(settings, 'ADMIN_URL_SUFFIX', 'admin/'), admin.site.urls),
+    path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     path('i18n/', include('django.conf.urls.i18n')),
     path('captcha/', include('captcha.urls')),
     path('set_language/', set_language, name='set_language'),

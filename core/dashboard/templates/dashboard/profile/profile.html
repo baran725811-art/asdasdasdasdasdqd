@@ -1,19 +1,19 @@
 {% extends 'dashboard/base.html' %}
 {% load i18n %}
 
-{% block title %}Profil{% endblock %}
+{% block title %}{% trans "Profil" %}{% endblock %}
 
 {% block content %}
 <div class="container-fluid">
     <!-- Page Header -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h1 class="h3 mb-0">Kullanıcı Profili</h1>
-            <p class="text-muted">Hesap bilgilerinizi görüntüleyin ve düzenleyin</p>
+            <h1 class="h3 mb-0">{% trans "Kullanıcı Profili" %}</h1>
+            <p class="text-muted">{% trans "Hesap bilgilerinizi görüntüleyin ve düzenleyin" %}</p>
         </div>
         <div>
             <a href="{% url 'dashboard:profile_edit' %}" class="btn btn-primary">
-                <i class="fas fa-edit me-2"></i>Profili Düzenle
+                <i class="fas fa-edit me-2"></i>{% trans "Profili Düzenle" %}
             </a>
         </div>
     </div>
@@ -24,55 +24,55 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title mb-0">
-                        <i class="fas fa-user me-2"></i>Profil Bilgileri
+                        <i class="fas fa-user me-2"></i>{% trans "Profil Bilgileri" %}
                     </h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-6 mb-3">
-                            <label class="text-muted">Kullanıcı Adı</label>
+                            <label class="text-muted">{% trans "Kullanıcı Adı" %}</label>
                             <p class="mb-0 fw-bold">{{ user.username }}</p>
                         </div>
                         <div class="col-sm-6 mb-3">
-                            <label class="text-muted">E-posta</label>
+                            <label class="text-muted">{% trans "E-posta" %}</label>
                             <p class="mb-0">{{ user.email|default:"Belirtilmemiş" }}</p>
                         </div>
                         <div class="col-sm-6 mb-3">
-                            <label class="text-muted">Ad</label>
+                            <label class="text-muted">{% trans "Ad" %}</label>
                             <p class="mb-0">{{ user.first_name|default:"Belirtilmemiş" }}</p>
                         </div>
                         <div class="col-sm-6 mb-3">
-                            <label class="text-muted">Soyad</label>
+                            <label class="text-muted">{% trans "Soyad" %}</label>
                             <p class="mb-0">{{ user.last_name|default:"Belirtilmemiş" }}</p>
                         </div>
                         <div class="col-sm-6 mb-3">
-                            <label class="text-muted">Hesap Türü</label>
+                            <label class="text-muted">{% trans "Hesap Türü" %}</label>
                             <p class="mb-0">
                                 {% if user.is_superuser %}
-                                    <span class="badge bg-danger">Süper Kullanıcı</span>
+                                    <span class="badge bg-danger">{% trans "Süper Kullanıcı" %}</span>
                                 {% elif user.is_staff %}
-                                    <span class="badge bg-warning">Personel</span>
+                                    <span class="badge bg-warning">{% trans "Personel" %}</span>
                                 {% else %}
-                                    <span class="badge bg-secondary">Kullanıcı</span>
+                                    <span class="badge bg-secondary">{% trans "Kullanıcı" %}</span>
                                 {% endif %}
                             </p>
                         </div>
                         <div class="col-sm-6 mb-3">
-                            <label class="text-muted">Hesap Durumu</label>
+                            <label class="text-muted">{% trans "Hesap Durumu" %}</label>
                             <p class="mb-0">
                                 {% if user.is_active %}
-                                    <span class="badge bg-success">Aktif</span>
+                                    <span class="badge bg-success">{% trans "Aktif" %}</span>
                                 {% else %}
-                                    <span class="badge bg-danger">Pasif</span>
+                                    <span class="badge bg-danger">{% trans "Pasif" %}</span>
                                 {% endif %}
                             </p>
                         </div>
                         <div class="col-sm-6 mb-3">
-                            <label class="text-muted">Kayıt Tarihi</label>
+                            <label class="text-muted">{% trans "Kayıt Tarihi" %}</label>
                             <p class="mb-0">{{ user.date_joined|date:"d.m.Y H:i" }}</p>
                         </div>
                         <div class="col-sm-6 mb-3">
-                            <label class="text-muted">Son Giriş</label>
+                            <label class="text-muted">{% trans "Son Giriş" %}</label>
                             <p class="mb-0">{{ user.last_login|date:"d.m.Y H:i"|default:"Hiç giriş yapmamış" }}</p>
                         </div>
                     </div>
@@ -85,19 +85,19 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title mb-0">
-                        <i class="fas fa-tools me-2"></i>Hızlı İşlemler
+                        <i class="fas fa-tools me-2"></i>{% trans "Hızlı İşlemler" %}
                     </h5>
                 </div>
                 <div class="card-body">
                     <div class="d-grid gap-2">
                         <a href="{% url 'dashboard:profile_edit' %}" class="btn btn-outline-primary">
-                            <i class="fas fa-edit me-2"></i>Profili Düzenle
+                            <i class="fas fa-edit me-2"></i>{% trans "Profili Düzenle" %}
                         </a>
                         <a href="{% url 'dashboard:profile_password_change' %}" class="btn btn-outline-warning">
-                            <i class="fas fa-key me-2"></i>Şifre Değiştir
+                            <i class="fas fa-key me-2"></i>{% trans "Şifre Değiştir" %}
                         </a>
                         <a href="{% url 'dashboard:settings' %}" class="btn btn-outline-info">
-                            <i class="fas fa-cog me-2"></i>Sistem Ayarları
+                            <i class="fas fa-cog me-2"></i>{% trans "Sistem Ayarları" %}
                         </a>
                     </div>
                 </div>
@@ -107,14 +107,14 @@
             <div class="card mt-3">
                 <div class="card-header">
                     <h5 class="card-title mb-0">
-                        <i class="fas fa-shield-alt me-2"></i>Güvenlik
+                        <i class="fas fa-shield-alt me-2"></i>{% trans "Güvenlik" %}
                     </h5>
                 </div>
                 <div class="card-body">
                     <div class="alert alert-info mb-0">
                         <small>
                             <i class="fas fa-info-circle me-1"></i>
-                            Hesabınızın güvenliği için şifrenizi düzenli olarak değiştirmenizi öneririz.
+                            {% trans "Hesabınızın güvenliği için şifrenizi düzenli olarak değiştirmenizi öneririz." %}
                         </small>
                     </div>
                 </div>

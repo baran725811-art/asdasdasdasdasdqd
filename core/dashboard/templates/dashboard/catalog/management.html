@@ -109,7 +109,7 @@
             {% else %}
                 <div class="alert alert-info d-flex align-items-center" role="alert">
                     <i class="fas fa-info-circle me-2"></i>
-                    <strong>{% trans "Katalog Yok"%}:</strong> {% trans "Henüz PDF katalog dosyası yüklenmemiş"%}.
+                    <strong>{% trans "Katalog Yok" %}:</strong> {% trans "Henüz PDF katalog dosyası yüklenmemiş" %}.
                 </div>
             {% endif %}
         </div>
@@ -138,12 +138,12 @@
                             <div class="text-center">
                                 <i class="fas fa-file-pdf text-danger" style="font-size: 4rem;"></i>
                                 <h4 class="mt-3">{{ site_settings.pdf_catalog_title }}</h4>
-                                <p class="text-muted">{% trans "PDF Kataloğu Mevcu" %}t</p>
+                                <p class="text-muted">{% trans "PDF Kataloğu Mevcut" %}</p>
                                 
                                 {% if stats.file_size_display %}
                                 <p class="mb-0">
                                     <small class="text-muted">
-                                        {% trans "Dosya Boyutu"%}: {{ stats.file_size_display }}
+                                        {% trans "Dosya Boyutu" %}: {{ stats.file_size_display }}
                                     </small>
                                 </p>
                                 {% endif %}
@@ -151,7 +151,7 @@
                                 {% if stats.upload_date %}
                                 <p class="mb-0">
                                     <small class="text-muted">
-                                       {% trans " Son Güncelleme"%}: {{ stats.upload_date|date:"d.m.Y H:i" }}
+                                       {% trans "Son Güncelleme" %}: {{ stats.upload_date|date:"d.m.Y H:i" }}
                                     </small>
                                 </p>
                                 {% endif %}
@@ -180,7 +180,7 @@
                                        onchange="this.form.submit()" required>
                                 <label for="catalogFile" class="btn btn-primary">
                                     <i class="fas fa-upload me-2"></i>
-                                    {% if stats.has_file %}{% trans "Dosyayı Değiştir"%}{% else %}{% trans "PDF Yükle"%}{% endif %}
+                                    {% if stats.has_file %}{% trans "Dosyayı Değiştir" %}{% else %}{% trans "PDF Yükle" %}{% endif %}
                                 </label>
                             </div>
                         </form>
@@ -191,20 +191,20 @@
                             <input type="hidden" name="action" value="toggle_status">
                             <button type="submit" class="btn {% if stats.is_enabled %}btn-warning{% else %}btn-success{% endif %}">
                                 {% if stats.is_enabled %}
-                                    <i class="fas fa-pause me-2"></i>{% trans "Pasif Et"%}
+                                    <i class="fas fa-pause me-2"></i>{% trans "Pasif Et" %}
                                 {% else %}
-                                    <i class="fas fa-play me-2"></i>{% trans "Aktif Et"%}
+                                    <i class="fas fa-play me-2"></i>{% trans "Aktif Et" %}
                                 {% endif %}
                             </button>
                         </form>
 
                         <!-- Dosya Sil -->
                         {% if stats.has_file %}
-                        <form method="post" class="d-inline" onsubmit="return confirm('Katalog dosyasını silmek istediğinizden emin misiniz?')">
+                        <form method="post" class="d-inline" onsubmit="return confirm('{% trans "Katalog dosyasını silmek istediğinizden emin misiniz?" %}')">
                             {% csrf_token %}
                             <input type="hidden" name="action" value="delete_catalog">
                             <button type="submit" class="btn btn-danger">
-                                <i class="fas fa-trash me-2"></i>{% trans "Dosyayı Sil"%}
+                                <i class="fas fa-trash me-2"></i>{% trans "Dosyayı Sil" %}
                             </button>
                         </form>
                         {% endif %}
@@ -220,7 +220,7 @@
                 <div class="card-header">
                     <h5 class="mb-0">
                         <i class="fas fa-edit me-2"></i>
-                        {% trans "Katalog Ayarları"%}
+                        {% trans "Katalog Ayarları" %}
                     </h5>
                 </div>
                 <div class="card-body">
@@ -228,16 +228,16 @@
                         {% csrf_token %}
                         <input type="hidden" name="action" value="update_title">
                         <div class="mb-3">
-                            <label for="catalogTitle" class="form-label">{% trans "Katalog Başlığı"%}</label>
+                            <label for="catalogTitle" class="form-label">{% trans "Katalog Başlığı" %}</label>
                             <input type="text" class="form-control" id="catalogTitle" name="catalog_title" 
                                    value="{{ site_settings.pdf_catalog_title }}" 
                                    placeholder="Ürün Kataloğu" required>
                             <div class="form-text">
-                                {% trans "Bu başlık navbar'da görünecek."%}
+                                {% trans "Bu başlık navbar'da görünecek." %}
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary btn-sm">
-                            <i class="fas fa-save me-2"></i>{% trans "Başlığı Güncelle"%}
+                            <i class="fas fa-save me-2"></i>{% trans "Başlığı Güncelle" %}
                         </button>
                     </form>
                 </div>
@@ -248,7 +248,7 @@
                 <div class="card-header">
                     <h5 class="mb-0">
                         <i class="fas fa-chart-pie me-2"></i>
-                        {% trans "İstatistikler"%}
+                        {% trans "İstatistikler" %}
                     </h5>
                 </div>
                 <div class="card-body">
@@ -262,7 +262,7 @@
                                         <i class="fas fa-times-circle"></i>
                                     {% endif %}
                                 </div>
-                                <div class="small text-muted">{% trans "Durum"%}</div>
+                                <div class="small text-muted">{% trans "Durum" %}</div>
                             </div>
                         </div>
                         <div class="col-6">
@@ -274,7 +274,7 @@
                                         <i class="fas fa-file-times"></i>
                                     {% endif %}
                                 </div>
-                                <div class="small text-muted">{% trans "Dosya"%}</div>
+                                <div class="small text-muted">{% trans "Dosya" %}</div>
                             </div>
                         </div>
                     </div>
@@ -282,10 +282,10 @@
                     {% if stats.has_file %}
                     <hr>
                     <div class="small">
-                        <p class="mb-1"><strong>{% trans "Dosya Adı"%}:</strong></p>
+                        <p class="mb-1"><strong>{% trans "Dosya Adı" %}:</strong></p>
                         <p class="text-muted small">{{ site_settings.pdf_catalog_file.name|slice:":30" }}...</p>
                         
-                        <p class="mb-1 mt-3"><strong>{% trans "Web Adresi"%}:</strong></p>
+                        <p class="mb-1 mt-3"><strong>{% trans "Web Adresi" %}:</strong></p>
                         <div class="input-group">
                             <input type="text" class="form-control form-control-sm" 
                                    value="{{ request.build_absolute_uri }}/katalog/" 
@@ -305,21 +305,21 @@
                 <div class="card-header">
                     <h5 class="mb-0">
                         <i class="fas fa-question-circle me-2"></i>
-                        {% trans "Nasıl Kullanılır?"%}
+                        {% trans "Nasıl Kullanılır?" %}
                     </h5>
                 </div>
                 <div class="card-body">
                     <ol class="small">
-                        <li>{% trans "PDF katalog dosyanızı \'PDF Yükle\' butonuyla yükleyin"%}</li>
-                        <li>{% trans "Katalog başlığını isteğinize göre düzenleyin"%}</li>
-                        <li>{% trans "\'Aktif Et\' butonuyla kataloğu web sitesinde yayınlayın"%}</li>
-                        <li>{% trans "Müşteriler navbar'dan kataloğa erişebilir"%}</li>
+                        <li>{% trans "PDF katalog dosyanızı \'PDF Yükle\' butonuyla yükleyin" %}</li>
+                        <li>{% trans "Katalog başlığını isteğinize göre düzenleyin" %}</li>
+                        <li>{% trans "\'Aktif Et\' butonuyla kataloğu web sitesinde yayınlayın" %}</li>
+                        <li>{% trans "Müşteriler navbar'dan kataloğa erişebilir" %}</li>
                     </ol>
                     
                     <div class="alert alert-info mt-3">
                         <small>
                             <i class="fas fa-lightbulb me-1"></i>
-                            <strong>{% trans "İpucu"%}:</strong> {% trans "PDF dosyası web içinde görüntülenir, indirme yapılmaz."%}
+                            <strong>{% trans "İpucu" %}:</strong> {% trans "PDF dosyası web içinde görüntülenir, indirme yapılmaz." %}
                         </small>
                     </div>
                 </div>
@@ -334,7 +334,7 @@ function copyToClipboard(text) {
         // Toast bildirim göster
         const toast = document.createElement('div');
         const copySuccessMessage = "{% trans 'Adres panoya kopyalandı!' %}";
-        const loadingMessage = "{% trans 'Yükleniyor... %}";
+        const loadingMessage = "{% trans 'Yükleniyor...' %}";
         toast.className = 'toast align-items-center text-white bg-success border-0 position-fixed';
         toast.style.cssText = 'top: 20px; right: 20px; z-index: 9999;';
         toast.innerHTML = `
@@ -362,7 +362,9 @@ document.getElementById('catalogFile').addEventListener('change', function() {
     if (this.files.length > 0) {
         const label = this.nextElementSibling;
         const originalText = label.innerHTML;
-        label.innerHTML = `<i class="fas fa-spinner fa-spin me-2"></i>${loadingMessage}`;        label.classList.add('disabled');
+        const loadingMessage = "{% trans 'Yükleniyor...' %}";
+        label.innerHTML = `<i class="fas fa-spinner fa-spin me-2"></i>${loadingMessage}`;       
+        label.classList.add('disabled');
     }
 });
 </script>

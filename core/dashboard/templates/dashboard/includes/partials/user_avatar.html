@@ -1,6 +1,7 @@
 <!-- core\dashboard\templates\dashboard\includes\partials\user_avatar.html - Kullanıcı avatarı -->
- {% if user_image %}
-    <img src="{{ user_image }}" alt="{{ user_name|default:'User' }}" class="user-avatar">
+{% load i18n %}
+{% if user_image %}
+    <img src="{{ user_image }}" alt="{{ user_name|default:_('Kullanıcı') }}" class="user-avatar">
 {% else %}
     <div class="user-avatar-placeholder">
         <i class="fas fa-user"></i>

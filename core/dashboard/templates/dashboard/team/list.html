@@ -9,21 +9,27 @@
 
 {% block page_content %}
 <!-- Page Header -->
-{% include 'dashboard/includes/navigation/page_header.html' with page_title="Ekip Yönetimi" page_subtitle="Ekip üyelerinizi düzenleyin ve yönetin" page_icon="fas fa-users" page_actions=page_actions %}
+{% trans "Ekip Yönetimi" as team_management_title %}
+{% trans "Ekip üyelerinizi düzenleyin ve yönetin" as team_management_subtitle %}
+{% include 'dashboard/includes/navigation/page_header.html' with page_title=team_management_title page_subtitle=team_management_subtitle page_icon="fas fa-users" page_actions=page_actions %}
 
 <!-- Statistics -->
 <div class="row g-4 mb-4">
     <div class="col-xl-3 col-lg-6 col-md-6">
-        {% include 'dashboard/includes/cards/stats_card.html' with card_value=total_members card_label="Toplam Üye" card_icon="fas fa-users" card_style="modern" card_color="primary" %}
+        {% trans "Toplam Üye" as total_members_label %}
+        {% include 'dashboard/includes/cards/stats_card.html' with card_value=total_members card_label=total_members_label card_icon="fas fa-users" card_style="modern" card_color="primary" %}
     </div>
     <div class="col-xl-3 col-lg-6 col-md-6">
-        {% include 'dashboard/includes/cards/stats_card.html' with card_value=active_members card_label="Aktif Üyeler" card_icon="fas fa-user-check" card_style="modern" card_color="success" %}
+        {% trans "Aktif Üyeler" as active_members_label %}
+        {% include 'dashboard/includes/cards/stats_card.html' with card_value=active_members card_label=active_members_label card_icon="fas fa-user-check" card_style="modern" card_color="success" %}
     </div>
     <div class="col-xl-3 col-lg-6 col-md-6">
-        {% include 'dashboard/includes/cards/stats_card.html' with card_value=positions_count card_label="Pozisyon Sayısı" card_icon="fas fa-briefcase" card_style="modern" card_color="info" %}
+        {% trans "Pozisyon Sayısı" as positions_count_label %}
+        {% include 'dashboard/includes/cards/stats_card.html' with card_value=positions_count card_label=positions_count_label card_icon="fas fa-briefcase" card_style="modern" card_color="info" %}
     </div>
     <div class="col-xl-3 col-lg-6 col-md-6">
-        {% include 'dashboard/includes/cards/stats_card.html' with card_value=avg_order card_label="Ortalama Sıralama" card_icon="fas fa-sort-numeric-up" card_style="modern" card_color="warning" %}
+        {% trans "Ortalama Sıralama" as avg_order_label %}
+        {% include 'dashboard/includes/cards/stats_card.html' with card_value=avg_order card_label=avg_order_label card_icon="fas fa-sort-numeric-up" card_style="modern" card_color="warning" %}
     </div>
 </div>
 
@@ -39,7 +45,8 @@
             </button>
         </div>
         <div class="d-flex gap-2">
-            {% include 'dashboard/includes/tables/table_search.html' with search_id="memberSearch" search_placeholder="Ekip üyesi ara..." %}
+            {% trans "Ekip üyesi ara..." as member_search_placeholder %}
+            {% include 'dashboard/includes/tables/table_search.html' with search_id="memberSearch" search_placeholder=member_search_placeholder %}
             <button type="button" class="btn-modern primary btn-sm" data-bs-toggle="modal" data-bs-target="#addMemberModal">
                 <i class="fas fa-plus me-1"></i>{% trans "Yeni Ekip Üyesi" %}
             </button>
@@ -64,13 +71,13 @@
                     {% endif %}
                     <div class="team-card-overlay">
                         <div class="team-card-actions">
-                            <button class="btn-card-action" data-bs-toggle="modal" data-bs-target="#memberModal{{ member.id }}" title="Detayları Görüntüle">
+                            <button class="btn-card-action" data-bs-toggle="modal" data-bs-target="#memberModal{{ member.id }}" title="{% trans "Detayları Görüntüle" %}">
                                 <i class="fas fa-eye"></i>
                             </button>
-                            <button class="btn-card-action" data-bs-toggle="modal" data-bs-target="#editMemberModal{{ member.id }}" title="Düzenle">
+                            <button class="btn-card-action" data-bs-toggle="modal" data-bs-target="#editMemberModal{{ member.id }}" title="{% trans "Düzenle" %}">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button class="btn-card-action delete" data-bs-toggle="modal" data-bs-target="#deleteMemberModal{{ member.id }}" title="Sil">
+                            <button class="btn-card-action delete" data-bs-toggle="modal" data-bs-target="#deleteMemberModal{{ member.id }}" title="{% trans "Sil" %}">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </div>
@@ -92,7 +99,10 @@
     {% else %}
     <div class="row">
         <div class="col-12">
-            {% include 'dashboard/includes/ui/empty_state.html' with empty_title="Henüz ekip üyesi bulunmuyor" empty_message="İlk ekip üyenizi eklemek için yukarıdaki 'Yeni Ekip Üyesi' butonunu kullanın." empty_icon="fas fa-users" action_button_text="İlk Üyeyi Ekle" action_button_icon="fas fa-plus" action_button_attrs='data-bs-toggle="modal" data-bs-target="#addMemberModal"' %}
+            {% trans "Henüz ekip üyesi bulunmuyor" as empty_members_title %}
+            {% trans "İlk ekip üyenizi eklemek için yukarıdaki 'Yeni Ekip Üyesi' butonunu kullanın." as empty_members_message %}
+            {% trans "İlk Üyeyi Ekle" as add_first_member_text %}
+            {% include 'dashboard/includes/ui/empty_state.html' with empty_title=empty_members_title empty_message=empty_members_message empty_icon="fas fa-users" action_button_text=add_first_member_text action_button_icon="fas fa-plus" action_button_attrs='data-bs-toggle="modal" data-bs-target="#addMemberModal"' %}
         </div>
     </div>
     {% endif %}
@@ -186,20 +196,28 @@
                     <div class="translation-content active" data-lang="tr">
                         <div class="row">
                             <div class="col-md-6">
-                                {% include 'dashboard/includes/forms/form_field.html' with field_name="name" field_label="Ad Soyad" field_icon="fas fa-user" field_type="text" is_required=True help_text="Ekip üyesinin adını girin" language_code="tr" %}
+                                {% trans "Ad Soyad" as name_label %}
+                                {% trans "Ekip üyesinin adını girin" as name_help_text %}
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="name" field_label=name_label field_icon="fas fa-user" field_type="text" is_required=True help_text=name_help_text language_code="tr" %}
                             </div>
                             <div class="col-md-6">
-                                {% include 'dashboard/includes/forms/form_field.html' with field_name="order" field_label="Sıralama" field_icon="fas fa-sort-numeric-up" field_type="number" field_min="0" field_value="0" help_text="Küçük sayılar önce görünür" %}
+                                {% trans "Sıralama" as order_label %}
+                                {% trans "Küçük sayılar önce görünür" as order_help_text %}
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="order" field_label=order_label field_icon="fas fa-sort-numeric-up" field_type="number" field_min="0" field_value="0" help_text=order_help_text %}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                {% include 'dashboard/includes/forms/form_field.html' with field_name="position" field_label="Pozisyon" field_icon="fas fa-briefcase" field_type="text" is_required=True help_text="Ör: Genel Müdür, Yazılım Geliştirici..." language_code="tr" %}
+                                {% trans "Pozisyon" as position_label %}
+                                {% trans "Ör: Genel Müdür, Yazılım Geliştirici..." as position_help_text %}
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="position" field_label=position_label field_icon="fas fa-briefcase" field_type="text" is_required=True help_text=position_help_text language_code="tr" %}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="bio" label="Biyografi" rows="4" help_text="Ekip üyesinin deneyimi, uzmanlık alanları vb." %}
+                                {% trans "Biyografi" as bio_label %}
+                                {% trans "Ekip üyesinin deneyimi, uzmanlık alanları vb." as bio_help_text %}
+                                {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="bio" label=bio_label rows="4" help_text=bio_help_text %}
                             </div>
                         </div>
                     </div>
@@ -212,12 +230,16 @@
                                 
                                 <div class="row">
                                     <div class="col-12">
-                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="position_"|add:lang field_label="Pozisyon" field_icon="fas fa-briefcase" field_type="text" is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                        {% trans "Pozisyon" as position_label_trans %}
+                                        {% trans "Bu alan zorunludur" as required_field_text %}
+                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="position_"|add:lang field_label=position_label_trans field_icon="fas fa-briefcase" field_type="text" is_required=True help_text=required_field_text language_code=lang %}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
-                                        {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="bio_"|add:lang label="Biyografi" rows="4" help_text="Bu alan zorunludur" %}
+                                        {% trans "Biyografi" as bio_label_trans %}
+                                        {% trans "Bu alan zorunludur" as required_field_text2 %}
+                                        {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="bio_"|add:lang label=bio_label_trans rows="4" help_text=required_field_text2 %}
                                     </div>
                                 </div>
                             </div>
@@ -235,18 +257,24 @@
                         <div class="card-body-modern">
                             <div class="row">
                                 <div class="col-12">
-                                    {% include 'dashboard/includes/forms/image_upload_field.html' with field_name="image" label="Fotoğraf" help_text="Önerilen boyut: 400x400 piksel, JPG/PNG formatında" required=True %}
+                                    {% trans "Fotoğraf" as image_label %}
+                                    {% trans "Önerilen boyut: 400x400 piksel, JPG/PNG formatında" as image_help_text %}
+                                    {% include 'dashboard/includes/forms/image_upload_field.html' with field_name="image" label=image_label help_text=image_help_text required=True %}
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text" field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" help_text="Fotoğraf için SEO alt metni (max 125 karakter)" %}
+                                    {% trans "Alt Metin (SEO)" as alt_text_label %}
+                                    {% trans "Fotoğraf için SEO alt metni (max 125 karakter)" as alt_text_help %}
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text" field_label=alt_text_label field_icon="fas fa-paragraph" field_type="text" help_text=alt_text_help %}
                                 </div>
                             </div>
                             
                             <div class="row">
                                 <div class="col-12">
-                                    {% include 'dashboard/includes/forms/checkbox_field.html' with field_name="is_active" label="Aktif Durumda" field_type="switch" icon="fas fa-toggle-on" checked=True help_text="Pasif üyeler web sitesinde görüntülenmez" %}
+                                    {% trans "Aktif Durumda" as is_active_label %}
+                                    {% trans "Pasif üyeler web sitesinde görüntülenmez" as is_active_help %}
+                                    {% include 'dashboard/includes/forms/checkbox_field.html' with field_name="is_active" label=is_active_label field_type="switch" icon="fas fa-toggle-on" checked=True help_text=is_active_help %}
                                 </div>
                             </div>
                         </div>
@@ -344,7 +372,9 @@
                         <div class="card-body-modern">
                             <div class="row">
                                 <div class="col-12">
-                                    {% include 'dashboard/includes/forms/image_upload_field.html' with field_name="image" label="Fotoğraf" current_image=member.image help_text="Yeni fotoğraf seçmezseniz mevcut fotoğraf korunur" %}
+                                    {% trans "Fotoğraf" as image_label2 %}
+                                    {% trans "Yeni fotoğraf seçmezseniz mevcut fotoğraf korunur" as image_help_text2 %}
+                                    {% include 'dashboard/includes/forms/image_upload_field.html' with field_name="image" label=image_label2 current_image=member.image help_text=image_help_text2 %}
                                 </div>
                             </div>
                             <div class="row">
@@ -456,12 +486,13 @@
                 <div class="text-center">
                     <i class="fas fa-trash-alt text-danger fa-3x mb-3"></i>
                     <h5>{% trans "Bu ekip üyesini silmek istediğinizden emin misiniz?" %}</h5>
+                    {% trans "kalıcı olarak silinecek." as will_be_deleted_text %}
                     <p class="text-muted">
-                        <strong>"{{ member.name }}"</strong> kalıcı olarak silinecek.
+                        <strong>"{{ member.name }}"</strong> {% trans "kalıcı olarak silinecek." %}
                     </p>
                     <div class="alert alert-warning mt-3">
                         <i class="fas fa-exclamation-triangle me-2"></i>
-                        Bu işlem geri alınamaz!
+                        {% trans "Bu işlem geri alınamaz!" %}
                     </div>
                 </div>
             </div>
@@ -470,8 +501,9 @@
                     <i class="fas fa-times me-2"></i>{% trans "İptal" %}
                 </button>
                 
+                {% trans "ekip üyesi" as item_type_member %}
                 <form method="post" style="display: inline;" class="delete-form" 
-                      data-item-type="ekip üyesi"
+                      data-item-type="{{ item_type_member }}"
                       data-item-name="{{ member.name }}"
                       action="{% url 'dashboard:team_member_delete' member.id %}">
                     {% csrf_token %}

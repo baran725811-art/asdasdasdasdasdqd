@@ -1,5 +1,6 @@
 <!-- dashboard/templates/dashboard/includes/crud/crud_table.html -->
 <!-- Ortak CRUD Tablosu Template'i -->
+{% load i18n %}
 
 <div class="table-card">
     <div class="card-header-modern">
@@ -46,19 +47,19 @@
                                 <button class="btn-action edit" 
                                         data-bs-toggle="modal" 
                                         data-bs-target="#edit{{ table_config.model_name }}Modal{{ item.id }}" 
-                                        title="Düzenle">
+                                        title="{% trans 'Düzenle' %}">
                                     <i class="fas fa-edit"></i>
                                 </button>
                                 <button class="btn-action view" 
                                         data-bs-toggle="modal" 
                                         data-bs-target="#view{{ table_config.model_name }}Modal{{ item.id }}" 
-                                        title="Görüntüle">
+                                        title="{% trans 'Görüntüle' %}">
                                     <i class="fas fa-eye"></i>
                                 </button>
                                 <button class="btn-action delete" 
                                         data-bs-toggle="modal" 
                                         data-bs-target="#delete{{ table_config.model_name }}Modal{{ item.id }}" 
-                                        title="Sil">
+                                        title="{% trans 'Sil' %}">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
@@ -81,273 +82,3 @@
         {% endif %}
     </div>
 </div>
-
-<!-- ============================================================================= -->
-<!-- dashboard/templates/dashboard/includes/crud/crud_modals.html -->
-<!-- Ortak CRUD Modal'ları Template'i -->
-
-<!-- Add Modal Template -->
-<div class="modal fade modal-modern" id="add{{ modal_config.model_name }}Modal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog {{ modal_config.size|default:'modal-xl' }}">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">
-                    <i class="fas fa-plus me-2"></i>{{ modal_config.add_title }}
-                </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-            
-            <form method="post" enctype="multipart/form-data" 
-                  id="add{{ modal_config.model_name }}Form" 
-                  action="{{ modal_config.add_url }}">
-                {% csrf_token %}
-                
-                <div class="modal-body">
-                    {% block add_form_content %}
-                    <!-- Bu blok her model için override edilecek -->
-                    {% endblock %}
-                </div>
-                
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                        <i class="fas fa-times me-2"></i>İptal
-                    </button>
-                    <button type="submit" class="btn-modern success">
-                        <i class="fas fa-save me-2"></i>{{ modal_config.save_text }}
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- Edit Modals Template -->
-{% for item in items %}
-<div class="modal fade modal-modern" id="edit{{ modal_config.model_name }}Modal{{ item.id }}" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog {{ modal_config.size|default:'modal-xl' }}">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">
-                    <i class="fas fa-edit me-2"></i>{{ modal_config.edit_title }}: {{ item.title|default:item.name }}
-                </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-            
-            <form method="post" enctype="multipart/form-data" 
-                  id="edit{{ modal_config.model_name }}Form{{ item.id }}" 
-                  action="{{ modal_config.edit_url_pattern }}{{ item.id }}/">
-                {% csrf_token %}
-                <input type="hidden" name="{{ modal_config.model_name_lower }}_id" value="{{ item.id }}">
-                
-                <div class="modal-body">
-                    {% block edit_form_content %}
-                    <!-- Bu blok her model için override edilecek -->
-                    {% endblock %}
-                </div>
-                
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                        <i class="fas fa-times me-2"></i>İptal
-                    </button>
-                    <button type="submit" class="btn-modern success">
-                        <i class="fas fa-save me-2"></i>Değişiklikleri Kaydet
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- View Modal -->
-<div class="modal fade modal-modern" id="view{{ modal_config.model_name }}Modal{{ item.id }}" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog {{ modal_config.view_size|default:'modal-lg' }}">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">
-                    <i class="fas fa-eye me-2"></i>{{ modal_config.view_title }}
-                </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                {% block view_content %}
-                <!-- Bu blok her model için override edilecek -->
-                {% endblock %}
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                    <i class="fas fa-times"></i>Kapat
-                </button>
-                <button type="button" class="btn-modern primary" data-bs-toggle="modal" data-bs-target="#edit{{ modal_config.model_name }}Modal{{ item.id }}">
-                    <i class="fas fa-edit"></i>Düzenle
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Delete Modal -->
-{% include 'dashboard/includes/modals/delete_confirmation.html' with modal_id="delete"|add:modal_config.model_name|add:"Modal"|add:item.id item_name=item.title|default:item.name delete_action=item.id item_type=modal_config.item_type warning_message=modal_config.delete_warning %}
-
-{% endfor %}
-
-<!-- ============================================================================= -->
-<!-- static/dashboard/js/common-crud.js -->
-<!-- Ortak CRUD JavaScript Handler'ları -->
-
-<script>
-class CrudManager {
-    constructor(config) {
-        this.config = config;
-        this.init();
-    }
-    
-    init() {
-        this.setupAddFormHandler();
-        this.setupEditFormHandlers();
-        this.setupDeleteHandlers();
-    }
-    
-    setupAddFormHandler() {
-        const addForm = document.getElementById(`add${this.config.modelName}Form`);
-        if (addForm) {
-            addForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                await this.handleFormSubmit(addForm, 'add');
-            });
-        }
-    }
-    
-    setupEditFormHandlers() {
-        document.querySelectorAll(`form[id^="edit${this.config.modelName}Form"]`).forEach(form => {
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                await this.handleFormSubmit(form, 'edit');
-            });
-        });
-    }
-    
-    setupDeleteHandlers() {
-        document.querySelectorAll('.delete-form').forEach(form => {
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                await this.handleDelete(form);
-            });
-        });
-    }
-    
-    async handleFormSubmit(form, action) {
-        const submitBtn = form.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-        
-        // Loading state
-        submitBtn.disabled = true;
-        const loadingText = action === 'add' ? 'Kaydediliyor...' : 'Güncelleniyor...';
-        submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span>${loadingText}`;
-        
-        try {
-            const response = await fetch(form.action, {
-                method: 'POST',
-                body: new FormData(form),
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
-                }
-            });
-            
-            if (response.ok) {
-                this.showNotification(`${itemName} başarıyla silindi!`, 'success');
-                this.closeModal(form);
-                this.reloadPage();
-            } else {
-                throw new Error('Silme işlemi başarısız');
-            }
-        } catch (error) {
-            console.error('Delete error:', error);
-            this.showNotification(`Silme işlemi sırasında hata oluştu: ${error.message}`, 'error');
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = originalText;
-        }
-    }
-    
-    showNotification(message, type) {
-        if (window.notificationSystem) {
-            window.notificationSystem[type](message);
-        } else {
-            alert(message);
-        }
-    }
-    
-    closeModal(form) {
-        const modal = bootstrap.Modal.getInstance(form.closest('.modal'));
-        if (modal) {
-            modal.hide();
-        }
-    }
-    
-    reloadPage() {
-        setTimeout(() => {
-            window.location.reload();
-        }, 1000);
-    }
-}
-
-// Global CRUD manager instances
-window.crudManagers = {};
-
-// Initialize CRUD manager for specific model
-function initializeCrud(modelName, config) {
-    window.crudManagers[modelName] = new CrudManager({
-        modelName: modelName,
-        itemName: config.itemName || modelName,
-        ...config
-    });
-}
-
-// Document ready handler
-document.addEventListener('DOMContentLoaded', function() {
-    // Auto-initialize based on page data
-    if (typeof window.crudConfig !== 'undefined') {
-        initializeCrud(window.crudConfig.modelName, window.crudConfig);
-    }
-});
-</script>(form.action, {
-                method: 'POST',
-                body: new FormData(form),
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
-                }
-            });
-            
-            if (response.ok) {
-                const successMessage = action === 'add' 
-                    ? `${this.config.itemName} başarıyla kaydedildi!`
-                    : `${this.config.itemName} başarıyla güncellendi!`;
-                    
-                this.showNotification(successMessage, 'success');
-                this.closeModal(form);
-                this.reloadPage();
-            } else {
-                throw new Error(`${action === 'add' ? 'Kaydetme' : 'Güncelleme'} hatası`);
-            }
-        } catch (error) {
-            console.error('Form submit error:', error);
-            this.showNotification(`Bir hata oluştu: ${error.message}`, 'error');
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = originalText;
-        }
-    }
-    
-    async handleDelete(form) {
-        const submitBtn = form.querySelector('.delete-confirm-btn');
-        const originalText = submitBtn.innerHTML;
-        const itemName = form.dataset.itemName || this.config.itemName;
-        
-        // Loading state
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Siliniyor...';
-        
-        try {
-            const response = await fetch

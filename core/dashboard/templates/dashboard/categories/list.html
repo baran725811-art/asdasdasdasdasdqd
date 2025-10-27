@@ -4,12 +4,14 @@
 {% load widget_tweaks %}
 {% load i18n %}
 {% load custom_filters %}
-{% block title %}{% trans "Kategoriler"%}{% endblock %}
-{% block page_title %}{% trans "Kategori Yönetimi"%}{% endblock %}
+
+{% block title %}{% trans "Kategoriler" %}{% endblock %}
 
 <!-- Page Header Configuration -->
 {% block page_header %}
-    {% include 'dashboard/includes/navigation/page_header.html' with page_title="Kategori Yönetimi" page_subtitle="Kategorilerinizi düzenleyin ve yönetin" page_icon="fas fa-tags" page_actions=page_actions %}
+    {% trans "Kategori Yönetimi" as page_title_trans %}
+    {% trans "Kategorilerinizi düzenleyin ve yönetin" as page_subtitle_trans %}
+    {% include 'dashboard/includes/navigation/page_header.html' with page_title=page_title_trans page_subtitle=page_subtitle_trans page_icon="fas fa-tags" page_actions=page_actions %}
 {% endblock %}
 
 <!-- Page Content -->
@@ -38,7 +40,7 @@
                     <div class="card-header-modern">
                         <div class="d-flex justify-content-between align-items-center">
                             <h5 class="mb-0">
-                                <i class="fas fa-list me-2"></i>{% trans "Kategori Listesi"%}
+                                <i class="fas fa-list me-2"></i>{% trans "Kategori Listesi" %}
                             </h5>
                             <div class="d-flex gap-2">
                                 {% include 'dashboard/includes/tables/table_search.html' with search_placeholder="Kategori ara..." search_id="categorySearch" %}
@@ -72,6 +74,7 @@
                                         <td><code class="bg-light px-2 py-1 rounded">{{ category.slug }}</code></td>
                                         <td>
                                             {% include 'dashboard/includes/ui/status_badge.html' with badge_text=category.is_active|yesno:"Aktif,Pasif" badge_color=category.is_active|yesno:"success,danger" badge_icon=category.is_active|yesno:"fas fa-check-circle,fas fa-times-circle" %}
+                                        </td>
                                         <td>
                                             <div class="action-buttons">
                                                 <button class="btn-action edit" 
@@ -94,7 +97,6 @@
                                                 </button>
                                             </div>
                                         </td>
-                                        </td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
@@ -103,7 +105,10 @@
                     </div>
                 </div>
             {% else %}
-                {% include 'dashboard/includes/ui/empty_state.html' with empty_title="Henüz kategori bulunmuyor" empty_message="İlk kategorinizi eklemek için aşağıdaki butona tıklayın." empty_icon="fas fa-tags" action_button_text="İlk Kategoriyi Ekle" action_button_icon="fas fa-plus" action_button_attrs='data-bs-toggle="modal" data-bs-target="#addCategoryModal"' %}
+                {% trans "Henüz kategori bulunmuyor" as empty_title_trans %}
+                {% trans "İlk kategorinizi eklemek için aşağıdaki butona tıklayın." as empty_message_trans %}
+                {% trans "İlk Kategoriyi Ekle" as action_button_text_trans %}
+                {% include 'dashboard/includes/ui/empty_state.html' with empty_title=empty_title_trans empty_message=empty_message_trans empty_icon="fas fa-tags" action_button_text=action_button_text_trans action_button_icon="fas fa-plus" action_button_attrs='data-bs-toggle="modal" data-bs-target="#addCategoryModal"' %}
             {% endif %}
         </div>
     </div>
@@ -117,7 +122,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="addCategoryModalLabel">
-                    <i class="fas fa-plus-circle me-2"></i>{% trans "Yeni Kategori"%}
+                    <i class="fas fa-plus-circle me-2"></i>{% trans "Yeni Kategori" %}
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
@@ -153,10 +158,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                        <i class="fas fa-times"></i>{% trans "İptal"%}
+                        <i class="fas fa-times"></i>{% trans "İptal" %}
                     </button>
                     <button type="submit" class="btn-modern primary">
-                        <i class="fas fa-save"></i>{% trans "Kategori Ekle"%}
+                        <i class="fas fa-save"></i>{% trans "Kategori Ekle" %}
                     </button>
                 </div>
             </form>
@@ -165,7 +170,6 @@
 </div>
 
 <!-- Edit & Delete Modals for each category -->
-<!-- Edit & Delete Modals for each category - GALLERY GİBİ DEĞİŞTİRİLDİ -->
 {% for category_data in categories_with_translations %}
 {% with category=category_data.object %}
 <!-- Edit Category Modal -->
@@ -241,7 +245,8 @@
                 <div class="row">
                     <div class="col-12">
                         <h4>{{ category.name }}</h4>
-                        <p class="text-muted">{{ category.description|default:"Açıklama bulunmuyor." }}</p>
+                        {% trans "Açıklama bulunmuyor." as no_description %}
+                        <p class="text-muted">{{ category.description|default:no_description }}</p>
                         
                         <div class="category-meta mt-3">
                             <div class="row">
@@ -292,11 +297,11 @@
                     <i class="fas fa-trash-alt text-danger fa-3x mb-3"></i>
                     <h5>{% trans "Bu kategoriyi silmek istediğinizden emin misiniz?" %}</h5>
                     <p class="text-muted">
-                        <strong>"{{ category.name }}"</strong> kalıcı olarak silinecek.
+                        <strong>"{{ category.name }}"</strong> {% trans "kalıcı olarak silinecek." %}
                     </p>
                     <div class="alert alert-warning mt-3">
                         <i class="fas fa-exclamation-triangle me-2"></i>
-                        Bu kategoriye ait ürünler de etkilenebilir!
+                        {% trans "Bu kategoriye ait ürünler de etkilenebilir!" %}
                     </div>
                 </div>
             </div>
@@ -320,15 +325,22 @@
 </div>
 {% endwith %}
 {% endfor %}
+
 {% block extra_js %}
 <script>
+const translations = {
+    updating: "{% trans 'Güncelleniyor...' %}",
+    success: "{% trans 'Kategori başarıyla güncellendi!' %}",
+    error: "{% trans 'Güncelleme hatası' %}",
+    generalError: "{% trans 'Bir hata oluştu:' %}"
+};
+
 document.addEventListener('DOMContentLoaded', function() {
     // Notification system kontrolü
     if (typeof window.notificationSystem === 'undefined') {
         window.notificationSystem = {
             success: function(message) { 
                 console.log('SUCCESS:', message);
-                // Bootstrap toast veya basit alert kullan
                 alert(message); 
             },
             error: function(message) { 
@@ -338,7 +350,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
 
-    // Edit Category Form Handlers - DÜZELTILMIŞ VERSİYON
+    // Edit Category Form Handlers
     document.querySelectorAll('form[id^="editCategoryForm"]').forEach(form => {
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -346,7 +358,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Güncelleniyor...';
+            submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span>${translations.updating}`;
             
             try {
                 const response = await fetch(this.action, {
@@ -361,15 +373,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 const data = await response.json();
                 
                 if (response.ok && data.success) {
-                    // Success notification
-                    window.notificationSystem.success('Kategori başarıyla güncellendi!');
+                    window.notificationSystem.success(translations.success);
                     
-                    // Modal kapat
                     const modalId = this.closest('.modal').id;
                     const modal = bootstrap.Modal.getInstance(document.getElementById(modalId));
                     if (modal) modal.hide();
                     
-                    // Sayfa yenile - GARANTİ İÇİN
                     setTimeout(() => {
                         window.location.reload();
                     }, 1000);
@@ -378,19 +387,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             } catch (error) {
                 console.error('Error:', error);
-                window.notificationSystem.error('Bir hata oluştu: ' + error.message);
+                window.notificationSystem.error(`${translations.generalError} ${error.message}`);
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalText;
             }
         });
     });
-
-    // Diğer form handler'ları da aynı şekilde düzelt...
 });
 </script>
-{% endblock %}
-{% endblock %}
+{% endblock extra_js %}
 
-
-
+{% endblock list_modals %}

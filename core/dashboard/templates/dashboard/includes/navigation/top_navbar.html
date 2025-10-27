@@ -24,7 +24,7 @@
                         {{ cloudinary_storage.used_gb }} GB / {{ cloudinary_storage.limit_gb }} GB
                     </small>
                     <small class="{% if cloudinary_storage.is_critical %}text-danger{% elif cloudinary_storage.is_warning %}text-warning{% else %}text-success{% endif %}">
-                        ({{ cloudinary_storage.remaining_gb }} GB kaldı)
+                        ({% blocktrans with remaining=cloudinary_storage.remaining_gb %}{{ remaining }} GB kaldı{% endblocktrans %})
                     </small>
                 </div>
                 <div class="progress storage-progress" style="height: 8px; width: 200px;">

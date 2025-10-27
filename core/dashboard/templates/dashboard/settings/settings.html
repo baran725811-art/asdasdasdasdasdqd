@@ -1,15 +1,15 @@
 {% extends 'dashboard/base.html' %}
 {% load i18n %}
 
-{% block title %}Sistem Ayarları{% endblock %}
+{% block title %}{% trans "Sistem Ayarları" %}{% endblock %}
 
 {% block content %}
 <div class="container-fluid">
     <!-- Page Header -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h1 class="h3 mb-0">Site Ayarları</h1>
-            <p class="text-muted">Site geneli ayarları yönetin</p>
+            <h1 class="h3 mb-0">{% trans "Site Ayarları" %}</h1>
+            <p class="text-muted">{% trans "Site geneli ayarları yönetin" %}</p>
         </div>
     </div>
 
@@ -18,16 +18,16 @@
         <div class="col-md-3">
             <div class="list-group">
                 <a href="#general" class="list-group-item list-group-item-action active" data-bs-toggle="tab">
-                    <i class="fas fa-cog me-2"></i>Genel Bilgiler
+                    <i class="fas fa-cog me-2"></i>{% trans "Genel Bilgiler" %}
                 </a>
                 <a href="#contact" class="list-group-item list-group-item-action" data-bs-toggle="tab">
-                    <i class="fas fa-phone me-2"></i>İletişim
+                    <i class="fas fa-phone me-2"></i>{% trans "İletişim" %}
                 </a>
                 <a href="#social" class="list-group-item list-group-item-action" data-bs-toggle="tab">
-                    <i class="fas fa-share-alt me-2"></i>Sosyal Medya
+                    <i class="fas fa-share-alt me-2"></i>{% trans "Sosyal Medya" %}
                 </a>
                 <a href="#seo" class="list-group-item list-group-item-action" data-bs-toggle="tab">
-                    <i class="fas fa-search me-2"></i>SEO
+                    <i class="fas fa-search me-2"></i>{% trans "SEO" %}
                 </a>
                 
             </div>
@@ -41,36 +41,36 @@
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title mb-0">
-                                <i class="fas fa-cog me-2"></i>Genel Bilgiler
+                                    <i class="fas fa-cog me-2"></i>{% trans "Genel Bilgiler" %}
                             </h5>
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="text-muted">Site Adı</label>
-                                        <p class="mb-0 fw-bold">{{ site_settings.site_name|default:"Belirtilmemiş" }}</p>
+                                        <label class="text-muted">{% trans "Site Adı" %}</label>
+                                        <p class="mb-0 fw-bold">{{ site_settings.site_name|default:_("Belirtilmemiş") }}</p>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="text-muted">Site Sloganı</label>
-                                        <p class="mb-0">{{ site_settings.site_tagline|default:"Belirtilmemiş" }}</p>
+                                        <label class="text-muted">{% trans "Site Sloganı" %}</label>
+                                        <p class="mb-0">{{ site_settings.site_tagline|default:_("Belirtilmemiş") }}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label class="text-muted">Logo</label>
+                                        <label class="text-muted">{% trans "Logo" %}</label>
                                         {% if site_settings.site_logo %}
                                             <div>
                                                 <img src="{{ site_settings.site_logo.url }}" alt="Logo" class="img-thumbnail" style="max-height: 80px;">
                                             </div>
                                         {% else %}
-                                            <p class="mb-0 text-muted">Yüklenmemiş</p>
+                                            <p class="mb-0 text-muted">{% trans "Yüklenmemiş" %}</p>
                                         {% endif %}
                                     </div>
                                 </div>
                             </div>
                             <a href="{% url 'dashboard:business_settings' %}" class="btn btn-primary">
-                                <i class="fas fa-edit me-2"></i>Düzenle
+                                <i class="fas fa-edit me-2"></i>{% trans "Düzenle" %}
                             </a>
                         </div>
                     </div>
@@ -81,28 +81,28 @@
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title mb-0">
-                                <i class="fas fa-phone me-2"></i>İletişim Bilgileri
+                                <i class="fas fa-phone me-2"></i>{% trans "İletişim Bilgileri" %}
                             </h5>
                         </div>
                         <div class="card-body">
                             <div class="mb-3">
-                                <label class="text-muted">Telefon</label>
-                                <p class="mb-0">{{ site_settings.contact_phone|default:"Belirtilmemiş" }}</p>
+                                <label class="text-muted">{% trans "Telefon" %}</label>
+                                <p class="mb-0">{{ site_settings.contact_phone|default:_("Belirtilmemiş") }}</p>
                             </div>
                             <div class="mb-3">
-                                <label class="text-muted">E-posta</label>
-                                <p class="mb-0">{{ site_settings.contact_email|default:"Belirtilmemiş" }}</p>
+                                <label class="text-muted">{% trans "E-posta" %}</label>
+                                <p class="mb-0">{{ site_settings.contact_email|default:_("Belirtilmemiş") }}</p>
                             </div>
                             <div class="mb-3">
-                                <label class="text-muted">Adres</label>
-                                <p class="mb-0">{{ site_settings.contact_address|default:"Belirtilmemiş" }}</p>
+                                <label class="text-muted">{% trans "Adres" %}</label>
+                                <p class="mb-0">{{ site_settings.contact_address|default:_("Belirtilmemiş") }}</p>
                             </div>
                             <div class="mb-3">
-                                <label class="text-muted">Google Maps URL</label>
-                                <p class="mb-0">{{ site_settings.google_maps_embed_url|default:"Belirtilmemiş" }}</p>
+                                <label class="text-muted">{% trans "Google Maps URL" %}</label>
+                                <p class="mb-0">{{ site_settings.google_maps_embed_url|default:_("Belirtilmemiş") }}</p>
                             </div>
                             <a href="{% url 'dashboard:business_settings' %}" class="btn btn-primary">
-                                <i class="fas fa-edit me-2"></i>Düzenle
+                                <i class="fas fa-edit me-2"></i>{% trans "Düzenle" %}
                             </a>
                         </div>
                     </div>
@@ -113,7 +113,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title mb-0">
-                                <i class="fas fa-share-alt me-2"></i>Sosyal Medya
+                                <i class="fas fa-share-alt me-2"></i>{% trans "Sosyal Medya" %}
                             </h5>
                         </div>
                         <div class="card-body">
@@ -121,34 +121,34 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="text-muted">
-                                            <i class="fab fa-facebook me-1"></i>Facebook
+                                            <i class="fab fa-facebook me-1"></i>{% trans "Facebook" %}
                                         </label>
-                                        <p class="mb-0">{{ site_settings.facebook_url|default:"Belirtilmemiş" }}</p>
+                                        <p class="mb-0">{{ site_settings.facebook_url|default:_("Belirtilmemiş") }}</p>
                                     </div>
                                     <div class="mb-3">
                                         <label class="text-muted">
-                                            <i class="fab fa-instagram me-1"></i>Instagram
+                                            <i class="fab fa-instagram me-1"></i>{% trans "Instagram" %}
                                         </label>
-                                        <p class="mb-0">{{ site_settings.instagram_url|default:"Belirtilmemiş" }}</p>
+                                        <p class="mb-0">{{ site_settings.instagram_url|default:_("Belirtilmemiş") }}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="text-muted">
-                                            <i class="fab fa-twitter me-1"></i>Twitter
+                                            <i class="fab fa-twitter me-1"></i>{% trans "Twitter" %}
                                         </label>
-                                        <p class="mb-0">{{ site_settings.twitter_url|default:"Belirtilmemiş" }}</p>
+                                        <p class="mb-0">{{ site_settings.twitter_url|default:_("Belirtilmemiş") }}</p>
                                     </div>
                                     <div class="mb-3">
                                         <label class="text-muted">
-                                            <i class="fab fa-whatsapp me-1"></i>WhatsApp
+                                            <i class="fab fa-whatsapp me-1"></i>{% trans "WhatsApp" %}
                                         </label>
-                                        <p class="mb-0">{{ site_settings.whatsapp_number|default:"Belirtilmemiş" }}</p>
+                                        <p class="mb-0">{{ site_settings.whatsapp_number|default:_("Belirtilmemiş") }}</p>
                                     </div>
                                 </div>
                             </div>
                             <a href="{% url 'dashboard:business_settings' %}" class="btn btn-primary">
-                                <i class="fas fa-edit me-2"></i>Düzenle
+                                <i class="fas fa-edit me-2"></i>{% trans "Düzenle" %}
                             </a>
                         </div>
                     </div>
@@ -159,24 +159,24 @@
                     <div class="card">
                         <div class="card-header">
                             <h5 class="card-title mb-0">
-                                <i class="fas fa-search me-2"></i>SEO Ayarları
+                                <i class="fas fa-search me-2"></i>{% trans "SEO Ayarları" %}
                             </h5>
                         </div>
                         <div class="card-body">
                             <div class="mb-3">
-                                <label class="text-muted">SEO Başlık</label>
-                                <p class="mb-0">{{ site_settings.seo_title|default:"Belirtilmemiş" }}</p>
+                                <label class="text-muted">{% trans "SEO Başlık" %}</label>
+                                    <p class="mb-0">{{ site_settings.seo_title|default:_("Belirtilmemiş") }}</p>
                             </div>
                             <div class="mb-3">
-                                <label class="text-muted">SEO Açıklama</label>
-                                <p class="mb-0">{{ site_settings.seo_description|default:"Belirtilmemiş" }}</p>
+                                <label class="text-muted">{% trans "SEO Açıklama" %}</label>
+                                <p class="mb-0">{{ site_settings.seo_description|default:_("Belirtilmemiş") }}</p>
                             </div>
                             <div class="mb-3">
-                                <label class="text-muted">Anahtar Kelimeler</label>
-                                <p class="mb-0">{{ site_settings.seo_keywords|default:"Belirtilmemiş" }}</p>
+                                <label class="text-muted">{% trans "Anahtar Kelimeler" %}</label>
+                                <p class="mb-0">{{ site_settings.seo_keywords|default:_("Belirtilmemiş") }}</p>
                             </div>
                             <a href="{% url 'dashboard:business_settings' %}" class="btn btn-primary">
-                                <i class="fas fa-edit me-2"></i>Düzenle
+                                <i class="fas fa-edit me-2"></i>{% trans "Düzenle" %}
                             </a>
                         </div>
                     </div>

@@ -3,8 +3,8 @@
 
 <div class="empty-state">
     <i class="{{ empty_icon|default:'fas fa-folder-open' }} icon"></i>
-    <h4>{{ empty_title|default:"Henüz öğe bulunmuyor" }}</h4>
-    <p>{{ empty_message|default:"İçerik eklendiğinde burada görünecektir." }}</p>
+    <h4>{{ empty_title|default:"" }}{% if not empty_title %}{% trans "Henüz öğe bulunmuyor" %}{% endif %}</h4>
+    <p>{{ empty_message|default:"" }}{% if not empty_message %}{% trans "İçerik eklendiğinde burada görünecektir." %}{% endif %}</p>
     
     {% if action_button_text %}
         {% if action_button_attrs %}

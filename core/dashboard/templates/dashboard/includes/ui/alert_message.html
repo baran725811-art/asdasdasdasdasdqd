@@ -275,19 +275,24 @@
 </style>
 
 <script>
+// Çeviri metinleri
+const alertTranslations = {
+    showDetails: "{% trans 'Detayları Göster' %}",
+    hideDetails: "{% trans 'Gizle' %}"
+};
+
 // Alert Component Functions
 function toggleAlertDetails(toggle) {
     const content = toggle.nextElementSibling;
-    const icon = toggle.querySelector('i');
     
     if (content.style.display === 'none') {
         content.style.display = 'block';
         toggle.classList.add('expanded');
-        toggle.innerHTML = toggle.innerHTML.replace('Göster', 'Gizle');
+        toggle.innerHTML = `<i class="fas fa-chevron-down me-1"></i>${alertTranslations.hideDetails}`;
     } else {
         content.style.display = 'none';
         toggle.classList.remove('expanded');
-        toggle.innerHTML = toggle.innerHTML.replace('Gizle', 'Göster');
+        toggle.innerHTML = `<i class="fas fa-chevron-down me-1"></i>${alertTranslations.showDetails}`;
     }
 }
 
@@ -332,7 +337,7 @@ class AlertManager {
                     ${details ? `
                         <div class="alert-details">
                             <a href="#" class="alert-details-toggle" onclick="toggleAlertDetails(this)">
-                                <i class="fas fa-chevron-down me-1"></i>Detayları Göster
+                                <i class="fas fa-chevron-down me-1"></i>${alertTranslations.showDetails}
                             </a>
                             <div class="alert-details-content" style="display: none;">
                                 ${details}

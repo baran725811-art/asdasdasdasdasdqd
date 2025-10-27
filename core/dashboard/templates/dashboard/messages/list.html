@@ -2,26 +2,26 @@
 {% load widget_tweaks %}
 {% load i18n %}
 
-{% block title %}{% trans "Mesajlar"%}{% endblock %}
-{% block page_title %}{% trans "Mesaj Yönetimi"%}{% endblock %}
+{% block title %}{% trans "Mesajlar" %}{% endblock %}
+{% block page_title %}{% trans "Mesaj Yönetimi" %}{% endblock %}
 
 {% block page_content %}
 <!-- Page Header -->
-{% include 'dashboard/includes/navigation/page_header.html' with page_icon="fas fa-envelope" page_title="Mesaj Yönetimi" page_subtitle="İletişim mesajları ve müşteri yorumlarını yönetin" page_actions=page_actions %}
+{% include 'dashboard/includes/navigation/page_header.html' with page_icon="fas fa-envelope" page_title=_("Mesaj Yönetimi") page_subtitle=_("İletişim mesajları ve müşteri yorumlarını yönetin") page_actions=page_actions %}
 
 <!-- Quick Stats -->
 <div class="row g-4 mb-4">
     <div class="col-xl-3 col-lg-6 col-md-6">
-        {% include 'dashboard/includes/cards/stats_card.html' with card_value=contact_messages|length card_label="İletişim Mesajları" card_icon="fas fa-envelope" card_style="modern" card_color="primary" %}
+        {% include 'dashboard/includes/cards/stats_card.html' with card_value=contact_messages|length card_label=_("İletişim Mesajları") card_icon="fas fa-envelope" card_style="modern" card_color="primary" %}
     </div>
     <div class="col-xl-3 col-lg-6 col-md-6">
-        {% include 'dashboard/includes/cards/stats_card.html' with card_value=customer_reviews|length card_label="Müşteri Yorumları" card_icon="fas fa-comments" card_style="modern" card_color="success" %}
+        {% include 'dashboard/includes/cards/stats_card.html' with card_value=customer_reviews|length card_label=_("Müşteri Yorumları") card_icon="fas fa-comments" card_style="modern" card_color="success" %}
     </div>
     <div class="col-xl-3 col-lg-6 col-md-6">
-        {% include 'dashboard/includes/cards/stats_card.html' with card_value=customer_reviews|length card_label="Bekleyen Onaylar" card_icon="fas fa-clock" card_style="modern" card_color="warning" %}
+        {% include 'dashboard/includes/cards/stats_card.html' with card_value=customer_reviews|length card_label=_("Bekleyen Onaylar") card_icon="fas fa-clock" card_style="modern" card_color="warning" %}
     </div>
     <div class="col-xl-3 col-lg-6 col-md-6">
-        {% include 'dashboard/includes/cards/stats_card.html' with card_value="4.8" card_label="Ortalama Puan" card_icon="fas fa-star" card_style="modern" card_color="info" %}
+        {% include 'dashboard/includes/cards/stats_card.html' with card_value="4.8" card_label=_("Ortalama Puan") card_icon="fas fa-star" card_style="modern" card_color="info" %}
     </div>
 </div>
 
@@ -44,12 +44,12 @@
             <table class="table table-hover" id="contactTable">
                 <thead>
                     <tr>
-                        <th>İsim</th>
-                        <th>Konu</th>
-                        <th>E-posta</th>
-                        <th>Tarih</th>
-                        <th>Durum</th>
-                        <th>İşlemler</th>
+                        <th>{% trans "İsim" %}</th>
+                        <th>{% trans "Konu" %}</th>
+                        <th>{% trans "E-posta" %}</th>
+                        <th>{% trans "Tarih" %}</th>
+                        <th>{% trans "Durum" %}</th>
+                        <th>{% trans "İşlemler" %}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,16 +61,16 @@
                         <td>{{ message.created_at|date:"d.m.Y H:i" }}</td>
                         <td>
                             {% if message.is_read %}
-                                <span class="badge bg-success">Okundu</span>
+                                <span class="badge bg-success">{% trans "Okundu" %}</span>
                             {% else %}
-                                <span class="badge bg-warning">Okunmadı</span>
+                                <span class="badge bg-warning">{% trans "Okunmadı" %}</span>
                             {% endif %}
                         </td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-outline-info" data-bs-toggle="modal" data-bs-target="#messageModal{{ message.id }}">
+                            <button type="button" class="btn btn-sm btn-outline-info" data-bs-toggle="modal" data-bs-target="#messageModal{{ message.id }}" title="{% trans 'Görüntüle' %}">
                                 <i class="fas fa-eye"></i>
                             </button>
-                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteMessageModal{{ message.id }}">
+                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteMessageModal{{ message.id }}" title="{% trans 'Sil' %}">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </td>
@@ -79,7 +79,7 @@
                     <tr>
                         <td colspan="6" class="text-center text-muted py-4">
                             <i class="fas fa-envelope fa-3x mb-3"></i>
-                            <p>Henüz mesaj bulunmuyor</p>
+                            <p>{% trans "Henüz mesaj bulunmuyor" %}</p>
                         </td>
                     </tr>
                     {% endfor %}
@@ -98,7 +98,7 @@
         <div class="modal-content">
             <div class="modal-header bg-primary">
                 <h5 class="modal-title text-white">
-                    <i class="fas fa-envelope me-2"></i>{% trans "Mesaj Detayı"%}
+                    <i class="fas fa-envelope me-2"></i>{% trans "Mesaj Detayı" %}
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -106,31 +106,31 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="info-item">
-                            <label>{% trans "İsim"%}:</label>
+                            <label>{% trans "İsim" %}:</label>
                             <span>{{ message.name }}</span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="info-item">
-                            <label>{% trans "E-posta"%}:</label>
+                            <label>{% trans "E-posta" %}:</label>
                             <span>{{ message.email }}</span>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="info-item">
-                            <label>{% trans "Konu"%}:</label>
+                            <label>{% trans "Konu" %}:</label>
                             <span>{{ message.subject }}</span>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="info-item">
-                            <label>{% trans "Mesaj"%}:</label>
+                            <label>{% trans "Mesaj" %}:</label>
                             <div class="message-content">{{ message.message }}</div>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="info-item">
-                            <label>{% trans "Tarih"%}:</label>
+                            <label>{% trans "Tarih" %}:</label>
                             <span>{% include 'dashboard/includes/partials/datetime_display.html' with datetime_value=message.created_at %}</span>
                         </div>
                     </div>
@@ -138,18 +138,18 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                    <i class="fas fa-times"></i>{% trans "Kapat"%}
+                    <i class="fas fa-times me-2"></i>{% trans "Kapat" %}
                 </button>
                 {% if not message.is_read %}
                 <form method="post" class="d-inline" onsubmit="handleFormSubmission(event)">
                     {% csrf_token %}
                     <button type="submit" name="mark_single_read" value="{{ message.id }}" class="btn-modern warning">
-                        <i class="fas fa-check"></i>{% trans "Okundu İşaretle"%}
+                        <i class="fas fa-check me-2"></i>{% trans "Okundu İşaretle" %}
                     </button>
                 </form>
                 {% endif %}
                 <a href="mailto:{{ message.email }}" class="btn-modern success">
-                    <i class="fas fa-reply"></i>{% trans "Yanıtla"%}
+                    <i class="fas fa-reply me-2"></i>{% trans "Yanıtla" %}
                 </a>
             </div>
         </div>
@@ -157,7 +157,7 @@
 </div>
 
 <!-- Delete Message Modal -->
-{% include 'dashboard/includes/modals/delete_confirmation.html' with modal_id="deleteMessageModal"|add:message.id item_name=message.name delete_url="dashboard:message_delete" delete_id=message.id item_type="mesaj" warning_message="Bu işlem geri alınamaz!" %}
+{% include 'dashboard/includes/modals/delete_confirmation.html' with modal_id="deleteMessageModal"|add:message.id item_name=message.name delete_url="dashboard:message_delete" delete_id=message.id item_type=_("mesaj") warning_message=_("Bu işlem geri alınamaz!") %}
 
 {% endfor %}
 
@@ -168,7 +168,7 @@
         <div class="modal-content">
             <div class="modal-header bg-warning">
                 <h5 class="modal-title text-white">
-                    <i class="fas fa-star me-2"></i>{% trans "Yorum Detayı"%}
+                    <i class="fas fa-star me-2"></i>{% trans "Yorum Detayı" %}
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
@@ -176,19 +176,19 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="info-item">
-                            <label>{% trans "İsim"%}:</label>
+                            <label>{% trans "İsim" %}:</label>
                             <span>{{ review.name }}</span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="info-item">
-                            <label>{% trans "Ürün"%}:</label>
+                            <label>{% trans "Ürün" %}:</label>
                             <span>{{ review.product.name }}</span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="info-item">
-                            <label>{% trans "Değerlendirme"%}:</label>
+                            <label>{% trans "Değerlendirme" %}:</label>
                             <div class="rating-stars">
                                 {% for i in "12345"|make_list %}
                                     {% if forloop.counter <= review.rating %}
@@ -203,19 +203,19 @@
                     </div>
                     <div class="col-md-6">
                         <div class="info-item">
-                            <label>{% trans "Durum"%}:</label>
+                            <label>{% trans "Durum" %}:</label>
                             {% include 'dashboard/includes/ui/status_badge.html' with badge_text=review.is_approved|yesno:"Onaylı,Bekliyor" badge_color=review.is_approved|yesno:"success,warning" %}
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="info-item">
-                            <label>{% trans "Yorum"%}:</label>
+                            <label>{% trans "Yorum" %}:</label>
                             <div class="review-content">{{ review.review }}</div>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="info-item">
-                            <label>{% trans "Tarih"%}:</label>
+                            <label>{% trans "Tarih" %}:</label>
                             <span>{% include 'dashboard/includes/partials/datetime_display.html' with datetime_value=review.created_at %}</span>
                         </div>
                     </div>
@@ -223,11 +223,11 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                    <i class="fas fa-times"></i>{% trans "Kapat"%}
+                    <i class="fas fa-times"></i>{% trans "Kapat" %}
                 </button>
                 {% if not review.is_approved %}
                     <button class="btn-modern success">
-                        <i class="fas fa-check"></i>{% trans "Onayla"%}
+                        <i class="fas fa-check me-2"></i>{% trans "Onayla" %}
                     </button>
                 {% endif %}
             </div>
@@ -246,7 +246,7 @@
         <div class="modal-content">
             <div class="modal-header bg-success">
                 <h5 class="modal-title text-white">
-                    <i class="fas fa-check-double me-2"></i>{% trans "Toplu İşlem Onayı"%}
+                    <i class="fas fa-check-double me-2"></i>{% trans "Toplu İşlem Onayı" %}
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
@@ -255,16 +255,22 @@
                     <i class="fas fa-check-double fa-4x text-success"></i>
                 </div>
                 <h5>{% trans "Tüm mesajları okundu olarak işaretlemek istediğinizden emin misiniz?" %}</h5>
-                <p class="text-muted">{{ unread_count }} {% trans "adet okunmamış mesaj bulunuyor." %}</p>
+                <p>
+                    {% blocktrans trimmed count counter=unread_count %}
+                    {{ counter }} adet okunmamış mesaj bulunuyor.
+                    {% plural %}
+                    {{ counter }} adet okunmamış mesaj bulunuyor.
+                    {% endblocktrans %}
+                </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                    <i class="fas fa-times"></i>{% trans "İptal"%}
+                    <i class="fas fa-times me-2"></i>{% trans "İptal" %}
                 </button>
                 <form method="post" class="d-inline">
                     {% csrf_token %}
                     <button type="submit" name="mark_all_read" class="btn-modern success">
-                        <i class="fas fa-check-double"></i>{% trans "Tümünü Okundu Yap"%}
+                        <i class="fas fa-check-double me-2"></i>{% trans "Tümünü Okundu Yap" %}
                     </button>
                 </form>
             </div>
