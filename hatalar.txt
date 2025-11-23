@@ -1,11 +1,11 @@
-carousel resim tam oturmuyor
+carousel resim tam oturmuyor ve carosel sağ tarafa kaydırma butonu görülmüyor tam olarak çok fazla sağa kaymış
 404 hatalarında sayfaya yönlendirmiyor. eror sayfasına yönlendirsin istiyorum
 
 
+ileti bölümünde yorum yap. ve mesaj bölümleri görülmüyor. 
 
 
-
-anasayfa galeri modal. uygulanacak yerler: ürünler delatis bölümünde modal,  galeri bölümünde modal. 
+ayarlar seo bölümü bir işlevi varmı hangi alanları etkiliyor.
 
 Hakkımızda , ve istatisliklerde göstermiyor rakamlar. footer bölümünde doğru çekkiyor. 
 

@@ -239,11 +239,9 @@
                 <div class="confirm-icon mb-3">
                     <i class="fas fa-check-double fa-4x text-success"></i>
                 </div>
-                <h5>{% blocktrans %}Tüm bekleyen yorumları onaylamak istediğinizden emin misiniz?{% endblocktrans %}</h5>
-                <p>
-                    {% blocktrans trimmed count counter=pending_count %}
-                    {{ counter }} adet onay bekleyen yorum bulunuyor.
-                    {% endblocktrans %}
+                <h5>{% trans "Tüm bekleyen yorumları onaylamak istediğinizden emin misiniz?" %}</h5>
+                <p class="text-muted">
+                    <strong>{{ pending_count }}</strong> {% trans "adet onay bekleyen yorum bulunuyor." %}
                 </p>
             </div>
             <div class="modal-footer">

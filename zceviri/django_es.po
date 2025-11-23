@@ -1590,7 +1590,7 @@ msgstr "Ver todos"
 #: .\dashboard\templates\dashboard\includes\cards\activity_card.html:33
 #, python-format
 msgid "%(time_since)s önce"
-msgstr "hace %(time_since)s"
+msgstr "hace %(tiempo_desde)s"
 
 #: .\dashboard\templates\dashboard\includes\cards\activity_card.html:45
 msgid "Henüz aktivite yok"
@@ -2042,7 +2042,7 @@ msgstr "Salida"
 #: .\dashboard\templates\dashboard\includes\navigation\top_navbar.html:27
 #, python-format
 msgid "%(remaining)s GB kaldı"
-msgstr "%(remaining)s GB restantes"
+msgstr "%(restante)s GB restantes"
 
 #: .\dashboard\templates\dashboard\includes\navigation\top_navbar.html:72
 #: .\dashboard\templates\dashboard\profile\profile.html:4
@@ -2312,7 +2312,7 @@ msgstr "Comprobación de seguridad"
 #: .\dashboard\templates\dashboard\login.html:43
 #, python-format
 msgid "%(attempts)s/%(max)s başarısız deneme yapıldı. Güvenlik kodunu girin."
-msgstr "%(attempts)s/%(max)s intentos fallidos. Introduzca el código de seguridad."
+msgstr "%(intentos)s/%(máx)s intentos fallidos. Introduzca el código de seguridad."
 
 #: .\dashboard\templates\dashboard\login.html:109
 #: .\templates\contact\sections\review_form.html:219
@@ -2551,8 +2551,8 @@ msgstr "¿Estás seguro de que quieres marcar todos los mensajes como leídos?"
 #, python-format
 msgid "%(counter)s adet okunmamış mesaj bulunuyor."
 msgid_plural "%(counter)s adet okunmamış mesaj bulunuyor."
-msgstr[0] "Hay %(counter)s mensaje sin leer."
-msgstr[1] "Hay %(counter)s mensajes sin leer."
+msgstr[0] ""
+msgstr[1] ""
 
 #: .\dashboard\templates\dashboard\messages\list.html:273
 msgid "Tümünü Okundu Yap"
@@ -2575,7 +2575,7 @@ msgstr "Marcar todo Leer"
 #: .\dashboard\templates\dashboard\notifications\list.html:75
 #, python-format
 msgid "%(current)s / %(total)s"
-msgstr "%(current)s / %(total)s"
+msgstr "%(actual)s / %(total)s"
 
 #: .\dashboard\templates\dashboard\products\list.html:11
 msgid "Ürünlerinizi kolayca yönetin ve takip edin"
@@ -2614,7 +2614,7 @@ msgstr "Todas las marcas"
 #: .\dashboard\templates\dashboard\products\list.html:546
 #, python-format
 msgid "%(stock)s adet"
-msgstr "%(stock)s unidades"
+msgstr "%(stock) unidades"
 
 #: .\dashboard\templates\dashboard\products\list.html:169
 #: .\templates\products\sections\product_detail.html:106
@@ -2733,7 +2733,7 @@ msgstr "Sin especificar"
 #: .\dashboard\templates\dashboard\products\list.html:557
 #, python-format
 msgid "%%%(percentage)s indirim"
-msgstr "%%%(percentage)s descuento"
+msgstr "%%%(porcentaje)s indirim"
 
 #: .\dashboard\templates\dashboard\products\list.html:578
 #: .\templates\products\sections\product_detail.html:131
@@ -2947,7 +2947,7 @@ msgstr "¿Está seguro de que desea aprobar todos los comentarios pendientes?"
 #: .\dashboard\templates\dashboard\reviews\list.html:244
 #, python-format
 msgid "%(counter)s adet onay bekleyen yorum bulunuyor."
-msgstr "Hay %(counter)s mensajes sin leer."
+msgstr "Hay %(contador)s comentarios en espera de aprobación."
 
 #: .\dashboard\templates\dashboard\services\list.html:10
 #: .\templates\about\sections\services_preview.html:8
@@ -3625,7 +3625,7 @@ msgstr "Últimos pedidos"
 #: .\templates\admin\dashboard.html:93
 #, python-format
 msgid "Sipariş #%(order.id)s"
-msgstr "Pedido #%(order.id)s"
+msgstr "Pedido #%(id.pedido)s"
 
 #: .\templates\admin\dashboard.html:94
 #, python-format
@@ -3907,13 +3907,19 @@ msgstr "Eventos"
 
 #: .\templates\catalog\catalog_view.html:8
 #, python-format
-msgid "%(site_name)s - %(catalog_title)s. Ürünlerimizi kataloğumuzdan inceleyebilirsiniz."
-msgstr "%(site_name)s - %(catalog_title)s. Puede explorar nuestros productos en nuestro catálogo."
+msgid ""
+"%(site_name)s - %(catalog_title)s. Ürünlerimizi katalogumuzdan "
+"inceleyebilirsiniz."
+msgstr ""
+"%(site_name)s - %(catalog_title)s. Puede explorar nuestros productos en nuestro catálogo."
 
 #: .\templates\catalog\catalog_view.html:11
 #, python-format
-msgid "%(site_name)s ürün kataloğu. Tüm ürünlerimizi detaylı olarak inceleyebilirsiniz."
-msgstr "Catálogo de productos de %(site_name)s. Puede ver todos nuestros productos en detalle."
+msgid ""
+"%(site_name)s ürün kataloğu. Tüm ürünlerimizi detaylı olarak "
+"inceleyebilirsiniz."
+msgstr ""
+"Catálogo de productos de %(site_name)s. Puede ver todos nuestros productos en detalle."
 
 
 #: .\templates\catalog\catalog_view.html:436
@@ -3982,13 +3988,12 @@ msgstr "Para preguntas sobre el catálogo"
 #: .\templates\contact\sections\contact_info.html:46
 #: .\templates\errors\404.html:198
 msgid "Ara"
-msgstr "Intervalo"
+msgstr ""
 
 #: .\templates\catalog\catalog_view.html:578
 #, python-format
 msgid "%(site_name)s ürün kataloğunu inceleyin."
-msgstr "Revise el catálogo de productos de %(site_name)s."
-
+msgstr "Revise el catálogo de productos de %(site_name)%."
 
 #: .\templates\catalog\catalog_view.html:591
 msgid "Katalog linki panoya kopyalandı!"
@@ -4285,7 +4290,8 @@ msgstr "y Evaluación"
 msgid ""
 "Profesyonel anahtarcılık hizmetlerimiz hakkında sorularınız mı var? Bizimle "
 "iletişime geçin veya deneyiminizi paylaşın."
-msgstr "¿Tiene alguna pregunta sobre nuestros servicios profesionales de cerrajería? Póngase en contacto con nosotros o comparta su experiencia."
+msgstr "¿Tiene alguna pregunta sobre nuestros servicios profesionales de cerrajería? Póngase en contacto con nosotros
+o comparta su experiencia."
 
 #: .\templates\contact\sections\hero.html:38
 msgid "Hızlı Yanıt"
@@ -4450,7 +4456,7 @@ msgstr "Evaluación total"
 #: .\templates\contact\sections\review_list.html:672
 #, python-format
 msgid "%(review.rating)s/5"
-msgstr "%(review.rating)s/5"
+msgstr "%(valoración)s/5"
 
 #: .\templates\contact\sections\review_list.html:748
 msgid "Hizmetimizden memnun kaldıysanız, görüşünüzü bizimle paylaşın."
@@ -4945,12 +4951,12 @@ msgstr "Lea los testimonios de nuestros clientes satisfechos con nuestros servic
 #: .\templates\home\sections\reviews.html:124
 #, python-format
 msgid "Memnuniyet %%"
-msgstr "Satisfacción %%"
+msgstr "Satisfacción %%."
 
 #: .\templates\home\sections\reviews.html:135
 #, python-format
 msgid "Tekrar Tercih %%"
-msgstr "Preferencia de repetición %%"
+msgstr "Preferencia de repetición %%%."
 
 #: .\templates\home\sections\reviews.html:149
 msgid "Tüm Yorumlar"
@@ -5175,13 +5181,13 @@ msgstr "Nuestros productos preferidos"
 #: .\templates\products\sections\product_detail.html:68
 #, python-format
 msgid "%(product.price)s ₺"
-msgstr "%(product.price)s ₺"
+msgstr "%(producto.precio)s ₺"
 
 #: .\templates\products\sections\featured_products.html:39
 #: .\templates\products\sections\product_detail.html:60
 #, python-format
 msgid "%(product.discount_price)s ₺"
-msgstr "%(product.discount_price)s ₺"
+msgstr "%(producto.precio_descuento)s ₺"
 
 #: .\templates\products\sections\featured_products.html:53
 msgid "Tüm Öne Çıkanları Gör"
@@ -5250,7 +5256,7 @@ msgstr[1] ""
 #: .\templates\products\sections\product_detail.html:132
 #, python-format
 msgid "%(product.weight)s kg"
-msgstr "%(product.weight)s kg"
+msgstr "%(peso.producto)s kg"
 
 #: .\templates\products\sections\product_detail.html:152
 msgid "Sipariş Ver"
@@ -5296,13 +5302,12 @@ msgstr "Otros productos de la categoría"
 #: .\templates\products\sections\related_products.html:36
 #, python-format
 msgid "%(related_product.price)s ₺"
-msgstr "%(related_product.price)s ₺"
+msgstr "%(producto_relacionado.precio)s ₺"
 
 #: .\templates\products\sections\related_products.html:34
 #, python-format
 msgid "%(related_product.discount_price)s ₺"
-msgstr "%(related_product.discount_price)s ₺"
-
+msgstr "%(producto_relacionado.precio_descuento)s₺"
 
 #: .\templates\products\sections\related_products.html:47
 msgid "Kategorisindeki Tüm Ürünler"
@@ -5320,11 +5325,9 @@ msgstr "Otros productos especialmente seleccionados para usted"
 #: .\templates\products\sections\suggested_products.html:37
 #, python-format
 msgid "%(suggested_product.price)s ₺"
-msgstr "%(suggested_product.price)s ₺"
-
+msgstr "%(precio_sugerido_del_producto)s₺"
 
 #: .\templates\products\sections\suggested_products.html:35
 #, python-format
 msgid "%(suggested_product.discount_price)s ₺"
-msgstr "%(suggested_product.discount_price)s ₺"
-
+msgstr "%(producto_sugerido.precio_descuento)s ₺₺"

@@ -5,21 +5,21 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Batman Çilingir 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-27 22:08+0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: fr\n"
+"PO-Revision-Date: 2025-10-27 22:10+0300\n"
+"Last-Translator: Batman Çilingir Team\n"
+"Language-Team: Turkish <tr@li.org>\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: .\about\templatetags\breadcrumb_tags.py:107 .\core\context_processors.py:415
 msgid "Sayfa"
-msgstr ""
+msgstr "Page"
 
 #: .\contact\forms.py:11 .\core\admin.py:251 .\core\forms.py:37
 #: .\dashboard\templates\dashboard\login.html:88 .\reviews\forms.py:9
@@ -27,33 +27,33 @@ msgstr ""
 #: .\templates\contact\sections\contact_form.html:155
 #: .\templates\contact\sections\review_form.html:170
 msgid "Güvenlik Kodu"
-msgstr ""
+msgstr "Code de sécurité"
 
 #: .\contact\forms.py:12 .\reviews\forms.py:10
 #: .\templates\contact\sections\contact_form.html:167
 #: .\templates\contact\sections\review_form.html:182
 msgid "Spam önleme için yukarıdaki kodu girin"
-msgstr ""
+msgstr "Entrez le code ci-dessus pour éviter les spams"
 
 #: .\contact\views.py:29
 msgid "Mesajınız başarıyla gönderildi. En kısa sürede size dönüş yapacağız."
-msgstr ""
+msgstr "Votre message a été envoyé avec succès. Nous vous répondrons dans les plus brefs délais."
 
 #: .\contact\views.py:32 .\reviews\views.py:23
 msgid "Form gönderilirken hata oluştu. Lütfen bilgileri kontrol edin."
-msgstr ""
+msgstr "Une erreur s'est produite lors de la soumission du formulaire. Veuillez vérifier les informations."
 
 #: .\contact\views.py:41
 msgid "Değerlendirmeniz başarıyla kaydedildi."
-msgstr ""
+msgstr "Votre évaluation a été enregistrée avec succès."
 
 #: .\contact\views.py:44
 msgid "Değerlendirme gönderilirken hata oluştu."
-msgstr ""
+msgstr "Une erreur s'est produite lors de l'envoi de l'évaluation."
 
 #: .\core\admin.py:252 .\core\forms.py:38 .\templates\admin\login.html:193
 msgid "Yukarıdaki kodu girin"
-msgstr ""
+msgstr "Entrez le code ci-dessus"
 
 #: .\core\context_processors.py:358 .\core\context_processors.py:410
 #: .\core\views.py:299 .\dashboard\templates\dashboard\activities\list.html:48
@@ -68,7 +68,7 @@ msgstr ""
 #: .\templates\home\index.html:25
 #: .\templates\products\sections\breadcrumb.html:12
 msgid "Ana Sayfa"
-msgstr ""
+msgstr "Page d'accueil"
 
 #: .\core\context_processors.py:428 .\core\context_processors.py:429
 #: .\core\views.py:300 .\dashboard\templates\dashboard\activities\list.html:38
@@ -78,7 +78,7 @@ msgstr ""
 #: .\templates\base\sections\navbar.html:65 .\templates\errors\404.html:294
 #: .\templates\products\sections\breadcrumb.html:17
 msgid "Ürünler"
-msgstr ""
+msgstr "Produits"
 
 #: .\core\context_processors.py:430 .\core\context_processors.py:431
 #: .\core\views.py:301
@@ -89,7 +89,7 @@ msgstr ""
 #: .\templates\gallery\sections\hero.html:11
 #: .\templates\home\sections\gallery_preview.html:14
 msgid "Galeri"
-msgstr ""
+msgstr "Galerie"
 
 #: .\core\context_processors.py:432 .\core\context_processors.py:433
 #: .\core\views.py:302
@@ -99,7 +99,7 @@ msgstr ""
 #: .\templates\home\sections\about_preview.html:14
 #: .\templates\home\sections\carousel.html:156
 msgid "Hakkımızda"
-msgstr ""
+msgstr "À propos de nous"
 
 #: .\core\context_processors.py:434 .\core\context_processors.py:435
 #: .\core\views.py:303
@@ -110,11 +110,11 @@ msgstr ""
 #: .\templates\contact\sections\hero.html:8
 #: .\templates\contact\sections\hero.html:15 .\templates\errors\404.html:297
 msgid "İletişim"
-msgstr ""
+msgstr "Contact"
 
 #: .\core\context_processors.py:436 .\core\context_processors.py:437
 msgid "Hizmetler"
-msgstr ""
+msgstr "Services"
 
 #: .\core\context_processors.py:438 .\core\context_processors.py:439
 #: .\dashboard\templates\dashboard\includes\navigation\sidebar.html:57
@@ -122,7 +122,7 @@ msgstr ""
 #: .\templates\about\sections\team_preview.html:8
 #: .\templates\home\sections\about_preview.html:24
 msgid "Ekibimiz"
-msgstr ""
+msgstr "Notre équipe"
 
 #: .\core\context_processors.py:440 .\core\context_processors.py:441
 #: .\dashboard\templates\dashboard\activities\list.html:41
@@ -132,184 +132,184 @@ msgstr ""
 #: .\templates\products\sections\categories_preview.html:7
 #: .\templates\products\sections\filters.html:25
 msgid "Kategoriler"
-msgstr ""
+msgstr "Catégories"
 
 #: .\core\settings\base.py:263
 #: .\dashboard\templates\dashboard\includes\partials\language_name.html:3
 msgid "Türkçe"
-msgstr ""
+msgstr "Turc"
 
 #: .\core\settings\base.py:264
 msgid "English"
-msgstr ""
+msgstr "Anglais"
 
 #: .\core\settings\base.py:265
 msgid "Deutsch"
-msgstr ""
+msgstr "Allemand"
 
 #: .\core\settings\base.py:266
 msgid "Français"
-msgstr ""
+msgstr "Français"
 
 #: .\core\settings\base.py:267
 msgid "Español"
-msgstr ""
+msgstr "Anglais"
 
 #: .\core\settings\base.py:268
 msgid "Русский"
-msgstr ""
+msgstr "Russie"
 
 #: .\core\settings\base.py:269
 msgid "العربية"
-msgstr ""
+msgstr "L'arabe"
 
 #: .\core\validators.py:16
 msgid "Parola en az bir büyük harf içermelidir."
-msgstr ""
+msgstr "Le mot de passe doit contenir au moins une lettre majuscule."
 
 #: .\core\validators.py:20
 msgid "Parola en az bir küçük harf içermelidir."
-msgstr ""
+msgstr "Le mot de passe doit contenir au moins une lettre minuscule."
 
 #: .\core\validators.py:24
 msgid "Parola en az bir rakam içermelidir."
-msgstr ""
+msgstr "Le mot de passe doit contenir au moins un chiffre."
 
 #: .\core\validators.py:28
 msgid "Parola en az bir özel karakter (!@#$%^&* vb.) içermelidir."
-msgstr ""
+msgstr "Le mot de passe doit contenir au moins un caractère spécial (!@#$%^&* etc.)."
 
 #: .\core\validators.py:36
 msgid "Bu parola çok yaygın kullanılan zayıf bir paroladır."
-msgstr ""
+msgstr "Ce mot de passe est un mot de passe faible très courant."
 
 #: .\core\validators.py:40
 msgid "Parola 3'ten fazla tekrarlayan karakter içeremez."
-msgstr ""
+msgstr "Le mot de passe ne peut contenir plus de 3 caractères répétitifs."
 
 #: .\core\validators.py:47
 msgid ""
 "Parolanız en az 12 karakter uzunluğunda olmalı ve büyük harf, küçük harf, "
 "rakam ve özel karakter içermelidir."
-msgstr ""
+msgstr "Votre mot de passe doit comporter au moins 12 caractères et contenir des majuscules, des minuscules, des chiffres et des caractères spéciaux."
 
 #: .\core\views.py:260 .\core\views.py:277
 msgid "Sayfa Bulunamadı"
-msgstr ""
+msgstr "Page non trouvée"
 
 #: .\core\views.py:261
 msgid "Aradığınız sayfa bulunamadı veya taşınmış olabilir."
-msgstr ""
+msgstr "La page que vous recherchez est peut-être introuvable ou a été déplacée."
 
 #: .\core\views.py:268
 msgid ""
 "Aradığınız sayfa bulunamadı. Popüler ürünlerimizi ve içeriklerimizi keşfedin."
-msgstr ""
+msgstr "La page que vous recherchez est introuvable. Découvrez nos produits et contenus populaires."
 
 #: .\core\views.py:272
 msgid "404 - Sayfa Bulunamadı"
-msgstr ""
+msgstr "404 - Page non trouvée"
 
 #: .\core\views.py:273
 msgid "Aradığınız sayfa bulunamadı"
-msgstr ""
+msgstr "La page que vous recherchez n'a pas été trouvée"
 
 #: .\core\views.py:278
 msgid "İstenen kaynak bulunamadı"
-msgstr ""
+msgstr "La ressource demandée n'a pas été trouvée"
 
 #: .\core\views.py:310
 msgid "Sunucu Hatası"
-msgstr ""
+msgstr "Erreur du serveur"
 
 #: .\core\views.py:311
 msgid ""
 "Geçici bir teknik sorun yaşanıyor. Lütfen birkaç dakika sonra tekrar deneyin."
-msgstr ""
+msgstr " Un problème technique temporaire est en cours. Veuillez réessayer dans quelques minutes. "
 
 #: .\core\views.py:316
 msgid "Geçici sunucu hatası. Yakında normale dönecektir."
-msgstr ""
+msgstr "Erreur temporaire du serveur. La situation devrait bientôt revenir à la normale."
 
 #: .\core\views.py:320
 msgid "500 - Sunucu Hatası"
-msgstr ""
+msgstr "500 - Erreur du serveur"
 
 #: .\core\views.py:321
 msgid "Geçici sunucu hatası"
-msgstr ""
+msgstr "Erreur temporaire du serveur"
 
 #: .\core\views.py:336
 msgid "Erişim Reddedildi"
-msgstr ""
+msgstr "Accès refusé"
 
 #: .\core\views.py:337 .\core\views.py:340
 msgid "Bu sayfaya erişim izniniz bulunmuyor."
-msgstr ""
+msgstr "Vous n'êtes pas autorisé à accéder à cette page."
 
 #: .\core\views.py:344
 msgid "403 - Erişim Reddedildi"
-msgstr ""
+msgstr "403 - Accès refusé"
 
 #: .\core\views.py:345
 msgid "Erişim reddedildi"
-msgstr ""
+msgstr "Accès refusé"
 
 #: .\core\views.py:360
 msgid "Hatalı İstek"
-msgstr ""
+msgstr "Demande incorrecte"
 
 #: .\core\views.py:361
 msgid "Gönderilen istek hatalı. Lütfen sayfayı yenileyin ve tekrar deneyin."
-msgstr ""
+msgstr "La demande envoyée est incorrecte. Veuillez actualiser la page et réessayer."
 
 #: .\core\views.py:363
 msgid "Hatalı istek gönderildi."
-msgstr ""
+msgstr "Demande incorrecte envoyée."
 
 #: .\core\views.py:367
 msgid "400 - Hatalı İstek"
-msgstr ""
+msgstr "400 - Demande incorrecte"
 
 #: .\core\views.py:368
 msgid "Hatalı istek"
-msgstr ""
+msgstr "Demande incorrecte"
 
 #: .\core\views.py:381
 msgid "Bakım Modu"
-msgstr ""
+msgstr "Mode maintenance"
 
 #: .\core\views.py:382
 msgid "Site şu anda bakım modunda. Kısa süre sonra tekrar açılacaktır."
-msgstr ""
+msgstr "Le site est actuellement en mode maintenance. Il sera rouvert sous peu."
 
 #: .\core\views.py:383
 msgid "Tahmini süre: 30 dakika"
-msgstr ""
+msgstr "Durée estimée 30 minutes"
 
 #: .\core\views.py:385
 msgid "Site bakım modunda."
-msgstr ""
+msgstr "Le site est en mode maintenance."
 
 #: .\core\views.py:389
 msgid "503 - Bakım Modu"
-msgstr ""
+msgstr "503 - Mode maintenance"
 
 #: .\core\views.py:390
 msgid "Site bakım modunda"
-msgstr ""
+msgstr "Le site est en mode maintenance"
 
 #: .\core\views.py:403
 msgid "Güvenlik Hatası"
-msgstr ""
+msgstr "Erreur de sécurité"
 
 #: .\core\views.py:404
 msgid "CSRF doğrulama hatası. Lütfen sayfayı yenileyin ve tekrar deneyin."
-msgstr ""
+msgstr "Erreur de validation CSRF. Veuillez rafraîchir la page et réessayer."
 
 #: .\core\widgets.py:50 .\templates\admin\widgets\image_crop_widget.html:11
 msgid "Resmi Kırp"
-msgstr ""
+msgstr "Recadrer l'image"
 
 #: .\core\widgets.py:52 .\dashboard\templates\dashboard\carousel\list.html:511
 #: .\dashboard\templates\dashboard\categories\list.html:275
@@ -330,34 +330,34 @@ msgstr ""
 #: .\templates\gallery\sections\featured.html:113
 #: .\templates\gallery\sections\gallery_grid.html:184
 msgid "Kapat"
-msgstr ""
+msgstr "Fermer"
 
 #: .\core\widgets.py:57
 msgid "Hedef Boyut"
-msgstr ""
+msgstr "Taille de la cible"
 
 #: .\core\widgets.py:58
 msgid ""
 "Kırpmak istediğiniz alanı seçin. Önizleme bölümünde sonucu görebilirsiniz."
-msgstr ""
+msgstr " Sélectionnez la zone que vous souhaitez recadrer. Vous pouvez voir le résultat dans la section Aperçu. "
 
 #: .\core\widgets.py:63
 msgid "Orijinal Resim"
-msgstr ""
+msgstr "Image originale"
 
 #: .\core\widgets.py:65
 msgid "Kırpılacak resim"
-msgstr ""
+msgstr "Image à recadrer"
 
 #: .\core\widgets.py:70 .\dashboard\templates\dashboard\about\edit.html:289
 #: .\dashboard\templates\dashboard\includes\modals\translation_form_modal.html:163
 #: .\templates\contact\sections\review_form.html:151
 msgid "Önizleme"
-msgstr ""
+msgstr "Avant-première"
 
 #: .\core\widgets.py:72 .\templates\admin\widgets\image_crop_widget.html:28
 msgid "Kırpma alanını seçin"
-msgstr ""
+msgstr "Sélectionner la zone de recadrage"
 
 #: .\core\widgets.py:80 .\dashboard\templates\dashboard\base\form_base.html:37
 #: .\dashboard\templates\dashboard\carousel\list.html:297
@@ -393,26 +393,26 @@ msgstr ""
 #: .\dashboard\templates\dashboard\team\list.html:501
 #: .\templates\admin\widgets\image_crop_widget.html:34
 msgid "İptal"
-msgstr ""
+msgstr "Annulation"
 
 #: .\core\widgets.py:82 .\templates\admin\widgets\image_crop_widget.html:35
 msgid "Kırpmayı Uygula"
-msgstr ""
+msgstr "Appliquer la culture"
 
 #: .\dashboard\models.py:18
 msgid "Site Başlığı"
-msgstr ""
+msgstr "Titre du site"
 
 #: .\dashboard\models.py:19
 #: .\dashboard\templates\dashboard\settings\business.html:186
 msgid "Favicon"
-msgstr ""
+msgstr "Favicon"
 
 #: .\dashboard\models.py:20
 #: .\dashboard\templates\dashboard\settings\business.html:153
 #: .\dashboard\templates\dashboard\settings\settings.html:61
 msgid "Logo"
-msgstr ""
+msgstr "Logo"
 
 #: .\dashboard\models.py:21 .\dashboard\models.py:53
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:54
@@ -425,7 +425,7 @@ msgstr ""
 #: .\templates\contact\sections\contact_form.html:83
 #: .\templates\errors\500.html:190
 msgid "E-posta"
-msgstr ""
+msgstr "Courriel"
 
 #: .\dashboard\models.py:22
 #: .\dashboard\templates\dashboard\settings\business.html:51
@@ -434,7 +434,7 @@ msgstr ""
 #: .\templates\contact\sections\contact_form.html:60
 #: .\templates\contact\sections\contact_info.html:41
 msgid "Telefon"
-msgstr ""
+msgstr "Numéro de téléphone"
 
 #: .\dashboard\models.py:23
 #: .\dashboard\templates\dashboard\settings\business.html:61
@@ -443,81 +443,81 @@ msgstr ""
 #: .\templates\contact\sections\contact_info.html:24
 #: .\templates\contact\sections\contact_info.html:57
 msgid "Adres"
-msgstr ""
+msgstr "Adresse"
 
 #: .\dashboard\models.py:24
 #: .\dashboard\templates\dashboard\settings\settings.html:124
 #: .\templates\contact\sections\contact_info.html:91
 msgid "Facebook"
-msgstr ""
+msgstr "Facebook"
 
 #: .\dashboard\models.py:25
 #: .\dashboard\templates\dashboard\settings\settings.html:138
 #: .\templates\contact\sections\contact_info.html:103
 msgid "Twitter"
-msgstr ""
+msgstr "Twitter"
 
 #: .\dashboard\models.py:26
 #: .\dashboard\templates\dashboard\settings\settings.html:130
 #: .\templates\contact\sections\contact_info.html:97
 msgid "Instagram"
-msgstr ""
+msgstr "Instagram"
 
 #: .\dashboard\models.py:27
 msgid "LinkedIn"
-msgstr ""
+msgstr "LinkedIn"
 
 #: .\dashboard\models.py:28
 msgid "YouTube"
-msgstr ""
+msgstr "YouTube"
 
 #: .\dashboard\models.py:29
 msgid "Analytics Kodu"
-msgstr ""
+msgstr "Analyse Kodu"
 
 #: .\dashboard\models.py:30
 #: .\dashboard\templates\dashboard\products\list.html:326
 msgid "Meta Başlık"
-msgstr ""
+msgstr "Méta Titre"
 
 #: .\dashboard\models.py:31
 #: .\dashboard\templates\dashboard\products\list.html:329
 msgid "Meta Açıklama"
-msgstr ""
+msgstr "Méta description"
 
 #: .\dashboard\models.py:32
 msgid "Oluşturulma Tarihi"
-msgstr ""
+msgstr "Date de création"
 
 #: .\dashboard\models.py:33 .\dashboard\models.py:59
 msgid "Güncellenme Tarihi"
-msgstr ""
+msgstr "Date de mise à jour"
 
 #: .\dashboard\models.py:36
 msgid "Site Ayarı"
-msgstr ""
+msgstr "Configuration du site"
 
 #: .\dashboard\models.py:37
 #: .\dashboard\templates\dashboard\settings\settings.html:11
 msgid "Site Ayarları"
-msgstr ""
+msgstr "Paramètres du site"
 
 #: .\dashboard\models.py:46
 msgid "Yeni"
-msgstr ""
+msgstr "Nouveau"
 
 #: .\dashboard\models.py:47
 #: .\dashboard\templates\dashboard\messages\list.html:64
 msgid "Okundu"
-msgstr ""
+msgstr "Lire la suite"
 
 #: .\dashboard\models.py:48
 msgid "Yanıtlandı"
-msgstr ""
+msgstr "Répondu"
 
 #: .\dashboard\models.py:49
 msgid "Spam"
-msgstr ""
+msgstr "Spam"
 
 #: .\dashboard\models.py:52
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:53
@@ -525,7 +525,7 @@ msgstr ""
 #: .\dashboard\templates\dashboard\messages\list.html:109
 #: .\dashboard\templates\dashboard\messages\list.html:179
 msgid "İsim"
-msgstr ""
+msgstr "Nom"
 
 #: .\dashboard\models.py:54
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:55
@@ -533,13 +533,13 @@ msgstr ""
 #: .\dashboard\templates\dashboard\messages\list.html:121
 #: .\templates\contact\sections\contact_form.html:105
 msgid "Konu"
-msgstr ""
+msgstr "épouse"
 
 #: .\dashboard\models.py:55 .\dashboard\models.py:62
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:56
 #: .\dashboard\templates\dashboard\messages\list.html:127
 msgid "Mesaj"
-msgstr ""
+msgstr "Message"
 
 #: .\dashboard\models.py:56
 #: .\dashboard\templates\dashboard\carousel\list.html:111
@@ -565,15 +565,15 @@ msgstr ""
 #: .\dashboard\templates\dashboard\services\list.html:379
 #: .\dashboard\templates\dashboard\team\list.html:445
 msgid "Durum"
-msgstr ""
+msgstr "Statut"
 
 #: .\dashboard\models.py:57
 msgid "Not"
-msgstr ""
+msgstr "Non"
 
 #: .\dashboard\models.py:58
 msgid "Gönderim Tarihi"
-msgstr ""
+msgstr "Date de soumission"
 
 #: .\dashboard\models.py:63
 #: .\dashboard\templates\dashboard\activities\list.html:40
@@ -581,37 +581,37 @@ msgstr ""
 #: .\dashboard\templates\dashboard\includes\navigation\sidebar.html:29
 #: .\dashboard\templates\dashboard\messages\list.html:5
 msgid "Mesajlar"
-msgstr ""
+msgstr "Messages"
 
 #: .\dashboard\models.py:134
 msgid "Müşteri Adı"
-msgstr ""
+msgstr "Nom du client"
 
 #: .\dashboard\models.py:135
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:64
 #: .\dashboard\templates\dashboard\messages\list.html:212
 #: .\dashboard\templates\dashboard\reviews\list.html:200
 msgid "Yorum"
-msgstr ""
+msgstr "Commentaire"
 
 #: .\dashboard\models.py:136
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:63
 #: .\dashboard\templates\dashboard\reviews\list.html:168
 msgid "Puan"
-msgstr ""
+msgstr "Points"
 
 #: .\dashboard\models.py:137
 msgid "Yorum Tarihi"
-msgstr ""
+msgstr "Date du commentaire"
 
 #: .\dashboard\models.py:138
 #: .\dashboard\templates\dashboard\reviews\list.html:39
 msgid "Onaylı"
-msgstr ""
+msgstr "Approuvé"
 
 #: .\dashboard\models.py:141
 msgid "Müşteri Yorumu"
-msgstr ""
+msgstr "Avis des clients"
 
 #: .\dashboard\models.py:142
 #: .\dashboard\templates\dashboard\includes\navigation\sidebar.html:33
@@ -619,7 +619,7 @@ msgstr ""
 #: .\dashboard\templates\dashboard\messages\list.html:18
 #: .\dashboard\templates\dashboard\reviews\list.html:5 .\reviews\views.py:47
 msgid "Müşteri Yorumları"
-msgstr ""
+msgstr "Avis des clients"
 
 #: .\dashboard\models.py:320
 #: .\dashboard\templates\dashboard\carousel\list.html:109
@@ -629,98 +629,98 @@ msgstr ""
 #: .\dashboard\templates\dashboard\media_mentions\list.html:557
 #: .\dashboard\templates\dashboard\products\list.html:250
 msgid "Açıklama"
-msgstr ""
+msgstr "Description"
 
 #: .\dashboard\templates\dashboard\about\edit.html:20
 #: .\dashboard\templates\dashboard\about\edit.html:21
 msgid "Hakkımızda Düzenle"
-msgstr ""
+msgstr "Editer A propos de nous"
 
 #: .\dashboard\templates\dashboard\about\edit.html:25
 msgid "Hakkımızda Sayfası"
-msgstr ""
+msgstr "À propos de nous"
 
 #: .\dashboard\templates\dashboard\about\edit.html:26
 msgid "Şirket bilgilerinizi düzenleyin ve güncelleyin"
-msgstr ""
+msgstr "Organisez et mettez à jour les informations relatives à votre entreprise"
 
 #: .\dashboard\templates\dashboard\about\edit.html:44
 #: .\dashboard\templates\dashboard\settings\business.html:31
 msgid "Temel Bilgiler"
-msgstr ""
+msgstr "Informations de base"
 
 #: .\dashboard\templates\dashboard\about\edit.html:52
 #: .\dashboard\templates\dashboard\about\edit.html:348
 msgid "Sayfa Başlığı"
-msgstr ""
+msgstr "Titre de la page"
 
 #: .\dashboard\templates\dashboard\about\edit.html:59
 #: .\dashboard\templates\dashboard\about\edit.html:358
 #: .\dashboard\templates\dashboard\media_mentions\list.html:279
 msgid "Kısa Açıklama"
-msgstr ""
+msgstr "Brève description"
 
 #: .\dashboard\templates\dashboard\about\edit.html:93
 #: .\dashboard\templates\dashboard\about\edit.html:368
 msgid "Ana Görsel"
-msgstr ""
+msgstr "Image principale"
 
 #: .\dashboard\templates\dashboard\about\edit.html:99
 msgid "Görsel Seçin"
-msgstr ""
+msgstr "Sélectionner une image"
 
 #: .\dashboard\templates\dashboard\about\edit.html:105
 #: .\dashboard\templates\dashboard\media_mentions\list.html:337
 #: .\dashboard\templates\dashboard\products\list.html:320
 #: .\dashboard\templates\dashboard\team\list.html:267
 msgid "Alt Metin (SEO)"
-msgstr ""
+msgstr "Texte Alt (SEO)"
 
 #: .\dashboard\templates\dashboard\about\edit.html:107
 msgid "Görsel için SEO alt metni (max 125 karakter)"
-msgstr ""
+msgstr "Texte alt SEO pour l'image (max 125 caractères)"
 
 #: .\dashboard\templates\dashboard\about\edit.html:118
 msgid "Mevcut Görsel"
-msgstr ""
+msgstr "Image disponible"
 
 #: .\dashboard\templates\dashboard\about\edit.html:122
 #: .\dashboard\templates\dashboard\media_mentions\list.html:342
 #: .\templates\products\sections\product_detail.html:28
 msgid "Görsel Yok"
-msgstr ""
+msgstr "Pas de visuel"
 
 #: .\dashboard\templates\dashboard\about\edit.html:134
 msgid "İçerik Bölümleri"
-msgstr ""
+msgstr "Sections du contenu"
 
 #: .\dashboard\templates\dashboard\about\edit.html:144
 #: .\templates\about\sections\content.html:26
 #: .\templates\home\sections\about_preview.html:31
 msgid "Misyonumuz"
-msgstr ""
+msgstr "Notre mission"
 
 #: .\dashboard\templates\dashboard\about\edit.html:157
 #: .\templates\about\sections\content.html:38
 msgid "Vizyonumuz"
-msgstr ""
+msgstr "Notre vision"
 
 #: .\dashboard\templates\dashboard\about\edit.html:170
 #: .\templates\about\sections\content.html:14
 msgid "Hikayemiz"
-msgstr ""
+msgstr "Notre histoire"
 
 #: .\dashboard\templates\dashboard\about\edit.html:230
 msgid "Şirket İstatistikleri"
-msgstr ""
+msgstr "Statistiques sur les entreprises"
 
 #: .\dashboard\templates\dashboard\about\edit.html:237
 msgid "Tecrübe Yılı"
-msgstr ""
+msgstr "Années d'expérience"
 
 #: .\dashboard\templates\dashboard\about\edit.html:244
 msgid "Tamamlanan İşler"
-msgstr ""
+msgstr "Œuvres achevées"
 
 #: .\dashboard\templates\dashboard\about\edit.html:251
 #: .\templates\about\sections\hero.html:20
@@ -729,25 +729,25 @@ msgstr ""
 #: .\templates\home\sections\about_preview.html:123
 #: .\templates\home\sections\statistics.html:55
 msgid "Mutlu Müşteri"
-msgstr ""
+msgstr "Client satisfait"
 
 #: .\dashboard\templates\dashboard\about\edit.html:258
 msgid "Toplam Hizmet"
-msgstr ""
+msgstr "Service total"
 
 #: .\dashboard\templates\dashboard\about\edit.html:265
 #, python-format
 msgid "Müşteri Memnuniyeti (%%)"
-msgstr ""
+msgstr "Satisfaction des clients (%%)"
 
 #: .\dashboard\templates\dashboard\about\edit.html:284
 msgid "Değişiklikleri Geri Al"
-msgstr ""
+msgstr "Annuler les modifications"
 
 #: .\dashboard\templates\dashboard\about\edit.html:292
 #: .\dashboard\templates\dashboard\includes\modals\translation_form_modal.html:169
 msgid "Taslak Kaydet"
-msgstr ""
+msgstr "Sauvegarder le projet"
 
 #: .\dashboard\templates\dashboard\about\edit.html:295
 #: .\dashboard\templates\dashboard\carousel\list.html:465
@@ -759,23 +759,23 @@ msgstr ""
 #: .\dashboard\templates\dashboard\services\list.html:333
 #: .\dashboard\templates\dashboard\team\list.html:400
 msgid "Değişiklikleri Kaydet"
-msgstr ""
+msgstr "Enregistrer les modifications"
 
 #: .\dashboard\templates\dashboard\about\edit.html:312
 msgid "Form Durumu"
-msgstr ""
+msgstr "État du formulaire"
 
 #: .\dashboard\templates\dashboard\about\edit.html:322
 msgid "Dikkat Edilecek Noktalar"
-msgstr ""
+msgstr "Points à prendre en considération"
 
 #: .\dashboard\templates\dashboard\about\edit.html:330
 msgid "Form Hazır"
-msgstr ""
+msgstr "Prêt à l'emploi"
 
 #: .\dashboard\templates\dashboard\about\edit.html:332
 msgid "Tüm zorunlu alanlar dolduruldu"
-msgstr ""
+msgstr "Tous les champs obligatoires sont remplis"
 
 #: .\dashboard\templates\dashboard\about\edit.html:349
 #: .\dashboard\templates\dashboard\about\edit.html:359
@@ -783,7 +783,7 @@ msgstr ""
 #: .\dashboard\templates\dashboard\about\edit.html:389
 #: .\dashboard\templates\dashboard\about\edit.html:399
 msgid "Boş"
-msgstr ""
+msgstr "Vide"
 
 #: .\dashboard\templates\dashboard\about\edit.html:352
 #: .\dashboard\templates\dashboard\about\edit.html:362
@@ -791,124 +791,124 @@ msgstr ""
 #: .\dashboard\templates\dashboard\about\edit.html:392
 #: .\dashboard\templates\dashboard\about\edit.html:402
 msgid "0 karakter"
-msgstr ""
+msgstr "0 caractère"
 
 #: .\dashboard\templates\dashboard\about\edit.html:369
 msgid "Yok"
-msgstr ""
+msgstr "Non"
 
 #: .\dashboard\templates\dashboard\about\edit.html:372
 msgid "Görsel seçilmedi"
-msgstr ""
+msgstr "Image non sélectionnée"
 
 #: .\dashboard\templates\dashboard\about\edit.html:378
 msgid "Misyon"
-msgstr ""
+msgstr "La mission"
 
 #: .\dashboard\templates\dashboard\about\edit.html:388
 msgid "Vizyon"
-msgstr ""
+msgstr "Vision"
 
 #: .\dashboard\templates\dashboard\about\edit.html:398
 msgid "Hikaye"
-msgstr ""
+msgstr "Histoire"
 
 #: .\dashboard\templates\dashboard\about\edit.html:408
 #: .\dashboard\templates\dashboard\catalog\management.html:251
 msgid "İstatistikler"
-msgstr ""
+msgstr "Statistiques"
 
 #: .\dashboard\templates\dashboard\about\edit.html:409
 #: .\dashboard\templates\dashboard\about\edit.html:429
 msgid "Eksik"
-msgstr ""
+msgstr "Manque"
 
 #: .\dashboard\templates\dashboard\about\edit.html:412
 msgid "0/5 alan dolduruldu"
-msgstr ""
+msgstr "0/5 zone remplie"
 
 #: .\dashboard\templates\dashboard\about\edit.html:423
 msgid "Tamamlanan"
-msgstr ""
+msgstr "Terminé"
 
 #: .\dashboard\templates\dashboard\about\edit.html:435
 msgid "Toplam"
-msgstr ""
+msgstr "Total"
 
 #: .\dashboard\templates\dashboard\about\edit.html:456
 msgid "Kaydediliyor..."
-msgstr ""
+msgstr "Enregistrement..."
 
 #: .\dashboard\templates\dashboard\about\edit.html:457
 msgid "Kaydedildi"
-msgstr ""
+msgstr "Enregistré"
 
 #: .\dashboard\templates\dashboard\about\edit.html:458
 msgid "Hata oluştu"
-msgstr ""
+msgstr "Une erreur s'est produite"
 
 #: .\dashboard\templates\dashboard\activities\list.html:4
 msgid "Tüm Aktiviteler"
-msgstr ""
+msgstr "Toutes les activités"
 
 #: .\dashboard\templates\dashboard\activities\list.html:5
 msgid "Aktivite Geçmişi"
-msgstr ""
+msgstr "Historique des activités"
 
 #: .\dashboard\templates\dashboard\activities\list.html:14
 #: .\dashboard\templates\dashboard\includes\cards\activity_card.html:9
 #: .\dashboard\templates\dashboard\index.html:158
 msgid "Son Aktiviteler"
-msgstr ""
+msgstr "Dernières activités"
 
 #: .\dashboard\templates\dashboard\activities\list.html:17
 msgid "toplam aktivite"
-msgstr ""
+msgstr "activité totale"
 
 #: .\dashboard\templates\dashboard\activities\list.html:18
 msgid "günlük dönem"
-msgstr ""
+msgstr "période quotidienne"
 
 #: .\dashboard\templates\dashboard\activities\list.html:27
 msgid "Son"
-msgstr ""
+msgstr "Fils"
 
 #: .\dashboard\templates\dashboard\activities\list.html:29
 #: .\dashboard\templates\dashboard\activities\list.html:30
 #: .\dashboard\templates\dashboard\activities\list.html:31
 msgid "gün"
-msgstr ""
+msgstr "jour"
 
 #: .\dashboard\templates\dashboard\activities\list.html:35
 msgid "Aktivite Tipi"
-msgstr ""
+msgstr "Tipi Aktivite"
 
 #: .\dashboard\templates\dashboard\activities\list.html:37
 #: .\templates\gallery\sections\gallery_grid.html:18
 #: .\templates\products\sections\filters.html:30
 msgid "Tümü"
-msgstr ""
+msgstr "Tous"
 
 #: .\dashboard\templates\dashboard\activities\list.html:39
 #: .\dashboard\templates\dashboard\includes\components\notification_dropdown.html:59
 msgid "Yorumlar"
-msgstr ""
+msgstr "Commentaires"
 
 #: .\dashboard\templates\dashboard\activities\list.html:45
 #: .\templates\admin\dashboard.html:128
 msgid "Hızlı Eylemler"
-msgstr ""
+msgstr "Actions rapides"
 
 #: .\dashboard\templates\dashboard\activities\list.html:51
 #: .\dashboard\templates\dashboard\activities\list.html:122
 #: .\dashboard\templates\dashboard\index.html:136
 #: .\templates\admin\dashboard.html:131
 msgid "Ürün Ekle"
-msgstr ""
+msgstr "Ajouter un produit"
 
 #: .\dashboard\templates\dashboard\activities\list.html:86
 msgid "Aktivite sayfaları"
-msgstr ""
+msgstr "Fiches d'activité"
 
 #: .\dashboard\templates\dashboard\activities\list.html:91
 #: .\dashboard\templates\dashboard\notifications\list.html:71
@@ -917,7 +917,7 @@ msgstr ""
 #: .\templates\gallery\sections\gallery_grid.html:197
 #: .\templates\products\sections\products_grid.html:76
 msgid "Önceki"
-msgstr ""
+msgstr "Précédent"
 
 #: .\dashboard\templates\dashboard\activities\list.html:105
 #: .\dashboard\templates\dashboard\notifications\list.html:81
@@ -926,61 +926,61 @@ msgstr ""
 #: .\templates\gallery\sections\gallery_grid.html:203
 #: .\templates\products\sections\products_grid.html:94
 msgid "Sonraki"
-msgstr ""
+msgstr "Suivant"
 
 #: .\dashboard\templates\dashboard\activities\list.html:115
 msgid "Aktivite bulunamadı"
-msgstr ""
+msgstr "Aucune activité trouvée"
 
 #: .\dashboard\templates\dashboard\activities\list.html:116
 msgid "Seçili dönemde herhangi bir aktivite gerçekleşmemiş."
-msgstr ""
+msgstr "Il n'y a pas eu d'activité au cours de la période sélectionnée."
 
 #: .\dashboard\templates\dashboard\activities\list.html:119
 #: .\templates\errors\400.html:62 .\templates\errors\403.html:72
 #: .\templates\errors\404.html:178 .\templates\errors\500.html:165
 #: .\templates\errors\ratelimit.html:10
 msgid "Ana Sayfaya Dön"
-msgstr ""
+msgstr "Retour à la page d'accueil"
 
 #: .\dashboard\templates\dashboard\base\form_base.html:34
 #: .\dashboard\templates\dashboard\includes\modals\crud_modal_base.html:39
 #: .\dashboard\templates\dashboard\includes\modals\translation_form_modal.html:174
 #: .\dashboard\templates\dashboard\media_mentions\list.html:355
 msgid "Kaydet"
-msgstr ""
+msgstr "Économiser"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:7
 #: .\dashboard\templates\dashboard\carousel\list.html:8
 #: .\dashboard\templates\dashboard\carousel\list.html:13
 msgid "Carousel Yönetimi"
-msgstr ""
+msgstr "Gestion des carrousels"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:12
 msgid "Ana sayfa slaytlarınızı düzenleyin ve yönetin"
-msgstr ""
+msgstr "Organisez et gérez les diapositives de votre page d'accueil"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:29
 msgid "Carousel Önizleme"
-msgstr ""
+msgstr "Aperçu du carrousel"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:32
 msgid "Önizlemeyi Göster/Gizle"
-msgstr ""
+msgstr "Afficher/masquer l'aperçu"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:90
 msgid "Slayt Listesi"
-msgstr ""
+msgstr "Listes de Slayt"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:93
 msgid "Slayt ara..."
-msgstr ""
+msgstr "Recherche de diapositive..."
 
 #: .\dashboard\templates\dashboard\carousel\list.html:96
 #: .\dashboard\templates\dashboard\carousel\list.html:194
 #: .\dashboard\templates\dashboard\carousel\list.html:578
 msgid "Yeni Slayt Ekle"
-msgstr ""
+msgstr "Ajouter une nouvelle diapositive"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:107
 #: .\dashboard\templates\dashboard\carousel\list.html:614
@@ -989,7 +989,7 @@ msgstr ""
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:70
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:96
 msgid "Görsel"
-msgstr ""
+msgstr "Ajoncs"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:108
 #: .\dashboard\templates\dashboard\carousel\list.html:619
@@ -999,7 +999,7 @@ msgstr ""
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:97
 #: .\dashboard\templates\dashboard\media_mentions\list.html:530
 msgid "Başlık"
-msgstr ""
+msgstr "Titre"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:110
 #: .\dashboard\templates\dashboard\carousel\list.html:498
@@ -1013,7 +1013,7 @@ msgstr ""
 #: .\dashboard\templates\dashboard\media_mentions\list.html:542
 #: .\dashboard\templates\dashboard\team\list.html:441
 msgid "Sıra"
-msgstr ""
+msgstr "Séquence"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:112
 #: .\dashboard\templates\dashboard\carousel\list.html:646
@@ -1028,7 +1028,7 @@ msgstr ""
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:101
 #: .\dashboard\templates\dashboard\messages\list.html:52
 msgid "İşlemler"
-msgstr ""
+msgstr "Transactions"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:150
 #: .\dashboard\templates\dashboard\carousel\list.html:514
@@ -1058,7 +1058,7 @@ msgstr ""
 #: .\dashboard\templates\dashboard\team\list.html:150
 #: .\dashboard\templates\dashboard\team\list.html:468
 msgid "Düzenle"
-msgstr ""
+msgstr "Editer"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:156
 #: .\dashboard\templates\dashboard\categories\list.html:89
@@ -1074,7 +1074,7 @@ msgstr ""
 #: .\dashboard\templates\dashboard\services\list.html:111
 #: .\dashboard\templates\dashboard\team\list.html:156
 msgid "Görüntüle"
-msgstr ""
+msgstr "Voir"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:162
 #: .\dashboard\templates\dashboard\carousel\list.html:555
@@ -1102,52 +1102,52 @@ msgstr ""
 #: .\dashboard\templates\dashboard\team\list.html:162
 #: .\dashboard\templates\dashboard\team\list.html:511
 msgid "Sil"
-msgstr ""
+msgstr "Supprimer"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:178
 msgid "Henüz slayt bulunmuyor"
-msgstr ""
+msgstr "Pas encore de diapositives"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:179
 msgid ""
 "İlk slaytınızı eklemek için yukarıdaki Yeni Slayt Ekle butonunu kullanın."
-msgstr ""
+msgstr "Pour ajouter votre première diapositive, utilisez le bouton Ajouter une nouvelle diapositive ci-dessus."
 
 #: .\dashboard\templates\dashboard\carousel\list.html:180
 msgid "İlk Slaytı Ekle"
-msgstr ""
+msgstr "Insérer la première diapositive"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:266
 #: .\dashboard\templates\dashboard\carousel\list.html:437
 msgid "Medya & Ayarlar"
-msgstr ""
+msgstr "Médias et paramètres"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:300
 msgid "Slaytı Kaydet"
-msgstr ""
+msgstr "Sauvegarder la diapositive"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:316
 msgid "Slayt Düzenle"
-msgstr ""
+msgstr "Modifier la diapositive"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:479
 msgid "Slayt Detayları"
-msgstr ""
+msgstr "Détails des diapositives"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:492
 #: .\dashboard\templates\dashboard\categories\list.html:248
 #: .\dashboard\templates\dashboard\gallery\list.html:397
 #: .\dashboard\templates\dashboard\services\list.html:366
 msgid "Açıklama bulunmuyor."
-msgstr ""
+msgstr "Il n'y a pas d'explication."
 
 #: .\dashboard\templates\dashboard\carousel\list.html:527
 msgid "Slayt Sil"
-msgstr ""
+msgstr "Supprimer la diapositive"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:534
 msgid "Bu slaytı silmek istediğinizden emin misiniz?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer cette diapositive ?"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:536
 #: .\dashboard\templates\dashboard\categories\list.html:300
@@ -1158,7 +1158,7 @@ msgstr ""
 #: .\dashboard\templates\dashboard\team\list.html:489
 #: .\dashboard\templates\dashboard\team\list.html:491
 msgid "kalıcı olarak silinecek."
-msgstr ""
+msgstr "effacé définitivement."
 
 #: .\dashboard\templates\dashboard\carousel\list.html:540
 #: .\dashboard\templates\dashboard\gallery\list.html:473
@@ -1169,33 +1169,33 @@ msgstr ""
 #: .\dashboard\templates\dashboard\services\list.html:422
 #: .\dashboard\templates\dashboard\team\list.html:495
 msgid "Bu işlem geri alınamaz!"
-msgstr ""
+msgstr "Cette opération est irréversible !"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:587
 msgid "Toplam Slayt"
-msgstr ""
+msgstr "Diapositive totale"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:593
 msgid "Aktif Slaytlar"
-msgstr ""
+msgstr "Diapositives actives"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:599
 msgid "İlk Sıra"
-msgstr ""
+msgstr "Premier rang"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:605
 msgid "Görüntülenme"
-msgstr ""
+msgstr "Imagerie"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:627
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:73
 msgid "Alt Metin"
-msgstr ""
+msgstr "Sous-texte"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:631
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:74
 msgid "Buton"
-msgstr ""
+msgstr "Bouton"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:725
 #: .\dashboard\templates\dashboard\catalog\management.html:129
@@ -1203,7 +1203,7 @@ msgstr ""
 #: .\dashboard\templates\dashboard\products\list.html:88
 #: .\dashboard\templates\dashboard\profile\profile.html:64
 msgid "Aktif"
-msgstr ""
+msgstr "Actif"
 
 #: .\dashboard\templates\dashboard\carousel\list.html:727
 #: .\dashboard\templates\dashboard\catalog\management.html:131
@@ -1211,166 +1211,166 @@ msgstr ""
 #: .\dashboard\templates\dashboard\products\list.html:584
 #: .\dashboard\templates\dashboard\profile\profile.html:66
 msgid "Pasif"
-msgstr ""
+msgstr "Passif"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:5
 #: .\dashboard\templates\dashboard\catalog\management.html:80
 msgid "PDF Katalog Yönetimi"
-msgstr ""
+msgstr "Gestion des catalogues PDF"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:86
 msgid "Önizle"
-msgstr ""
+msgstr "Avant-première"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:89
 msgid "Web'de Görüntüle"
-msgstr ""
+msgstr "Voir sur le web"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:102
 msgid "Katalog Aktif"
-msgstr ""
+msgstr "Catalogue Aktif"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:102
 msgid "Müşteriler web sitesinde kataloğu görüntüleyebilir"
-msgstr ""
+msgstr "Les clients peuvent consulter le catalogue sur le site web"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:107
 msgid "Katalog Pasif"
-msgstr ""
+msgstr "Catalogue passif"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:107
 msgid "Dosya yüklü ancak müşteriler göremez"
-msgstr ""
+msgstr "Fichier téléchargé mais les clients ne peuvent pas le voir"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:107
 msgid "Aktif etmeyi unutmayın"
-msgstr ""
+msgstr "N'oubliez pas d'activer"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:112
 msgid "Katalog Yok"
-msgstr ""
+msgstr "Catalogue Yok"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:112
 msgid "Henüz PDF katalog dosyası yüklenmemiş"
-msgstr ""
+msgstr "Aucun fichier de catalogue PDF n'a encore été téléchargé"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:125
 msgid "Katalog Dosyası"
-msgstr ""
+msgstr "Fichier catalogue"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:141
 msgid "PDF Kataloğu Mevcut"
-msgstr ""
+msgstr "Catalogue PDF disponible"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:146
 msgid "Dosya Boyutu"
-msgstr ""
+msgstr "Taille du fichier"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:154
 #: .\templates\legal\legal_page_detail.html:34
 msgid "Son Güncelleme"
-msgstr ""
+msgstr "Dernière mise à jour"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:162
 msgid "PDF Katalog Yükle"
-msgstr ""
+msgstr "Télécharger le catalogue PDF"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:163
 msgid "Henüz katalog dosyası yüklenmemiş"
-msgstr ""
+msgstr "Aucun fichier de catalogue n'a encore été téléchargé"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:165
 msgid "Desteklenen format"
-msgstr ""
+msgstr "Format desteklenen"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:166
 msgid "Maksimum dosya boyutu"
-msgstr ""
+msgstr "Taille maximale du fichier"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:183
 msgid "Dosyayı Değiştir"
-msgstr ""
+msgstr "Modifier le fichier"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:183
 msgid "PDF Yükle"
-msgstr ""
+msgstr "Télécharger le PDF"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:194
 msgid "Pasif Et"
-msgstr ""
+msgstr "Passif Et"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:196
 msgid "Aktif Et"
-msgstr ""
+msgstr "Actif Et"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:203
 msgid "Katalog dosyasını silmek istediğinizden emin misiniz?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer le fichier du catalogue ?"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:207
 msgid "Dosyayı Sil"
-msgstr ""
+msgstr "Supprimer le fichier"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:223
 msgid "Katalog Ayarları"
-msgstr ""
+msgstr "Paramètres du catalogue"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:231
 msgid "Katalog Başlığı"
-msgstr ""
+msgstr "Titre du catalogue"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:236
 msgid "Bu başlık navbar'da görünecek."
-msgstr ""
+msgstr "Ce titre apparaîtra dans la barre de navigation."
 
 #: .\dashboard\templates\dashboard\catalog\management.html:240
 msgid "Başlığı Güncelle"
-msgstr ""
+msgstr "Titre de la mise à jour"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:277
 msgid "Dosya"
-msgstr ""
+msgstr "Fichier"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:285
 #: .\dashboard\templates\dashboard\includes\modals\image_viewer_modal.html:112
 msgid "Dosya Adı"
-msgstr ""
+msgstr "Nom du fichier"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:288
 msgid "Web Adresi"
-msgstr ""
+msgstr "Adresse web"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:308
 msgid "Nasıl Kullanılır?"
-msgstr ""
+msgstr "Comment l'utiliser ?"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:313
 msgid "PDF katalog dosyanızı \\'PDF Yükle\\' butonuyla yükleyin"
-msgstr ""
+msgstr "Téléchargez votre fichier de catalogue PDF à l'aide du bouton \"Télécharger le PDF\"."
 
 #: .\dashboard\templates\dashboard\catalog\management.html:314
 msgid "Katalog başlığını isteğinize göre düzenleyin"
-msgstr ""
+msgstr "Modifier le titre du catalogue selon vos souhaits"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:315
 msgid "\\'Aktif Et\\' butonuyla kataloğu web sitesinde yayınlayın"
-msgstr ""
+msgstr "\\\\Publier le catalogue sur le site web à l'aide du bouton \"Activer\"."
 
 #: .\dashboard\templates\dashboard\catalog\management.html:316
 msgid "Müşteriler navbar'dan kataloğa erişebilir"
-msgstr ""
+msgstr "Les clients peuvent accéder au catalogue à partir de la barre de navigation"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:322
 msgid "İpucu"
-msgstr ""
+msgstr "Conseil"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:322
 msgid "PDF dosyası web içinde görüntülenir, indirme yapılmaz."
-msgstr ""
+msgstr "Le fichier PDF est affiché sur le web, il n'est pas téléchargé."
 
 #: .\dashboard\templates\dashboard\catalog\management.html:336
 msgid "Adres panoya kopyalandı!"
-msgstr ""
+msgstr "L'adresse a été copiée sur le tableau !"
 
 #: .\dashboard\templates\dashboard\catalog\management.html:337
 #: .\dashboard\templates\dashboard\catalog\management.html:365
@@ -1380,52 +1380,52 @@ msgstr ""
 #: .\dashboard\templates\dashboard\includes\ui\loading_spinner.html:221
 #: .\templates\components\modal.html:29
 msgid "Yükleniyor..."
-msgstr ""
+msgstr "Chargement..."
 
 #: .\dashboard\templates\dashboard\categories\list.html:12
 msgid "Kategori Yönetimi"
-msgstr ""
+msgstr "Gestion des catégories"
 
 #: .\dashboard\templates\dashboard\categories\list.html:13
 msgid "Kategorilerinizi düzenleyin ve yönetin"
-msgstr ""
+msgstr "Organisez et gérez vos catégories"
 
 #: .\dashboard\templates\dashboard\categories\list.html:43
 msgid "Kategori Listesi"
-msgstr ""
+msgstr "Liste des catégories"
 
 #: .\dashboard\templates\dashboard\categories\list.html:48
 msgid "Yeni Kategori Ekle"
-msgstr ""
+msgstr "Ajouter une nouvelle catégorie"
 
 #: .\dashboard\templates\dashboard\categories\list.html:108
 #: .\dashboard\templates\dashboard\index.html:133
 msgid "Henüz kategori bulunmuyor"
-msgstr ""
+msgstr "Pas encore de catégories"
 
 #: .\dashboard\templates\dashboard\categories\list.html:109
 msgid "İlk kategorinizi eklemek için aşağıdaki butona tıklayın."
-msgstr ""
+msgstr "Cliquez sur le bouton ci-dessous pour ajouter votre première catégorie."
 
 #: .\dashboard\templates\dashboard\categories\list.html:110
 msgid "İlk Kategoriyi Ekle"
-msgstr ""
+msgstr "Ajouter une première catégorie"
 
 #: .\dashboard\templates\dashboard\categories\list.html:125
 msgid "Yeni Kategori"
-msgstr ""
+msgstr "Nouvelle catégorie"
 
 #: .\dashboard\templates\dashboard\categories\list.html:164
 msgid "Kategori Ekle"
-msgstr ""
+msgstr "Ajouter une catégorie"
 
 #: .\dashboard\templates\dashboard\categories\list.html:181
 msgid "Kategori Düzenle"
-msgstr ""
+msgstr "Modifier la catégorie"
 
 #: .\dashboard\templates\dashboard\categories\list.html:240
 msgid "Kategori Detayları"
-msgstr ""
+msgstr "Détails de la catégorie"
 
 #: .\dashboard\templates\dashboard\categories\list.html:254
 #: .\dashboard\templates\dashboard\gallery\list.html:402
@@ -1433,53 +1433,53 @@ msgstr ""
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:36
 #: .\dashboard\templates\dashboard\services\list.html:371
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: .\dashboard\templates\dashboard\categories\list.html:257
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:22
 msgid "Slug"
-msgstr ""
+msgstr "Limace"
 
 #: .\dashboard\templates\dashboard\categories\list.html:266
 #: .\dashboard\templates\dashboard\gallery\list.html:433
 #: .\dashboard\templates\dashboard\services\list.html:383
 msgid "Oluşturma"
-msgstr ""
+msgstr "Création"
 
 #: .\dashboard\templates\dashboard\categories\list.html:291
 msgid "Kategori Sil"
-msgstr ""
+msgstr "Catégorie Sil"
 
 #: .\dashboard\templates\dashboard\categories\list.html:298
 msgid "Bu kategoriyi silmek istediğinizden emin misiniz?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer cette catégorie ?"
 
 #: .\dashboard\templates\dashboard\categories\list.html:304
 msgid "Bu kategoriye ait ürünler de etkilenebilir!"
-msgstr ""
+msgstr "Les produits appartenant à cette catégorie peuvent également être concernés !"
 
 #: .\dashboard\templates\dashboard\categories\list.html:332
 msgid "Güncelleniyor..."
-msgstr ""
+msgstr "Mise à jour..."
 
 #: .\dashboard\templates\dashboard\categories\list.html:333
 msgid "Kategori başarıyla güncellendi!"
-msgstr ""
+msgstr "Mise à jour réussie de la catégorie !"
 
 #: .\dashboard\templates\dashboard\categories\list.html:334
 msgid "Güncelleme hatası"
-msgstr ""
+msgstr "Erreur de mise à jour"
 
 #: .\dashboard\templates\dashboard\categories\list.html:335
 msgid "Bir hata oluştu:"
-msgstr ""
+msgstr "Une erreur s'est produite :"
 
 #: .\dashboard\templates\dashboard\categories\products_list.html:7
 #: .\dashboard\templates\dashboard\products\list.html:6
 #: .\dashboard\templates\dashboard\products\list.html:7
 #: .\dashboard\templates\dashboard\products\list.html:11
 msgid "Ürün Yönetimi"
-msgstr ""
+msgstr "Gestion des produits"
 
 #: .\dashboard\templates\dashboard\categories\products_list.html:43
 #: .\dashboard\templates\dashboard\products\list.html:135
@@ -1492,65 +1492,65 @@ msgstr ""
 #: .\templates\products\sections\featured_products.html:16
 #: .\templates\products\sections\product_detail.html:42
 msgid "Öne Çıkan"
-msgstr ""
+msgstr "En vedette"
 
 #: .\dashboard\templates\dashboard\categories\products_list.html:77
 msgid "Henüz ürün eklenmemiş."
-msgstr ""
+msgstr "Aucun produit n'a encore été ajouté."
 
 #: .\dashboard\templates\dashboard\categories\products_list.html:78
 msgid "İlk ürününüzü eklemek için yukarıdaki butona tıklayın."
-msgstr ""
+msgstr "Cliquez sur le bouton ci-dessus pour ajouter votre premier produit."
 
 #: .\dashboard\templates\dashboard\categories\products_list.html:79
 #: .\dashboard\templates\dashboard\categories\products_list.html:93
 #: .\dashboard\templates\dashboard\products\list.html:36
 #: .\dashboard\templates\dashboard\products\list.html:219
 msgid "Yeni Ürün Ekle"
-msgstr ""
+msgstr "Ajouter un nouveau produit"
 
 #: .\dashboard\templates\dashboard\categories\products_list.html:129
 msgid "Ekle"
-msgstr ""
+msgstr "Ajouter"
 
 #: .\dashboard\templates\dashboard\categories\products_list.html:138
 #: .\dashboard\templates\dashboard\products\list.html:366
 msgid "Ürün Düzenle"
-msgstr ""
+msgstr "Modifier le produit"
 
 #: .\dashboard\templates\dashboard\gallery\list.html:9
 #: .\dashboard\templates\dashboard\gallery\list.html:10
 msgid "Galeri Yönetimi"
-msgstr ""
+msgstr "Gestion de la galerie"
 
 #: .\dashboard\templates\dashboard\gallery\list.html:37
 msgid "Galeri Listesi"
-msgstr ""
+msgstr "Liste des galeries"
 
 #: .\dashboard\templates\dashboard\gallery\list.html:42
 msgid "Yeni Öğe Ekle"
-msgstr ""
+msgstr "Ajouter un nouvel élément"
 
 #: .\dashboard\templates\dashboard\gallery\list.html:139
 msgid "Yeni Galeri Öğesi Ekle"
-msgstr ""
+msgstr "Ajouter un nouvel élément de la galerie"
 
 #: .\dashboard\templates\dashboard\gallery\list.html:201
 #: .\dashboard\templates\dashboard\gallery\list.html:322
 msgid "Medya Ayarları"
-msgstr ""
+msgstr "Paramètres des médias"
 
 #: .\dashboard\templates\dashboard\gallery\list.html:243
 msgid "Galeri Öğesini Kaydet"
-msgstr ""
+msgstr "Sauvegarder un élément de la galerie"
 
 #: .\dashboard\templates\dashboard\gallery\list.html:259
 msgid "Galeri Öğesi Düzenle"
-msgstr ""
+msgstr "Modifier l'article de la galerie"
 
 #: .\dashboard\templates\dashboard\gallery\list.html:378
 msgid "Galeri Detayları"
-msgstr ""
+msgstr "Détails de la galerie"
 
 #: .\dashboard\templates\dashboard\gallery\list.html:391
 #: .\dashboard\templates\dashboard\media_mentions\list.html:524
@@ -1558,396 +1558,396 @@ msgstr ""
 #: .\dashboard\templates\dashboard\reviews\list.html:194
 #: .\dashboard\templates\dashboard\services\list.html:360
 msgid "Görsel yok"
-msgstr ""
+msgstr "Pas de visuel"
 
 #: .\dashboard\templates\dashboard\gallery\list.html:405
 msgid "Medya Türü"
-msgstr ""
+msgstr "Type de média"
 
 #: .\dashboard\templates\dashboard\gallery\list.html:410
 #: .\dashboard\templates\dashboard\media_mentions\list.html:325
 #: .\dashboard\templates\dashboard\services\list.html:374
 #: .\dashboard\templates\dashboard\team\list.html:204
 msgid "Sıralama"
-msgstr ""
+msgstr "Classement"
 
 #: .\dashboard\templates\dashboard\gallery\list.html:427
 msgid "Video URL"
-msgstr ""
+msgstr "URL de la vidéo"
 
 #: .\dashboard\templates\dashboard\gallery\list.html:460
 msgid "Galeri Öğesi Sil"
-msgstr ""
+msgstr "Supprimer un élément de la galerie"
 
 #: .\dashboard\templates\dashboard\gallery\list.html:467
 msgid "Bu galeri öğesini silmek istediğinizden emin misiniz?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer cet élément de la galerie ?"
 
 #: .\dashboard\templates\dashboard\includes\cards\activity_card.html:13
 msgid "Tümünü Gör"
-msgstr ""
+msgstr "Tout voir"
 
 #: .\dashboard\templates\dashboard\includes\cards\activity_card.html:33
 #, python-format
 msgid "%(time_since)s önce"
-msgstr ""
+msgstr "Il y a %(time_since)s"
 
 #: .\dashboard\templates\dashboard\includes\cards\activity_card.html:45
 msgid "Henüz aktivite yok"
-msgstr ""
+msgstr "Pas encore d'activité"
 
 #: .\dashboard\templates\dashboard\includes\cards\activity_card.html:46
 msgid "Sistem kullanıldıkça aktiviteler burada görünecek"
-msgstr ""
+msgstr "Les activités apparaîtront ici au fur et à mesure de l'utilisation du système"
 
 #: .\dashboard\templates\dashboard\includes\cards\chart_card.html:10
 msgid "Grafik"
-msgstr ""
+msgstr "Graphique"
 
 #: .\dashboard\templates\dashboard\includes\cards\chart_card.html:16
 #: .\dashboard\templates\dashboard\includes\cards\chart_card.html:24
 msgid "Son 7 Gün"
-msgstr ""
+msgstr "7 derniers jours"
 
 #: .\dashboard\templates\dashboard\includes\cards\chart_card.html:32
 msgid "Son 30 Gün"
-msgstr ""
+msgstr "30 derniers jours"
 
 #: .\dashboard\templates\dashboard\includes\cards\chart_card.html:40
 msgid "Son 90 Gün"
-msgstr ""
+msgstr "90 derniers jours"
 
 #: .\dashboard\templates\dashboard\includes\cards\info_card.html:114
 msgid "önce güncellendi"
-msgstr ""
+msgstr "première mise à jour"
 
 #: .\dashboard\templates\dashboard\includes\cards\info_card.html:161
 msgid "Form alanları yüklenecek..."
-msgstr ""
+msgstr "Les champs du formulaire seront chargés..."
 
 #: .\dashboard\templates\dashboard\includes\components\notification_dropdown.html:16
 #: .\dashboard\templates\dashboard\notifications\list.html:5
 msgid "Bildirimler"
-msgstr ""
+msgstr "Notifications"
 
 #: .\dashboard\templates\dashboard\includes\components\notification_dropdown.html:18
 #: .\dashboard\templates\dashboard\includes\components\notification_dropdown.html:90
 msgid "Tümünü okundu olarak işaretle"
-msgstr ""
+msgstr "Marquer tous les textes comme lus"
 
 #: .\dashboard\templates\dashboard\includes\components\notification_dropdown.html:26
 msgid "Henüz yeni bildirim yok."
-msgstr ""
+msgstr "Il n'y a pas encore de nouvelles notifications."
 
 #: .\dashboard\templates\dashboard\includes\components\notification_dropdown.html:34
 msgid "Tüm Bildirimleri Gör"
-msgstr ""
+msgstr "Voir toutes les notifications"
 
 #: .\dashboard\templates\dashboard\includes\components\notification_dropdown.html:46
 #: .\dashboard\templates\dashboard\notifications\list.html:13
 msgid "Tüm Bildirimler"
-msgstr ""
+msgstr "Toutes les notifications"
 
 #: .\dashboard\templates\dashboard\includes\components\notification_dropdown.html:55
 msgid "Bildirim türü"
-msgstr ""
+msgstr "Type de notification"
 
 #: .\dashboard\templates\dashboard\includes\components\notification_dropdown.html:57
 msgid "Tüm türler"
-msgstr ""
+msgstr "Toutes les espèces"
 
 #: .\dashboard\templates\dashboard\includes\components\notification_dropdown.html:61
 msgid "Sistem"
-msgstr ""
+msgstr "Système"
 
 #: .\dashboard\templates\dashboard\includes\components\notification_dropdown.html:67
 msgid "Tüm durumlar"
-msgstr ""
+msgstr "Tous les cas"
 
 #: .\dashboard\templates\dashboard\includes\components\notification_dropdown.html:68
 #: .\dashboard\templates\dashboard\notifications\list.html:30
 msgid "Okunmamış"
-msgstr ""
+msgstr "Non lu"
 
 #: .\dashboard\templates\dashboard\includes\components\notification_dropdown.html:69
 #: .\dashboard\templates\dashboard\notifications\list.html:31
 msgid "Okunmuş"
-msgstr ""
+msgstr "Lire"
 
 #: .\dashboard\templates\dashboard\includes\components\notification_dropdown.html:81
 msgid "Bildirimler yükleniyor..."
-msgstr ""
+msgstr "Chargement des notifications..."
 
 #: .\dashboard\templates\dashboard\includes\components\notification_dropdown.html:407
 msgid "Yeni bildirim yok."
-msgstr ""
+msgstr "Pas de nouvelles notifications."
 
 #: .\dashboard\templates\dashboard\includes\components\notification_dropdown.html:428
 #: .\dashboard\templates\dashboard\notifications\list.html:63
 msgid "Bildirim bulunamadı."
-msgstr ""
+msgstr "Aucune notification n'a été trouvée."
 
 #: .\dashboard\templates\dashboard\includes\components\notification_dropdown.html:495
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:39
 msgid "Tür"
-msgstr ""
+msgstr "Type"
 
 #: .\dashboard\templates\dashboard\includes\components\site_view_dropdown.html:6
 msgid "Siteyi Görüntüle"
-msgstr ""
+msgstr "Voir le site"
 
 #: .\dashboard\templates\dashboard\includes\components\site_view_dropdown.html:11
 msgid "Ana Dilde Görüntüle"
-msgstr ""
+msgstr "Voir dans la langue principale"
 
 #: .\dashboard\templates\dashboard\includes\components\site_view_dropdown.html:16
 msgid "Diğer Dillerde:"
-msgstr ""
+msgstr "Dans d'autres langues :"
 
 #: .\dashboard\templates\dashboard\includes\components\theme_selector.html:6
 msgid "Tema"
-msgstr ""
+msgstr "Elle"
 
 #: .\dashboard\templates\dashboard\includes\components\theme_selector.html:15
 msgid "Varsayılan"
-msgstr ""
+msgstr "Défaut"
 
 #: .\dashboard\templates\dashboard\includes\components\theme_selector.html:25
 msgid "Karanlık Mod"
-msgstr ""
+msgstr "Mode sombre"
 
 #: .\dashboard\templates\dashboard\includes\components\theme_selector.html:35
 msgid "Okuma Modu"
-msgstr ""
+msgstr "Mode lecture"
 
 #: .\dashboard\templates\dashboard\includes\components\theme_selector.html:46
 msgid "Mavi"
-msgstr ""
+msgstr "Bleu"
 
 #: .\dashboard\templates\dashboard\includes\components\theme_selector.html:56
 msgid "Yeşil"
-msgstr ""
+msgstr "Vert"
 
 #: .\dashboard\templates\dashboard\includes\components\theme_selector.html:66
 msgid "Mor"
-msgstr ""
+msgstr "Violet"
 
 #: .\dashboard\templates\dashboard\includes\components\theme_selector.html:76
 msgid "Turuncu"
-msgstr ""
+msgstr "Orange"
 
 #: .\dashboard\templates\dashboard\includes\forms\date_field.html:82
 msgid "Başlangıç tarihi"
-msgstr ""
+msgstr "Date de début"
 
 #: .\dashboard\templates\dashboard\includes\forms\date_field.html:88
 msgid "Başlangıç"
-msgstr ""
+msgstr "Démarrage"
 
 #: .\dashboard\templates\dashboard\includes\forms\date_field.html:98
 msgid "Bitiş tarihi"
-msgstr ""
+msgstr "Date de fin"
 
 #: .\dashboard\templates\dashboard\includes\forms\date_field.html:103
 msgid "Bitiş"
-msgstr ""
+msgstr "Fin"
 
 #: .\dashboard\templates\dashboard\includes\forms\date_field.html:147
 msgid "Hızlı seçim:"
-msgstr ""
+msgstr "Sélection rapide :"
 
 #: .\dashboard\templates\dashboard\includes\forms\date_field.html:150
 msgid "Bugün"
-msgstr ""
+msgstr "Aujourd'hui"
 
 #: .\dashboard\templates\dashboard\includes\forms\date_field.html:153
 msgid "Yarın"
-msgstr ""
+msgstr "Demain"
 
 #: .\dashboard\templates\dashboard\includes\forms\date_field.html:156
 msgid "+1 Hafta"
-msgstr ""
+msgstr "+1 semaine"
 
 #: .\dashboard\templates\dashboard\includes\forms\date_field.html:159
 msgid "+1 Ay"
-msgstr ""
+msgstr "+1 mois"
 
 #: .\dashboard\templates\dashboard\includes\forms\image_upload_field.html:21
 msgid "Mevcut görsel"
-msgstr ""
+msgstr "Visuel disponible"
 
 #: .\dashboard\templates\dashboard\includes\forms\image_upload_field.html:27
 msgid "Yeni görsel seçmezseniz mevcut görsel korunur"
-msgstr ""
+msgstr "Si vous ne sélectionnez pas de nouvelle image, l'image existante est conservée"
 
 #: .\dashboard\templates\dashboard\includes\forms\image_upload_field.html:37
 #: .\dashboard\templates\dashboard\media_mentions\list.html:334
 #: .\dashboard\templates\dashboard\products\list.html:315
 msgid "JPG, PNG formatlarında görsel yükleyebilirsiniz"
-msgstr ""
+msgstr "Vous pouvez télécharger des images aux formats JPG et PNG."
 
 #: .\dashboard\templates\dashboard\includes\forms\select_field.html:83
 msgid "Ara..."
-msgstr ""
+msgstr "Recherche..."
 
 #: .\dashboard\templates\dashboard\includes\forms\text_editor_field.html:15
 msgid "Kalın"
-msgstr ""
+msgstr "Épais"
 
 #: .\dashboard\templates\dashboard\includes\forms\text_editor_field.html:18
 msgid "İtalik"
-msgstr ""
+msgstr "En italique"
 
 #: .\dashboard\templates\dashboard\includes\forms\text_editor_field.html:21
 msgid "Altı Çizgili"
-msgstr ""
+msgstr "Souligné"
 
 #: .\dashboard\templates\dashboard\includes\forms\text_editor_field.html:26
 msgid "Sola Hizala"
-msgstr ""
+msgstr "Alignement à gauche"
 
 #: .\dashboard\templates\dashboard\includes\forms\text_editor_field.html:29
 msgid "Ortala"
-msgstr ""
+msgstr "Moyenne"
 
 #: .\dashboard\templates\dashboard\includes\forms\text_editor_field.html:32
 msgid "Sağa Hizala"
-msgstr ""
+msgstr "Alignement à droite"
 
 #: .\dashboard\templates\dashboard\includes\forms\text_editor_field.html:37
 msgid "Madde İşareti"
-msgstr ""
+msgstr "Marquage des articles"
 
 #: .\dashboard\templates\dashboard\includes\forms\text_editor_field.html:40
 msgid "Numaralı Liste"
-msgstr ""
+msgstr "Liste numérotée"
 
 #: .\dashboard\templates\dashboard\includes\forms\translation_tabs.html:9
 #: .\templates\base\sections\language.html:15
 #: .\templates\base\sections\navbar.html:131
 msgid "Dil Seçimi"
-msgstr ""
+msgstr "Sélection de la langue"
 
 #: .\dashboard\templates\dashboard\includes\forms\url_field.html:28
 msgid "Otomatik oluştur"
-msgstr ""
+msgstr "Auto-générer"
 
 #: .\dashboard\templates\dashboard\includes\forms\url_field.html:95
 msgid "Platform seçin:"
-msgstr ""
+msgstr "Sélectionnez la plate-forme :"
 
 #: .\dashboard\templates\dashboard\includes\forms\url_field.html:99
 msgid "Website"
-msgstr ""
+msgstr "Site web"
 
 #: .\dashboard\templates\dashboard\includes\forms\url_field.html:186
 msgid "URL'yi kontrol et"
-msgstr ""
+msgstr "Vérifier l'URL"
 
 #: .\dashboard\templates\dashboard\includes\forms\url_field.html:219
 msgid "URL geçerli görünüyor"
-msgstr ""
+msgstr "L'URL semble valide"
 
 #: .\dashboard\templates\dashboard\includes\forms\url_field.html:226
 msgid "URL geçersiz"
-msgstr ""
+msgstr "URL invalide"
 
 #: .\dashboard\templates\dashboard\includes\meta\base_meta.html:7
 msgid "Dashboard Yönetim Paneli"
-msgstr ""
+msgstr "Panneau de gestion du tableau de bord"
 
 #: .\dashboard\templates\dashboard\includes\meta\base_meta.html:8
 msgid "dashboard, yönetim, panel"
-msgstr ""
+msgstr "tableau de bord, gestion, panneau"
 
 #: .\dashboard\templates\dashboard\includes\meta\base_meta.html:9
 #: .\templates\admin\dashboard.html:4
 msgid "Dashboard"
-msgstr ""
+msgstr "Tableau de bord"
 
 #: .\dashboard\templates\dashboard\includes\modals\bulk_actions_modal.html:9
 msgid "Toplu İşlemler"
-msgstr ""
+msgstr "Transactions par lots"
 
 #: .\dashboard\templates\dashboard\includes\modals\bulk_actions_modal.html:17
 msgid "öğe seçildi"
-msgstr ""
+msgstr "élément sélectionné"
 
 #: .\dashboard\templates\dashboard\includes\modals\bulk_actions_modal.html:22
 msgid "İşlem Seçin"
-msgstr ""
+msgstr "Sélectionner le processus"
 
 #: .\dashboard\templates\dashboard\includes\modals\bulk_actions_modal.html:24
 msgid "İşlem seçin..."
-msgstr ""
+msgstr "Sélectionner le processus..."
 
 #: .\dashboard\templates\dashboard\includes\modals\bulk_actions_modal.html:25
 msgid "Seçilenleri Aktif Yap"
-msgstr ""
+msgstr "Rendre la sélection active"
 
 #: .\dashboard\templates\dashboard\includes\modals\bulk_actions_modal.html:26
 msgid "Seçilenleri Pasif Yap"
-msgstr ""
+msgstr "Rendre la sélection passive"
 
 #: .\dashboard\templates\dashboard\includes\modals\bulk_actions_modal.html:27
 msgid "Seçilenleri Sil"
-msgstr ""
+msgstr "Supprimer la sélection"
 
 #: .\dashboard\templates\dashboard\includes\modals\bulk_actions_modal.html:28
 msgid "Seçilenleri Dışa Aktar"
-msgstr ""
+msgstr "Exportation sélectionnée"
 
 #: .\dashboard\templates\dashboard\includes\modals\bulk_actions_modal.html:36
 msgid "Bu işlem geri alınamaz! Seçili öğeler kalıcı olarak silinecek."
-msgstr ""
+msgstr "Cette opération ne peut être annulée ! Les éléments sélectionnés seront définitivement supprimés."
 
 #: .\dashboard\templates\dashboard\includes\modals\bulk_actions_modal.html:41
 msgid "Silme işlemini onaylıyorum"
-msgstr ""
+msgstr "Je confirme la suppression"
 
 #: .\dashboard\templates\dashboard\includes\modals\bulk_actions_modal.html:47
 msgid "Dışa Aktarma Formatı"
-msgstr ""
+msgstr "Format d'exportation"
 
 #: .\dashboard\templates\dashboard\includes\modals\bulk_actions_modal.html:60
 msgid "İşlemi Uygula"
-msgstr ""
+msgstr "Appliquer le processus"
 
 #: .\dashboard\templates\dashboard\includes\modals\delete_confirmation.html:9
 msgid "Silme Onayı"
-msgstr ""
+msgstr "Confirmation de la suppression"
 
 #: .\dashboard\templates\dashboard\includes\modals\delete_confirmation.html:16
 msgid "Bu işlemi onaylıyor musunuz?"
-msgstr ""
+msgstr "Autorisez-vous cette transaction ?"
 
 #: .\dashboard\templates\dashboard\includes\modals\delete_confirmation.html:18
 msgid "silinecek."
-msgstr ""
+msgstr "sera supprimée."
 
 #: .\dashboard\templates\dashboard\includes\modals\image_viewer_modal.html:76
 msgid "Görsel bulunamadı"
-msgstr ""
+msgstr "Image non trouvée"
 
 #: .\dashboard\templates\dashboard\includes\modals\image_viewer_modal.html:116
 msgid "Boyut"
-msgstr ""
+msgstr "Taille"
 
 #: .\dashboard\templates\dashboard\includes\modals\image_viewer_modal.html:120
 msgid "Boyutlar"
-msgstr ""
+msgstr "Dimensions"
 
 #: .\dashboard\templates\dashboard\includes\modals\image_viewer_modal.html:125
 msgid "Yüklenme"
-msgstr ""
+msgstr "Chargement"
 
 #: .\dashboard\templates\dashboard\includes\modals\image_viewer_modal.html:142
 msgid "İndir"
-msgstr ""
+msgstr "Télécharger"
 
 #: .\dashboard\templates\dashboard\includes\modals\translation_form_modal.html:9
 msgid "Çeviri Yönetimi"
-msgstr ""
+msgstr "Gestion de la traduction"
 
 #: .\dashboard\templates\dashboard\includes\modals\translation_form_modal.html:25
 #: .\dashboard\templates\dashboard\translation\settings.html:36
@@ -1955,177 +1955,177 @@ msgstr ""
 #: .\dashboard\templates\dashboard\translation\settings.html:209
 #: .\dashboard\templates\dashboard\translation\settings.html:224
 msgid "Ana Dil"
-msgstr ""
+msgstr "Langue maternelle"
 
 #: .\dashboard\templates\dashboard\includes\modals\translation_form_modal.html:66
 msgid "Bu dil için çeviri zorunludur. Tüm alanları doldurun."
-msgstr ""
+msgstr "La traduction est obligatoire pour cette langue. Remplir tous les champs."
 
 #: .\dashboard\templates\dashboard\includes\modals\translation_form_modal.html:91
 #: .\dashboard\templates\dashboard\team\list.html:254
 #: .\dashboard\templates\dashboard\team\list.html:369
 msgid "Genel Ayarlar"
-msgstr ""
+msgstr "Paramètres généraux"
 
 #: .\dashboard\templates\dashboard\includes\modals\translation_form_modal.html:118
 #: .\dashboard\templates\dashboard\translation\settings.html:179
 msgid "Çeviri Durumu"
-msgstr ""
+msgstr "État de la traduction"
 
 #: .\dashboard\templates\dashboard\includes\modals\translation_form_modal.html:131
 msgid "Kontrol Ediliyor"
-msgstr ""
+msgstr "Contrôlé"
 
 #: .\dashboard\templates\dashboard\includes\modals\translation_form_modal.html:137
 msgid "Zorunlu alanlar kontrol ediliyor..."
-msgstr ""
+msgstr "Les champs obligatoires sont vérifiés..."
 
 #: .\dashboard\templates\dashboard\includes\modals\translation_form_modal.html:145
 msgid "Genel Tamamlanma"
-msgstr ""
+msgstr "Achèvement global"
 
 #: .\dashboard\templates\dashboard\includes\navigation\filter_section.html:8
 #: .\dashboard\templates\dashboard\products\list.html:33
 msgid "Filtreler"
-msgstr ""
+msgstr "Filtreur"
 
 #: .\dashboard\templates\dashboard\includes\navigation\filter_section.html:12
 msgid "Filtrele"
-msgstr ""
+msgstr "Filtrer"
 
 #: .\dashboard\templates\dashboard\includes\navigation\filter_section.html:15
 msgid "Temizle"
-msgstr ""
+msgstr "Clair"
 
 #: .\dashboard\templates\dashboard\includes\navigation\quick_actions.html:7
 #: .\dashboard\templates\dashboard\index.html:163
 msgid "Hızlı Erişim"
-msgstr ""
+msgstr "Accès rapide"
 
 #: .\dashboard\templates\dashboard\includes\navigation\quick_actions.html:28
 msgid "Hızlı erişim bulunamadı"
-msgstr ""
+msgstr "Accès rapide non trouvé"
 
 #: .\dashboard\templates\dashboard\includes\navigation\sidebar.html:10
 msgid "Yönetim Paneli"
-msgstr ""
+msgstr "Groupe de gestion"
 
 #: .\dashboard\templates\dashboard\includes\navigation\sidebar.html:25
 msgid "Hizmetlerimiz "
-msgstr ""
+msgstr "Nos services"
 
 #: .\dashboard\templates\dashboard\includes\navigation\sidebar.html:41
 msgid "Carousel"
-msgstr ""
+msgstr "Carrousel"
 
 #: .\dashboard\templates\dashboard\includes\navigation\sidebar.html:53
 #: .\templates\catalog\catalog_view.html:461
 msgid "PDF Katalog"
-msgstr ""
+msgstr "Catalogue PDF"
 
 #: .\dashboard\templates\dashboard\includes\navigation\sidebar.html:61
 msgid "Basın'da Biz"
-msgstr ""
+msgstr "Nous dans la presse"
 
 #: .\dashboard\templates\dashboard\includes\navigation\sidebar.html:67
 msgid "ÇEVİRİ YÖNETİMİ"
-msgstr ""
+msgstr "GESTION DES TRADUCTIONS"
 
 #: .\dashboard\templates\dashboard\includes\navigation\sidebar.html:70
 msgid "Dil Ayarları"
-msgstr ""
+msgstr "Paramètres linguistiques"
 
 #: .\dashboard\templates\dashboard\includes\navigation\sidebar.html:77
 msgid "Çıkış"
-msgstr ""
+msgstr "Sortie"
 
 #: .\dashboard\templates\dashboard\includes\navigation\top_navbar.html:27
 #, python-format
 msgid "%(remaining)s GB kaldı"
-msgstr ""
+msgstr "%(restant)s GB restant"
 
 #: .\dashboard\templates\dashboard\includes\navigation\top_navbar.html:72
 #: .\dashboard\templates\dashboard\profile\profile.html:4
 msgid "Profil"
-msgstr ""
+msgstr "Profil"
 
 #: .\dashboard\templates\dashboard\includes\navigation\top_navbar.html:77
 msgid "Ayarlar"
-msgstr ""
+msgstr "Paramètres"
 
 #: .\dashboard\templates\dashboard\includes\navigation\top_navbar.html:83
 msgid "Çıkış Yap"
-msgstr ""
+msgstr "S'inscrire"
 
 #: .\dashboard\templates\dashboard\includes\partials\datetime_display.html:13
 msgid "önce"
-msgstr ""
+msgstr "avant"
 
 #: .\dashboard\templates\dashboard\includes\partials\language_name.html:4
 msgid "İngilizce"
-msgstr ""
+msgstr "Anglais"
 
 #: .\dashboard\templates\dashboard\includes\partials\language_name.html:5
 msgid "Almanca"
-msgstr ""
+msgstr "Allemand"
 
 #: .\dashboard\templates\dashboard\includes\partials\language_name.html:6
 msgid "Fransızca"
-msgstr ""
+msgstr "Français"
 
 #: .\dashboard\templates\dashboard\includes\partials\language_name.html:7
 msgid "İspanyolca"
-msgstr ""
+msgstr "Espagnol"
 
 #: .\dashboard\templates\dashboard\includes\partials\language_name.html:8
 msgid "Rusça"
-msgstr ""
+msgstr "Russie"
 
 #: .\dashboard\templates\dashboard\includes\partials\language_name.html:9
 msgid "Arapça"
-msgstr ""
+msgstr "L'arabe"
 
 #: .\dashboard\templates\dashboard\includes\partials\user_avatar.html:4
 #: .\dashboard\templates\dashboard\profile\profile.html:56
 msgid "Kullanıcı"
-msgstr ""
+msgstr "Utilisateur"
 
 #: .\dashboard\templates\dashboard\includes\scripts\external_js.html:13
 msgid "Bootstrap yüklenemedi!"
-msgstr ""
+msgstr "Le chargement de Bootstrap a échoué !"
 
 #: .\dashboard\templates\dashboard\includes\scripts\external_js.html:15
 msgid "Bootstrap başarıyla yüklendi"
-msgstr ""
+msgstr "Bootstrap installé avec succès"
 
 #: .\dashboard\templates\dashboard\includes\tables\modern_table.html:12
 msgid "öğe"
-msgstr ""
+msgstr "Objet"
 
 #: .\dashboard\templates\dashboard\includes\tables\modern_table.html:27
 msgid "Yeni Ekle"
-msgstr ""
+msgstr "Ajouter un nouveau"
 
 #: .\dashboard\templates\dashboard\includes\tables\modern_table.html:100
 msgid "Açıklama yok"
-msgstr ""
+msgstr "Pas d'explication"
 
 #: .\dashboard\templates\dashboard\includes\tables\modern_table.html:167
 msgid "Footer\\"
-msgstr ""
+msgstr "Pied de page"
 
 #: .\dashboard\templates\dashboard\includes\tables\modern_table.html:220
 msgid "Fiyat belirtilmemiş"
-msgstr ""
+msgstr "Prix non spécifié"
 
 #: .\dashboard\templates\dashboard\includes\tables\modern_table.html:227
 msgid "Stok belirtilmemiş"
-msgstr ""
+msgstr "Stock non spécifié"
 
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:9
 #: .\dashboard\templates\dashboard\products\list.html:237
 msgid "Ürün Adı"
-msgstr ""
+msgstr "Nom du produit"
 
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:10
 #: .\dashboard\templates\dashboard\products\list.html:298
@@ -2133,7 +2133,7 @@ msgstr ""
 #: .\dashboard\templates\dashboard\products\list.html:565
 #: .\templates\products\sections\product_detail.html:84
 msgid "Ürün Kodu"
-msgstr ""
+msgstr "Code produit"
 
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:11
 #: .\dashboard\templates\dashboard\products\list.html:240
@@ -2142,7 +2142,7 @@ msgstr ""
 #: .\templates\products\sections\hero.html:23
 #: .\templates\products\sections\product_detail.html:143
 msgid "Kategori"
-msgstr ""
+msgstr "Catégories"
 
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:12
 #: .\dashboard\templates\dashboard\products\list.html:304
@@ -2150,19 +2150,19 @@ msgstr ""
 #: .\templates\products\sections\product_detail.html:52
 #: .\templates\products\sections\product_detail.html:119
 msgid "Marka"
-msgstr ""
+msgstr "Marque"
 
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:13
 #: .\dashboard\templates\dashboard\products\list.html:285
 #: .\dashboard\templates\dashboard\products\list.html:536
 msgid "Fiyat"
-msgstr ""
+msgstr "Prix"
 
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:14
 #: .\dashboard\templates\dashboard\products\list.html:288
 #: .\dashboard\templates\dashboard\products\list.html:544
 msgid "Stok"
-msgstr ""
+msgstr "Canne"
 
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:16
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:57
@@ -2172,29 +2172,29 @@ msgstr ""
 #: .\dashboard\templates\dashboard\messages\list.html:218
 #: .\dashboard\templates\dashboard\reviews\list.html:164
 msgid "Tarih"
-msgstr ""
+msgstr "L'histoire"
 
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:21
 msgid "Kategori Adı"
-msgstr ""
+msgstr "Nom de la catégorie"
 
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:29
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:65
 #: .\templates\gallery\sections\stats.html:26
 #: .\templates\home\sections\gallery_preview.html:91
 msgid "Resim"
-msgstr ""
+msgstr "Image"
 
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:31
 msgid "Footer"
-msgstr ""
+msgstr "Pied de page"
 
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:46
 #: .\dashboard\templates\dashboard\team\list.html:260
 #: .\dashboard\templates\dashboard\team\list.html:375
 #: .\templates\contact\sections\review_form.html:131
 msgid "Fotoğraf"
-msgstr ""
+msgstr "Photo."
 
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:47
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:62
@@ -2203,169 +2203,169 @@ msgstr ""
 #: .\dashboard\templates\dashboard\team\list.html:433
 #: .\templates\contact\sections\contact_form.html:36
 msgid "Ad Soyad"
-msgstr ""
+msgstr "Nom Nom de famille"
 
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:48
 #: .\dashboard\templates\dashboard\team\list.html:211
 #: .\dashboard\templates\dashboard\team\list.html:233
 #: .\dashboard\templates\dashboard\team\list.html:437
 msgid "Pozisyon"
-msgstr ""
+msgstr "Position"
 
 #: .\dashboard\templates\dashboard\includes\tables\table_pagination.html:6
 #: .\templates\about\media_mentions_list.html:511
 #: .\templates\contact\sections\review_list.html:687
 #: .\templates\includes\breadcrumb.html:5
 msgid "Sayfa navigasyonu"
-msgstr ""
+msgstr "Navigation dans les pages"
 
 #: .\dashboard\templates\dashboard\includes\ui\alert_message.html:42
 #: .\dashboard\templates\dashboard\includes\ui\alert_message.html:280
 msgid "Detayları Göster"
-msgstr ""
+msgstr "Afficher les détails"
 
 #: .\dashboard\templates\dashboard\includes\ui\alert_message.html:281
 msgid "Gizle"
-msgstr ""
+msgstr "Cacher"
 
 #: .\dashboard\templates\dashboard\includes\ui\empty_state.html:6
 msgid "Henüz öğe bulunmuyor"
-msgstr ""
+msgstr "Aucun article n'est encore disponible"
 
 #: .\dashboard\templates\dashboard\includes\ui\empty_state.html:7
 msgid "İçerik eklendiğinde burada görünecektir."
-msgstr ""
+msgstr "Lorsque du contenu est ajouté, il apparaît ici."
 
 #: .\dashboard\templates\dashboard\index.html:20
 #: .\dashboard\templates\dashboard\index.html:100
 #: .\dashboard\templates\dashboard\products\list.html:16
 #: .\templates\admin\dashboard.html:13
 msgid "Toplam Ürün"
-msgstr ""
+msgstr "Produit total"
 
 #: .\dashboard\templates\dashboard\index.html:35
 #: .\dashboard\templates\dashboard\media_mentions\list.html:8
 msgid "Basın Haberleri"
-msgstr ""
+msgstr "Nouvelles de la presse"
 
 #: .\dashboard\templates\dashboard\index.html:43
 msgid "Aylık İstatistikler"
-msgstr ""
+msgstr "Statistiques mensuelles"
 
 #: .\dashboard\templates\dashboard\index.html:51
 msgid "Kategori Dağılımı"
-msgstr ""
+msgstr "Répartition par catégorie"
 
 #: .\dashboard\templates\dashboard\index.html:63
 #: .\dashboard\templates\dashboard\media_mentions\list.html:68
 #: .\dashboard\templates\dashboard\team\list.html:74
 msgid "Detayları Görüntüle"
-msgstr ""
+msgstr "Voir les détails"
 
 #: .\dashboard\templates\dashboard\index.html:82
 msgid "Kategori Analizi"
-msgstr ""
+msgstr "Analyse des catégories"
 
 #: .\dashboard\templates\dashboard\index.html:83
 msgid "Tüm kategorilerin detaylı ürün dağılımı"
-msgstr ""
+msgstr "Distribution détaillée des produits de toutes les catégories"
 
 #: .\dashboard\templates\dashboard\index.html:96
 msgid "Toplam Kategori"
-msgstr ""
+msgstr "Total de la catégorie"
 
 #: .\dashboard\templates\dashboard\index.html:125
 #: .\dashboard\templates\dashboard\products\list.html:639
 msgid "ürün"
-msgstr ""
+msgstr "Produit"
 
 #: .\dashboard\templates\dashboard\index.html:134
 msgid "İlk kategorinizi oluşturmak için ürün ekleme sayfasına gidin."
-msgstr ""
+msgstr "Pour créer votre première catégorie, rendez-vous sur la page d'ajout de produit."
 
 #: .\dashboard\templates\dashboard\index.html:145
 #: .\dashboard\templates\dashboard\profile\edit.html:16
 #: .\templates\errors\404.html:181
 msgid "Geri Dön"
-msgstr ""
+msgstr "Retour"
 
 #: .\dashboard\templates\dashboard\index.html:148
 msgid "Kategori Yönet"
-msgstr ""
+msgstr "Gérer la catégorie"
 
 #: .\dashboard\templates\dashboard\login.html:9
 msgid "Dashboard - Giriş"
-msgstr ""
+msgstr "Tableau de bord - Connexion"
 
 #: .\dashboard\templates\dashboard\login.html:25
 msgid "Hoş Geldiniz"
-msgstr ""
+msgstr "Bienvenue"
 
 #: .\dashboard\templates\dashboard\login.html:26
 msgid "Yönetim panelinize giriş yapın"
-msgstr ""
+msgstr "Connectez-vous à votre panneau d'administration"
 
 #: .\dashboard\templates\dashboard\login.html:42
 msgid "Güvenlik Kontrolü!"
-msgstr ""
+msgstr "Contrôle de sécurité !"
 
 #: .\dashboard\templates\dashboard\login.html:43
 #, python-format
 msgid "%(attempts)s/%(max)s başarısız deneme yapıldı. Güvenlik kodunu girin."
-msgstr ""
+msgstr "%(tentatives)s/%(max)s tentatives échouées. Entrez le code de sécurité."
 
 #: .\dashboard\templates\dashboard\login.html:109
 #: .\templates\contact\sections\review_form.html:219
 #: .\templates\errors\403.html:81
 msgid "Giriş Yap"
-msgstr ""
+msgstr "Se connecter"
 
 #: .\dashboard\templates\dashboard\login.html:116
 msgid "Güvenli bağlantı ile korunan giriş"
-msgstr ""
+msgstr "Login protégé avec connexion sécurisée"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:9
 msgid "Basın Haberleri Yönetimi"
-msgstr ""
+msgstr "Gestion de l'actualité de la presse"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:35
 #: .\dashboard\templates\dashboard\team\list.html:40
 msgid "Kart Görünümü"
-msgstr ""
+msgstr "Vue de la carte"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:38
 #: .\dashboard\templates\dashboard\team\list.html:43
 msgid "Liste Görünümü"
-msgstr ""
+msgstr "Vue de la liste"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:43
 msgid "Haber ara..."
-msgstr ""
+msgstr "Rechercher des actualités..."
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:45
 msgid "Yeni Haber Ekle"
-msgstr ""
+msgstr "Ajouter une nouvelle"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:75
 #: .\dashboard\templates\dashboard\media_mentions\list.html:159
 msgid "Kaynağa Git"
-msgstr ""
+msgstr "Aller à la source"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:117
 msgid "Henüz basın haberi eklenmemiş"
-msgstr ""
+msgstr "Aucun communiqué de presse n'a encore été ajouté"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:117
 msgid "İlk basın haberinizi ekleyerek başlayın"
-msgstr ""
+msgstr "Commencez par ajouter votre premier communiqué de presse"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:117
 msgid "İlk Haberi Ekle"
-msgstr ""
+msgstr "Ajouter une première nouvelle"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:172
 msgid "Çeviriler"
-msgstr ""
+msgstr "Traductions"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:221
 #, python-format
@@ -2376,176 +2376,176 @@ msgstr[1] ""
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:242
 msgid "Yeni Basın Haberi Ekle"
-msgstr ""
+msgstr "Ajouter un nouveau communiqué de presse"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:259
 #: .\dashboard\templates\dashboard\media_mentions\list.html:390
 msgid "Haber Bilgileri"
-msgstr ""
+msgstr "Informations sur les actualités"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:267
 msgid "Haber Başlığı"
-msgstr ""
+msgstr "Titre de l'actualité"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:267
 msgid "Haberin ana başlığı"
-msgstr ""
+msgstr "Titre principal de la nouvelle"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:271
 #: .\dashboard\templates\dashboard\media_mentions\list.html:534
 msgid "Kaynak"
-msgstr ""
+msgstr "Source"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:271
 msgid "Haberin yayınlandığı kaynak"
-msgstr ""
+msgstr "Source de publication de la nouvelle"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:275
 #: .\dashboard\templates\dashboard\media_mentions\list.html:407
 #: .\dashboard\templates\dashboard\media_mentions\list.html:538
 msgid "Yayın Tarihi"
-msgstr ""
+msgstr "Date de publication"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:279
 msgid "Haberin kısa özeti"
-msgstr ""
+msgstr "Résumé de l'actualité"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:313
 #: .\dashboard\templates\dashboard\media_mentions\list.html:451
 msgid "Medya ve Ayarlar"
-msgstr ""
+msgstr "Médias et paramètres"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:321
 msgid "Haber URL'si"
-msgstr ""
+msgstr "URL de l'actualité"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:321
 msgid "Haberin orijinal linkini girin (https:// ile başlamalı)"
-msgstr ""
+msgstr "Saisissez le lien original vers l'article de presse (doit commencer par https://)"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:325
 msgid "Düşük sayı önce görünür"
-msgstr ""
+msgstr "Le chiffre le plus bas apparaît en premier"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:334
 msgid "Haber Görseli"
-msgstr ""
+msgstr "Image d'actualité"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:337
 msgid "Haber görseli için SEO alt metni (max 125 karakter)"
-msgstr ""
+msgstr "Texte alt SEO pour l'image d'actualité (max 125 caractères)"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:372
 msgid "Haber Düzenle"
-msgstr ""
+msgstr "Edit News"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:458
 msgid "Haber URL"
-msgstr ""
+msgstr "URL de l'actualité"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:465
 msgid "https://example.com/haber-linki"
-msgstr ""
+msgstr "https://example.com/lien-vers-article"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:510
 msgid "Haber Detayı"
-msgstr ""
+msgstr "Détail de l'actualité"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:551
 #: .\dashboard\templates\dashboard\products\list.html:245
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:564
 #: .\dashboard\templates\dashboard\team\list.html:457
 msgid "Oluşturma Tarihi"
-msgstr ""
+msgstr "Date de création"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:588
 msgid "Haber Sil"
-msgstr ""
+msgstr "Supprimer l'actualité"
 
 #: .\dashboard\templates\dashboard\media_mentions\list.html:595
 msgid "Bu haberi silmek istediğinizden emin misiniz?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer cette nouvelle ?"
 
 #: .\dashboard\templates\dashboard\messages\list.html:6
 #: .\dashboard\templates\dashboard\messages\list.html:10
 msgid "Mesaj Yönetimi"
-msgstr ""
+msgstr "Gestion des messages"
 
 #: .\dashboard\templates\dashboard\messages\list.html:10
 msgid "İletişim mesajları ve müşteri yorumlarını yönetin"
-msgstr ""
+msgstr "Gérer les messages de contact et les commentaires des clients"
 
 #: .\dashboard\templates\dashboard\messages\list.html:15
 #: .\dashboard\templates\dashboard\messages\list.html:33
 msgid "İletişim Mesajları"
-msgstr ""
+msgstr "Messages de contact"
 
 #: .\dashboard\templates\dashboard\messages\list.html:21
 msgid "Bekleyen Onaylar"
-msgstr ""
+msgstr "Approbations en cours"
 
 #: .\dashboard\templates\dashboard\messages\list.html:24
 #: .\templates\contact\sections\review_list.html:628
 #: .\templates\home\sections\reviews.html:102
 msgid "Ortalama Puan"
-msgstr ""
+msgstr "Note moyenne"
 
 #: .\dashboard\templates\dashboard\messages\list.html:66
 msgid "Okunmadı"
-msgstr ""
+msgstr "Pas de lecture"
 
 #: .\dashboard\templates\dashboard\messages\list.html:82
 msgid "Henüz mesaj bulunmuyor"
-msgstr ""
+msgstr "Aucun message pour l'instant"
 
 #: .\dashboard\templates\dashboard\messages\list.html:101
 msgid "Mesaj Detayı"
-msgstr ""
+msgstr "Détail du message"
 
 #: .\dashboard\templates\dashboard\messages\list.html:147
 #: .\dashboard\templates\dashboard\notifications\list.html:54
 msgid "Okundu İşaretle"
-msgstr ""
+msgstr "Mark Read"
 
 #: .\dashboard\templates\dashboard\messages\list.html:152
 msgid "Yanıtla"
-msgstr ""
+msgstr "Répondre à"
 
 #: .\dashboard\templates\dashboard\messages\list.html:160
 msgid "mesaj"
-msgstr ""
+msgstr "Message"
 
 #: .\dashboard\templates\dashboard\messages\list.html:171
 #: .\dashboard\templates\dashboard\reviews\list.html:152
 msgid "Yorum Detayı"
-msgstr ""
+msgstr "Détail du commentaire"
 
 #: .\dashboard\templates\dashboard\messages\list.html:185
 #: .\templates\errors\404.html:219 .\templates\products\sections\hero.html:19
 msgid "Ürün"
-msgstr ""
+msgstr "Produit"
 
 #: .\dashboard\templates\dashboard\messages\list.html:191
 #: .\templates\contact\sections\review_form.html:10
 #: .\templates\home\sections\reviews.html:113
 msgid "Değerlendirme"
-msgstr ""
+msgstr "L'évaluation"
 
 #: .\dashboard\templates\dashboard\messages\list.html:230
 #: .\dashboard\templates\dashboard\reviews\list.html:214
 msgid "Onayla"
-msgstr ""
+msgstr "Confirmer"
 
 #: .\dashboard\templates\dashboard\messages\list.html:249
 msgid "Toplu İşlem Onayı"
-msgstr ""
+msgstr "Approbation des transactions par lots"
 
 #: .\dashboard\templates\dashboard\messages\list.html:257
 msgid "Tüm mesajları okundu olarak işaretlemek istediğinizden emin misiniz?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir marquer tous les messages comme lus ?"
 
 #: .\dashboard\templates\dashboard\messages\list.html:259
 #, python-format
@@ -2556,161 +2556,161 @@ msgstr[1] ""
 
 #: .\dashboard\templates\dashboard\messages\list.html:273
 msgid "Tümünü Okundu Yap"
-msgstr ""
+msgstr "Faire lire tout le monde"
 
 #: .\dashboard\templates\dashboard\notifications\list.html:21
 msgid "Tüm Tipler"
-msgstr ""
+msgstr "Tous les types"
 
 #: .\dashboard\templates\dashboard\notifications\list.html:29
 #: .\dashboard\templates\dashboard\products\list.html:87
 #: .\dashboard\templates\dashboard\reviews\list.html:38
 msgid "Tüm Durumlar"
-msgstr ""
+msgstr "Tous les cas"
 
 #: .\dashboard\templates\dashboard\notifications\list.html:36
 msgid "Tümünü Okundu İşaretle"
-msgstr ""
+msgstr "Marquer tout Lire"
 
 #: .\dashboard\templates\dashboard\notifications\list.html:75
 #, python-format
 msgid "%(current)s / %(total)s"
-msgstr ""
+msgstr "%(courant)s / %(total)s"
 
 #: .\dashboard\templates\dashboard\products\list.html:11
 msgid "Ürünlerinizi kolayca yönetin ve takip edin"
-msgstr ""
+msgstr "Gérez et suivez facilement vos produits"
 
 #: .\dashboard\templates\dashboard\products\list.html:17
 msgid "Aktif Ürünler"
-msgstr ""
+msgstr "Produits actifs"
 
 #: .\dashboard\templates\dashboard\products\list.html:18
 msgid "Düşük Stok"
-msgstr ""
+msgstr "Inventaire réduit"
 
 #: .\dashboard\templates\dashboard\products\list.html:19
 msgid "Toplam Değer"
-msgstr ""
+msgstr "Valeur totale"
 
 #: .\dashboard\templates\dashboard\products\list.html:29
 msgid "Ürün Listesi"
-msgstr ""
+msgstr "Liste des produits"
 
 #: .\dashboard\templates\dashboard\products\list.html:53
 msgid "Ürün adı, kodu veya marka ara..."
-msgstr ""
+msgstr "Recherche par nom de produit, code ou marque..."
 
 #: .\dashboard\templates\dashboard\products\list.html:61
 msgid "Tüm Kategoriler"
-msgstr ""
+msgstr "Toutes les catégories"
 
 #: .\dashboard\templates\dashboard\products\list.html:74
 msgid "Tüm Markalar"
-msgstr ""
+msgstr "Toutes les marques"
 
 #: .\dashboard\templates\dashboard\products\list.html:165
 #: .\dashboard\templates\dashboard\products\list.html:167
 #: .\dashboard\templates\dashboard\products\list.html:546
 #, python-format
 msgid "%(stock)s adet"
-msgstr ""
+msgstr "%(stock)s unités"
 
 #: .\dashboard\templates\dashboard\products\list.html:169
 #: .\templates\products\sections\product_detail.html:106
 #: .\templates\products\sections\products_grid.html:54
 msgid "Stokta Yok"
-msgstr ""
+msgstr "En rupture de stock"
 
 #: .\dashboard\templates\dashboard\products\list.html:201
 #: .\templates\admin\dashboard.html:44
 msgid "Henüz ürün eklenmemiş"
-msgstr ""
+msgstr "Aucun produit n'a encore été ajouté"
 
 #: .\dashboard\templates\dashboard\products\list.html:201
 msgid "İlk ürününüzü ekleyerek başlayın"
-msgstr ""
+msgstr "Commencez par ajouter votre premier produit"
 
 #: .\dashboard\templates\dashboard\products\list.html:201
 msgid "İlk Ürünü Ekle"
-msgstr ""
+msgstr "Ajouter le premier produit"
 
 #: .\dashboard\templates\dashboard\products\list.html:237
 msgid "Ürünün Türkçe adı"
-msgstr ""
+msgstr "Nom turc du produit"
 
 #: .\dashboard\templates\dashboard\products\list.html:245
 msgid "Otomatik oluşturulur veya özel girebilirsiniz"
-msgstr ""
+msgstr "Générée automatiquement ou vous pouvez saisir une valeur personnalisée."
 
 #: .\dashboard\templates\dashboard\products\list.html:250
 msgid "Ürünün Türkçe açıklaması"
-msgstr ""
+msgstr "Description du produit en turc"
 
 #: .\dashboard\templates\dashboard\products\list.html:279
 #: .\dashboard\templates\dashboard\products\list.html:426
 #: .\dashboard\templates\dashboard\products\list.html:510
 msgid "Ürün Detayları"
-msgstr ""
+msgstr "Détails du produit"
 
 #: .\dashboard\templates\dashboard\products\list.html:285
 #: .\dashboard\templates\dashboard\products\list.html:288
 #: .\dashboard\templates\dashboard\products\list.html:304
 #: .\dashboard\templates\dashboard\products\list.html:307
 msgid "İsteğe bağlı"
-msgstr ""
+msgstr "En option"
 
 #: .\dashboard\templates\dashboard\products\list.html:295
 #: .\dashboard\templates\dashboard\products\list.html:554
 msgid "İndirimli Fiyat"
-msgstr ""
+msgstr "Prix réduit"
 
 #: .\dashboard\templates\dashboard\products\list.html:295
 msgid "İndirim varsa bu alanı doldurun"
-msgstr ""
+msgstr "Remplissez ce champ si vous bénéficiez d'une réduction"
 
 #: .\dashboard\templates\dashboard\products\list.html:298
 msgid "Otomatik oluşturulur"
-msgstr ""
+msgstr "Auto-généré"
 
 #: .\dashboard\templates\dashboard\products\list.html:307
 msgid "Ağırlık (kg)"
-msgstr ""
+msgstr "Poids (kg)"
 
 #: .\dashboard\templates\dashboard\products\list.html:315
 #: .\dashboard\templates\dashboard\products\list.html:461
 msgid "Ürün Görseli"
-msgstr ""
+msgstr "Image du produit"
 
 #: .\dashboard\templates\dashboard\products\list.html:320
 msgid "Ürün görseli için SEO alt metni (max 125 karakter)"
-msgstr ""
+msgstr "Texte alt SEO pour l'image du produit (max 125 caractères)"
 
 #: .\dashboard\templates\dashboard\products\list.html:326
 #: .\dashboard\templates\dashboard\products\list.html:329
 msgid "SEO için"
-msgstr ""
+msgstr "Pour le référencement"
 
 #: .\dashboard\templates\dashboard\products\list.html:335
 msgid "Öne Çıkan Ürün"
-msgstr ""
+msgstr "Produit vedette"
 
 #: .\dashboard\templates\dashboard\products\list.html:338
 #: .\dashboard\templates\dashboard\products\list.html:584
 msgid "Satışta"
-msgstr ""
+msgstr "En vente"
 
 #: .\dashboard\templates\dashboard\products\list.html:350
 msgid "Ürünü Kaydet"
-msgstr ""
+msgstr "Sauvegarder le produit"
 
 #: .\dashboard\templates\dashboard\products\list.html:446
 msgid "Değiştirebilirsiniz"
-msgstr ""
+msgstr "Vous pouvez le modifier"
 
 #: .\dashboard\templates\dashboard\products\list.html:461
 msgid "Yeni bir görsel seçmezseniz mevcut görsel korunur"
-msgstr ""
+msgstr "Si vous ne sélectionnez pas de nouvelle image, l'image existante est conservée"
 
 #: .\dashboard\templates\dashboard\products\list.html:540
 #: .\dashboard\templates\dashboard\products\list.html:548
@@ -2728,56 +2728,56 @@ msgstr ""
 #: .\dashboard\templates\dashboard\settings\settings.html:172
 #: .\dashboard\templates\dashboard\settings\settings.html:176
 msgid "Belirtilmemiş"
-msgstr ""
+msgstr "Non spécifié"
 
 #: .\dashboard\templates\dashboard\products\list.html:557
 #, python-format
 msgid "%%%(percentage)s indirim"
-msgstr ""
+msgstr "%%%(pourcentage)s indirim"
 
 #: .\dashboard\templates\dashboard\products\list.html:578
 #: .\templates\products\sections\product_detail.html:131
 msgid "Ağırlık"
-msgstr ""
+msgstr "Poids"
 
 #: .\dashboard\templates\dashboard\products\list.html:616
 msgid "Ürün Sil"
-msgstr ""
+msgstr "Supprimer un produit"
 
 #: .\dashboard\templates\dashboard\products\list.html:623
 msgid "Bu ürünü silmek istediğinizden emin misiniz?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer ce produit ?"
 
 #: .\dashboard\templates\dashboard\profile\edit.html:4
 #: .\dashboard\templates\dashboard\profile\edit.html:11
 msgid "Profil Düzenle"
-msgstr ""
+msgstr "Modifier le profil"
 
 #: .\dashboard\templates\dashboard\profile\edit.html:12
 msgid "Hesap bilgilerinizi güncelleyin"
-msgstr ""
+msgstr "Mettre à jour les détails de votre compte"
 
 #: .\dashboard\templates\dashboard\profile\edit.html:26
 msgid "Profil Bilgilerini Düzenle"
-msgstr ""
+msgstr "Modifier les informations du profil"
 
 #: .\dashboard\templates\dashboard\profile\edit.html:63
 msgid "Bu alan kullanıcı adınızı belirler ve benzersiz olmalıdır."
-msgstr ""
+msgstr "Ce champ définit votre nom d'utilisateur et doit être unique."
 
 #: .\dashboard\templates\dashboard\profile\edit.html:94
 msgid "Bilgi"
-msgstr ""
+msgstr "Informations"
 
 #: .\dashboard\templates\dashboard\profile\edit.html:100
 msgid "Dikkat:"
-msgstr ""
+msgstr "Dikkat :"
 
 #: .\dashboard\templates\dashboard\profile\edit.html:100
 msgid ""
 "Kullanıcı adınızı değiştirirseniz, bir sonraki girişinizde yeni kullanıcı "
 "adınızı kullanmanız gerekecektir."
-msgstr ""
+msgstr " Si vous modifiez votre nom d'utilisateur, vous devrez utiliser votre nouveau nom d'utilisateur lors de votre prochaine connexion. "
 
 #: .\dashboard\templates\dashboard\profile\edit.html:105
 #: .\dashboard\templates\dashboard\profile\password_change.html:4
@@ -2785,360 +2785,360 @@ msgstr ""
 #: .\dashboard\templates\dashboard\profile\password_change.html:26
 #: .\dashboard\templates\dashboard\profile\profile.html:97
 msgid "Şifre Değiştir"
-msgstr ""
+msgstr "Modifier le mot de passe"
 
 #: .\dashboard\templates\dashboard\profile\password_change.html:12
 msgid "Hesap güvenliğiniz için şifrenizi güncelleyin"
-msgstr ""
+msgstr "Mettez à jour votre mot de passe pour la sécurité de votre compte"
 
 #: .\dashboard\templates\dashboard\profile\password_change.html:16
 msgid "Profil'e Dön"
-msgstr ""
+msgstr "Retour au profil"
 
 #: .\dashboard\templates\dashboard\profile\password_change.html:65
 msgid "Şifreyi Değiştir"
-msgstr ""
+msgstr "Modifier le mot de passe"
 
 #: .\dashboard\templates\dashboard\profile\password_change.html:81
 msgid "Güvenlik İpuçları"
-msgstr ""
+msgstr "Conseils de sécurité"
 
 #: .\dashboard\templates\dashboard\profile\password_change.html:86
 msgid "Güçlü şifre için:"
-msgstr ""
+msgstr "Pour un mot de passe fort :"
 
 #: .\dashboard\templates\dashboard\profile\password_change.html:88
 msgid "En az 8 karakter kullanın"
-msgstr ""
+msgstr "Utiliser au moins 8 caractères"
 
 #: .\dashboard\templates\dashboard\profile\password_change.html:89
 msgid "Büyük ve küçük harf karışımı"
-msgstr ""
+msgstr "Mélange de majuscules et de minuscules"
 
 #: .\dashboard\templates\dashboard\profile\password_change.html:90
 msgid "Sayı ve özel karakter ekleyin"
-msgstr ""
+msgstr "Ajouter des chiffres et des caractères spéciaux"
 
 #: .\dashboard\templates\dashboard\profile\password_change.html:91
 msgid "Kişisel bilgiler kullanmayın"
-msgstr ""
+msgstr "Ne pas utiliser d'informations personnelles"
 
 #: .\dashboard\templates\dashboard\profile\password_change.html:97
 msgid "Önemli:"
-msgstr ""
+msgstr "Important :"
 
 #: .\dashboard\templates\dashboard\profile\password_change.html:97
 msgid "Şifrenizi değiştirdikten sonra tüm oturumlarınız sonlanacaktır."
-msgstr ""
+msgstr "Après avoir modifié votre mot de passe, toutes vos sessions seront interrompues."
 
 #: .\dashboard\templates\dashboard\profile\profile.html:11
 msgid "Kullanıcı Profili"
-msgstr ""
+msgstr "Profil de l'utilisateur"
 
 #: .\dashboard\templates\dashboard\profile\profile.html:12
 msgid "Hesap bilgilerinizi görüntüleyin ve düzenleyin"
-msgstr ""
+msgstr "Consulter et modifier les informations relatives à votre compte"
 
 #: .\dashboard\templates\dashboard\profile\profile.html:16
 #: .\dashboard\templates\dashboard\profile\profile.html:94
 msgid "Profili Düzenle"
-msgstr ""
+msgstr "Modifier le profil"
 
 #: .\dashboard\templates\dashboard\profile\profile.html:27
 msgid "Profil Bilgileri"
-msgstr ""
+msgstr "Informations sur le profil"
 
 #: .\dashboard\templates\dashboard\profile\profile.html:33
 msgid "Kullanıcı Adı"
-msgstr ""
+msgstr "Nom de l'utilisateur"
 
 #: .\dashboard\templates\dashboard\profile\profile.html:41
 msgid "Ad"
-msgstr ""
+msgstr "Annonce"
 
 #: .\dashboard\templates\dashboard\profile\profile.html:45
 msgid "Soyad"
-msgstr ""
+msgstr "Nom de famille"
 
 #: .\dashboard\templates\dashboard\profile\profile.html:49
 msgid "Hesap Türü"
-msgstr ""
+msgstr "Type de compte"
 
 #: .\dashboard\templates\dashboard\profile\profile.html:52
 msgid "Süper Kullanıcı"
-msgstr ""
+msgstr "Super utilisateur"
 
 #: .\dashboard\templates\dashboard\profile\profile.html:54
 msgid "Personel"
-msgstr ""
+msgstr "Personnel"
 
 #: .\dashboard\templates\dashboard\profile\profile.html:61
 #: .\templates\errors\lockout.html:79
 msgid "Hesap Durumu"
-msgstr ""
+msgstr "Statut du compte"
 
 #: .\dashboard\templates\dashboard\profile\profile.html:71
 msgid "Kayıt Tarihi"
-msgstr ""
+msgstr "Date d'inscription"
 
 #: .\dashboard\templates\dashboard\profile\profile.html:75
 msgid "Son Giriş"
-msgstr ""
+msgstr "Dernière entrée"
 
 #: .\dashboard\templates\dashboard\profile\profile.html:88
 #: .\dashboard\templates\dashboard\translation\settings.html:175
 msgid "Hızlı İşlemler"
-msgstr ""
+msgstr "Transactions rapides"
 
 #: .\dashboard\templates\dashboard\profile\profile.html:100
 #: .\dashboard\templates\dashboard\settings\settings.html:4
 msgid "Sistem Ayarları"
-msgstr ""
+msgstr "Paramètres du système"
 
 #: .\dashboard\templates\dashboard\profile\profile.html:110
 msgid "Güvenlik"
-msgstr ""
+msgstr "Sécurité"
 
 #: .\dashboard\templates\dashboard\profile\profile.html:117
 msgid ""
 "Hesabınızın güvenliği için şifrenizi düzenli olarak değiştirmenizi öneririz."
-msgstr ""
+msgstr " Pour la sécurité de votre compte, nous vous recommandons de changer régulièrement votre mot de passe. "
 
 #: .\dashboard\templates\dashboard\reviews\list.html:6
 msgid "Yorum Yönetimi"
-msgstr ""
+msgstr "Gestion des commentaires"
 
 #: .\dashboard\templates\dashboard\reviews\list.html:33
 msgid "Yorum Listesi"
-msgstr ""
+msgstr "Liste des commentaires"
 
 #: .\dashboard\templates\dashboard\reviews\list.html:40
 msgid "Onay Bekleyen"
-msgstr ""
+msgstr "En attente d'approbation"
 
 #: .\dashboard\templates\dashboard\reviews\list.html:43
 #: .\dashboard\templates\dashboard\reviews\list.html:256
 msgid "Tümünü Onayla"
-msgstr ""
+msgstr "Confirmer tout"
 
 #: .\dashboard\templates\dashboard\reviews\list.html:68
 #: .\templates\contact\sections\review_list.html:609
 #: .\templates\home\sections\reviews.html:13
 msgid "Müşteri"
-msgstr ""
+msgstr "Client"
 
 #: .\dashboard\templates\dashboard\reviews\list.html:119
 #: .\templates\about\sections\service_detail.html:64
 msgid "Detay"
-msgstr ""
+msgstr "Détail"
 
 #: .\dashboard\templates\dashboard\reviews\list.html:214
 msgid "Onayı Kaldır"
-msgstr ""
+msgstr "Supprimer l'approbation"
 
 #: .\dashboard\templates\dashboard\reviews\list.html:234
 msgid "Toplu Onaylama"
-msgstr ""
+msgstr "Approbation des lots"
 
 #: .\dashboard\templates\dashboard\reviews\list.html:242
 msgid "Tüm bekleyen yorumları onaylamak istediğinizden emin misiniz?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir approuver tous les commentaires en attente ?"
 
 #: .\dashboard\templates\dashboard\reviews\list.html:244
 #, python-format
 msgid "%(counter)s adet onay bekleyen yorum bulunuyor."
-msgstr ""
+msgstr "Il y a des commentaires %(counter)s en attente d'approbation."
 
 #: .\dashboard\templates\dashboard\services\list.html:10
 #: .\templates\about\sections\services_preview.html:8
 #: .\templates\base\sections\footer.html:105
 #: .\templates\home\sections\services_grid.html:13
 msgid "Hizmetlerimiz"
-msgstr ""
+msgstr "Nos services"
 
 #: .\dashboard\templates\dashboard\services\list.html:11
 msgid "Hizmet Yönetimi"
-msgstr ""
+msgstr "Gestion des services"
 
 #: .\dashboard\templates\dashboard\services\list.html:38
 msgid "Hizmet Listesi"
-msgstr ""
+msgstr "Liste des services"
 
 #: .\dashboard\templates\dashboard\services\list.html:43
 #: .\dashboard\templates\dashboard\services\list.html:148
 msgid "Yeni Hizmet Ekle"
-msgstr ""
+msgstr "Ajouter un nouveau service"
 
 #: .\dashboard\templates\dashboard\services\list.html:200
 #: .\dashboard\templates\dashboard\services\list.html:301
 msgid "Hizmet Ayarları"
-msgstr ""
+msgstr "Paramètres de service"
 
 #: .\dashboard\templates\dashboard\services\list.html:232
 msgid "Hizmeti Kaydet"
-msgstr ""
+msgstr "Service d'enregistrement"
 
 #: .\dashboard\templates\dashboard\services\list.html:248
 msgid "Hizmet Düzenle"
-msgstr ""
+msgstr "Organiser le service"
 
 #: .\dashboard\templates\dashboard\services\list.html:347
 msgid "Hizmet Detayları"
-msgstr ""
+msgstr "Détails du service"
 
 #: .\dashboard\templates\dashboard\services\list.html:409
 msgid "Hizmet Sil"
-msgstr ""
+msgstr "Supprimer le service"
 
 #: .\dashboard\templates\dashboard\services\list.html:416
 msgid "Bu hizmeti silmek istediğinizden emin misiniz?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer ce service ?"
 
 #: .\dashboard\templates\dashboard\settings\business.html:5
 #: .\dashboard\templates\dashboard\settings\business.html:12
 msgid "İşletme Ayarları"
-msgstr ""
+msgstr "Paramètres de fonctionnement"
 
 #: .\dashboard\templates\dashboard\settings\business.html:13
 msgid "İşletme bilgilerinizi ve ayarlarınızı güncelleyin"
-msgstr ""
+msgstr "Mettre à jour les informations et les paramètres de votre entreprise"
 
 #: .\dashboard\templates\dashboard\settings\business.html:17
 msgid "Ayarlara Dön"
-msgstr ""
+msgstr "Retour aux paramètres"
 
 #: .\dashboard\templates\dashboard\settings\business.html:37
 #: .\dashboard\templates\dashboard\settings\settings.html:51
 msgid "Site Adı"
-msgstr ""
+msgstr "Nom du site"
 
 #: .\dashboard\templates\dashboard\settings\business.html:45
 #: .\dashboard\templates\dashboard\settings\settings.html:55
 msgid "Site Sloganı"
-msgstr ""
+msgstr "Slogan du site"
 
 #: .\dashboard\templates\dashboard\settings\business.html:66
 msgid "Google Maps Embed URL"
-msgstr ""
+msgstr "URL d'intégration de Google Maps"
 
 #: .\dashboard\templates\dashboard\settings\business.html:68
 msgid "Google Maps'ten alınan iframe URL'si"
-msgstr ""
+msgstr "URL de l'Iframe de Google Maps"
 
 #: .\dashboard\templates\dashboard\settings\business.html:77
 #: .\dashboard\templates\dashboard\settings\settings.html:162
 msgid "SEO Ayarları"
-msgstr ""
+msgstr "Paramètres SEO"
 
 #: .\dashboard\templates\dashboard\settings\business.html:82
 #: .\dashboard\templates\dashboard\settings\settings.html:167
 msgid "SEO Başlık"
-msgstr ""
+msgstr "Titre SEO"
 
 #: .\dashboard\templates\dashboard\settings\business.html:84
 msgid "Sitenizin ana başlığı (max 60 karakter)"
-msgstr ""
+msgstr "Le titre principal de votre site (60 caractères maximum)"
 
 #: .\dashboard\templates\dashboard\settings\business.html:88
 #: .\dashboard\templates\dashboard\settings\settings.html:171
 msgid "SEO Açıklama"
-msgstr ""
+msgstr "Description de la SEO"
 
 #: .\dashboard\templates\dashboard\settings\business.html:90
 msgid "Site açıklaması (max 160 karakter)"
-msgstr ""
+msgstr "Description du site (160 caractères maximum)"
 
 #: .\dashboard\templates\dashboard\settings\business.html:94
 #: .\dashboard\templates\dashboard\settings\settings.html:175
 msgid "Anahtar Kelimeler"
-msgstr ""
+msgstr "Mots clés"
 
 #: .\dashboard\templates\dashboard\settings\business.html:96
 msgid "Virgül ile ayrılmış anahtar kelimeler"
-msgstr ""
+msgstr "Mots clés séparés par des virgules"
 
 #: .\dashboard\templates\dashboard\settings\business.html:105
 msgid "Sosyal Medya Hesapları"
-msgstr ""
+msgstr "Comptes de médias sociaux"
 
 #: .\dashboard\templates\dashboard\settings\business.html:112
 msgid "Facebook URL"
-msgstr ""
+msgstr "URL Facebook"
 
 #: .\dashboard\templates\dashboard\settings\business.html:119
 msgid "Instagram URL"
-msgstr ""
+msgstr "URL Instagram"
 
 #: .\dashboard\templates\dashboard\settings\business.html:128
 msgid "Twitter URL"
-msgstr ""
+msgstr "URL de Twitter"
 
 #: .\dashboard\templates\dashboard\settings\business.html:135
 msgid "WhatsApp Numarası"
-msgstr ""
+msgstr "Numéro WhatsApp"
 
 #: .\dashboard\templates\dashboard\settings\business.html:138
 msgid "Örn: +90xxxxxxxxx"
-msgstr ""
+msgstr "Örn : +90xxxxxxxxx"
 
 #: .\dashboard\templates\dashboard\settings\business.html:160
 msgid "Mevcut Logo"
-msgstr ""
+msgstr "Logo existant"
 
 #: .\dashboard\templates\dashboard\settings\business.html:167
 msgid "Logo yüklenmemiş"
-msgstr ""
+msgstr "Logo non téléchargé"
 
 #: .\dashboard\templates\dashboard\settings\business.html:177
 msgid "Önerilen boyut: 300x100px"
-msgstr ""
+msgstr "Taille recommandée : 300x100px"
 
 #: .\dashboard\templates\dashboard\settings\business.html:195
 msgid "Önerilen boyut: 32x32px"
-msgstr ""
+msgstr "Taille recommandée : 32x32px"
 
 #: .\dashboard\templates\dashboard\settings\business.html:205
 #: .\dashboard\templates\dashboard\translation\settings.html:153
 #: .\templates\components\cookie-banner.html:146
 msgid "Ayarları Kaydet"
-msgstr ""
+msgstr "Sauvegarder les paramètres"
 
 #: .\dashboard\templates\dashboard\settings\business.html:214
 msgid "Değişiklikler site genelinde etkili olacaktır."
-msgstr ""
+msgstr "Les modifications prendront effet sur l'ensemble du site."
 
 #: .\dashboard\templates\dashboard\settings\settings.html:12
 msgid "Site geneli ayarları yönetin"
-msgstr ""
+msgstr "Gérer les paramètres du site"
 
 #: .\dashboard\templates\dashboard\settings\settings.html:21
 #: .\dashboard\templates\dashboard\settings\settings.html:44
 msgid "Genel Bilgiler"
-msgstr ""
+msgstr "Informations générales"
 
 #: .\dashboard\templates\dashboard\settings\settings.html:27
 #: .\dashboard\templates\dashboard\settings\settings.html:116
 #: .\templates\contact\sections\contact_info.html:88
 msgid "Sosyal Medya"
-msgstr ""
+msgstr "Médias sociaux"
 
 #: .\dashboard\templates\dashboard\settings\settings.html:30
 msgid "SEO"
-msgstr ""
+msgstr "RÉFÉRENCEMENT"
 
 #: .\dashboard\templates\dashboard\settings\settings.html:67
 msgid "Yüklenmemiş"
-msgstr ""
+msgstr "Non chargé"
 
 #: .\dashboard\templates\dashboard\settings\settings.html:84
 #: .\templates\base\sections\footer.html:156
 #: .\templates\contact\sections\contact_info.html:14
 msgid "İletişim Bilgileri"
-msgstr ""
+msgstr "Coordonnées"
 
 #: .\dashboard\templates\dashboard\settings\settings.html:101
 msgid "Google Maps URL"
-msgstr ""
+msgstr "URL Google Maps"
 
 #: .\dashboard\templates\dashboard\settings\settings.html:144
 #: .\templates\base\sections\navbar.html:202
@@ -3146,335 +3146,335 @@ msgstr ""
 #: .\templates\contact\sections\contact_info.html:109
 #: .\templates\home\sections\cta_section.html:56
 msgid "WhatsApp"
-msgstr ""
+msgstr "WhatsApp"
 
 #: .\dashboard\templates\dashboard\team\list.html:8
 #: .\dashboard\templates\dashboard\team\list.html:12
 msgid "Ekip Yönetimi"
-msgstr ""
+msgstr "Gestion d'équipe"
 
 #: .\dashboard\templates\dashboard\team\list.html:13
 msgid "Ekip üyelerinizi düzenleyin ve yönetin"
-msgstr ""
+msgstr "Organiser et gérer les membres de votre équipe"
 
 #: .\dashboard\templates\dashboard\team\list.html:19
 msgid "Toplam Üye"
-msgstr ""
+msgstr "Total des membres"
 
 #: .\dashboard\templates\dashboard\team\list.html:23
 msgid "Aktif Üyeler"
-msgstr ""
+msgstr "Membres actifs"
 
 #: .\dashboard\templates\dashboard\team\list.html:27
 msgid "Pozisyon Sayısı"
-msgstr ""
+msgstr "Nombre de postes"
 
 #: .\dashboard\templates\dashboard\team\list.html:31
 msgid "Ortalama Sıralama"
-msgstr ""
+msgstr "Classement moyen"
 
 #: .\dashboard\templates\dashboard\team\list.html:48
 msgid "Ekip üyesi ara..."
-msgstr ""
+msgstr "Recherche d'un membre de l'équipe..."
 
 #: .\dashboard\templates\dashboard\team\list.html:51
 msgid "Yeni Ekip Üyesi"
-msgstr ""
+msgstr "Nouveau membre de l'équipe"
 
 #: .\dashboard\templates\dashboard\team\list.html:102
 msgid "Henüz ekip üyesi bulunmuyor"
-msgstr ""
+msgstr "Aucun membre de l'équipe pour l'instant"
 
 #: .\dashboard\templates\dashboard\team\list.html:103
 msgid ""
 "İlk ekip üyenizi eklemek için yukarıdaki 'Yeni Ekip Üyesi' butonunu kullanın."
-msgstr ""
+msgstr " Pour ajouter votre premier membre d'équipe, utilisez le bouton  Nouveau membre d'équipe  ci-dessus. "
 
 #: .\dashboard\templates\dashboard\team\list.html:104
 msgid "İlk Üyeyi Ekle"
-msgstr ""
+msgstr "Ajouter un premier membre"
 
 #: .\dashboard\templates\dashboard\team\list.html:181
 msgid "Yeni Ekip Üyesi Ekle"
-msgstr ""
+msgstr "Ajouter un nouveau membre de l'équipe"
 
 #: .\dashboard\templates\dashboard\team\list.html:200
 msgid "Ekip üyesinin adını girin"
-msgstr ""
+msgstr "Saisir le nom du membre de l'équipe"
 
 #: .\dashboard\templates\dashboard\team\list.html:205
 msgid "Küçük sayılar önce görünür"
-msgstr ""
+msgstr "Les petits nombres apparaissent en premier"
 
 #: .\dashboard\templates\dashboard\team\list.html:212
 msgid "Ör: Genel Müdür, Yazılım Geliştirici..."
-msgstr ""
+msgstr "Ex : Directeur général, développeur de logiciels..."
 
 #: .\dashboard\templates\dashboard\team\list.html:218
 #: .\dashboard\templates\dashboard\team\list.html:240
 #: .\dashboard\templates\dashboard\team\list.html:450
 msgid "Biyografi"
-msgstr ""
+msgstr "Biographie"
 
 #: .\dashboard\templates\dashboard\team\list.html:219
 msgid "Ekip üyesinin deneyimi, uzmanlık alanları vb."
-msgstr ""
+msgstr "Expérience des membres de l'équipe, domaines d'expertise, etc."
 
 #: .\dashboard\templates\dashboard\team\list.html:234
 #: .\dashboard\templates\dashboard\team\list.html:241
 msgid "Bu alan zorunludur"
-msgstr ""
+msgstr "Ce champ est obligatoire"
 
 #: .\dashboard\templates\dashboard\team\list.html:261
 msgid "Önerilen boyut: 400x400 piksel, JPG/PNG formatında"
-msgstr ""
+msgstr "Taille recommandée : 400x400 pixels, format JPG/PNG"
 
 #: .\dashboard\templates\dashboard\team\list.html:268
 msgid "Fotoğraf için SEO alt metni (max 125 karakter)"
-msgstr ""
+msgstr "Texte alt SEO pour la photo (max. 125 caractères)"
 
 #: .\dashboard\templates\dashboard\team\list.html:275
 msgid "Aktif Durumda"
-msgstr ""
+msgstr "Statut actif"
 
 #: .\dashboard\templates\dashboard\team\list.html:276
 msgid "Pasif üyeler web sitesinde görüntülenmez"
-msgstr ""
+msgstr "Les membres inactifs ne sont pas affichés sur le site web"
 
 #: .\dashboard\templates\dashboard\team\list.html:289
 msgid "Üyeyi Kaydet"
-msgstr ""
+msgstr "S'inscrire comme membre"
 
 #: .\dashboard\templates\dashboard\team\list.html:305
 msgid "Ekip Üyesi Düzenle"
-msgstr ""
+msgstr "Membre de l'équipe de rédaction"
 
 #: .\dashboard\templates\dashboard\team\list.html:376
 msgid "Yeni fotoğraf seçmezseniz mevcut fotoğraf korunur"
-msgstr ""
+msgstr "Si vous ne sélectionnez pas de nouvelle photo, la photo actuelle est conservée"
 
 #: .\dashboard\templates\dashboard\team\list.html:414
 msgid "Ekip Üyesi Detayı"
-msgstr ""
+msgstr "Détails sur les membres de l'équipe"
 
 #: .\dashboard\templates\dashboard\team\list.html:481
 msgid "Ekip Üyesi Sil"
-msgstr ""
+msgstr "Supprimer un membre de l'équipe"
 
 #: .\dashboard\templates\dashboard\team\list.html:488
 msgid "Bu ekip üyesini silmek istediğinizden emin misiniz?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer ce membre de l'équipe ?"
 
 #: .\dashboard\templates\dashboard\team\list.html:504
 msgid "ekip üyesi"
-msgstr ""
+msgstr "membre de l'équipe"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:4
 #: .\dashboard\templates\dashboard\translation\settings.html:5
 #: .\dashboard\templates\dashboard\translation\settings.html:8
 msgid "Çeviri Ayarları"
-msgstr ""
+msgstr "Paramètres de traduction"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:9
 msgid "Sistem dil ayarlarını yönetin"
-msgstr ""
+msgstr "Gérer les paramètres linguistiques du système"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:16
 msgid "Çeviri Sistemi Ayarları"
-msgstr ""
+msgstr "Paramètres du système de traduction"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:20
 msgid "Çeviri ayarları formu"
-msgstr ""
+msgstr "Formulaire de paramétrage de la traduction"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:25
 msgid "Mevcut Durum"
-msgstr ""
+msgstr "Statut actuel"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:26
 msgid "Dashboard ayarlarınızın şu anki durumu"
-msgstr ""
+msgstr "Statut actuel des paramètres de votre tableau de bord"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:32
 #: .\dashboard\templates\dashboard\translation\settings.html:126
 #: .\dashboard\templates\dashboard\translation\settings.html:206
 #: .\dashboard\templates\dashboard\translation\settings.html:221
 msgid "Dashboard Dili"
-msgstr ""
+msgstr "Tableau de bord Dili"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:40
 #: .\dashboard\templates\dashboard\translation\settings.html:78
 #: .\dashboard\templates\dashboard\translation\settings.html:212
 #: .\dashboard\templates\dashboard\translation\settings.html:227
 msgid "Aktif Diller"
-msgstr ""
+msgstr "Langues actives"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:50
 #: .\dashboard\templates\dashboard\translation\settings.html:58
 msgid "Dashboard Arayüz Dili"
-msgstr ""
+msgstr "Langue de l'interface du tableau de bord"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:54
 msgid "Sadece dashboard arayüzünün dilini değiştirir. Site dili etkilenmez."
-msgstr ""
+msgstr "Il ne modifie que la langue de l'interface du tableau de bord. La langue du site n'est pas affectée."
 
 #: .\dashboard\templates\dashboard\translation\settings.html:72
 msgid "Site İçerik Dilleri"
-msgstr ""
+msgstr "Langues du contenu du site"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:76
 msgid "Site ziyaretçileri için hangi dillerde içerik sunacağınızı belirleyin."
-msgstr ""
+msgstr "Déterminez les langues dans lesquelles vous proposerez du contenu aux visiteurs du site."
 
 #: .\dashboard\templates\dashboard\translation\settings.html:83
 msgid "Ana dil değişince site varsayılan dili de değişir"
-msgstr ""
+msgstr "Lorsque la langue principale change, la langue par défaut du site change également."
 
 #: .\dashboard\templates\dashboard\translation\settings.html:84
 msgid "Seçili"
-msgstr ""
+msgstr "Sélectionné"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:94
 msgid "Ek Çeviri Dilleri"
-msgstr ""
+msgstr "Langues de traduction supplémentaires"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:96
 msgid "Ana dilinize ek olarak hangi dillerde içerik sunmak istiyorsanız seçin."
-msgstr ""
+msgstr "Sélectionnez les langues dans lesquelles vous souhaitez proposer du contenu en plus de votre langue maternelle."
 
 #: .\dashboard\templates\dashboard\translation\settings.html:110
 msgid "URL'si"
-msgstr ""
+msgstr "URL"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:122
 msgid "Aktif Dil Sayısı"
-msgstr ""
+msgstr "Nombre de langues actives"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:134
 msgid "Mevcut Dil Sayısı"
-msgstr ""
+msgstr "Nombre de langues disponibles"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:142
 msgid "Çeviri İpuçları"
-msgstr ""
+msgstr "Conseils de traduction"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:151
 #: .\dashboard\templates\dashboard\translation\settings.html:275
 #: .\templates\catalog\catalog_view.html:630 .\templates\errors\400.html:65
 #: .\templates\errors\500.html:168
 msgid "Sayfayı Yenile"
-msgstr ""
+msgstr "Rafraîchir la page"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:152
 msgid "Değişiklikleri Önizle"
-msgstr ""
+msgstr "Changements dans l'aperçu"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:180
 msgid "Sistem dil ayarları aktif ve çalışıyor"
-msgstr ""
+msgstr "Les paramètres linguistiques du système sont actifs et fonctionnent"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:190
 msgid "Ayar Değişiklikleri Önizlemesi"
-msgstr ""
+msgstr "Aperçu des changements de paramètres"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:196
 msgid "Bu modal mevcut ve yeni çeviri ayarlarınızı karşılaştırır"
-msgstr ""
+msgstr "Cette fenêtre modale compare vos paramètres de traduction actuels et vos nouveaux paramètres de traduction."
 
 #: .\dashboard\templates\dashboard\translation\settings.html:202
 msgid "Mevcut Ayarlar"
-msgstr ""
+msgstr "Réglages actuels"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:216
 msgid "Yeni Ayarlar"
-msgstr ""
+msgstr "Nouveaux paramètres"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:236
 msgid "Değişiklikleri Uygula"
-msgstr ""
+msgstr "Appliquer les changements"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:253
 msgid "Ayarlar Kaydedildi"
-msgstr ""
+msgstr "Paramètres sauvegardés"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:263
 msgid "Çeviri ayarları başarıyla güncellendi!"
-msgstr ""
+msgstr "Les paramètres de traduction ont été mis à jour avec succès !"
 
 #: .\dashboard\templates\dashboard\translation\settings.html:265
 msgid "Değişiklikler hemen etkili olacaktır."
-msgstr ""
+msgstr "Les modifications prendront effet immédiatement."
 
 #: .\dashboard\templates\dashboard\translation\settings.html:267
 msgid "Çeviri ayarları başarıyla kaydedildi"
-msgstr ""
+msgstr "Les paramètres de traduction ont été sauvegardés avec succès"
 
 #: .\reviews\views.py:20
 msgid "Yorumunuz başarıyla alındı. İncelendikten sonra yayınlanacaktır."
-msgstr ""
+msgstr "Votre commentaire a bien été reçu. Il sera publié après examen."
 
 #: .\reviews\views.py:29
 msgid "Yorum Ekle"
-msgstr ""
+msgstr "Ajouter un commentaire"
 
 #: .\templates\about\media_mentions_list.html:450
 #: .\templates\about\sections\media_mentions.html:8
 #: .\templates\home\sections\media_mentions.html:11
 msgid "Basında Biz"
-msgstr ""
+msgstr "Nous dans la presse"
 
 #: .\templates\about\media_mentions_list.html:453
 msgid "Basın"
-msgstr ""
+msgstr "Presse"
 
 #: .\templates\about\media_mentions_list.html:453
 msgid "Haberleri"
-msgstr ""
+msgstr "Actualités"
 
 #: .\templates\about\media_mentions_list.html:456
 msgid "Medyada yer alan haberlerimiz ve basın görünümlerimiz"
-msgstr ""
+msgstr "Notre actualité et nos apparitions dans les médias"
 
 #: .\templates\about\media_mentions_list.html:485
 #: .\templates\home\sections\media_mentions.html:54
 msgid "Haber"
-msgstr ""
+msgstr "Actualités"
 
 #: .\templates\about\media_mentions_list.html:500
 #: .\templates\about\sections\media_mentions.html:26
 #: .\templates\home\sections\media_mentions.html:74
 msgid "Haberi Oku"
-msgstr ""
+msgstr "Lire les nouvelles"
 
 #: .\templates\about\media_mentions_list.html:515
 #: .\templates\catalog\catalog_view.html:502
 #: .\templates\contact\sections\review_list.html:691
 msgid "İlk sayfa"
-msgstr ""
+msgstr "Première page"
 
 #: .\templates\about\media_mentions_list.html:520
 #: .\templates\contact\sections\review_list.html:696
 msgid "Önceki sayfa"
-msgstr ""
+msgstr "Page précédente"
 
 #: .\templates\about\media_mentions_list.html:540
 #: .\templates\contact\sections\review_list.html:716
 msgid "Sonraki sayfa"
-msgstr ""
+msgstr "Page suivante"
 
 #: .\templates\about\media_mentions_list.html:545
 #: .\templates\catalog\catalog_view.html:503
 #: .\templates\contact\sections\review_list.html:721
 msgid "Son sayfa"
-msgstr ""
+msgstr "Dernière page"
 
 #: .\templates\about\media_mentions_list.html:560
 msgid "Henüz basın haberi yok"
-msgstr ""
+msgstr "Aucun rapport de presse pour l'instant"
 
 #: .\templates\about\media_mentions_list.html:561
 msgid "Yakında medyada yer alan haberlerimizi burada bulabilirsiniz."
-msgstr ""
+msgstr "Vous trouverez bientôt notre couverture médiatique ici."
 
 #: .\templates\about\sections\hero.html:16
 #: .\templates\about\sections\statistics.html:13
@@ -3483,149 +3483,149 @@ msgstr ""
 #: .\templates\home\sections\carousel.html:78
 #: .\templates\home\sections\statistics.html:38
 msgid "Yıl Deneyim"
-msgstr ""
+msgstr "Année d'expérience"
 
 #: .\templates\about\sections\media_mentions.html:9
 msgid "Medyada yer alan haberlerimiz"
-msgstr ""
+msgstr "Notre actualité dans les médias"
 
 #: .\templates\about\sections\media_mentions.html:34
 msgid "Henüz medya haberi eklenmemiş."
-msgstr ""
+msgstr "Aucun média n'a encore été ajouté."
 
 #: .\templates\about\sections\media_mentions.html:43
 msgid "Tüm Haberleri Gör"
-msgstr ""
+msgstr "Voir toutes les actualités"
 
 #: .\templates\about\sections\service_detail.html:40
 msgid "Hakkımızda Sayfasına Dön"
-msgstr ""
+msgstr "Retour à la page \"À propos de nous"
 
 #: .\templates\about\sections\service_detail.html:50
 msgid "Diğer Hizmetlerimiz"
-msgstr ""
+msgstr "Autres services"
 
 #: .\templates\about\sections\services_preview.html:9
 msgid "Profesyonel çözümlerimizle size hizmet veriyoruz"
-msgstr ""
+msgstr "Nous vous servons avec nos solutions professionnelles"
 
 #: .\templates\about\sections\services_preview.html:29
 #: .\templates\products\sections\featured_products.html:28
 #: .\templates\products\sections\products_grid.html:60
 msgid "Detayları Gör"
-msgstr ""
+msgstr "Voir les détails"
 
 #: .\templates\about\sections\services_preview.html:37
 msgid "Henüz hizmet eklenmemiş."
-msgstr ""
+msgstr "Aucun service n'a encore été ajouté."
 
 #: .\templates\about\sections\services_preview.html:44
 #: .\templates\home\sections\services_grid.html:233
 msgid "Tüm Hizmetlerimizi Görün"
-msgstr ""
+msgstr "Voir tous nos services"
 
 #: .\templates\about\sections\statistics.html:21
 #: .\templates\home\sections\about_preview.html:128
 #: .\templates\home\sections\statistics.html:72
 msgid "Tamamlanan İş"
-msgstr ""
+msgstr "Travaux terminés"
 
 #: .\templates\about\sections\statistics.html:37
 msgid "Memnuniyet"
-msgstr ""
+msgstr "Satisfaction"
 
 #: .\templates\about\sections\team_preview.html:9
 msgid "Uzman kadromuzla size en iyi hizmeti sunuyoruz"
-msgstr ""
+msgstr "Nous vous offrons le meilleur service grâce à notre personnel spécialisé"
 
 #: .\templates\about\sections\team_preview.html:36
 msgid "Henüz ekip üyesi eklenmemiş."
-msgstr ""
+msgstr "Aucun membre de l'équipe n'a encore été ajouté."
 
 #: .\templates\about\sections\team_preview.html:43
 msgid "Tüm Ekibi Görün"
-msgstr ""
+msgstr "Voir toute l'équipe"
 
 #: .\templates\admin\base_site.html:5 .\templates\admin\login.html:5
 msgid "Django site admin"
-msgstr ""
+msgstr "Administrateur de site Django"
 
 #: .\templates\admin\base_site.html:69
 msgid "Django administration"
-msgstr ""
+msgstr "Administration de Django"
 
 #: .\templates\admin\base_site.html:79
 msgid "Ana Dil:"
-msgstr ""
+msgstr "Langue maternelle"
 
 #: .\templates\admin\base_site.html:91 .\templates\admin\base_site.html:142
 msgid "Mevcut:"
-msgstr ""
+msgstr "Disponible :"
 
 #: .\templates\admin\base_site.html:96
 msgid "Dashboard'a Geç"
-msgstr ""
+msgstr "Passer au tableau de bord"
 
 #: .\templates\admin\base_site.html:123
 msgid "Ana dil değiştirilemedi:"
-msgstr ""
+msgstr "La langue maternelle ne peut être changée :"
 
 #: .\templates\admin\base_site.html:126
 msgid "Dil değiştirme hatası:"
-msgstr ""
+msgstr "Erreur de changement de langue :"
 
 #: .\templates\admin\base_site.html:127
 msgid "Ana dil değiştirilirken hata oluştu"
-msgstr ""
+msgstr "Erreur de changement de la langue principale"
 
 #: .\templates\admin\base_site.html:146
 msgid "Dil bilgisi alınamadı:"
-msgstr ""
+msgstr "Aucune information linguistique n'a pu être obtenue :"
 
 #: .\templates\admin\dashboard.html:9
 msgid "Genel İstatistikler"
-msgstr ""
+msgstr "Statistiques générales"
 
 #: .\templates\admin\dashboard.html:17
 msgid "Okunmamış Mesaj"
-msgstr ""
+msgstr "Message non lu"
 
 #: .\templates\admin\dashboard.html:21
 msgid "Toplam Sipariş"
-msgstr ""
+msgstr "Commande totale"
 
 #: .\templates\admin\dashboard.html:25
 msgid "Aktif Kullanıcı"
-msgstr ""
+msgstr "Utilisateur actif"
 
 #: .\templates\admin\dashboard.html:31
 msgid "Son Eklenen Ürünler"
-msgstr ""
+msgstr "Derniers produits ajoutés"
 
 #: .\templates\admin\dashboard.html:50
 msgid "Okunmamış Mesajlar"
-msgstr ""
+msgstr "Messages non lus"
 
 #: .\templates\admin\dashboard.html:63
 msgid "Yeni mesaj bulunmuyor"
-msgstr ""
+msgstr "Aucun nouveau message trouvé"
 
 #: .\templates\admin\dashboard.html:69
 msgid "Kategori İstatistikleri"
-msgstr ""
+msgstr "Statistiques par catégorie"
 
 #: .\templates\admin\dashboard.html:82
 msgid "Kategori bulunmuyor"
-msgstr ""
+msgstr "Catégorie non trouvée"
 
 #: .\templates\admin\dashboard.html:88
 msgid "Son Siparişler"
-msgstr ""
+msgstr "Dernières commandes"
 
 #: .\templates\admin\dashboard.html:93
 #, python-format
 msgid "Sipariş #%(order.id)s"
-msgstr ""
+msgstr "Ordre #%(ordre.id)s"
 
 #: .\templates\admin\dashboard.html:94
 #, python-format
@@ -3634,635 +3634,645 @@ msgid ""
 "                        Sipariş #%(order_id)s - %(customer_name)s\n"
 "                        "
 msgstr ""
+"\n"
+"                        Commande n°%(order_id)s - %(customer_name)s\n"
+"                        "
+
 
 #: .\templates\admin\dashboard.html:105
 msgid "Henüz sipariş bulunmuyor"
-msgstr ""
+msgstr "Pas encore de commandes"
 
 #: .\templates\admin\dashboard.html:111
 msgid "Sistem Durumu"
-msgstr ""
+msgstr "État du système"
 
 #: .\templates\admin\dashboard.html:115
 msgid "Disk Kullanımı"
-msgstr ""
+msgstr "Utilisation du disque"
 
 #: .\templates\admin\dashboard.html:119
 msgid "Bellek Kullanımı"
-msgstr ""
+msgstr "Utilisation de la mémoire"
 
 #: .\templates\admin\login.html:5
 msgid "Log in"
-msgstr ""
+msgstr "Se connecter"
 
 #: .\templates\admin\login.html:156
 msgid "Lütfen aşağıdaki hatayı düzeltin."
-msgstr ""
+msgstr "Veuillez corriger l'erreur suivante."
 
 #: .\templates\admin\login.html:156
 msgid "Lütfen aşağıdaki hataları düzeltin."
-msgstr ""
+msgstr "Veuillez corriger les erreurs suivantes."
 
 #: .\templates\admin\login.html:189
 #: .\templates\contact\sections\contact_form.html:163
 #: .\templates\contact\sections\review_form.html:178
 msgid "Yeni kod üret"
-msgstr ""
+msgstr "Générer un nouveau code"
 
 #: .\templates\admin\login.html:198
 msgid "Oturum aç"
-msgstr ""
+msgstr "S'inscrire"
 
 #: .\templates\admin\login.html:204
 msgid "Şifrenizi mi unuttunuz?"
-msgstr ""
+msgstr "Vous avez oublié votre mot de passe ?"
 
 #: .\templates\admin\widgets\image_crop_widget.html:17
 msgid "Resmi istediğiniz boyutta kırpın"
-msgstr ""
+msgstr "Recadrer l'image à la taille souhaitée"
 
 #: .\templates\admin\widgets\image_crop_widget.html:22
 msgid "Orijinal"
-msgstr ""
+msgstr "Original"
 
 #: .\templates\admin\widgets\image_crop_widget.html:27
 msgid "Kırpılacak Alan"
-msgstr ""
+msgstr "Superficie à cultiver"
 
 #: .\templates\base\includes\back_to_top.html:8
 #: .\templates\base\includes\back_to_top.html:9
 msgid "Sayfanın başına dön"
-msgstr ""
+msgstr "Retour au début de la page"
 
 #: .\templates\base\includes\breadcrumb.html:6
 msgid "Sayfa konumu"
-msgstr ""
+msgstr "Position de la page"
 
 #: .\templates\base\includes\breadcrumb.html:12
 msgid "Önceki sayfaya dön"
-msgstr ""
+msgstr "Retour à la page précédente"
 
 #: .\templates\base\includes\breadcrumb.html:13
 msgid "Geri"
-msgstr ""
+msgstr "Retour"
 
 #: .\templates\base\includes\breadcrumb.html:29
 msgid "Git"
-msgstr ""
+msgstr "Aller"
 
 #: .\templates\base\includes\breadcrumb.html:55
 msgid "Sayfayı paylaş"
-msgstr ""
+msgstr "Partager cette page"
 
 #: .\templates\base\includes\breadcrumb.html:56
 #: .\templates\catalog\catalog_view.html:483
 #: .\templates\products\sections\product_detail.html:156
 msgid "Paylaş"
-msgstr ""
+msgstr "Partager"
 
 #: .\templates\base\includes\breadcrumb.html:63
 msgid "Sayfayı yazdır"
-msgstr ""
+msgstr "Imprimer la page"
 
 #: .\templates\base\includes\breadcrumb.html:64
 msgid "Yazdır"
-msgstr ""
+msgstr "Imprimer"
 
 #: .\templates\base\includes\breadcrumb.html:73
 msgid "Mobil navigasyon"
-msgstr ""
+msgstr "Navigation mobile"
 
 #: .\templates\base\includes\breadcrumb.html:125
 msgid "Link panoya kopyalandı!"
-msgstr ""
+msgstr "Lien copié dans le presse-papiers !"
 
 #: .\templates\base\includes\breadcrumb.html:145
 msgid "Link kopyalandı!"
-msgstr ""
+msgstr "Lien copié !"
 
 #: .\templates\base\includes\messages.html:6
 msgid "Sistem mesajları"
-msgstr ""
+msgstr "Messages du système"
 
 #: .\templates\base\includes\messages.html:34
 msgid "Sorun devam ederse lütfen"
-msgstr ""
+msgstr "Si le problème persiste, veuillez"
 
 #: .\templates\base\includes\messages.html:34
 msgid "iletişime geçin"
-msgstr ""
+msgstr "prendre contact"
 
 #: .\templates\base\includes\messages.html:43
 msgid "Mesajı kapat"
-msgstr ""
+msgstr "Fermer le message"
 
 #: .\templates\base\main.html:141
 msgid "Ana içeriğe geç"
-msgstr ""
+msgstr "Skip to main content"
 
 #: .\templates\base\sections\footer.html:56
 msgid "Hızlı Menü"
-msgstr ""
+msgstr "Menu rapide"
 
 #: .\templates\base\sections\footer.html:57
 msgid "Footer navigasyon"
-msgstr ""
+msgstr "Navigation en pied de page"
 
 #: .\templates\base\sections\footer.html:106
 msgid "Hizmetler navigasyon"
-msgstr ""
+msgstr "Services de navigation"
 
 #: .\templates\base\sections\footer.html:120
 #: .\templates\home\sections\services_grid.html:77
 msgid "Anahtar Kopyalama"
-msgstr ""
+msgstr "Copie de la clé"
 
 #: .\templates\base\sections\footer.html:126
 #: .\templates\home\sections\services_grid.html:103
 msgid "Araç Anahtarı"
-msgstr ""
+msgstr "Clé du véhicule"
 
 #: .\templates\base\sections\footer.html:132
 #: .\templates\home\sections\services_grid.html:129
 msgid "Kasa Açma"
-msgstr ""
+msgstr "Ouverture du coffre-fort"
 
 #: .\templates\base\sections\footer.html:138
 #: .\templates\home\sections\services_grid.html:155
 msgid "Güvenlik Sistemleri"
-msgstr ""
+msgstr "Systèmes de sécurité"
 
 #: .\templates\base\sections\footer.html:144
 #: .\templates\home\sections\services_grid.html:181
 msgid "Acil Çilingir"
-msgstr ""
+msgstr "Serrurier d'urgence"
 
 #: .\templates\base\sections\footer.html:201
 #: .\templates\contact\sections\contact_info.html:74
 msgid "Çalışma Saatleri"
-msgstr ""
+msgstr "Heures de travail"
 
 #: .\templates\base\sections\footer.html:203
 msgid "Pazartesi - Cumartesi"
-msgstr ""
+msgstr "Du lundi au samedi"
 
 #: .\templates\base\sections\footer.html:213
 msgid "Bizi Takip Edin"
-msgstr ""
+msgstr "Suivez-nous"
 
 #: .\templates\base\sections\footer.html:216
 msgid "Facebook sayfamız"
-msgstr ""
+msgstr "Notre page Facebook"
 
 #: .\templates\base\sections\footer.html:221
 msgid "Instagram sayfamız"
-msgstr ""
+msgstr "Notre page Instagram"
 
 #: .\templates\base\sections\footer.html:226
 msgid "Twitter sayfamız"
-msgstr ""
+msgstr "Notre page Twitter"
 
 #: .\templates\base\sections\footer.html:231
 msgid "YouTube kanalımız"
-msgstr ""
+msgstr "Notre chaîne YouTube"
 
 #: .\templates\base\sections\footer.html:236
 msgid "WhatsApp ile iletişim"
-msgstr ""
+msgstr "Communication avec WhatsApp"
 
 #: .\templates\base\sections\footer.html:257
 msgid "Tüm hakları saklıdır."
-msgstr ""
+msgstr "Tous droits réservés."
 
 #: .\templates\base\sections\footer.html:263
 msgid "Alt menü"
-msgstr ""
+msgstr "Menu Alt"
 
 #: .\templates\base\sections\footer.html:273
 #: .\templates\base\sections\newsletter.html:81
 msgid "Gizlilik Politikası"
-msgstr ""
+msgstr "Politique de confidentialité"
 
 #: .\templates\base\sections\footer.html:285
 msgid "Kullanım Şartları"
-msgstr ""
+msgstr "Conditions d'utilisation"
 
 #: .\templates\base\sections\footer.html:298
 msgid "Çerez Politikası"
-msgstr ""
+msgstr "Politique en matière de cookies"
 
 #: .\templates\base\sections\navbar.html:6
 msgid "Ana navigasyon"
-msgstr ""
+msgstr "Navigation principale"
 
 #: .\templates\base\sections\navbar.html:35
 msgid "Menüyü aç/kapat"
-msgstr ""
+msgstr "Ouvrir/fermer le menu"
 
 #: .\templates\base\sections\navbar.html:200
 msgid "WhatsApp ile iletişime geç"
-msgstr ""
+msgstr "Contact WhatsApp"
 
 #: .\templates\base\sections\newsletter.html:22
 msgid "Haberlerden Haberdar Olun"
-msgstr ""
+msgstr "Restez informé des nouvelles"
 
 #: .\templates\base\sections\newsletter.html:25
 msgid ""
 "Yeni hizmetlerimiz, özel tekliflerimiz ve sektördeki gelişmelerden ilk siz "
 "haberdar olun."
-msgstr ""
+msgstr " Soyez les premiers informés de nos nouveaux services, de nos offres spéciales et des dernières actualités du secteur. "
 
 #: .\templates\base\sections\newsletter.html:39
 #: .\templates\base\sections\newsletter.html:45
 msgid "E-posta adresiniz"
-msgstr ""
+msgstr "Votre adresse électronique"
 
 #: .\templates\base\sections\newsletter.html:59
 msgid "Abone Ol"
-msgstr ""
+msgstr "S'abonner"
 
 #: .\templates\base\sections\newsletter.html:63
 msgid "Gönderiliyor..."
-msgstr ""
+msgstr "Envoi..."
 
 #: .\templates\base\sections\newsletter.html:80
 msgid "E-posta adresiniz güvenlidir. Spam göndermiyoruz."
-msgstr ""
+msgstr "Votre adresse électronique est sécurisée. Nous n'envoyons pas de spam."
 
 #: .\templates\base\sections\newsletter.html:92
 msgid "Özel Teklifler"
-msgstr ""
+msgstr "Offres spéciales"
 
 #: .\templates\base\sections\newsletter.html:98
 msgid "Yeni Hizmetler"
-msgstr ""
+msgstr "Nouveaux services"
 
 #: .\templates\base\sections\newsletter.html:104
 msgid "Etkinlikler"
-msgstr ""
+msgstr "Evénements"
 
 #: .\templates\catalog\catalog_view.html:8
 #, python-format
 msgid ""
 "%(site_name)s - %(catalog_title)s. Ürünlerimizi katalogumuzdan "
 "inceleyebilirsiniz."
-msgstr ""
+msgstr "%(site_name)s - %(catalog_title)s. Vous pouvez consulter nos produits dans notre catalogue."
 
 #: .\templates\catalog\catalog_view.html:11
 #, python-format
 msgid ""
 "%(site_name)s ürün kataloğu. Tüm ürünlerimizi detaylı olarak "
 "inceleyebilirsiniz."
-msgstr ""
+msgstr "Catalogue de produits (site_name). Vous pouvez consulter tous nos produits en détail."
 
 #: .\templates\catalog\catalog_view.html:436
 msgid "Ürünlerimizi detaylı olarak inceleyebilirsiniz"
-msgstr ""
+msgstr "Vous pouvez examiner nos produits en détail"
 
 #: .\templates\catalog\catalog_view.html:448
 msgid "PDF Katalog Yükleniyor..."
-msgstr ""
+msgstr "Catalogue PDF Chargement..."
 
 #: .\templates\catalog\catalog_view.html:449
 msgid "Lütfen bekleyiniz..."
-msgstr ""
+msgstr "Veuillez patienter..."
 
 #: .\templates\catalog\catalog_view.html:466
 msgid "Sayfa Sayfa Görüntüleme"
-msgstr ""
+msgstr "Affichage page par page"
 
 #: .\templates\catalog\catalog_view.html:473
 msgid "Yeni Sekmede Aç"
-msgstr ""
+msgstr "Ouvrir dans un nouvel onglet"
 
 #: .\templates\catalog\catalog_view.html:478
 msgid "Kataloğu İndir"
-msgstr ""
+msgstr "Télécharger le catalogue"
 
 #: .\templates\catalog\catalog_view.html:496
 msgid "Klavye Kısayolları"
-msgstr ""
+msgstr "Raccourcis clavier"
 
 #: .\templates\catalog\catalog_view.html:501
 msgid "Sayfa değiştir"
-msgstr ""
+msgstr "Modifier la page"
 
 #: .\templates\catalog\catalog_view.html:508
 msgid "Yakınlaştır"
-msgstr ""
+msgstr "Zoom avant"
 
 #: .\templates\catalog\catalog_view.html:509
 msgid "Uzaklaştır"
-msgstr ""
+msgstr "Zoom arrière"
 
 #: .\templates\catalog\catalog_view.html:510
 msgid "Genişliğe sığdır"
-msgstr ""
+msgstr "Ajustement dans la largeur"
 
 #: .\templates\catalog\catalog_view.html:516
 msgid "Ürünlere Göz At"
-msgstr ""
+msgstr "Parcourir les produits"
 
 #: .\templates\catalog\catalog_view.html:519
 #: .\templates\home\sections\carousel.html:152
 #: .\templates\home\sections\gallery_preview.html:156
 msgid "İletişime Geç"
-msgstr ""
+msgstr "Nous contacter"
 
 #: .\templates\catalog\catalog_view.html:530
 msgid "Yardıma İhtiyacınız Var?"
-msgstr ""
+msgstr "Besoin d'aide ?"
 
 #: .\templates\catalog\catalog_view.html:533
 msgid "Katalog ile ilgili sorularınız için"
-msgstr ""
+msgstr "Pour toute question concernant le catalogue"
 
 #: .\templates\catalog\catalog_view.html:541
 #: .\templates\contact\sections\contact_info.html:46
 #: .\templates\errors\404.html:198
 msgid "Ara"
-msgstr ""
+msgstr "recherche"
 
 #: .\templates\catalog\catalog_view.html:578
 #, python-format
 msgid "%(site_name)s ürün kataloğunu inceleyin."
-msgstr ""
+msgstr "Consultez le catalogue de produits de %(site_name)%."
 
 #: .\templates\catalog\catalog_view.html:591
 msgid "Katalog linki panoya kopyalandı!"
-msgstr ""
+msgstr "Lien du catalogue copié sur le tableau !"
 
 #: .\templates\catalog\catalog_view.html:593
 msgid "Link kopyalanamadı"
-msgstr ""
+msgstr "Le lien n'a pas pu être copié"
 
 #: .\templates\catalog\catalog_view.html:626
 msgid "PDF Yüklenemedi"
-msgstr ""
+msgstr "Le PDF n'a pas pu être chargé"
 
 #: .\templates\catalog\catalog_view.html:627
 msgid ""
 "PDF kataloğu görüntülenemiyor. Lütfen farklı bir tarayıcı deneyin veya "
 "dosyayı indirin."
-msgstr ""
+msgstr "Le catalogue PDF ne s'affiche pas. Veuillez essayer un autre navigateur ou télécharger le fichier."
 
 #: .\templates\catalog\catalog_view.html:633
 msgid "PDF'i İndir"
-msgstr ""
+msgstr "Télécharger le PDF"
 
 #: .\templates\components\cookie-banner.html:7
 msgid "Çerez Kullanımı"
-msgstr ""
+msgstr "Utilisation des cookies"
 
 #: .\templates\components\cookie-banner.html:9
 msgid ""
 "Web sitemizde deneyiminizi geliştirmek için çerezler kullanıyoruz. Dil "
 "tercihlerinizi hatırlamak, site performansını analiz etmek ve size özel "
 "içerik sunmak için çerezleri kullanırız."
-msgstr ""
+msgstr "Nous utilisons des cookies pour améliorer votre expérience sur notre site Web. Ils servent à mémoriser vos préférences linguistiques, à analyser les performances du site et à vous proposer un contenu personnalisé."
+
 
 #: .\templates\components\cookie-banner.html:15
 #: .\templates\components\cookie-banner.html:143
 msgid "Tümünü Reddet"
-msgstr ""
+msgstr "Rejeter tout"
 
 #: .\templates\components\cookie-banner.html:18
 msgid "Ayarla"
-msgstr ""
+msgstr "Mise en place"
 
 #: .\templates\components\cookie-banner.html:21
 #: .\templates\components\cookie-banner.html:149
 msgid "Tümünü Kabul Et"
-msgstr ""
+msgstr "Tout accepter"
 
 #: .\templates\components\cookie-banner.html:32
 #: .\templates\legal\legal_page_detail.html:62
 msgid "Çerez Ayarları"
-msgstr ""
+msgstr "Paramètres des cookies"
 
 #: .\templates\components\cookie-banner.html:38
 msgid ""
 "Hangi çerez türlerinin kullanılmasına izin vermek istediğinizi "
 "seçebilirsiniz. Bu ayarları istediğiniz zaman değiştirebilirsiniz."
-msgstr ""
+msgstr "Vous pouvez choisir les types de cookies que vous souhaitez autoriser. Vous pouvez modifier ces paramètres à tout moment."
+
 
 #: .\templates\components\cookie-banner.html:48
 msgid "Zorunlu Çerezler"
-msgstr ""
+msgstr "Cookies obligatoires"
 
 #: .\templates\components\cookie-banner.html:49
 msgid "Her Zaman Aktif"
-msgstr ""
+msgstr "Toujours actif"
 
 #: .\templates\components\cookie-banner.html:54
 msgid ""
 "Bu çerezler web sitesinin düzgün çalışması için gereklidir. Dil seçiminiz, "
 "oturum bilgileriniz ve güvenlik için gerekli çerezlerdir. Devre dışı "
 "bırakılamazlar."
-msgstr ""
+msgstr "Ces cookies sont nécessaires au bon fonctionnement du site Web. Ils sont utilisés pour mémoriser votre préférence de langue, vos informations de session et assurer la sécurité. Ils ne peuvent pas être désactivés."
+
 
 #: .\templates\components\cookie-banner.html:58
 #: .\templates\components\cookie-banner.html:79
 #: .\templates\components\cookie-banner.html:100
 #: .\templates\components\cookie-banner.html:121
 msgid "Kullanılan çerezler:"
-msgstr ""
+msgstr "Cookies utilisés :"
 
 #: .\templates\components\cookie-banner.html:70
 msgid "Fonksiyonel Çerezler"
-msgstr ""
+msgstr "Cookies fonctionnels"
 
 #: .\templates\components\cookie-banner.html:75
 msgid ""
 "Bu çerezler gelişmiş özellikler sağlar. Tema tercihlerinizi, form "
 "verilerinizi hatırlar ve kullanıcı deneyiminizi kişiselleştirir."
-msgstr ""
+msgstr "Ces cookies offrent des fonctionnalités avancées. Ils mémorisent vos préférences de thème, vos données de formulaire et personnalisent votre expérience utilisateur."
 
 #: .\templates\components\cookie-banner.html:91
 msgid "Analitik Çerezler"
-msgstr ""
+msgstr "Cookies analytiques"
 
 #: .\templates\components\cookie-banner.html:96
 msgid ""
 "Bu çerezler web sitemizin performansını anlamamıza yardımcı olur. Hangi "
 "sayfaların ziyaret edildiğini, ne kadar zaman geçirildiğini ve hata "
 "durumlarını analiz eder."
-msgstr ""
+msgstr "Ces cookies nous aident à comprendre les performances de notre site Web. Ils analysent quelles pages sont visitées, combien de temps les utilisateurs y passent et enregistrent les erreurs."
+
 
 #: .\templates\components\cookie-banner.html:112
 msgid "Pazarlama Çerezleri"
-msgstr ""
+msgstr "Cookies de marketing"
 
 #: .\templates\components\cookie-banner.html:117
 msgid ""
 "Bu çerezler size daha alakalı reklamlar göstermek için kullanılır. İlgi "
 "alanlarınızı takip eder ve kişiselleştirilmiş içerik sunar."
-msgstr ""
+msgstr "Ces cookies sont utilisés pour vous montrer des publicités plus pertinentes. Ils suivent vos centres d'intérêt et vous proposent un contenu personnalisé."
 
 #: .\templates\components\cookie-banner.html:134
 msgid "Detaylı çerez politikamızı okuyun"
-msgstr ""
+msgstr "Lire notre politique détaillée en matière de cookies"
 
 #: .\templates\components\cookie-banner.html:231
 msgid "Tüm çerezler kabul edildi."
-msgstr ""
+msgstr "Tous les cookies sont acceptés."
 
 #: .\templates\components\cookie-banner.html:243
 msgid "Sadece zorunlu çerezler kabul edildi."
-msgstr ""
+msgstr "Seuls les cookies obligatoires ont été acceptés."
 
 #: .\templates\components\cookie-banner.html:255
 msgid "Çerez ayarlarınız kaydedildi."
-msgstr ""
+msgstr "Vos paramètres de cookies ont été sauvegardés."
 
 #: .\templates\components\modal.html:10
 msgid "/"
-msgstr ""
+msgstr "/"
 
 #: .\templates\components\modal.html:20
 msgid "Görseli kapat"
-msgstr ""
+msgstr "Fermer l'image"
 
 #: .\templates\components\modal.html:36
 msgid "Önceki görsel"
-msgstr ""
+msgstr "Image précédente"
 
 #: .\templates\components\modal.html:40
 #: .\templates\contact\sections\contact_form.html:141
 #: .\templates\contact\sections\review_form.html:117
 msgid " / "
-msgstr ""
+msgstr " /"
 
 #: .\templates\components\modal.html:42
 msgid "Sonraki görsel"
-msgstr ""
+msgstr "Image suivante"
 
 #: .\templates\contact\contact.html:6
 msgid "İletişim ve Değerlendirme"
-msgstr ""
+msgstr "Communication et évaluation"
 
 #: .\templates\contact\sections\contact_form.html:12
 msgid "Bize Ulaşın"
-msgstr ""
+msgstr "Contactez nous"
 
 #: .\templates\contact\sections\contact_form.html:14
 msgid ""
 "Sorularınız, önerileriniz veya hizmet talebiniz için aşağıdaki formu "
-"doldurarak bizimle iletişime geçebilirsiniz."
+"doldurabilirsiniz."
 msgstr ""
+"Pour toute question, suggestion ou demande de service, vous pouvez nous "
+"contacter en remplissant le formulaire ci-dessous."
 
 #: .\templates\contact\sections\contact_form.html:24
 #: .\templates\home\sections\cta_section.html:62
 msgid "Mesaj Gönder"
-msgstr ""
+msgstr "Envoyer un message"
 
 #: .\templates\contact\sections\contact_form.html:25
 msgid "Formu doldurun, size en kısa sürede dönüş yapalım"
-msgstr ""
+msgstr "Remplissez le formulaire et nous vous répondrons dans les plus brefs délais."
 
 #: .\templates\contact\sections\contact_form.html:45
 #: .\templates\contact\sections\review_form.html:45
 msgid "Adınız ve soyadınız"
-msgstr ""
+msgstr "Vos nom et prénom"
 
 #: .\templates\contact\sections\contact_form.html:68
 msgid "+90 5xx xxx xx xx"
-msgstr ""
+msgstr "+90 5xx xxx xx xx"
 
 #: .\templates\contact\sections\contact_form.html:91
 msgid "ornek@email.com"
-msgstr ""
+msgstr "exemple@email.com"
 
 #: .\templates\contact\sections\contact_form.html:114
 msgid "Mesajınızın konusu"
-msgstr ""
+msgstr "Objet de votre message"
 
 #: .\templates\contact\sections\contact_form.html:129
 msgid "Mesajınız"
-msgstr ""
+msgstr "Votre message"
 
 #: .\templates\contact\sections\contact_form.html:137
 msgid "Detaylı mesajınızı yazın..."
-msgstr ""
+msgstr "Rédigez votre message détaillé..."
 
 #: .\templates\contact\sections\contact_form.html:181
 msgid "Mesajı Gönder"
-msgstr ""
+msgstr "Envoyer un message"
 
 #: .\templates\contact\sections\contact_form.html:189
 msgid "Mesajınıza 24 saat içinde yanıt vereceğiz"
-msgstr ""
+msgstr "Nous répondrons à votre message dans les 24 heures"
 
 #: .\templates\contact\sections\contact_info.html:15
 msgid "Bize ulaşabileceğiniz tüm kanallar"
-msgstr ""
+msgstr "Tous les canaux par lesquels vous pouvez nous joindre"
 
 #: .\templates\contact\sections\contact_info.html:29
 #: .\templates\contact\sections\contact_info.html:62
 msgid "Haritada Göster"
-msgstr ""
+msgstr "Afficher sur la carte"
 
 #: .\templates\contact\sections\contact_info.html:43
 msgid "7/24 Acil Durum Hattı"
-msgstr ""
+msgstr "Ligne d'urgence 7/24"
 
 #: .\templates\contact\sections\contact_info.html:75
 msgid "7 Gün 24 Saat"
-msgstr ""
+msgstr "7 jours 24 heures"
 
 #: .\templates\contact\sections\contact_info.html:76
 #: .\templates\contact\sections\hero.html:29
 msgid "Acil durumlarda her zaman ulaşabilirsiniz"
-msgstr ""
+msgstr "Toujours disponible en cas d'urgence"
 
 #: .\templates\contact\sections\contact_info.html:124
 msgid "Konum"
-msgstr ""
+msgstr "Localisation"
 
 #: .\templates\contact\sections\contact_info.html:125
 msgid "Batman/Kozuk bölgesinde hizmet veriyoruz"
-msgstr ""
+msgstr "Nous desservons la région de Batman / Kozuk"
 
 #: .\templates\contact\sections\contact_info.html:159
 msgid "Google Maps'te Aç"
-msgstr ""
+msgstr "Ouvrir dans Google Maps"
 
 #: .\templates\contact\sections\contact_info.html:164
 msgid "Yol Tarifi Al"
-msgstr ""
+msgstr "Obtenir un itinéraire"
 
 #: .\templates\contact\sections\contact_info.html:174
 msgid "Hizmet Verdiğimiz Bölgeler"
-msgstr ""
+msgstr "Les régions que nous servons"
 
 #: .\templates\contact\sections\contact_info.html:175
 msgid "Batman ve çevre illerde profesyonel anahtarcılık hizmeti"
-msgstr ""
+msgstr "Service professionnel de fabrication de clés à Batman et dans les provinces voisines"
 
 #: .\templates\contact\sections\contact_info.html:183
 msgid "Batman Merkez"
-msgstr ""
+msgstr "Centre Batman"
 
 #: .\templates\contact\sections\contact_info.html:184
 msgid "Tüm mahalleler"
-msgstr ""
+msgstr "Tous les quartiers"
 
 #: .\templates\contact\sections\contact_info.html:191
 msgid "Köprübaşı"
-msgstr ""
+msgstr "Koprubasi"
 
 #: .\templates\contact\sections\contact_info.html:192
 msgid "Ana hizmet bölgesi"
-msgstr ""
+msgstr "Zone de service principale"
 
 #: .\templates\contact\sections\contact_info.html:199
 msgid "Çevre İlçeler"
-msgstr ""
+msgstr "Districts voisins"
 
 #: .\templates\contact\sections\contact_info.html:200
 msgid "Acil durumlar"
-msgstr ""
+msgstr "Urgences"
 
 #: .\templates\contact\sections\contact_info.html:207
 #: .\templates\contact\sections\hero.html:28
@@ -4270,278 +4280,278 @@ msgstr ""
 #: .\templates\home\sections\cta_section.html:70
 #: .\templates\home\sections\services_grid.html:133
 msgid "7/24 Hizmet"
-msgstr ""
+msgstr "Service 7/24"
 
 #: .\templates\contact\sections\contact_info.html:208
 msgid "Tüm bölgelerde"
-msgstr ""
+msgstr "Dans toutes les régions"
 
 #: .\templates\contact\sections\hero.html:16
 msgid "& Değerlendirme"
-msgstr ""
+msgstr "& Évaluation"
 
 #: .\templates\contact\sections\hero.html:19
 msgid ""
 "Profesyonel anahtarcılık hizmetlerimiz hakkında sorularınız mı var? Bizimle "
 "iletişime geçin veya deneyiminizi paylaşın."
-msgstr ""
+msgstr "Vous avez des questions sur nos services de serrurerie professionnelle ? Contactez-nous ou partagez votre expérience."
 
 #: .\templates\contact\sections\hero.html:38
 msgid "Hızlı Yanıt"
-msgstr ""
+msgstr "Réponse rapide"
 
 #: .\templates\contact\sections\hero.html:39
 msgid "Mesajlarınıza 24 saat içinde geri dönüş"
-msgstr ""
+msgstr "Retour à vos messages dans les 24 heures"
 
 #: .\templates\contact\sections\hero.html:48
 #: .\templates\home\sections\media_mentions.html:111
 msgid "Güvenilir"
-msgstr ""
+msgstr "Fiable"
 
 #: .\templates\contact\sections\hero.html:49
 msgid "Bilgileriniz güvenli ve gizli tutulur"
-msgstr ""
+msgstr "Vos informations sont conservées de manière sûre et confidentielle"
 
 #: .\templates\contact\sections\hero.html:58
 msgid "GÜN"
-msgstr ""
+msgstr "JOUR"
 
 #: .\templates\contact\sections\hero.html:67
 msgid "SAAT"
-msgstr ""
+msgstr "HORLOGE"
 
 #: .\templates\contact\sections\hero.html:71
 msgid "ÇİLİNGİR HİZMETİ"
-msgstr ""
+msgstr "SERVICE D'ÉGRENAGE"
 
 #: .\templates\contact\sections\review_form.html:12
 #: .\templates\contact\sections\review_list.html:747
 msgid "Deneyiminizi Paylaşın"
-msgstr ""
+msgstr "Partagez votre expérience"
 
 #: .\templates\contact\sections\review_form.html:14
 msgid ""
 "Hizmetimizden memnun kaldıysanız, deneyiminizi diğer müşterilerimizle "
 "paylaşın. Görüşleriniz bizim için çok değerli."
-msgstr ""
+msgstr "Si vous êtes satisfait de notre service, partagez votre expérience avec nos autres clients. Vos commentaires sont très précieux pour nous."
 
 #: .\templates\contact\sections\review_form.html:24
 #: .\templates\contact\sections\review_list.html:739
 #: .\templates\home\sections\reviews.html:145
 msgid "Değerlendirme Yap"
-msgstr ""
+msgstr "Évaluer"
 
 #: .\templates\contact\sections\review_form.html:25
 msgid "Hizmetimizi nasıl buldunuz? Puanınızı ve yorumunuzu bizimle paylaşın."
-msgstr ""
+msgstr "Faites-nous part de votre évaluation et de vos commentaires."
 
 #: .\templates\contact\sections\review_form.html:36
 msgid "Adınız Soyadınız"
-msgstr ""
+msgstr "Votre nom et prénom"
 
 #: .\templates\contact\sections\review_form.html:60
 msgid "Puanınız"
-msgstr ""
+msgstr "Votre score"
 
 #: .\templates\contact\sections\review_form.html:66
 msgid "5 yıldız - Mükemmel"
-msgstr ""
+msgstr "5 étoiles - Excellent"
 
 #: .\templates\contact\sections\review_form.html:71
 msgid "4 yıldız - Çok İyi"
-msgstr ""
+msgstr "4 étoiles - Très bon"
 
 #: .\templates\contact\sections\review_form.html:76
 msgid "3 yıldız - İyi"
-msgstr ""
+msgstr "3 étoiles - Bon"
 
 #: .\templates\contact\sections\review_form.html:81
 msgid "2 yıldız - Orta"
-msgstr ""
+msgstr "2 étoiles - Moyen"
 
 #: .\templates\contact\sections\review_form.html:86
 msgid "1 yıldız - Kötü"
-msgstr ""
+msgstr "1 étoile - Mauvais"
 
 #: .\templates\contact\sections\review_form.html:91
 msgid "Puan seçin"
-msgstr ""
+msgstr "Sélectionner les points"
 
 #: .\templates\contact\sections\review_form.html:105
 msgid "Yorumunuz"
-msgstr ""
+msgstr "Commentaire"
 
 #: .\templates\contact\sections\review_form.html:113
 msgid "Deneyiminizi detaylı olarak paylaşın..."
-msgstr ""
+msgstr "Partagez votre expérience en détail..."
 
 #: .\templates\contact\sections\review_form.html:132
 msgid "(İsteğe bağlı)"
-msgstr ""
+msgstr "(optionnel)"
 
 #: .\templates\contact\sections\review_form.html:146
 msgid "Fotoğraf Yükle"
-msgstr ""
+msgstr "Télécharger la photo"
 
 #: .\templates\contact\sections\review_form.html:147
 msgid "Sürükle bırak veya seç"
-msgstr ""
+msgstr "Glisser-déposer ou sélectionner"
 
 #: .\templates\contact\sections\review_form.html:157
 msgid "JPG, PNG veya GIF formatında, maksimum 5MB"
-msgstr ""
+msgstr "Format JPG, PNG ou GIF, maximum 5MB"
 
 #: .\templates\contact\sections\review_form.html:196
 msgid "Değerlendirme Gönder"
-msgstr ""
+msgstr "Envoyer l'évaluation"
 
 #: .\templates\contact\sections\review_form.html:204
 msgid "Değerlendirmeniz onaylandıktan sonra yayınlanacak"
-msgstr ""
+msgstr "Votre évaluation sera publiée après approbation"
 
 #: .\templates\contact\sections\review_form.html:214
 msgid "Giriş Gerekli"
-msgstr ""
+msgstr "Connexion requise"
 
 #: .\templates\contact\sections\review_form.html:215
 msgid "Değerlendirme yapabilmek için giriş yapmanız gerekiyor."
-msgstr ""
+msgstr "Vous devez vous connecter pour effectuer une évaluation."
 
 #: .\templates\contact\sections\review_form.html:229
 msgid "Son Değerlendirmeler"
-msgstr ""
+msgstr "Évaluations finales"
 
 #: .\templates\contact\sections\review_form.html:230
 msgid "Müşterilerimizin görüşleri"
-msgstr ""
+msgstr "Les points de vue de nos clients"
 
 #: .\templates\contact\sections\review_form.html:266
 msgid "Değerlendirme resmi"
-msgstr ""
+msgstr "Tableau d'évaluation"
 
 #: .\templates\contact\sections\review_form.html:276
 #: .\templates\contact\sections\review_list.html:736
 msgid "Henüz değerlendirme yok"
-msgstr ""
+msgstr "Pas encore d'évaluation"
 
 #: .\templates\contact\sections\review_form.html:277
 #: .\templates\contact\sections\review_list.html:737
 msgid "İlk değerlendirmeyi yapan siz olun!"
-msgstr ""
+msgstr "Soyez le premier à donner votre avis !"
 
 #: .\templates\contact\sections\review_form.html:285
 msgid "Tüm Değerlendirmeleri Gör"
-msgstr ""
+msgstr "Voir tous les commentaires"
 
 #: .\templates\contact\sections\review_list.html:7
 msgid "Müşterilerimizin deneyimlerini ve değerlendirmelerini okuyun."
-msgstr ""
+msgstr "Lisez les expériences et les commentaires de nos clients."
 
 #: .\templates\contact\sections\review_list.html:609
 msgid "Değerlendirmeleri"
-msgstr ""
+msgstr "Évaluations"
 
 #: .\templates\contact\sections\review_list.html:635
 msgid "Toplam Değerlendirme"
-msgstr ""
+msgstr "Évaluation totale"
 
 #: .\templates\contact\sections\review_list.html:672
 #, python-format
 msgid "%(review.rating)s/5"
-msgstr ""
+msgstr "%(note.d'évaluation)s/5"
 
 #: .\templates\contact\sections\review_list.html:748
 msgid "Hizmetimizden memnun kaldıysanız, görüşünüzü bizimle paylaşın."
-msgstr ""
+msgstr "Si vous êtes satisfait de notre service, n'hésitez pas à nous faire part de vos commentaires."
 
 #: .\templates\contact\sections\review_list.html:750
 #: .\templates\home\sections\reviews.html:163
 msgid "Yorum Yap"
-msgstr ""
+msgstr "Laisser un commentaire"
 
 #: .\templates\errors\403.html:78
 msgid "Giriş Yapın"
-msgstr ""
+msgstr "S'inscrire"
 
 #: .\templates\errors\403.html:79
 msgid "Bu sayfaya erişmek için giriş yapmanız gerekebilir."
-msgstr ""
+msgstr "Il se peut que vous deviez vous connecter pour accéder à cette page."
 
 #: .\templates\errors\404.html:156
 msgid "Hata"
-msgstr ""
+msgstr "Erreur"
 
 #: .\templates\errors\404.html:171
 msgid "İstenen sayfa"
-msgstr ""
+msgstr "Page demandée"
 
 #: .\templates\errors\404.html:189
 msgid "Aradığınızı bulamadınız mı?"
-msgstr ""
+msgstr "Vous n'avez pas trouvé ce que vous cherchiez ?"
 
 #: .\templates\errors\404.html:195
 #: .\templates\products\sections\filters.html:12
 msgid "Ürün ara..."
-msgstr ""
+msgstr "Recherche de produits..."
 
 #: .\templates\errors\404.html:212
 msgid "Bunları arıyor olabilirsiniz"
-msgstr ""
+msgstr "Vous pouvez rechercher les éléments suivants"
 
 #: .\templates\errors\404.html:242
 msgid "Popüler Ürünlerimiz"
-msgstr ""
+msgstr "Produits populaires"
 
 #: .\templates\errors\404.html:257
 #: .\templates\products\sections\related_products.html:24
 #: .\templates\products\sections\suggested_products.html:42
 msgid "İncele"
-msgstr ""
+msgstr "Révision"
 
 #: .\templates\errors\404.html:289
 msgid "Site Haritası"
-msgstr ""
+msgstr "Plan du site"
 
 #: .\templates\errors\500.html:158
 msgid "Sorun araştırılıyor"
-msgstr ""
+msgstr "Enquête sur le problème"
 
 #: .\templates\errors\500.html:175
 msgid "Güvenli Sayfalar"
-msgstr ""
+msgstr "Pages sécurisées"
 
 #: .\templates\errors\500.html:185
 msgid "Teknik Destek"
-msgstr ""
+msgstr "Support technique"
 
 #: .\templates\errors\500.html:186
 msgid "Sorun devam ederse, lütfen teknik destek ekibimizle iletişime geçin."
-msgstr ""
+msgstr "Si le problème persiste, veuillez contacter notre équipe d'assistance technique."
 
 #: .\templates\errors\500.html:196
 msgid "Hata kodu"
-msgstr ""
+msgstr "Maison Hata"
 
 #: .\templates\errors\500.html:197
 msgid "Zaman"
-msgstr ""
+msgstr "L'heure"
 
 #: .\templates\errors\500.html:206
 msgid "Bu sayfa 30 saniye sonra otomatik olarak yenilenecektir."
-msgstr ""
+msgstr "Cette page sera automatiquement actualisée après 30 secondes."
 
 #: .\templates\errors\lockout.html:9
 msgid "Hesap Kilitlendi"
-msgstr ""
+msgstr "Compte bloqué"
 
 #: .\templates\errors\lockout.html:49
 msgid "Hesap Geçici Olarak Kilitlendi"
-msgstr ""
+msgstr "Compte temporairement bloqué"
 
 #: .\templates\errors\lockout.html:52
 msgid "Güvenlik Uyarısı"
-msgstr ""
+msgstr "Avertissement de sécurité"
 
 #: .\templates\errors\lockout.html:54
 msgid ""
@@ -4554,336 +4564,336 @@ msgstr ""
 
 #: .\templates\errors\lockout.html:66
 msgid "1 Saat"
-msgstr ""
+msgstr "1 Moment"
 
 #: .\templates\errors\lockout.html:72
 msgid "Güvenlik Seviyesi"
-msgstr ""
+msgstr "Niveau de sécurité"
 
 #: .\templates\errors\lockout.html:73
 msgid "Yüksek"
-msgstr ""
+msgstr "Haut"
 
 #: .\templates\errors\lockout.html:86
 msgid "Ne yapabilirsiniz?"
-msgstr ""
+msgstr "Que pouvez-vous faire ?"
 
 #: .\templates\errors\lockout.html:90
 msgid "Bekleme süresinin dolmasını bekleyin"
-msgstr ""
+msgstr "Attendre l'expiration du temps d'attente"
 
 #: .\templates\errors\lockout.html:94
 msgid "Şifrenizi unuttuysanız yöneticiye başvurun"
-msgstr ""
+msgstr "Contactez l'administrateur si vous avez oublié votre mot de passe"
 
 #: .\templates\errors\lockout.html:98
 msgid "Güçlü bir şifre kullanın (büyük/küçük harf, sayı, özel karakter)"
-msgstr ""
+msgstr "Utiliser un mot de passe fort (majuscules/minuscules, chiffres, caractères spéciaux)"
 
 #: .\templates\errors\lockout.html:102
 msgid "Şifrenizi girerken dikkatli olun"
-msgstr ""
+msgstr "Soyez prudent lorsque vous saisissez votre mot de passe"
 
 #: .\templates\errors\lockout.html:110
 msgid "Giriş Sayfasına Dön"
-msgstr ""
+msgstr "Retour à la page d'accueil"
 
 #: .\templates\errors\lockout.html:113
 msgid "Sorun devam ederse sistem yöneticisi ile iletişime geçin"
-msgstr ""
+msgstr "Si le problème persiste, contactez l'administrateur du système"
 
 #: .\templates\errors\ratelimit.html:4 .\templates\errors\ratelimit.html:8
 msgid "Çok Fazla İstek"
-msgstr ""
+msgstr "Trop de demandes"
 
 #: .\templates\gallery\sections\featured.html:9
 msgid "Öne Çıkan Çalışmalar"
-msgstr ""
+msgstr "Œuvres en vedette"
 
 #: .\templates\gallery\sections\featured.html:10
 msgid "En beğenilen projelerimizden seçmeler"
-msgstr ""
+msgstr "Une sélection de nos projets les plus admirés"
 
 #: .\templates\gallery\sections\gallery_grid.html:22
 msgid "Resimler"
-msgstr ""
+msgstr "Images"
 
 #: .\templates\gallery\sections\gallery_grid.html:26
 msgid "Videolar"
-msgstr ""
+msgstr "Vidéos"
 
 #: .\templates\gallery\sections\gallery_grid.html:48
 msgid "Büyüt"
-msgstr ""
+msgstr "Agrandir"
 
 #: .\templates\gallery\sections\gallery_grid.html:60
 msgid "Tarayıcınız video etiketini desteklemiyor."
-msgstr ""
+msgstr "Votre navigateur ne prend pas en charge la balise vidéo."
 
 #: .\templates\gallery\sections\gallery_grid.html:75
 msgid "Oynat"
-msgstr ""
+msgstr "Jouer"
 
 #: .\templates\gallery\sections\gallery_grid.html:171
 msgid "Henüz galeri öğesi bulunmuyor"
-msgstr ""
+msgstr "Aucun élément de la galerie pour l'instant"
 
 #: .\templates\gallery\sections\gallery_grid.html:172
 #: .\templates\home\sections\gallery_preview.html:154
 msgid "Çalışmalarımızdan kareler yakında burada olacak."
-msgstr ""
+msgstr "Les cadres de notre travail seront bientôt là."
 
 #: .\templates\gallery\sections\hero.html:13
 msgid ""
 "Profesyonel çalışmalarımızdan örnekler, projelerimiz ve hizmet videolarımız"
-msgstr ""
+msgstr " Exemples de nos travaux professionnels, nos projets et nos vidéos de services "
 
 #: .\templates\gallery\sections\hero.html:18
 msgid "Yüksek Kalite"
-msgstr ""
+msgstr "Haute qualité"
 
 #: .\templates\gallery\sections\hero.html:22
 msgid "Video İçerik"
-msgstr ""
+msgstr "Contenu vidéo"
 
 #: .\templates\gallery\sections\hero.html:26
 msgid "Detaylı Görünüm"
-msgstr ""
+msgstr "Vue détaillée"
 
 #: .\templates\gallery\sections\stats.html:16
 msgid "Toplam Öğe"
-msgstr ""
+msgstr "Total du poste"
 
 #: .\templates\gallery\sections\stats.html:36
 #: .\templates\home\sections\gallery_preview.html:91
 msgid "Video"
-msgstr ""
+msgstr "Vidéo"
 
 #: .\templates\home\sections\about_preview.html:22
 msgid "Deneyimli ve Güvenilir"
-msgstr ""
+msgstr "Expérimenté et fiable"
 
 #: .\templates\home\sections\about_preview.html:37
 msgid ""
 "Müşterilerimize en kaliteli ve güvenilir hizmeti sunarak, sektörde öncü "
 "olmayı hedefliyoruz."
-msgstr ""
+msgstr " Nous visons à être leaders dans notre secteur en offrant à nos clients le service le plus fiable et de la meilleure qualité possible. Nous visons à être leaders dans notre secteur en offrant à nos clients le service le plus fiable et de la meilleure qualité possible. "
 
 #: .\templates\home\sections\about_preview.html:49
 msgid "Profesyonel Ekip"
-msgstr ""
+msgstr "Équipe professionnelle"
 
 #: .\templates\home\sections\about_preview.html:50
 msgid "Uzman ve deneyimli ekibimiz ile hizmet."
-msgstr ""
+msgstr "Service avec notre équipe experte et expérimentée."
 
 #: .\templates\home\sections\about_preview.html:60
 msgid "Sektörde köklü bir geçmiş."
-msgstr ""
+msgstr "Une longue histoire dans le secteur."
 
 #: .\templates\home\sections\about_preview.html:70
 msgid "Her an yanınızda güvenli çözüm."
-msgstr ""
+msgstr "Une solution sûre vous accompagne à tout moment."
 
 #: .\templates\home\sections\about_preview.html:79
 #: .\templates\home\sections\statistics.html:89
 msgid "Müşteri Memnuniyeti"
-msgstr ""
+msgstr "Satisfaction des clients"
 
 #: .\templates\home\sections\about_preview.html:80
 msgid "Kaliteli hizmet anlayışımız."
-msgstr ""
+msgstr "Notre conception d'un service de qualité."
 
 #: .\templates\home\sections\about_preview.html:88
 msgid "Detaylı Bilgi"
-msgstr ""
+msgstr "Informations détaillées"
 
 #: .\templates\home\sections\about_preview.html:95
 #: .\templates\home\sections\cta_section.html:46
 #: .\templates\home\sections\services_grid.html:195
 msgid "Hemen Ara"
-msgstr ""
+msgstr "Rechercher immédiatement"
 
 #: .\templates\home\sections\about_preview.html:115
 msgid "Hakkımızda Görseli"
-msgstr ""
+msgstr "À propos de nous Image"
 
 #: .\templates\home\sections\carousel.html:6
 msgid "Ana carousel"
-msgstr ""
+msgstr "Carrousel Ana"
 
 #: .\templates\home\sections\carousel.html:15
 msgid "Slayt"
-msgstr ""
+msgstr "Diapositive"
 
 #: .\templates\home\sections\carousel.html:70
 msgid "Güvenilir Hizmet"
-msgstr ""
+msgstr "Un service fiable"
 
 #: .\templates\home\sections\carousel.html:74
 msgid "7/24 Destek"
-msgstr ""
+msgstr "Assistance 24 h/24, 7 j/7"
 
 #: .\templates\home\sections\carousel.html:90
 msgid "Keşfetmek için kaydır"
-msgstr ""
+msgstr "Faites défiler l'écran pour découvrir"
 
 #: .\templates\home\sections\carousel.html:106
 msgid "Önceki slayt"
-msgstr ""
+msgstr "Diapositive précédente"
 
 #: .\templates\home\sections\carousel.html:114
 msgid "Sonraki slayt"
-msgstr ""
+msgstr "Diapositive suivante"
 
 #: .\templates\home\sections\carousel.html:122
 msgid "Carousel oynat/duraklat"
-msgstr ""
+msgstr "Lecture/pause du carrousel"
 
 #: .\templates\home\sections\carousel.html:123
 msgid "Duraklat"
-msgstr ""
+msgstr "Pause"
 
 #: .\templates\home\sections\carousel.html:147
 msgid "Profesyonel hizmet anlayışımızla sizlerleyiz."
-msgstr ""
+msgstr "Nous sommes à vos côtés avec notre compréhension des services professionnels."
 
 #: .\templates\home\sections\cta_section.html:22
 msgid "Acil Durumda mı?"
-msgstr ""
+msgstr "S'agit-il d'une urgence ?"
 
 #: .\templates\home\sections\cta_section.html:23
 msgid "Hemen Arayın!"
-msgstr ""
+msgstr "Appelez-nous !"
 
 #: .\templates\home\sections\cta_section.html:28
 msgid ""
 "7/24 acil çilingir hizmetimiz ile kapınızın önünde. Profesyonel ekibimiz her "
 "an hazır."
-msgstr ""
+msgstr " Notre service de serrurerie d'urgence est disponible 24 h/24, 7 j/7, devant votre porte. Notre équipe professionnelle est prête à intervenir à tout moment. "
 
 #: .\templates\home\sections\cta_section.html:74
 msgid "Güvenli"
-msgstr ""
+msgstr "Sûr"
 
 #: .\templates\home\sections\cta_section.html:78
 msgid "Hızlı Çözüm"
-msgstr ""
+msgstr "Solution rapide"
 
 #: .\templates\home\sections\cta_section.html:91
 msgid "Acil arama"
-msgstr ""
+msgstr "Appel d'urgence"
 
 #: .\templates\home\sections\cta_section.html:92
 msgid "Acil Durum - Hemen Ara"
-msgstr ""
+msgstr "Urgence - Appeler maintenant"
 
 #: .\templates\home\sections\gallery_preview.html:17
 msgid "Çalışmalarımız"
-msgstr ""
+msgstr "Notre travail"
 
 #: .\templates\home\sections\gallery_preview.html:20
 msgid ""
 "Gerçekleştirdiğimiz projelerden kareler ve başarı hikayelerimizi keşfedin."
-msgstr ""
+msgstr " Découvrez les photos de nos projets réalisés et nos réussites. "
 
 #: .\templates\home\sections\gallery_preview.html:30
 msgid "Önceki görseller"
-msgstr ""
+msgstr "Images précédentes"
 
 #: .\templates\home\sections\gallery_preview.html:33
 msgid "Sonraki görseller"
-msgstr ""
+msgstr "Images suivantes"
 
 #: .\templates\home\sections\gallery_preview.html:78
 msgid "Videoyu oynat"
-msgstr ""
+msgstr "Lire la vidéo"
 
 #: .\templates\home\sections\gallery_preview.html:78
 msgid "Görseli büyüt"
-msgstr ""
+msgstr "Agrandir l'image"
 
 #: .\templates\home\sections\gallery_preview.html:142
 msgid "Tüm Galeriyi Görüntüle"
-msgstr ""
+msgstr "Voir toute la galerie"
 
 #: .\templates\home\sections\gallery_preview.html:153
 msgid "Galeri Yakında"
-msgstr ""
+msgstr "Galerie à venir"
 
 #: .\templates\home\sections\media_mentions.html:14
 msgid "Medyada"
-msgstr ""
+msgstr "Dans les médias"
 
 #: .\templates\home\sections\media_mentions.html:14
 msgid "Yer Aldık"
-msgstr ""
+msgstr "Nous avons participé"
 
 #: .\templates\home\sections\media_mentions.html:17
 msgid "Başarılarımız ve hizmet kalitemiz medyada da takdir görüyor."
-msgstr ""
+msgstr "Nos réalisations et la qualité de nos services sont également appréciées par les médias."
 
 #: .\templates\home\sections\media_mentions.html:108
 msgid "Güven"
-msgstr ""
+msgstr "Confiance"
 
 #: .\templates\home\sections\media_mentions.html:111
 msgid "Hizmet"
-msgstr ""
+msgstr "Service"
 
 #: .\templates\home\sections\media_mentions.html:114
 msgid ""
 "Kaliteli hizmet anlayışımız ve müşteri memnuniyetimiz ile güveninizi "
 "kazanıyoruz."
-msgstr ""
+msgstr " Nous gagnons votre confiance grâce à notre conception du service de qualité et à la satisfaction de nos clients. Nous gagnons votre confiance grâce à notre conception du service de qualité et à la satisfaction de nos clients. "
 
 #: .\templates\home\sections\media_mentions.html:123
 msgid "Sertifikalı Hizmet"
-msgstr ""
+msgstr "Service certifié"
 
 #: .\templates\home\sections\media_mentions.html:124
 msgid "Standartlara uygun profesyonel hizmet anlayışı."
-msgstr ""
+msgstr "Compréhension professionnelle des services conformément aux normes."
 
 #: .\templates\home\sections\media_mentions.html:131
 msgid "Güvenli İşlem"
-msgstr ""
+msgstr "Transaction sécurisée"
 
 #: .\templates\home\sections\media_mentions.html:132
 msgid "Tüm işlemlerimizde güvenlik önceliğimizdir."
-msgstr ""
+msgstr "La sécurité est notre priorité dans toutes nos transactions."
 
 #: .\templates\home\sections\media_mentions.html:139
 msgid "Güven Esaslı"
-msgstr ""
+msgstr "La confiance"
 
 #: .\templates\home\sections\media_mentions.html:140
 msgid "Müşteri güveni bizim en değerli varlığımız."
-msgstr ""
+msgstr "La confiance des clients est notre atout le plus précieux."
 
 #: .\templates\home\sections\media_mentions.html:147
 msgid "Kalite Garantisi"
-msgstr ""
+msgstr " Garantie de qualité "
 
 #: .\templates\home\sections\media_mentions.html:148
 msgid "Yaptığımız her işte kalite garantisi veriyoruz."
-msgstr ""
+msgstr "Nous garantissons la qualité dans tout ce que nous faisons."
 
 #: .\templates\home\sections\products_preview.html:16
 #: .\templates\home\sections\products_preview.html:19
 #: .\templates\products\sections\hero.html:8
 msgid "Ürünlerimiz"
-msgstr ""
+msgstr "Nos produits"
 
 #: .\templates\home\sections\products_preview.html:22
 msgid ""
 "Kaliteli ve güvenilir ürün yelpazemizi keşfedin. Her ihtiyaca uygun çözümler."
-msgstr ""
+msgstr " Découvrez notre gamme de produits fiables et de qualité. Des solutions adaptées à tous les besoins. "
 
 #: .\templates\home\sections\products_preview.html:65
 #: .\templates\home\sections\products_preview.html:147
 msgid "Ürün detayını görüntüle"
-msgstr ""
+msgstr "Voir le détail du produit"
 
 #: .\templates\home\sections\products_preview.html:108
 #: .\templates\home\sections\products_preview.html:190
@@ -4894,82 +4904,82 @@ msgstr ""
 #: .\templates\home\sections\services_grid.html:169
 #: .\templates\home\sections\services_grid.html:221
 msgid "Detaylar"
-msgstr ""
+msgstr "Détails"
 
 #: .\templates\home\sections\products_preview.html:213
 msgid "Önceki ürün grubu"
-msgstr ""
+msgstr "Groupe de produits précédent"
 
 #: .\templates\home\sections\products_preview.html:225
 msgid "Ürün grubu"
-msgstr ""
+msgstr "Groupe de produits"
 
 #: .\templates\home\sections\products_preview.html:236
 msgid "Sonraki ürün grubu"
-msgstr ""
+msgstr "Groupe de produits suivant"
 
 #: .\templates\home\sections\products_preview.html:244
 msgid "Tüm Ürünleri Görüntüle"
-msgstr ""
+msgstr "Voir tous les produits"
 
 #: .\templates\home\sections\products_preview.html:255
 msgid "Ürünler Yakında"
-msgstr ""
+msgstr "Produits à venir"
 
 #: .\templates\home\sections\products_preview.html:256
 msgid ""
 "Kaliteli ürün yelpazemizi hazırlıyoruz. Güncellemeler için bizi takip edin."
-msgstr ""
+msgstr " Nous préparons notre gamme de produits de qualité. Suivez-nous pour rester informé des dernières actualités. "
 
 #: .\templates\home\sections\products_preview.html:258
 msgid "Bilgi Al"
-msgstr ""
+msgstr "Obtenir des informations"
 
 #: .\templates\home\sections\reviews.html:10
 msgid "Müşteri Deneyimleri"
-msgstr ""
+msgstr "Expériences des clients"
 
 #: .\templates\home\sections\reviews.html:13
 msgid "Yorumları"
-msgstr ""
+msgstr "Commentaires"
 
 #: .\templates\home\sections\reviews.html:16
 msgid "Hizmetlerimizden memnun kalan müşterilerimizin görüşlerini okuyun."
-msgstr ""
+msgstr "Lisez les témoignages de nos clients qui sont satisfaits de nos services."
 
 #: .\templates\home\sections\reviews.html:124
 #, python-format
 msgid "Memnuniyet %%"
-msgstr ""
+msgstr "Satisfaction %%"
 
 #: .\templates\home\sections\reviews.html:135
 #, python-format
 msgid "Tekrar Tercih %%"
-msgstr ""
+msgstr "Préférence en matière de répétition %%"
 
 #: .\templates\home\sections\reviews.html:149
 msgid "Tüm Yorumlar"
-msgstr ""
+msgstr "Tous les commentaires"
 
 #: .\templates\home\sections\reviews.html:160
 msgid "İlk Yorumu Siz Yapın"
-msgstr ""
+msgstr "Soyez le premier à commenter"
 
 #: .\templates\home\sections\reviews.html:161
 msgid "Hizmetlerimiz hakkındaki deneyiminizi paylaşın."
-msgstr ""
+msgstr "Partagez votre expérience de nos services."
 
 #: .\templates\home\sections\services_grid.html:16
 msgid "Profesyonel"
-msgstr ""
+msgstr "Professionnel"
 
 #: .\templates\home\sections\services_grid.html:16
 msgid "Çözümlerimiz"
-msgstr ""
+msgstr "Nos solutions"
 
 #: .\templates\home\sections\services_grid.html:19
 msgid "Uzman ekibimiz ile 7/24 hizmet veren geniş hizmet yelpazemizi keşfedin."
-msgstr ""
+msgstr "Découvrez notre large gamme de services disponibles 24 heures sur 24 et 7 jours sur 7 avec notre équipe d'experts."
 
 #: .\templates\home\sections\services_grid.html:56
 #: .\templates\home\sections\services_grid.html:87
@@ -4979,130 +4989,130 @@ msgstr ""
 #: .\templates\home\sections\services_grid.html:191
 #: .\templates\home\sections\services_grid.html:217
 msgid "başlayan fiyatlarla"
-msgstr ""
+msgstr "à partir de"
 
 #: .\templates\home\sections\services_grid.html:78
 msgid "Tüm anahtar türleri için hızlı ve güvenilir kopyalama hizmeti."
-msgstr ""
+msgstr "Service de copie rapide et fiable pour tous les types de clés."
 
 #: .\templates\home\sections\services_grid.html:80
 msgid "Hızlı Hizmet"
-msgstr ""
+msgstr "Service rapide"
 
 #: .\templates\home\sections\services_grid.html:81
 msgid "Kaliteli Malzeme"
-msgstr ""
+msgstr "Matériau de qualité"
 
 #: .\templates\home\sections\services_grid.html:82
 msgid "Uygun Fiyat"
-msgstr ""
+msgstr "Prix raisonnable"
 
 #: .\templates\home\sections\services_grid.html:104
 msgid "Araç anahtarı kayıp ve kopyalama işlemleri için uzman hizmet."
-msgstr ""
+msgstr "Service d'experts pour les pertes et les reproductions de clés de voiture."
 
 #: .\templates\home\sections\services_grid.html:106
 msgid "Tüm Marka/Model"
-msgstr ""
+msgstr "Toutes les marques et tous les modèles"
 
 #: .\templates\home\sections\services_grid.html:107
 msgid "Çipli Anahtar"
-msgstr ""
+msgstr "Clé à puce"
 
 #: .\templates\home\sections\services_grid.html:108
 msgid "Orijinal Kalite"
-msgstr ""
+msgstr "Qualité originale"
 
 #: .\templates\home\sections\services_grid.html:130
 msgid "Kasa, çelik kapi ve güvenlik sistemleri açma hizmeti."
-msgstr ""
+msgstr "Service d'ouverture de coffres-forts, de portes en acier et de systèmes de sécurité."
 
 #: .\templates\home\sections\services_grid.html:132
 msgid "Hasar Vermeden"
-msgstr ""
+msgstr "Aucun dommage"
 
 #: .\templates\home\sections\services_grid.html:134
 msgid "Garantili İş"
-msgstr ""
+msgstr "Travail garanti"
 
 #: .\templates\home\sections\services_grid.html:156
 msgid "Modern güvenlik sistemleri kurulum ve bakım hizmetleri."
-msgstr ""
+msgstr "Services d'installation et de maintenance de systèmes de sécurité modernes."
 
 #: .\templates\home\sections\services_grid.html:158
 msgid "Akıllı Kilit"
-msgstr ""
+msgstr "Serrure intelligente"
 
 #: .\templates\home\sections\services_grid.html:159
 msgid "Kamera Sistemi"
-msgstr ""
+msgstr "Système de caméras"
 
 #: .\templates\home\sections\services_grid.html:160
 msgid "Uzaktan Kontrol"
-msgstr ""
+msgstr "Télécommande"
 
 #: .\templates\home\sections\services_grid.html:182
 msgid "7/24 acil durum çilingir hizmeti. Kapınızın önünde dakikalar içinde."
-msgstr ""
+msgstr "Service de serrurerie d'urgence 24/7. Devant votre porte en quelques minutes."
 
 #: .\templates\home\sections\services_grid.html:184
 msgid "24 Saat Hizmet"
-msgstr ""
+msgstr "Service 24 heures"
 
 #: .\templates\home\sections\services_grid.html:185
 msgid "Hızlı Müdahale"
-msgstr ""
+msgstr "Réponse rapide"
 
 #: .\templates\home\sections\services_grid.html:186
 msgid "Güvenilir Ekip"
-msgstr ""
+msgstr "Une équipe fiable"
 
 #: .\templates\home\sections\services_grid.html:207
 msgid "Ev Güvenliği"
-msgstr ""
+msgstr "Sécurité domestique"
 
 #: .\templates\home\sections\services_grid.html:208
 msgid "Evinizdeki tüm kilit ve güvenlik ihtiyaçları için kapsamlı çözümler."
-msgstr ""
+msgstr "Des solutions complètes pour tous les besoins en matière de serrure et de sécurité dans votre maison."
 
 #: .\templates\home\sections\services_grid.html:210
 msgid "Kapı Kilidi"
-msgstr ""
+msgstr "Serrure de porte"
 
 #: .\templates\home\sections\services_grid.html:211
 msgid "Pencere Kilidi"
-msgstr ""
+msgstr "Serrure de fenêtre"
 
 #: .\templates\home\sections\services_grid.html:212
 msgid "Güvenlik Analizi"
-msgstr ""
+msgstr "Analyse de la sécurité"
 
 #: .\templates\home\sections\statistics.html:16
 msgid "İstatistiklerimiz"
-msgstr ""
+msgstr "Nos statistiques"
 
 #: .\templates\home\sections\statistics.html:19
 msgid "Rakamlarla"
-msgstr ""
+msgstr "En chiffres"
 
 #: .\templates\home\sections\statistics.html:19
 msgid "Başarımız"
-msgstr ""
+msgstr "Notre succès"
 
 #: .\templates\home\sections\statistics.html:22
 msgid ""
 "Yıllar içinde elde ettiğimiz başarılarımızı ve müşteri memnuniyetimizi "
 "rakamlarla görün."
-msgstr ""
+msgstr " Découvrez nos succès et la satisfaction de nos clients au fil des ans en chiffres ."
 
 #: .\templates\home\sections\statistics.html:103
 #, python-format
 msgid "100%%"
-msgstr ""
+msgstr "100%%"
 
 #: .\templates\includes\mobile_breadcrumb.html:4
 msgid "Mobil sayfa navigasyonu"
-msgstr ""
+msgstr "Navigation mobile"
 
 #: .\templates\includes\mobile_breadcrumb.html:11
 #, python-format
@@ -5113,31 +5123,31 @@ msgstr[1] ""
 
 #: .\templates\legal\legal_page_detail.html:39
 msgid "Bu sayfa yasal bilgilendirme amaçlıdır"
-msgstr ""
+msgstr "Cette page est destinée à des fins d'information juridique"
 
 #: .\templates\legal\legal_page_detail.html:55
 msgid "Çerez Tercihlerinizi Yönetin"
-msgstr ""
+msgstr "Gérer vos préférences en matière de cookies"
 
 #: .\templates\legal\legal_page_detail.html:58
 msgid "Mevcut çerez tercihlerinizi görüntüleyebilir ve değiştirebilirsiniz."
-msgstr ""
+msgstr "Vous pouvez consulter et modifier vos préférences en matière de cookies."
 
 #: .\templates\legal\legal_page_detail.html:75
 msgid "Sorularınız mı var?"
-msgstr ""
+msgstr "Avez-vous des questions ?"
 
 #: .\templates\legal\legal_page_detail.html:78
 msgid "Bu sayfayla ilgili sorularınız varsa bizimle iletişime geçebilirsiniz."
-msgstr ""
+msgstr "Si vous avez des questions concernant cette page, vous pouvez nous contacter."
 
 #: .\templates\legal\legal_page_detail.html:81
 msgid "İletişime Geçin"
-msgstr ""
+msgstr "Nous contacter"
 
 #: .\templates\products\sections\categories_preview.html:8
 msgid "Ürün kategorilerimizi keşfedin"
-msgstr ""
+msgstr "Découvrez nos catégories de produits"
 
 #: .\templates\products\sections\categories_preview.html:27
 #, python-format
@@ -5154,15 +5164,15 @@ msgstr[1] ""
 
 #: .\templates\products\sections\categories_preview.html:40
 msgid "Tüm Kategorileri Gör"
-msgstr ""
+msgstr "Voir toutes les catégories"
 
 #: .\templates\products\sections\featured_products.html:7
 msgid "Öne Çıkan Ürünler"
-msgstr ""
+msgstr "Produits vedettes"
 
 #: .\templates\products\sections\featured_products.html:8
 msgid "En çok tercih edilen ürünlerimiz"
-msgstr ""
+msgstr "Nos produits préférés"
 
 #: .\templates\products\sections\featured_products.html:38
 #: .\templates\products\sections\featured_products.html:42
@@ -5170,45 +5180,45 @@ msgstr ""
 #: .\templates\products\sections\product_detail.html:68
 #, python-format
 msgid "%(product.price)s ₺"
-msgstr ""
+msgstr "%(produit.prix)s ₺ ₺"
 
 #: .\templates\products\sections\featured_products.html:39
 #: .\templates\products\sections\product_detail.html:60
 #, python-format
 msgid "%(product.discount_price)s ₺"
-msgstr ""
+msgstr "%(produit.prix_discount)s ₺ ₺"
 
 #: .\templates\products\sections\featured_products.html:53
 msgid "Tüm Öne Çıkanları Gör"
-msgstr ""
+msgstr "Voir tous les points forts"
 
 #: .\templates\products\sections\filters.html:49
 msgid "Sırala"
-msgstr ""
+msgstr "Trier"
 
 #: .\templates\products\sections\filters.html:52
 msgid "En Yeni"
-msgstr ""
+msgstr "Les plus récents"
 
 #: .\templates\products\sections\filters.html:55
 msgid "İsme Göre"
-msgstr ""
+msgstr "Par nom"
 
 #: .\templates\products\sections\filters.html:58
 msgid "Ucuzdan Pahalıya"
-msgstr ""
+msgstr "De bon marché à cher"
 
 #: .\templates\products\sections\filters.html:61
 msgid "Pahalıdan Ucuza"
-msgstr ""
+msgstr "Du cher au bon marché"
 
 #: .\templates\products\sections\hero.html:11
 msgid "kategorisindeki ürünlerimizi keşfedin"
-msgstr ""
+msgstr "Découvrez nos produits dans la catégorie"
 
 #: .\templates\products\sections\hero.html:13
 msgid "Kaliteli ürün yelpazemizi keşfedin"
-msgstr ""
+msgstr "Découvrez notre gamme de produits de qualité"
 
 #: .\templates\products\sections\product_detail.html:62
 #, python-format
@@ -5217,14 +5227,18 @@ msgid ""
 "                            %(savings_amount)s ₺ tasarruf\n"
 "                            "
 msgstr ""
+"\n"
+"                            Économisez %(savings_amount)s ₺\n"
+"                            "
+
 
 #: .\templates\products\sections\product_detail.html:96
 msgid "Stok Durumu"
-msgstr ""
+msgstr "État des stocks"
 
 #: .\templates\products\sections\product_detail.html:99
 msgid "Stokta Var"
-msgstr ""
+msgstr "En stock"
 
 #: .\templates\products\sections\product_detail.html:100
 #, python-format
@@ -5242,78 +5256,78 @@ msgstr[1] ""
 #: .\templates\products\sections\product_detail.html:132
 #, python-format
 msgid "%(product.weight)s kg"
-msgstr ""
+msgstr "%(produit.poids)s kg"
 
 #: .\templates\products\sections\product_detail.html:152
 msgid "Sipariş Ver"
-msgstr ""
+msgstr "Passer commande"
 
 #: .\templates\products\sections\product_detail.html:160
 msgid "Sipariş ve Bilgi İçin"
-msgstr ""
+msgstr "Pour commander et obtenir des informations"
 
 #: .\templates\products\sections\product_detail.html:172
 msgid "WhatsApp ile İletişim"
-msgstr ""
+msgstr "Contact avec WhatsApp"
 
 #: .\templates\products\sections\product_detail.html:182
 msgid "Ürün Açıklaması"
-msgstr ""
+msgstr "Description du produit"
 
 #: .\templates\products\sections\products_grid.html:52
 msgid "Stokta"
-msgstr ""
+msgstr "En stock"
 
 #: .\templates\products\sections\products_grid.html:107
 msgid "Ürün Bulunamadı"
-msgstr ""
+msgstr "Produit introuvable"
 
 #: .\templates\products\sections\products_grid.html:108
 msgid "Aradığınız kriterlere uygun ürün bulunamadı."
-msgstr ""
+msgstr "Aucun produit correspondant à vos critères de recherche n'a été trouvé."
 
 #: .\templates\products\sections\products_grid.html:110
 msgid "Tüm Ürünleri Gör"
-msgstr ""
+msgstr "Voir tous les produits"
 
 #: .\templates\products\sections\related_products.html:7
 msgid "İlgili Ürünler"
-msgstr ""
+msgstr "Produits apparentés"
 
 #: .\templates\products\sections\related_products.html:8
 msgid "kategorisindeki diğer ürünler"
-msgstr ""
+msgstr "Autres produits de la catégorie"
 
 #: .\templates\products\sections\related_products.html:33
 #: .\templates\products\sections\related_products.html:36
 #, python-format
 msgid "%(related_product.price)s ₺"
-msgstr ""
+msgstr "%(produit_relatif.prix)s ₺"
 
 #: .\templates\products\sections\related_products.html:34
 #, python-format
 msgid "%(related_product.discount_price)s ₺"
-msgstr ""
+msgstr "%(produit_relatif.prix_discount)s ₺"
 
 #: .\templates\products\sections\related_products.html:47
 msgid "Kategorisindeki Tüm Ürünler"
-msgstr ""
+msgstr "Tous les produits de la catégorie"
 
 #: .\templates\products\sections\suggested_products.html:7
 msgid "Önerilen Ürünler"
-msgstr ""
+msgstr "Produits recommandés"
 
 #: .\templates\products\sections\suggested_products.html:8
 msgid "Size özel seçtiğimiz diğer ürünler"
-msgstr ""
+msgstr "Autres produits spécialement sélectionnés pour vous"
 
 #: .\templates\products\sections\suggested_products.html:34
 #: .\templates\products\sections\suggested_products.html:37
 #, python-format
 msgid "%(suggested_product.price)s ₺"
-msgstr ""
+msgstr "%(prix suggéré du produit)s ₺ ₺"
 
 #: .\templates\products\sections\suggested_products.html:35
 #, python-format
 msgid "%(suggested_product.discount_price)s ₺"
-msgstr ""
+msgstr "%(prix_du_produit_conseillé)s ₺"

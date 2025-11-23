@@ -1,0 +1,232 @@
+#: .\templates\products\sections\product_detail.html:100
+#, python-format
+msgid ""
+"\n"
+"                                    (%(stock_count)s adet)\n"
+"                                    "
+msgid_plural ""
+"\n"
+"                                    (%(stock_count)s adet)\n"
+"                                    "
+msgstr[0] ""
+"\n"
+"                                    (%(stock_count)s adet)\n"
+"                                    "
+msgstr[1] ""
+"\n"
+"                                    (%(stock_count)s adet)\n"
+"                                    "
+
+
+#: .\templates\products\sections\product_detail.html:62
+#, python-format
+msgid ""
+"\n"
+"                            %(savings_amount)s ₺ tasarruf\n"
+"                            "
+msgstr ""
+"\n"
+"                            %(savings_amount)s ₺ tasarruf\n"
+"                            "
+
+
+#: .\templates\products\sections\featured_products.html:38
+#: .\templates\products\sections\featured_products.html:42
+#: .\templates\products\sections\product_detail.html:59
+#: .\templates\products\sections\product_detail.html:68
+#, python-format
+msgid "%(product.price)s ₺"
+msgstr "%(product.price)s ₺"
+
+#: .\templates\products\sections\featured_products.html:39
+#: .\templates\products\sections\product_detail.html:60
+#, python-format
+msgid "%(product.discount_price)s ₺"
+msgstr "%(product.discount_price)s ₺"
+
+
+#: .\templates\products\sections\categories_preview.html:27
+#, python-format
+msgid ""
+"\n"
+"                        %(product_count)s ürün\n"
+"                        "
+msgid_plural ""
+"\n"
+"                        %(product_count)s ürün\n"
+"                        "
+msgstr[0] ""
+"\n"
+"                        %(product_count)s ürün\n"
+"                        "
+msgstr[1] ""
+"\n"
+"                        %(product_count)s ürün\n"
+"                        "
+
+
+#: .\templates\errors\lockout.html:54
+msgid ""
+"\n"
+"                            Çok fazla başarısız giriş denemesi yaptınız. \n"
+"                            Hesabınız güvenlik nedeniyle <strong>1 saat</strong> süreyle kilitlenmiştir.\n"
+"                            "
+msgstr ""
+"\n"
+"                            Çok fazla başarısız giriş denemesi yaptınız. \n"
+"                            Hesabınız güvenlik nedeniyle <strong>1 saat</strong> süreyle kilitlenmiştir.\n"
+"                            "
+
+
+#: .\dashboard\templates\dashboard\includes\cards\activity_card.html:33
+#, python-format
+msgid "%(time_since)s önce"
+msgstr "%(time_since)s önce"
+
+
+#: .\dashboard\templates\dashboard\includes\navigation\top_navbar.html:27
+#, python-format
+msgid "%(remaining)s GB kaldı"
+msgstr "%(remaining)s GB kaldı"
+
+
+#: .\dashboard\templates\dashboard\media_mentions\list.html:221
+#, python-format
+msgid "%(counter)s haber gösteriliyor"
+msgid_plural "%(counter)s haber gösteriliyor"
+msgstr[0] "%(counter)s haber gösteriliyor"
+msgstr[1] "%(counter)s haber gösteriliyor"
+
+
+#: .\dashboard\templates\dashboard\messages\list.html:259
+#, python-format
+msgid "%(counter)s adet okunmamış mesaj bulunuyor."
+msgid_plural "%(counter)s adet okunmamış mesaj bulunuyor."
+msgstr[0] "%(counter)s adet okunmamış mesaj bulunuyor."
+msgstr[1] "%(counter)s adet okunmamış mesaj bulunuyor."
+
+
+#: .\dashboard\templates\dashboard\notifications\list.html:75
+#, python-format
+msgid "%(current)s / %(total)s"
+msgstr "%(current)s / %(total)s"
+
+
+#: .\dashboard\templates\dashboard\login.html:43
+#, python-format
+msgid "%(attempts)s/%(max)s başarısız deneme yapıldı. Güvenlik kodunu girin."
+msgstr "%(attempts)s/%(max)s başarısız deneme yapıldı. Güvenlik kodunu girin."
+
+
+#: .\dashboard\templates\dashboard\products\list.html:165
+#: .\dashboard\templates\dashboard\products\list.html:167
+#: .\dashboard\templates\dashboard\products\list.html:546
+#, python-format
+msgid "%(stock)s adet"
+msgstr "%(stock)s adet"
+
+
+#: .\dashboard\templates\dashboard\products\list.html:557
+#, python-format
+msgid "%%%(percentage)s indirim"
+msgstr "%%%(percentage)s indirim"
+
+
+#: .\templates\catalog\catalog_view.html:8
+#, python-format
+msgid "%(site_name)s - %(catalog_title)s. Ürünlerimizi katalogumuzdan inceleyebilirsiniz."
+msgstr "%(site_name)s - %(catalog_title)s. Ürünlerimizi katalogumuzdan inceleyebilirsiniz."
+
+
+#: .\templates\catalog\catalog_view.html:11
+#, python-format
+msgid "%(site_name)s ürün kataloğu. Tüm ürünlerimizi detaylı olarak inceleyebilirsiniz."
+msgstr "%(site_name)s ürün kataloğu. Tüm ürünlerimizi detaylı olarak inceleyebilirsiniz."
+
+
+#: .\templates\catalog\catalog_view.html:578
+#, python-format
+msgid "%(site_name)s ürün kataloğunu inceleyin."
+msgstr "%(site_name)s ürün kataloğunu inceleyin."
+
+
+#: .\templates\products\sections\product_detail.html:132
+#, python-format
+msgid "%(product.weight)s kg"
+msgstr "%(product.weight)s kg"
+
+
+#: .\templates\products\sections\related_products.html:33
+#: .\templates\products\sections\related_products.html:36
+#, python-format
+msgid "%(related_product.price)s ₺"
+msgstr "%(related_product.price)s ₺"
+
+
+#: .\templates\products\sections\related_products.html:34
+#, python-format
+msgid "%(related_product.discount_price)s ₺"
+msgstr "%(related_product.discount_price)s ₺"
+
+
+#: .\templates\products\sections\suggested_products.html:34
+#: .\templates\products\sections\suggested_products.html:37
+#, python-format
+msgid "%(suggested_product.price)s ₺"
+msgstr "%(suggested_product.price)s ₺"
+
+
+#: .\templates\products\sections\suggested_products.html:35
+#, python-format
+msgid "%(suggested_product.discount_price)s ₺"
+msgstr "%(suggested_product.discount_price)s ₺"
+
+
+#: .\templates\contact\sections\review_list.html:672
+#, python-format
+msgid "%(review.rating)s/5"
+msgstr "%(review.rating)s/5"
+
+
+#: .\templates\home\sections\statistics.html:103
+#, python-format
+msgid "100%%"
+msgstr "100%%"
+
+
+#: .\templates\includes\mobile_breadcrumb.html:11
+#, python-format
+msgid "(%(count)s seviye)"
+msgid_plural "(%(count)s seviye)"
+msgstr[0] "(%(count)s seviye)"
+msgstr[1] "(%(count)s seviye)"
+
+
+#: .\templates\admin\dashboard.html:93
+#, python-format
+msgid "Sipariş #%(order.id)s"
+msgstr "Sipariş #%(order.id)s"
+
+
+#: .\templates\admin\dashboard.html:94
+#, python-format
+msgid ""
+"\n"
+"                        Sipariş #%(order_id)s - %(customer_name)s\n"
+"                        "
+msgstr ""
+"\n"
+"                        Sipariş #%(order_id)s - %(customer_name)s\n"
+"                        "
+
+
+#: .\dashboard\templates\dashboard\reviews\list.html:244
+#, python-format
+msgid "%(counter)s adet onay bekleyen yorum bulunuyor."
+msgstr "%(counter)s adet onay bekleyen yorum bulunuyor."
+
+
+#: .\dashboard\templates\dashboard\about\edit.html:265
+#, python-format
+msgid "Müşteri Memnuniyeti (%%)"
+msgstr "Müşteri Memnuniyeti (%%)"
