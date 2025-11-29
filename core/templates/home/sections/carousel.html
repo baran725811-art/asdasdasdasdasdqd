@@ -26,7 +26,7 @@
                 <div class="carousel-bg">
                     {% load image_tags %}
                     {% if slide.cropped_image %}
-                        {% carousel_image slide alt_text=slide.alt_text|default:slide.title is_first=forloop.first %}
+                        {% carousel_image slide css_class="carousel-image" alt_text=slide.alt_text|default:slide.title is_first=forloop.first %}
                     {% endif %}
                     <div class="carousel-overlay"></div>
                 </div>
