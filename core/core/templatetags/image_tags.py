@@ -277,7 +277,7 @@ def about_card_image(obj, css_class=''):
 @register.simple_tag
 def carousel_image(slide_obj, css_class='', is_first=False, alt_text=''):
     """
-    Carousel için resim tag'i - SADECE KIRPILMIŞ
+    Carousel için resim tag'i
     Usage: {% carousel_image slide 'carousel-image' is_first=forloop.first alt_text=slide.alt_text %}
     """
     if not slide_obj:
@@ -298,9 +298,9 @@ def carousel_image(slide_obj, css_class='', is_first=False, alt_text=''):
     else:
         final_alt_text = ''
     
-    # SADECE kırpılmış resim kullan - orijinal fallback YOK
-    if slide_obj.cropped_image:
-        image_url = cropped_image_url(slide_obj.cropped_image, 'carousel')
+    # Image alanını kullan
+    if slide_obj.image:  # ← cropped_image yerine image
+        image_url = cropped_image_url(slide_obj.image, 'carousel')  # ← cropped_image yerine image
     
     if not image_url:
         return ''

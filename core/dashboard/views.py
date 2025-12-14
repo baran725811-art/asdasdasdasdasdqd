@@ -13,7 +13,7 @@ from .forms import (MediaMentionForm, CategoryForm, ProductForm,
                    CarouselSlideForm, CategoryFormWithTranslation, AboutFormWithTranslation,    
                    ProductFormWithTranslation, GalleryFormWithTranslation,
                    CarouselSlideFormWithTranslation, ServiceFormWithTranslation, 
-                   TeamMemberFormWithTranslation, MediaMentionFormWithTranslation)
+                   TeamMemberFormWithTranslation, MediaMentionFormWithTranslation, DashboardPasswordResetForm, DashboardSetPasswordForm)
 from about.models import About, Service, TeamMember
 from gallery.models import Gallery
 from contact.models import Contact
@@ -62,8 +62,9 @@ from django.template.loader import render_to_string
 from .models import Notification
 from django.conf import settings
 from django.urls import reverse_lazy, reverse 
-
-
+from django.contrib.auth import views as auth_views
+from django.utils.decorators import method_decorator
+from django.utils.translation import gettext_lazy as _
 
 # Login View
 
@@ -2258,11 +2259,34 @@ def carousel_edit(request, pk):
     return redirect('dashboard:dashboard_carousel')
 @staff_member_required(login_url='dashboard:dashboard_login')
 def carousel_delete(request, pk):
-    slide = get_object_or_404(CarouselSlide, pk=pk)
-    slide.delete()
-    messages.success(request, 'Slayt silindi.')
+    """Carousel slayt silme - Güvenli versiyon"""
+    try:
+        slide = CarouselSlide.objects.get(pk=pk)
+    except CarouselSlide.DoesNotExist:
+        messages.error(request, f'ID={pk} numaralı slayt bulunamadı. Muhtemelen daha önce silinmiş.')
+        return redirect('dashboard:dashboard_carousel')
+    
+    slide_title = slide.title
+    
+    if request.method == 'POST':
+        try:
+            with transaction.atomic():
+                # Görsel dosyasını da sil
+                if slide.image:
+                    try:
+                        import os
+                        if os.path.isfile(slide.image.path):
+                            os.remove(slide.image.path)
+                    except:
+                        pass  # Cloudinary kullanıyorsanız gerek yok
+                
+                slide.delete()
+                messages.success(request, f'"{slide_title}" slaytı başarıyla silindi.')
+                
+        except Exception as e:
+            messages.error(request, f'Silme işlemi sırasında hata oluştu: {str(e)}')
+    
     return redirect('dashboard:dashboard_carousel')
-
 # dashboard/views.py (mevcut views'lara ekleyin)
 
 @staff_member_required(login_url='dashboard:dashboard_login')
@@ -3919,3 +3943,65 @@ def storage_info_api(request):
     """Storage bilgilerini JSON olarak döner"""
     storage_info = check_cloudinary_storage()
     return JsonResponse(storage_info)
+
+
+@method_decorator(ratelimit(key='ip', rate='3/m', block=True), name='dispatch')
+@method_decorator(ratelimit(key='post:email', rate='3/m', block=True), name='dispatch')
+class DashboardPasswordResetView(auth_views.PasswordResetView):
+    """
+    1. Adım: E-posta giriş sayfası.
+    Güvenlik: IP başına ve POST edilen email başına dakikada 3 istek limiti.
+    """
+    template_name = 'dashboard/password_reset/password_reset_form.html'
+    email_template_name = 'dashboard/password_reset/password_reset_email.html'
+    subject_template_name = 'dashboard/password_reset/password_reset_subject.txt'
+    success_url = reverse_lazy('dashboard:password_reset_done')
+    form_class = DashboardPasswordResetForm
+    html_email_template_name = 'dashboard/password_reset/password_reset_email.html'
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = _('Parolamı Unuttum')
+        return context
+
+
+class DashboardPasswordResetDoneView(auth_views.PasswordResetDoneView):
+    """
+    2. Adım: Başarılı gönderim mesajı.
+    Güvenlik: Kullanıcı var veya yok ayrımı yapmadan aynı mesajı gösterir.
+    """
+    template_name = 'dashboard/password_reset/password_reset_done.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = _('E-posta Gönderildi')
+        return context
+
+
+@method_decorator(ratelimit(key='ip', rate='5/m', block=True), name='dispatch')
+class DashboardPasswordResetConfirmView(auth_views.PasswordResetConfirmView):
+    """
+    3. Adım: Token doğrulama ve yeni parola belirleme.
+    Token URL'den gelir, Django otomatik doğrular (HMAC).
+    """
+    template_name = 'dashboard/password_reset/password_reset_confirm.html'
+    success_url = reverse_lazy('dashboard:password_reset_complete')
+    form_class = DashboardSetPasswordForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = _('Yeni Parola Belirle')
+        return context
+
+
+class DashboardPasswordResetCompleteView(auth_views.PasswordResetCompleteView):
+    """
+    4. Adım: İşlem tamamlandı.
+    """
+    template_name = 'dashboard/password_reset/password_reset_complete.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = _('Parola Sıfırlandı')
+        return context

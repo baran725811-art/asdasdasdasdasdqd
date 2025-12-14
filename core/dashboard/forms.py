@@ -17,7 +17,11 @@ from .mixins import BaseTranslationForm, TranslationFieldGenerator
 from .constants import FORM_WIDGET_CLASSES, LANGUAGE_NAMES
 from django.contrib.auth.forms import PasswordChangeForm
 from core.models import SiteSettings
+from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
+from django.utils.translation import gettext_lazy as _
 
+from django.core.cache import cache 
+from django.conf import settings
 
 from .models import DashboardTranslationSettings
 from .constants import LANGUAGE_CHOICES, LANGUAGE_NAMES
@@ -672,6 +676,16 @@ class CarouselSlideFormWithTranslation(BaseTranslationForm):
             return int(order)
         except (ValueError, TypeError):
             return 0
+    
+    def clean_image(self):
+        """Görsel alanını temizle - YENİ kayıtlar için zorunlu"""
+        image = self.cleaned_data.get('image')
+        
+        # Sadece YENİ kayıt ekleniyorsa görsel zorunlu
+        if not self.instance.pk and not image:
+            raise forms.ValidationError('Görsel alanı zorunludur.')
+        
+        return image
     
     def _add_translation_fields(self):
         """Çeviri alanlarını manuel olarak ekle - Gallery gibi"""        
@@ -1341,3 +1355,62 @@ class DashboardTranslationSettingsForm(forms.ModelForm):
         
         self.fields['dashboard_language'].choices = dashboard_choices
         self.fields['primary_language'].choices = primary_choices
+        
+        
+        
+# Mail
+
+
+class DashboardPasswordResetForm(PasswordResetForm):
+    """
+    E-posta adresi ile parola sıfırlama talep formu.
+    Rate limit (zaman aşımı) kontrolü eklenmiştir.
+    """
+    email = forms.EmailField(
+        label=_("E-posta Adresi"),
+        max_length=254,
+        widget=forms.EmailInput(attrs={
+            'class': 'form-control-modern',
+            'placeholder': _('Kayıtlı e-posta adresinizi girin'),
+            'autocomplete': 'email'
+        })
+    )
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        
+        # 1. Rate Limit Kontrolü (Cache'den kontrol et)
+        # Eğer bu e-posta için 'cooldown' anahtarı varsa, hata fırlat.
+        cooldown_key = f"password_reset_cooldown_{email}"
+        if cache.get(cooldown_key):
+            # Kalan süreyi hesaplamak opsiyoneldir, basitçe hata verebiliriz.
+            raise forms.ValidationError(
+                _("Bu e-posta adresi için yakın zamanda bir sıfırlama bağlantısı gönderildi. Lütfen tekrar denemeden önce 15 dakika bekleyin.")
+            )
+            
+        return email
+
+    def save(self, *args, **kwargs):
+        """
+        E-posta gönderildikten sonra cache'e bir 'cooldown' (soğuma) kaydı ekle.
+        """
+        email = self.cleaned_data.get('email')
+        
+        # Normal gönderme işlemini yap
+        ret_val = super().save(*args, **kwargs)
+        
+        # 2. Başarılı gönderimden sonra 15 dakika (900 saniye) engelleme koy
+        cooldown_key = f"password_reset_cooldown_{email}"
+        cache.set(cooldown_key, True, timeout=900)  # 900 saniye = 15 dakika
+        
+        return ret_val
+
+
+class DashboardSetPasswordForm(SetPasswordForm):
+    """
+    Token doğrulandıktan sonra yeni parolanın belirlendiği form.
+    """
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.update({'class': 'form-control-modern'})

@@ -36,17 +36,17 @@ if USE_TRANSLATION:
 
         # Küçük resim için özel method
         def thumbnail(self, obj):
-            if obj.cropped_image:
+            if obj.image:
                 return format_html(
                     '<img src="{}" style="width:80px; height:auto; border-radius:6px;" />',
-                    obj.cropped_image.url
+                    obj.image.url
                 )
             return "—"
         thumbnail.short_description = "Görsel"
         
         fieldsets = (
             ('Temel Bilgiler', {
-                'fields': ('title', 'slug', 'description',  'cropped_image', 'alt_text')
+                'fields': ('title', 'slug', 'description', 'image', 'alt_text')
             }),
             ('Butonlar', {
                 'fields': ('button_text', 'button_url', 'secondary_button_text', 'secondary_button_url')
@@ -66,9 +66,9 @@ if USE_TRANSLATION:
         
         def get_form(self, request, obj=None, **kwargs):
             form = super().get_form(request, obj, **kwargs)
-            # Sadece cropped_image alanına widget uygula
-            if 'cropped_image' in form.base_fields:
-                form.base_fields['cropped_image'].widget = CarouselCropWidget()
+            # Sadece image alanına widget uygula
+            if 'image' in form.base_fields:
+                form.base_fields['image'].widget = CarouselCropWidget()
             return form
 
         def save_model(self, request, obj, form, change):

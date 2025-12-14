@@ -1,27 +1,24 @@
-<!-- core\dashboard\templates\dashboard\carousel\list.html -->
+<!--core\dashboard\templates\dashboard\carousel\list.html-->
 {% extends 'dashboard/base/list_base.html' %}
 {% load widget_tweaks %}
 {% load i18n %}
 {% load custom_filters %}
+{% load static %}
 
 {% block title %}{% trans "Carousel Yönetimi" %}{% endblock %}
 {% block page_title %}{% trans "Carousel Yönetimi" %}{% endblock %}
 
-<!-- Page Header Configuration -->
 {% block page_header %}
     {% trans "Ana sayfa slaytlarınızı düzenleyin ve yönetin" as carousel_subtitle %}
     {% trans "Carousel Yönetimi" as page_title_trans %}
     {% include 'dashboard/includes/navigation/page_header.html' with page_title=page_title_trans page_subtitle=carousel_subtitle page_icon="fas fa-images" page_actions=page_actions %}
 {% endblock %}
 
-<!-- Page Content -->
 {% block page_content %}
     
-    <!-- Carousel Preview Section -->
     {% if slides %}
     <div class="row mb-4">
         <div class="col-12">
-           
             <div class="card-modern">
                 <div class="card-header-modern">
                     <div class="d-flex justify-content-between align-items-center">
@@ -46,13 +43,25 @@
                                 {% for slide in slides %}
                                 <div class="carousel-item {% if forloop.first %}active{% endif %}">
                                     <div class="carousel-slide-preview">
-                                        <img src="{{ slide.image.url }}" 
-                                             alt="{{ slide.alt_text|default:slide.title }}" 
-                                             class="d-block w-100"
-                                             title="{{ slide.alt_text|default:slide.title }}">
+                                        {% if slide.image %}
+                                        <img src="{{ slide.image.url }}"
+                                                alt="{{ slide.alt_text|default:slide.title }}" 
+                                                class="d-block w-100"
+                                                title="{{ slide.alt_text|default:slide.title }}"
+                                                style="max-height: 500px; object-fit: cover;"
+                                                onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'d-block w-100 bg-secondary d-flex align-items-center justify-content-center\' style=\'height: 400px;\'><div class=\'text-center text-white\'><i class=\'fas fa-image fa-3x mb-3\'></i><p>Görsel Yüklenemedi</p></div></div>';">
+                                        {% else %}
+                                        <div class="d-block w-100 bg-secondary d-flex align-items-center justify-content-center" style="height: 400px;">
+                                            <div class="text-center text-white">
+                                                <i class="fas fa-image fa-3x mb-3"></i>
+                                                <p>{% trans "Görsel Yok" %}</p>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+
                                         <div class="carousel-caption d-md-block">
                                             <h5>{{ slide.title }}</h5>
-                                            <p>{{ slide.description }}</p>
+                                            <p>{{ slide.description|striptags }}</p>
                                             {% if slide.button_text %}
                                             <button class="btn-modern primary">{{ slide.button_text }}</button>
                                             {% endif %}
@@ -75,14 +84,9 @@
     </div>
     {% endif %}
 
-    <!-- Slides Table -->
     <div class="row">
         <div class="col-12">
             {% if slides %}
-
-
-
-                
                 <div class="table-card">
                     <div class="card-header-modern">
                         <div class="d-flex justify-content-between align-items-center">
@@ -90,8 +94,7 @@
                                 <i class="fas fa-list me-2"></i>{% trans "Slayt Listesi" %}
                             </h5>
                             <div class="d-flex gap-2">
-                                {% trans "Slayt ara..." as search_placeholder_trans %}
-                                {% include 'dashboard/includes/tables/table_search.html' with search_placeholder=search_placeholder_trans search_id="slideSearch" %}
+                                {% include 'dashboard/includes/tables/table_search.html' with search_placeholder="Slayt ara..." search_id="slideSearch" %}
                                 <button type="button" class="btn-modern primary btn-sm" data-bs-toggle="modal" data-bs-target="#addSlideModal">
                                     <i class="fas fa-plus me-1"></i>{% trans "Yeni Slayt Ekle" %}
                                 </button>
@@ -99,7 +102,6 @@
                         </div>
                     </div>
                     <div class="card-body p-0">
-                        {% if slides %}
                         <div class="table-responsive">
                             <table class="table table-modern table-hover" id="slidesTable">
                                 <thead>
@@ -116,13 +118,22 @@
                                     {% for slide in slides %}
                                     <tr data-slide-id="{{ slide.id }}">
                                         <td>
-                                            {% if slide.image %}
-                                                <img src="{{ slide.image.url }}" alt="{{ slide.title }}" class="image-modern" style="width: 100px; height: 60px; object-fit: cover;">
-                                            {% else %}
-                                                <div class="image-placeholder" style="width: 100px; height: 60px;">
-                                                    <i class="fas fa-image"></i>
+                                            <div class="position-relative">
+                                                {% if slide.image %}
+                                                <img src="{{ slide.image.url }}"
+                                                         alt="{{ slide.title }}" 
+                                                         class="image-modern" 
+                                                         style="width: 100px; height: 60px; object-fit: cover;"
+                                                         onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'image-placeholder bg-light d-flex align-items-center justify-content-center\' style=\'width: 100px; height: 60px; border-radius: 6px;\'><i class=\'fas fa-image text-muted fs-4\'></i></div>';">
+                                                {% else %}
+                                                    <div class="image-placeholder bg-light d-flex align-items-center justify-content-center" style="width: 100px; height: 60px; border-radius: 6px;">
+                                                        <i class="fas fa-image text-muted fs-4"></i>
+                                                    </div>
+                                                {% endif %}
+                                                <div class="position-absolute top-0 end-0 bg-dark text-white px-2 py-1 rounded-start-bottom" style="font-size: 0.7rem;">
+                                                    {{ slide.order }}
                                                 </div>
-                                            {% endif %}
+                                            </div>
                                         </td>
                                         <td>
                                             <div class="fw-semibold">{{ slide.title }}</div>
@@ -169,14 +180,11 @@
                                 </tbody>
                             </table>
                         </div>
-                        {% endif %}
                     </div>
                 </div>
-
-
             {% else %}
                 {% trans "Henüz slayt bulunmuyor" as empty_title %}
-                {% trans "İlk slaytınızı eklemek için yukarıdaki Yeni Slayt Ekle butonunu kullanın." as empty_message %}
+                {% trans "İlk slaytınızı eklemek için yukarıdaki \"Yeni Slayt Ekle\" butonunu kullanın." as empty_message %}
                 {% trans "İlk Slaytı Ekle" as add_first_slide %}
                 {% include 'dashboard/includes/ui/empty_state.html' with empty_title=empty_title empty_message=empty_message empty_icon="fas fa-images" action_button_attrs='data-bs-toggle="modal" data-bs-target="#addSlideModal"' action_button_text=add_first_slide action_button_icon="fas fa-plus" %}
             {% endif %}
@@ -185,7 +193,6 @@
 {% endblock %}
 
 {% block list_modals %}
-<!-- Add Slide Modal -->
 <div class="modal fade modal-modern" id="addSlideModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -200,12 +207,10 @@
                 {% csrf_token %}
                 
                 <div class="modal-body">
-                    <!-- Translation Tabs -->
                     {% if translation_enabled and enabled_languages|length > 1 %}
                         {% include 'dashboard/includes/forms/translation_tabs.html' with show_primary_label=True %}
                     {% endif %}
                     
-                    <!-- Turkish Content -->
                     <div class="translation-content active" data-lang="tr">
                         <div class="row">
                             <div class="col-md-8">
@@ -230,27 +235,31 @@
                         </div>
                     </div>
 
-                    <!-- Translation Languages Content -->
                     {% if translation_enabled and enabled_languages|length > 1 %}
                         {% for lang in enabled_languages %}
                             {% if lang != 'tr' %}
                             <div class="translation-content" data-lang="{{ lang }}">
                                 <div class="row">
                                     <div class="col-12">
-                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="title_"|add:lang field_label="Başlık" field_icon="fas fa-heading" field_type="text" is_required=True help_text="Bu alan zorunludur" language_code=lang %}
+                                        {% trans "Başlık" as label_title %}
+                                        {% trans "Bu alan zorunludur" as help_text_required %}
+                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="title_"|add:lang field_label=label_title field_icon="fas fa-heading" field_type="text" is_required=True help_text=help_text_required language_code=lang %}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
-                                        {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description_"|add:lang label="Açıklama" rows="3" help_text="Bu alan zorunludur" %}
+                                        {% trans "Açıklama" as label_desc %}
+                                        {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description_"|add:lang label=label_desc rows="3" help_text=help_text_required %}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text_"|add:lang field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" help_text="SEO için görsel açıklaması" language_code=lang %}
+                                        {% trans "Alt Metin (SEO)" as label_alt %}
+                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text_"|add:lang field_label=label_alt field_icon="fas fa-paragraph" field_type="text" help_text=help_text_required language_code=lang %}
                                     </div>
                                     <div class="col-md-6">
-                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="button_text_"|add:lang field_label="Buton Metni" field_icon="fas fa-mouse-pointer" field_type="text" language_code=lang %}
+                                        {% trans "Buton Metni" as label_btn %}
+                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="button_text_"|add:lang field_label=label_btn field_icon="fas fa-mouse-pointer" field_type="text" language_code=lang %}
                                     </div>
                                 </div>
                             </div>
@@ -258,16 +267,12 @@
                         {% endfor %}
                     {% endif %}
 
-                    <!-- Media & Settings -->
-                    <!-- Media & Settings -->
                     <div class="card-modern mt-4">
                         <div class="card-header-modern">
                             <h6 class="mb-0">
                                 <i class="fas fa-cogs me-2"></i>{% trans "Medya & Ayarlar" %}
                             </h6>
                         </div>
-                        
-
                         <div class="card-body-modern">
                             <div class="row">
                                 <div class="col-12">
@@ -305,7 +310,6 @@
     </div>
 </div>
 
-<!-- Edit & Delete Modals for each slide -->
 {% for slide_data in slides_with_translations %}
 {% with slide=slide_data.object %}
 <div class="modal fade modal-modern" id="editSlideModal{{ slide.id }}" tabindex="-1" aria-hidden="true">
@@ -323,12 +327,10 @@
                 <input type="hidden" name="slide_id" value="{{ slide.id }}">
                 
                 <div class="modal-body">
-                    <!-- Translation Tabs -->
                     {% if translation_enabled and enabled_languages|length > 1 %}
                         {% include 'dashboard/includes/forms/translation_tabs.html' with show_primary_label=True %}
                     {% endif %}
                     
-                    <!-- Turkish Content -->
                     <div class="translation-content active" data-lang="tr">
                         <div class="row">
                             <div class="col-md-8">
@@ -353,76 +355,31 @@
                         </div>
                     </div>
 
-                    <!-- Translation Languages Content -->
-                    <!-- Translation Languages Content -->
                     {% if translation_enabled and enabled_languages|length > 1 %}
                         {% for lang in enabled_languages %}
                             {% if lang != 'tr' %}
                             <div class="translation-content" data-lang="{{ lang }}">
                                 <div class="row">
                                     <div class="col-12">
-                                        {% if lang == 'en' %}
-                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="title_en" field_label="{% trans "Başlık" %}" field_icon="fas fa-heading" field_type="text" field_value=slide.title_en_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
-                                        {% elif lang == 'de' %}
-                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="title_de" field_label="Başlık" field_icon="fas fa-heading" field_type="text" field_value=slide.title_de_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
-                                        {% elif lang == 'fr' %}
-                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="title_fr" field_label="Başlık" field_icon="fas fa-heading" field_type="text" field_value=slide.title_fr_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
-                                        {% elif lang == 'es' %}
-                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="title_es" field_label="Başlık" field_icon="fas fa-heading" field_type="text" field_value=slide.title_es_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
-                                        {% elif lang == 'ru' %}
-                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="title_ru" field_label="Başlık" field_icon="fas fa-heading" field_type="text" field_value=slide.title_ru_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
-                                        {% elif lang == 'ar' %}
-                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="title_ar" field_label="Başlık" field_icon="fas fa-heading" field_type="text" field_value=slide.title_ar_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
-                                        {% endif %}
+                                        {% trans "Başlık" as label_title %}
+                                        {% trans "Bu alan zorunludur" as help_text_required %}
+                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="title_"|add:lang field_label=label_title field_icon="fas fa-heading" field_type="text" field_value=slide.title_en_value is_required=True help_text=help_text_required language_code=lang %}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
-                                        {% if lang == 'en' %}
-                                            {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description_en" label="Açıklama" value=slide.description_en_value rows="3" help_text="Bu alan zorunludur" %}
-                                        {% elif lang == 'de' %}
-                                            {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description_de" label="Açıklama" value=slide.description_de_value rows="3" help_text="Bu alan zorunludur" %}
-                                        {% elif lang == 'fr' %}
-                                            {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description_fr" label="Açıklama" value=slide.description_fr_value rows="3" help_text="Bu alan zorunludur" %}
-                                        {% elif lang == 'es' %}
-                                            {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description_es" label="Açıklama" value=slide.description_es_value rows="3" help_text="Bu alan zorunludur" %}
-                                        {% elif lang == 'ru' %}
-                                            {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description_ru" label="Açıklama" value=slide.description_ru_value rows="3" help_text="Bu alan zorunludur" %}
-                                        {% elif lang == 'ar' %}
-                                            {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description_ar" label="Açıklama" value=slide.description_ar_value rows="3" help_text="Bu alan zorunludur" %}
-                                        {% endif %}
+                                        {% trans "Açıklama" as label_desc %}
+                                        {% include 'dashboard/includes/forms/text_editor_field.html' with field_name="description_"|add:lang label=label_desc value=slide.description_en_value rows="3" help_text=help_text_required %}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
-                                        {% if lang == 'en' %}
-                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text_en" field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" field_value=slide.alt_text_en_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
-                                        {% elif lang == 'de' %}
-                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text_de" field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" field_value=slide.alt_text_de_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
-                                        {% elif lang == 'fr' %}
-                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text_fr" field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" field_value=slide.alt_text_fr_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
-                                        {% elif lang == 'es' %}
-                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text_es" field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" field_value=slide.alt_text_es_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
-                                        {% elif lang == 'ru' %}
-                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text_ru" field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" field_value=slide.alt_text_ru_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
-                                        {% elif lang == 'ar' %}
-                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text_ar" field_label="Alt Metin (SEO)" field_icon="fas fa-paragraph" field_type="text" field_value=slide.alt_text_ar_value is_required=True help_text="Bu alan zorunludur" language_code=lang %}
-                                        {% endif %}
+                                        {% trans "Alt Metin (SEO)" as label_alt %}
+                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="alt_text_"|add:lang field_label=label_alt field_icon="fas fa-paragraph" field_type="text" field_value=slide.alt_text_en_value help_text=help_text_required language_code=lang %}
                                     </div>
                                     <div class="col-md-6">
-                                        {% if lang == 'en' %}
-                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="button_text_en" field_label="Buton Metni" field_icon="fas fa-mouse-pointer" field_type="text" field_value=slide.button_text_en_value language_code=lang %}
-                                        {% elif lang == 'de' %}
-                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="button_text_de" field_label="Buton Metni" field_icon="fas fa-mouse-pointer" field_type="text" field_value=slide.button_text_de_value language_code=lang %}
-                                        {% elif lang == 'fr' %}
-                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="button_text_fr" field_label="Buton Metni" field_icon="fas fa-mouse-pointer" field_type="text" field_value=slide.button_text_fr_value language_code=lang %}
-                                        {% elif lang == 'es' %}
-                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="button_text_es" field_label="Buton Metni" field_icon="fas fa-mouse-pointer" field_type="text" field_value=slide.button_text_es_value language_code=lang %}
-                                        {% elif lang == 'ru' %}
-                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="button_text_ru" field_label="Buton Metni" field_icon="fas fa-mouse-pointer" field_type="text" field_value=slide.button_text_ru_value language_code=lang %}
-                                        {% elif lang == 'ar' %}
-                                            {% include 'dashboard/includes/forms/form_field.html' with field_name="button_text_ar" field_label="Buton Metni" field_icon="fas fa-mouse-pointer" field_type="text" field_value=slide.button_text_ar_value language_code=lang %}
-                                        {% endif %}
+                                        {% trans "Buton Metni" as label_btn %}
+                                        {% include 'dashboard/includes/forms/form_field.html' with field_name="button_text_"|add:lang field_label=label_btn field_icon="fas fa-mouse-pointer" field_type="text" field_value=slide.button_text_en_value language_code=lang %}
                                     </div>
                                 </div>
                             </div>
@@ -430,7 +387,6 @@
                         {% endfor %}
                     {% endif %}
 
-                    <!-- Media & Settings -->
                     <div class="card-modern mt-4">
                         <div class="card-header-modern">
                             <h6 class="mb-0">
@@ -440,7 +396,9 @@
                         <div class="card-body-modern">
                             <div class="row">
                                 <div class="col-12">
-                                    {% include 'dashboard/includes/forms/image_upload_field.html' with field_name="image" label="Slayt Görseli" current_image=slide.image help_text="Yeni görsel seçmezseniz mevcut korunur" %}
+                                    {# --- DÜZELTME 1: is_required=False parametresini ekledik --- #}
+                                    {% include 'dashboard/includes/forms/image_upload_field.html' with field_name="image" label="Slayt Görseli" current_image=slide.image help_text="Yeni görsel seçmezseniz mevcut korunur" is_required=False %}
+                                    {# --- DÜZELTME SONU --- #}
                                 </div>
                             </div>
                             <div class="row">
@@ -470,13 +428,12 @@
     </div>
 </div>
 
-<!-- View Slide Modal -->
 <div class="modal fade modal-modern" id="viewSlideModal{{ slide.id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
-                    <i class="fas fa-eye me-2"></i>{% trans "Slayt Detayları" %}
+                    <i class="fas fa-eye me-2"></i>{% trans "Slayt Detayları"%}
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
@@ -484,21 +441,30 @@
                 <div class="row">
                     <div class="col-md-6">
                         {% if slide.image %}
-                            <img src="{{ slide.image.url }}" alt="{{ slide.title }}" class="img-fluid rounded shadow">
+                                <img src="{{ slide.image.url }}"
+                                 alt="{{ slide.title }}" 
+                                 class="img-fluid rounded shadow"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="bg-secondary rounded shadow d-flex align-items-center justify-content-center" style="height: 250px; display:none;">
+                                <i class="fas fa-image fa-3x text-white"></i>
+                            </div>
+                        {% else %}
+                            <div class="bg-secondary rounded shadow d-flex align-items-center justify-content-center" style="height: 250px;">
+                                <i class="fas fa-image fa-3x text-white"></i>
+                            </div>
                         {% endif %}
                     </div>
                     <div class="col-md-6">
                         <h4>{{ slide.title }}</h4>
-                        {% trans "Açıklama bulunmuyor." as no_description %}
-                        <p class="text-muted">{{ slide.description|default:no_description|striptags }}</p>
+                        <p class="text-muted">{{ slide.description|default:"Açıklama bulunmuyor."|striptags }}</p>
                         
                         <div class="slide-meta mt-3">
                             <div class="row">
                                 <div class="col-6">
-                                    <strong>{% trans "Sıra" %}:</strong> {{ slide.order }}
+                                    <strong>{% trans "Sıra"%}:</strong> {{ slide.order }}
                                 </div>
                                 <div class="col-6">
-                                    <strong>{% trans "Durum" %}:</strong> 
+                                    <strong>{% trans "Durum"%}:</strong> 
                                     {% include 'dashboard/includes/ui/status_badge.html' with badge_text=slide.is_active|yesno:"Aktif,Pasif" badge_color=slide.is_active|yesno:"success,danger" %}
                                 </div>
                             </div>
@@ -518,7 +484,6 @@
     </div>
 </div>
 
-<!-- Delete Slide Modal -->
 <div class="modal fade" id="deleteSlideModal{{ slide.id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -533,11 +498,11 @@
                     <i class="fas fa-trash-alt text-danger fa-3x mb-3"></i>
                     <h5>{% trans "Bu slaytı silmek istediğinizden emin misiniz?" %}</h5>
                     <p class="text-muted">
-                        <strong>"{{ slide.title }}"</strong> {% trans "kalıcı olarak silinecek." %}
+                        <strong>"{{ slide.title }}"</strong> kalıcı olarak silinecek.
                     </p>
                     <div class="alert alert-warning mt-3">
                         <i class="fas fa-exclamation-triangle me-2"></i>
-                        {% trans "Bu işlem geri alınamaz!" %}
+                        Bu işlem geri alınamaz!
                     </div>
                 </div>
             </div>
@@ -559,13 +524,10 @@
         </div>
     </div>
 </div>
-
-
 {% endwith %}
 {% endfor %}
 {% endblock %}
 
-<!-- Page Variables and Configuration -->
 {% block page_vars %}
 <script>
 // Page actions for header
@@ -650,6 +612,7 @@ const tableHeaders = [
 ];
 
 // Table rows data
+// --- DÜZELTME 3: JavaScript içinde IF/ELSE kontrolü (En önemlisi) ---
 const tableRows = [
     {% for slide in slides %}
     {
@@ -660,11 +623,18 @@ const tableRows = [
             {
                 content: `
                     <div class="position-relative">
-                        <img src="{{ slide.image.url }}" 
-                             alt="{{ slide.alt_text|default:slide.title }}" 
+                        {% if slide.image %}
+                        <img src="{{ slide.image.url }}"
+                             alt="{{ slide.alt_text|default:slide.title|escapejs }}" 
                              class="image-modern" 
                              style="width: 100px; height: 60px; object-fit: cover;"
-                             title="{{ slide.alt_text|default:slide.title }}">
+                             title="{{ slide.alt_text|default:slide.title|escapejs }}"
+                             onerror="this.parentElement.innerHTML='<div class=\'image-placeholder bg-light d-flex align-items-center justify-content-center\' style=\'width: 100px; height: 60px;\'><i class=\'fas fa-image text-muted\'></i></div>';">
+                        {% else %}
+                        <div class="image-placeholder bg-light d-flex align-items-center justify-content-center" style="width: 100px; height: 60px; border-radius: 6px;">
+                            <i class="fas fa-image text-muted fs-4"></i>
+                        </div>
+                        {% endif %}
                         <div class="position-absolute top-0 end-0 bg-dark text-white px-2 py-1 rounded-start-bottom" 
                              style="font-size: 0.7rem;">
                             {{ slide.order }}
@@ -749,57 +719,10 @@ const tableRows = [
     }{% if not forloop.last %},{% endif %}
     {% endfor %}
 ];
+// --- DÜZELTME SONU ---
 
 // Form action URLs
-const addFormAction = '{% url "dashboard:dashboard_carousel_add" %}';
-
-// Modal content for add slide (this could be moved to a separate include)
-const addModalContent = `
-    <div class="row">
-        <div class="col-md-8 mb-3">
-            <label class="form-label">Başlık (Türkçe) *</label>
-            <input type="text" name="title" class="form-control" placeholder="Slayt başlığını girin..." required>
-        </div>
-        <div class="col-md-4 mb-3">
-            <label class="form-label">Sıralama</label>
-            <input type="number" name="order" class="form-control" value="0" min="0">
-        </div>
-    </div>
-    
-    <div class="mb-3">
-        <label class="form-label">Açıklama (Türkçe)</label>
-        <textarea name="description" class="form-control" rows="3" placeholder="Slayt açıklaması..."></textarea>
-    </div>
-    
-    <div class="mb-3">
-        <label class="form-label">Alt Metin (SEO) (Türkçe)</label>
-        <input type="text" name="alt_text" class="form-control" maxlength="125" placeholder="Görsel için SEO açıklaması (Max 125 karakter)">
-        <small class="form-text text-muted">Görselin ne olduğunu açıklayan metin. SEO için çok önemli!</small>
-    </div>
-    
-    <div class="mb-3">
-        <label class="form-label">Buton Metni (Türkçe)</label>
-        <input type="text" name="button_text" class="form-control" placeholder="Daha Fazla Bilgi">
-    </div>
-    
-    <div class="mb-3">
-        <label class="form-label">Görsel *</label>
-        <input type="file" name="image" class="form-control" accept="image/*" required>
-        <small class="form-text text-muted">Önerilen boyut: 1920x600 piksel</small>
-    </div>
-    
-    <div class="mb-3">
-        <label class="form-label">Buton URL</label>
-        <input type="url" name="button_url" class="form-control" placeholder="https://example.com">
-    </div>
-    
-    <div class="mb-3">
-        <div class="form-check form-switch">
-            <input type="checkbox" name="is_active" class="form-check-input" checked>
-            <label class="form-check-label">Aktif</label>
-        </div>
-    </div>
-`;
+const addFormAction = '{% url "dashboard:carousel_add" %}';
 
 // Preview toggle functionality
 document.addEventListener('DOMContentLoaded', function() {
@@ -808,8 +731,16 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (previewToggle && previewContainer) {
         previewToggle.addEventListener('click', function() {
-            previewContainer.style.display = previewContainer.style.display === 'none' ? 'block' : 'none';
+            if (previewContainer.style.display === 'none') {
+                previewContainer.style.display = 'block';
+                this.innerHTML = '<i class="fas fa-eye-slash me-1"></i>{% trans "Önizlemeyi Gizle" %}';
+            } else {
+                previewContainer.style.display = 'none';
+                this.innerHTML = '<i class="fas fa-eye me-1"></i>{% trans "Önizlemeyi Göster" %}';
+            }
         });
+        // Başlangıçta gizle veya göster (tercihe bağlı)
+        // previewContainer.style.display = 'none';
     }
 
     // Count active slides
@@ -822,13 +753,11 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 {% endblock %}
 
-<!-- Page specific CSS -->
 {% block extra_css %}
 {% load static %}
 <link rel="stylesheet" href="{% static 'dashboard/css/pages/carousel.css' %}">
 {% endblock %}
 
-<!-- Page specific JS -->
 {% block extra_js %}
 {% load static %}
 <script src="{% static 'dashboard/js/pages/carousel.js' %}"></script>
