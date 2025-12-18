@@ -608,4 +608,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+<script src="{% static 'dashboard/js/components/image-crop.js' %}"></script>
+<script>
+// Kırpma tamamlandığında cropped_image field'ını doldur
+document.addEventListener('cropComplete', function(e) {
+    const croppedImageField = document.querySelector('[name="cropped_image"]');
+    croppedImageField.value = e.detail.croppedImageData;
+});
+</script>
 {% endblock %}

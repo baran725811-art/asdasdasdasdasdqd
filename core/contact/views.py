@@ -20,42 +20,24 @@ def contact(request):
     reviews = Review.objects.filter(is_approved=True).order_by('-created_at')[:5]
     
     if request.method == 'POST':
-        # IP adresini al
-        client_ip = get_client_ip(request)
-
         if 'form_type' in request.POST:
             if request.POST['form_type'] == 'contact':
                 contact_form = ContactForm(request.POST)
                 review_form = ReviewForm()
-                
                 if contact_form.is_valid():
-                    # Commit=False ile nesneyi oluştur ama veritabanına henüz yazma
-                    contact_msg = contact_form.save(commit=False)
-                    # IP adresini ekle
-                    contact_msg.ip_address = client_ip
-                    # Şimdi kaydet
-                    contact_msg.save()
-                    
+                    contact_form.save()
                     messages.success(request, _('Mesajınız başarıyla gönderildi. En kısa sürede size dönüş yapacağız.'))
                     return redirect('contact:contact')
                 else:
                     messages.error(request, _('Form gönderilirken hata oluştu. Lütfen bilgileri kontrol edin.'))
             
-            elif request.POST['form_type'] == 'review':
-                # DÜZELTME: request.FILES parametresi eklendi (Resim yükleme için)
-                review_form = ReviewForm(request.POST, request.FILES)
+            elif request.POST['form_type'] == 'review' and request.user.is_authenticated:
+                review_form = ReviewForm(request.POST)
                 contact_form = ContactForm()
-                
                 if review_form.is_valid():
                     review = review_form.save(commit=False)
-                    
-                    # DÜZELTME: Sadece kullanıcı giriş yapmışsa user'ı kaydet
-                    if request.user.is_authenticated:
-                        review.user = request.user
-                    
-                    review.ip_address = client_ip
+                    review.user = request.user
                     review.save()
-                    
                     messages.success(request, _('Değerlendirmeniz başarıyla kaydedildi.'))
                     return redirect('contact:contact')
                 else:

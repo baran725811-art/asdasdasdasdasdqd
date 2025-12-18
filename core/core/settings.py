@@ -631,9 +631,8 @@ if DEBUG:
     if not os.path.exists(logs_dir):
         os.makedirs(logs_dir)
         
+        
 
-# Parola sıfırlama 
-PASSWORD_RESET_TIMEOUT = 3600  # 1 saat (saniye)
 
 # 2. Çerez ayarları
 # Dil çerezi (her zaman aktif - zorunlu)

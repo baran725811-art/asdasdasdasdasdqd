@@ -148,12 +148,6 @@ dashboard\templates\dashboard\login.html
 dashboard\templates\dashboard\media_mentions\list.html
 dashboard\templates\dashboard\messages\list.html
 dashboard\templates\dashboard\notifications\list.html
-dashboard\templates\dashboard\password_reset\password_reset_complete.html
-dashboard\templates\dashboard\password_reset\password_reset_confirm.html
-dashboard\templates\dashboard\password_reset\password_reset_done.html
-dashboard\templates\dashboard\password_reset\password_reset_email.html
-dashboard\templates\dashboard\password_reset\password_reset_form.html
-dashboard\templates\dashboard\password_reset\password_reset_subject.txt
 dashboard\templates\dashboard\products\list.html
 dashboard\templates\dashboard\profile\edit.html
 dashboard\templates\dashboard\profile\password_change.html
@@ -788,7 +782,6 @@ templates\errors\400.html
 templates\errors\403.html
 templates\errors\404.html
 templates\errors\500.html
-templates\errors\csrf_failure.html
 templates\errors\lockout.html
 templates\errors\ratelimit.html
 templates\gallery\gallery_list.html

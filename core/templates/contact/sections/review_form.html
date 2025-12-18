@@ -1,3 +1,4 @@
+<!-- templates/contact/sections/review_form.html -->
 {% load static %}
 {% load i18n %}
 
@@ -24,6 +25,7 @@
                     <p>{% trans "Hizmetimizi nasıl buldunuz? Puanınızı ve yorumunuzu bizimle paylaşın." %}</p>
                 </div>
 
+                {% if user.is_authenticated %}
                 <form method="post" id="reviewForm" class="review-form" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type="hidden" name="form_type" value="review">
@@ -39,7 +41,7 @@
                                    name="{{ review_form.name.name }}" 
                                    id="{{ review_form.name.id_for_label }}" 
                                    class="form-input {% if review_form.name.errors %}error{% endif %}"
-                                   value="{% if review_form.name.value %}{{ review_form.name.value }}{% elif user.is_authenticated %}{{ user.get_full_name|default:user.username }}{% endif %}" 
+                                   value="{{ review_form.name.value|default:user.get_full_name|default:user.username }}" 
                                    placeholder="{% trans 'Adınız ve soyadınız' %}"
                                    required>
                             <div class="input-indicator"></div>
@@ -112,7 +114,7 @@
                                       required>{{ review_form.comment.value|default:'' }}</textarea>
                             <div class="input-indicator"></div>
                             <div class="character-counter">
-                                <span class="current">0</span> / <span class="max">500</span>
+                                <span class="current">0</span>{% trans " / " %}<span class="max">500</span>
                             </div>
                         </div>
                         {% if review_form.comment.errors %}
@@ -203,8 +205,25 @@
                         </div>
                     </div>
                 </form>
+                {% else %}
+                <!-- Giriş yapmamış kullanıcı için mesaj -->
+                <div class="login-required">
+                    <div class="login-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h4>{% trans "Giriş Gerekli" %}</h4>
+                    <p>{% trans "Değerlendirme yapabilmek için giriş yapmanız gerekiyor." %}</p>
+                    <div class="login-actions">
+                        <a href="{% url 'admin:login' %}" class="login-btn">
+                            <i class="fas fa-sign-in-alt"></i>
+                            {% trans "Giriş Yap" %}
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
             </div>
 
+            <!-- Son Değerlendirmeler -->
             <div class="recent-reviews">
                 <div class="reviews-header">
                     <h3>{% trans "Son Değerlendirmeler" %}</h3>
@@ -271,4 +290,5 @@
             </div>
         </div>
     </div>
-</section>
+
+                    

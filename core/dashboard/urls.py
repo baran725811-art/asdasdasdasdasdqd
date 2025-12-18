@@ -109,13 +109,6 @@ urlpatterns = [
     path('profile/password-change/', views.profile_password_change, name='profile_password_change'),
     path('settings/', views.settings_view, name='settings'),
     path('settings/business/', views.business_settings, name='business_settings'),
-    
-    
-    # PAROLA SIFIRLAMA URL'LERİ (Rate Limit Korumalı)
-    path('password-reset/', views.DashboardPasswordResetView.as_view(), name='password_reset'),
-    path('password-reset/done/', views.DashboardPasswordResetDoneView.as_view(), name='password_reset_done'),
-    path('password-reset/confirm/<uidb64>/<token>/', views.DashboardPasswordResetConfirmView.as_view(), name='password_reset_confirm'),
-    path('password-reset/complete/', views.DashboardPasswordResetCompleteView.as_view(), name='password_reset_complete'),
 ]
 
 # AJAX ve API endpoint'leri için ek URL patterns

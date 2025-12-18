@@ -19,10 +19,7 @@ class ContactForm(SecureForm, forms.ModelForm):
     def clean_phone(self):
         phone = self.cleaned_data.get('phone')
         if phone:
-            # Sadece rakamları bırak
             phone = re.sub(r'\D', '', phone)
-            # DÜZELTME: Regex kuralı 10 ile 13 hane arasını kabul edecek şekilde güncellendi.
-            # (Örn: 0555... (11), 90555... (12) formatlarını kapsar)
-            if not re.match(r'^\d{10,13}$', phone):
+            if not re.match(r'^\d{10,11}$', phone):
                 raise ValidationError('Geçersiz telefon numarası')
         return phone

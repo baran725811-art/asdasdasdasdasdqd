@@ -17,11 +17,7 @@ from .mixins import BaseTranslationForm, TranslationFieldGenerator
 from .constants import FORM_WIDGET_CLASSES, LANGUAGE_NAMES
 from django.contrib.auth.forms import PasswordChangeForm
 from core.models import SiteSettings
-from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
-from django.utils.translation import gettext_lazy as _
 
-from django.core.cache import cache 
-from django.conf import settings
 
 from .models import DashboardTranslationSettings
 from .constants import LANGUAGE_CHOICES, LANGUAGE_NAMES
@@ -548,11 +544,13 @@ class ProductFormWithTranslation(BaseTranslationForm):
         
         return instance
 
+# dashboard/forms.py - GalleryFormWithTranslation DÜZELTME
+
 class GalleryFormWithTranslation(BaseTranslationForm):
-    """Galeri formu - KESIN ÇÖZÜM"""
+    """Galeri formu - KIRPMA DESTEKLİ"""
     
     def __init__(self, *args, **kwargs):
-        # Çeviri alanlarını meta fields'a ekle - BU ÖNEMLİ!
+        # Çeviri alanlarını meta fields'a ekle
         if kwargs.get('translation_enabled', False) and len(kwargs.get('enabled_languages', ['tr'])) > 1:
             enabled_languages = kwargs.get('enabled_languages', ['tr'])
             additional_fields = []
@@ -564,7 +562,6 @@ class GalleryFormWithTranslation(BaseTranslationForm):
                         f'alt_text_{lang_code}'
                     ])
             
-            # Meta fields'ı dinamik olarak genişlet
             self._meta.fields = list(self._meta.fields) + additional_fields
         
         super().__init__(*args, **kwargs)
@@ -574,14 +571,42 @@ class GalleryFormWithTranslation(BaseTranslationForm):
     
     class Meta:
         model = Gallery
-        fields = ['title', 'description', 'alt_text', 'media_type', 'image', 'video_url', 'is_active', 'is_featured', 'order']
+        fields = [
+            'title', 'description', 'alt_text', 'media_type', 
+            'image',  # ← Orijinal/kırpılmamış görsel
+            'video_url', 'is_active', 'is_featured', 'order'
+        ]
         widgets = {
-            'title': forms.TextInput(),
-            'description': forms.Textarea(attrs={'rows': 4}),
-            'alt_text': forms.TextInput(),
-            'media_type': forms.Select(),
-            'video_url': forms.URLInput(),
-            'order': forms.NumberInput(),
+            'title': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Galeri başlığı'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 4
+            }),
+            'alt_text': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'SEO alt metni'
+            }),
+            'media_type': forms.Select(attrs={
+                'class': 'form-select'
+            }),
+            'image': forms.ClearableFileInput(attrs={
+                'class': 'form-control image-crop-input',
+                'accept': 'image/*',
+                'data-crop-type': 'gallery',  # ← Kırpma tipi
+                'data-crop-width': '800',
+                'data-crop-height': '600',
+            }),
+            'video_url': forms.URLInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'https://youtube.com/...'
+            }),
+            'order': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': 0
+            }),
         }
     
     def _add_translation_fields(self):
@@ -620,6 +645,34 @@ class GalleryFormWithTranslation(BaseTranslationForm):
                         'placeholder': f'Alt Metin ({lang_name}) - Zorunlu'
                     })
                 )
+    
+    def save(self, commit=True):
+        """Kırpılmış görseli otomatik kaydet"""
+        instance = super().save(commit=False)
+        
+        # ★ KRİTİK: Kırpılmış görsel verisini al
+        if hasattr(self, 'cleaned_data'):
+            cropped_data = self.cleaned_data.get('cropped_image_data')
+            if cropped_data:
+                # Kırpılmış görseli kaydet
+                from django.core.files.base import ContentFile
+                import base64
+                
+                # Base64'ü decode et
+                format, imgstr = cropped_data.split(';base64,')
+                ext = format.split('/')[-1]
+                
+                # Dosya oluştur
+                image_data = ContentFile(base64.b64decode(imgstr))
+                file_name = f'gallery_cropped_{instance.id}.{ext}'
+                
+                # cropped_image field'ına kaydet
+                instance.cropped_image.save(file_name, image_data, save=False)
+        
+        if commit:
+            instance.save()
+        
+        return instance
                 
 class CarouselSlideFormWithTranslation(BaseTranslationForm):
     """Carousel slayt formu - DÜZELTILMIŞ"""
@@ -676,16 +729,6 @@ class CarouselSlideFormWithTranslation(BaseTranslationForm):
             return int(order)
         except (ValueError, TypeError):
             return 0
-    
-    def clean_image(self):
-        """Görsel alanını temizle - YENİ kayıtlar için zorunlu"""
-        image = self.cleaned_data.get('image')
-        
-        # Sadece YENİ kayıt ekleniyorsa görsel zorunlu
-        if not self.instance.pk and not image:
-            raise forms.ValidationError('Görsel alanı zorunludur.')
-        
-        return image
     
     def _add_translation_fields(self):
         """Çeviri alanlarını manuel olarak ekle - Gallery gibi"""        
@@ -1355,62 +1398,3 @@ class DashboardTranslationSettingsForm(forms.ModelForm):
         
         self.fields['dashboard_language'].choices = dashboard_choices
         self.fields['primary_language'].choices = primary_choices
-        
-        
-        
-# Mail
-
-
-class DashboardPasswordResetForm(PasswordResetForm):
-    """
-    E-posta adresi ile parola sıfırlama talep formu.
-    Rate limit (zaman aşımı) kontrolü eklenmiştir.
-    """
-    email = forms.EmailField(
-        label=_("E-posta Adresi"),
-        max_length=254,
-        widget=forms.EmailInput(attrs={
-            'class': 'form-control-modern',
-            'placeholder': _('Kayıtlı e-posta adresinizi girin'),
-            'autocomplete': 'email'
-        })
-    )
-
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
-        
-        # 1. Rate Limit Kontrolü (Cache'den kontrol et)
-        # Eğer bu e-posta için 'cooldown' anahtarı varsa, hata fırlat.
-        cooldown_key = f"password_reset_cooldown_{email}"
-        if cache.get(cooldown_key):
-            # Kalan süreyi hesaplamak opsiyoneldir, basitçe hata verebiliriz.
-            raise forms.ValidationError(
-                _("Bu e-posta adresi için yakın zamanda bir sıfırlama bağlantısı gönderildi. Lütfen tekrar denemeden önce 15 dakika bekleyin.")
-            )
-            
-        return email
-
-    def save(self, *args, **kwargs):
-        """
-        E-posta gönderildikten sonra cache'e bir 'cooldown' (soğuma) kaydı ekle.
-        """
-        email = self.cleaned_data.get('email')
-        
-        # Normal gönderme işlemini yap
-        ret_val = super().save(*args, **kwargs)
-        
-        # 2. Başarılı gönderimden sonra 15 dakika (900 saniye) engelleme koy
-        cooldown_key = f"password_reset_cooldown_{email}"
-        cache.set(cooldown_key, True, timeout=900)  # 900 saniye = 15 dakika
-        
-        return ret_val
-
-
-class DashboardSetPasswordForm(SetPasswordForm):
-    """
-    Token doğrulandıktan sonra yeni parolanın belirlendiği form.
-    """
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs.update({'class': 'form-control-modern'})

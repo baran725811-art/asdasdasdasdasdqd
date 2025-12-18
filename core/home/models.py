@@ -13,6 +13,8 @@ class CarouselSlide(SEOImageMixin, models.Model):
     # Tek görsel alanı - hem carousel hem detay için
     image = OptimizedImageField("Slayt Görseli", folder="carousel",
                                help_text="Carousel görseli (Önerilen: 1920x1080)")
+    
+    
     # SEO için alt text alanı (güçlendirildi)
     alt_text = models.CharField(
         "Alt Metin (SEO)", 
@@ -71,36 +73,8 @@ class CarouselSlide(SEOImageMixin, models.Model):
     def get_absolute_url(self):
         return reverse('home:slide_detail', kwargs={'slug': self.slug})
 
-    
-    
-    
-    
-    
     def __str__(self):
-        return self.title or f"Slayt #{self.id}"  # ✅ Güvenli
-    
-    def get_image_url(self):
-        """Güvenli görsel URL döndür"""
-        if self.image:
-            try:
-                # Cloudinary URL'i varsa döndür
-                if hasattr(self.image, 'url') and self.image.url:
-                    return self.image.url
-            except:
-                pass
-        return None
-    
-    def has_valid_image(self):
-        """Geçerli görsel var mı?"""
-        return bool(self.get_image_url())
-    
-    
-    
-    
-    
-    
-    
-    
+        return self.title
 
     def clean(self):
         if self.is_active:
