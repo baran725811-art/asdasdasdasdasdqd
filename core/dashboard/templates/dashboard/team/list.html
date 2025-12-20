@@ -524,12 +524,12 @@
 <!-- Bulk Actions Modal -->
 {% include 'dashboard/includes/modals/bulk_actions_modal.html' %}
 {% endblock %}
-{% block extra_js %}
-<!-- Team Page Styles -->
+{% block extra_css %}
 <link rel="stylesheet" href="{% static 'dashboard/css/pages/team.css' %}">
+{% endblock %}
 
-<!-- Team Page JavaScript -->
+{% block extra_js %}
+{{ block.super }}
+<script src="{% static 'dashboard/js/components/image-crop.js' %}"></script>
 <script src="{% static 'dashboard/js/pages/team.js' %}"></script>
-
-<!-- Remove the existing JavaScript code and replace with just this -->
 {% endblock %}

@@ -217,13 +217,11 @@
         <!-- Sonuç sayısı -->
         <div class="mt-3 text-center">
             <small class="text-muted" id="resultsCount">
-                <p>
-                    {% blocktrans trimmed count counter=mention_count %}
-                    {{ counter }} haber gösteriliyor
-                    {% plural %}
-                    {{ counter }} haber gösteriliyor
-                    {% endblocktrans %}
-                </p>
+                {% if mentions %}
+                    {{ mentions|length }} {% trans "haber gösteriliyor" %}
+                {% else %}
+                    0 {% trans "haber gösteriliyor" %}
+                {% endif %}
             </small>
         </div>
     {% else %}
@@ -630,11 +628,12 @@
 {% include 'dashboard/includes/modals/bulk_actions_modal.html' %}
 {% endblock %}
 
-{% block extra_js %}
-<!-- News Page Styles -->
+{% block extra_css %}
 <link rel="stylesheet" href="{% static 'dashboard/css/pages/news.css' %}">
+{% endblock %}
 
-<!-- News Page JavaScript -->
+{% block extra_js %}
+{{ block.super }}
+<script src="{% static 'dashboard/js/components/image-crop.js' %}"></script>
 <script src="{% static 'dashboard/js/pages/news.js' %}"></script>
-
 {% endblock %}

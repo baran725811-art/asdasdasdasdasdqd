@@ -474,7 +474,7 @@ CLOUDINARY_STORAGE.update({
     'MAX_VIDEO_SIZE': 100 * 1024 * 1024,  # 100MB
 })
 
-# PERFORMANCE OPTIMIZED CLOUDINARY TRANSFORMATIONS
+# görsel boyutları
 CLOUDINARY_DEFAULT_TRANSFORMATIONS = {
     'image': {
         'quality': 'auto:eco',  # Aggressive compression

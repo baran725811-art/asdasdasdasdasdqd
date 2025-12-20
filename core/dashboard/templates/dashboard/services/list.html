@@ -453,6 +453,8 @@
 {% endblock %}
 
 {% block extra_js %}
+{{ block.super }}
+<script src="{% static 'dashboard/js/components/image-crop.js' %}"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Add Service Form Handler

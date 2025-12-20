@@ -18,7 +18,7 @@ sayfaya her giriş yapan kullanıcı sonrası tamamlanan iş artsın
 
 
 
-4-)Profil E-posta (/dashboard/profile/edit/)  << parola unutunca yenilemek için "http://127.0.0.1:8000/dashboard/login/" bölümü için
+tamamlandı  4-)Profil E-posta (/dashboard/profile/edit/)  << parola unutunca yenilemek için "http://127.0.0.1:8000/dashboard/login/" bölümü için
 Kullanıcı talep eder: “Parolamı unuttum” diyerek e-posta girer.
 Token oluşturulur: Rastgele, tek kullanımlık ve süreli bir kod üretilir.
 E-posta gönderilir: Token içeren güvenli link kullanıcıya yollanır.

@@ -148,6 +148,12 @@ dashboard\templates\dashboard\login.html
 dashboard\templates\dashboard\media_mentions\list.html
 dashboard\templates\dashboard\messages\list.html
 dashboard\templates\dashboard\notifications\list.html
+dashboard\templates\dashboard\password_reset\password_reset_complete.html
+dashboard\templates\dashboard\password_reset\password_reset_confirm.html
+dashboard\templates\dashboard\password_reset\password_reset_done.html
+dashboard\templates\dashboard\password_reset\password_reset_email.html
+dashboard\templates\dashboard\password_reset\password_reset_form.html
+dashboard\templates\dashboard\password_reset\password_reset_subject.txt
 dashboard\templates\dashboard\products\list.html
 dashboard\templates\dashboard\profile\edit.html
 dashboard\templates\dashboard\profile\password_change.html
@@ -167,6 +173,7 @@ dashboard\translation_utils.py
 dashboard\urls.py
 dashboard\utils.py
 dashboard\views.py
+dashboard\widgets.py
 dashboard\__init__.py
 dashboard\__pycache__/
 db.sqlite3
@@ -281,6 +288,7 @@ static\css\products\main.css
 static\dashboard\css\common.css
 static\dashboard\css\components\cards.css
 static\dashboard\css\components\forms.css
+static\dashboard\css\components\image-crop.css
 static\dashboard\css\components\modals.css
 static\dashboard\css\components\navbar.css
 static\dashboard\css\components\notifications.css
@@ -298,6 +306,7 @@ static\dashboard\css\pages\news.css
 static\dashboard\css\pages\team.css
 static\dashboard\js\common.js
 static\dashboard\js\components\form-validation.js
+static\dashboard\js\components\image-crop.js
 static\dashboard\js\components\image-preview.js
 static\dashboard\js\components\modal-manager.js
 static\dashboard\js\components\notification-system.js
@@ -782,6 +791,7 @@ templates\errors\400.html
 templates\errors\403.html
 templates\errors\404.html
 templates\errors\500.html
+templates\errors\csrf_failure.html
 templates\errors\lockout.html
 templates\errors\ratelimit.html
 templates\gallery\gallery_list.html

@@ -1,4 +1,4 @@
-/* Modern Image Crop Modal Styles  core\static\admin\css\image-crop.css*/
+/* Modern Image Crop Modal Styles  core\static\dashboard\css\components\image-crop.css*/
 :root {
     --primary-color: #2563eb;
     --primary-hover: #1d4ed8;
@@ -453,6 +453,73 @@
     border: 2px solid var(--primary-color);
 }
 
+
+
+
+
+
+
+
+/* Inline Kırpma Container */
+.crop-inline-container {
+    display: none;
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    margin-top: 16px;
+    background: white;
+    overflow: hidden;
+}
+
+.crop-inline-header {
+    background: var(--primary-color);
+    color: white;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.crop-inline-header h6 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.btn-close-crop {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.btn-close-crop:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.crop-inline-body {
+    padding: 16px;
+    max-height: 400px;
+    overflow: auto;
+}
+
+.crop-inline-footer {
+    padding: 12px 16px;
+    border-top: 1px solid #dee2e6;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    background: #f8f9fa;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
     .crop-preview-container {
@@ -540,3 +607,5 @@
         padding: 12px 16px;
     }
 }
+
+

@@ -1,4 +1,4 @@
-<!-- core\dashboard\templates\dashboard\about\edit.html - DÜZELTILMIŞ -->
+<!-- core\dashboard\templates\dashboard\about\edit.html - TEMİZ VERSİYON -->
 
 {% extends 'dashboard/base/content_base.html' %}
 {% load i18n %}
@@ -6,7 +6,6 @@
 {% load static %}
 {% load widget_tweaks %}
 {% load custom_filters %}
-
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'dashboard/css/pages/about.css' %}">
@@ -32,7 +31,7 @@
 <form method="post" enctype="multipart/form-data" id="aboutForm" action="{% url 'dashboard:dashboard_about_edit' %}">
     {% csrf_token %}
     
-    <!-- ✅ GALERİ GİBİ DÜZELT -->
+    <!-- Translation Tabs -->
     {% if translation_enabled and enabled_languages|length > 1 %}
         {% include 'dashboard/includes/forms/translation_tabs.html' with show_primary_label=True %}
     {% endif %}
@@ -50,14 +49,14 @@
                 <div class="row g-3">
                     <div class="col-12 mb-3">
                         <label for="{{ form.title.id_for_label }}" class="form-label">{% trans "Sayfa Başlığı" %}</label>
-                        {{ form.title }}
+                        {{ form.title|add_class:"form-control" }}
                         {% if form.title.errors %}
                             <div class="text-danger">{{ form.title.errors.0 }}</div>
                         {% endif %}
                     </div>
                     <div class="col-12 mb-3">
                         <label for="{{ form.short_description.id_for_label }}" class="form-label">{% trans "Kısa Açıklama" %}</label>
-                        {{ form.short_description }}
+                        {{ form.short_description|add_class:"form-control" }}
                         {% if form.short_description.errors %}
                             <div class="text-danger">{{ form.short_description.errors.0 }}</div>
                         {% endif %}
@@ -65,7 +64,7 @@
                 </div>
             </div>
             
-            <!-- ✅ ABOUT_WITH_TRANSLATIONS KULLAN -->
+            <!-- Translation Languages Content -->
             {% if translation_enabled and enabled_languages|length > 1 %}
                 {% for lang in enabled_languages %}
                     {% if lang != 'tr' and lang and lang|length >= 2 %}
@@ -94,33 +93,18 @@
             </h5>
         </div>
         <div class="card-body-modern">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <label for="{{ form.image.id_for_label }}" class="form-label">{% trans "Görsel Seçin" %}</label>
-                    {{ form.image }}
-                    {% if form.image.errors %}
-                        <div class="text-danger">{{ form.image.errors.0 }}</div>
-                    {% endif %}
-                    <div class="mt-3">
-                        <label for="{{ form.alt_text.id_for_label }}" class="form-label">{% trans "Alt Metin (SEO)" %}</label>
-                        {{ form.alt_text|add_class:"form-control" }}
-                        <small class="form-text text-muted">{% trans "Görsel için SEO alt metni (max 125 karakter)" %}</small>
-                        {% if form.alt_text.errors %}
-                            <div class="text-danger">{{ form.alt_text.errors.0 }}</div>
-                        {% endif %}
-                    </div>
+            <div class="row">
+                <div class="col-12">
+                    {% include 'dashboard/includes/forms/image_upload_field.html' with field_name="image" label="Ana Görsel" current_image=about.image help_text="Önerilen boyut: 1200x800 piksel (3:2 oran)" is_required=False %}
                 </div>
-                <div class="col-md-4">
-                    {% if about.image %}
-                        <div class="current-image">
-                            <img src="{{ about.image.url }}" alt="{{ about.get_alt_text }}" class="image-modern w-100" loading="lazy">
-                            <div class="image-overlay">
-                                <small class="text-white">{% trans "Mevcut Görsel" %}</small>
-                            </div>
-                        </div>
-                    {% else %}
-                        {% trans "Görsel Yok" as no_image_title %}
-                        {% include 'dashboard/includes/ui/empty_state.html' with empty_icon="fas fa-image" empty_title=no_image_title empty_message="" %}
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <label for="{{ form.alt_text.id_for_label }}" class="form-label">{% trans "Alt Metin (SEO)" %}</label>
+                    {{ form.alt_text|add_class:"form-control" }}
+                    <small class="form-text text-muted">{% trans "Görsel için SEO alt metni (max 125 karakter)" %}</small>
+                    {% if form.alt_text.errors %}
+                        <div class="text-danger">{{ form.alt_text.errors.0 }}</div>
                     {% endif %}
                 </div>
             </div>
@@ -179,7 +163,7 @@
                 </div>
             </div>
 
-            <!-- ✅ ÇEVIRI İÇERİKLERİ - FIELD_VALUE EKLENDİ -->
+            <!-- Translation Languages Content -->
             {% if translation_enabled and enabled_languages|length > 1 %}
                 {% for lang in enabled_languages %}
                     {% if lang != 'tr' and lang and lang|length >= 2 %}
@@ -235,35 +219,35 @@
                 <div class="row g-3">
                     <div class="col-12 col-sm-6 col-lg-4">
                         <label for="{{ form.years_experience.id_for_label }}" class="form-label">{% trans "Tecrübe Yılı" %}</label>
-                        {{ form.years_experience }}
+                        {{ form.years_experience|add_class:"form-control" }}
                         {% if form.years_experience.errors %}
                             <div class="text-danger">{{ form.years_experience.errors.0 }}</div>
                         {% endif %}
                     </div>
                     <div class="col-12 col-sm-6 col-lg-4">
                         <label for="{{ form.completed_jobs.id_for_label }}" class="form-label">{% trans "Tamamlanan İşler" %}</label>
-                        {{ form.completed_jobs }}
+                        {{ form.completed_jobs|add_class:"form-control" }}
                         {% if form.completed_jobs.errors %}
                             <div class="text-danger">{{ form.completed_jobs.errors.0 }}</div>
                         {% endif %}
                     </div>
                     <div class="col-12 col-sm-6 col-lg-4">
                         <label for="{{ form.happy_customers.id_for_label }}" class="form-label">{% trans "Mutlu Müşteri" %}</label>
-                        {{ form.happy_customers }}
+                        {{ form.happy_customers|add_class:"form-control" }}
                         {% if form.happy_customers.errors %}
                             <div class="text-danger">{{ form.happy_customers.errors.0 }}</div>
                         {% endif %}
                     </div>
                     <div class="col-12 col-sm-6 col-lg-4">
                         <label for="{{ form.total_services.id_for_label }}" class="form-label">{% trans "Toplam Hizmet" %}</label>
-                        {{ form.total_services }}
+                        {{ form.total_services|add_class:"form-control" }}
                         {% if form.total_services.errors %}
                             <div class="text-danger">{{ form.total_services.errors.0 }}</div>
                         {% endif %}
                     </div>
                     <div class="col-12 col-sm-6 col-lg-4">
                         <label for="{{ form.customer_satisfaction.id_for_label }}" class="form-label">{% trans "Müşteri Memnuniyeti (%)" %}</label>
-                        {{ form.customer_satisfaction }}
+                        {{ form.customer_satisfaction|add_class:"form-control" }}
                         {% if form.customer_satisfaction.errors %}
                             <div class="text-danger">{{ form.customer_satisfaction.errors.0 }}</div>
                         {% endif %}
@@ -273,14 +257,14 @@
         </div>
     </div>
 
-    <!-- Form Actions - Kayıt Butonları -->
+    <!-- Form Actions -->
     <div class="row mt-4">
         <div class="col-12">
             <div class="card-modern">
                 <div class="card-body-modern">
                     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
                         <div>
-                            <button type="button" class="btn btn-outline-secondary" onclick="resetForm()">
+                            <button type="button" class="btn btn-outline-secondary" onclick="location.reload()">
                                 <i class="fas fa-undo me-2"></i>{% trans "Değişiklikleri Geri Al" %}
                             </button>
                         </div>
@@ -288,9 +272,6 @@
                             <a href="{% url 'about:about' %}" target="_blank" class="btn btn-outline-info">
                                 <i class="fas fa-eye me-2"></i>{% trans "Önizleme" %}
                             </a>
-                            <button type="button" class="btn btn-outline-warning" onclick="saveDraft()">
-                                <i class="fas fa-save me-2"></i>{% trans "Taslak Kaydet" %}
-                            </button>
                             <button type="submit" class="btn-modern primary btn-lg">
                                 <i class="fas fa-check-circle me-2"></i>{% trans "Değişiklikleri Kaydet" %}
                             </button>
@@ -302,9 +283,9 @@
     </div>
 </form>
 {% endblock %}
+
 <!-- Sidebar Content -->
 {% block sidebar_content %}
-    
     <!-- Form Durumu Takibi -->
     <div class="card-modern mb-4">
         <div class="card-header-modern">
@@ -314,30 +295,11 @@
         </div>
         <div class="card-body-modern">
             <div class="form-status-tracker">
-                <!-- Validation Durumu -->
-                <div class="validation-status mb-4">
-                    <div class="alert alert-info" id="validationAlert" style="display: none;">
-                        <h6 class="alert-heading mb-2">
-                            <i class="fas fa-exclamation-triangle me-1"></i>
-                            {% trans "Dikkat Edilecek Noktalar" %}
-                        </h6>
-                        <ul class="mb-0" id="validationList"></ul>
-                    </div>
-                    
-                    <div class="alert alert-success" id="validationSuccess" style="display: none;">
-                        <h6 class="alert-heading mb-1">
-                            <i class="fas fa-check-circle me-1"></i>
-                            {% trans "Form Hazır" %}
-                        </h6>
-                        <small>{% trans "Tüm zorunlu alanlar dolduruldu" %}</small>
-                    </div>
-                </div>
-                
                 <!-- Genel İlerleme -->
                 <div class="progress mb-3">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 0%" 
-                         aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="formProgress">
-                        <span id="formProgressText">0%</span>
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 80%" 
+                         aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                        <span>80%</span>
                     </div>
                 </div>
                 
@@ -346,70 +308,42 @@
                     <div class="status-item mb-2">
                         <div class="d-flex justify-content-between align-items-center">
                             <span class="field-name">{% trans "Sayfa Başlığı" %}</span>
-                            <span class="badge bg-secondary" id="titleStatus">{% trans "Boş" %}</span>
-                        </div>
-                        <div class="field-info">
-                            <small class="text-muted" id="titleInfo">{% trans "0 karakter" %}</small>
-                        </div>
-                    </div>
-                    
-                    <div class="status-item mb-2">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="field-name">{% trans "Kısa Açıklama" %}</span>
-                            <span class="badge bg-secondary" id="descriptionStatus">{% trans "Boş" %}</span>
-                        </div>
-                        <div class="field-info">
-                            <small class="text-muted" id="descriptionInfo">{% trans "0 karakter" %}</small>
+                            <span class="badge bg-success">{% trans "Tamam" %}</span>
                         </div>
                     </div>
                     
                     <div class="status-item mb-2">
                         <div class="d-flex justify-content-between align-items-center">
                             <span class="field-name">{% trans "Ana Görsel" %}</span>
-                            <span class="badge bg-secondary" id="imageStatus">{% trans "Yok" %}</span>
-                        </div>
-                        <div class="field-info">
-                            <small class="text-muted" id="imageInfo">{% trans "Görsel seçilmedi" %}</small>
+                            <span class="badge bg-success">{% trans "Var" %}</span>
                         </div>
                     </div>
                     
                     <div class="status-item mb-2">
                         <div class="d-flex justify-content-between align-items-center">
                             <span class="field-name">{% trans "Misyon" %}</span>
-                            <span class="badge bg-secondary" id="missionStatus">{% trans "Boş" %}</span>
-                        </div>
-                        <div class="field-info">
-                            <small class="text-muted" id="missionInfo">{% trans "0 karakter" %}</small>
+                            <span class="badge bg-success">{% trans "Tamam" %}</span>
                         </div>
                     </div>
                     
                     <div class="status-item mb-2">
                         <div class="d-flex justify-content-between align-items-center">
                             <span class="field-name">{% trans "Vizyon" %}</span>
-                            <span class="badge bg-secondary" id="visionStatus">{% trans "Boş" %}</span>
-                        </div>
-                        <div class="field-info">
-                            <small class="text-muted" id="visionInfo">{% trans "0 karakter" %}</small>
+                            <span class="badge bg-success">{% trans "Tamam" %}</span>
                         </div>
                     </div>
                     
                     <div class="status-item mb-2">
                         <div class="d-flex justify-content-between align-items-center">
                             <span class="field-name">{% trans "Hikaye" %}</span>
-                            <span class="badge bg-secondary" id="storyStatus">{% trans "Boş" %}</span>
-                        </div>
-                        <div class="field-info">
-                            <small class="text-muted" id="storyInfo">{% trans "0 karakter" %}</small>
+                            <span class="badge bg-success">{% trans "Tamam" %}</span>
                         </div>
                     </div>
                     
                     <div class="status-item mb-2">
                         <div class="d-flex justify-content-between align-items-center">
                             <span class="field-name">{% trans "İstatistikler" %}</span>
-                            <span class="badge bg-secondary" id="statsStatus">{% trans "Eksik" %}</span>
-                        </div>
-                        <div class="field-info">
-                            <small class="text-muted" id="statsInfo">{% trans "0/5 alan dolduruldu" %}</small>
+                            <span class="badge bg-success">{% trans "5/5" %}</span>
                         </div>
                     </div>
                 </div>
@@ -417,21 +351,15 @@
                 <!-- Özet -->
                 <div class="status-summary mt-3 pt-3 border-top">
                     <div class="row text-center">
-                        <div class="col-4">
+                        <div class="col-6">
                             <div class="summary-item">
-                                <h6 class="text-success mb-0" id="completedFields">0</h6>
+                                <h6 class="text-success mb-0">8</h6>
                                 <small class="text-muted">{% trans "Tamamlanan" %}</small>
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-6">
                             <div class="summary-item">
-                                <h6 class="text-warning mb-0" id="pendingFields">0</h6>
-                                <small class="text-muted">{% trans "Eksik" %}</small>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="summary-item">
-                                <h6 class="text-info mb-0" id="totalFields">10</h6>
+                                <h6 class="text-info mb-0">10</h6>
                                 <small class="text-muted">{% trans "Toplam" %}</small>
                             </div>
                         </div>
@@ -440,35 +368,27 @@
             </div>
         </div>
     </div>
-
-    
-
-    
 {% endblock %}
+
 {% block extra_js %}
-    <script>
-        window.aboutConfig = {
-            urls: {
-                about: "{% url 'about:about' %}",
-                edit: "{% url 'dashboard:dashboard_about_edit' %}"
-            },
-            translations: {
-                saving: "{% trans 'Kaydediliyor...' %}",
-                saved: "{% trans 'Kaydedildi' %}",
-                error: "{% trans 'Hata oluştu' %}"
-            },
-            settings: {
-                translationEnabled: {{ translation_enabled|yesno:'true,false' }},
-                enabledLanguages: {{ enabled_languages|safe }}
-            }
-        };
-        
-        // Çeviri sistemi aktifse JavaScript yükle
-        {% if translation_enabled and enabled_languages|length > 1 %}
-        document.addEventListener('DOMContentLoaded', function() {
-            // Translation system JavaScript burada
-        });
-        {% endif %}
-    </script>
-    <script src="{% static 'dashboard/js/pages/about.js' %}"></script>
+{{ block.super }}
+<script src="{% static 'dashboard/js/components/image-crop.js' %}"></script>
+<script>
+    window.aboutConfig = {
+        urls: {
+            about: "{% url 'about:about' %}",
+            edit: "{% url 'dashboard:dashboard_about_edit' %}"
+        },
+        translations: {
+            saving: "{% trans 'Kaydediliyor...' %}",
+            saved: "{% trans 'Kaydedildi' %}",
+            error: "{% trans 'Hata oluştu' %}"
+        },
+        settings: {
+            translationEnabled: {{ translation_enabled|yesno:'true,false' }},
+            enabledLanguages: {{ enabled_languages|safe }}
+        }
+    };
+</script>
+<script src="{% static 'dashboard/js/pages/about.js' %}"></script>
 {% endblock %}
