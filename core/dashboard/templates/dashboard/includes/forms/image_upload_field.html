@@ -132,6 +132,13 @@ window.cropConfigs = window.cropConfigs || {};
         width: 800,
         height: 600
     };
+{% elif "product" in request.path %}
+    // ÜRÜNLER - 6:5 (600x500) - Kapak ve Detay için optimize
+    window.cropConfigs['{{ field_name }}'] = {
+        ratio: 6/5,
+        width: 600,
+        height: 500
+    };
 {% elif "gallery" in request.path %}
     // GALERİ - 4:3 (800x600)
     window.cropConfigs['{{ field_name }}'] = {
@@ -147,6 +154,8 @@ window.cropConfigs = window.cropConfigs || {};
         height: 1080
     };
 {% endif %}
+
+
 
 console.log('Crop config for {{ field_name }}:', window.cropConfigs['{{ field_name }}']);
 </script>

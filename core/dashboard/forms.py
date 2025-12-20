@@ -468,7 +468,8 @@ class ProductFormWithTranslation(BaseTranslationForm):
     class Meta:
         model = Product
         fields = ['category', 'name', 'slug', 'description', 'price', 
-                 'stock', 'image', 'meta_title', 'meta_description', 
+                 'stock', 'image', 'cropped_image',  # ← EKLE
+                 'meta_title', 'meta_description', 
                  'is_featured', 'is_active']
         widgets = {
             'name': forms.TextInput(),

@@ -977,7 +977,35 @@ def gallery_add(request):
         
         if form.is_valid():
             try:
-                gallery_item = form.save()
+                gallery_item = form.save(commit=False)  # ← DEĞİŞTİ
+                
+                # ✅ ORİJİNAL GÖRSELİ KAYDET (Base64'ten) - YENİ EKLENEN BÖLÜM BAŞLANGIÇ
+                original_image_data = request.POST.get('original_image_data')
+                if original_image_data and 'base64,' in original_image_data:
+                    import base64
+                    from django.core.files.base import ContentFile
+                    import uuid
+                    
+                    # Base64'ü decode et
+                    format, imgstr = original_image_data.split(';base64,')
+                    ext = format.split('/')[-1]
+                    
+                    # Dosya oluştur
+                    original_file = ContentFile(
+                        base64.b64decode(imgstr),
+                        name=f'original_{uuid.uuid4()}.{ext}'
+                    )
+                    
+                    # Orijinal dosyayı kaydet
+                    gallery_item.image = original_file
+                
+                # ✅ KIRPILMIŞ GÖRSELİ KAYDET (Form'dan gelir)
+                if 'image' in request.FILES:
+                    gallery_item.cropped_image = request.FILES['image']
+                # YENİ EKLENEN BÖLÜM BİTİŞ
+                
+                gallery_item.save()  # ← YENİ EKLENEN
+                
                 print(f"✅ GALERİ ÖĞESİ BAŞARIYLA KAYDEDİLDİ! ID: {gallery_item.id}, Title: {gallery_item.title}")
                 
                 # AJAX request için JSON response
@@ -1068,7 +1096,34 @@ def gallery_edit(request, pk):
         )
         if form.is_valid():
             try:
-                gallery_item = form.save()
+                gallery_item = form.save(commit=False)  # ← DEĞİŞTİ
+                
+                # ✅ ORİJİNAL GÖRSELİ KAYDET (Base64'ten) - YENİ EKLENEN BÖLÜM BAŞLANGIÇ
+                original_image_data = request.POST.get('original_image_data')
+                if original_image_data and 'base64,' in original_image_data:
+                    import base64
+                    from django.core.files.base import ContentFile
+                    import uuid
+                    
+                    # Base64'ü decode et
+                    format, imgstr = original_image_data.split(';base64,')
+                    ext = format.split('/')[-1]
+                    
+                    # Dosya oluştur
+                    original_file = ContentFile(
+                        base64.b64decode(imgstr),
+                        name=f'original_{uuid.uuid4()}.{ext}'
+                    )
+                    
+                    # Orijinal dosyayı kaydet
+                    gallery_item.image = original_file
+                
+                # ✅ KIRPILMIŞ GÖRSELİ KAYDET (Form'dan gelir)
+                if 'image' in request.FILES:
+                    gallery_item.cropped_image = request.FILES['image']
+                # YENİ EKLENEN BÖLÜM BİTİŞ
+                
+                gallery_item.save()  # ← YENİ EKLENEN
                 
                 # AJAX request için JSON response
                 if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
@@ -1856,8 +1911,42 @@ def product_add(request):
         )
         if form.is_valid():
             try:
-                product = form.save()
+                product = form.save(commit=False)
                 
+                # ✅ KIRPILMIŞ GÖRSELİ KAYDET (Form'dan gelir)
+                if 'image' in request.FILES:
+                    product.cropped_image.save(
+                        request.FILES['image'].name,
+                        request.FILES['image'],
+                        save=False
+                    )
+
+                # ✅ ORİJİNAL GÖRSELİ KAYDET (Base64'ten)
+                original_image_data = request.POST.get('original_image_data')
+                if original_image_data and 'base64,' in original_image_data:
+                    import base64
+                    from django.core.files.base import ContentFile
+                    import uuid
+
+                    # Base64'ü decode et
+                    format, imgstr = original_image_data.split(';base64,')
+                    ext = format.split('/')[-1]
+
+                    # Dosya oluştur
+                    original_file = ContentFile(
+                        base64.b64decode(imgstr),
+                        name=f'original_{uuid.uuid4()}.{ext}'
+                    )
+
+                    # ✅ DOĞRU YÖNTEM: save() ile kaydet
+                    product.image.save(
+                        original_file.name,
+                        original_file,
+                        save=False
+                    )
+
+                product.save()  # ✅ Şimdi kaydet
+
                 if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                     return JsonResponse({
                         'success': True,
@@ -1933,7 +2022,41 @@ def product_edit(request, pk):
         )
         if form.is_valid():
             try:
-                product = form.save()
+                product = form.save(commit=False)
+
+                # ✅ KIRPILMIŞ GÖRSELİ KAYDET (Form'dan gelir)
+                if 'image' in request.FILES:
+                    product.cropped_image.save(
+                        request.FILES['image'].name,
+                        request.FILES['image'],
+                        save=False
+                    )
+
+                # ✅ ORİJİNAL GÖRSELİ KAYDET (Base64'ten)
+                original_image_data = request.POST.get('original_image_data')
+                if original_image_data and 'base64,' in original_image_data:
+                    import base64
+                    from django.core.files.base import ContentFile
+                    import uuid
+
+                    # Base64'ü decode et
+                    format, imgstr = original_image_data.split(';base64,')
+                    ext = format.split('/')[-1]
+
+                    # Dosya oluştur
+                    original_file = ContentFile(
+                        base64.b64decode(imgstr),
+                        name=f'original_{uuid.uuid4()}.{ext}'
+                    )
+
+                    # ✅ DOĞRU YÖNTEM: save() ile kaydet
+                    product.image.save(
+                        original_file.name,
+                        original_file,
+                        save=False
+                    )
+
+                product.save()  # ✅ Şimdi kaydet
                 
                 if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                     return JsonResponse({

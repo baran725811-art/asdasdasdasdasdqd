@@ -214,6 +214,9 @@ function applyCrop(fieldName) {
         config = window.cropConfigs[fieldName];
     }
     
+    // ✅ ORİJİNAL DOSYAYI SAKLA (Products & Gallery için)
+    const originalFile = container.querySelector('input[type="file"]').files[0];
+    
     setTimeout(() => {
         const canvas = cropper.getCroppedCanvas({
             width: config.width,
@@ -258,6 +261,7 @@ function applyCrop(fieldName) {
             
             closeCropInline(fieldName);
             
+            // ✅ SADECE KIRPILMIŞ DOSYAYI `image` FIELD'INA EKLE
             const fileInput = document.querySelector(`[data-field-name="${fieldName}"] input[type="file"]`);
             if (fileInput) {
                 const dt = new DataTransfer();
@@ -267,6 +271,30 @@ function applyCrop(fieldName) {
                 const changeEvent = new Event('change', { bubbles: true });
                 changeEvent.isCropEvent = true;
                 fileInput.dispatchEvent(changeEvent);
+            }
+            
+            // ✅ ORİJİNAL DOSYAYI FORMA EKLE (Hidden input olarak)
+            // Products & Gallery formu için çalışacak
+            const form = container.closest('form');
+            if (form && originalFile) {
+                // Eski hidden input varsa sil
+                const oldHiddenInput = form.querySelector('input[name="original_image_data"]');
+                if (oldHiddenInput) {
+                    oldHiddenInput.remove();
+                }
+                
+                // Yeni hidden input oluştur
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.name = 'original_image_data';
+                    hiddenInput.value = e.target.result; // Base64 data
+                    form.appendChild(hiddenInput);
+                    
+                    console.log('✅ Orijinal görsel forma eklendi (base64)');
+                };
+                reader.readAsDataURL(originalFile);
             }
             
             // Success message
