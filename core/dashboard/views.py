@@ -1911,17 +1911,25 @@ def product_add(request):
         )
         if form.is_valid():
             try:
-                product = form.save(commit=False)
+                # ✅ DÜZELTME: Önce form'u commit=True ile kaydet (slug oluşsun)
+                product = form.save(commit=True)
+                
+                # ✅ Product None kontrolü
+                if product is None:
+                    raise ValueError("Form save işlemi başarısız oldu")
                 
                 # ✅ KIRPILMIŞ GÖRSELİ KAYDET (Form'dan gelir)
+                cropped_saved = False
                 if 'image' in request.FILES:
                     product.cropped_image.save(
                         request.FILES['image'].name,
                         request.FILES['image'],
                         save=False
                     )
+                    cropped_saved = True
 
                 # ✅ ORİJİNAL GÖRSELİ KAYDET (Base64'ten)
+                original_saved = False
                 original_image_data = request.POST.get('original_image_data')
                 if original_image_data and 'base64,' in original_image_data:
                     import base64
@@ -1944,8 +1952,11 @@ def product_add(request):
                         original_file,
                         save=False
                     )
+                    original_saved = True
 
-                product.save()  # ✅ Şimdi kaydet
+                # ✅ Görsel kaydedildiyse tekrar save et
+                if cropped_saved or original_saved:
+                    product.save()
 
                 if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                     return JsonResponse({
@@ -1959,6 +1970,8 @@ def product_add(request):
                     return redirect('dashboard:dashboard_products')
                     
             except Exception as e:
+                import traceback
+                traceback.print_exc()  # Debug için
                 if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                     return JsonResponse({
                         'success': False,
@@ -1966,6 +1979,7 @@ def product_add(request):
                     })
                 else:
                     messages.error(request, f'Kaydetme hatası: {str(e)}')
+       
         else:
             # Form geçersiz - AJAX ve normal request için hata handling
             if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
@@ -1996,20 +2010,7 @@ def product_add(request):
 def product_edit(request, pk):
     product = get_object_or_404(Product, pk=pk)
     
-    # Çeviri sistemi kontrol et
-    from core.models import SiteSettings
-    from .models import DashboardTranslationSettings
-    
-    site_settings = SiteSettings.get_current()
-    translation_enabled = site_settings.translation_enabled
-    
-    enabled_languages = ['tr']
-    if translation_enabled and request.user.is_authenticated:
-        user_translation_settings, created = DashboardTranslationSettings.objects.get_or_create(
-            user=request.user,
-            defaults={'enabled_languages': ['tr']}
-        )
-        enabled_languages = user_translation_settings.get_all_languages()
+    # ... çeviri ayarları ...
     
     if request.method == 'POST':
         form = ProductFormWithTranslation(
@@ -2022,17 +2023,25 @@ def product_edit(request, pk):
         )
         if form.is_valid():
             try:
-                product = form.save(commit=False)
+                # ✅ DÜZELTME: Önce form'u commit=True ile kaydet
+                product = form.save(commit=True)
+                
+                # ✅ Product None kontrolü
+                if product is None:
+                    raise ValueError("Form save işlemi başarısız oldu")
 
                 # ✅ KIRPILMIŞ GÖRSELİ KAYDET (Form'dan gelir)
+                cropped_saved = False
                 if 'image' in request.FILES:
                     product.cropped_image.save(
                         request.FILES['image'].name,
                         request.FILES['image'],
                         save=False
                     )
+                    cropped_saved = True
 
                 # ✅ ORİJİNAL GÖRSELİ KAYDET (Base64'ten)
+                original_saved = False
                 original_image_data = request.POST.get('original_image_data')
                 if original_image_data and 'base64,' in original_image_data:
                     import base64
@@ -2055,8 +2064,11 @@ def product_edit(request, pk):
                         original_file,
                         save=False
                     )
+                    original_saved = True
 
-                product.save()  # ✅ Şimdi kaydet
+                # ✅ Görsel kaydedildiyse tekrar save et
+                if cropped_saved or original_saved:
+                    product.save()
                 
                 if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                     return JsonResponse({

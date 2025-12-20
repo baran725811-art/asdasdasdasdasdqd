@@ -7,7 +7,7 @@
             <!-- Product Image -->
             <div class="product-image-section" data-aos="fade-right">
                 <div class="main-image">
-                    {% if product.image %}
+                    {% if product.cropped_image or product.image %}
                     {% load image_tags %}
                     <!-- Küçük görsel (focal point'li) -->
                     <div onclick="openProductModal()">
@@ -18,6 +18,7 @@
                     <script type="application/json" id="product-modal-data">
                     {
                         "originalImageUrl": "{% original_image_url product.image %}",
+                        "croppedImageUrl": "{% cropped_image_url product.cropped_image 'products_main' %}",
                         "title": "{{ product.name|escapejs }}",
                         "description": "{{ product.short_description|default:''|escapejs }}"
                     }
