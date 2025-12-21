@@ -1988,7 +1988,7 @@ msgstr "Hizmetlerimiz"
 
 #: .\dashboard\templates\dashboard\includes\navigation\sidebar.html:41
 msgid "Carousel"
-msgstr "Atlıkarınca"
+msgstr "Carousel"
 
 #: .\dashboard\templates\dashboard\includes\navigation\sidebar.html:53
 #: .\templates\catalog\catalog_view.html:461
@@ -2130,7 +2130,7 @@ msgstr "Fiyat"
 #: .\dashboard\templates\dashboard\products\list.html:288
 #: .\dashboard\templates\dashboard\products\list.html:544
 msgid "Stok"
-msgstr "Baston"
+msgstr "Stok"
 
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:16
 #: .\dashboard\templates\dashboard\includes\tables\table_header.html:57
@@ -2529,7 +2529,7 @@ msgstr "Tümünü Okundu İşaretle"
 #: .\dashboard\templates\dashboard\notifications\list.html:75
 #, python-format
 msgid "%(current)s / %(total)s"
-msgstr "%(mevcut)s / %(toplam)s"
+msgstr "%(current)s / %(total)s"
 
 #: .\dashboard\templates\dashboard\products\list.html:11
 msgid "Ürünlerinizi kolayca yönetin ve takip edin"
@@ -2568,7 +2568,7 @@ msgstr "Tüm Markalar"
 #: .\dashboard\templates\dashboard\products\list.html:546
 #, python-format
 msgid "%(stock)s adet"
-msgstr "%(stok)lar adet"
+msgstr "%(stok)s adet"
 
 #: .\dashboard\templates\dashboard\products\list.html:169
 #: .\templates\products\sections\product_detail.html:106
@@ -2687,7 +2687,7 @@ msgstr "Belirtilmemiş"
 #: .\dashboard\templates\dashboard\products\list.html:557
 #, python-format
 msgid "%%%(percentage)s indirim"
-msgstr "%%(yüzde)s indirim"
+msgstr "%%(percentage)s  indirim"
 
 #: .\dashboard\templates\dashboard\products\list.html:578
 #: .\templates\products\sections\product_detail.html:131
@@ -4296,7 +4296,7 @@ msgstr "Toplam Değerlendirme"
 #: .\templates\contact\sections\review_list.html:672
 #, python-format
 msgid "%(review.rating)s/5"
-msgstr "%(inceleme.değerlendirme)s/5"
+msgstr "%(review.rating)s/5"
 
 #: .\templates\contact\sections\review_list.html:748
 msgid "Hizmetimizden memnun kaldıysanız, görüşünüzü bizimle paylaşın."
@@ -4537,7 +4537,7 @@ msgstr "Hakkımızda Görseli"
 
 #: .\templates\home\sections\carousel.html:6
 msgid "Ana carousel"
-msgstr "Ana atlıkarınca"
+msgstr "Ana carousel"
 
 #: .\templates\home\sections\carousel.html:15
 msgid "Slayt"
@@ -4892,7 +4892,7 @@ msgstr "Başarımız"
 #: .\templates\home\sections\statistics.html:103
 #, python-format
 msgid "100%%"
-msgstr "100%%"
+msgstr "%%100"
 
 #: .\templates\includes\mobile_breadcrumb.html:4
 msgid "Mobil sayfa navigasyonu"
@@ -4944,13 +4944,13 @@ msgstr "En çok tercih edilen ürünlerimiz"
 #: .\templates\products\sections\product_detail.html:68
 #, python-format
 msgid "%(product.price)s ₺"
-msgstr "%(ürün.fiyat)s ₺"
+msgstr "%(product.price)s ₺"
 
 #: .\templates\products\sections\featured_products.html:39
 #: .\templates\products\sections\product_detail.html:60
 #, python-format
 msgid "%(product.discount_price)s ₺"
-msgstr "%(ürün.indirim_fiyatı)s ₺"
+msgstr "%(product.discount_price)s ₺"
 
 #: .\templates\products\sections\featured_products.html:53
 msgid "Tüm Öne Çıkanları Gör"
@@ -4995,7 +4995,7 @@ msgstr "Stokta Var"
 #: .\templates\products\sections\product_detail.html:132
 #, python-format
 msgid "%(product.weight)s kg"
-msgstr "%(ürün.ağırlık)s kg"
+msgstr "%(product.weight)s kg"
 
 #: .\templates\products\sections\product_detail.html:152
 msgid "Sipariş Ver"
@@ -5041,12 +5041,12 @@ msgstr "kategorisindeki diğer ürünler"
 #: .\templates\products\sections\related_products.html:36
 #, python-format
 msgid "%(related_product.price)s ₺"
-msgstr "%(ilgili_ürün.fiyat)s ₺"
+msgstr "%(related_product.price)s ₺"
 
 #: .\templates\products\sections\related_products.html:34
 #, python-format
 msgid "%(related_product.discount_price)s ₺"
-msgstr "%(ilgili_ürün.indirim_fiyatı)s ₺"
+msgstr "%(related_product.discount_price)s ₺"
 
 #: .\templates\products\sections\related_products.html:47
 msgid "Kategorisindeki Tüm Ürünler"
@@ -5064,12 +5064,12 @@ msgstr "Size özel seçtiğimiz diğer ürünler"
 #: .\templates\products\sections\suggested_products.html:37
 #, python-format
 msgid "%(suggested_product.price)s ₺"
-msgstr "%(önerilen_ürün.fiyatı)s ₺"
+msgstr "%(suggested_product.price)s ₺"
 
 #: .\templates\products\sections\suggested_products.html:35
 #, python-format
 msgid "%(suggested_product.discount_price)s ₺"
-msgstr "%(önerilen_ürün.indirim_fiyatı)s ₺"
+msgstr "%(suggested_product.discount_price)s ₺"
 
 
 
