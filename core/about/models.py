@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
 from core.cloudinary_fields import OptimizedImageField, SEOImageMixin
+from core.dashboard.mixins import AutoOrderMixin
 
 class About(SEOImageMixin, models.Model):
     title = models.CharField("Başlık", max_length=200)
@@ -65,7 +66,7 @@ class About(SEOImageMixin, models.Model):
 
 
 
-class Service(SEOImageMixin, models.Model):
+class Service(AutoOrderMixin, SEOImageMixin, models.Model):
     title = models.CharField("Başlık", max_length=200)
     slug = models.SlugField("SEO URL", max_length=250, unique=True, blank=True,
                            help_text="Otomatik oluşturulur. SEO dostu URL için kullanılır.")
@@ -135,7 +136,7 @@ class Service(SEOImageMixin, models.Model):
     def __str__(self):
         return self.title
 
-class TeamMember(SEOImageMixin, models.Model):
+class TeamMember(AutoOrderMixin, SEOImageMixin, models.Model):
     name = models.CharField("Ad Soyad", max_length=100)
     slug = models.SlugField("SEO URL", max_length=250, unique=True, blank=True,
                            help_text="Otomatik oluşturulur. SEO dostu URL için kullanılır.")

@@ -212,13 +212,109 @@ class BaseTranslationForm(RequiredTranslationMixin, forms.ModelForm):
 
 class StaffRequiredMixin:
     """Staff yetkisi kontrolü için mixin"""
-    
+
     def dispatch(self, request, *args, **kwargs):
         from django.contrib.admin.views.decorators import staff_member_required
         from django.utils.decorators import method_decorator
-        
+
         @method_decorator(staff_member_required(login_url='dashboard:dashboard_login'))
         def wrapper(view_func):
             return view_func
-        
+
         return wrapper(super().dispatch)(request, *args, **kwargs)
+
+
+class AutoOrderMixin(models.Model):
+    """
+    Otomatik sıralama işlevselliği sağlayan mixin
+
+    Kullanım:
+        class MyModel(AutoOrderMixin, models.Model):
+            # order field'ı otomatik olarak yönetilir
+            pass
+
+    Özellikler:
+        - Yeni kayıt order belirtilmezse → en sona ekler
+        - Yeni kayıt order=1 gibi belirtilirse → diğer kayıtları kaydırır
+        - Mevcut kayıt order'ı değiştirilirse → diğer kayıtları yeniden sıralar
+        - Transaction-safe (atomik işlem)
+        - Toplu güncelleme ile performanslı
+    """
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        from django.db import transaction
+
+        with transaction.atomic():
+            # Model'in order field'ını kontrol et
+            if not hasattr(self, 'order'):
+                raise AttributeError(
+                    f"{self.__class__.__name__} model'inde 'order' field'ı bulunamadı. "
+                    "AutoOrderMixin kullanmak için model'de 'order' field'ı olmalıdır."
+                )
+
+            # Yeni kayıt mı yoksa güncelleme mi?
+            is_new = self.pk is None
+
+            if is_new:
+                # YENİ KAYIT
+                if self.order is None or self.order == 0:
+                    # SENARYO 1: Order belirtilmemiş → en sona ekle
+                    max_order = self.__class__.objects.aggregate(
+                        models.Max('order')
+                    )['order__max'] or 0
+                    self.order = max_order + 1
+                else:
+                    # SENARYO 2: Order belirtilmiş → diğerlerini kaydır
+                    # Belirtilen order'dan büyük veya eşit olan tüm kayıtları 1 arttır
+                    self.__class__.objects.filter(
+                        order__gte=self.order
+                    ).update(order=models.F('order') + 1)
+            else:
+                # MEVCUT KAYDIN GÜNCELLENMESİ
+                # Eski order değerini al
+                try:
+                    old_instance = self.__class__.objects.get(pk=self.pk)
+                    old_order = old_instance.order
+
+                    if old_order != self.order:
+                        # SENARYO 3: Order değiştirilmiş → yeniden sırala
+
+                        if self.order > old_order:
+                            # Order arttırılmış → aradaki kayıtları 1 azalt
+                            self.__class__.objects.filter(
+                                order__gt=old_order,
+                                order__lte=self.order
+                            ).exclude(pk=self.pk).update(order=models.F('order') - 1)
+                        else:
+                            # Order azaltılmış → aradaki kayıtları 1 arttır
+                            self.__class__.objects.filter(
+                                order__gte=self.order,
+                                order__lt=old_order
+                            ).exclude(pk=self.pk).update(order=models.F('order') + 1)
+
+                except self.__class__.DoesNotExist:
+                    # Eski kayıt bulunamadı (olağandışı durum)
+                    pass
+
+            # Kaydı kaydet
+            super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        """
+        Kayıt silindiğinde diğer kayıtların order'larını düzenle
+        """
+        from django.db import transaction
+
+        with transaction.atomic():
+            deleted_order = self.order
+
+            # Kaydı sil
+            super().delete(*args, **kwargs)
+
+            # Silinen order'dan büyük olan tüm kayıtları 1 azalt
+            self.__class__.objects.filter(
+                order__gt=deleted_order
+            ).update(order=models.F('order') - 1)
