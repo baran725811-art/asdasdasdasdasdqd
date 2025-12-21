@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 from django.urls import reverse
 from core.cloudinary_fields import OptimizedImageField, SEOImageMixin
-from core.dashboard.mixins import AutoOrderMixin
+from dashboard.mixins import AutoOrderMixin
 
 class CarouselSlide(AutoOrderMixin, SEOImageMixin, models.Model):
     title = models.CharField("Başlık", max_length=200)
