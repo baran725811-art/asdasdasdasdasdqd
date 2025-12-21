@@ -1,5 +1,6 @@
 # dashboard/mixins.py
 from django import forms
+from django.db import models
 from django.core.exceptions import ValidationError
 from django_ckeditor_5.widgets import CKEditor5Widget
 from django.contrib import messages
