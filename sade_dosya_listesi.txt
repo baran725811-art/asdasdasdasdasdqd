@@ -560,6 +560,7 @@ staticfiles\css\style.css
 staticfiles\dashboard\css\common.css
 staticfiles\dashboard\css\components\cards.css
 staticfiles\dashboard\css\components\forms.css
+staticfiles\dashboard\css\components\image-crop.css
 staticfiles\dashboard\css\components\modals.css
 staticfiles\dashboard\css\components\navbar.css
 staticfiles\dashboard\css\components\notifications.css
@@ -577,6 +578,7 @@ staticfiles\dashboard\css\pages\news.css
 staticfiles\dashboard\css\pages\team.css
 staticfiles\dashboard\js\common.js
 staticfiles\dashboard\js\components\form-validation.js
+staticfiles\dashboard\js\components\image-crop.js
 staticfiles\dashboard\js\components\image-preview.js
 staticfiles\dashboard\js\components\modal-manager.js
 staticfiles\dashboard\js\components\notification-system.js

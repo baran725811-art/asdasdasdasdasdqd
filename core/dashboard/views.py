@@ -945,7 +945,6 @@ def gallery_list(request):
 
 
 # dashboard/views.py - gallery_add fonksiyonunu güncelleyin:
-
 @staff_member_required(login_url='dashboard:dashboard_login')
 def gallery_add(request):
     from core.models import SiteSettings
@@ -977,38 +976,36 @@ def gallery_add(request):
         
         if form.is_valid():
             try:
-                gallery_item = form.save(commit=False)  # ← DEĞİŞTİ
+                # ✅ ADIM 1: Form'u kaydet (commit=False ile)
+                gallery_item = form.save(commit=False)
+                gallery_item.save()  # Önce instance'ı kaydet ki ID oluşsun
                 
-                # ✅ ORİJİNAL GÖRSELİ KAYDET (Base64'ten) - YENİ EKLENEN BÖLÜM BAŞLANGIÇ
+                # ✅ ADIM 2: ORİJİNAL GÖRSELİ KAYDET (Base64'ten)
                 original_image_data = request.POST.get('original_image_data')
                 if original_image_data and 'base64,' in original_image_data:
                     import base64
                     from django.core.files.base import ContentFile
                     import uuid
                     
-                    # Base64'ü decode et
                     format, imgstr = original_image_data.split(';base64,')
                     ext = format.split('/')[-1]
                     
-                    # Dosya oluştur
                     original_file = ContentFile(
                         base64.b64decode(imgstr),
                         name=f'original_{uuid.uuid4()}.{ext}'
                     )
                     
-                    # Orijinal dosyayı kaydet
+                    # ✅ Cloudinary field için doğru yöntem
                     gallery_item.image = original_file
+                    gallery_item.save()
                 
-                # ✅ KIRPILMIŞ GÖRSELİ KAYDET (Form'dan gelir)
+                # ✅ ADIM 3: KIRPILMIŞ GÖRSELİ KAYDET
                 if 'image' in request.FILES:
                     gallery_item.cropped_image = request.FILES['image']
-                # YENİ EKLENEN BÖLÜM BİTİŞ
-                
-                gallery_item.save()  # ← YENİ EKLENEN
+                    gallery_item.save()
                 
                 print(f"✅ GALERİ ÖĞESİ BAŞARIYLA KAYDEDİLDİ! ID: {gallery_item.id}, Title: {gallery_item.title}")
                 
-                # AJAX request için JSON response
                 if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                     return JsonResponse({
                         'success': True,
@@ -1036,7 +1033,6 @@ def gallery_add(request):
             print("❌ Form geçersiz!")
             print(f"Hatalar: {dict(form.errors)}")
             
-            # Form hatalarını handle et
             error_messages = []
             for field, errors in form.errors.items():
                 if '_en' in field or '_de' in field or '_fr' in field or '_es' in field or '_ru' in field or '_ar' in field:
@@ -1063,14 +1059,13 @@ def gallery_add(request):
                     'error_messages': error_messages
                 })
     
-    # GET request - redirect to gallery list
     return redirect('dashboard:dashboard_gallery')
+
 
 @staff_member_required(login_url='dashboard:dashboard_login')
 def gallery_edit(request, pk):
     gallery_item = get_object_or_404(Gallery, pk=pk)
     
-    # Çeviri sistemi kontrol et
     from core.models import SiteSettings
     from .models import DashboardTranslationSettings
     
@@ -1096,36 +1091,34 @@ def gallery_edit(request, pk):
         )
         if form.is_valid():
             try:
-                gallery_item = form.save(commit=False)  # ← DEĞİŞTİ
+                # ✅ ADIM 1: Form'u kaydet
+                gallery_item = form.save(commit=False)
+                gallery_item.save()
                 
-                # ✅ ORİJİNAL GÖRSELİ KAYDET (Base64'ten) - YENİ EKLENEN BÖLÜM BAŞLANGIÇ
+                # ✅ ADIM 2: ORİJİNAL GÖRSELİ KAYDET (Base64'ten)
                 original_image_data = request.POST.get('original_image_data')
                 if original_image_data and 'base64,' in original_image_data:
                     import base64
                     from django.core.files.base import ContentFile
                     import uuid
                     
-                    # Base64'ü decode et
                     format, imgstr = original_image_data.split(';base64,')
                     ext = format.split('/')[-1]
                     
-                    # Dosya oluştur
                     original_file = ContentFile(
                         base64.b64decode(imgstr),
                         name=f'original_{uuid.uuid4()}.{ext}'
                     )
                     
-                    # Orijinal dosyayı kaydet
+                    # ✅ Cloudinary field için doğru yöntem
                     gallery_item.image = original_file
+                    gallery_item.save()
                 
-                # ✅ KIRPILMIŞ GÖRSELİ KAYDET (Form'dan gelir)
+                # ✅ ADIM 3: KIRPILMIŞ GÖRSELİ KAYDET
                 if 'image' in request.FILES:
                     gallery_item.cropped_image = request.FILES['image']
-                # YENİ EKLENEN BÖLÜM BİTİŞ
+                    gallery_item.save()
                 
-                gallery_item.save()  # ← YENİ EKLENEN
-                
-                # AJAX request için JSON response
                 if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                     return JsonResponse({
                         'success': True,
@@ -1153,8 +1146,10 @@ def gallery_edit(request, pk):
             else:
                 messages.error(request, 'Form hatası! Lütfen alanları kontrol edin.')
     
-    # GET request - redirect to list
     return redirect('dashboard:dashboard_gallery')
+
+
+
 
 @staff_member_required(login_url='dashboard:dashboard_login')
 def gallery_delete(request, pk):
