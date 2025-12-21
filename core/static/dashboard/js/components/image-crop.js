@@ -262,40 +262,41 @@ function applyCrop(fieldName) {
             closeCropInline(fieldName);
             
             // ✅ SADECE KIRPILMIŞ DOSYAYI `image` FIELD'INA EKLE
-            const fileInput = document.querySelector(`[data-field-name="${fieldName}"] input[type="file"]`);
-            if (fileInput) {
-                const dt = new DataTransfer();
-                dt.items.add(croppedFile);
-                fileInput.files = dt.files;
-                
-                const changeEvent = new Event('change', { bubbles: true });
-                changeEvent.isCropEvent = true;
-                fileInput.dispatchEvent(changeEvent);
-            }
-            
-            // ✅ ORİJİNAL DOSYAYI FORMA EKLE (Hidden input olarak)
-            // Products & Gallery formu için çalışacak
+                        // ✅ KIRPILMIŞ DOSYAYI `cropped_image` FIELD'INA, ORİJİNALİ `image` FIELD'INDA BIRAK
             const form = container.closest('form');
-            if (form && originalFile) {
-                // Eski hidden input varsa sil
-                const oldHiddenInput = form.querySelector('input[name="original_image_data"]');
-                if (oldHiddenInput) {
-                    oldHiddenInput.remove();
+            if (form) {
+                // 1. Kırpılmış dosyayı cropped_image field'ına yaz
+                let croppedImageInput = form.querySelector('input[name="cropped_image"]');
+                
+                if (!croppedImageInput) {
+                    // cropped_image field'ı yoksa oluştur (hidden file input)
+                    croppedImageInput = document.createElement('input');
+                    croppedImageInput.type = 'file';
+                    croppedImageInput.name = 'cropped_image';
+                    croppedImageInput.style.display = 'none';
+                    form.appendChild(croppedImageInput);
                 }
                 
-                // Yeni hidden input oluştur
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const hiddenInput = document.createElement('input');
-                    hiddenInput.type = 'hidden';
-                    hiddenInput.name = 'original_image_data';
-                    hiddenInput.value = e.target.result; // Base64 data
-                    form.appendChild(hiddenInput);
+                const dtCropped = new DataTransfer();
+                dtCropped.items.add(croppedFile);
+                croppedImageInput.files = dtCropped.files;
+                
+                // 2. Orijinal dosyayı image field'ında tut
+                const imageInput = document.querySelector(`[data-field-name="${fieldName}"] input[type="file"]`);
+                if (imageInput && originalFile) {
+                    const dtOriginal = new DataTransfer();
+                    dtOriginal.items.add(originalFile);
+                    imageInput.files = dtOriginal.files;
                     
-                    console.log('✅ Orijinal görsel forma eklendi (base64)');
-                };
-                reader.readAsDataURL(originalFile);
+                    const changeEvent = new Event('change', { bubbles: true });
+                    changeEvent.isCropEvent = true;
+                    imageInput.dispatchEvent(changeEvent);
+                }
+                
+                console.log('✅ Kırpılmış dosya: cropped_image field\'ına yazıldı');
+                console.log('✅ Orijinal dosya: image field\'ında korundu');
             }
+
             
             // Success message
             showSuccess(fieldName);
