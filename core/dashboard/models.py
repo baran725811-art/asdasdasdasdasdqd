@@ -8,7 +8,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django_ckeditor_5.fields import CKEditor5Field
 from core.cloudinary_fields import OptimizedImageField, SEOImageMixin
-
+from .mixins import AutoOrderMixin
 
 from .constants import LANGUAGE_CHOICES, NOTIFICATION_TYPES
 
@@ -67,7 +67,7 @@ class Message(models.Model):
         return f"{self.name} - {self.subject}"
 
 
-class MediaMention(SEOImageMixin, models.Model):
+class MediaMention(AutoOrderMixin, SEOImageMixin, models.Model):
     """Basın haberleri - Optimize edilmiş çeviri alanları ile"""
     # Temel alanlar
     title = models.CharField("Başlık", max_length=200)

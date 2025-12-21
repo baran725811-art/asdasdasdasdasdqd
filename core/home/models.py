@@ -4,8 +4,9 @@ from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 from django.urls import reverse
 from core.cloudinary_fields import OptimizedImageField, SEOImageMixin
+from core.dashboard.mixins import AutoOrderMixin
 
-class CarouselSlide(SEOImageMixin, models.Model):
+class CarouselSlide(AutoOrderMixin, SEOImageMixin, models.Model):
     title = models.CharField("Başlık", max_length=200)
     slug = models.SlugField("SEO URL", max_length=250, unique=True, blank=True)
     description = models.TextField("Açıklama")

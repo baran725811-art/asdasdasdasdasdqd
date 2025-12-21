@@ -3,8 +3,9 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 from core.cloudinary_fields import OptimizedImageField, OptimizedVideoField, SEOImageMixin
+from core.dashboard.mixins import AutoOrderMixin
 
-class Gallery(SEOImageMixin, models.Model):
+class Gallery(AutoOrderMixin, SEOImageMixin, models.Model):
     MEDIA_TYPES = (
         ('image', 'Resim'),
         ('video', 'Video'),
