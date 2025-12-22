@@ -212,10 +212,12 @@
                     <!-- Turkish Content -->
                     <div class="translation-content active" data-lang="tr">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-8">
                                 {% include 'dashboard/includes/forms/form_field.html' with field_name="title" field_label="Başlık" field_icon="fas fa-heading" field_type="text" is_required=True help_text="Slayt başlığı" language_code="tr" %}
-                            </div>                       
-                            
+                            </div>
+                            <div class="col-md-4">
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="order" field_label="Sıralama" field_icon="fas fa-sort-numeric-up" field_type="number" field_min="0" field_placeholder="Otomatik sırala" help_text="Boş bırakırsanız otomatik olarak en sona eklenir" %}
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
@@ -283,10 +285,7 @@
                             </div>
                             
                             <div class="row">
-                                <div class="col-md-6">
-                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="order" field_label="Sıralama" field_icon="fas fa-sort-numeric-up" field_type="number" field_min="0" help_text="Küçük sayılar önce görünür" %}
-                                </div>
-                                <div class="col-md-6">
+                                <div class="col-12">
                                     {% include 'dashboard/includes/forms/checkbox_field.html' with field_name="is_active" label="Aktif Durumda" field_type="switch" icon="fas fa-toggle-on" checked=True %}
                                 </div>
                             </div>
@@ -337,7 +336,7 @@
                                 {% include 'dashboard/includes/forms/form_field.html' with field_name="title" field_label="Başlık" field_icon="fas fa-heading" field_type="text" field_value=slide.title is_required=True language_code="tr" %}
                             </div>
                             <div class="col-md-4">
-                                {% include 'dashboard/includes/forms/form_field.html' with field_name="order" field_label="Sıralama" field_icon="fas fa-sort-numeric-up" field_type="number" field_value=slide.order field_min="0" %}
+                                {% include 'dashboard/includes/forms/form_field.html' with field_name="order" field_label="Sıralama" field_icon="fas fa-sort-numeric-up" field_type="number" field_value=slide.order field_min="0" field_placeholder="Otomatik sırala" help_text="Küçük sayılar önce görünür" %}
                             </div>
                         </div>
                         <div class="row">
