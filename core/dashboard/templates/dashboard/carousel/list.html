@@ -212,12 +212,10 @@
                     <!-- Turkish Content -->
                     <div class="translation-content active" data-lang="tr">
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 {% include 'dashboard/includes/forms/form_field.html' with field_name="title" field_label="Başlık" field_icon="fas fa-heading" field_type="text" is_required=True help_text="Slayt başlığı" language_code="tr" %}
-                            </div>
-                            <div class="col-md-4">
-                                {% include 'dashboard/includes/forms/form_field.html' with field_name="order" field_label="Sıralama" field_icon="fas fa-sort-numeric-up" field_type="number" field_value="0" field_min="0" %}
-                            </div>
+                            </div>                       
+                            
                         </div>
                         <div class="row">
                             <div class="col-12">

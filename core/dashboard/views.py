@@ -1914,13 +1914,10 @@ def product_add(request):
                     raise ValueError("Form save işlemi başarısız oldu")
                 
                 # ✅ KIRPILMIŞ GÖRSELİ KAYDET (Form'dan gelir)
+                                
                 cropped_saved = False
                 if 'image' in request.FILES:
-                    product.cropped_image.save(
-                        request.FILES['image'].name,
-                        request.FILES['image'],
-                        save=False
-                    )
+                    product.cropped_image = request.FILES['image']
                     cropped_saved = True
 
                 # ✅ ORİJİNAL GÖRSELİ KAYDET (Base64'ten)
@@ -1941,17 +1938,14 @@ def product_add(request):
                         name=f'original_{uuid.uuid4()}.{ext}'
                     )
 
-                    # ✅ DOĞRU YÖNTEM: save() ile kaydet
-                    product.image.save(
-                        original_file.name,
-                        original_file,
-                        save=False
-                    )
+                    # ✅ DOĞRU YÖNTEM: Doğrudan assign
+                    product.image = original_file
                     original_saved = True
 
                 # ✅ Görsel kaydedildiyse tekrar save et
                 if cropped_saved or original_saved:
                     product.save()
+
 
                 if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                     return JsonResponse({
@@ -2028,11 +2022,7 @@ def product_edit(request, pk):
                 # ✅ KIRPILMIŞ GÖRSELİ KAYDET (Form'dan gelir)
                 cropped_saved = False
                 if 'image' in request.FILES:
-                    product.cropped_image.save(
-                        request.FILES['image'].name,
-                        request.FILES['image'],
-                        save=False
-                    )
+                    product.cropped_image = request.FILES['image']
                     cropped_saved = True
 
                 # ✅ ORİJİNAL GÖRSELİ KAYDET (Base64'ten)
@@ -2053,17 +2043,14 @@ def product_edit(request, pk):
                         name=f'original_{uuid.uuid4()}.{ext}'
                     )
 
-                    # ✅ DOĞRU YÖNTEM: save() ile kaydet
-                    product.image.save(
-                        original_file.name,
-                        original_file,
-                        save=False
-                    )
+                    # ✅ DOĞRU YÖNTEM: Doğrudan assign
+                    product.image = original_file
                     original_saved = True
 
                 # ✅ Görsel kaydedildiyse tekrar save et
                 if cropped_saved or original_saved:
                     product.save()
+
                 
                 if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                     return JsonResponse({

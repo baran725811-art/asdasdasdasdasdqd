@@ -696,3 +696,69 @@ document.addEventListener('DOMContentLoaded', function() {
 // Export for global use
 window.GalleryManager = GalleryManager;
 window.GalleryUtils = GalleryUtils;
+
+
+// Gallery form submit handler - Modal kapatma eklendi
+document.addEventListener('submit', function(e) {
+    const form = e.target;
+    
+    // Sadece gallery modal formlarını dinle
+    if (form.closest('#addGalleryModal') || form.closest('#editGalleryModal')) {
+        e.preventDefault();
+        
+        const formData = new FormData(form);
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        
+        // Loading state
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Kaydediliyor...';
+        
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // ✅ MODAL KAPAT
+                const modalElement = form.closest('.modal');
+                if (modalElement) {
+                    const modalInstance = bootstrap.Modal.getInstance(modalElement);
+                    if (modalInstance) {
+                        modalInstance.hide();
+                    }
+                }
+                
+                // Notification
+                if (window.notificationSystem) {
+                    window.notificationSystem.success(data.message || 'Başarıyla kaydedildi!');
+                }
+                
+                // Sayfa yenile
+                setTimeout(() => location.reload(), 1000);
+            } else {
+                // Hata
+                if (window.notificationSystem) {
+                    window.notificationSystem.error(data.message || 'Bir hata oluştu!');
+                }
+                
+                // Restore button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        })
+        .catch(error => {
+            console.error('Submit error:', error);
+            alert('Bir hata oluştu: ' + error.message);
+            
+            // Restore button
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        });
+    }
+});
