@@ -606,8 +606,10 @@ class GalleryFormWithTranslation(BaseTranslationForm):
             }),
             'order': forms.NumberInput(attrs={
                 'class': 'form-control',
-                'min': 0
+                'min': 0,
+                'value': 0
             }),
+
         }
     
     def _add_translation_fields(self):
@@ -809,7 +811,12 @@ class ServiceFormWithTranslation(BaseTranslationForm):
         widgets = {
             'title': forms.TextInput(),
             'description': forms.Textarea(attrs={'rows': 4}),
-            'order': forms.NumberInput(),
+            'order': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': 0,
+                'value': 0
+            }),
+
         }
     
     def _add_translation_fields(self):
@@ -876,7 +883,12 @@ class TeamMemberFormWithTranslation(BaseTranslationForm):
             'name': forms.TextInput(),
             'position': forms.TextInput(),
             'bio': forms.Textarea(attrs={'rows': 4}),
-            'order': forms.NumberInput(),
+            'order': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': 0,
+                'value': 0
+            }),
+
             'image': forms.FileInput(attrs={'class': 'form-control', 'accept': 'image/*'}),
         }
     

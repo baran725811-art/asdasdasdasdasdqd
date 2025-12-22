@@ -485,3 +485,109 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// ===============================================
+// SERVICE FORM SUBMIT HANDLER
+// ===============================================
+const serviceAddForm = document.getElementById('serviceForm');
+const serviceEditForms = document.querySelectorAll('[id^="editServiceForm"]');
+
+if (serviceAddForm) {
+    serviceAddForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        
+        // Loading state
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Kaydediliyor...';
+        
+        try {
+            const formData = new FormData(this);
+            const response = await fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                }
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                showToast('Başarılı', result.message || 'Hizmet başarıyla eklendi.', 'success');
+                
+                // Modal'ı kapat
+                const modal = bootstrap.Modal.getInstance(document.getElementById('addServiceModal'));
+                if (modal) modal.hide();
+                
+                // Sayfayı yenile
+                setTimeout(() => window.location.reload(), 1000);
+            } else {
+                showToast('Hata', result.message || 'Kaydetme başarısız.', 'error');
+            }
+            
+        } catch (error) {
+            console.error('Service save error:', error);
+            showToast('Hata', 'Bir hata oluştu. Lütfen tekrar deneyin.', 'error');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        }
+    });
+}
+
+// Service Edit Forms
+serviceEditForms.forEach(form => {
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        
+        // Loading state
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Güncelleniyor...';
+        
+        try {
+            const formData = new FormData(this);
+            const response = await fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+                }
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                showToast('Başarılı', result.message || 'Hizmet başarıyla güncellendi.', 'success');
+                
+                // Modal'ı kapat
+                const modalId = this.closest('.modal').id;
+                const modal = bootstrap.Modal.getInstance(document.getElementById(modalId));
+                if (modal) modal.hide();
+                
+                // Sayfayı yenile
+                setTimeout(() => window.location.reload(), 1000);
+            } else {
+                showToast('Hata', result.message || 'Güncelleme başarısız.', 'error');
+            }
+            
+        } catch (error) {
+            console.error('Service update error:', error);
+            showToast('Hata', 'Bir hata oluştu. Lütfen tekrar deneyin.', 'error');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        }
+    });
+});
+
+// Hizmetler kısmı için initialize
+function initServices() {
+    console.log('🔧 Services section initializing...');

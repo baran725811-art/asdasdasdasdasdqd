@@ -37,10 +37,31 @@ footer : Hizmetlerimiz  dahsbordan çekecek
 
 
 2-)depolama : <!-- Storage Progress Bar -->  doğru çalışmıyor gibi sanırım.  bu depolama alanı  yüklenen resim ve videoların toplam boyutunu hesaplayacak "CLOUDINARY" bölümüne 
+Cloudinary API’den toplam kullanılan depolama alanı çekilecek.
 
+Resim + videoların boyutları toplanıp progress bar’a aktarılacak.
+
+Hem backend (API çağrısı) hem frontend (bar güncelleme) yapılmalı.
+
+Mantık basit ama entegrasyon testleri uğraştırabilir.
 
 3-)istatislikler: 
 index bölümünde rakamlarla biz bölümünde görülmüyor istatislik rakmları. 
 index bölümünde "Hakkımızda" bölümünde resim bölümünde bulunan istatislik görülmüyor
 iletişim verileri  otomatik olarak  istatiliklere eklensin. her yıl geçince otomatik olarak güncellensin  tamamlanan iş her yoruma göre artsın mutlu müşteri 2 puan ve üzeirne versin  menuniyet puan ortalamasına göre verilsin
 sayfaya her giriş yapan kullanıcı sonrası tamamlanan iş artsın
+Index ve Hakkımızda bölümlerinde rakamların görünmemesi → template + context fix.
+
+Dinamik istatistik:
+
+Yorum geldikçe → tamamlanan iş artacak.
+
+2+ puanlı yorumlar → mutlu müşteri.
+
+Ortalama puan → memnuniyet.
+
+Her yıl otomatik güncelleme.
+
+Her giriş → tamamlanan iş artsın.
+
+Backend mantığı + cron veya sinyal tabanlı güncelleme gerek.
