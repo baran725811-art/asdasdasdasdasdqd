@@ -214,7 +214,7 @@
                             
                             <div class="row">
                                 <div class="col-md-6">
-                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="order" field_label="Sıralama" field_icon="fas fa-sort-numeric-up" field_type="number" field_min="0" help_text="Küçük sayılar önce görünür" %}
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="order" field_label="Sıralama" field_icon="fas fa-sort-numeric-up" field_type="number" field_min="0" field_placeholder="Otomatik sırala" help_text="Boş bırakırsanız otomatik olarak en sona eklenir" %}
                                 </div>
                                 <div class="col-md-6">
                                     {% include 'dashboard/includes/forms/checkbox_field.html' with field_name="is_active" label="Aktif Durumda" field_type="switch" icon="fas fa-toggle-on" checked=True %}
@@ -462,13 +462,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (addServiceForm) {
         addServiceForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
+
             // Loading state
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Kaydediliyor...';
-            
+
             try {
                 const response = await fetch(this.action, {
                     method: 'POST',
@@ -478,21 +478,23 @@ document.addEventListener('DOMContentLoaded', function() {
                         'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
                     }
                 });
-                
+
                 if (response.ok) {
                     // Success
                     if (window.notificationSystem) {
                         window.notificationSystem.success('Hizmet başarıyla kaydedildi!');
                     }
-                    
-                    // Modal kapat
-                    const modal = bootstrap.Modal.getInstance(document.getElementById('addServiceModal'));
-                    modal.hide();
-                    
-                    // Sayfa yenile (hizmet listesini güncelle)
-                    setTimeout(() => {
+
+                    // Modal tam kapandıktan sonra sayfa yenile
+                    const modalElement = document.getElementById('addServiceModal');
+                    const modal = bootstrap.Modal.getInstance(modalElement);
+
+                    // Modal'ın tam kapanmasını bekle
+                    modalElement.addEventListener('hidden.bs.modal', function() {
                         window.location.reload();
-                    }, 1000);
+                    }, { once: true });
+
+                    modal.hide();
                 } else {
                     throw new Error('Kaydetme hatası');
                 }
@@ -503,8 +505,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {
                     alert('Bir hata oluştu: ' + error.message);
                 }
-            } finally {
-                // Reset button
+                // Reset button sadece hata durumunda
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalText;
             }
@@ -515,12 +516,12 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('form[id^="editServiceForm"]').forEach(form => {
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
+
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Güncelleniyor...';
-            
+
             try {
                 const response = await fetch(this.action, {
                     method: 'POST',
@@ -530,21 +531,22 @@ document.addEventListener('DOMContentLoaded', function() {
                         'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
                     }
                 });
-                
+
                 if (response.ok) {
                     if (window.notificationSystem) {
                         window.notificationSystem.success('Hizmet başarıyla güncellendi!');
                     }
-                    
-                    // Modal kapat
-                    const modalId = this.closest('.modal').id;
-                    const modal = bootstrap.Modal.getInstance(document.getElementById(modalId));
-                    modal.hide();
-                    
-                    // Sayfa yenile
-                    setTimeout(() => {
+
+                    // Modal tam kapandıktan sonra sayfa yenile
+                    const modalElement = this.closest('.modal');
+                    const modal = bootstrap.Modal.getInstance(modalElement);
+
+                    // Modal'ın tam kapanmasını bekle
+                    modalElement.addEventListener('hidden.bs.modal', function() {
                         window.location.reload();
-                    }, 1000);
+                    }, { once: true });
+
+                    modal.hide();
                 } else {
                     throw new Error('Güncelleme hatası');
                 }
@@ -555,7 +557,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {
                     alert('Bir hata oluştu: ' + error.message);
                 }
-            } finally {
+                // Reset button sadece hata durumunda
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalText;
             }

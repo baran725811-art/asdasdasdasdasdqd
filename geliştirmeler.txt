@@ -2,6 +2,7 @@
 
 
 1-)dashboda görselleri kırpma işlmeleri getirilecek resimleri yüklenince. admin bölümündeki kırpma işlemi bölümü kullanılsn. 
+düzenleme bölümündede kırpma işlemi dahil olsun
 
 2-)depolama : <!-- Storage Progress Bar -->  doğru çalışmıyor gibi sanırım.  bu depolama alanı  yüklenen resim ve videoların toplam boyutunu hesaplayacak "CLOUDINARY" bölümüne 
 

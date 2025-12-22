@@ -43,7 +43,10 @@
             const generateBtn = document.querySelector('.auto-generate-btn[data-source="{{ source_field }}"]');
             const previewText = document.querySelector('.preview-text');
             const sourceField = generateBtn ? document.querySelector(`[name="${generateBtn.dataset.source}"]`) : null;
-            
+
+            // Kullanıcının manuel edit yapıp yapmadığını takip et
+            let isManuallyEdited = false;
+
             function updatePreview() {
                 if (previewText) {
                     const baseUrl = '{{ preview_url|default:"/" }}';
@@ -51,7 +54,7 @@
                     previewText.textContent = baseUrl + slugValue;
                 }
             }
-            
+
             function generateSlug(text) {
                 return text
                     .toLowerCase()
@@ -60,30 +63,40 @@
                     .replace(/-+/g, '-')
                     .replace(/^-|-$/g, '');
             }
-            
+
             if (generateBtn && sourceField) {
                 generateBtn.addEventListener('click', function() {
                     const sourceValue = sourceField.value;
                     if (sourceValue) {
                         slugInput.value = generateSlug(sourceValue);
                         updatePreview();
+                        isManuallyEdited = false; // Manuel edit flag'ini sıfırla
                     }
                 });
-                
+
                 // Auto-generate on source field change
                 sourceField.addEventListener('input', function() {
-                    if (!slugInput.value || slugInput.value === '...') {
+                    // Sadece kullanıcı slug'ı manuel olarak düzenlemediyse otomatik oluştur
+                    if (!isManuallyEdited) {
                         slugInput.value = generateSlug(this.value);
                         updatePreview();
                     }
                 });
             }
-            
+
+            // Kullanıcı slug'a dokunduğunda manuel edit flag'ini aktif et
+            slugInput.addEventListener('focus', function() {
+                if (this.value && this.value !== '...') {
+                    isManuallyEdited = true;
+                }
+            });
+
             slugInput.addEventListener('input', function() {
+                isManuallyEdited = true; // Kullanıcı yazdığında flag'i aktif et
                 this.value = generateSlug(this.value);
                 updatePreview();
             });
-            
+
             updatePreview();
         });
         </script>
@@ -251,4 +264,3 @@
         </div>
     {% endif %}
 </div>
-

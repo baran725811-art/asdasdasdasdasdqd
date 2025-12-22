@@ -18,3 +18,29 @@ galeri ve hizmetlerimiz bölümünde :  kaydet basınca kaydetikten sonra modal 
 
 tüm sayfalarda modalda sıralama otomatik olarak yazılsın  ve tüm modalarda tek bir sıralama bölümü olsun 
 carousel iki sıralama bölümü var birini kaldır hangisi aktifse o  kalsın   Sıralama üstedi devre dışı bırak hepsinde altaki aktfi bundada o aktif olsun 
+
+
+
+yeni: 
+ayarlar seo bölümü bir işlevi varmı hangi alanları etkiliyor.
+Hakkımızda , ve istatisliklerde göstermiyor rakamlar. footer bölümünde doğru çekkiyor. 
+footer : Hizmetlerimiz  dahsbordan çekecek
+"Gösterge Tablosu << yerine işletme adı girilecek bunun için nerede yazdığına bakılacak ve işletme adı yazılacak ve logosu olacak"
+{% block page_title %}{% trans "Dashboard Ana Sayfa" %}{% endblock %} dashboard/templates/dashboard/index.html
+
+"Yönetici Kontrol Paneli << işletme adı yazılacak devamı yönetici kontrol paneli yazılacak gerekirse yazı biraz küçültülecek "
+<h4>{% trans "Admin Dashboard"%}</h4> dashboard/templates/dashboard/includes/navigation/sidebar.html
+
+"Yönetim Paneli << paneli kullanacak kişinin adı yazılacak soy isim isteğe bağlı"
+<div class="subtitle">{% trans "Yönetim Paneli"%}</div>  dashboard/templates/dashboard/includes/navigation/sidebar.html
+
+
+
+2-)depolama : <!-- Storage Progress Bar -->  doğru çalışmıyor gibi sanırım.  bu depolama alanı  yüklenen resim ve videoların toplam boyutunu hesaplayacak "CLOUDINARY" bölümüne 
+
+
+3-)istatislikler: 
+index bölümünde rakamlarla biz bölümünde görülmüyor istatislik rakmları. 
+index bölümünde "Hakkımızda" bölümünde resim bölümünde bulunan istatislik görülmüyor
+iletişim verileri  otomatik olarak  istatiliklere eklensin. her yıl geçince otomatik olarak güncellensin  tamamlanan iş her yoruma göre artsın mutlu müşteri 2 puan ve üzeirne versin  menuniyet puan ortalamasına göre verilsin
+sayfaya her giriş yapan kullanıcı sonrası tamamlanan iş artsın
