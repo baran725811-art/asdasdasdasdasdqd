@@ -1,0 +1,148 @@
+<!--core\templates\about\team.html-->
+{% extends 'base/main.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Ekibimiz" %} | {{ site_name }}{% endblock %}
+{% block meta_description %}{% trans "Deneyimli ve uzman kadromuzla tanışın. Her biri alanında profesyonel ekip üyelerimiz ile başarıya birlikte ulaşıyoruz." %}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/about/main.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="about-hero team-hero">
+    <div class="hero-content">
+        <div class="container">
+            <div class="hero-text">
+                <h1 class="hero-title" data-aos="fade-up">{% trans "Ekibimiz" %}</h1>
+                <p class="hero-description" data-aos="fade-up" data-aos-delay="200">
+                    {% trans "Başarılarımızın arkasındaki en büyük güç, tutkulu ve deneyimli ekibimizdir. Her biri alanında uzman ekip üyelerimizle tanışın." %}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="hero-pattern"></div>
+</section>
+
+<!-- Team Grid Section -->
+<section class="about-team team-full">
+    <div class="container">
+        <div class="team-grid team-grid-full">
+            {% for member in team_members %}
+            {% if member.is_active %}
+            <div class="team-card team-card-full" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:100 }}">
+                <div class="member-image">
+                    {% if member.cropped_image %}
+                        <img src="{{ member.cropped_image.url }}" alt="{{ member.alt_text|default:member.name }}" loading="lazy">
+                    {% elif member.image %}
+                        <img src="{{ member.image.url }}" alt="{{ member.alt_text|default:member.name }}" loading="lazy">
+                    {% else %}
+                    <div class="member-placeholder">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    {% endif %}
+                    <div class="member-overlay">
+                        {% if member.linkedin_url or member.twitter_url or member.email %}
+                        <div class="member-social">
+                            {% if member.linkedin_url %}
+                            <a href="{{ member.linkedin_url }}" target="_blank" rel="noopener" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            {% endif %}
+                            {% if member.twitter_url %}
+                            <a href="{{ member.twitter_url }}" target="_blank" rel="noopener" aria-label="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            {% endif %}
+                            {% if member.email %}
+                            <a href="mailto:{{ member.email }}" aria-label="Email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="member-content">
+                    <h2 class="member-name">{{ member.name }}</h2>
+                    <p class="member-position">{{ member.position }}</p>
+                    {% if member.bio %}
+                    <p class="member-bio">{{ member.bio }}</p>
+                    {% endif %}
+                    {% if member.expertise %}
+                    <div class="member-expertise">
+                        <h4>{% trans "Uzmanlık Alanları" %}</h4>
+                        <ul>
+                            {% for skill in member.expertise.split:',' %}
+                            <li>{{ skill|trim }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+            {% empty %}
+            <div class="empty-state" data-aos="fade-up">
+                <div class="empty-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>{% trans "Henüz Ekip Üyesi Eklenmemiş" %}</h3>
+                <p>{% trans "Yakında ekip üyelerimizle burada tanışabileceksiniz." %}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Team Values Section -->
+        {% if team_members %}
+        <div class="team-values" data-aos="fade-up">
+            <div class="section-header">
+                <h2 class="section-title">{% trans "Değerlerimiz" %}</h2>
+                <p class="section-subtitle">{% trans "Bizi biz yapan değerler" %}</p>
+            </div>
+            <div class="values-grid">
+                <div class="value-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="value-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>{% trans "Güven" %}</h3>
+                    <p>{% trans "Müşterilerimizle uzun soluklu, güvene dayalı ilişkiler kuruyoruz." %}</p>
+                </div>
+                <div class="value-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="value-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>{% trans "İnovasyon" %}</h3>
+                    <p>{% trans "Sürekli gelişim ve yenilikçi çözümler üretmek için çalışıyoruz." %}</p>
+                </div>
+                <div class="value-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="value-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>{% trans "Mükemmellik" %}</h3>
+                    <p>{% trans "Her projede en yüksek kalite standartlarını hedefliyoruz." %}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="team-cta" data-aos="fade-up">
+            <div class="cta-content">
+                <h3>{% trans "Ekibimize katılmak ister misiniz?" %}</h3>
+                <p>{% trans "Açık pozisyonlarımız için kariyer sayfamızı ziyaret edin." %}</p>
+                <a href="{% url 'contact:contact' %}" class="btn btn-secondary">
+                    {% trans "İletişime Geçin" %}
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/about/main.js' %}"></script>
+{% endblock %}

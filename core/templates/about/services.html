@@ -1,0 +1,89 @@
+<!--core\templates\about\services.html-->
+{% extends 'base/main.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Hizmetlerimiz" %} | {{ site_name }}{% endblock %}
+{% block meta_description %}{% trans "Profesyonel hizmetlerimiz ile işinizi bir adım öteye taşıyın. Uzman kadromuz ve yenilikçi çözümlerimizle yanınızdayız." %}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/about/main.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="about-hero services-hero">
+    <div class="hero-content">
+        <div class="container">
+            <div class="hero-text">
+                <h1 class="hero-title" data-aos="fade-up">{% trans "Hizmetlerimiz" %}</h1>
+                <p class="hero-description" data-aos="fade-up" data-aos-delay="200">
+                    {% trans "İşinizi büyütmek, verimliliğinizi artırmak ve hedeflerinize ulaşmak için ihtiyacınız olan profesyonel hizmetleri sunuyoruz." %}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="hero-pattern"></div>
+</section>
+
+<!-- Services Grid Section -->
+<section class="about-services services-full">
+    <div class="container">
+        <div class="services-grid">
+            {% for service in services %}
+            {% if service.is_active %}
+            <div class="service-card service-card-full" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:100 }}">
+                <div class="service-image">
+                    {% if service.cropped_image %}
+                        <img src="{{ service.cropped_image.url }}" alt="{{ service.alt_text|default:service.title }}" loading="lazy">
+                    {% elif service.image %}
+                        <img src="{{ service.image.url }}" alt="{{ service.alt_text|default:service.title }}" loading="lazy">
+                    {% else %}
+                    <div class="service-placeholder">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="service-content">
+                    <h2 class="service-title">{{ service.title }}</h2>
+                    <div class="service-description">{{ service.description|safe }}</div>
+                    {% if service.slug %}
+                    <a href="{% url 'about:service_detail' service.slug %}" class="service-link">
+                        {% trans "Detaylı Bilgi" %}
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+            {% empty %}
+            <div class="empty-state" data-aos="fade-up">
+                <div class="empty-icon">
+                    <i class="fas fa-inbox"></i>
+                </div>
+                <h3>{% trans "Henüz Hizmet Eklenmemiş" %}</h3>
+                <p>{% trans "Yakında yeni hizmetlerimizi burada bulabileceksiniz." %}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- CTA Section -->
+        {% if services %}
+        <div class="services-cta" data-aos="fade-up">
+            <div class="cta-content">
+                <h3>{% trans "Projeniz için doğru çözümü mü arıyorsunuz?" %}</h3>
+                <p>{% trans "Size özel çözümler geliştirmek için iletişime geçin." %}</p>
+                <a href="{% url 'contact:contact' %}" class="btn btn-primary">
+                    {% trans "İletişime Geçin" %}
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/about/main.js' %}"></script>
+{% endblock %}
