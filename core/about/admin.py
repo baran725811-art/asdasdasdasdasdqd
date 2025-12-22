@@ -65,8 +65,10 @@ class AboutAdmin(TranslationAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
-        # About için AboutCropWidget kullan
-        form.base_fields['cropped_image'].widget = AboutCropWidget()
+        # Her dil için cropped_image widget'ını ata
+        for field_name in form.base_fields:
+            if field_name.startswith('cropped_image'):
+                form.base_fields[field_name].widget = AboutCropWidget()
         return form
 
     def has_add_permission(self, request):
@@ -109,8 +111,10 @@ class ServiceAdmin(TranslationAdmin):
     
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
-        # Service için ServiceCropWidget kullan
-        form.base_fields['image'].widget = ServiceCropWidget()
+        # Her dil için image widget'ını ata
+        for field_name in form.base_fields:
+            if field_name.startswith('image') and not field_name.startswith('cropped'):
+                form.base_fields[field_name].widget = ServiceCropWidget()
         return form
     
     def get_queryset(self, request):
@@ -144,8 +148,10 @@ class TeamMemberAdmin(TranslationAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
-        # Team member için TeamCropWidget kullan
-        form.base_fields['image'].widget = TeamCropWidget()
+        # Her dil için image widget'ını ata
+        for field_name in form.base_fields:
+            if field_name.startswith('image') and not field_name.startswith('cropped'):
+                form.base_fields[field_name].widget = TeamCropWidget()
         return form
 
 # Modelleri kaydet

@@ -143,6 +143,8 @@ class TeamMember(AutoOrderMixin, SEOImageMixin, models.Model):
     position = models.CharField("Pozisyon", max_length=100)
     bio = models.TextField("Biyografi", blank=True)
     
+    
+    
     # Cloudinary ile değiştirildi
     image = OptimizedImageField("Orijinal Fotoğraf", folder="team",
                                help_text="Tam boyut orijinal fotoğraf (modal/detay için)")

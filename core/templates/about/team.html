@@ -27,8 +27,10 @@
 </section>
 
 <!-- Team Grid Section -->
+<!-- Team Grid Section -->
 <section class="about-team team-full">
     <div class="container">
+        {% if team_members and team_members|length > 0 %}
         <div class="team-grid team-grid-full">
             {% for member in team_members %}
             {% if member.is_active %}
@@ -43,27 +45,6 @@
                         <i class="fas fa-user"></i>
                     </div>
                     {% endif %}
-                    <div class="member-overlay">
-                        {% if member.linkedin_url or member.twitter_url or member.email %}
-                        <div class="member-social">
-                            {% if member.linkedin_url %}
-                            <a href="{{ member.linkedin_url }}" target="_blank" rel="noopener" aria-label="LinkedIn">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                            {% endif %}
-                            {% if member.twitter_url %}
-                            <a href="{{ member.twitter_url }}" target="_blank" rel="noopener" aria-label="Twitter">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            {% endif %}
-                            {% if member.email %}
-                            <a href="mailto:{{ member.email }}" aria-label="Email">
-                                <i class="fas fa-envelope"></i>
-                            </a>
-                            {% endif %}
-                        </div>
-                        {% endif %}
-                    </div>
                 </div>
                 <div class="member-content">
                     <h2 class="member-name">{{ member.name }}</h2>
@@ -75,8 +56,8 @@
                     <div class="member-expertise">
                         <h4>{% trans "Uzmanlık Alanları" %}</h4>
                         <ul>
-                            {% for skill in member.expertise.split:',' %}
-                            <li>{{ skill|trim }}</li>
+                            {% for skill in member.expertise_list %}
+                            <li>{{ skill }}</li>
                             {% endfor %}
                         </ul>
                     </div>
@@ -84,59 +65,19 @@
                 </div>
             </div>
             {% endif %}
-            {% empty %}
-            <div class="empty-state" data-aos="fade-up">
-                <div class="empty-icon">
-                    <i class="fas fa-users"></i>
-                </div>
-                <h3>{% trans "Henüz Ekip Üyesi Eklenmemiş" %}</h3>
-                <p>{% trans "Yakında ekip üyelerimizle burada tanışabileceksiniz." %}</p>
-            </div>
             {% endfor %}
         </div>
 
-        <!-- Team Values Section -->
-        {% if team_members %}
-        <div class="team-values" data-aos="fade-up">
-            <div class="section-header">
-                <h2 class="section-title">{% trans "Değerlerimiz" %}</h2>
-                <p class="section-subtitle">{% trans "Bizi biz yapan değerler" %}</p>
+       
+    
+        {% else %}
+        <!-- Empty State -->
+        <div class="empty-state" data-aos="fade-up">
+            <div class="empty-icon">
+                <i class="fas fa-users"></i>
             </div>
-            <div class="values-grid">
-                <div class="value-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="value-icon">
-                        <i class="fas fa-handshake"></i>
-                    </div>
-                    <h3>{% trans "Güven" %}</h3>
-                    <p>{% trans "Müşterilerimizle uzun soluklu, güvene dayalı ilişkiler kuruyoruz." %}</p>
-                </div>
-                <div class="value-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="value-icon">
-                        <i class="fas fa-lightbulb"></i>
-                    </div>
-                    <h3>{% trans "İnovasyon" %}</h3>
-                    <p>{% trans "Sürekli gelişim ve yenilikçi çözümler üretmek için çalışıyoruz." %}</p>
-                </div>
-                <div class="value-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="value-icon">
-                        <i class="fas fa-award"></i>
-                    </div>
-                    <h3>{% trans "Mükemmellik" %}</h3>
-                    <p>{% trans "Her projede en yüksek kalite standartlarını hedefliyoruz." %}</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- CTA Section -->
-        <div class="team-cta" data-aos="fade-up">
-            <div class="cta-content">
-                <h3>{% trans "Ekibimize katılmak ister misiniz?" %}</h3>
-                <p>{% trans "Açık pozisyonlarımız için kariyer sayfamızı ziyaret edin." %}</p>
-                <a href="{% url 'contact:contact' %}" class="btn btn-secondary">
-                    {% trans "İletişime Geçin" %}
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
+            <h3>{% trans "Henüz Ekip Üyesi Eklenmemiş" %}</h3>
+            <p>{% trans "Yakında ekip üyelerimizle burada tanışabileceksiniz." %}</p>
         </div>
         {% endif %}
     </div>

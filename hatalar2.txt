@@ -5,3 +5,16 @@ hakımızda hizmter tümünü göster  sayfası açılmıyor çözüm.
 ekimiz tümünü gör << butonu çalışmıyor 4 ' kart tek var daha fazlasını göremiyor ve otomatik kaydırılsın
 
 basında biz dashboard bölümünde hata
+
+
+carousel, team, basın, ürün ekleme
+ürünler bölümü sorunlar : 
+Kaydetme hatası: 'CloudinaryResource' object has no attribute 'save'
+ürünler ve kategori ortak : url sadce tek harfi yazıyor devamı gelmiyor bunu düzenle otomatik doldursun. 
+
+
+galeri bölümünde  ve hizmetlerimiz 
+galeri ve hizmetlerimiz bölümünde :  kaydet basınca kaydetikten sonra modal kapanmıyor kayıt edip modalı kapatsın. 
+
+tüm sayfalarda modalda sıralama otomatik olarak yazılsın  ve tüm modalarda tek bir sıralama bölümü olsun 
+carousel iki sıralama bölümü var birini kaldır hangisi aktifse o  kalsın   Sıralama üstedi devre dışı bırak hepsinde altaki aktfi bundada o aktif olsun 
