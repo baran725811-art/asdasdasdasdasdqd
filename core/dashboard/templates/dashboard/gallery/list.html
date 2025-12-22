@@ -207,7 +207,7 @@
                                     {% include 'dashboard/includes/forms/select_field.html' with field_name="media_type" label="Medya Türü" icon="fas fa-photo-video" options=media_type_options required=True %}
                                 </div>
                                 <div class="col-md-6">
-                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="order" field_label="Sıralama" field_icon="fas fa-sort-numeric-up" field_type="number" field_min="0" help_text="Küçük sayılar önce görünür" %}
+                                    {% include 'dashboard/includes/forms/form_field.html' with field_name="order" field_label="Sıralama" field_icon="fas fa-sort-numeric-up" field_type="number" field_min="0" field_placeholder="Otomatik sırala" help_text="Boş bırakırsanız otomatik olarak en sona eklenir" %}
                                 </div>
                             </div>
                             
@@ -522,13 +522,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (addGalleryForm) {
         addGalleryForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
+
             // Loading state
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Kaydediliyor...';
-            
+
             try {
                 const response = await fetch(this.action, {
                     method: 'POST',
@@ -538,27 +538,28 @@ document.addEventListener('DOMContentLoaded', function() {
                         'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
                     }
                 });
-                
+
                 if (response.ok) {
                     // Success
                     window.notificationSystem.success('Galeri öğesi başarıyla kaydedildi!');
-                    
-                    // Modal kapat
-                    const modal = bootstrap.Modal.getInstance(document.getElementById('addGalleryModal'));
-                    modal.hide();
-                    
-                    // Sayfa yenile
-                    setTimeout(() => {
+
+                    // Modal tam kapandıktan sonra sayfa yenile
+                    const modalElement = document.getElementById('addGalleryModal');
+                    const modal = bootstrap.Modal.getInstance(modalElement);
+
+                    // Modal'ın tam kapanmasını bekle
+                    modalElement.addEventListener('hidden.bs.modal', function() {
                         window.location.reload();
-                    }, 1000);
+                    }, { once: true });
+
+                    modal.hide();
                 } else {
                     throw new Error('Kaydetme hatası');
                 }
             } catch (error) {
                 console.error('Error:', error);
                 window.notificationSystem.error('Bir hata oluştu: ' + error.message);
-            } finally {
-                // Reset button
+                // Reset button sadece hata durumunda
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalText;
             }
@@ -569,12 +570,12 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('form[id^="editGalleryForm"]').forEach(form => {
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
+
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Güncelleniyor...';
-            
+
             try {
                 const response = await fetch(this.action, {
                     method: 'POST',
@@ -584,26 +585,27 @@ document.addEventListener('DOMContentLoaded', function() {
                         'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
                     }
                 });
-                
+
                 if (response.ok) {
                     window.notificationSystem.success('Galeri öğesi başarıyla güncellendi!');
-                    
-                    // Modal kapat
-                    const modalId = this.closest('.modal').id;
-                    const modal = bootstrap.Modal.getInstance(document.getElementById(modalId));
-                    modal.hide();
-                    
-                    // Sayfa yenile
-                    setTimeout(() => {
+
+                    // Modal tam kapandıktan sonra sayfa yenile
+                    const modalElement = this.closest('.modal');
+                    const modal = bootstrap.Modal.getInstance(modalElement);
+
+                    // Modal'ın tam kapanmasını bekle
+                    modalElement.addEventListener('hidden.bs.modal', function() {
                         window.location.reload();
-                    }, 1000);
+                    }, { once: true });
+
+                    modal.hide();
                 } else {
                     throw new Error('Güncelleme hatası');
                 }
             } catch (error) {
                 console.error('Error:', error);
                 window.notificationSystem.error('Bir hata oluştu: ' + error.message);
-            } finally {
+                // Reset button sadece hata durumunda
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalText;
             }
