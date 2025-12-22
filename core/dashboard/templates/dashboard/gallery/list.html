@@ -517,6 +517,32 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // ==========================================
+    // AUTO-POPULATE ORDER FIELD ON MODAL OPEN
+    // ==========================================
+    const addGalleryModal = document.getElementById('addGalleryModal');
+    if (addGalleryModal) {
+        addGalleryModal.addEventListener('shown.bs.modal', function() {
+            // Find all existing order values from the table
+            const orderCells = document.querySelectorAll('#galleriesTable tbody tr td:nth-child(6) .fw-semibold');
+            let maxOrder = 0;
+
+            orderCells.forEach(cell => {
+                const orderValue = parseInt(cell.textContent.trim());
+                if (!isNaN(orderValue) && orderValue > maxOrder) {
+                    maxOrder = orderValue;
+                }
+            });
+
+            // Set the next order value (max + 1)
+            const orderInput = addGalleryModal.querySelector('input[name="order"]');
+            if (orderInput) {
+                orderInput.value = maxOrder + 1;
+                orderInput.setAttribute('placeholder', `Otomatik: ${maxOrder + 1}`);
+            }
+        });
+    }
+
     // Add Gallery Form Handler
     const addGalleryForm = document.getElementById('addGalleryForm');
     if (addGalleryForm) {

@@ -835,4 +835,33 @@ document.addEventListener('DOMContentLoaded', function() {
 {% load static %}
 <script src="{% static 'dashboard/js/pages/carousel.js' %}"></script>
 <script src="{% static 'dashboard/js/components/image-crop.js' %}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // ==========================================
+    // AUTO-POPULATE ORDER FIELD ON MODAL OPEN
+    // ==========================================
+    const addSlideModal = document.getElementById('addSlideModal');
+    if (addSlideModal) {
+        addSlideModal.addEventListener('shown.bs.modal', function() {
+            // Find all existing order values from the table
+            const orderCells = document.querySelectorAll('#carouselTable tbody tr td:nth-last-child(2) .fw-semibold, #carouselTable tbody tr td:nth-last-child(2)');
+            let maxOrder = 0;
+
+            orderCells.forEach(cell => {
+                const orderValue = parseInt(cell.textContent.trim());
+                if (!isNaN(orderValue) && orderValue > maxOrder) {
+                    maxOrder = orderValue;
+                }
+            });
+
+            // Set the next order value (max + 1)
+            const orderInput = addSlideModal.querySelector('input[name="order"]');
+            if (orderInput) {
+                orderInput.value = maxOrder + 1;
+                orderInput.setAttribute('placeholder', `Otomatik: ${maxOrder + 1}`);
+            }
+        });
+    }
+});
+</script>
 {% endblock %}

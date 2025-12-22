@@ -16,22 +16,43 @@ let cropperLoaded = false;
 
 function initImageCropWidgets() {
     const cropContainers = document.querySelectorAll('.image-crop-container');
-    
+
     cropContainers.forEach(container => {
         const fieldName = container.dataset.fieldName;
         const fileInput = container.querySelector('input[type="file"]');
-        
+
         if (fileInput) {
             fileInput.addEventListener('change', function(e) {
                 if (e.isCropEvent) return;
-                
+
                 const file = e.target.files[0];
                 if (file && file.type.startsWith('image/')) {
                     openCropInline(fieldName, file);
                 }
             });
-            
+
             addCropButtonToExisting(container, fieldName);
+        }
+
+        // ★ EDIT MODE: Handle recrop button clicks
+        const recropBtn = container.querySelector('.recrop-btn');
+        if (recropBtn) {
+            recropBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const imageUrl = this.dataset.imageUrl;
+                if (imageUrl) {
+                    fetch(imageUrl)
+                        .then(response => response.blob())
+                        .then(blob => {
+                            const file = new File([blob], 'existing-image.jpg', { type: blob.type });
+                            openCropInline(fieldName, file);
+                        })
+                        .catch(error => {
+                            console.error('Failed to load existing image:', error);
+                            alert('Görsel yüklenemedi. Lütfen tekrar deneyin.');
+                        });
+                }
+            });
         }
     });
 }

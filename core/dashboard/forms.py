@@ -609,7 +609,20 @@ class GalleryFormWithTranslation(BaseTranslationForm):
                 'min': 0
             }),
         }
-    
+
+    def clean_order(self):
+        """Order alanını temizle ve varsayılan değer ata"""
+        order = self.cleaned_data.get('order')
+
+        # Boş, None veya geçersiz değerleri 0 yap (AutoOrderMixin tarafından işlenecek)
+        if not order or order == '' or order is None:
+            return 0
+
+        try:
+            return int(order)
+        except (ValueError, TypeError):
+            return 0
+
     def _add_translation_fields(self):
         """Çeviri alanlarını manuel olarak ekle"""        
         for lang_code in self.enabled_languages:
@@ -809,9 +822,22 @@ class ServiceFormWithTranslation(BaseTranslationForm):
         widgets = {
             'title': forms.TextInput(),
             'description': forms.Textarea(attrs={'rows': 4}),
-            'order': forms.NumberInput(),
+            'order': forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),
         }
-    
+
+    def clean_order(self):
+        """Order alanını temizle ve varsayılan değer ata"""
+        order = self.cleaned_data.get('order')
+
+        # Boş, None veya geçersiz değerleri 0 yap (AutoOrderMixin tarafından işlenecek)
+        if not order or order == '' or order is None:
+            return 0
+
+        try:
+            return int(order)
+        except (ValueError, TypeError):
+            return 0
+
     def _add_translation_fields(self):
         """Çeviri alanlarını manuel olarak ekle - Gallery gibi"""        
         for lang_code in self.enabled_languages:
@@ -876,10 +902,23 @@ class TeamMemberFormWithTranslation(BaseTranslationForm):
             'name': forms.TextInput(),
             'position': forms.TextInput(),
             'bio': forms.Textarea(attrs={'rows': 4}),
-            'order': forms.NumberInput(),
+            'order': forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),
             'image': forms.FileInput(attrs={'class': 'form-control', 'accept': 'image/*'}),
         }
-    
+
+    def clean_order(self):
+        """Order alanını temizle ve varsayılan değer ata"""
+        order = self.cleaned_data.get('order')
+
+        # Boş, None veya geçersiz değerleri 0 yap (AutoOrderMixin tarafından işlenecek)
+        if not order or order == '' or order is None:
+            return 0
+
+        try:
+            return int(order)
+        except (ValueError, TypeError):
+            return 0
+
     def _add_translation_fields(self):
         """Çeviri alanlarını manuel olarak ekle"""        
         for lang_code in self.enabled_languages:

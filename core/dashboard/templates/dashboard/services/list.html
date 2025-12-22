@@ -457,6 +457,32 @@
 <script src="{% static 'dashboard/js/components/image-crop.js' %}"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // ==========================================
+    // AUTO-POPULATE ORDER FIELD ON MODAL OPEN
+    // ==========================================
+    const addServiceModal = document.getElementById('addServiceModal');
+    if (addServiceModal) {
+        addServiceModal.addEventListener('shown.bs.modal', function() {
+            // Find all existing order values from the table
+            const orderCells = document.querySelectorAll('#servicesTable tbody tr td:nth-last-child(2) .fw-semibold');
+            let maxOrder = 0;
+
+            orderCells.forEach(cell => {
+                const orderValue = parseInt(cell.textContent.trim());
+                if (!isNaN(orderValue) && orderValue > maxOrder) {
+                    maxOrder = orderValue;
+                }
+            });
+
+            // Set the next order value (max + 1)
+            const orderInput = addServiceModal.querySelector('input[name="order"]');
+            if (orderInput) {
+                orderInput.value = maxOrder + 1;
+                orderInput.setAttribute('placeholder', `Otomatik: ${maxOrder + 1}`);
+            }
+        });
+    }
+
     // Add Service Form Handler
     const addServiceForm = document.getElementById('addServiceForm');
     if (addServiceForm) {
