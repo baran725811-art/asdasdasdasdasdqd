@@ -119,12 +119,12 @@
                         <!-- Floating Stats -->
                         <div class="floating-stats">
                             <div class="stat-card">
-                                <div class="stat-number">{{ company_info.happy_customers|default:1000 }}+</div>
+                                <div class="stat-number">{% firstof company_info.happy_customers 1000 %}+</div>
                                 <div class="stat-label">{% trans "Mutlu Müşteri" %}</div>
                             </div>
-                            
+
                             <div class="stat-card">
-                                <div class="stat-number">{{ company_info.completed_jobs|default:5000 }}+</div>
+                                <div class="stat-number">{% firstof company_info.completed_jobs 5000 %}+</div>
                                 <div class="stat-label">{% trans "Tamamlanan İş" %}</div>
                             </div>
                         </div>
