@@ -6,8 +6,13 @@
         <button class="sidebar-close" id="sidebarClose">
             <i class="fas fa-times"></i>
         </button>
-        <h4>{{ site_settings.site_name|default:"Dashboard" }}</h4>
-        <div class="subtitle">{% trans "Yönetim Paneli" %}</div>
+        <div class="d-flex align-items-center justify-content-center mb-2">
+            {% if site_settings.site_logo %}
+            <img src="{{ site_settings.site_logo.url }}" alt="{{ site_settings.site_name }}" style="height: 35px; width: auto; object-fit: contain; margin-right: 10px;">
+            {% endif %}
+            <h4 class="mb-0" style="font-size: 1.1rem;">{{ site_settings.site_name|default:"Dashboard" }} <br><small style="font-size: 0.75rem; font-weight: normal;">{% trans "Yönetici Kontrol Paneli" %}</small></h4>
+        </div>
+        <div class="subtitle">{{ user.get_full_name|default:user.username }}</div>
     </div>
     
     <nav class="sidebar-nav">

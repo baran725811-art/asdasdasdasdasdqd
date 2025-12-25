@@ -102,6 +102,15 @@ def seo_context(request):
         'company_years_experience': about_info.get('years_experience', 20),
         'company_completed_jobs': about_info.get('completed_jobs', 5000),
         'company_happy_customers': about_info.get('happy_customers', 1000),
+
+        # COMPANY_INFO - Ana sayfa uyumluluğu için eklendi
+        'company_info': {
+            'years_experience': about_info.get('years_experience', 20),
+            'completed_jobs': about_info.get('completed_jobs', 5000),
+            'happy_customers': about_info.get('happy_customers', 1000),
+            'total_services': about_info.get('total_services', 10),
+            'customer_satisfaction': about_info.get('customer_satisfaction', 100),
+        },
         
         # Renk ayarları
         'primary_color': site_settings.primary_color,
