@@ -33,15 +33,15 @@ def home(request):
     context = {
         # Ana carousel
         'carousel_slides': CarouselSlide.objects.filter(is_active=True).order_by('order')[:5],
-        
+
         # ABOUT BİLGİLERİ
         'about': about,
         'company_info': {
-            'years_experience': about.years_experience,
-            'completed_jobs': about.completed_jobs,
-            'happy_customers': about.happy_customers,
-            'total_services': about.total_services,
-            'customer_satisfaction': about.customer_satisfaction,
+            'years_experience': about.years_experience or 20,
+            'completed_jobs': about.completed_jobs or 5000,
+            'happy_customers': about.happy_customers or 1000,
+            'total_services': about.total_services or 10,
+            'customer_satisfaction': about.customer_satisfaction or 100,
         },
         
         # ✅ FEATURED GALERİ - HEM RESİM HEM VİDEO
