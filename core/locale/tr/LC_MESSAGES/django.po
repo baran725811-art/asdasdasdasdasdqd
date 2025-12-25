@@ -1678,7 +1678,7 @@ msgstr "Diğer Dillerde:"
 
 #: .\dashboard\templates\dashboard\includes\components\theme_selector.html:6
 msgid "Tema"
-msgstr "Onun"
+msgstr "Tema"
 
 #: .\dashboard\templates\dashboard\includes\components\theme_selector.html:15
 msgid "Varsayılan"
