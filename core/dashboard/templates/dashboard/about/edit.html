@@ -297,69 +297,46 @@
             <div class="form-status-tracker">
                 <!-- Genel İlerleme -->
                 <div class="progress mb-3">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 80%" 
-                         aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
-                        <span>80%</span>
+                    <div class="progress-bar {% if completion_percentage >= 100 %}bg-success{% elif completion_percentage >= 70 %}bg-info{% elif completion_percentage >= 50 %}bg-warning{% else %}bg-danger{% endif %}"
+                         role="progressbar" style="width: {{ completion_percentage }}%"
+                         aria-valuenow="{{ completion_percentage }}" aria-valuemin="0" aria-valuemax="100">
+                        <span>{{ completion_percentage }}%</span>
                     </div>
                 </div>
-                
+
                 <!-- Alan Durumları -->
                 <div class="field-status-list">
+                    {% for field in field_status %}
                     <div class="status-item mb-2">
                         <div class="d-flex justify-content-between align-items-center">
-                            <span class="field-name">{% trans "Sayfa Başlığı" %}</span>
-                            <span class="badge bg-success">{% trans "Tamam" %}</span>
+                            <span class="field-name">
+                                {{ field.name }}
+                                {% if field.reason %}
+                                <i class="fas fa-info-circle text-muted ms-1"
+                                   data-bs-toggle="tooltip"
+                                   title="{{ field.reason }}"></i>
+                                {% endif %}
+                            </span>
+                            <span class="badge {% if field.completed %}bg-success{% else %}bg-warning{% endif %}">
+                                {{ field.badge }}
+                            </span>
                         </div>
                     </div>
-                    
-                    <div class="status-item mb-2">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="field-name">{% trans "Ana Görsel" %}</span>
-                            <span class="badge bg-success">{% trans "Var" %}</span>
-                        </div>
-                    </div>
-                    
-                    <div class="status-item mb-2">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="field-name">{% trans "Misyon" %}</span>
-                            <span class="badge bg-success">{% trans "Tamam" %}</span>
-                        </div>
-                    </div>
-                    
-                    <div class="status-item mb-2">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="field-name">{% trans "Vizyon" %}</span>
-                            <span class="badge bg-success">{% trans "Tamam" %}</span>
-                        </div>
-                    </div>
-                    
-                    <div class="status-item mb-2">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="field-name">{% trans "Hikaye" %}</span>
-                            <span class="badge bg-success">{% trans "Tamam" %}</span>
-                        </div>
-                    </div>
-                    
-                    <div class="status-item mb-2">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="field-name">{% trans "İstatistikler" %}</span>
-                            <span class="badge bg-success">{% trans "5/5" %}</span>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
-                
+
                 <!-- Özet -->
                 <div class="status-summary mt-3 pt-3 border-top">
                     <div class="row text-center">
                         <div class="col-6">
                             <div class="summary-item">
-                                <h6 class="text-success mb-0">8</h6>
+                                <h6 class="text-success mb-0">{{ completed_fields }}</h6>
                                 <small class="text-muted">{% trans "Tamamlanan" %}</small>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="summary-item">
-                                <h6 class="text-info mb-0">10</h6>
+                                <h6 class="text-info mb-0">{{ total_fields }}</h6>
                                 <small class="text-muted">{% trans "Toplam" %}</small>
                             </div>
                         </div>

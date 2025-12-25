@@ -562,12 +562,19 @@ def about_edit(request):
     else:
         about_with_translations = None
 
+    # Form tamamlanma durumunu hesapla
+    completion_data = calculate_completion_status(about)
+
     context = {
-        'form': form, 
+        'form': form,
         'about': about,
         'translation_enabled': translation_enabled,
         'enabled_languages': enabled_languages,
-        'about_with_translations': about_with_translations,  
+        'about_with_translations': about_with_translations,
+        'completion_percentage': completion_data['percentage'],
+        'completed_fields': completion_data['completed'],
+        'total_fields': completion_data['total'],
+        'field_status': completion_data['fields'],
     }
     return render(request, 'dashboard/about/edit.html', context)
 
@@ -578,30 +585,140 @@ def calculate_content_completion(about):
     fields = ['title', 'short_description', 'mission', 'vision', 'story']
     completed = 0
     total = len(fields)
-    
+
     for field in fields:
         value = getattr(about, field, None)
         if value and str(value).strip():
             completed += 1
-    
+
     # İstatistik alanları
     stat_fields = ['years_experience', 'completed_jobs', 'happy_customers', 'total_services', 'customer_satisfaction']
     stat_completed = 0
     stat_total = len(stat_fields)
-    
+
     for field in stat_fields:
         value = getattr(about, field, None)
         if value and value > 0:
             stat_completed += 1
-    
+
     # Görsel
     image_completed = 1 if about.image else 0
-    
+
     # Toplam hesaplama
     total_completed = completed + stat_completed + image_completed
     total_fields = total + stat_total + 1  # +1 için görsel
-    
+
     return int((total_completed / total_fields) * 100)
+
+
+def calculate_completion_status(about):
+    """Detaylı form tamamlanma durumunu hesapla"""
+    field_status = []
+    completed_count = 0
+
+    # 1. Sayfa Başlığı
+    title_ok = bool(about.title and about.title.strip())
+    field_status.append({
+        'name': 'Sayfa Başlığı',
+        'completed': title_ok,
+        'badge': 'Tamam' if title_ok else 'Eksik',
+        'reason': '' if title_ok else 'Başlık alanı boş'
+    })
+    if title_ok:
+        completed_count += 1
+
+    # 2. Kısa Açıklama
+    desc_ok = bool(about.short_description and about.short_description.strip())
+    field_status.append({
+        'name': 'Kısa Açıklama',
+        'completed': desc_ok,
+        'badge': 'Tamam' if desc_ok else 'Eksik',
+        'reason': '' if desc_ok else 'Kısa açıklama boş'
+    })
+    if desc_ok:
+        completed_count += 1
+
+    # 3. Ana Görsel
+    image_ok = bool(about.image)
+    field_status.append({
+        'name': 'Ana Görsel',
+        'completed': image_ok,
+        'badge': 'Var' if image_ok else 'Yok',
+        'reason': '' if image_ok else 'Görsel yüklenmemiş'
+    })
+    if image_ok:
+        completed_count += 1
+
+    # 4. Misyon
+    mission_ok = bool(about.mission and about.mission.strip())
+    field_status.append({
+        'name': 'Misyon',
+        'completed': mission_ok,
+        'badge': 'Tamam' if mission_ok else 'Eksik',
+        'reason': '' if mission_ok else 'Misyon metni boş'
+    })
+    if mission_ok:
+        completed_count += 1
+
+    # 5. Vizyon
+    vision_ok = bool(about.vision and about.vision.strip())
+    field_status.append({
+        'name': 'Vizyon',
+        'completed': vision_ok,
+        'badge': 'Tamam' if vision_ok else 'Eksik',
+        'reason': '' if vision_ok else 'Vizyon metni boş'
+    })
+    if vision_ok:
+        completed_count += 1
+
+    # 6. Hikaye
+    story_ok = bool(about.story and about.story.strip())
+    field_status.append({
+        'name': 'Hikaye',
+        'completed': story_ok,
+        'badge': 'Tamam' if story_ok else 'Eksik',
+        'reason': '' if story_ok else 'Hikaye metni boş'
+    })
+    if story_ok:
+        completed_count += 1
+
+    # 7. İstatistikler (5 alan)
+    stat_fields = {
+        'years_experience': 'Tecrübe Yılı',
+        'completed_jobs': 'Tamamlanan İşler',
+        'happy_customers': 'Mutlu Müşteri',
+        'total_services': 'Toplam Hizmet',
+        'customer_satisfaction': 'Müşteri Memnuniyeti'
+    }
+    stat_count = 0
+    stat_missing = []
+    for field_name, display_name in stat_fields.items():
+        value = getattr(about, field_name, None)
+        if value and value > 0:
+            stat_count += 1
+        else:
+            stat_missing.append(display_name)
+
+    all_stats_ok = stat_count == 5
+    field_status.append({
+        'name': 'İstatistikler',
+        'completed': all_stats_ok,
+        'badge': f'{stat_count}/5',
+        'reason': f'Eksik: {", ".join(stat_missing)}' if stat_missing else ''
+    })
+    if all_stats_ok:
+        completed_count += 1
+
+    # Toplam alan sayısı: 7 (başlık, açıklama, görsel, misyon, vizyon, hikaye, istatistikler)
+    total_fields = 7
+    percentage = int((completed_count / total_fields) * 100)
+
+    return {
+        'percentage': percentage,
+        'completed': completed_count,
+        'total': total_fields,
+        'fields': field_status
+    }
 
 
 def calculate_translation_completion(about, enabled_languages):
