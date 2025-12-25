@@ -105,11 +105,11 @@ def seo_context(request):
 
         # COMPANY_INFO - Ana sayfa uyumluluğu için eklendi
         'company_info': {
-            'years_experience': about_info.get('years_experience', 20),
-            'completed_jobs': about_info.get('completed_jobs', 5000),
-            'happy_customers': about_info.get('happy_customers', 1000),
-            'total_services': about_info.get('total_services', 10),
-            'customer_satisfaction': about_info.get('customer_satisfaction', 100),
+            'years_experience': about_info.get('years_experience') or 20,
+            'completed_jobs': about_info.get('completed_jobs') or 5000,
+            'happy_customers': about_info.get('happy_customers') or 1000,
+            'total_services': about_info.get('total_services') or 10,
+            'customer_satisfaction': about_info.get('customer_satisfaction') or 100,
         },
         
         # Renk ayarları
