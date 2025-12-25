@@ -34,6 +34,41 @@ footer : Hizmetlerimiz  dahsbordan çekecek
 "Yönetim Paneli << paneli kullanacak kişinin adı yazılacak soy isim isteğe bağlı"
 <div class="subtitle">{% trans "Yönetim Paneli"%}</div>  dashboard/templates/dashboard/includes/navigation/sidebar.html
 
+hata safaları görülsün 404,403 gibi sayfalar
+
+ana sayfa hakkımızda bölümü mutlu müşteri ve tamamlanan iş dahsbord çekmiyor onu ayarlayalım. 
+
+
+
+“Şifremi Unuttum” mesajı, CodeNovaX tarafından gönderilecektir ve mesajda şirketin logosu yer alacaktır. Mesajı alan kişinin, web sitesindeki dashboard profilinde görünen adı ve soyadı içerikte açıkça belirtilecektir. Ayrıca, ilgili web sitesinin hangi şirkete ait olduğu bilgisi de mesajda yer alacaktır.
+Şifre sıfırlama bağlantısını gönderen firmanın, web sitesini tasarlayan ve geliştiren şirket olan CodeNovaX olduğu mesaj içinde özellikle belirtilecektir. Mesaj içeriği, kurumsal ve anlaşılır bir dille hazırlanacak; şifre yenileme işleminin kime ait olduğu net şekilde ifade edilecektir.
+Bu kapsamda mesajda, şifre yenileme talebinin gönderildiği kişinin adı ve soyadı, e-posta adresi ve web sitesinin ait olduğu şirketin adı açık ve doğru biçimde yer alacaktır.
+şifre yenileme mesajı örneği : 
+<!-- LOGO -->
+<div style="text-align:center; margin-bottom:24px;">
+  <img src="{{CodeNovaX_Logo_URL}}" alt="CodeNovaX Logo" height="60">
+</div>
+Sayın **{{Ad_Soyad}}**,
+Bu e-posta, **{{Web_Sitesi_Adi}}** web sitesi üzerinde yer alan hesabınız için tarafınızca oluşturulan *şifre sıfırlama talebi* üzerine gönderilmiştir.
+Talebe ilişkin kullanıcı bilgileri aşağıda yer almaktadır:
+* **Ad Soyad:** {{Ad_Soyad}}
+* **E-posta Adresi:** {{Eposta}}
+* **İlgili Web Sitesi:** {{Web_Sitesi_Adi}}
+Şifrenizi güvenli bir şekilde yenilemek için aşağıda yer alan bağlantıyı kullanabilirsiniz:
+🔐 **Şifre Sıfırlama Bağlantısı**
+{{Sifre_Sifirlama_Linki}}
+⚠️ **Önemli Güvenlik Bilgilendirmesi:**
+Bu bağlantı, güvenlik gerekçeleriyle **yalnızca 1 (bir) saat** süreyle geçerlidir. Süre dolduktan sonra bağlantı geçersiz hale gelecek olup, yeniden şifre sıfırlama talebi oluşturmanız gerekecektir.
+Eğer bu talep tarafınızca oluşturulmadıysa, herhangi bir işlem yapmadan bu e-postayı dikkate almayınız. Hesabınız üzerinde herhangi bir değişiklik yapılmayacaktır.
+Bu web sitesi, **CodeNovaX** tarafından tasarlanmış ve geliştirilmektedir.
+Teknik destek veya sorularınız için CodeNovaX ile iletişime geçebilirsiniz.
+Saygılarımızla,
+**CodeNovaX**
+*Web Tasarım ve Yazılım Çözümleri*
+{{CodeNovaX_Web_Sitesi}}"" backend ayarla buna göre 
+
+
+
 
 
 2-)depolama : <!-- Storage Progress Bar -->  doğru çalışmıyor gibi sanırım.  bu depolama alanı  yüklenen resim ve videoların toplam boyutunu hesaplayacak "CLOUDINARY" bölümüne 
@@ -65,3 +100,27 @@ Her yıl otomatik güncelleme.
 Her giriş → tamamlanan iş artsın.
 
 Backend mantığı + cron veya sinyal tabanlı güncelleme gerek.
+
+
+en son her şey bitince : seo yapılandırması yapılacak tüm sayfalara 
+baran oto anahtar, oto çilingir, ev çilingir, çelik kapı çilingir, oto yedek ahanahtar, oto imobizer anahatar, oto kumanda tamiri, kepen yedek anahatarı, imobizer tamiri, kayıptan oto anahtar, oto yedek anahtar, oto yedek kumanda, oto smart yedek anahtar, ev yedek anahtar, bilyalı yedek anahtar, yalde yedek anahtar, bareller, kilit sistemleri, kontak tamiri, kayıptan oto anahtar,
+
+
+
+
+KURALLAR
+Tahmin, varsayım veya olasılık içeren hiçbir ifade kullanma
+“Muhtemelen”, “olabilir”, “büyük ihtimalle” gibi ifadeler kesinlikle yasak
+Kodu görmeden analiz yapma
+Kodu görmeden çözüm önerme
+Kodu görmeden tek satır kod yazma
+Django genellemeleri yapma
+“Şöyle deneyebilirsin” tarzı yönlendirmeler yapma
+Sorunun nedenini bulmadan çözüme geçme
+Sorunun kesin ve tek nedenini bulmadan kod yazma
+Yorum yapmadan önce gerekli tüm kodları bizzat kendin iste
+Eksik kod varken analizi sürdürme
+Kök neden netleşmeden sonuç üretme
+Yumuşatma, geçiştirme veya üstünkörü açıklama yapma
+Kodlama yapacağın zaman öncesi sonrası olarak değiştirileceği yerleri söyle
+Kodlama eklecek veya değiştirilecek bölümlerin dosya yolunu belirt
