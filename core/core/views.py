@@ -23,6 +23,8 @@ from django.views.decorators.csrf import requires_csrf_token
 from django.shortcuts import render, get_object_or_404
 from core.models import LegalPage, CookieConsent
 
+from products.models import Product
+from gallery.models import Gallery
 
 def contact(request):
     reviews = Review.objects.filter(is_approved=True).order_by('-created_at')[:5]
