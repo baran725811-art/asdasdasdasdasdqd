@@ -8,10 +8,14 @@ from django.utils.translation import gettext as _
 from .models import Review
 from .forms import ReviewForm
 
-@login_required
 @ratelimit(key='user', rate='3/h', method='POST', block=True)
 def add_review(request):
     if request.method == 'POST':
+        # POST işleminde giriş kontrolü
+        if not request.user.is_authenticated:
+            messages.error(request, _('Değerlendirme yapabilmek için giriş yapmanız gerekiyor.'))
+            return redirect('admin:login')
+
         form = ReviewForm(request.POST, request.FILES)
         if form.is_valid():
             review = form.save(commit=False)
@@ -23,7 +27,7 @@ def add_review(request):
             messages.error(request, _('Form gönderilirken hata oluştu. Lütfen bilgileri kontrol edin.'))
     else:
         form = ReviewForm()
-    
+
     context = {
         'form': form,
         'title': _('Yorum Ekle')
