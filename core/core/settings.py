@@ -107,11 +107,11 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-    
+
     # SEO Middleware
     'core.middleware.SEOCanonicalMiddleware',
     'core.middleware.URLRedirectMiddleware',
-    
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -119,14 +119,15 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
     'django_ratelimit.middleware.RatelimitMiddleware',
-    
+
     # GÜVENLİK MIDDLEWARE EKLENDİ
     'axes.middleware.AxesMiddleware',  # En sona eklendi
-    
+
     # Custom middleware
     'core.middleware.IPAddressMiddleware',
     'core.middleware.SitePrimaryLanguageMiddleware',
     'core.middleware.DashboardLocaleMiddleware',
+    'core.middleware.PageVisitStatisticsMiddleware',  # Sayfa ziyareti istatistikleri
 ]
 
 # Debug toolbar (sadece development)
