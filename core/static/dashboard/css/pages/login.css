@@ -519,10 +519,12 @@
     border: 2px solid #e9ecef;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    width: 120px;
+    min-width: 160px;
+    max-width: 200px;
+    width: auto;
     height: auto;
     background: white;
-    padding: 4px;
+    padding: 8px;
 }
 
 .captcha-container input[type="text"] {

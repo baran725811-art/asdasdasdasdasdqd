@@ -561,6 +561,17 @@
     font-weight: 600;
 }
 
+.captcha-container img {
+    min-width: 160px;
+    max-width: 220px;
+    width: auto;
+    height: auto;
+    padding: 8px;
+    background: white;
+    border-radius: 8px;
+    border: 2px solid var(--form-border);
+}
+
 .form-help {
     display: block;
     color: var(--text-muted);
