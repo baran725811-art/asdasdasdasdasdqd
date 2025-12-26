@@ -163,7 +163,7 @@ CAPTCHA_IMAGE_SIZE = (120, 50)  # Görüntü boyutu
 CAPTCHA_BACKGROUND_COLOR = '#f8f9fa'  # Arka plan rengi
 CAPTCHA_FOREGROUND_COLOR = '#495057'  # Yazı rengi
 CAPTCHA_FONT_SIZE = 22  # Font boyutu
-CAPTCHA_LETTER_ROTATION = (-20, 20)  # Harf rotasyonu
+CAPTCHA_LETTER_ROTATION = (-5, 5)  # Harf rotasyonu (azaltıldı)
 CAPTCHA_NOISE_FUNCTIONS = (
     'captcha.helpers.noise_arcs',
     'captcha.helpers.noise_dots',

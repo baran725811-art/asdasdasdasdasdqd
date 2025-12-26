@@ -519,17 +519,18 @@
     border: 2px solid #e9ecef;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    max-width: 120px;
+    width: 120px;
+    height: auto;
     background: white;
     padding: 4px;
 }
 
 .captcha-container input[type="text"] {
-    width: 80px !important;
+    width: 120px !important;
     text-align: center;
     font-weight: bold;
     font-size: 16px;
-    height: 45px; /* Yükseklik ekle */
+    height: 45px;
 }
 .form-text {
     font-size: 12px;
