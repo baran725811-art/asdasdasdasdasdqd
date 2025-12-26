@@ -107,11 +107,11 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-    
+
     # SEO Middleware
     'core.middleware.SEOCanonicalMiddleware',
     'core.middleware.URLRedirectMiddleware',
-    
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -119,14 +119,15 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
     'django_ratelimit.middleware.RatelimitMiddleware',
-    
+
     # GÜVENLİK MIDDLEWARE EKLENDİ
     'axes.middleware.AxesMiddleware',  # En sona eklendi
-    
+
     # Custom middleware
     'core.middleware.IPAddressMiddleware',
     'core.middleware.SitePrimaryLanguageMiddleware',
     'core.middleware.DashboardLocaleMiddleware',
+    'core.middleware.PageVisitStatisticsMiddleware',  # Sayfa ziyareti istatistikleri
 ]
 
 # Debug toolbar (sadece development)
@@ -163,7 +164,7 @@ CAPTCHA_IMAGE_SIZE = (120, 50)  # Görüntü boyutu
 CAPTCHA_BACKGROUND_COLOR = '#f8f9fa'  # Arka plan rengi
 CAPTCHA_FOREGROUND_COLOR = '#495057'  # Yazı rengi
 CAPTCHA_FONT_SIZE = 22  # Font boyutu
-CAPTCHA_LETTER_ROTATION = (-20, 20)  # Harf rotasyonu
+CAPTCHA_LETTER_ROTATION = (-5, 5)  # Harf rotasyonu
 CAPTCHA_NOISE_FUNCTIONS = (
     'captcha.helpers.noise_arcs',
     'captcha.helpers.noise_dots',

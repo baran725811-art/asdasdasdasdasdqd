@@ -9,5 +9,6 @@ class ContactConfig(AppConfig):
     def ready(self):
         try:
             import contact.translation
+            import contact.signals  # Signal'leri yükle
         except ImportError:
             pass

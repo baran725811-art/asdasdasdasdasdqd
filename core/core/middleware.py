@@ -671,23 +671,96 @@ class MaintenanceModeMiddleware:
     def __call__(self, request):
         # Bakım modu kontrolü
         maintenance_settings = getattr(settings, 'MAINTENANCE_MODE_SETTINGS', {})
-        
+
         if maintenance_settings.get('ENABLED', False):
             # İzinli IP'leri kontrol et
             allowed_ips = maintenance_settings.get('ALLOWED_IPS', [])
             client_ip = self._get_client_ip(request)
-            
+
             if client_ip not in allowed_ips:
                 # Admin ve dashboard'a erişimi engelleme
                 if not request.path.startswith('/admin/') and not request.path.startswith('/dashboard/'):
                     from core.views import maintenance_view
                     return maintenance_view(request)
-        
+
         return self.get_response(request)
-    
+
     def _get_client_ip(self, request):
         """Gerçek client IP'sini al"""
         x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
         if x_forwarded_for:
             return x_forwarded_for.split(',')[0].strip()
         return request.META.get('REMOTE_ADDR', '')
+
+
+class PageVisitStatisticsMiddleware:
+    """
+    Sayfa ziyaretlerini izleyen ve istatistikleri güncelleyen middleware
+
+    Kural:
+    - Her benzersiz session için sadece 1 kez sayılır
+    - Dashboard, admin, static ve media URL'leri hariç
+    - Cache kullanarak optimize edilmiş
+    """
+    def __init__(self, get_response):
+        self.get_response = get_response
+        self.skip_paths = ['/dashboard/', '/admin/', '/static/', '/media/', '/favicon.ico', '/robots.txt']
+
+    def __call__(self, request):
+        response = self.get_response(request)
+
+        # Sadece başarılı GET isteklerini say
+        if request.method == 'GET' and response.status_code == 200:
+            self._track_page_visit(request)
+
+        return response
+
+    def _track_page_visit(self, request):
+        """Sayfa ziyaretini izle ve istatistikleri güncelle"""
+        # Skip edilecek path'leri kontrol et
+        if any(request.path.startswith(path) for path in self.skip_paths):
+            return
+
+        # Session kontrolü - her session için sadece 1 kez say
+        session_key = request.session.session_key
+        if not session_key:
+            # Session yoksa oluştur
+            request.session.create()
+            session_key = request.session.session_key
+
+        # Cache key oluştur
+        cache_key = f'page_visit_counted_{session_key}'
+
+        # Bu session daha önce sayıldı mı?
+        if cache.get(cache_key):
+            return
+
+        # İstatistikleri güncelle
+        try:
+            from about.models import About
+
+            about = About.objects.first()
+            if not about:
+                return
+
+            # Tamamlanan işi arttır
+            # NOT: Review ve Contact signal'leri de completed_jobs'ı güncelliyor
+            # Bu yüzden conflict'i önlemek için F() expression kullanıyoruz
+            from django.db.models import F
+            About.objects.filter(pk=about.pk).update(
+                completed_jobs=F('completed_jobs') + 1
+            )
+
+            # Cache'i temizle
+            cache.delete('about_info')
+            cache.delete('site_settings')
+
+            # Bu session'ı sayıldı olarak işaretle (1 gün geçerli)
+            cache.set(cache_key, True, 86400)
+
+            logger = logging.getLogger(__name__)
+            logger.debug(f"Sayfa ziyareti kaydedildi: session={session_key}")
+
+        except Exception as e:
+            logger = logging.getLogger(__name__)
+            logger.error(f"Sayfa ziyareti izleme hatası: {e}")

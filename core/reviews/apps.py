@@ -9,5 +9,6 @@ class ReviewsConfig(AppConfig):
     def ready(self):
         try:
             import reviews.translation  # Translation dosyasını import et
+            import reviews.signals  # Signal'leri yükle
         except ImportError:
             pass
