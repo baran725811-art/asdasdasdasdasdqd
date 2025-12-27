@@ -182,9 +182,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
                 'core.context_processors.seo_context',
-                'core.context_processors.meta_seo_context'
                 'core.context_processors.meta_seo_context',  # Meta SEO context
-                'core.context_processors.breadcrumb_context',  # YENİ EKLENEN - Breadcrumb context
+                'core.context_processors.breadcrumb_context',  # Breadcrumb context
                 'core.context_processors.language_context',
                 'core.context_processors.storage_info',
             ],
