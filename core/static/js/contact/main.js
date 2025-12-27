@@ -327,17 +327,10 @@ function initFileUpload() {
     
     // File input change handler
     fileInput.addEventListener('change', handleFileSelect);
-    
-    // Click to select file
-    uploadArea.addEventListener('click', (e) => {
-        const uploadContent = uploadArea.querySelector('.upload-content');
-        const isUploadContentVisible = uploadContent && uploadContent.style.display !== 'none';
-        
-        if (isUploadContentVisible || e.target.closest('.upload-content')) {
-            fileInput.click();
-        }
-    }); 
 
+    // Note: Click handler removed - the file input already covers the upload area
+    // and will respond to clicks naturally due to its styling (opacity: 0, full coverage)
+    
     function handleDragOver(e) {
         e.preventDefault();
         uploadArea.classList.add('dragover');
@@ -777,6 +770,5 @@ function initLazyMapLoading() {
 
 // Initialize performance optimizations
 document.addEventListener('DOMContentLoaded', initLazyMapLoading);
-
 
 
