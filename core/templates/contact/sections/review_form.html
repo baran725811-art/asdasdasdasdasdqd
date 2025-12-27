@@ -28,7 +28,7 @@
                 <form method="post" id="reviewForm" class="review-form" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type="hidden" name="form_type" value="review">
-                    
+
                     <div class="form-group">
                         <label for="{{ review_form.name.id_for_label }}" class="form-label">
                             <i class="fas fa-user"></i>
@@ -65,22 +65,22 @@
                                 <label for="star5" title="{% trans '5 yıldız - Mükemmel' %}">
                                     <i class="fas fa-star"></i>
                                 </label>
-                                
+
                                 <input type="radio" id="star4" name="rating" value="4" {% if review_form.rating.value == 4 %}checked{% endif %}>
                                 <label for="star4" title="{% trans '4 yıldız - Çok İyi' %}">
                                     <i class="fas fa-star"></i>
                                 </label>
-                                
+
                                 <input type="radio" id="star3" name="rating" value="3" {% if review_form.rating.value == 3 %}checked{% endif %}>
                                 <label for="star3" title="{% trans '3 yıldız - İyi' %}">
                                     <i class="fas fa-star"></i>
                                 </label>
-                                
+
                                 <input type="radio" id="star2" name="rating" value="2" {% if review_form.rating.value == 2 %}checked{% endif %}>
                                 <label for="star2" title="{% trans '2 yıldız - Orta' %}">
                                     <i class="fas fa-star"></i>
                                 </label>
-                                
+
                                 <input type="radio" id="star1" name="rating" value="1" {% if review_form.rating.value == 1 %}checked{% endif %}>
                                 <label for="star1" title="{% trans '1 yıldız - Kötü' %}">
                                     <i class="fas fa-star"></i>
@@ -105,10 +105,10 @@
                             <span class="required">*</span>
                         </label>
                         <div class="input-container">
-                            <textarea name="{{ review_form.comment.name }}" 
-                                      id="{{ review_form.comment.id_for_label }}" 
+                            <textarea name="{{ review_form.comment.name }}"
+                                      id="{{ review_form.comment.id_for_label }}"
                                       class="form-textarea {% if review_form.comment.errors %}error{% endif %}"
-                                      rows="5" 
+                                      rows="5"
                                       placeholder="{% trans 'Deneyiminizi detaylı olarak paylaşın...' %}"
                                       required>{{ review_form.comment.value|default:'' }}</textarea>
                             <div class="input-indicator"></div>
@@ -132,10 +132,10 @@
                         </label>
                         <div class="file-upload-container">
                             <div class="file-upload-area" id="imageUploadArea">
-                                <input type="file" 
-                                       name="{{ review_form.image.name }}" 
-                                       id="{{ review_form.image.id_for_label }}" 
-                                       class="file-input" 
+                                <input type="file"
+                                       name="{{ review_form.image.name }}"
+                                       id="{{ review_form.image.id_for_label }}"
+                                       class="file-input"
                                        accept="image/*">
                                 <div class="upload-content">
                                     <div class="upload-icon">
@@ -171,9 +171,9 @@
                         </label>
                         <div class="captcha-container">
                             {{ review_form.captcha }}
-                            <button type="button" 
-                                    onclick="refreshReviewCaptcha()" 
-                                    class="captcha-refresh" 
+                            <button type="button"
+                                    onclick="refreshReviewCaptcha()"
+                                    class="captcha-refresh"
                                     title="{% trans 'Yeni kod üret' %}">
                                 <i class="fas fa-sync-alt"></i>
                             </button>
@@ -197,7 +197,7 @@
                                 <div class="spinner"></div>
                             </div>
                         </button>
-                        
+
                         <div class="form-info">
                             <i class="fas fa-info-circle"></i>
                             {% trans "Değerlendirmeniz onaylandıktan sonra yayınlanacak" %}
@@ -230,7 +230,7 @@
                                     <span class="review-date">{{ review.created_at|date:"d M Y" }}</span>
                                 </div>
                             </div>
-                            
+
                             <div class="review-rating">
                                 {% for i in "12345"|make_list %}
                                     {% if forloop.counter <= review.rating %}
@@ -273,5 +273,4 @@
             </div>
         </div>
     </div>
-
-                    
+</section>
