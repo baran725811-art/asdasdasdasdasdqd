@@ -39,14 +39,16 @@ def contact(request):
                     messages.success(request, 'Mesajınız başarıyla gönderildi.')
                     return redirect('contact:contact')
             
-            elif request.POST['form_type'] == 'review' and request.user.is_authenticated:
-                review_form = ReviewForm(request.POST)
+            elif request.POST['form_type'] == 'review':
+                review_form = ReviewForm(request.POST, request.FILES)
                 contact_form = ContactForm()
                 if review_form.is_valid():
                     review = review_form.save(commit=False)
-                    review.user = request.user
+                    # IP adresini kaydet (spam önleme için)
+                    from contact.views import get_client_ip
+                    review.ip_address = get_client_ip(request)
                     review.save()
-                    messages.success(request, 'Değerlendirmeniz başarıyla kaydedildi.')
+                    messages.success(request, 'Değerlendirmeniz başarıyla kaydedildi. İncelendikten sonra yayınlanacaktır.')
                     return redirect('contact:contact')
     else:
         contact_form = ContactForm()
