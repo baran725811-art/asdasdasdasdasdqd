@@ -71,7 +71,7 @@ Saygılarımızla,
 
 
 
-2-)depolama : <!-- Storage Progress Bar -->  doğru çalışmıyor gibi sanırım.  bu depolama alanı  yüklenen resim ve videoların toplam boyutunu hesaplayacak "CLOUDINARY" bölümüne 
+1-)depolama : <!-- Storage Progress Bar -->  doğru çalışmıyor gibi sanırım.  bu depolama alanı  yüklenen resim ve videoların toplam boyutunu hesaplayacak "CLOUDINARY" bölümüne 
 Cloudinary API’den toplam kullanılan depolama alanı çekilecek.
 
 Resim + videoların boyutları toplanıp progress bar’a aktarılacak.
@@ -80,7 +80,7 @@ Hem backend (API çağrısı) hem frontend (bar güncelleme) yapılmalı.
 
 Mantık basit ama entegrasyon testleri uğraştırabilir.
 
-3-)istatislikler: 
+2-)istatislikler: 
 index bölümünde rakamlarla biz bölümünde görülmüyor istatislik rakmları. 
 index bölümünde "Hakkımızda" bölümünde resim bölümünde bulunan istatislik görülmüyor
 iletişim verileri  otomatik olarak  istatiliklere eklensin. her yıl geçince otomatik olarak güncellensin  tamamlanan iş her yoruma göre artsın mutlu müşteri 2 puan ve üzeirne versin  menuniyet puan ortalamasına göre verilsin
@@ -102,9 +102,6 @@ Her giriş → tamamlanan iş artsın.
 Backend mantığı + cron veya sinyal tabanlı güncelleme gerek.
 
 
-en son her şey bitince : seo yapılandırması yapılacak tüm sayfalara 
-baran oto anahtar, oto çilingir, ev çilingir, çelik kapı çilingir, oto yedek ahanahtar, oto imobizer anahatar, oto kumanda tamiri, kepen yedek anahatarı, imobizer tamiri, kayıptan oto anahtar, oto yedek anahtar, oto yedek kumanda, oto smart yedek anahtar, ev yedek anahtar, bilyalı yedek anahtar, yalde yedek anahtar, bareller, kilit sistemleri, kontak tamiri, kayıptan oto anahtar,
-
 
 
 
@@ -124,3 +121,9 @@ Kök neden netleşmeden sonuç üretme
 Yumuşatma, geçiştirme veya üstünkörü açıklama yapma
 Kodlama yapacağın zaman öncesi sonrası olarak değiştirileceği yerleri söyle
 Kodlama eklecek veya değiştirilecek bölümlerin dosya yolunu belirt
+
+
+
+en son her şey bitince : seo yapılandırması yapılacak tüm sayfalara 
+baran oto anahtar, oto çilingir, ev çilingir, çelik kapı çilingir, oto yedek ahanahtar, oto imobizer anahatar, oto kumanda tamiri, kepen yedek anahatarı, imobizer tamiri, kayıptan oto anahtar, oto yedek anahtar, oto yedek kumanda, oto smart yedek anahtar, ev yedek anahtar, bilyalı yedek anahtar, yalde yedek anahtar, bareller, kilit sistemleri, kontak tamiri, kayıptan oto anahtar,
+

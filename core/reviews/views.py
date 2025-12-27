@@ -8,27 +8,27 @@ from django.utils.translation import gettext as _
 from .models import Review
 from .forms import ReviewForm
 
-@login_required
-@ratelimit(key='user', rate='3/h', method='POST', block=True)
+def get_client_ip(request):
+    """Kullanıcının IP adresini al"""
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+@ratelimit(key='ip', rate='5/h', method='POST', block=True)  # ← IP bazlı limit
 def add_review(request):
     if request.method == 'POST':
+        # Giriş kontrolü YOK - herkes gönderebilir
         form = ReviewForm(request.POST, request.FILES)
         if form.is_valid():
             review = form.save(commit=False)
-            review.user = request.user
+            # IP adresini kaydet (spam önleme için)
+            review.ip_address = get_client_ip(request)  # ← Spam koruması
             review.save()
-            messages.success(request, _('Yorumunuz başarıyla alındı. İncelendikten sonra yayınlanacaktır.'))
-            return redirect('home:index')
-        else:
-            messages.error(request, _('Form gönderilirken hata oluştu. Lütfen bilgileri kontrol edin.'))
-    else:
-        form = ReviewForm()
-    
-    context = {
-        'form': form,
-        'title': _('Yorum Ekle')
-    }
-    return render(request, 'reviews/review_form.html', context)
+
+
 
 def review_list(request):
     # select_related('user') kısmını kaldırın çünkü user field'ı yok
