@@ -327,10 +327,16 @@ function initFileUpload() {
     
     // File input change handler
     fileInput.addEventListener('change', handleFileSelect);
-    
-    // Click to select file
-    uploadArea.addEventListener('click', () => {
-        fileInput.click();
+
+    // Click to select file (only when upload content is visible)
+    uploadArea.addEventListener('click', (e) => {
+        const uploadContent = uploadArea.querySelector('.upload-content');
+        const isUploadContentVisible = uploadContent && uploadContent.style.display !== 'none';
+
+        // Only trigger file input if clicking on upload content area, not preview
+        if (isUploadContentVisible || e.target.closest('.upload-content')) {
+            fileInput.click();
+        }
     });
     
     function handleDragOver(e) {
