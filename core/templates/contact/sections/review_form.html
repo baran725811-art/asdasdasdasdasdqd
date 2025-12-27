@@ -25,7 +25,6 @@
                     <p>{% trans "Hizmetimizi nasıl buldunuz? Puanınızı ve yorumunuzu bizimle paylaşın." %}</p>
                 </div>
 
-                {% if user.is_authenticated %}
                 <form method="post" id="reviewForm" class="review-form" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type="hidden" name="form_type" value="review">
@@ -37,11 +36,11 @@
                             <span class="required">*</span>
                         </label>
                         <div class="input-container">
-                            <input type="text" 
-                                   name="{{ review_form.name.name }}" 
-                                   id="{{ review_form.name.id_for_label }}" 
+                            <input type="text"
+                                   name="{{ review_form.name.name }}"
+                                   id="{{ review_form.name.id_for_label }}"
                                    class="form-input {% if review_form.name.errors %}error{% endif %}"
-                                   value="{{ review_form.name.value|default:user.get_full_name|default:user.username }}" 
+                                   value="{% if user.is_authenticated %}{{ review_form.name.value|default:user.get_full_name|default:user.username }}{% else %}{{ review_form.name.value|default:'' }}{% endif %}"
                                    placeholder="{% trans 'Adınız ve soyadınız' %}"
                                    required>
                             <div class="input-indicator"></div>
@@ -205,22 +204,6 @@
                         </div>
                     </div>
                 </form>
-                {% else %}
-                <!-- Giriş yapmamış kullanıcı için mesaj -->
-                <div class="login-required">
-                    <div class="login-icon">
-                        <i class="fas fa-lock"></i>
-                    </div>
-                    <h4>{% trans "Giriş Gerekli" %}</h4>
-                    <p>{% trans "Değerlendirme yapabilmek için giriş yapmanız gerekiyor." %}</p>
-                    <div class="login-actions">
-                        <a href="{% url 'admin:login' %}" class="login-btn">
-                            <i class="fas fa-sign-in-alt"></i>
-                            {% trans "Giriş Yap" %}
-                        </a>
-                    </div>
-                </div>
-                {% endif %}
             </div>
 
             <!-- Son Değerlendirmeler -->
