@@ -24,11 +24,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
-    
-    # Core uygulama (site ayarları için)
+
+    # Core apps
     'core',
-    
-    # Uygulamalar
     'home',
     'products',
     'gallery',
@@ -36,13 +34,19 @@ INSTALLED_APPS = [
     'contact',
     'dashboard',
     'reviews',
-    
-    # Üçüncü parti (modeltranslation en sona)
-    'ckeditor',
-    'crispy_forms',
-    'django_cleanup',
+
+    # Third party apps - Security packages
+    'axes',           # Rate limiting ve brute force koruması
+    'captcha',        # CAPTCHA koruması
+
+    # Other third party apps
+    'imagekit',
+    'django_ckeditor_5',
+    'widget_tweaks',
+    'modeltranslation',
+    'cloudinary_storage',
+    'cloudinary',
     'compressor',
-    'modeltranslation',  # En sona taşındı
 ]
 # Security middleware sıralaması - EN ÖNEMLİ DEĞİŞİKLİK
 MIDDLEWARE = [
