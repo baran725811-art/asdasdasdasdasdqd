@@ -526,12 +526,16 @@
 }
 
 .captcha-container input[type="text"] {
-    width: 120px !important;
+    min-width: 150px;      /* Minimum genişlik */
+    max-width: 200px;      /* Maksimum genişlik */
+    flex: 1;               /* Esnek genişlik */
     text-align: center;
     font-weight: bold;
     font-size: 16px;
     height: 45px;
+    padding: 0 10px;       /* İçerik için padding */
 }
+
 .form-text {
     font-size: 12px;
     color: #6c757d;
