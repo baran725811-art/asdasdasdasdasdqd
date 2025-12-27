@@ -13,7 +13,12 @@ class Review(models.Model):
     )
     comment = models.TextField(verbose_name="Yorum")
     image = models.ImageField(upload_to='reviews/%Y/%m/', verbose_name="Resim", blank=True, null=True)
-    ip_address = models.GenericIPAddressField("IP Adresi", null=True, blank=True)  # Yeni eklendi
+    ip_address = models.GenericIPAddressField(
+        "IP Adresi",
+        null=True,
+        blank=True,
+        help_text="Kullanıcının IP adresi otomatik olarak kaydedilir."
+    )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Oluşturulma Tarihi")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Güncellenme Tarihi")
     is_approved = models.BooleanField(default=False, verbose_name="Onaylı")
@@ -25,10 +30,3 @@ class Review(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.rating} Yıldız"
-    
-ip_address = models.GenericIPAddressField(
-    "IP Adresi",
-    null=True,
-    blank=True,
-    help_text="Kullanıcının IP adresi otomatik olarak kaydedilir."
-)

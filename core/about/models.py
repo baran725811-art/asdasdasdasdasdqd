@@ -1,5 +1,6 @@
 #core\about\models.py
 from django.db import models
+from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 from django.urls import reverse
 from core.cloudinary_fields import OptimizedImageField, SEOImageMixin
