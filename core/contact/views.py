@@ -32,20 +32,17 @@ def contact(request):
                     messages.error(request, _('Form gönderilirken hata oluştu. Lütfen bilgileri kontrol edin.'))
             
             elif request.POST['form_type'] == 'review':
-                if not request.user.is_authenticated:
-                    messages.error(request, _('Değerlendirme yapabilmek için giriş yapmanız gerekiyor.'))
-                    return redirect('contact:contact')
-            
                 review_form = ReviewForm(request.POST, request.FILES)
                 contact_form = ContactForm()
                 if review_form.is_valid():
                     review = review_form.save(commit=False)
-                    review.user = request.user
+                    review.ip_address = get_client_ip(request)
                     review.save()
-                    messages.success(request, _('Değerlendirmeniz başarıyla kaydedildi.'))
+                    messages.success(request, _('Değerlendirmeniz başarıyla kaydedildi. Onaylandıktan sonra yayınlanacaktır.'))
                     return redirect('contact:contact')
                 else:
                     messages.error(request, _('Değerlendirme gönderilirken hata oluştu.'))
+
 
     else:
         contact_form = ContactForm()

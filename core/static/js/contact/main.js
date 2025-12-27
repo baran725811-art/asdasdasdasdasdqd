@@ -329,10 +329,15 @@ function initFileUpload() {
     fileInput.addEventListener('change', handleFileSelect);
     
     // Click to select file
-    uploadArea.addEventListener('click', () => {
-        fileInput.click();
-    });
-    
+    uploadArea.addEventListener('click', (e) => {
+        const uploadContent = uploadArea.querySelector('.upload-content');
+        const isUploadContentVisible = uploadContent && uploadContent.style.display !== 'none';
+        
+        if (isUploadContentVisible || e.target.closest('.upload-content')) {
+            fileInput.click();
+        }
+    }); 
+
     function handleDragOver(e) {
         e.preventDefault();
         uploadArea.classList.add('dragover');
