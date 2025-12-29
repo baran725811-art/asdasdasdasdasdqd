@@ -14,3 +14,7 @@ staticfiles/
 local_settings.py
 db.sqlite3
 deployment/ssl/
+
+# Cache files
+cache/
+*.djcache

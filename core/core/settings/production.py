@@ -3,6 +3,7 @@
 
 from .base import *
 from decouple import config
+import os
 
 # Production güvenlik ayarları
 DEBUG = False
@@ -92,6 +93,11 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 SESSION_CACHE_ALIAS = 'default'
 
 # Logging - production için kapsamlı
+LOG_DIR = config('LOG_DIR', default='/var/log/django')
+
+# Log directory yoksa oluştur
+os.makedirs(LOG_DIR, exist_ok=True)
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -109,7 +115,7 @@ LOGGING = {
         'file': {
             'level': 'ERROR',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '/var/log/django/django.log',
+            'filename': os.path.join(LOG_DIR, 'django.log'),
             'maxBytes': 50 * 1024 * 1024,  # 50MB
             'backupCount': 5,
             'formatter': 'verbose',
@@ -117,7 +123,7 @@ LOGGING = {
         'security_file': {
             'level': 'WARNING',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '/var/log/django/security.log',
+            'filename': os.path.join(LOG_DIR, 'security.log'),
             'maxBytes': 50 * 1024 * 1024,  # 50MB
             'backupCount': 10,
             'formatter': 'security',
