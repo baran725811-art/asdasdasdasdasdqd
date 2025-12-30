@@ -4,10 +4,24 @@ import os
 from decouple import config
 from django.utils.translation import gettext_lazy as _
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+# Core Settings
+DEBUG = config('DEBUG', default=True, cast=bool)
+# SECRET_KEY - .env dosyasında ZORUNLU (güvenlik için default yok)
+SECRET_KEY = config('SECRET_KEY')
 
-# DEBUG, SECRET_KEY, ALLOWED_HOSTS, DATABASES ayarları
-# development.py ve production.py dosyalarında tanımlanmıştır.
+# ALLOWED_HOSTS - Güvenli konfigürasyon
+if DEBUG:
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
+else:
+    ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')])
 
+# Database ayarını da ekle (eksik olan)
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,11 +54,12 @@ INSTALLED_APPS = [
     'cloudinary',
     'compressor',
 ]
-# Security middleware sıralaması - EN ÖNEMLİ DEĞİŞİKLİK
+# Security middleware sıralaması - Optimize edilmiş sıralama
 MIDDLEWARE = [
-    'django.middleware.cache.UpdateCacheMiddleware',
-    'django.middleware.security.SecurityMiddleware',  # En başta
+    'django.middleware.security.SecurityMiddleware',  # En başta (HTTPS, HSTS)
+    'django_ratelimit.middleware.RatelimitMiddleware',  # Rate limiting erken
     'core.middleware.SecurityHeadersMiddleware',      # Özel güvenlik middleware'i
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'core.middleware.SEOCanonicalMiddleware',
@@ -55,7 +70,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
-    'django_ratelimit.middleware.RatelimitMiddleware',
     'core.middleware.IPAddressMiddleware',
     'core.middleware.SitePrimaryLanguageMiddleware',
     'core.middleware.DashboardLocaleMiddleware',
@@ -101,10 +115,6 @@ RATELIMIT_VIEW = 'core.views.ratelimit_view'
 ADMIN_URL = config('ADMIN_URL', default='admin/')  # Özelleştirilebilir admin URL
 ADMIN_SESSION_TIMEOUT = 60 * 30  # 30 dakika
 
-# Logs klasörünü oluştur (yoksa)
-LOGS_DIR = os.path.join(BASE_DIR, 'logs')
-if not os.path.exists(LOGS_DIR):
-    os.makedirs(LOGS_DIR, mode=0o755)
 
 # Logging - güvenlik olayları için gelişmiş
 LOGGING = {
@@ -281,9 +291,21 @@ DASHBOARD_LANGUAGE_COOKIE_NAME = 'dashboard_language'
 DASHBOARD_LANGUAGE_COOKIE_AGE = 365 * 24 * 60 * 60  # 1 yıl
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-# SSL/HTTPS ayarları
-# SECURE_SSL_REDIRECT, SECURE_PROXY_SSL_HEADER, SESSION_COOKIE_SECURE,
-# CSRF_COOKIE_SECURE, HSTS ayarları production.py ve development.py'de tanımlanır
+# File upload ayarları
+FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5MB
+DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5MB
+
+
+# SSL/HTTPS ayarları - production/development'a göre dinamik
+SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', default=False, cast=bool)
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https') if not DEBUG else None
+SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', default=not DEBUG, cast=bool)
+CSRF_COOKIE_SECURE = config('CSRF_COOKIE_SECURE', default=not DEBUG, cast=bool)
+
+# HSTS (HTTP Strict Transport Security) ayarları
+SECURE_HSTS_SECONDS = config('SECURE_HSTS_SECONDS', default=0 if DEBUG else 31536000, cast=int)
+SECURE_HSTS_INCLUDE_SUBDOMAINS = config('SECURE_HSTS_INCLUDE_SUBDOMAINS', default=not DEBUG, cast=bool)
+SECURE_HSTS_PRELOAD = config('SECURE_HSTS_PRELOAD', default=not DEBUG, cast=bool)
 
 # CSRF koruması - gelişmiş ayarlar
 CSRF_COOKIE_HTTPONLY = True
@@ -345,51 +367,18 @@ if DEBUG:
 else:
     STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
-# CKEditor 5 ayarları (django-ckeditor-5 için)
-CKEDITOR_5_CONFIGS = {
+# CKEditor ayarları
+CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': ['heading', '|', 'bold', 'italic', 'underline', '|',
-                   'link', 'bulletedList', 'numberedList', '|',
-                   'blockQuote', 'insertTable', '|',
-                   'undo', 'redo'],
-        'height': '300px',
-    },
-    'extends': {
-        'blockToolbar': [
-            'paragraph', 'heading1', 'heading2', 'heading3',
-            '|',
-            'bulletedList', 'numberedList',
-            '|',
-            'blockQuote',
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink'],
+            ['RemoveFormat', 'Source']
         ],
-        'toolbar': ['heading', '|', 'outdent', 'indent', '|', 'bold', 'italic', 'link', 'underline', 'strikethrough',
-                   'code', 'subscript', 'superscript', 'highlight', '|', 'codeBlock', 'sourceEditing', 'insertImage',
-                   'bulletedList', 'numberedList', 'todoList', '|', 'blockQuote', 'imageUpload', '|',
-                   'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'mediaEmbed', 'removeFormat',
-                   'insertTable'],
-        'image': {
-            'toolbar': ['imageTextAlternative', '|', 'imageStyle:alignLeft',
-                       'imageStyle:alignRight', 'imageStyle:alignCenter', 'imageStyle:side', '|'],
-            'styles': [
-                'full',
-                'side',
-                'alignLeft',
-                'alignRight',
-                'alignCenter',
-            ]
-        },
-        'table': {
-            'contentToolbar': ['tableColumn', 'tableRow', 'mergeTableCells',
-                             'tableProperties', 'tableCellProperties'],
-        },
-        'heading': {
-            'options': [
-                {'model': 'paragraph', 'title': 'Paragraph', 'class': 'ck-heading_paragraph'},
-                {'model': 'heading1', 'view': 'h1', 'title': 'Heading 1', 'class': 'ck-heading_heading1'},
-                {'model': 'heading2', 'view': 'h2', 'title': 'Heading 2', 'class': 'ck-heading_heading2'},
-                {'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3'}
-            ]
-        }
+        'height': 200,
+        'width': '100%',
     },
 }
 # Modeltranslation ayarları
@@ -401,21 +390,7 @@ DEEPL_API_URL = 'https://api-free.deepl.com/v2/translate'  # Free plan için
 # DEEPL_API_URL = 'https://api.deepl.com/v2/translate'  # Pro plan için
 DEEPL_CHARACTER_LIMIT = 500000  # Müşteri başına karakter limiti
 
-# ========================
-# CLOUDINARY STORAGE SETTINGS
-# ========================
-CLOUDINARY_STORAGE_LIMIT_GB = config('CLOUDINARY_STORAGE_LIMIT', default=10, cast=int)
-CLOUDINARY_STORAGE_LIMIT_BYTES = CLOUDINARY_STORAGE_LIMIT_GB * 1024 * 1024 * 1024
 
-CLOUDINARY_STORAGE_PACKAGES = {
-    10: "Free Plan (10GB)",
-    25: "Plus Plan (25GB)",
-    100: "Advanced Plan (100GB)",
-    500: "Enterprise Plan (500GB)"
-}
-
-CLOUDINARY_MAX_IMAGE_SIZE = 20 * 1024 * 1024  # 20MB
-CLOUDINARY_MAX_VIDEO_SIZE = 100 * 1024 * 1024  # 100MB
 
 
 # ========================

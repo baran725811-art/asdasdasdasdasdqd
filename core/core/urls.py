@@ -84,12 +84,15 @@ urlpatterns += i18n_patterns(
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    
-    # Debug Toolbar URLs
-    import debug_toolbar
-    urlpatterns = [
-        path("__debug__/", include("debug_toolbar.urls")),
-    ] + urlpatterns
+
+    # Debug Toolbar URLs (opsiyonel - kurulu ise)
+    try:
+        import debug_toolbar
+        urlpatterns = [
+            path("__debug__/", include("debug_toolbar.urls")),
+        ] + urlpatterns
+    except ImportError:
+        pass  # debug_toolbar kurulu değilse sessizce atla
 
 # Error handlers
 handler400 = 'core.views.custom_400_view'

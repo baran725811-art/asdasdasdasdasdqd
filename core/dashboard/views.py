@@ -67,6 +67,7 @@ from django.urls import reverse_lazy, reverse
 
 # Login View
 
+@ratelimit(key='ip', rate='5/m', method='POST', block=True)
 @axes_dispatch
 def dashboard_login(request):
     if request.user.is_authenticated:
@@ -1000,9 +1001,11 @@ def gallery_add(request):
                     gallery_item.save()
                 
                 # ✅ ADIM 3: KIRPILMIŞ GÖRSELİ KAYDET
-                if 'image' in request.FILES:
-                    gallery_item.cropped_image = request.FILES['image']
+                # ✅ ADIM 3: KIRPILMIŞ GÖRSELİ KAYDET
+                if 'cropped_image' in request.FILES:
+                    gallery_item.cropped_image = request.FILES['cropped_image']
                     gallery_item.save()
+
                 
                 print(f"✅ GALERİ ÖĞESİ BAŞARIYLA KAYDEDİLDİ! ID: {gallery_item.id}, Title: {gallery_item.title}")
                 
@@ -1115,9 +1118,10 @@ def gallery_edit(request, pk):
                     gallery_item.save()
                 
                 # ✅ ADIM 3: KIRPILMIŞ GÖRSELİ KAYDET
-                if 'image' in request.FILES:
-                    gallery_item.cropped_image = request.FILES['image']
+                if 'cropped_image' in request.FILES:
+                    gallery_item.cropped_image = request.FILES['cropped_image']
                     gallery_item.save()
+
                 
                 if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                     return JsonResponse({
