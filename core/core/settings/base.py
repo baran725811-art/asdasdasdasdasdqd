@@ -4,10 +4,16 @@ import os
 from decouple import config
 from django.utils.translation import gettext_lazy as _
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-# BU SATIRLARI EKLE:
+# Core Settings
 DEBUG = config('DEBUG', default=True, cast=bool)
-SECRET_KEY = config('SECRET_KEY', default='django-insecure-development-key-change-this-in-production-minimum-50-characters-long!')
-ALLOWED_HOSTS = ['*']  # Development için
+# SECRET_KEY - .env dosyasında ZORUNLU (güvenlik için default yok)
+SECRET_KEY = config('SECRET_KEY')
+
+# ALLOWED_HOSTS - Güvenli konfigürasyon
+if DEBUG:
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
+else:
+    ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')])
 
 # Database ayarını da ekle (eksik olan)
 DATABASES = {
@@ -48,11 +54,12 @@ INSTALLED_APPS = [
     'cloudinary',
     'compressor',
 ]
-# Security middleware sıralaması - EN ÖNEMLİ DEĞİŞİKLİK
+# Security middleware sıralaması - Optimize edilmiş sıralama
 MIDDLEWARE = [
-    'django.middleware.cache.UpdateCacheMiddleware',
-    'django.middleware.security.SecurityMiddleware',  # En başta
+    'django.middleware.security.SecurityMiddleware',  # En başta (HTTPS, HSTS)
+    'django_ratelimit.middleware.RatelimitMiddleware',  # Rate limiting erken
     'core.middleware.SecurityHeadersMiddleware',      # Özel güvenlik middleware'i
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'core.middleware.SEOCanonicalMiddleware',
@@ -63,7 +70,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
-    'django_ratelimit.middleware.RatelimitMiddleware',
     'core.middleware.IPAddressMiddleware',
     'core.middleware.SitePrimaryLanguageMiddleware',
     'core.middleware.DashboardLocaleMiddleware',

@@ -1,20 +1,16 @@
+# core/settings/__init__.py
 """
-Django Settings Package
-Environment-based settings loader.
+Settings modülü - Otomatik environment seçimi
+Development veya Production ayarlarını otomatik import eder
 """
+
 import os
-from decouple import config
 
-# Environment detection (default: development)
-DJANGO_ENV = config('DJANGO_ENV', default='development')
+# DJANGO_SETTINGS_MODULE environment variable'ından ayarları al
+# Eğer set edilmemişse, DEBUG değişkenine göre karar ver
+env = os.environ.get('DJANGO_ENV', 'development')
 
-# Import settings based on environment
-if DJANGO_ENV == 'production':
+if env == 'production':
     from .production import *
-    print(f"🚀 Production settings loaded")
-elif DJANGO_ENV == 'test':
-    from .development import *
-    print(f"🧪 Test settings loaded")
 else:
     from .development import *
-    print(f"🔧 Development settings loaded")

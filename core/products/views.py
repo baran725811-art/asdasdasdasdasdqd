@@ -3,19 +3,25 @@ from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from django.db.models import Q, Count
 from .models import Product, Category
+import re
 
 def product_list(request):
     """Ana ürün listesi sayfası"""
     products = Product.objects.filter(is_active=True).select_related('category')
-    
-    # Arama functionality
-    search_query = request.GET.get('q')
+
+    # Arama functionality - Input sanitization ile güvenli
+    search_query = request.GET.get('q', '').strip()
     if search_query:
-        products = products.filter(
-            Q(name__icontains=search_query) |
-            Q(description__icontains=search_query) |
-            Q(category__name__icontains=search_query)
-        )
+        # Güvenlik: Sadece alfanumerik, boşluk ve güvenli karakterlere izin ver
+        search_query = re.sub(r'[^\w\s\-]', '', search_query)[:100]  # Max 100 karakter
+
+        # Minimum 2 karakter kontrolü
+        if len(search_query) >= 2:
+            products = products.filter(
+                Q(name__icontains=search_query) |
+                Q(description__icontains=search_query) |
+                Q(category__name__icontains=search_query)
+            )
     
     # Kategori filtresi
     category_slug = request.GET.get('category')

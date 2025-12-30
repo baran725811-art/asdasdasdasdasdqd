@@ -67,6 +67,7 @@ from django.urls import reverse_lazy, reverse
 
 # Login View
 
+@ratelimit(key='ip', rate='5/m', method='POST', block=True)
 @axes_dispatch
 def dashboard_login(request):
     if request.user.is_authenticated:
