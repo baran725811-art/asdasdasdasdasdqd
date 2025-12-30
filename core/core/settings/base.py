@@ -177,14 +177,13 @@ SECURITY_MONITORING = {
 AXES_FAILURE_LIMIT = 5  # 5 başarısız denemeden sonra engelleme
 AXES_COOLOFF_TIME = 1  # 1 saat (saat cinsinden)
 AXES_LOCK_OUT_AT_FAILURE = True  # Başarısız denemelerden sonra kilitle
-AXES_ONLY_USER_FAILURES = False  # IP bazlı ve kullanıcı bazlı takip
+AXES_LOCKOUT_PARAMETERS = ['username', 'ip_address']  # Kullanıcı + IP kombinasyonu ile kilitleme
 AXES_ENABLE_ACCESS_FAILURE_LOG = True  # Başarısız denemeleri logla
 AXES_RESET_ON_SUCCESS = True  # Başarılı girişte sayaçları sıfırla
 AXES_LOCKOUT_TEMPLATE = None  # Custom template kullanılabilir
 AXES_LOCKOUT_URL = None  # Özel lockout URL'i
 AXES_VERBOSE = True  # Detaylı logging
 AXES_USERNAME_FORM_FIELD = 'username'  # Login form field
-AXES_LOCK_OUT_BY_COMBINATION_USER_AND_IP = True  # Kullanıcı + IP kombinasyonu
 AXES_IPWARE_PROXY_COUNT = 1  # Proxy arkasındaysa
 AXES_IPWARE_META_PRECEDENCE_ORDER = [  # IP algılama sırası
     'HTTP_X_FORWARDED_FOR',
