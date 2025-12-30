@@ -4,16 +4,10 @@ import os
 from decouple import config
 from django.utils.translation import gettext_lazy as _
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-# Core Settings
+# BU SATIRLARI EKLE:
 DEBUG = config('DEBUG', default=True, cast=bool)
-# SECRET_KEY - .env dosyasında ZORUNLU (güvenlik için default yok)
-SECRET_KEY = config('SECRET_KEY')
-
-# ALLOWED_HOSTS - Güvenli konfigürasyon
-if DEBUG:
-    ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
-else:
-    ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',')])
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-development-key-change-this-in-production-minimum-50-characters-long!')
+ALLOWED_HOSTS = ['*']  # Development için
 
 # Database ayarını da ekle (eksik olan)
 DATABASES = {
@@ -54,12 +48,11 @@ INSTALLED_APPS = [
     'cloudinary',
     'compressor',
 ]
-# Security middleware sıralaması - Optimize edilmiş sıralama
+# Security middleware sıralaması - EN ÖNEMLİ DEĞİŞİKLİK
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',  # En başta (HTTPS, HSTS)
-    'django_ratelimit.middleware.RatelimitMiddleware',  # Rate limiting erken
-    'core.middleware.SecurityHeadersMiddleware',      # Özel güvenlik middleware'i
     'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.security.SecurityMiddleware',  # En başta
+    'core.middleware.SecurityHeadersMiddleware',      # Özel güvenlik middleware'i
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'core.middleware.SEOCanonicalMiddleware',
@@ -67,20 +60,21 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'axes.middleware.AxesMiddleware',  
-    # Axes brute force protection
+    'axes.middleware.AxesMiddleware',  # Brute force koruması - AuthenticationMiddleware'den sonra
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
+    #'django_ratelimit.middleware.RatelimitMiddleware',
     'core.middleware.IPAddressMiddleware',
     'core.middleware.SitePrimaryLanguageMiddleware',
     'core.middleware.DashboardLocaleMiddleware',
 ]
 
-# Authentication backends - Axes için gerekli
+# Authentication backends - Axes ile birlikte
 AUTHENTICATION_BACKENDS = [
-    'axes.backends.AxesStandaloneBackend',  # Axes brute force protection
-    'django.contrib.auth.backends.ModelBackend', ]
+    'axes.backends.AxesStandaloneBackend',  # Axes backend - brute force koruması
+    'django.contrib.auth.backends.ModelBackend',  # Default backend
+]
 
 # Güçlü password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -179,6 +173,26 @@ SECURITY_MONITORING = {
     'LOGIN_ATTEMPT_TIMEOUT': 300,  # 5 dakika
 }
 
+# Django Axes Configuration - Brute Force Protection
+
+# AXES_FAILURE_LIMIT = 5  # 5 başarısız denemeden sonra engelleme
+# AXES_COOLOFF_TIME = 1  # 1 saat (saat cinsinden)
+# AXES_LOCK_OUT_AT_FAILURE = True  # Başarısız denemelerden sonra kilitle
+# AXES_ONLY_USER_FAILURES = False  # IP bazlı ve kullanıcı bazlı takip
+# AXES_ENABLE_ACCESS_FAILURE_LOG = True  # Başarısız denemeleri logla
+# AXES_RESET_ON_SUCCESS = True  # Başarılı girişte sayaçları sıfırla
+# AXES_LOCKOUT_TEMPLATE = None  # Custom template kullanılabilir
+# AXES_LOCKOUT_URL = None  # Özel lockout URL'i
+# AXES_VERBOSE = True  # Detaylı logging
+# AXES_USERNAME_FORM_FIELD = 'username'  # Login form field
+# AXES_LOCK_OUT_BY_COMBINATION_USER_AND_IP = True  # Kullanıcı + IP kombinasyonu
+# AXES_IPWARE_PROXY_COUNT = 1  # Proxy arkasındaysa
+# AXES_IPWARE_META_PRECEDENCE_ORDER = [  # IP algılama sırası
+#     'HTTP_X_FORWARDED_FOR',
+#     'X_FORWARDED_FOR',
+#     'REMOTE_ADDR',
+# ]
+
 
 
 
@@ -254,33 +268,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')    # collectstatic çıktıs
 # Medya dosyaları (kullanıcı yüklemeleri)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-
-# Cloudinary Configuration & Validation
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME', default=''),
-    'API_KEY': config('CLOUDINARY_API_KEY', default=''),
-    'API_SECRET': config('CLOUDINARY_API_SECRET', default=''),
-    'SECURE': True,
-}
-
-# Cloudinary credentials validation
-# Eğer herhangi biri tanımlıysa, hepsi zorunlu
-if any([CLOUDINARY_STORAGE['CLOUD_NAME'],
-        CLOUDINARY_STORAGE['API_KEY'],
-        CLOUDINARY_STORAGE['API_SECRET']]):
-    from django.core.exceptions import ImproperlyConfigured
-    if not all([CLOUDINARY_STORAGE['CLOUD_NAME'],
-                CLOUDINARY_STORAGE['API_KEY'],
-                CLOUDINARY_STORAGE['API_SECRET']]):
-        raise ImproperlyConfigured(
-            'Cloudinary kullanmak için tüm credentials gerekli:\n'
-            '  - CLOUDINARY_CLOUD_NAME\n'
-            '  - CLOUDINARY_API_KEY\n'
-            '  - CLOUDINARY_API_SECRET\n'
-            '.env dosyasında tümünü tanımlayın veya hiçbirini kullanmayın.'
-        )
-
 # Internationalization (Çoklu dil desteği)
 LANGUAGE_CODE = 'tr'  # Varsayılan dil Türkçe
 TIME_ZONE = 'Europe/Istanbul'
@@ -335,10 +322,6 @@ SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', default=False, cast=bool)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https') if not DEBUG else None
 SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', default=not DEBUG, cast=bool)
 CSRF_COOKIE_SECURE = config('CSRF_COOKIE_SECURE', default=not DEBUG, cast=bool)
-CSRF_FAILURE_VIEW = 'core.views.csrf_failure_view'  # Özel CSRF hata sayfası
-
-
-
 
 # HSTS (HTTP Strict Transport Security) ayarları
 SECURE_HSTS_SECONDS = config('SECURE_HSTS_SECONDS', default=0 if DEBUG else 31536000, cast=int)
