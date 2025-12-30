@@ -1,26 +1,20 @@
+import json
+import logging
+import random
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from contact.forms import ContactForm
-from reviews.forms import ReviewForm
-from reviews.models import Review
-from django.http import JsonResponse
-from django.utils.translation import activate
+from django.http import JsonResponse, HttpResponseNotFound, HttpResponseServerError, HttpResponseForbidden
+from django.template import TemplateDoesNotExist
+from django.utils.translation import activate, gettext as _
+from django.utils import timezone
 from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import csrf_exempt
-import json
-from django.shortcuts import render
-from django.http import HttpResponseNotFound, HttpResponseServerError, HttpResponseForbidden
-from django.template import TemplateDoesNotExist
-from django.utils.translation import gettext as _
-from django.utils import timezone
-from django.conf import settings
-import logging
-import random
 from django.views.decorators.csrf import requires_csrf_token
-from django.shortcuts import render, get_object_or_404
+from contact.forms import ContactForm
+from reviews.forms import ReviewForm
+from reviews.models import Review
 from core.models import LegalPage, CookieConsent
 
 from products.models import Product
@@ -68,7 +62,6 @@ def ratelimit_view(request, exception):
 
 
 @require_POST
-@csrf_exempt
 def set_main_language(request):
     """Ana dil ayarlama - admin ve dashboard için"""
     try:
@@ -125,7 +118,6 @@ def set_main_language(request):
 
 @staff_member_required(login_url='/admin/login/')
 @require_POST
-@csrf_exempt
 def set_dashboard_language(request):
     """Dashboard arayüz dili ayarlama (geçici)"""
     try:
@@ -431,8 +423,7 @@ def legal_page_detail(request, slug):
     
     return render(request, 'legal/legal_page_detail.html', context)
 
-@require_POST 
-@csrf_exempt
+@require_POST
 def save_cookie_preferences(request):
     """Çerez tercihlerini kaydet"""
     try:
