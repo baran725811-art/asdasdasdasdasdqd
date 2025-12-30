@@ -9,7 +9,6 @@ from django.utils.translation import activate
 from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import csrf_exempt
 import json
 from django.shortcuts import render
 from django.http import HttpResponseNotFound, HttpResponseServerError, HttpResponseForbidden
@@ -68,7 +67,6 @@ def ratelimit_view(request, exception):
 
 
 @require_POST
-@csrf_exempt
 def set_main_language(request):
     """Ana dil ayarlama - admin ve dashboard için"""
     try:
@@ -125,7 +123,6 @@ def set_main_language(request):
 
 @staff_member_required(login_url='/admin/login/')
 @require_POST
-@csrf_exempt
 def set_dashboard_language(request):
     """Dashboard arayüz dili ayarlama (geçici)"""
     try:
@@ -431,8 +428,7 @@ def legal_page_detail(request, slug):
     
     return render(request, 'legal/legal_page_detail.html', context)
 
-@require_POST 
-@csrf_exempt
+@require_POST
 def save_cookie_preferences(request):
     """Çerez tercihlerini kaydet"""
     try:
