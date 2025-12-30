@@ -33,7 +33,7 @@ except ImportError:
 
 # Dil-bağımsız URL'ler (admin, sitemap, dil değiştirme, API'ler)
 urlpatterns = [
-    path(getattr(settings, 'ADMIN_URL_SUFFIX', 'admin/'), admin.site.urls),
+    path(getattr(settings, 'ADMIN_URL', 'admin/'), admin.site.urls),
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     path('i18n/', include('django.conf.urls.i18n')),
     path('captcha/', include('captcha.urls')),
@@ -84,15 +84,12 @@ urlpatterns += i18n_patterns(
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-    # Debug Toolbar URLs - Güvenli import
-    try:
-        import debug_toolbar
-        urlpatterns = [
-            path("__debug__/", include("debug_toolbar.urls")),
-        ] + urlpatterns
-    except ImportError:
-        pass  # Debug toolbar yüklü değilse devam et
+    
+    # Debug Toolbar URLs
+    import debug_toolbar
+    urlpatterns = [
+        path("__debug__/", include("debug_toolbar.urls")),
+    ] + urlpatterns
 
 # Error handlers
 handler400 = 'core.views.custom_400_view'

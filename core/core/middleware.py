@@ -5,11 +5,11 @@ import time
 from django.http import HttpResponseForbidden, HttpResponsePermanentRedirect, HttpResponseRedirect
 from django.urls import reverse
 from django.conf import settings
+from django.utils import translation, timezone
 from django.utils.deprecation import MiddlewareMixin
 from django.core.cache import cache
 from django.contrib.auth.signals import user_login_failed
 from django.dispatch import receiver
-from django.utils import translation, timezone
 
 # Security logger
 security_logger = logging.getLogger('core.security')
@@ -106,18 +106,13 @@ class SecurityMonitoringMiddleware:
 
     def __call__(self, request):
         # İstek öncesi kontroller
-        try:
-            # İstek öncesi kontroller
-            self._check_suspicious_request(request)
-            self._check_rate_limit(request)
-        except Exception as e:
-            security_logger.error(f'SecurityMonitoring error in pre-request checks: {e}')
+        self._check_suspicious_request(request)
+        self._check_rate_limit(request)
+        
         response = self.get_response(request)
-        try:
-            # Response sonrası loglar
-            self._log_response(request, response)
-        except Exception as e:
-            security_logger.error(f'SecurityMonitoring error in post-response logging: {e}')
+        
+        # Response sonrası loglar
+        self._log_response(request, response)
         
         return response
     
@@ -196,12 +191,9 @@ class LoginSecurityMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        try:
-            # Login sayfası kontrolü
-            if request.path.startswith('/dashboard/login/') and request.method == 'POST':
-                self._check_login_attempts(request)
-        except Exception as e:
-            security_logger.error(f'LoginSecurity error: {e}')
+        # Login sayfası kontrolü
+        if request.path.startswith('/dashboard/login/') and request.method == 'POST':
+            self._check_login_attempts(request)
         
         response = self.get_response(request)
         return response
@@ -251,7 +243,55 @@ def log_failed_login(sender, credentials, request, **kwargs):
     cache.set(cache_key, attempts + 1, 300)  # 5 dakika
 
 # MEVCUT MIDDLEWARE'LER (SecurityMiddleware, IPAddressMiddleware, etc.) AYNI KALIR
-
+class SecurityMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+        
+    def __call__(self, request):
+        # SQL injection koruması
+        if self._check_sql_injection(request):
+            return HttpResponseForbidden("Forbidden")
+            
+        # XSS koruması
+        if self._check_xss(request):
+            return HttpResponseForbidden("Forbidden")
+            
+        response = self.get_response(request)
+        
+        # Güvenlik başlıkları
+        response['X-Content-Type-Options'] = 'nosniff'
+        response['X-Frame-Options'] = 'DENY'
+        response['X-XSS-Protection'] = '1; mode=block'
+        
+        return response
+        
+    def _check_sql_injection(self, request):
+        sql_patterns = [
+            r'(\s|^)(SELECT|INSERT|UPDATE|DELETE|DROP|UNION|ALTER)(\s|$)',
+            r'--',
+            r';',
+            r'\/\*.*\*\/',
+        ]
+        
+        for param in request.GET.values():
+            for pattern in sql_patterns:
+                if re.search(pattern, param, re.I):
+                    return True
+        return False
+        
+    def _check_xss(self, request):
+        xss_patterns = [
+            r'<script.*?>.*?<\/script>',
+            r'javascript:',
+            r'onerror=',
+            r'onload=',
+        ]
+        
+        for param in request.GET.values():
+            for pattern in xss_patterns:
+                if re.search(pattern, param, re.I):
+                    return True
+        return False
 
 class IPAddressMiddleware:
     def __init__(self, get_response):
@@ -519,12 +559,9 @@ class Error404TrackingMiddleware:
     def __call__(self, request):
         response = self.get_response(request)
         
-        try:
-            # 404 hatalarını izle
-            if response.status_code == 404:
-                self._track_404_error(request)
-        except Exception as e:
-            error_logger.error(f'Error404Tracking error: {e}')
+        # 404 hatalarını izle
+        if response.status_code == 404:
+            self._track_404_error(request)
         
         return response
     
@@ -629,23 +666,19 @@ class MaintenanceModeMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        try:
-            # Bakım modu kontrolü
-            maintenance_settings = getattr(settings, 'MAINTENANCE_MODE_SETTINGS', {})
-            if maintenance_settings.get('ENABLED', False):
-                # İzinli IP'leri kontrol et
-                allowed_ips = maintenance_settings.get('ALLOWED_IPS', [])
-                client_ip = self._get_client_ip(request)
-                
-                if client_ip not in allowed_ips:
-                    # Admin ve dashboard'a erişimi engelleme
-                    if not request.path.startswith('/admin/') and not request.path.startswith('/dashboard/'):
-                        from core.views import maintenance_view
-                        return maintenance_view(request)
-        except Exception as e:
-            # Bakım modu kontrolü başarısız olursa, normal akışa devam et
-            import logging
-            logging.getLogger(__name__).error(f'MaintenanceMode error: {e}')
+        # Bakım modu kontrolü
+        maintenance_settings = getattr(settings, 'MAINTENANCE_MODE_SETTINGS', {})
+
+        if maintenance_settings.get('ENABLED', False):
+            # İzinli IP'leri kontrol et
+            allowed_ips = maintenance_settings.get('ALLOWED_IPS', [])
+            client_ip = self._get_client_ip(request)
+
+            if client_ip not in allowed_ips:
+                # Admin ve dashboard'a erişimi engelleme
+                if not request.path.startswith('/admin/') and not request.path.startswith('/dashboard/'):
+                    from core.views import maintenance_view
+                    return maintenance_view(request)
 
         return self.get_response(request)
 

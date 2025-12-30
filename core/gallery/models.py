@@ -2,7 +2,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
-from core.cloudinary_fields import OptimizedImageField, OptimizedVideoField, SEOImageMixin
+from core.cloudinary_fields import OptimizedImageField, OptimizedVideoField, SEOImageMixin, RawImageField
 from dashboard.mixins import AutoOrderMixin
 
 
@@ -20,9 +20,8 @@ class Gallery(AutoOrderMixin, SEOImageMixin, models.Model):
                             help_text="Görsel için SEO alt metni (max 125 karakter)")
     
     media_type = models.CharField("Medya Tipi", max_length=5, choices=MEDIA_TYPES)
-    
+
     # Cloudinary ile değiştirildi - imagekit kaldırıldı
-    from core.cloudinary_fields import RawImageField
     image = RawImageField("Resim", folder="gallery", blank=True)
     
     # kırpma

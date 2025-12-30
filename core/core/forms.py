@@ -30,16 +30,3 @@ class SecureForm(forms.Form):
             if not re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', email):
                 raise ValidationError('Geçersiz email adresi')
         return email
-    
-    
-class AdminLoginForm(AuthenticationForm):
-    captcha = CaptchaField(
-        label=_("Güvenlik Kodu"),
-        help_text=_("Yukarıdaki kodu girin")
-    )
-    
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.update({'class': 'vTextField required'})
-        self.fields['password'].widget.attrs.update({'class': 'vPasswordField required'})
-        self.fields['captcha'].widget.attrs.update({'class': 'vTextField required'})
