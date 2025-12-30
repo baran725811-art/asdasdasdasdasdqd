@@ -94,22 +94,16 @@ def dashboard_login(request):
         attempts_count = 0
     
     # 3 veya daha fazla başarısız denemede CAPTCHA göster
-    show_captcha = True #attempts_count >= 3 or was_limited
-    
-    print(f"DEBUG: IP: {ip_address}, Attempts: {attempts_count}, Show CAPTCHA: {show_captcha}")  # DEBUG
-    
     if request.method == 'POST':
         form = DashboardLoginForm(
-            request.POST, 
-            show_captcha=show_captcha, 
+            request.POST,
             request=request
         )
         
         if was_limited:
             messages.error(request, 'Çok fazla başarısız deneme. Lütfen birkaç dakika bekleyin.')
             return render(request, 'dashboard/login.html', {
-                'form': form, 
-                'show_captcha': True,
+                'form': form,                 
                 'attempts': attempts_count,
                 'max_attempts': 5,
             })
@@ -135,24 +129,12 @@ def dashboard_login(request):
             messages.error(request, 'Giriş bilgilerini kontrol edin.')
             logger.warning(f"Failed login attempt from {ip_address}")
     else:
-        form = DashboardLoginForm(
-            show_captcha=show_captcha, 
-            request=request
-        )
-    
-    print(f"DEBUG: Form has captcha: {'captcha' in form.fields}")  # DEBUG
-    if 'captcha' in form.fields:
-        print(f"DEBUG: CAPTCHA required: {form.fields['captcha'].required}")
-        print(f"DEBUG: CAPTCHA widget: {type(form.fields['captcha'].widget)}")
-        print(f"DEBUG: CAPTCHA widget attrs: {form.fields['captcha'].widget.attrs}")
-    
+        form = DashboardLoginForm(request=request)
     context = {
         'form': form,
-        'show_captcha': show_captcha,
-        'attempts': attempts_count if show_captcha else 0,
+        'attempts': attempts_count,
         'max_attempts': 5,
-    }
-    
+    }    
     return render(request, 'dashboard/login.html', context)
 
 
