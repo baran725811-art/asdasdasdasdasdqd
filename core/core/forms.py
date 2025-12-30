@@ -32,12 +32,40 @@ class SecureForm(forms.Form):
         return email
     
     
+class SecureModelForm(forms.ModelForm):
+    """
+    ModelForm için güvenli base class
+    Tüm string field'ları otomatik olarak sanitize eder
+    """
+    def clean(self):
+        cleaned_data = super().clean()
+        for field, value in cleaned_data.items():
+            if isinstance(value, str):
+                # HTML temizleme - XSS koruması
+                cleaned_data[field] = bleach.clean(
+                    value,
+                    tags=[],  # İzin verilen HTML etiketleri (boş = hiçbiri)
+                    attributes={},  # İzin verilen HTML özellikleri
+                    strip=True  # Tag'leri kaldır
+                )
+        return cleaned_data
+
+    def clean_email(self):
+        """Email alanı için özel validation"""
+        email = self.cleaned_data.get('email')
+        if email:
+            # Email regex validation
+            if not re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', email):
+                raise ValidationError('Geçersiz email adresi')
+        return email
+
+
 class AdminLoginForm(AuthenticationForm):
     captcha = CaptchaField(
         label=_("Güvenlik Kodu"),
         help_text=_("Yukarıdaki kodu girin")
     )
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['username'].widget.attrs.update({'class': 'vTextField required'})

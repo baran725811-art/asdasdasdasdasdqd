@@ -50,14 +50,14 @@ class DashboardLoginForm(forms.Form):
     captcha = CaptchaField(
         label='Güvenlik Kodu',
         help_text='Yukarıdaki matematik işleminin sonucunu yazın',
-        required=False
+        required=True  # Her zaman zorunlu - güvenlik için
     )
-    
+
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
-        self.show_captcha = kwargs.pop('show_captcha', False)
+        # show_captcha parametresi kaldırıldı - her zaman aktif
         super().__init__(*args, **kwargs)
-        
+
         # CAPTCHA widget'ına CSS class ekle
         if 'captcha' in self.fields:
             # TextInput kısmına class ekle
@@ -65,14 +65,8 @@ class DashboardLoginForm(forms.Form):
                 'class': 'form-control-modern',
                 'placeholder': 'Sonucu yazın'
             })
-        
-        # CAPTCHA'yı koşullu olarak zorunlu yap
-        if self.show_captcha:
-            if 'captcha' in self.fields:
-                self.fields['captcha'].required = True
-        else:
-            if 'captcha' in self.fields:
-                self.fields['captcha'].required = False
+            # Her zaman zorunlu
+            self.fields['captcha'].required = True
     
     def clean(self):
         cleaned_data = super().clean()

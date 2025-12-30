@@ -247,6 +247,33 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')    # collectstatic çıktıs
 # Medya dosyaları (kullanıcı yüklemeleri)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Cloudinary Configuration & Validation
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME', default=''),
+    'API_KEY': config('CLOUDINARY_API_KEY', default=''),
+    'API_SECRET': config('CLOUDINARY_API_SECRET', default=''),
+    'SECURE': True,
+}
+
+# Cloudinary credentials validation
+# Eğer herhangi biri tanımlıysa, hepsi zorunlu
+if any([CLOUDINARY_STORAGE['CLOUD_NAME'],
+        CLOUDINARY_STORAGE['API_KEY'],
+        CLOUDINARY_STORAGE['API_SECRET']]):
+
+    from django.core.exceptions import ImproperlyConfigured
+
+    if not all([CLOUDINARY_STORAGE['CLOUD_NAME'],
+                CLOUDINARY_STORAGE['API_KEY'],
+                CLOUDINARY_STORAGE['API_SECRET']]):
+        raise ImproperlyConfigured(
+            'Cloudinary kullanmak için tüm credentials gerekli:\n'
+            '  - CLOUDINARY_CLOUD_NAME\n'
+            '  - CLOUDINARY_API_KEY\n'
+            '  - CLOUDINARY_API_SECRET\n'
+            '.env dosyasında tümünü tanımlayın veya hiçbirini kullanmayın.'
+        )
 # Internationalization (Çoklu dil desteği)
 LANGUAGE_CODE = 'tr'  # Varsayılan dil Türkçe
 TIME_ZONE = 'Europe/Istanbul'
@@ -301,6 +328,7 @@ SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', default=False, cast=bool)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https') if not DEBUG else None
 SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', default=not DEBUG, cast=bool)
 CSRF_COOKIE_SECURE = config('CSRF_COOKIE_SECURE', default=not DEBUG, cast=bool)
+CSRF_FAILURE_VIEW = 'core.views.csrf_failure_view'  # Özel CSRF hata sayfası
 
 # HSTS (HTTP Strict Transport Security) ayarları
 SECURE_HSTS_SECONDS = config('SECURE_HSTS_SECONDS', default=0 if DEBUG else 31536000, cast=int)
