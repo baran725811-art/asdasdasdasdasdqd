@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'captcha',        # CAPTCHA koruması
 
     # Other third party apps
+    'sslserver',      # HTTPS development server
     'imagekit',
     'django_ckeditor_5',
     'widget_tweaks',
