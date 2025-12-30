@@ -67,12 +67,19 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'axes.middleware.AxesMiddleware',  # Axes brute force protection
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
     'core.middleware.IPAddressMiddleware',
     'core.middleware.SitePrimaryLanguageMiddleware',
     'core.middleware.DashboardLocaleMiddleware',
+]
+
+# Authentication backends - Axes için gerekli
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesStandaloneBackend',  # Axes brute force protection
+    'django.contrib.auth.backends.ModelBackend',  # Default Django backend
 ]
 
 # Güçlü password validation
