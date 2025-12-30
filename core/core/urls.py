@@ -33,7 +33,7 @@ except ImportError:
 
 # Dil-bağımsız URL'ler (admin, sitemap, dil değiştirme, API'ler)
 urlpatterns = [
-    path(getattr(settings, 'ADMIN_URL_SUFFIX', 'admin/'), admin.site.urls),
+    path(getattr(settings, 'ADMIN_URL', 'admin/'), admin.site.urls),
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     path('i18n/', include('django.conf.urls.i18n')),
     path('captcha/', include('captcha.urls')),

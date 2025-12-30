@@ -91,6 +91,12 @@ CACHES = {
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 SESSION_CACHE_ALIAS = 'default'
 
+# Production log klasörünü oluştur (yoksa)
+import os
+PRODUCTION_LOG_DIR = '/var/log/django/'
+if not os.path.exists(PRODUCTION_LOG_DIR):
+    os.makedirs(PRODUCTION_LOG_DIR, mode=0o755)
+
 # Logging - production için kapsamlı
 LOGGING = {
     'version': 1,
