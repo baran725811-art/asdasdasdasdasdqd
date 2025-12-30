@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     # Third party apps - Security packages
     'axes',           # Rate limiting ve brute force koruması
     'captcha',        # CAPTCHA koruması
+    'sslserver',      # HTTPS development server desteği
 
     # Other third party apps
     'imagekit',
