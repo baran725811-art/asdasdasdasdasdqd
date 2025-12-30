@@ -60,6 +60,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'axes.middleware.AxesMiddleware',  # Brute force koruması - AuthenticationMiddleware'den sonra
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
@@ -67,6 +68,12 @@ MIDDLEWARE = [
     'core.middleware.IPAddressMiddleware',
     'core.middleware.SitePrimaryLanguageMiddleware',
     'core.middleware.DashboardLocaleMiddleware',
+]
+
+# Authentication backends - Axes ile birlikte
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesStandaloneBackend',  # Axes backend - brute force koruması
+    'django.contrib.auth.backends.ModelBackend',  # Default backend
 ]
 
 # Güçlü password validation
@@ -165,6 +172,25 @@ SECURITY_MONITORING = {
     'MAX_LOGIN_ATTEMPTS': 5,
     'LOGIN_ATTEMPT_TIMEOUT': 300,  # 5 dakika
 }
+
+# Django Axes Configuration - Brute Force Protection
+AXES_FAILURE_LIMIT = 5  # 5 başarısız denemeden sonra engelleme
+AXES_COOLOFF_TIME = 1  # 1 saat (saat cinsinden)
+AXES_LOCK_OUT_AT_FAILURE = True  # Başarısız denemelerden sonra kilitle
+AXES_ONLY_USER_FAILURES = False  # IP bazlı ve kullanıcı bazlı takip
+AXES_ENABLE_ACCESS_FAILURE_LOG = True  # Başarısız denemeleri logla
+AXES_RESET_ON_SUCCESS = True  # Başarılı girişte sayaçları sıfırla
+AXES_LOCKOUT_TEMPLATE = None  # Custom template kullanılabilir
+AXES_LOCKOUT_URL = None  # Özel lockout URL'i
+AXES_VERBOSE = True  # Detaylı logging
+AXES_USERNAME_FORM_FIELD = 'username'  # Login form field
+AXES_LOCK_OUT_BY_COMBINATION_USER_AND_IP = True  # Kullanıcı + IP kombinasyonu
+AXES_IPWARE_PROXY_COUNT = 1  # Proxy arkasındaysa
+AXES_IPWARE_META_PRECEDENCE_ORDER = [  # IP algılama sırası
+    'HTTP_X_FORWARDED_FOR',
+    'X_FORWARDED_FOR',
+    'REMOTE_ADDR',
+]
 
 
 
