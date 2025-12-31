@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'modeltranslation',
     'cloudinary_storage',
+    'sslserver',      # HTTPS development server
     'cloudinary',
     'compressor',
 ]

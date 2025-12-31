@@ -43,3 +43,5 @@ django-redis==5.4.0
 redis==5.0.1
 django-debug-toolbar==4.2.0
 gunicorn==21.2.0
+django-sslserver==0.22
+
