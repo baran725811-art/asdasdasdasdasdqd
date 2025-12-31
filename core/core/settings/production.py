@@ -56,42 +56,94 @@ MIDDLEWARE = [
 ]
 
 # Database - production için optimize
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', default='5432'),
-        'OPTIONS': {
-            'sslmode': 'require',  # SSL bağlantı zorunlu
-        },
-        'CONN_MAX_AGE': 600,  # Connection pooling
-    }
-}
+# PythonAnywhere için: SQLite veya MySQL kullanabilirsiniz
+DB_ENGINE = config('DB_ENGINE', default='django.db.backends.sqlite3')
 
-# Cache - production için Redis
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': config('REDIS_URL', default='redis://127.0.0.1:6379/1'),
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-            'CONNECTION_POOL_KWARGS': {
-                'ssl_cert_reqs': None,
+if DB_ENGINE == 'django.db.backends.sqlite3':
+    # SQLite - küçük projeler için
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+elif DB_ENGINE == 'django.db.backends.mysql':
+    # MySQL - PythonAnywhere için önerilir
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'HOST': config('DB_HOST', default='localhost'),
+            'PORT': config('DB_PORT', default='3306'),
+            'OPTIONS': {
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+                'charset': 'utf8mb4',
             },
-        },
-        'KEY_PREFIX': 'baran_anahtarci_prod',
-        'TIMEOUT': 3600,
+            'CONN_MAX_AGE': 600,
+        }
     }
-}
+else:
+    # PostgreSQL - kendi sunucunuz için
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'HOST': config('DB_HOST', default='localhost'),
+            'PORT': config('DB_PORT', default='5432'),
+            'OPTIONS': {
+                'sslmode': 'require',
+            },
+            'CONN_MAX_AGE': 600,
+        }
+    }
 
-# Session cache
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
-SESSION_CACHE_ALIAS = 'default'
+# Cache - production için
+# PythonAnywhere ücretsiz hesaplarda Redis yok, file-based cache kullanın
+CACHE_BACKEND = config('CACHE_BACKEND', default='django.core.cache.backends.filebased.FileBasedCache')
+
+if CACHE_BACKEND == 'django_redis.cache.RedisCache':
+    # Redis - kendi sunucunuz veya paid plan için
+    CACHES = {
+        'default': {
+            'BACKEND': 'django_redis.cache.RedisCache',
+            'LOCATION': config('REDIS_URL', default='redis://127.0.0.1:6379/1'),
+            'OPTIONS': {
+                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+                'CONNECTION_POOL_KWARGS': {
+                    'ssl_cert_reqs': None,
+                },
+            },
+            'KEY_PREFIX': 'baran_anahtarci_prod',
+            'TIMEOUT': 3600,
+        }
+    }
+    SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+    SESSION_CACHE_ALIAS = 'default'
+else:
+    # File-based cache - PythonAnywhere için
+    import os
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+            'LOCATION': os.path.join(BASE_DIR, 'cache'),
+            'TIMEOUT': 3600,
+            'OPTIONS': {
+                'MAX_ENTRIES': 10000,
+                'CULL_FREQUENCY': 3,
+            },
+        }
+    }
+    # File-based cache ile cached_db session engine kullan
+    SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
+    SESSION_CACHE_ALIAS = 'default'
 
 # Logging - production için kapsamlı
+# PythonAnywhere için logs dizini proje içinde
+import os
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -109,7 +161,7 @@ LOGGING = {
         'file': {
             'level': 'ERROR',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '/var/log/django/django.log',
+            'filename': os.path.join(BASE_DIR, 'logs', 'django.log'),
             'maxBytes': 50 * 1024 * 1024,  # 50MB
             'backupCount': 5,
             'formatter': 'verbose',
@@ -117,7 +169,7 @@ LOGGING = {
         'security_file': {
             'level': 'WARNING',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': '/var/log/django/security.log',
+            'filename': os.path.join(BASE_DIR, 'logs', 'security.log'),
             'maxBytes': 50 * 1024 * 1024,  # 50MB
             'backupCount': 10,
             'formatter': 'security',
@@ -177,7 +229,8 @@ RATELIMIT_USE_CACHE = 'default'
 
 # Static files - production için optimized
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
-STATIC_ROOT = '/var/www/static/'
+# PythonAnywhere için static root
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Media files - Cloudinary için production ayarları
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

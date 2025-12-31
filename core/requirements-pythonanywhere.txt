@@ -1,0 +1,45 @@
+# ===================================================================
+# PYTHONANYWHERE REQUIREMENTS
+# ===================================================================
+# Bu dosya PythonAnywhere'de kurulum için gerekli paketleri içerir
+#
+# Kurulum:
+# pip install -r requirements-pythonanywhere.txt
+# ===================================================================
+
+# Ana requirements dosyasını dahil et
+-r requirements.txt
+
+# ===================================================================
+# MYSQL SUPPORT (PythonAnywhere MySQL kullanıyorsanız)
+# ===================================================================
+# Eğer MySQL kullanacaksanız, aşağıdaki satırı uncomment edin:
+# mysqlclient==2.2.4
+
+# ===================================================================
+# NOTLAR:
+# ===================================================================
+# 1. psycopg2-binary: PythonAnywhere'de gerekli değil (SQLite/MySQL kullanılacak)
+# 2. django-redis: Ücretsiz hesaplarda Redis yok, gerekli değil
+# 3. mysqlclient: Sadece MySQL kullanıyorsanız gerekli
+# 4. Tüm diğer paketler requirements.txt'den gelir
+# ===================================================================
+
+# Production için önerilen ek paketler
+gunicorn==21.2.0  # WSGI server (PythonAnywhere'de gerekmez ama iyi bir pratik)
+
+# ===================================================================
+# KURULUM TALİMATLARI:
+# ===================================================================
+# 1. Virtual environment oluşturun:
+#    python3.10 -m venv ~/.virtualenvs/django_env
+#
+# 2. Virtual environment'ı aktifleştirin:
+#    source ~/.virtualenvs/django_env/bin/activate
+#
+# 3. Requirements'ları yükleyin:
+#    pip install -r requirements-pythonanywhere.txt
+#
+# 4. MySQL kullanıyorsanız:
+#    pip install mysqlclient
+# ===================================================================
