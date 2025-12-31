@@ -3,19 +3,11 @@ from pathlib import Path
 import os
 from decouple import config
 from django.utils.translation import gettext_lazy as _
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
-# BU SATIRLARI EKLE:
-DEBUG = config('DEBUG', default=True, cast=bool)
-SECRET_KEY = config('SECRET_KEY', default='django-insecure-development-key-change-this-in-production-minimum-50-characters-long!')
-ALLOWED_HOSTS = ['*']  # Development için
 
-# Database ayarını da ekle (eksik olan)
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
+# DEBUG, SECRET_KEY, ALLOWED_HOSTS ve DATABASES
+# development.py ve production.py'de tanımlanmalıdır!
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

@@ -1,39 +1,67 @@
+# Django Core
+Django==5.2.4
+asgiref==3.9.1
+sqlparse==0.5.3
+tzdata==2025.2
+
+# Security
 argon2-cffi==25.1.0
 argon2-cffi-bindings==21.2.0
-asgiref==3.9.1
-bleach==5.0.1
-certifi==2025.8.3
-cffi==1.17.1
-charset-normalizer==3.4.2
-deepl==1.22.0
-Django==5.2.4
-django-appconf==1.1.0
-django-bleach==3.1.0
-django-ckeditor-5==0.2.18
-django-cleanup==9.0.0
-django-compressor==4.5.1
-django-crispy-forms==2.4
-django-imagekit==5.0.0
-django-js-asset==3.1.2
-django-modeltranslation==0.19.16
-django-ratelimit==4.1.0
-django-widget-tweaks==1.5.0
-idna==3.10
-pilkit==3.0
-pillow==11.3.0
-psycopg2-binary==2.9.10
-pycparser==2.22
-python-decouple==3.8
-rcssmin==1.1.2
-requests==2.32.4
-rjsmin==1.2.2
-six==1.17.0
-sqlparse==0.5.3
-tinycss2==1.1.1
-tzdata==2025.2
-urllib3==2.5.0
-webencodings==0.5.1
-cloudinary==1.41.0
-django-cloudinary-storage==0.3.0
 django-axes==6.1.1
 django-simple-captcha==0.6.0
+
+# Configuration
+python-decouple==3.8
+
+# Content Management
+django-ckeditor-5==0.2.18
+django-bleach==3.1.0
+bleach==5.0.1
+
+# Image Processing
+Pillow==11.3.0
+django-imagekit==5.0.0
+pilkit==3.0
+django-cleanup==9.0.0
+
+# Cloudinary Storage
+cloudinary==1.41.0
+django-cloudinary-storage==0.3.0
+
+# Compression & Optimization
+django-compressor==4.5.1
+rcssmin==1.1.2
+rjsmin==1.2.2
+
+# Internationalization
+django-modeltranslation==0.19.16
+deepl==1.22.0
+
+# Forms & UI
+django-crispy-forms==2.4
+django-widget-tweaks==1.5.0
+django-js-asset==3.1.2
+
+# Rate Limiting
+django-ratelimit==4.1.0
+
+# HTTP & Networking
+requests==2.32.4
+urllib3==2.5.0
+certifi==2025.8.3
+charset-normalizer==3.4.2
+idna==3.10
+
+# Other
+django-appconf==1.1.0
+cffi==1.17.1
+pycparser==2.22
+six==1.17.0
+tinycss2==1.1.1
+webencodings==0.5.1
+
+# Database (optional - uncomment if using PostgreSQL)
+# psycopg2-binary==2.9.10
+
+# MySQL (optional - uncomment if using MySQL on PythonAnywhere)
+# mysqlclient==2.2.0

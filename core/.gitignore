@@ -7,6 +7,7 @@ __pycache__/
 env/
 venv/
 .env
+.env.production
 *.sqlite3
 media/
 staticfiles/
@@ -14,3 +15,10 @@ staticfiles/
 local_settings.py
 db.sqlite3
 deployment/ssl/
+cache/
+logs/
+*.txt
+!requirements.txt
+seo_report.json
+optimize_dashboard.sh
+setup_vendors.py
