@@ -462,13 +462,10 @@ class DashboardLocaleMiddleware:
                 
                 # Dashboard dili (primary_language'den BAĞIMSIZ)
                 dashboard_language = user_settings.dashboard_language
-                print(f"[MIDDLEWARE] Kullanıcı {request.user.username} dashboard dili: {dashboard_language}")
                 
             except DashboardTranslationSettings.DoesNotExist:
                 dashboard_language = request.COOKIES.get('dashboard_language', 'tr')
-                print(f"[MIDDLEWARE] Cookie'den dashboard dili: {dashboard_language}")
             except Exception as e:
-                print(f"[MIDDLEWARE] Hata: {e}")
                 dashboard_language = 'tr'
             
             # Dil aktivasyonu
@@ -476,7 +473,6 @@ class DashboardLocaleMiddleware:
             if dashboard_language in [lang[0] for lang in settings.LANGUAGES]:
                 translation.activate(dashboard_language)
                 request.LANGUAGE_CODE = dashboard_language
-                print(f"[MIDDLEWARE] Dashboard dili aktive edildi: {dashboard_language}")
             
         response = self.get_response(request)
         
@@ -539,13 +535,11 @@ class SitePrimaryLanguageMiddleware:
                 if primary_language != 'tr':
                     from django.shortcuts import redirect
                     request._redirect_processed = True
-                    print(f"[SITE MIDDLEWARE] Root URL, ana dile yönlendiriliyor: /{primary_language}/")
                     return redirect(f'/{primary_language}/')
                     
             except DashboardTranslationSettings.DoesNotExist:
                 pass
             except Exception as e:
-                print(f"[SITE MIDDLEWARE] Hata: {e}")
         
         response = self.get_response(request)
         return response
