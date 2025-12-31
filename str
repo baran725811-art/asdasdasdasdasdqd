@@ -1,0 +1,27 @@
+SECRET_KEY=pythonanywhere-quasar72-baran-anahtarci-secret-key-2025-random-xyz-abc-def-ghi
+DEBUG=True
+
+ALLOWED_HOSTS=.pythonanywhere.com
+
+CSRF_TRUSTED_ORIGINS=https://quasar72.pythonanywhere.com
+
+# E-POSTA AYARLARI
+EMAIL_HOST_USER=codenovaxx@gmail.com
+EMAIL_HOST_PASSWORD=iwlp xrxf uron qwsg
+DEFAULT_FROM_EMAIL=codenovaxx@gmail.com
+CONTACT_EMAIL=codenovaxx@gmail.com
+
+# Cloudinary Settings
+CLOUDINARY_CLOUD_NAME=dqdt70itm
+CLOUDINARY_API_KEY=658223835389929
+CLOUDINARY_API_SECRET=THkpOhYI1DrkKJOz9s4GfFc_YLA
+CLOUDINARY_STORAGE_LIMIT=5
+
+# PythonAnywhere için güvenlik ayarları
+SECURE_SSL_REDIRECT=False
+SESSION_COOKIE_SECURE=False
+CSRF_COOKIE_SECURE=False
+COMPRESS_ENABLED=False
+
+# Admin güvenliği
+ADMIN_URL=secure-admin-baran2025/
