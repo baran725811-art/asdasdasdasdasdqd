@@ -200,8 +200,6 @@ class MediaMentionFormWithTranslation(BaseTranslationForm):
         
         # ✅ KRİTİK: Edit modunda initial değerleri set et
         if hasattr(self, 'instance') and self.instance and self.instance.pk:
-            print(f"🔍 EDIT MODU - Instance URL: {self.instance.url}")
-            print(f"🔍 EDIT MODU - Instance Date: {self.instance.publish_date}")
             
             # URL field'ını zorla set et
             if 'url' in self.fields:

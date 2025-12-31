@@ -242,6 +242,5 @@ class SitemapIndex:
                 stats['carousel'] = 0
                 
         except Exception as e:
-            print(f"Sitemap stats error: {e}")
         
         return stats

@@ -26,7 +26,6 @@ def about(request):
                 customer_satisfaction=100,
             )
     except Exception as e:
-        print(f"About view error: {e}")
         raise Http404("Hakkımızda bilgisi bulunamadı")
     
     context = {

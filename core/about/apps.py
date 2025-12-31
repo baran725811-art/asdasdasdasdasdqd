@@ -10,6 +10,4 @@ class AboutConfig(AppConfig):
         """Uygulama hazır olduğunda sinyalleri import et"""
         try:
             import about.signals  # signals.py dosyasını import et
-            print("✅ About signals loaded successfully")
         except ImportError:
-            print("❌ About signals import failed")

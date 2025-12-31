@@ -1,4 +1,5 @@
 #core\dashboard\views.py
+import logging
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -7,6 +8,8 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login, logout
 from django_ratelimit.decorators import ratelimit
+
+logger = logging.getLogger(__name__)
 from .models import MediaMention, CustomerReview
 from .forms import (MediaMentionForm, CategoryForm, ProductForm, 
                    CustomerReviewForm, AboutForm, GalleryForm, ServiceForm,
@@ -95,7 +98,6 @@ def dashboard_login(request):
     # 3 veya daha fazla başarısız denemede CAPTCHA göster
     show_captcha = True #attempts_count >= 3 or was_limited
     
-    print(f"DEBUG: IP: {ip_address}, Attempts: {attempts_count}, Show CAPTCHA: {show_captcha}")  # DEBUG
     
     if request.method == 'POST':
         form = DashboardLoginForm(
@@ -139,11 +141,7 @@ def dashboard_login(request):
             request=request
         )
     
-    print(f"DEBUG: Form has captcha: {'captcha' in form.fields}")  # DEBUG
     if 'captcha' in form.fields:
-        print(f"DEBUG: CAPTCHA required: {form.fields['captcha'].required}")
-        print(f"DEBUG: CAPTCHA widget: {type(form.fields['captcha'].widget)}")
-        print(f"DEBUG: CAPTCHA widget attrs: {form.fields['captcha'].widget.attrs}")
     
     context = {
         'form': form,
@@ -272,9 +270,7 @@ def dashboard_home(request):
     monthly_stats.reverse()
     
     # Debug çıktısı
-    print(f"Monthly stats count: {len(monthly_stats)}")
     for stat in monthly_stats:
-        print(f"{stat['month_short']}: {stat['products']} products, {stat['reviews']} reviews, {stat['messages']} messages")
     
     context = {
         'total_products': Product.objects.count(),
@@ -458,7 +454,6 @@ def about_edit(request):
     # About objesini al veya oluştur
     try:
         about = About.objects.get(pk=1)
-        print(f"✅ Mevcut About - ID: {about.id}, Years: {about.years_experience}")
     except About.DoesNotExist:
         about = About.objects.create(
             title='Hakkımızda',
@@ -474,8 +469,6 @@ def about_edit(request):
         )
     
     if request.method == 'POST':
-        print("\n=== POST İSTEĞİ ===")
-        print(f"Gelen veriler: {dict(request.POST)}")
         
         # Form oluştur
         # Eski AboutForm yerine yeni AboutFormWithTranslation kullan
@@ -489,13 +482,11 @@ def about_edit(request):
         )
         
         if form.is_valid():
-            print("✅ Form geçerli - kaydediliyor...")
             try:
                 # Transaction ile kaydet
                 with transaction.atomic():
                     # Değişiklikleri debug et
                     changed_fields = form.changed_data
-                    print(f"Değişen alanlar: {changed_fields}")
                     
                     # Kaydet
                     saved_about = form.save()
@@ -503,7 +494,6 @@ def about_edit(request):
                     # Veritabanından tekrar oku
                     saved_about.refresh_from_db()
                     
-                    print(f"✅ KAYDEDİLDİ - Years: {saved_about.years_experience}")
                     
                 # AJAX response
                 if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
@@ -517,7 +507,6 @@ def about_edit(request):
                     return redirect('dashboard:dashboard_about_edit')
                     
             except Exception as e:
-                print(f"❌ Hata: {str(e)}")
                 import traceback
                 traceback.print_exc()
                 
@@ -527,8 +516,6 @@ def about_edit(request):
                         'error': f'Kaydetme hatası: {str(e)}'
                     })
         else:
-            print("❌ Form geçersiz!")
-            print(f"Hatalar: {dict(form.errors)}")
             
             if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                 return JsonResponse({
@@ -962,9 +949,6 @@ def gallery_add(request):
         enabled_languages = user_translation_settings.get_all_languages()
 
     if request.method == 'POST':
-        print("=== GALLERY ADD POST İSTEĞİ ===")
-        print(f"POST verileri: {dict(request.POST)}")
-        print(f"Dosyalar: {dict(request.FILES)}")
         
         form = GalleryFormWithTranslation(
             request.POST,
@@ -1006,7 +990,6 @@ def gallery_add(request):
                     gallery_item.save()
 
                 
-                print(f"✅ GALERİ ÖĞESİ BAŞARIYLA KAYDEDİLDİ! ID: {gallery_item.id}, Title: {gallery_item.title}")
                 
                 if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                     return JsonResponse({
@@ -1020,7 +1003,6 @@ def gallery_add(request):
                     return redirect('dashboard:dashboard_gallery')
                     
             except Exception as e:
-                print(f"❌ Kaydetme hatası: {str(e)}")
                 import traceback
                 traceback.print_exc()
                 
@@ -1032,8 +1014,6 @@ def gallery_add(request):
                 else:
                     messages.error(request, f'Kaydetme hatası: {str(e)}')
         else:
-            print("❌ Form geçersiz!")
-            print(f"Hatalar: {dict(form.errors)}")
             
             error_messages = []
             for field, errors in form.errors.items():
@@ -1278,8 +1258,6 @@ def media_mention_add(request):
         enabled_languages = user_translation_settings.get_all_languages()
 
     if request.method == 'POST':
-        print("=== MEDIA MENTION POST İSTEĞİ BAŞLADI ===")
-        print("POST verileri:", dict(request.POST))
         
         form = MediaMentionFormWithTranslation(
             request.POST, 
@@ -1290,18 +1268,13 @@ def media_mention_add(request):
         )
         
         if form.is_valid():
-            print("✅ Form geçerli, kaydediliyor...")
             try:
                 saved_mention = form.save()
-                print("✅ BAŞARIYLA KAYDEDİLDİ! ID:", saved_mention.id)
                 messages.success(request, 'Basın haberi başarıyla eklendi.')
                 return redirect('dashboard:dashboard_media_mentions')
             except Exception as e:
-                print("❌ Kaydetme hatası:", str(e))
                 messages.error(request, f'Kaydetme hatası: {str(e)}')
         else:
-            print("❌ Form geçersiz!")
-            print("Form hataları:", form.errors)
             for field, errors in form.errors.items():
                 for error in errors:
                     messages.error(request, f'{field}: {error}')
@@ -1333,8 +1306,6 @@ def media_mention_edit(request, pk):
         enabled_languages = user_translation_settings.get_all_languages()
 
     if request.method == 'POST':
-        print("=== MEDIA MENTION EDIT POST İSTEĞİ ===")
-        print("POST verileri:", dict(request.POST))
         
         form = MediaMentionFormWithTranslation(
             request.POST, 
@@ -1346,22 +1317,17 @@ def media_mention_edit(request, pk):
         )
         
         if form.is_valid():
-            print("✅ Form geçerli, güncelleniyor...")
             try:
                 saved_mention = form.save()
-                print(f"✅ GÜNCELLEME BAŞARILI! URL: {saved_mention.url}, Date: {saved_mention.publish_date}")
                 
                 messages.success(request, f'Basın haberi "{saved_mention.title}" başarıyla güncellendi.')
                 return redirect('dashboard:dashboard_media_mentions')
                 
             except Exception as e:
-                print("❌ Güncelleme hatası:", str(e))
                 import traceback
                 traceback.print_exc()
                 messages.error(request, f'Güncelleme hatası: {str(e)}')
         else:
-            print("❌ Form geçersiz!")
-            print("Form hataları:", form.errors)
             for field, errors in form.errors.items():
                 for error in errors:
                     messages.error(request, f'{field}: {error}')
@@ -2227,9 +2193,6 @@ def carousel_add(request):
         enabled_languages = user_translation_settings.get_all_languages()
 
     if request.method == 'POST':
-        print("=== CAROUSEL ADD POST İSTEĞİ ===")
-        print(f"POST verileri: {dict(request.POST)}")
-        print(f"Dosyalar: {dict(request.FILES)}")
         
         form = CarouselSlideFormWithTranslation(
             request.POST,
@@ -2242,7 +2205,6 @@ def carousel_add(request):
         if form.is_valid():
             try:
                 slide = form.save()
-                print(f"✅ CAROUSEL SLIDE BAŞARIYLA KAYDEDİLDİ! ID: {slide.id}, Title: {slide.title}")
                 
                 # AJAX request için JSON response
                 if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
@@ -2257,7 +2219,6 @@ def carousel_add(request):
                     return redirect('dashboard:dashboard_carousel')
                     
             except Exception as e:
-                print(f"❌ Kaydetme hatası: {str(e)}")
                 import traceback
                 traceback.print_exc()
                 
@@ -2269,8 +2230,6 @@ def carousel_add(request):
                 else:
                     messages.error(request, f'Kaydetme hatası: {str(e)}')
         else:
-            print("❌ Form geçersiz!")
-            print(f"Hatalar: {dict(form.errors)}")
             
             # Form hatalarını handle et
             error_messages = []
@@ -2322,8 +2281,6 @@ def carousel_edit(request, pk):
         enabled_languages = user_translation_settings.get_all_languages()
 
     if request.method == 'POST':
-        print("=== CAROUSEL EDIT POST İSTEĞİ ===")
-        print(f"POST verileri: {dict(request.POST)}")
         
         form = CarouselSlideFormWithTranslation(
             request.POST, 
@@ -2337,7 +2294,6 @@ def carousel_edit(request, pk):
         if form.is_valid():
             try:
                 slide = form.save()
-                print(f"✅ CAROUSEL SLIDE BAŞARIYLA GÜNCELLENDİ! ID: {slide.id}")
                 
                 # AJAX request için JSON response
                 if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
@@ -2351,7 +2307,6 @@ def carousel_edit(request, pk):
                     return redirect('dashboard:dashboard_carousel')
                     
             except Exception as e:
-                print(f"❌ Güncelleme hatası: {str(e)}")
                 import traceback
                 traceback.print_exc()
                 
@@ -2363,8 +2318,6 @@ def carousel_edit(request, pk):
                 else:
                     messages.error(request, f'Güncelleme hatası: {str(e)}')
         else:
-            print("❌ Form geçersiz!")
-            print(f"Hatalar: {dict(form.errors)}")
             
             if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                 return JsonResponse({
@@ -2567,8 +2520,6 @@ def service_create(request):
         enabled_languages = user_translation_settings.get_all_languages()
 
     if request.method == 'POST':
-        print("=== SERVICE CREATE POST İSTEĞİ ===")
-        print(f"POST verileri: {dict(request.POST)}")
         
         form = ServiceFormWithTranslation(
             request.POST, 
@@ -2581,7 +2532,6 @@ def service_create(request):
         if form.is_valid():
             try:
                 service = form.save()
-                print(f"✅ HİZMET BAŞARIYLA KAYDEDİLDİ! ID: {service.id}, Title: {service.title}")
                 
                 # AJAX request için JSON response
                 if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
@@ -2596,7 +2546,6 @@ def service_create(request):
                     return redirect('dashboard:service_list')
                     
             except Exception as e:
-                print(f"❌ Kaydetme hatası: {str(e)}")
                 import traceback
                 traceback.print_exc()
                 
@@ -2608,8 +2557,6 @@ def service_create(request):
                 else:
                     messages.error(request, f'Kaydetme hatası: {str(e)}')
         else:
-            print("❌ Form geçersiz!")
-            print(f"Hatalar: {dict(form.errors)}")
             
             # Çeviri hatalarını handle et
             translation_errors = []
@@ -2697,10 +2644,6 @@ def service_edit(request, pk):
                 messages.error(request, 'Form hatası! Lütfen alanları kontrol edin.')
     
     # GET request - redirect to list (modal'da açılıyor)
-    print(f"DEBUG: Service ID: {service.id}")
-    print(f"DEBUG: Title: {service.title}")  
-    print(f"DEBUG: Title_en: {getattr(service, 'title_en', 'BULUNAMADI')}")
-    print(f"DEBUG: Description_en: {getattr(service, 'description_en', 'BULUNAMADI')}")
     return redirect('dashboard:service_list')
 
 @staff_member_required(login_url='dashboard:dashboard_login')
@@ -2960,11 +2903,6 @@ def team_member_edit(request, pk):
         enabled_languages = user_translation_settings.get_all_languages()
 
     if request.method == 'POST':
-        print("=== TEAM MEMBER EDIT DEBUG ===")
-        print(f"POST verileri: {dict(request.POST)}")
-        print(f"Dosyalar: {dict(request.FILES)}")
-        print(f"Translation enabled: {translation_enabled}")
-        print(f"Enabled languages: {enabled_languages}")
         
         form = TeamMemberFormWithTranslation(
             request.POST, 
@@ -2975,15 +2913,10 @@ def team_member_edit(request, pk):
             user=request.user
         )
         
-        print(f"Form oluşturuldu. Form fields: {list(form.fields.keys())}")
         
         if form.is_valid():
-            print("✅ Form geçerli!")
-            print(f"Cleaned data: {form.cleaned_data}")
             try:
                 team_member = form.save()
-                print(f"✅ SAVE başarılı! ID: {team_member.id}")
-                print(f"Name: {team_member.name}, Position: {team_member.position}")
                 
                 # AJAX response için
                 if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
@@ -2997,7 +2930,6 @@ def team_member_edit(request, pk):
                     return redirect('dashboard:team_member_list')
                     
             except Exception as e:
-                print(f"❌ SAVE hatası: {str(e)}")
                 import traceback
                 traceback.print_exc()
                 
@@ -3009,8 +2941,6 @@ def team_member_edit(request, pk):
                 else:
                     messages.error(request, f'Güncelleme hatası: {str(e)}')
         else:
-            print("❌ Form geçersiz!")
-            print(f"Form errors: {dict(form.errors)}")
             
             # Form geçersiz - AJAX için hata response
             if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
@@ -3576,7 +3506,6 @@ def translation_settings(request):
     )
     
     if request.method == 'POST':
-        print(f"[VIEW] POST verileri: {dict(request.POST)}")
         
         # Ana dil güncellemesi
         primary_language = request.POST.get('primary_language', user_settings.primary_language)
@@ -3586,13 +3515,11 @@ def translation_settings(request):
         
         # Ek diller güncellemesi
         enabled_languages = request.POST.getlist('enabled_languages')
-        print(f"[DEBUG] Alınan ek diller: {enabled_languages}")
         
         # Ana dili de dahil et (her zaman)
         if primary_language not in enabled_languages:
             enabled_languages.append(primary_language)
         
-        print(f"[DEBUG] Kaydedilecek tüm diller: {enabled_languages}")
         
         # KAYDET - HER DURUMDA
         user_settings.primary_language = primary_language
@@ -3600,8 +3527,6 @@ def translation_settings(request):
         user_settings.enabled_languages = enabled_languages
         user_settings.save()
         
-        print(f"[VIEW] ✅ BAŞARIYLA KAYDEDİLDİ!")
-        print(f"[VIEW] Veritabanı durumu - Primary: {user_settings.primary_language}, Dashboard: {user_settings.dashboard_language}, Enabled: {user_settings.enabled_languages}")
         
         # AJAX isteği kontrolü
         auto_save = request.POST.get('auto_save')
@@ -3692,10 +3617,6 @@ def translation_settings(request):
     }
     
     # DEBUG: Context'i kontrol et
-    print(f"[CONTEXT] user_settings.enabled_languages: {user_settings.enabled_languages}")
-    print(f"[CONTEXT] user_settings.primary_language: {user_settings.primary_language}")
-    print(f"[CONTEXT] user_settings.dashboard_language: {user_settings.dashboard_language}")
-    print(f"[CONTEXT] available_languages: {[lang['code'] for lang in available_languages]}")
     
     return render(request, 'dashboard/translation/settings.html', context)
 
@@ -3799,7 +3720,6 @@ def pdf_catalog_management(request):
                 stats['file_size_display'] = f"{stats['file_size_mb']} MB"
                 
         except Exception as e:
-            print(f"Dosya boyutu hesaplama hatası: {e}")
             pass
     
     context = {
@@ -3855,7 +3775,6 @@ def catalog_view(request):
         
         file_stats['size_bytes'] = file_size
     except Exception as e:
-        print(f"Dosya boyutu hesaplama hatası: {e}")
         file_stats['size_display'] = "Bilinmiyor"
     
     # WhatsApp linki oluştur
