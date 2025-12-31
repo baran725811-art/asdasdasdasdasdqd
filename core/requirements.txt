@@ -22,6 +22,7 @@ idna==3.10
 pilkit==3.0
 pillow==11.3.0
 psycopg2-binary==2.9.10
+mysqlclient==2.2.6
 pycparser==2.22
 python-decouple==3.8
 rcssmin==1.1.2
