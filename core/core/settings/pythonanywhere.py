@@ -94,11 +94,77 @@ MEDIA_ROOT = os.path.join(BASE_DIR.parent, 'media')  # /home/username/media/
 # Static files storage
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
+# =====================================
+# CLOUDINARY CONFIGURATION
+# =====================================
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+STORAGE_INFO_ADMIN_ONLY = True  # Production'da sadece admin görsün
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME', default=''),
+    'API_KEY': config('CLOUDINARY_API_KEY', default=''),
+    'API_SECRET': config('CLOUDINARY_API_SECRET', default=''),
+    'SECURE': True,
+}
+
+# Cloudinary storage packages (GB → Bytes)
+CLOUDINARY_STORAGE_PACKAGES = {
+    5: 5 * 1024 * 1024 * 1024,
+    10: 10 * 1024 * 1024 * 1024,
+    15: 15 * 1024 * 1024 * 1024,
+    20: 20 * 1024 * 1024 * 1024,
+    25: 25 * 1024 * 1024 * 1024,
+}
+
+CLOUDINARY_STORAGE_LIMIT_GB = int(config('CLOUDINARY_STORAGE_LIMIT', default='5'))
+CLOUDINARY_STORAGE_LIMIT_BYTES = CLOUDINARY_STORAGE_PACKAGES.get(
+    CLOUDINARY_STORAGE_LIMIT_GB,
+    CLOUDINARY_STORAGE_PACKAGES[5]
+)
+
+# Cloudinary config
+cloudinary.config(
+    cloud_name=CLOUDINARY_STORAGE['CLOUD_NAME'],
+    api_key=CLOUDINARY_STORAGE['API_KEY'],
+    api_secret=CLOUDINARY_STORAGE['API_SECRET'],
+    secure=CLOUDINARY_STORAGE['SECURE']
+)
+
 # Media files - Cloudinary (ücretsiz tier)
 if config('USE_CLOUDINARY', default=True, cast=bool):
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 else:
     DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+
+CLOUDINARY_URL_PREFIX = f"https://res.cloudinary.com/{CLOUDINARY_STORAGE['CLOUD_NAME']}/"
+
+# Cloudinary storage limits
+CLOUDINARY_STORAGE.update({
+    'STORAGE_LIMIT': CLOUDINARY_STORAGE_LIMIT_BYTES,
+    'STORAGE_LIMIT_GB': CLOUDINARY_STORAGE_LIMIT_GB,
+    'MAX_FILE_SIZE': 100 * 1024 * 1024,  # 100MB
+    'MAX_IMAGE_SIZE': 20 * 1024 * 1024,  # 20MB
+    'MAX_VIDEO_SIZE': 100 * 1024 * 1024,  # 100MB
+})
+
+# Görsel boyut limitleri
+CLOUDINARY_MAX_IMAGE_SIZE = 20 * 1024 * 1024  # 20MB
+CLOUDINARY_MAX_VIDEO_SIZE = 100 * 1024 * 1024  # 100MB
+
+# Görsel kalite ayarları
+CLOUDINARY_IMAGE_QUALITY = 'auto:good'
+CLOUDINARY_IMAGE_FORMAT = 'auto'
+
+# Cloudinary transformations
+CLOUDINARY_DEFAULT_TRANSFORMATIONS = {
+    'image': {
+        'quality': 'auto:eco',
+        'fetch_format': 'auto',
+    }
+}
 
 # =====================================
 # LOGGING - HOME DIRECTORY
