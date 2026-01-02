@@ -1,49 +1,50 @@
-# 🚀 DJANGO E-TİCARET PROJESİ PAZARLAMA STRATEJİSİ
+# 🌐 DJANGO KURUMSAL TANITIM SİTESİ PAZARLAMA STRATEJİSİ
 
-**Proje:** Django E-Ticaret & Kurumsal Web Platformu
+**Proje:** Django Kurumsal Tanıtım Web Sitesi & Ürün Kataloğu
+**NOT:** Bu bir tanıtım sitesidir, online ödeme sistemi içermez
 **Hedef Pazar:** Türkiye
-**Fiyat Aralığı:** 25.000 - 150.000 TL
+**Fiyat Aralığı:** 15.000 - 85.000 TL
 
 ---
 
-## 🎯 HEDEF KİTLE ANALİZİ
+## 🎯 HEDEF KİTLE ANALİZİ (TANıTıM SİTESİ İÇİN)
 
 ### Birincil Hedef Kitleler:
 
-#### 1. **KOBİ'ler (Küçük ve Orta Büyüklükteki İşletmeler)**
-- 📍 Konum: Tüm Türkiye (özellikle İstanbul, Ankara, İzmir, Bursa, Antalya)
-- 💼 Sektörler: Tekstil, Gıda, Kozmetik, El sanatları, Hediyelik eşya
-- 💰 Bütçe: 30.000 - 75.000 TL
-- 🎯 İhtiyaç: İlk kez e-ticaret sitesi kuracak firmalar
-- ⚡ Aciliyet: Dijitalleşme zorunluluğu
+#### 1. **Üretici Firmalar (B2B)**
+- 📍 Konum: Tüm Türkiye (özellikle sanayi bölgeleri)
+- 💼 Sektörler: Mobilya, Tekstil, Makine, Aksesuar üreticileri
+- 💰 Bütçe: 30.000 - 50.000 TL
+- 🎯 İhtiyaç: Ürünlerini bayilere/distribütörlere göstermek
+- ⚡ Aciliyet: Dijital katalog ile satış artışı
 
-#### 2. **Mevcut E-Ticaret Firmaları (Yenileme)**
+#### 2. **Showroom ve Mağazalar**
+- 📍 Büyük şehirler (İstanbul, Ankara, İzmir, Bursa)
+- 💼 Mobilya, otomotiv, dekorasyon showroom'ları
+- 💰 Bütçe: 25.000 - 40.000 TL
+- 🎯 İhtiyaç: Fiziksel mağaza + online vitrin
+- ⚡ Aciliyet: Online görünürlük eksikliği
+
+#### 3. **Küçük Perakendeciler (E-Ticaret Öncesi)**
 - 📍 Tüm Türkiye
-- 💼 Eski, yavaş veya güvenlik açığı olan sitelerden geçiş yapacak firmalar
-- 💰 Bütçe: 50.000 - 100.000 TL
-- 🎯 İhtiyaç: Modern, hızlı, güvenli platform
-- ⚡ Aciliyet: Müşteri kaybı yaşayan firmalar
+- 💼 Henüz e-ticaret yapmaya hazır olmayan firmalar
+- 💰 Bütçe: 20.000 - 35.000 TL
+- 🎯 İhtiyaç: Katalog + iletişim (telefon/WhatsApp siparişi)
+- ⚡ Aciliyet: Düşük maliyet ile dijitalleşme
 
-#### 3. **Dijital Ajanslar**
+#### 4. **Hizmet Sağlayıcılar**
 - 📍 İstanbul, Ankara, İzmir
-- 💼 Müşterileri için e-ticaret çözümü arayan ajanslar
-- 💰 Bütçe: 40.000 - 120.000 TL
-- 🎯 İhtiyaç: White-label çözümler, teknik partner
-- ⚡ Aciliyet: Müşteri taleplerini karşılama
+- 💼 Mimarlık, tasarım, reklam ajansları
+- 💰 Bütçe: 25.000 - 45.000 TL
+- 🎯 İhtiyaç: Hizmetleri + referansları göstermek
+- ⚡ Aciliyet: Portföy sitesi ihtiyacı
 
-#### 4. **Startup'lar**
-- 📍 Teknoloji merkezleri (İstanbul, Ankara)
-- 💼 Yeni ürün/hizmet lansmanı yapacak şirketler
-- 💰 Bütçe: 35.000 - 80.000 TL
-- 🎯 İhtiyaç: MVP (Minimum Viable Product), hızlı kurulum
-- ⚡ Aciliyet: Hızlı pazara giriş
-
-#### 5. **Kurumsal Firmalar**
-- 📍 Büyük şehirler
-- 💼 Holding, büyük marka
-- 💰 Bütçe: 100.000 - 150.000+ TL
-- 🎯 İhtiyaç: Enterprise çözümler, özel entegrasyonlar
-- ⚡ Aciliyet: Marka imajı, güvenilirlik
+#### 5. **Gelecekte E-Ticaret Planlayan Firmalar**
+- 📍 Tüm Türkiye
+- 💼 Büyüme potansiyeli olan KOBİ'ler
+- 💰 Bütçe: 35.000 - 50.000 TL (+ sonra 25-40K upgrade)
+- 🎯 İhtiyaç: Önce katalog, sonra satış
+- ⚡ Aciliyet: Kademeli dijitalleşme
 
 ---
 
